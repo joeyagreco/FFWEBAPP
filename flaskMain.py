@@ -9,6 +9,7 @@ app = Flask(__name__)
 def index():
     return render_template("index.html", subtitle="Home")
 
+
 @app.route("/test", methods=["GET", "POST"])
 def test():
     try:
@@ -21,5 +22,5 @@ def test():
         return render_template("test.html", subtitle="Test", sum="N/A")
 
 
-if(__name__ == "__main__"):
-    app.run(debug=True)        
+if __name__ == "__main__":
+    app.run(debug=True)

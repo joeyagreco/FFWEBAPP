@@ -4,7 +4,7 @@ class Calculator:
         pass
 
     def add(self, a, b):
-        sum = float(a) + float(b)
-        if(sum.is_integer()):
-            sum = int(sum)
-        return sum        
+        add_sum = float(a) + float(b)
+        if(add_sum.is_integer()):
+            add_sum = int(add_sum)
+        return add_sum
