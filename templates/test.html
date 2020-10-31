@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block header %}
+<link rel="stylesheet" href="../static/test.css">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+  <div class="formBox1">
+    <form method="POST">
+      <input class="form1" name="num1">
+      <input class="form1" name="num2">
+      <input class="form1" type="submit" value="Add">
+    </form>
+  </div>
+  <p>Sum = {{sum}}</p>
+</div>
+{% endblock %}

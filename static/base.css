@@ -1,0 +1,49 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.topSection {
+  width: 100%;
+  height: 15%;
+}
+
+.bottomSection {
+  width: 100%;
+  height: 100%;
+}
+
+.pageTitle {
+  font-size: 350%;
+  text-align: center;
+  color: red;
+}
+
+.pageSubtitle {
+  font-size: 150%;
+  text-align: center;
+  color: red;
+}
+
+.navBar {
+  width: 100%;
+  height: 8%;
+  background-color: grey;
+}
+
+.navButton {
+  width: 10%;
+  height: 100%;
+  padding: 0%;
+  display: inline;
+  background-color: white;
+}
+
+.navButtonText {
+  font-size: 80%;
+}
