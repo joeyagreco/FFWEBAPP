@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 
 from packages.Calculator import Calculator
+from packages.TestDatabase.TestDatabase import TestDatabase
 
 app = Flask(__name__)
 
@@ -18,6 +19,10 @@ def test():
         num1 = request.form["num1"]
         num2 = request.form["num2"]
         sum = c.add(num1, num2)
+        # TEST DATABASE
+        testDatabase = TestDatabase()
+        testDatabase.post({"_id": 6, "num1": num1, "num2": num2})
+        # END TEST
         return render_template("test.html", subtitle=subtitle, sum=sum)
     except:
         return render_template("test.html", subtitle=subtitle, sum="N/A")
