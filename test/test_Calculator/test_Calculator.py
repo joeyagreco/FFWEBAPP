@@ -17,6 +17,6 @@ class TestCalculator(unittest.TestCase):
         calculator = Calculator()
         self.assertEqual(-3, calculator.add(-1, -2))
 
-        #test
+
 
 
