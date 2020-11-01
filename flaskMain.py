@@ -6,9 +6,9 @@ from packages.TestDatabase.TestDatabase import TestDatabase
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/testHomePage")
 def index():
-    return render_template("index.html", subtitle="Home")
+    return render_template("testHomePage.html", subtitle="Test Home Page")
 
 
 @app.route("/test", methods=["GET", "POST"])
