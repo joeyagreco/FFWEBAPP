@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <title>{% block title %}{% endblock %}</title>
 
-  <header>
+  <head>
+    <title>{{subtitle}}</title>
     <link rel="stylesheet" href="../static/base.css">
-    {% block header %}{% endblock %}
-  </header>
+  </head>
 
   <body>
+
+    <header>
+      {% block header %}{% endblock %}
+    </header>
 
     <div class="navBar">
       <button class="navButton" onclick="location.href='http://127.0.0.1:5000/testHomePage'" type="button">
@@ -26,6 +29,7 @@
     <div class="bottomSection">
       {% block content %}{% endblock %}
     </div>
+
   </body>
 
 </html>

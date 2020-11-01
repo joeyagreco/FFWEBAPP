@@ -6,8 +6,13 @@ from packages.TestDatabase.TestDatabase import TestDatabase
 app = Flask(__name__)
 
 
-@app.route("/testHomePage")
+@app.route("/")
 def index():
+    return render_template("indexHomepage.html")
+
+
+@app.route("/testHomePage")
+def testHomePage():
     return render_template("testHomePage.html", subtitle="Test Home Page")
 
 
