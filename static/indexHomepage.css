@@ -11,8 +11,8 @@ body {
 
 header {
     width: 100%;
-    height: 30%;
-    margin-top: 10%;
+    height: 20%;
+    margin-top: 5%;
     position: relative;
     text-align: center;
     background-color: red;
@@ -23,6 +23,7 @@ header {
     position: absolute;
     bottom: 0;
     background-color: grey;
+    width: 100%;
 }
 
 .pageTitle {
@@ -33,8 +34,40 @@ header {
     font-size: 150%;
 }
 
-.buttonCenter {
+.buttonSelection {
     width: 100%;
-    height: 50%;
+    height: 30%;
+    margin-top: 5%;
+    text-align: center;
     background-color: blue;
+}
+
+#newLeagueButton {
+    width: 10%;
+    display: inline-block;
+    background-color: white;
+}
+
+#or {
+    width: 10%;
+    display: inline-block;
+    color: black;
+}
+
+#leagueIdFormStack {
+    width: 10%;
+    position: relative;
+    display: inline-block;
+    background-color: yellow;
+}
+
+#leagueIdInputForm {
+    left: 0%;
+    position: absolute;
+}
+
+#loadLeagueButton {
+    left: 0%;
+    position: absolute;
+    background-color: white;
 }
