@@ -10,9 +10,10 @@ class TestDatabase:
         self.collection = self.db["TestCollection"]
         print("created db instance")
 
-    def post(self, data):
+    def post(self, id, data):
         # example data
         # post = {"_id":0, "name":"joey", "age":23}
 
+        data["_id"] = id
         self.collection.insert_one(data)
         print("posted successfully")
