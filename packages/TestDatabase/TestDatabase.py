@@ -1,13 +1,17 @@
 import pymongo
 from pymongo import MongoClient
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 class TestDatabase:
 
     def __init__(self):
-        self.cluster = MongoClient("mongodb://127.0.0.1:27017/")
-        self.db = self.cluster["TestDatabase"]
-        self.collection = self.db["TestCollection"]
+        self.cluster = MongoClient(os.getenv("DATABASE_CLUSTER"))
+        self.database = self.cluster[os.getenv("DATABASE_DATABASE")]
+        self.collection = self.database[os.getenv("DATABASE_COLLECTION")]
         print("created db instance")
 
     def post(self, id, data):
