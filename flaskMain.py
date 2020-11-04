@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-
+from clients.DatabaseClient import DatabaseClient
 from packages.Calculator import Calculator
 from packages.TestDatabase.TestDatabase import TestDatabase
 
@@ -25,12 +25,19 @@ def test():
         num2 = request.form["num2"]
         sum = c.add(num1, num2)
         # TEST DATABASE
-        testDatabase = TestDatabase()
-        testDatabase.post(50, {"_id": 6, "num1": num1, "num2": num2})
+        id = 1
+        dbClient = DatabaseClient(id)
+        dbClient.setLeague(id, {"_id": id, "num1": num1, "num2": num2})
         # END TEST
         return render_template("test.html", subtitle=subtitle, sum=sum)
     except:
         return render_template("test.html", subtitle=subtitle, sum="N/A")
+
+
+@app.route("/test/getleague/<leagueId>")
+def test_getLeague(leagueId):
+    dbClient = DatabaseClient(int(leagueId))
+    return dbClient.getLeague()
 
 
 if __name__ == "__main__":

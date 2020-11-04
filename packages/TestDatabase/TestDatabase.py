@@ -9,9 +9,9 @@ load_dotenv()
 class TestDatabase:
 
     def __init__(self):
-        self.cluster = MongoClient(os.getenv("DATABASE_CLUSTER"))
-        self.database = self.cluster[os.getenv("DATABASE_DATABASE")]
-        self.collection = self.database[os.getenv("DATABASE_COLLECTION")]
+        self.__cluster = MongoClient(os.getenv("DATABASE_CLUSTER"))
+        self.__database = self.__cluster[os.getenv("DATABASE_DATABASE")]
+        self.__collection = self.__database[os.getenv("DATABASE_COLLECTION")]
         print("created db instance")
 
     def post(self, id, data):
@@ -19,5 +19,5 @@ class TestDatabase:
         # post = {"_id":0, "name":"joey", "age":23}
 
         data["_id"] = id
-        self.collection.insert_one(data)
+        self.__collection.insert_one(data)
         print("posted successfully")
