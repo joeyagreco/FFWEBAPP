@@ -14,7 +14,7 @@
         </header>
 
         <div class="errorSection">
-            <div class="errorMessage">Error: Error Message Here</div>
+            <div class="errorMessage">{{errorMessage}}</div>
         </div>
 
         <div class="buttonSelection">
@@ -22,8 +22,8 @@
 
             <div class="or">OR</div>
 
-            <form class="leagueIdFormStack" method="POST">
-                <input class="leagueIdInputForm" type="number" name="league_id" placeholder="League ID">
+            <form class="leagueIdFormStack" action="/" method="POST">
+                <input class="leagueIdInputForm" type="number" name="league_id" id="league_id" placeholder="League ID" required min="1" max="2">
                 <button class="loadLeagueButton" type="submit">Load League</button>
             </form>
         </div>
