@@ -14,11 +14,13 @@
         </header>
 
         <div class="buttonSelection">
-            <button id="newLeagueButton" type="button" href="#">New League</button>
-            <div id="or">OR</div>
-            <form method="POST" id="leagueIdFormStack">
-                <input id="leagueIdInputForm" name="League ID" placeholder="League ID">
-                <button id="loadLeagueButton" form="leagueIdFormStack" type="submit">Load League</button>
+            <button class="newLeagueButton" type="button" href="#">New League</button>
+
+            <div class="or">OR</div>
+
+            <form class="leagueIdFormStack" method="POST">
+                <input class="leagueIdInputForm" type="number" name="league_id" placeholder="League ID">
+                <button class="loadLeagueButton" type="submit">Load League</button>
             </form>
         </div>
     </body>

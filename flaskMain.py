@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from clients.DatabaseClient import DatabaseClient
 from packages.Calculator import Calculator
 from packages.TestDatabase.TestDatabase import TestDatabase
@@ -6,12 +6,20 @@ from packages.TestDatabase.TestDatabase import TestDatabase
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("indexHomepage.html")
+    try:
+        if request.method == "POST":
+            league_id = request.form["league_id"]
+            return redirect(url_for("test_league", league_id=league_id))
+        else:
+            return render_template("indexHomepage.html")
+    except Exception as e:
+        print("except", e)
+        return render_template("indexHomepage.html")
 
 
-@app.route("/testHomePage")
+@app.route("/testHomePage", methods=["GET"])
 def testHomePage():
     return render_template("testHomePage.html", subtitle="Test Home Page")
 
@@ -34,10 +42,13 @@ def test():
         return render_template("test.html", subtitle=subtitle, sum="N/A")
 
 
-@app.route("/test/league/<leagueId>")
-def test_league(leagueId):
-    dbClient = DatabaseClient(int(leagueId))
-    return dbClient.getLeague()
+@app.route("/test/league/<league_id>")
+def test_league(league_id):
+    dbClient = DatabaseClient(int(league_id))
+    if dbClient.getLeague():
+        return dbClient.getLeague()
+    else:
+        return "league not found"
 
 
 if __name__ == "__main__":
