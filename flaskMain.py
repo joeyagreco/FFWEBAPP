@@ -34,8 +34,8 @@ def test():
         return render_template("test.html", subtitle=subtitle, sum="N/A")
 
 
-@app.route("/test/getleague/<leagueId>")
-def test_getLeague(leagueId):
+@app.route("/test/league/<leagueId>")
+def test_league(leagueId):
     dbClient = DatabaseClient(int(leagueId))
     return dbClient.getLeague()
 
