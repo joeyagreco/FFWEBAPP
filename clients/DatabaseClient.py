@@ -1,9 +1,8 @@
-import pymongo
-from bson import ObjectId
-from pymongo import MongoClient
-from dotenv import load_dotenv
-import random
 import os
+import random
+
+from dotenv import load_dotenv
+from pymongo import MongoClient
 
 load_dotenv()
 
