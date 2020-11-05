@@ -23,7 +23,7 @@ def testHomepage():
 
 
 @app.route("/addleague", methods=["GET", "POST"])
-def addleague():
+def addLeague():
     print("in add league")
     mainController = MainController()
     newLeague = mainController.addLeague()
