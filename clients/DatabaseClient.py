@@ -16,20 +16,27 @@ class DatabaseClient:
         self.__collection = self.__database[os.getenv("DATABASE_COLLECTION")]
 
     def __generateLeagueId(self):
-        """ Returns a new and unused random league id """
-        newLeagueId = random.randint(1, 1000000)
+        """
+        Returns a new and unused random league id
+        Will be between 100000-999999 [always 6 digits]
+        """
+        newLeagueId = random.randint(100000, 999999)
         while self.__collection.find_one({"_id": newLeagueId}):
-            newLeagueId = random.randint(1, 1000000)
+            newLeagueId = random.randint(100000, 999999)
         return newLeagueId
 
     def getLeague(self, leagueId):
+        """
+        Returns a Document object
+        https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
+        """
         return self.__collection.find_one({"_id": leagueId})
 
     def addLeague(self):
         """
-        example data
-        post = {"_id":0, *leagueJsonHere}
+        Adds a league with a new generated ID to the database
+        Returns a Document object
+        https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
         league = {"_id": self.__generateLeagueId()}
         return self.__collection.insert_one(league)
-        print("posted successfully")
