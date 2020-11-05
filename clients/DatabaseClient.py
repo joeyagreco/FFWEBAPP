@@ -10,14 +10,14 @@ load_dotenv()
 
 class DatabaseClient:
 
-    def __init__(self, leagueId):
-        self.__leagueId = leagueId
+    def __init__(self):
         self.__cluster = MongoClient(os.getenv("DATABASE_CLUSTER"))
         self.__database = self.__cluster[os.getenv("DATABASE_DATABASE")]
         self.__collection = self.__database[os.getenv("DATABASE_COLLECTION")]
 
-    def getLeague(self):
-        return self.__collection.find_one({"_id": self.__leagueId})
+    def getLeague(self, leagueId):
+        print(self.__collection.find_one({"_id": leagueId}))
+        return self.__collection.find_one({"_id": leagueId})
 
     def setLeague(self, leagueId, league):
         """

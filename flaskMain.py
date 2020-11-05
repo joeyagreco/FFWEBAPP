@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from clients.DatabaseClient import DatabaseClient
+from controllers.MainController import MainController
 from packages.Calculator import Calculator
-from packages.TestDatabase.TestDatabase import TestDatabase
 
 app = Flask(__name__)
 
@@ -44,9 +44,10 @@ def test():
 
 @app.route("/leaguehomepage/<league_id>")
 def leagueHomepage(league_id):
-    dbClient = DatabaseClient(int(league_id))
-    if dbClient.getLeague():
-        return dbClient.getLeague()
+    mainController = MainController()
+    league = mainController.getLeague(int(league_id))
+    if league:
+        return league
     else:
         return f"league with id {league_id} not found"
 
