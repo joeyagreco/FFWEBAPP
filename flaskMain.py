@@ -9,7 +9,7 @@ def index():
     return render_template("indexHomepage.html")
 
 
-@app.route("/testHomePage", methods=["GET"])
+@app.route("/testHomepage", methods=["GET"])
 def testHomepage():
     return render_template("testHomepage.html", subtitle="Test Home Page")
 
@@ -21,7 +21,7 @@ def addLeague():
     if newLeague:
         return redirect(url_for("leagueHomepage", league_id=int(newLeague.inserted_id)))
     else:
-        return "league could not be added"
+        return render_template("indexHomepage.html", errorMessage="ERROR: Could not add league.")
 
 
 @app.route("/leaguehomepage", methods=["GET"])
@@ -32,7 +32,8 @@ def leagueHomepage():
     if league:
         return league
     else:
-        return f"league with id {league_id} not found"
+        return render_template("indexHomepage.html",
+                               errorMessage=f"ERROR: Cannot find a league with the ID {league_id}.")
 
 
 if __name__ == "__main__":
