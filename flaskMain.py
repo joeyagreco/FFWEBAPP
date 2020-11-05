@@ -14,12 +14,11 @@ def testHomepage():
     return render_template("testHomepage.html", subtitle="Test Home Page")
 
 
-@app.route("/addleague", methods=["GET", "POST"])
+@app.route("/addleague")
 def addLeague():
     mainController = MainController()
     newLeague = mainController.addLeague()
     if newLeague:
-        print("redirecting to league homepage")
         return redirect(url_for("leagueHomepage", league_id=int(newLeague.inserted_id)))
     else:
         return "league could not be added"
@@ -27,11 +26,9 @@ def addLeague():
 
 @app.route("/leaguehomepage", methods=["GET"])
 def leagueHomepage():
-    print("in league homepage")
     league_id = request.args.get("league_id")
     mainController = MainController()
     league = mainController.getLeague(int(league_id))
-    print(league_id)
     if league:
         return league
     else:
