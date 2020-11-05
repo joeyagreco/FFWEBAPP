@@ -4,17 +4,9 @@ from controllers.MainController import MainController
 app = Flask(__name__)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
-    try:
-        if request.method == "POST":
-            league_id = request.form["league_id"]
-            return redirect(url_for("leagueHomepage", league_id=league_id))
-        else:
-            return render_template("indexHomepage.html")
-    except Exception as e:
-        print("except", e)
-        return render_template("indexHomepage.html")
+    return render_template("indexHomepage.html")
 
 
 @app.route("/testHomePage", methods=["GET"])
@@ -24,20 +16,22 @@ def testHomepage():
 
 @app.route("/addleague", methods=["GET", "POST"])
 def addLeague():
-    print("in add league")
     mainController = MainController()
     newLeague = mainController.addLeague()
     if newLeague:
-        print(newLeague.inserted_id)
+        print("redirecting to league homepage")
         return redirect(url_for("leagueHomepage", league_id=int(newLeague.inserted_id)))
     else:
         return "league could not be added"
 
 
-@app.route("/leaguehomepage/<league_id>")
-def leagueHomepage(league_id):
+@app.route("/leaguehomepage", methods=["GET"])
+def leagueHomepage():
+    print("in league homepage")
+    league_id = request.args.get("league_id")
     mainController = MainController()
     league = mainController.getLeague(int(league_id))
+    print(league_id)
     if league:
         return league
     else:
