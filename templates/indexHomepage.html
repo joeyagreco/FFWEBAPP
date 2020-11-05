@@ -18,13 +18,15 @@
         </div>
 
         <div class="buttonSelection">
-            <button class="newLeagueButton" type="button" href="#">New League</button>
+            <form class="newLeagueFormStack" action="/addleague" method="POST">
+                <button class="newLeagueButton" name="add_league" type="submit">New League</button>
+            </form>
 
             <div class="or">OR</div>
 
             <form class="leagueIdFormStack" action="/" method="POST">
-                <input class="leagueIdInputForm" type="number" name="league_id" id="league_id" placeholder="League ID" required min="1" max="2">
-                <button class="loadLeagueButton" type="submit">Load League</button>
+                <input class="leagueIdInputForm" type="number" name="league_id" id="league_id" placeholder="League ID" required min="1">
+                <button class="loadLeagueButton" name="load_league" type="submit">Load League</button>
             </form>
         </div>
     </body>

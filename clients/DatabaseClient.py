@@ -15,16 +15,21 @@ class DatabaseClient:
         self.__database = self.__cluster[os.getenv("DATABASE_DATABASE")]
         self.__collection = self.__database[os.getenv("DATABASE_COLLECTION")]
 
+    def __generateLeagueId(self):
+        """ Returns a new and unused random league id """
+        newLeagueId = random.randint(1, 1000000)
+        while self.__collection.find_one({"_id": newLeagueId}):
+            newLeagueId = random.randint(1, 1000000)
+        return newLeagueId
+
     def getLeague(self, leagueId):
-        print(self.__collection.find_one({"_id": leagueId}))
         return self.__collection.find_one({"_id": leagueId})
 
-    def setLeague(self, leagueId, league):
+    def addLeague(self):
         """
         example data
         post = {"_id":0, *leagueJsonHere}
         """
-
-        league["_id"] = leagueId
-        self.__collection.insert_one(league)
+        league = {"_id": self.__generateLeagueId()}
+        return self.__collection.insert_one(league)
         print("posted successfully")

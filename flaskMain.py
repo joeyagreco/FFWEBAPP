@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from clients.DatabaseClient import DatabaseClient
 from controllers.MainController import MainController
-from packages.Calculator import Calculator
 
 app = Flask(__name__)
 
@@ -22,6 +20,18 @@ def index():
 @app.route("/testHomePage", methods=["GET"])
 def testHomepage():
     return render_template("testHomepage.html", subtitle="Test Home Page")
+
+
+@app.route("/addleague", methods=["GET", "POST"])
+def addleague():
+    print("in add league")
+    mainController = MainController()
+    newLeague = mainController.addLeague()
+    if newLeague:
+        print(newLeague.inserted_id)
+        return redirect(url_for("leagueHomepage", league_id=int(newLeague.inserted_id)))
+    else:
+        return "league could not be added"
 
 
 @app.route("/leaguehomepage/<league_id>")

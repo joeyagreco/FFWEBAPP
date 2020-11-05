@@ -8,3 +8,6 @@ class MainController:
 
     def getLeague(self, leagueId: int):
         return self.__databaseService.getLeague(leagueId)
+
+    def addLeague(self):
+        return self.__databaseService.addLeague()
