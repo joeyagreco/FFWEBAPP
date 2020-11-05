@@ -24,24 +24,6 @@ def testHomepage():
     return render_template("testHomepage.html", subtitle="Test Home Page")
 
 
-@app.route("/test", methods=["GET", "POST"])
-def test():
-    subtitle = "Test"
-    try:
-        c = Calculator.Calculator()
-        num1 = request.form["num1"]
-        num2 = request.form["num2"]
-        sum = c.add(num1, num2)
-        # TEST DATABASE
-        id = 1
-        dbClient = DatabaseClient(id)
-        dbClient.setLeague(id, {"_id": id, "num1": num1, "num2": num2})
-        # END TEST
-        return render_template("test.html", subtitle=subtitle, sum=sum)
-    except:
-        return render_template("test.html", subtitle=subtitle, sum="N/A")
-
-
 @app.route("/leaguehomepage/<league_id>")
 def leagueHomepage(league_id):
     mainController = MainController()
