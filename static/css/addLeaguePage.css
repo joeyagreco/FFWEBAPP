@@ -59,5 +59,35 @@ header {
     background-color: blue;
 }
 
+.createLeagueFormStack {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: yellow;
+}
+
+.leagueNameInputForm {
+    width: 50%;
+    height: 10%;
+    order: 1;
+}
+
+.numberOfTeamsDropdown {
+    width: 40%;
+    height: 10%;
+    order: 2;
+}
+
+.createLeagueButton {
+    width: 50%;
+    height: 25%;
+    font-size: 150%;
+    order: 3;
+    background-color: white;
+}
+
 
 
