@@ -14,15 +14,10 @@ def index():
 @app.route("/addleague", methods=["POST"])
 def addLeague():
     if request.method == "POST":
-        # leagueName = request.form["league_name"]
-        # numberOfTeams = request.form["number_of_teams"]
-        # mainController = MainController()
-        # newLeagueFromDB = mainController.addLeague(leagueName, numberOfTeams)
         leagueName = request.form["league_name"]
         numberOfTeams = request.form["number_of_teams"]
-        leagueModelFixtureGeneratorDict = LeagueModelFixtureGeneratorDict()
         mainController = MainController()
-        newLeagueOrError = mainController.addLeague(leagueName, numberOfTeams, leagueModelFixtureGeneratorDict.getDummyWeekDict())
+        newLeagueOrError = mainController.addLeague(leagueName, numberOfTeams)
         if isinstance(newLeagueOrError, Error):
             return render_template("addLeaguePage.html", errorMessage=newLeagueOrError.errorMessage())
         else:
