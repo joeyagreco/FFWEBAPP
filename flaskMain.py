@@ -19,7 +19,8 @@ def addLeague():
     mainController = MainController()
     newLeague = mainController.addLeague()
     if newLeague:
-        return redirect(url_for("leagueHomepage", league_id=int(newLeague.inserted_id)))
+        #return redirect(url_for("leagueHomepage", league_id=int(newLeague.inserted_id)))
+        return render_template("addLeaguePage.html")
     else:
         return render_template("indexHomepage.html", errorMessage="ERROR: Could not add league.")
 
