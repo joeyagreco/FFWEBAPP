@@ -10,5 +10,4 @@ class MainController:
         return self.__databaseService.getLeague(leagueId)
 
     def addLeague(self, leagueName: str, numberOfTeams: int):
-        print("adding league from controller")
         return self.__databaseService.addLeague(leagueName, numberOfTeams)
