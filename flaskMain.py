@@ -9,11 +9,6 @@ def index():
     return render_template("indexHomepage.html")
 
 
-@app.route("/testHomepage", methods=["GET"])
-def testHomepage():
-    return render_template("testHomepage.html", subtitle="Test Home Page")
-
-
 @app.route("/addleague", methods=["POST"])
 def addLeague():
     if request.method == "POST":
@@ -21,7 +16,6 @@ def addLeague():
         numberOfTeams = request.form["number_of_teams"]
         mainController = MainController()
         newLeagueFromDB = mainController.addLeague(leagueName, numberOfTeams)
-
         if newLeagueFromDB:
             return redirect(url_for("leagueHomepage", league_id=int(newLeagueFromDB.inserted_id)))
         else:
