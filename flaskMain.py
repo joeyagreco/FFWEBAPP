@@ -14,15 +14,25 @@ def testHomepage():
     return render_template("testHomepage.html", subtitle="Test Home Page")
 
 
-@app.route("/addleague")
+@app.route("/addleague", methods=["POST"])
 def addLeague():
-    mainController = MainController()
-    newLeague = mainController.addLeague()
-    if newLeague:
-        #return redirect(url_for("leagueHomepage", league_id=int(newLeague.inserted_id)))
-        return render_template("addLeaguePage.html")
+    if request.method == "POST":
+        leagueName = request.form["league_name"]
+        numberOfTeams = request.form["number_of_teams"]
+        mainController = MainController()
+        newLeagueFromDB = mainController.addLeague(leagueName, numberOfTeams)
+
+        if newLeagueFromDB:
+            return redirect(url_for("leagueHomepage", league_id=int(newLeagueFromDB.inserted_id)))
+        else:
+            return render_template("addLeaguePage.html", errorMessage="ERROR: Could not add league.")
     else:
-        return render_template("indexHomepage.html", errorMessage="ERROR: Could not add league.")
+        return render_template("addLeaguePage.html", errorMessage="ERROR: Not getting a POST.")
+
+
+@app.route("/newleague")
+def newLeague():
+    return render_template("addLeaguePage.html")
 
 
 @app.route("/leaguehomepage", methods=["GET"])

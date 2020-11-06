@@ -9,5 +9,5 @@ class DatabaseService:
     def getLeague(self, leagueId):
         return self.__databaseClient.getLeague(leagueId)
 
-    def addLeague(self):
-        return self.__databaseClient.addLeague()
+    def addLeague(self, leagueName: str, numberOfTeams: int):
+        return self.__databaseClient.addLeague(leagueName, numberOfTeams)
