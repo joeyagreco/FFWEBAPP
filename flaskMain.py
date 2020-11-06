@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from controllers.MainController import MainController
 from fixtures.LeagueModelFixtureGeneratorDict import LeagueModelFixtureGeneratorDict
+from helpers.Error import Error
 
 app = Flask(__name__)
 
@@ -21,11 +22,11 @@ def addLeague():
         numberOfTeams = request.form["number_of_teams"]
         leagueModelFixtureGeneratorDict = LeagueModelFixtureGeneratorDict()
         mainController = MainController()
-        newLeagueFromDB = mainController.addLeague(leagueName, numberOfTeams, leagueModelFixtureGeneratorDict.getDummyWeekDict())
-        if newLeagueFromDB:
-            return redirect(url_for("leagueHomepage", league_id=int(newLeagueFromDB.inserted_id)))
+        newLeagueOrError = mainController.addLeague(leagueName, numberOfTeams, leagueModelFixtureGeneratorDict.getDummyWeekDict())
+        if isinstance(newLeagueOrError, Error):
+            return render_template("addLeaguePage.html", errorMessage=newLeagueOrError.errorMessage())
         else:
-            return render_template("addLeaguePage.html", errorMessage="ERROR: Could not add league.")
+            return redirect(url_for("leagueHomepage", league_id=int(newLeagueOrError.inserted_id)))
     else:
         return render_template("addLeaguePage.html", errorMessage="ERROR: Not getting a POST.")
 
@@ -39,12 +40,11 @@ def newLeague():
 def leagueHomepage():
     league_id = request.args.get("league_id")
     mainController = MainController()
-    league = mainController.getLeague(int(league_id))
-    if league:
-        return league
+    leagueOrError = mainController.getLeague(int(league_id))
+    if isinstance(leagueOrError, Error):
+        return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
     else:
-        return render_template("indexHomepage.html",
-                               errorMessage=f"ERROR: Cannot find a league with the ID {league_id}.")
+        return leagueOrError
 
 
 if __name__ == "__main__":

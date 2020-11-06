@@ -4,6 +4,8 @@ import random
 from dotenv import load_dotenv
 from pymongo import MongoClient
 
+from helpers.Error import Error
+
 load_dotenv()
 
 
@@ -26,16 +28,24 @@ class DatabaseClient:
 
     def getLeague(self, leagueId):
         """
-        Returns a Document object or None if not found
+        Returns a Document object or an Error object if not inserted
         https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
         """
-        return self.__collection.find_one({"_id": leagueId})
+        response = self.__collection.find_one({"_id": leagueId})
+        if response:
+            return response
+        else:
+            return Error(f"Could not find a league with ID: {leagueId}")
 
     def addLeague(self, leagueName: str, numberOfTeams: int, weeks):
         """
         Adds a league with a new generated ID to the database
-        Returns a Document object or None if not found
+        Returns a Document object or an Error object if not inserted
         https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
         league = {"_id": self.__generateLeagueId(), "leagueName": leagueName, "numberOfTeams": numberOfTeams, "weeks": weeks}
-        return self.__collection.insert_one(league)
+        response = self.__collection.insert_one(league)
+        if response:
+            return response
+        else:
+            return Error("Could not insert into database.")
