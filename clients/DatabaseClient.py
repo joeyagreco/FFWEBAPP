@@ -31,11 +31,11 @@ class DatabaseClient:
         """
         return self.__collection.find_one({"_id": leagueId})
 
-    def addLeague(self, leagueName: str, numberOfTeams: int):
+    def addLeague(self, leagueName: str, numberOfTeams: int, weeks):
         """
         Adds a league with a new generated ID to the database
         Returns a Document object or None if not found
         https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
-        league = {"_id": self.__generateLeagueId(), "leagueName": leagueName, "numberOfTeams": numberOfTeams}
+        league = {"_id": self.__generateLeagueId(), "leagueName": leagueName, "numberOfTeams": numberOfTeams, "weeks": weeks}
         return self.__collection.insert_one(league)

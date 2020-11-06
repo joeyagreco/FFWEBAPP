@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from controllers.MainController import MainController
+from fixtures.LeagueModelFixtureGeneratorDict import LeagueModelFixtureGeneratorDict
 
 app = Flask(__name__)
 
@@ -12,10 +13,15 @@ def index():
 @app.route("/addleague", methods=["POST"])
 def addLeague():
     if request.method == "POST":
+        # leagueName = request.form["league_name"]
+        # numberOfTeams = request.form["number_of_teams"]
+        # mainController = MainController()
+        # newLeagueFromDB = mainController.addLeague(leagueName, numberOfTeams)
         leagueName = request.form["league_name"]
         numberOfTeams = request.form["number_of_teams"]
+        leagueModelFixtureGeneratorDict = LeagueModelFixtureGeneratorDict()
         mainController = MainController()
-        newLeagueFromDB = mainController.addLeague(leagueName, numberOfTeams)
+        newLeagueFromDB = mainController.addLeague(leagueName, numberOfTeams, leagueModelFixtureGeneratorDict.getDummyWeekDict())
         if newLeagueFromDB:
             return redirect(url_for("leagueHomepage", league_id=int(newLeagueFromDB.inserted_id)))
         else:
