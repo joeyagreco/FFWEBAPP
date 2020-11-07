@@ -48,7 +48,6 @@ def leagueHomepage():
 @app.route("/updateleague", methods=["GET"])
 def updateLeague():
     league_id = request.args.get("league_id")
-    print(league_id)
     mainController = MainController()
     leagueOrError = mainController.getLeague(int(league_id))
     if isinstance(leagueOrError, Error):
