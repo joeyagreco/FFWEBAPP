@@ -44,7 +44,7 @@ def leagueHomepage():
 
 @app.route("/testbase")
 def testBase():
-    return render_template("leagueHomepage.html", league_name="TestLeague")
+    return render_template("leagueHomepage.html", league_name="TestLeague", league_id=123456)
 
 
 if __name__ == "__main__":
