@@ -2,7 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/leagueHomepage.css') }}">
-<script src="{{ url_for('static', filename='css/leagueHomepage.js') }}"></script>
+<script src="{{ url_for('static', filename='javascript/leagueHomepage.js') }}"></script>
 {% endblock %}
 
 {% block pageTitle %}{{league_name}} League{% endblock %}
@@ -28,6 +28,6 @@
 
 <div class="copyUrlForm">
     <input class="urlForm" type="text" name="league_url" id="league_id" value="{{league_url}}">
-    <button class="copyUrlButton">Copy URL</button>
+    <button class="copyUrlButton" type="button" onclick="copyUrl();">Copy URL</button>
 </div>
 {% endblock %}
