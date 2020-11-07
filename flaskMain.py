@@ -41,6 +41,10 @@ def leagueHomepage():
     else:
         return leagueOrError
 
+@app.route("/testbase")
+def testBase():
+    return render_template("testBasePage.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

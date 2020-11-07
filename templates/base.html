@@ -14,14 +14,14 @@
     </header>
 
     <div class="navBar">
-      <button class="navButton" action="/" type="button">
-        <div class="navButtonText">Home</div>
-      </button>
+      <form class="navButtonForm" action="http://127.0.0.1:5000">
+        <button class="navButton" type="submit">Home</button>
+      </form>
     </div>
 
     <div class="topSection">
-      <div class="pageTitle">FF WEB APP</div>
-      <div class="pageSubtitle">{{subtitle}}</div>
+      <div class="pageTitle">{% block pageTitle %}{% endblock %}</div>
+      <div class="pageSubtitle"></div>
     </div>
 
     <div class="bottomSection">
