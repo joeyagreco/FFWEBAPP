@@ -41,13 +41,7 @@ def leagueHomepage():
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
     else:
-        return leagueOrError
-
-
-@app.route("/testlh")
-def testlh():
-    return render_template("leagueHomepage.html", league_name="TestLeague", league_id=123456,
-                           league_url=f"{os.getenv('SERVER_BASE_URL')}leaguehomepage?leagueid=123456")
+        return render_template("leagueHomepage.html", league=leagueOrError, server_url=os.getenv("SERVER_BASE_URL"))
 
 
 if __name__ == "__main__":
