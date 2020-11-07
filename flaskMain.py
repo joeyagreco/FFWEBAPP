@@ -43,9 +43,16 @@ def leagueHomepage():
     else:
         return render_template("leagueHomepage.html", league=leagueOrError, server_url=os.getenv("SERVER_BASE_URL"))
     
-@app.route("/updateleague")
+@app.route("/updateleague", methods=["GET"])
 def updateLeague():
-    return render_template("updateLeaguePage.html")
+    league_id = request.args.get("league_id")
+    print(league_id)
+    mainController = MainController()
+    leagueOrError = mainController.getLeague(int(league_id))
+    if isinstance(leagueOrError, Error):
+        return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
+    else:
+        return render_template("updateLeaguePage.html", league=leagueOrError)
 
 
 if __name__ == "__main__":

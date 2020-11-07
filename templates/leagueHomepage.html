@@ -19,7 +19,8 @@
     <form class="teamStatsForm">
         <button class="stackButton" type="submit">Team Stats</button>
     </form>
-    <form class="updateLeagueForm">
+    <form class="updateLeagueForm" action="/updateleague" method="GET">
+        <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
         <button class="stackButton" type="submit">Update League</button>
     </form>
 </div>
@@ -27,7 +28,7 @@
 <div class="urlExplanation">This is your League URL: Save it to get back to this page anytime!</div>
 
 <div class="copyUrlForm">
-    <input class="urlForm" type="text" name="league_id" id="league_id" value="{{server_url}}leaguehomepage?league_id={{league._id}}">
+    <input class="urlForm" type="text" name="copyLeagueUrlForm" id="copyLeagueUrlForm" value="{{server_url}}leaguehomepage?league_id={{league._id}}">
     <button class="copyUrlButton" type="button" onclick="copyUrl()">Copy URL</button>
 </div>
 {% endblock %}
