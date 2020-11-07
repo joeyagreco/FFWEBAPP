@@ -10,7 +10,7 @@ body {
 
 .topSection {
   width: 100%;
-  height: 15%;
+  height: 20%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -35,6 +35,22 @@ body {
   order: 2;
   text-align: center;
   color: black;
+}
+
+.errorSection {
+    width: 100%;
+    height: 25%;
+    order: 3;
+    background-color: red;
+}
+
+.errorMessage {
+    width: 100%;
+    height: 100%;
+    font-size: 150%;
+    text-align: center;
+    color: red;
+    background-color: pink;
 }
 
 .navBar {

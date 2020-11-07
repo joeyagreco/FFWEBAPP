@@ -5,7 +5,7 @@
 <script src="{{ url_for('static', filename='javascript/leagueHomepage.js') }}"></script>
 {% endblock %}
 
-{% block pageTitle %}{{league.leagueName}} League{% endblock %}
+{% block pageTitle %}{{league.leagueName}}{% endblock %}
 
 {% block pageSubtitle %}League ID: {{league._id}}{% endblock %}
 
@@ -24,7 +24,7 @@
     </form>
 </div>
 
-<div class="urlExplanation">This is your League URL: Use it to get back to this page anytime!</div>
+<div class="urlExplanation">This is your League URL: Save it to get back to this page anytime!</div>
 
 <div class="copyUrlForm">
     <input class="urlForm" type="text" name="league_id" id="league_id" value="{{server_url}}leaguehomepage?league_id={{league._id}}">

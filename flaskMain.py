@@ -21,11 +21,11 @@ def addLeague():
         mainController = MainController()
         newLeagueOrError = mainController.addLeague(leagueName, numberOfTeams)
         if isinstance(newLeagueOrError, Error):
-            return render_template("addLeaguePage.html", errorMessage=newLeagueOrError.errorMessage())
+            return render_template("addLeaguePage.html", error_message=newLeagueOrError.errorMessage())
         else:
             return redirect(url_for("leagueHomepage", league_id=int(newLeagueOrError.inserted_id)))
     else:
-        return render_template("addLeaguePage.html", errorMessage="ERROR: Not getting a POST.")
+        return render_template("addLeaguePage.html", error_message="ERROR: Not getting a POST.")
 
 
 @app.route("/newleague")
@@ -42,6 +42,10 @@ def leagueHomepage():
         return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
     else:
         return render_template("leagueHomepage.html", league=leagueOrError, server_url=os.getenv("SERVER_BASE_URL"))
+    
+@app.route("/updateleague")
+def updateLeague():
+    return render_template("updateLeaguePage.html")
 
 
 if __name__ == "__main__":
