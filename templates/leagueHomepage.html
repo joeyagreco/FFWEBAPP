@@ -9,5 +9,20 @@
 {% block header %}{% endblock %}
 
 {% block content %}
+<div class="buttonStack">
+    <form class="leagueStatsForm">
+        <button class="stackButton" type="submit">League Stats</button>
+    </form>
+    <form class="teamStatsForm">
+        <button class="stackButton" type="submit">Team Stats</button>
+    </form>
+    <form class="updateLeagueForm">
+        <button class="stackButton" type="submit">Update League</button>
+    </form>
+</div>
 
+<div class="copyUrlForm">
+    <input class="urlForm" type="text" name="league_url" id="league_id" value="{{league_url}}">
+    <button class="copyUrlButton">Copy URL</button>
+</div>
 {% endblock %}

@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, request, redirect, url_for
 from controllers.MainController import MainController
 from fixtures.LeagueModelFixtureGeneratorDict import LeagueModelFixtureGeneratorDict
@@ -44,7 +46,8 @@ def leagueHomepage():
 
 @app.route("/testbase")
 def testBase():
-    return render_template("leagueHomepage.html", league_name="TestLeague", league_id=123456)
+    return render_template("leagueHomepage.html", league_name="TestLeague", league_id=123456,
+                           league_url=f"{os.getenv('SERVER_BASE_URL')}leaguehomepage?leagueid=123456")
 
 
 if __name__ == "__main__":
