@@ -1,8 +1,15 @@
-function Copy() {
-  var url = document.getElementById("league_id");
-  url.value = window.location.href;
-  url.focus();
-  url.select();
-  document.execCommand("Copy");
+function copyUrl() {
+  /* Get the text field */
+  var copyText = document.getElementById("league_id");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied to clipboard!");
 }
 
