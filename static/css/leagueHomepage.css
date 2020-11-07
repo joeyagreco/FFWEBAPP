@@ -35,6 +35,14 @@
     background-color: white;
 }
 
+.urlExplanation {
+    width: 100%;
+    height: auto%;
+    font-size: 120%;
+    background-color: yellow;
+    text-align: center;
+}
+
 .copyUrlForm {
     width: 100%;
     height: auto;

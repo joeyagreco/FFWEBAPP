@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
-{% block head %}<link rel="stylesheet" href="{{ url_for('static', filename='css/leagueHomepage.css') }}">{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/leagueHomepage.css') }}">
+<script src="{{ url_for('static', filename='css/leagueHomepage.js') }}"></script>
+{% endblock %}
 
 {% block pageTitle %}{{league_name}} League{% endblock %}
 
@@ -20,6 +23,8 @@
         <button class="stackButton" type="submit">Update League</button>
     </form>
 </div>
+
+<div class="urlExplanation">This is your League URL: Use it to get back to this page anytime!</div>
 
 <div class="copyUrlForm">
     <input class="urlForm" type="text" name="league_url" id="league_id" value="{{league_url}}">

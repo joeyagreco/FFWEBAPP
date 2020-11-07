@@ -44,8 +44,8 @@ def leagueHomepage():
         return leagueOrError
 
 
-@app.route("/testbase")
-def testBase():
+@app.route("/testlh")
+def testlh():
     return render_template("leagueHomepage.html", league_name="TestLeague", league_id=123456,
                            league_url=f"{os.getenv('SERVER_BASE_URL')}leaguehomepage?leagueid=123456")
 
