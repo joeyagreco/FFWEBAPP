@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
+{% block head %}<link rel="stylesheet" href="{{ url_for('static', filename='css/leagueHomepage.css') }}">{% endblock %}
+
 {% block pageTitle %}{{league_name}} League{% endblock %}
 
 {% block header %}{% endblock %}
 
-{% block content %}{% endblock %}
+{% block content %}
+<div class="test"></div>
+{% endblock %}
