@@ -41,6 +41,7 @@ def leagueHomepage():
     else:
         return leagueOrError
 
+
 @app.route("/testbase")
 def testBase():
     return render_template("leagueHomepage.html", league_name="TestLeague")
