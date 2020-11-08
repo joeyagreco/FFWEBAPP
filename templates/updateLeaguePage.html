@@ -14,12 +14,12 @@
 
 <div class="inputsAndButtons">
     <div class="topForm">
-        <input class="leagueNameForm" type="text" name="league_name_form" id="league_name_form" value="{{league.leagueName}}" placeholder="League Name">
+        <input class="leagueNameForm" type="text" name="league_name_form" id="league_name_form" value="{{league.leagueName}}" placeholder="League Name" required>
     </div>
 
     <div class="middleForms">
         {% for team in league.teams %}
-            <input class="teamForm" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name">
+            <input class="teamForm" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required>
         {% endfor %}
     </div>
 
