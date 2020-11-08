@@ -15,4 +15,7 @@ class LeagueModelFixtureGeneratorDict:
                 "matchups": [self.getDummyMatchupDict(), self.getDummyMatchupDict(), self.getDummyMatchupDict()]}
 
     def getDummyLeagueDict(self):
-        return {"leagueId": 100000, "leagueName": "dummyLeague", "numberOfTeams": 6, "weeks": self.getDummyWeekDict()}
+        return {"leagueId": 100000, "leagueName": "dummyLeague", "numberOfTeams": 6,
+                "teams": [self.getDummyTeamDict(), self.getDummyTeamDict(), self.getDummyTeamDict(),
+                          self.getDummyTeamDict(), self.getDummyTeamDict(), self.getDummyTeamDict()],
+                "weeks": self.getDummyWeekDict()}
