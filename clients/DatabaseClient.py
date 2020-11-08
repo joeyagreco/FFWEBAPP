@@ -37,14 +37,14 @@ class DatabaseClient:
         else:
             return Error(f"Could not find a league with ID: {leagueId}")
 
-    def addLeague(self, leagueName: str, numberOfTeams: int):
+    def addLeague(self, leagueName: str, numberOfTeams: int, teams: list):
         """
         Adds a league with a new generated ID to the database
         Returns a Document object or an Error object if not inserted
         https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
         league = {"_id": self.__generateLeagueId(), "leagueName": leagueName,
-                  "numberOfTeams": numberOfTeams, "weeks": []}
+                  "numberOfTeams": numberOfTeams, "teams": teams, "weeks": []}
         response = self.__collection.insert_one(league)
         if response:
             return response

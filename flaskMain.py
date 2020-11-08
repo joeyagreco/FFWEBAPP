@@ -17,9 +17,12 @@ def index():
 def addLeague():
     if request.method == "POST":
         leagueName = request.form["league_name"]
-        numberOfTeams = request.form["number_of_teams"]
+        numberOfTeams = int(request.form["number_of_teams"])
+        teams = []
+        for x in range(1, numberOfTeams+1):
+            teams.append({"teamId": x, "teamName": ""})
         mainController = MainController()
-        newLeagueOrError = mainController.addLeague(leagueName, numberOfTeams)
+        newLeagueOrError = mainController.addLeague(leagueName, numberOfTeams, teams)
         if isinstance(newLeagueOrError, Error):
             return render_template("addLeaguePage.html", error_message=newLeagueOrError.errorMessage())
         else:
@@ -35,9 +38,9 @@ def newLeague():
 
 @app.route("/leaguehomepage", methods=["GET"])
 def leagueHomepage():
-    leagueId = request.args.get("league_id")
+    leagueId = int(request.args.get("league_id"))
     mainController = MainController()
-    leagueOrError = mainController.getLeague(int(leagueId))
+    leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
     else:

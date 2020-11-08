@@ -1,14 +1,15 @@
 from typing import List
 
-from models import WeekModel
+from models import WeekModel, TeamModel
 
 
 class LeagueModel:
 
-    def __init__(self, leagueId: int, leagueName: str, numberOfTeams: int, weeks: List[WeekModel]):
+    def __init__(self, leagueId: int, leagueName: str, numberOfTeams: int, teams: List[TeamModel], weeks: List[WeekModel]):
         self.__leagueId = leagueId
         self.__leagueName = leagueName
         self.__numberOfTeams = numberOfTeams
+        self.__teams = teams
         self.__weeks = weeks
 
     def getLeagueId(self):
@@ -19,6 +20,9 @@ class LeagueModel:
 
     def getNumberOfTeams(self):
         return self.__numberOfTeams
+
+    def getTeams(self):
+        return self.__teams
 
     def getWeeks(self):
         return self.__weeks

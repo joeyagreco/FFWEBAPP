@@ -9,6 +9,6 @@ class MainController:
     def getLeague(self, leagueId: int):
         return self.__databaseService.getLeague(leagueId)
 
-    def addLeague(self, leagueName: str, numberOfTeams: int):
-        return self.__databaseService.addLeague(leagueName, numberOfTeams)
+    def addLeague(self, leagueName: str, numberOfTeams: int, teams: list):
+        return self.__databaseService.addLeague(leagueName, numberOfTeams, teams)
 
