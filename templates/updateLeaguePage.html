@@ -12,9 +12,11 @@
 
 {% block content %}
 
-<div class="inputsAndButtons">
+<form class="inputsAndButtons" action="/updateleague" method="POST">
     <div class="topForm">
-        <input class="leagueNameForm" type="text" name="league_name_form" id="league_name_form" value="{{league.leagueName}}" placeholder="League Name" required>
+        <input class="leagueNameForm" type="text" name="league_name" id="league_name" value="{{league.leagueName}}" placeholder="League Name" required>
+        <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
+        <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
     </div>
 
     <div class="middleForms">
@@ -42,6 +44,6 @@
     </div>
 
 
-</div>
+</form>
 
 {% endblock %}

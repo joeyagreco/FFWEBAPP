@@ -19,7 +19,7 @@ def addLeague():
         leagueName = request.form["league_name"]
         numberOfTeams = int(request.form["number_of_teams"])
         teams = []
-        for x in range(1, numberOfTeams+1):
+        for x in range(1, numberOfTeams + 1):
             teams.append({"teamId": x, "teamName": ""})
         mainController = MainController()
         newLeagueOrError = mainController.addLeague(leagueName, numberOfTeams, teams)
@@ -48,15 +48,27 @@ def leagueHomepage():
         return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
 
 
-@app.route("/updateleague", methods=["GET"])
+@app.route("/updateleague", methods=["GET", "POST"])
 def updateLeague():
-    league_id = request.args.get("league_id")
-    mainController = MainController()
-    leagueOrError = mainController.getLeague(int(league_id))
-    if isinstance(leagueOrError, Error):
-        return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
+    if request.method == "GET":
+        leagueId = int(request.args.get("league_id"))
+        mainController = MainController()
+        leagueOrError = mainController.getLeague(leagueId)
+        if isinstance(leagueOrError, Error):
+            return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
+        else:
+            return render_template("updateLeaguePage.html", league=leagueOrError)
+    elif request.method == "POST":
+        leagueId = int(request.form["league_id"])
+        leagueName = request.form["league_name"]
+        numberOfTeams = int(request.form["number_of_teams"])
+        teamNamesAndIds = []
+        for teamId in range(1, numberOfTeams + 1):
+            teamNamesAndIds.append({"teamId": teamId, "teamName": request.form[f"team_{teamId}"]})
+        print(leagueId, leagueName, teamNamesAndIds)
+        return "posted successfully"
     else:
-        return render_template("updateLeaguePage.html", league=leagueOrError)
+        return render_template("updateLeaguePage.html", error_message="ERROR: Not getting a GET or POST.")
 
 
 if __name__ == "__main__":

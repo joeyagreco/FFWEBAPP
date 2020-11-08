@@ -20,6 +20,14 @@
     text-align: center;
 }
 
+.leagueIdHidden {
+    display: none;
+}
+
+.leagueNumberOfTeamsHidden {
+    display: none;
+}
+
 .middleForms {
     width: 40%;
     height: 50%;
