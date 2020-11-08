@@ -18,9 +18,21 @@
     </div>
 
     <div class="middleForms">
+        <div class="oddTeamForms">
         {% for team in league.teams %}
-            <input class="teamForm" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required>
+            {% if team.teamId is not divisibleby 2 %}
+                <input class="teamFormOdd" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required>
+            {% endif %}
         {% endfor %}
+        </div>
+
+        <div class="evenTeamForms">
+        {% for team in league.teams %}
+            {% if team.teamId is divisibleby 2 %}
+                <input class="teamFormEven" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required>
+            {% endif %}
+        {% endfor %}
+        </div>
     </div>
 
     <div class="bottomButtons">
