@@ -17,5 +17,20 @@
 .leagueNameForm {
     width: 10%;
     height: auto;
+}
+
+.middleForm {
+    width: 100%;
+    height: 50%;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     text-align: center;
+    background-color: yellow;
+}
+
+.teamForm {
+    width: 10%;
+    height: auto;
 }

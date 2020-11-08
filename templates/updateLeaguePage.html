@@ -17,6 +17,12 @@
         <input class="leagueNameForm" type="text" name="league_name_form" id="league_name_form" value="{{league.leagueName}}" placeholder="League Name">
     </div>
 
+    <div class="middleForm">
+        {% for team in league.teams %}
+            <input class="teamForm" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name">
+        {% endfor %}
+    </div>
+
 
 </div>
 
