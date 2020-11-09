@@ -2,13 +2,18 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/updateLeaguePage.css') }}">
+<script src="{{ url_for('static', filename='javascript/updateLeaguePage.js') }}"></script>
 {% endblock %}
 
 {% block pageTitle %}Update League{% endblock %}
 
 {% block pageSubtitle %}{% endblock %}
 
-{% block header %}{% endblock %}
+{% block header %}
+{% if updated %}
+    <body onload="successUpdatePopup()">
+{% endif %}
+{% endblock %}
 
 {% block content %}
 

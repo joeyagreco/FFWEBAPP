@@ -68,15 +68,15 @@ def updateLeague():
         mainController = MainController()
         updated = mainController.updateLeague(leagueId, leagueName, teams)
         leagueOrError = mainController.getLeague(leagueId)
-        if isinstance(updated, Error):
-            if isinstance(leagueOrError, Error):
-                # could not update league or find league
-                return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
-            else:
-                # could not update league
-                return render_template("updateLeaguePage.html", error=leagueOrError)
+        if isinstance(leagueOrError, Error):
+            # could not find league
+            return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
+        elif isinstance(updated, Error):
+            # could not update league
+            return render_template("updateLeaguePage.html", error=leagueOrError)
         else:
-            return render_template("updateLeaguePage.html", league=leagueOrError)
+            # successfully updated league
+            return render_template("updateLeaguePage.html", league=leagueOrError, updated=True)
     else:
         return render_template("updateLeaguePage.html", error_message="ERROR: Not getting a GET or POST.")
 
