@@ -42,7 +42,7 @@ def leagueHomepage():
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
-        return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
+        return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     else:
         leagueUrl = f"{os.getenv('SERVER_BASE_URL')}leaguehomepage?league_id={leagueId}"
         return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
@@ -55,7 +55,7 @@ def updateLeague():
         mainController = MainController()
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
-            return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
+            return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         else:
             return render_template("updateLeaguePage.html", league=leagueOrError)
     elif request.method == "POST":
@@ -70,10 +70,10 @@ def updateLeague():
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             # could not find league
-            return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
+            return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         elif isinstance(updated, Error):
             # could not update league
-            return render_template("updateLeaguePage.html", error=leagueOrError)
+            return render_template("updateLeaguePage.html", league=leagueOrError, error_message=updated.errorMessage())
         else:
             # successfully updated league
             return render_template("updateLeaguePage.html", league=leagueOrError, updated=True)
