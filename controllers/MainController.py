@@ -12,3 +12,6 @@ class MainController:
     def addLeague(self, leagueName: str, numberOfTeams: int, teams: list):
         return self.__databaseService.addLeague(leagueName, numberOfTeams, teams)
 
+    def updateLeague(self, leagueId: int, leagueName: str, teams: list):
+        return self.__databaseService.updateLeague(leagueId, leagueName, teams)
+

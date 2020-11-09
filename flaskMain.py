@@ -62,11 +62,21 @@ def updateLeague():
         leagueId = int(request.form["league_id"])
         leagueName = request.form["league_name"]
         numberOfTeams = int(request.form["number_of_teams"])
-        teamNamesAndIds = []
+        teams = []
         for teamId in range(1, numberOfTeams + 1):
-            teamNamesAndIds.append({"teamId": teamId, "teamName": request.form[f"team_{teamId}"]})
-        print(leagueId, leagueName, teamNamesAndIds)
-        return "posted successfully"
+            teams.append({"teamId": int(teamId), "teamName": request.form[f"team_{teamId}"]})
+        mainController = MainController()
+        updated = mainController.updateLeague(leagueId, leagueName, teams)
+        leagueOrError = mainController.getLeague(leagueId)
+        if isinstance(updated, Error):
+            if isinstance(leagueOrError, Error):
+                # could not update league or find league
+                return render_template("indexHomepage.html", errorMessage=leagueOrError.errorMessage())
+            else:
+                # could not update league
+                return render_template("updateLeaguePage.html", error=leagueOrError)
+        else:
+            return render_template("updateLeaguePage.html", league=leagueOrError)
     else:
         return render_template("updateLeaguePage.html", error_message="ERROR: Not getting a GET or POST.")
 

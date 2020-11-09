@@ -50,3 +50,22 @@ class DatabaseClient:
             return response
         else:
             return Error("Could not insert into database.")
+
+    def updateLeague(self, leagueId: int, leagueName: str, teams: list):
+        """
+        Updates a league with given parameters
+        Returns a Document object or an Error object if not updated
+        https://docs.mongodb.com/manual/reference/method/db.collection.update/
+        https://specify.io/how-tos/mongodb-update-documents
+        """
+        league = self.getLeague(leagueId)
+        if isinstance(league, Error):
+            return league
+        else:
+            league["leagueName"] = leagueName
+            league["teams"] = teams
+            response = self.__collection.update({"_id": leagueId}, league)
+            if response:
+                return response
+            else:
+                return Error("Could not update league.")
