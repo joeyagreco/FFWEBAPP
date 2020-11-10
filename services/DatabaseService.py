@@ -14,3 +14,6 @@ class DatabaseService:
 
     def updateLeague(self, leagueId: int, leagueName: str, teams: list):
         return self.__databaseClient.updateLeague(leagueId, leagueName, teams)
+
+    def deleteLeague(self, leagueId: int):
+        return self.__databaseClient.deleteLeague(leagueId)

@@ -15,3 +15,6 @@ class MainController:
     def updateLeague(self, leagueId: int, leagueName: str, teams: list):
         return self.__databaseService.updateLeague(leagueId, leagueName, teams)
 
+    def deleteLeague(self, leagueId: int):
+        return self.__databaseService.deleteLeague(leagueId)
+

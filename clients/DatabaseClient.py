@@ -69,3 +69,14 @@ class DatabaseClient:
                 return response
             else:
                 return Error("Could not update league.")
+
+    def deleteLeague(self, leagueId: int):
+        """
+        Deletes the league with the given ID
+        Returns None if successfully deleted or an Error if not.
+        """
+        response = self.__collection.remove({"_id": leagueId})
+        if response["n"] == 1:
+            return None
+        else:
+            return Error("Could not delete league.")

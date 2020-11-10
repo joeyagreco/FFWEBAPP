@@ -94,7 +94,13 @@ def updateLeague():
 @app.route("/deleteleague", methods=["GET"])
 def deleteLeague():
     leagueId = int(request.args.get("league_id"))
-    return redirect(url_for("index"))
+    mainController = MainController()
+    response = mainController.deleteLeague(leagueId)
+    if isinstance(response, Error):
+        # could not delete league
+        return render_template("indexHomepage.html", error_message=response.errorMessage())
+    else:
+        return redirect(url_for("index"))
 
 
 if __name__ == "__main__":
