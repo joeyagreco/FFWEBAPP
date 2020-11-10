@@ -8,6 +8,11 @@ from helpers.Error import Error
 app = Flask(__name__)
 
 
+@app.route('/favicon.ico')
+def favicon():
+    return redirect(url_for('static', filename='icons/football_icon.ico'))
+
+
 @app.route("/")
 def index():
     return render_template("indexHomepage.html")
