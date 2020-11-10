@@ -10,6 +10,11 @@ app = Flask(__name__)
 
 @app.route('/favicon.ico')
 def favicon():
+    """
+    This is for the browser icon.
+    """
+    print(request)
+    print(request.method)
     return redirect(url_for('static', filename='icons/football_icon.ico'))
 
 
