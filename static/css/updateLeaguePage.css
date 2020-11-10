@@ -86,7 +86,7 @@
     background-color: teal;
 }
 
-.addOrUpdateWeekButton {
+.saveChangesButton {
     width: 10%;
     height: 20%;
     font-size: 120%;
@@ -94,7 +94,7 @@
     margin: auto;
 }
 
-.saveChangesButton {
+.addOrUpdateWeekButton {
     width: 10%;
     height: 20%;
     font-size: 120%;

@@ -15,6 +15,7 @@ def favicon():
 
 @app.route("/")
 def index():
+    print("in index")
     return render_template("indexHomepage.html")
 
 
