@@ -74,6 +74,7 @@ class DatabaseClient:
         """
         Deletes the league with the given ID
         Returns None if successfully deleted or an Error if not.
+        https://docs.mongodb.com/manual/reference/method/db.collection.remove/
         """
         response = self.__collection.remove({"_id": leagueId})
         if response["n"] == 1:
