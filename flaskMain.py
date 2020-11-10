@@ -88,7 +88,6 @@ def deleteLeague():
     if request.method == "GET":
         leagueId = int(request.args.get("league_id"))
         print(f"getting delete league for {leagueId}")
-        # return render_template("indexHomepage.html")
         return redirect(url_for("index"))
     else:
         return "not getting a get"
