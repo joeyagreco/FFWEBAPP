@@ -13,14 +13,11 @@ def favicon():
     """
     This is for the browser icon.
     """
-    print(request)
-    print(request.method)
     return redirect(url_for('static', filename='icons/football_icon.ico'))
 
 
 @app.route("/")
 def index():
-    print("in index")
     return render_template("indexHomepage.html")
 
 
@@ -96,12 +93,8 @@ def updateLeague():
 
 @app.route("/deleteleague", methods=["GET"])
 def deleteLeague():
-    if request.method == "GET":
-        leagueId = int(request.args.get("league_id"))
-        print(f"getting delete league for {leagueId}")
-        return redirect(url_for("index"))
-    else:
-        return "not getting a get"
+    leagueId = int(request.args.get("league_id"))
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":
