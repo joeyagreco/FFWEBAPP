@@ -28,10 +28,11 @@ class DatabaseClient:
 
     def getLeague(self, leagueId):
         """
-        Returns a Document object or an Error object if not inserted
+        Returns a dictionary object of the league or an Error object if not inserted
         https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
         """
         response = self.__collection.find_one({"_id": leagueId})
+        # response will be None if not found
         if response:
             return response
         else:
@@ -40,14 +41,14 @@ class DatabaseClient:
     def addLeague(self, leagueName: str, numberOfTeams: int, teams: list):
         """
         Adds a league with a new generated ID to the database
-        Returns a Document object or an Error object if not inserted
+        Returns the new league's ID or an Error object if not inserted
         https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
         league = {"_id": self.__generateLeagueId(), "leagueName": leagueName,
                   "numberOfTeams": numberOfTeams, "teams": teams, "weeks": []}
         response = self.__collection.insert_one(league)
-        if response:
-            return response
+        if response.acknowledged:
+            return response.inserted_id
         else:
             return Error("Could not insert into database.")
 
@@ -78,6 +79,8 @@ class DatabaseClient:
         """
         response = self.__collection.remove({"_id": leagueId})
         if response["n"] == 1:
+            # successfully deleted 1 league
             return None
         else:
+            # could not delete the league
             return Error("Could not delete league.")
