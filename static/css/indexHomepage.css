@@ -97,6 +97,7 @@ header {
 .leagueIdInputForm {
     height: 10%;
     width: 100%;
+    text-align: center;
     box-sizing:border-box
 }
 
