@@ -1,0 +1,3 @@
+function homeRedirect() {
+    window.location = "/";
+}

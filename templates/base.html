@@ -3,6 +3,7 @@
 
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <script src="{{ url_for('static', filename='javascript/base.js') }}"></script>
     {% block head %}
     {% endblock %}
   </head>
@@ -14,8 +15,8 @@
     </header>
 
     <div class="navBar">
-      <form class="navButtonForm" action="http://127.0.0.1:5000">
-        <button class="navButton" type="submit">Home</button>
+      <form class="navButtonForm">
+        <button class="navButton" type="button" onclick="homeRedirect()">Home</button>
       </form>
     </div>
 
