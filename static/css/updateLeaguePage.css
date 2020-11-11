@@ -15,8 +15,9 @@
 }
 
 .leagueNameForm {
-    width: 10%;
-    height: auto;
+    width: 15%;
+    height: 50%;
+    font-size: 150%;
     text-align: center;
 }
 
