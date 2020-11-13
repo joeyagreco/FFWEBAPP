@@ -57,7 +57,6 @@ def leagueHomepage():
 @app.route("/updateleague", methods=["GET", "POST"])
 def updateLeague():
     if request.method == "GET":
-        print("in get update league")
         leagueId = int(request.args.get("league_id"))
         mainController = MainController()
         leagueOrError = mainController.getLeague(leagueId)
@@ -66,7 +65,6 @@ def updateLeague():
         else:
             return render_template("updateLeaguePage.html", league=leagueOrError)
     elif request.method == "POST":
-        print("posting in update league")
         leagueId = int(request.form["league_id"])
         leagueName = request.form["league_name"]
         numberOfTeams = int(request.form["number_of_teams"])
@@ -81,10 +79,11 @@ def updateLeague():
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         elif isinstance(updated, Error):
             # could not update league
-            return render_template("updateLeaguePage.html", league=leagueOrError, error_message=updated.errorMessage())
+            return render_template("updateLeaguePage.html", league=leagueOrError,
+                                   error_message=updated.errorMessage())
         else:
             # successfully updated league
-            return render_template("updateLeaguePage.html", league=leagueOrError, updated=True)
+            return render_template("updateLeaguePage.html", league=leagueOrError)
     else:
         return render_template("indexHomepage.html", error_message="ERROR: Not getting a GET or POST.")
 

@@ -10,11 +10,7 @@
 
 {% block pageSubtitle %}{% endblock %}
 
-{% block header %}
-{% if updated %}
-    <body onload="successUpdatePopup()">
-{% endif %}
-{% endblock %}
+{% block header %}{% endblock %}
 
 {% block content %}
 
@@ -44,7 +40,7 @@
     </div>
 
     <div class="bottomButtons">
-        <button class="saveChangesButton" type="submit">Save Changes</button>
+        <button class="saveChangesButton" type="submit" onclick="successfulUpdatePopup()">Save Changes</button>
         <button class="addOrUpdateWeekButton" type="button">Add/Update a Week</button>
         <button class="deleteLeagueButton" type="button" onclick="deleteLeague()">Delete League</button>
     </div>
