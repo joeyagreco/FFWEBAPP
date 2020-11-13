@@ -1,4 +1,6 @@
 from clients.DatabaseClient import DatabaseClient
+from helpers.Error import Error
+from packages.Verifiers.DatabaseVerifier import DatabaseVerifier
 
 
 class DatabaseService:
@@ -17,7 +19,15 @@ class DatabaseService:
         return self.__databaseClient.addLeague(leagueName, numberOfTeams, teams)
 
     def updateLeague(self, leagueId: int, leagueName: str, teams: list):
-        return self.__databaseClient.updateLeague(leagueId, leagueName, teams)
+        """
+        Does checks on the updated league data
+        Either passes the request to the client or returns an Error
+        """
+        databaseVerifier = DatabaseVerifier()
+        if databaseVerifier.duplicateTeamNames(teams):
+            return Error("Duplicate team names.")
+        else:
+            return self.__databaseClient.updateLeague(leagueId, leagueName, teams)
 
     def deleteLeague(self, leagueId: int):
         return self.__databaseClient.deleteLeague(leagueId)
