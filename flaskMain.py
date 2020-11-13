@@ -2,7 +2,6 @@ import os
 
 from flask import Flask, render_template, request, redirect, url_for
 from controllers.MainController import MainController
-from fixtures.LeagueModelFixtureGeneratorDict import LeagueModelFixtureGeneratorDict
 from helpers.Error import Error
 
 app = Flask(__name__)
@@ -36,7 +35,6 @@ def addLeague():
         return redirect(url_for("leagueHomepage", league_id=newLeagueIdOrError))
 
 
-
 @app.route("/new-league")
 def newLeague():
     return render_template("addLeaguePage.html")
@@ -50,7 +48,7 @@ def leagueHomepage():
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     else:
-        leagueUrl = f"{os.getenv('SERVER_BASE_URL')}leaguehomepage?league_id={leagueId}"
+        leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
         return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
 
 
