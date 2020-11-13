@@ -24,11 +24,8 @@ def index():
 def addLeague():
     leagueName = request.form["league_name"]
     numberOfTeams = int(request.form["number_of_teams"])
-    teams = []
-    for x in range(1, numberOfTeams + 1):
-        teams.append({"teamId": x, "teamName": ""})
     mainController = MainController()
-    newLeagueIdOrError = mainController.addLeague(leagueName, numberOfTeams, teams)
+    newLeagueIdOrError = mainController.addLeague(leagueName, numberOfTeams)
     if isinstance(newLeagueIdOrError, Error):
         return render_template("addLeaguePage.html", error_message=newLeagueIdOrError.errorMessage())
     else:
