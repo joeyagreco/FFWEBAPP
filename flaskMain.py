@@ -21,7 +21,7 @@ def index():
     return render_template("indexHomepage.html")
 
 
-@app.route("/addleague", methods=["POST"])
+@app.route("/add-league", methods=["POST"])
 def addLeague():
     leagueName = request.form["league_name"]
     numberOfTeams = int(request.form["number_of_teams"])
@@ -37,12 +37,12 @@ def addLeague():
 
 
 
-@app.route("/newleague")
+@app.route("/new-league")
 def newLeague():
     return render_template("addLeaguePage.html")
 
 
-@app.route("/leaguehomepage", methods=["GET"])
+@app.route("/league-homepage", methods=["GET"])
 def leagueHomepage():
     leagueId = int(request.args.get("league_id"))
     mainController = MainController()
@@ -54,7 +54,7 @@ def leagueHomepage():
         return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
 
 
-@app.route("/updateleague", methods=["GET", "POST"])
+@app.route("/update-league", methods=["GET", "POST"])
 def updateLeague():
     if request.method == "GET":
         leagueId = int(request.args.get("league_id"))
@@ -87,7 +87,7 @@ def updateLeague():
         return render_template("indexHomepage.html", error_message="ERROR: Not getting a GET or POST.")
 
 
-@app.route("/deleteleague", methods=["GET"])
+@app.route("/delete-league", methods=["GET"])
 def deleteLeague():
     leagueId = int(request.args.get("league_id"))
     mainController = MainController()
