@@ -9,3 +9,10 @@ function deleteLeague() {
 function successfulUpdatePopup() {
     alert("League Successfully Updated");
 }
+
+function sendToUpdateWeeks() {
+    // GET request
+    leagueId = document.getElementById("league_id").value;
+    window.location = "/add-update-weeks?league_id="+leagueId;
+
+}

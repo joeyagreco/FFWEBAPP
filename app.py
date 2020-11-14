@@ -94,5 +94,12 @@ def deleteLeague():
         return redirect(url_for("index"))
 
 
+@app.route("/add-update-weeks", methods=["GET"])
+def addUpdateWeeks():
+    leagueId = int(request.args.get("league_id"))
+    print(leagueId)
+    return render_template("addUpdateWeeksPage.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
