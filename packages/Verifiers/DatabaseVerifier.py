@@ -1,11 +1,8 @@
 class DatabaseVerifier:
 
-    def __init__(self):
-        pass
-
     def duplicateTeamNames(self, teams: list):
         """
-        Returns a boolean of whether the team list has any duplicate team names
+        Returns a boolean of whether the given team list has any duplicate team names
         """
         teamNames = []
         for team in teams:
