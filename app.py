@@ -102,6 +102,7 @@ def addUpdateWeeks():
     leagueOrError = mainController.getLeague(leagueId)
     fixture = LeagueModelFixtureGeneratorDict()
     leagueOrError["weeks"].append(fixture.getDummyWeekDict())
+    print(leagueOrError)
     return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=1)
 
 

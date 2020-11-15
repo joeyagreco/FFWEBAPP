@@ -27,17 +27,21 @@
     </select>
     <div class="teams">
         <div class="oddTeamForms">
-        {% for team in league.teams %}
-            {% if team.teamId is not divisibleby 2 %}
-                <input class="teamFormOdd" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required>
+        {% for week in league.weeks %}
+            {% if week.weekNumber == week_number %}
+                {% for matchup in week.matchups %}
+                     <input class="teamFormOdd" type="text" name="team_{{matchup.teamA.teamId}}" id="matchup.teamA_{{matchup.teamA.teamId}}" value="{{matchup.teamA.teamName}}" placeholder="team here" required>
+                {% endfor %}
             {% endif %}
         {% endfor %}
         </div>
 
         <div class="evenTeamForms">
-        {% for team in league.teams %}
-            {% if team.teamId is divisibleby 2 %}
-                <input class="teamFormEven" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required>
+        {% for week in league.weeks %}
+            {% if week.weekNumber == week_number %}
+                {% for matchup in week.matchups %}
+                     <input class="teamFormEven" type="text" name="team_{{matchup.teamB.teamId}}" id="matchup.teamB_{{matchup.teamB.teamId}}" value="{{matchup.teamB.teamName}}" placeholder="team here" required>
+                {% endfor %}
             {% endif %}
         {% endfor %}
         </div>
