@@ -15,11 +15,33 @@
 {% block content %}
 <form class="weekForm">
     <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
+    <input class="weekHidden" type="number" name="week_number" id="week_number" value="{{week_number}}">
     <select class="selectWeekDropdown">
         {% for week in league.weeks %}
-            <option value="{{week.weekNumber}}">Week {{week.weekNumber}}</option>
+            {% if week.weekNumber == 1 %}
+                <option value="{{week.weekNumber}}" selected>Week {{week.weekNumber}}</option>
+            {% else %}
+                <option value="{{week.weekNumber}}">Week {{week.weekNumber}}</option>
+            {% endif %}
         {% endfor %}
     </select>
+    <div class="teams">
+        <div class="oddTeamForms">
+        {% for team in league.teams %}
+            {% if team.teamId is not divisibleby 2 %}
+                <input class="teamFormOdd" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required>
+            {% endif %}
+        {% endfor %}
+        </div>
+
+        <div class="evenTeamForms">
+        {% for team in league.teams %}
+            {% if team.teamId is divisibleby 2 %}
+                <input class="teamFormEven" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
 
 
 </form>
