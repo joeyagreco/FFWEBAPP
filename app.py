@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, render_template, request, redirect, url_for
 from controllers.MainController import MainController
+from fixtures.LeagueModelFixtureGeneratorDict import LeagueModelFixtureGeneratorDict
 from helpers.Error import Error
 
 app = Flask(__name__)
@@ -99,6 +100,8 @@ def addUpdateWeeks():
     leagueId = int(request.args.get("league_id"))
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
+    fixture = LeagueModelFixtureGeneratorDict()
+    leagueOrError["weeks"].append(fixture.getDummyWeekDict())
     return render_template("addUpdateWeeksPage.html", league=leagueOrError)
 
 
