@@ -6,13 +6,22 @@
 <script src="{{ url_for('static', filename='javascript/addUpdateWeeksPage.js') }}"></script>
 {% endblock %}
 
-{% block pageTitle %}Update Your League{% endblock %}
+{% block pageTitle %}Add/Update Weeks{% endblock %}
 
 {% block pageSubtitle %}{% endblock %}
 
 {% block header %}{% endblock %}
 
 {% block content %}
-<p>add update weeks page</p>
+<form class="weekForm">
+    <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
+    <select class="selectWeekDropdown">
+        {% for week in league.weeks %}
+            <option value="{{week.weekNumber}}">Week {{week.weekNumber}}</option>
+        {% endfor %}
+    </select>
+
+
+</form>
 
 {% endblock %}

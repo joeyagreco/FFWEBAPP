@@ -97,8 +97,9 @@ def deleteLeague():
 @app.route("/add-update-weeks", methods=["GET"])
 def addUpdateWeeks():
     leagueId = int(request.args.get("league_id"))
-    print(leagueId)
-    return render_template("addUpdateWeeksPage.html")
+    mainController = MainController()
+    leagueOrError = mainController.getLeague(leagueId)
+    return render_template("addUpdateWeeksPage.html", league=leagueOrError)
 
 
 if __name__ == "__main__":
