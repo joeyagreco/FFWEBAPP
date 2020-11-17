@@ -40,7 +40,9 @@
                                     {% endif %}
                                 {% endfor %}
                             </select>
-                            <input class="oddTeamScore" type="number" value="100">
+                            {% if matchup.matchupId == loop.index %}
+                                <input class="oddTeamScore" type="number" value="{{matchup.teamAScore}}">
+                            {% endif %}
                         </div>
                     {% endfor %}
             {% endfor %}
