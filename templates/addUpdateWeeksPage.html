@@ -29,7 +29,7 @@
         <div class="oddTeamForms">
             {% for week in league.weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
-                    <select class="teamFormOdd">
+                    <select class="teamFormsOdd">
                         {% if matchup.matchupId == loop.index %}
                             <option name="team_{{matchup.teamA.teamId}}" id="team_{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
                         {% endif %}
@@ -46,7 +46,7 @@
         <div class="evenTeamForms">
             {% for week in league.weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
-                    <select class="teamFormEven">
+                    <select class="teamFormsEven">
                         {% if matchup.matchupId == loop.index %}
                             <option name="team_{{matchup.teamB.teamId}}" id="team_{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
                         {% endif %}

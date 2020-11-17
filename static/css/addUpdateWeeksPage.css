@@ -55,16 +55,14 @@
     background-color: yellow;
 }
 
-.teamFormOdd {
+.teamFormsOdd {
     width: 50%;
     height: auto;
     margin: auto;
-    text-align: center;
 }
 
-.teamFormEven {
+.teamFormsEven {
     width: 50%;
     height: auto;
     margin: auto;
-    text-align: center;
 }
