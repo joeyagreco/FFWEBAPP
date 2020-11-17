@@ -47,10 +47,12 @@
                 {% for matchup in week.matchups %}
                     <select class="teamFormEven">
                         {% if matchup.matchupId == loop.index %}
-                            <option name="team_{{matchup.teamB.teamId}}" id="matchup.teamB_{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}if{{loop.index}}</option>
+                            <option name="team_{{matchup.teamB.teamId}}" id="team_{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
                         {% endif %}
                         {% for team in league.teams %}
-                            <option name="team_{{matchup.teamB.teamId}}" id="matchup.teamB_{{matchup.teamB.teamId}}">{{matchup.teamB.teamName}}else{{loop.index}}</option>
+                            {% if team.teamId != matchup.teamB.teamId %}
+                                <option name="team_{{team.teamId}}" id="team_{{team.teamId}}">{{team.teamName}}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                 {% endfor %}
