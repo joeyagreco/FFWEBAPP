@@ -27,18 +27,19 @@
     </select>
     <div class="teams">
         <div class="oddTeamForms">
-            {% for week in league.weeks %}
-                {% if week.weekNumber == week_number %}
-                    {% for matchup in week.matchups %}
-                        <select class="teamFormOdd">
-                            {% if matchup.matchupId == loop.index %}
-                                <option name="team_{{matchup.teamA.teamId}}" id="matchup.teamA_{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}if{{loop.index}}</option>
-                            {% else %}
-                                <option name="team_{{matchup.teamA.teamId}}" id="matchup.teamA_{{matchup.teamA.teamId}}">{{matchup.teamA.teamName}}else{{loop.index}}</option>
+            {% for week in league.weeks if week.weekNumber == week_number %}
+                {% for matchup in week.matchups %}
+                    <select class="teamFormOdd">
+                        {% if matchup.matchupId == loop.index %}
+                            <option name="team_{{matchup.teamA.teamId}}" id="team_{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
+                        {% endif %}
+                        {% for team in league.teams %}
+                            {% if team.teamId != matchup.teamA.teamId %}
+                                <option name="team_{{team.teamId}}" id="team_{{team.teamId}}">{{team.teamName}}</option>
                             {% endif %}
-                        </select>
-                    {% endfor %}
-                {% endif %}
+                        {% endfor %}
+                    </select>
+                {% endfor %}
             {% endfor %}
         </div>
 
