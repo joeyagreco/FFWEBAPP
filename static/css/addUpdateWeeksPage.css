@@ -52,17 +52,31 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: yellow;
+    background-color: orange;
 }
 
 .teamFormsOdd {
-    width: 50%;
+    width: 100%;
     height: auto;
     margin: auto;
+    display: flex;
+    flex-direction: row;
 }
 
 .teamFormsEven {
     width: 50%;
     height: auto;
     margin: auto;
+}
+
+.oddTeamName {
+    width: 50%;
+    height: auto;
+    order: 1;
+}
+
+.oddTeamScore {
+    width: 20%;
+    height: auto;
+    order: 2;
 }
