@@ -7,7 +7,7 @@ class LeagueModelFixtureGeneratorDict:
         return {"teamId": 1, "teamName": "dummyTeam"}
 
     def getDummyMatchupDict(self):
-        return {"teamA": self.getDummyTeamDict(), "teamB": self.getDummyTeamDict(),
+        return {"matchupId": 1, "teamA": self.getDummyTeamDict(), "teamB": self.getDummyTeamDict(),
                 "teamAScore": 100.0, "teamBScore": 100.0}
 
     def getDummyWeekDict(self):

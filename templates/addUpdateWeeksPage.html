@@ -30,7 +30,13 @@
         {% for week in league.weeks %}
             {% if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
-                     <input class="teamFormOdd" type="text" name="team_{{matchup.teamA.teamId}}" id="matchup.teamA_{{matchup.teamA.teamId}}" value="{{matchup.teamA.teamName}}" placeholder="team here" required>
+                    <select class="teamFormOdd">
+                        {% if matchup.matchupId == loop.index %}
+                            <option name="team_{{matchup.teamA.teamId}}" id="matchup.teamA_{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}if{{loop.index}}</option>
+                        {% else %}
+                            <option name="team_{{matchup.teamA.teamId}}" id="matchup.teamA_{{matchup.teamA.teamId}}">{{matchup.teamA.teamName}}else{{loop.index}}</option>
+                        {% endif %}
+                    </select>
                 {% endfor %}
             {% endif %}
         {% endfor %}
