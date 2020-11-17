@@ -65,9 +65,21 @@
 }
 
 .teamFormsEven {
-    width: 50%;
+    width: 80%;
     height: auto;
     margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.teamFormsOdd {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .oddTeamName {
@@ -76,7 +88,19 @@
     order: 1;
 }
 
+.evenTeamName {
+    width: 50%;
+    height: auto;
+    order: 1;
+}
+
 .oddTeamScore {
+    width: 20%;
+    height: auto;
+    order: 2;
+}
+
+.evenTeamScore {
     width: 20%;
     height: auto;
     order: 2;
