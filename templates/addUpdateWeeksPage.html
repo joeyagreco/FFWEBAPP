@@ -18,7 +18,7 @@
     <input class="weekHidden" type="number" name="week_number" id="week_number" value="{{week_number}}">
     <select class="selectWeekDropdown">
         {% for week in league.weeks %}
-            {% if week.weekNumber == 1 %}
+            {% if week.weekNumber == week_number %}
                 <option value="{{week.weekNumber}}" selected>Week {{week.weekNumber}}</option>
             {% else %}
                 <option value="{{week.weekNumber}}">Week {{week.weekNumber}}</option>
