@@ -30,18 +30,18 @@
             {% for week in league.weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsOdd">
-                        <select class="oddTeamName">
+                        <select class="oddTeamName" name="teamAId_matchup_{{loop.index}}" id="teamAId_matchup_{{loop.index}}">
                             {% if matchup.matchupId == loop.index %}
-                                <option name="teamAId_{{matchup.teamA.teamId}}matchup_{{loop.index}}" id="teamAId_{{matchup.teamA.teamId}}matchup_{{loop.index}}" selected>{{matchup.teamA.teamName}}</option>
+                                <option value="{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
                             {% endif %}
                             {% for team in league.teams %}
                                 {% if team.teamId != matchup.teamA.teamId %}
-                                    <option name="teamAId_{{team.teamId}}matchup_{{loop.index}}" id="teamAId_{{team.teamId}}matchup_{{loop.index}}">{{team.teamName}}</option>
+                                    <option value="{{matchup.teamA.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="oddTeamScore" name="teamAScore_{{matchup.teamA.teamId}}matchup_{{loop.index}}" id="teamAScore_{{matchup.teamA.teamId}}matchup_{{loop.index}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" required>
+                            <input class="oddTeamScore" name="teamAScore_matchup_{{loop.index}}" id="teamAScore_{{matchup.teamA.teamId}}matchup_{{loop.index}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" required>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -52,18 +52,18 @@
             {% for week in league.weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsEven">
-                        <select class="evenTeamName">
+                        <select class="evenTeamName" name="teamBId_matchup_{{loop.index}}" id="teamBId_matchup_{{loop.index}}">
                             {% if matchup.matchupId == loop.index %}
-                                <option name="teamBId_{{matchup.teamB.teamId}}matchup_{{loop.index}}" id="teamBId_{{matchup.teamB.teamId}}matchup_{{loop.index}}" selected>{{matchup.teamB.teamName}}</option>
+                                <option value="{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
                             {% endif %}
                             {% for team in league.teams %}
                                 {% if team.teamId != matchup.teamB.teamId %}
-                                    <option name="teamAId_{{team.teamId}}matchup_{{loop.index}}" id="teamAId_{{team.teamId}}matchup_{{loop.index}}">{{team.teamName}}</option>
+                                    <option value="{{matchup.teamB.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="evenTeamScore" name="teamAScore_{{matchup.teamB.teamId}}matchup_{{loop.index}}" id="teamAScore_{{matchup.teamB.teamId}}matchup_{{loop.index}}" type="number" value="{{matchup.teamBScore}}" placeholder="Score" required>
+                            <input class="evenTeamScore" name="teamBScore_matchup_{{loop.index}}" id="teamBScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamBScore}}" placeholder="Score" required>
                         {% endif %}
                     </div>
                 {% endfor %}
