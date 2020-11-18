@@ -125,6 +125,16 @@ def addUpdateWeeks():
 @app.route("/add-week", methods=["POST"])
 def addWeek():
     print(request.form)
+    leagueId = int(request.form["league_id"])
+    weekNumber = int(request.form["week_number"])
+    mainController = MainController()
+    leagueOrError = mainController.getLeague(leagueId)
+
+    # matchupIdCounter = 1
+    # for i in range(1, len(leagueOrError["teams"]), 2):
+    #     matchup = {"matchupId": matchupIdCounter, "teamA": leagueOrError["teams"][i - 1],
+    #                "teamB": leagueOrError["teams"][i], "teamAScore": None, "teamBScore": None}
+    #     matchupIdCounter += 1
 
 
 if __name__ == "__main__":

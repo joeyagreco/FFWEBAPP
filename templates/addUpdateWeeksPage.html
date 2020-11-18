@@ -32,16 +32,16 @@
                     <div class="teamFormsOdd">
                         <select class="oddTeamName">
                             {% if matchup.matchupId == loop.index %}
-                                <option name="team_{{matchup.teamA.teamId}}" id="team_{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
+                                <option name="teamAId_{{matchup.teamA.teamId}}matchup_{{loop.index}}" id="teamAId_{{matchup.teamA.teamId}}matchup_{{loop.index}}" selected>{{matchup.teamA.teamName}}</option>
                             {% endif %}
                             {% for team in league.teams %}
                                 {% if team.teamId != matchup.teamA.teamId %}
-                                    <option name="team_{{team.teamId}}" id="team_{{team.teamId}}">{{team.teamName}}</option>
+                                    <option name="teamAId_{{team.teamId}}matchup_{{loop.index}}" id="teamAId_{{team.teamId}}matchup_{{loop.index}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="oddTeamScore" name="teamAScore_{{matchup.teamA.teamId}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" required>
+                            <input class="oddTeamScore" name="teamAScore_{{matchup.teamA.teamId}}matchup_{{loop.index}}" id="teamAScore_{{matchup.teamA.teamId}}matchup_{{loop.index}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" required>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -54,16 +54,16 @@
                     <div class="teamFormsEven">
                         <select class="evenTeamName">
                             {% if matchup.matchupId == loop.index %}
-                                <option name="team_{{matchup.teamB.teamId}}" id="team_{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
+                                <option name="teamBId_{{matchup.teamB.teamId}}matchup_{{loop.index}}" id="teamBId_{{matchup.teamB.teamId}}matchup_{{loop.index}}" selected>{{matchup.teamB.teamName}}</option>
                             {% endif %}
                             {% for team in league.teams %}
                                 {% if team.teamId != matchup.teamB.teamId %}
-                                    <option name="team_{{team.teamId}}" id="team_{{team.teamId}}">{{team.teamName}}</option>
+                                    <option name="teamAId_{{team.teamId}}matchup_{{loop.index}}" id="teamAId_{{team.teamId}}matchup_{{loop.index}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="evenTeamScore" name="teamAScore_{{matchup.teamB.teamId}}" type="number" value="{{matchup.teamBScore}}" placeholder="Score" required>
+                            <input class="evenTeamScore" name="teamAScore_{{matchup.teamB.teamId}}matchup_{{loop.index}}" id="teamAScore_{{matchup.teamB.teamId}}matchup_{{loop.index}}" type="number" value="{{matchup.teamBScore}}" placeholder="Score" required>
                         {% endif %}
                     </div>
                 {% endfor %}
