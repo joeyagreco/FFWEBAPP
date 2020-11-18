@@ -41,7 +41,7 @@
                             {% endfor %}
                         </select>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="oddTeamScore" type="number" value="{{matchup.teamAScore}}" required>
+                            <input class="oddTeamScore" type="number" value="{{matchup.teamAScore}}" placeholder="Score" required>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -63,7 +63,7 @@
                             {% endfor %}
                         </select>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="evenTeamScore" type="number" value="{{matchup.teamBScore}}" required>
+                            <input class="evenTeamScore" type="number" value="{{matchup.teamBScore}}" placeholder="Score" required>
                         {% endif %}
                     </div>
                 {% endfor %}
