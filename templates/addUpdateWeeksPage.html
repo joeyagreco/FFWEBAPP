@@ -36,7 +36,7 @@
                             {% endif %}
                             {% for team in league.teams %}
                                 {% if team.teamId != matchup.teamA.teamId %}
-                                    <option value="{{matchup.teamA.teamId}}">{{team.teamName}}</option>
+                                    <option value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
@@ -58,7 +58,7 @@
                             {% endif %}
                             {% for team in league.teams %}
                                 {% if team.teamId != matchup.teamB.teamId %}
-                                    <option value="{{matchup.teamB.teamId}}">{{team.teamName}}</option>
+                                    <option value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
