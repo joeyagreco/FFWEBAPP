@@ -130,6 +130,13 @@ def addWeek():
             if team["teamId"] == teamId:
                 return team
 
+    # helper function to check if week exists in league
+    def weekExists(league: dict, weekNum: int):
+        for week in league["weeks"]:
+            if week["weekNumber"] == weekNum:
+                return True
+        return False
+
     leagueId = int(request.form["league_id"])
     weekNumber = int(request.form["week_number"])
     weekDict = {"weekNumber": weekNumber, "matchups": []}
@@ -145,11 +152,20 @@ def addWeek():
                    "teamBScore": int(request.form[f"teamBScore_matchup_{matchupIdCounter}"])}
         weekDict["matchups"].append(matchup)
         matchupIdCounter += 1
-    leagueOrError["weeks"][weekNumber-1] = weekDict
+    # check if this league has this week already, if so, overwrite it, if not, add it
+    if weekExists(leagueOrError, weekNumber):
+        # overwrite week
+        leagueOrError["weeks"][weekNumber - 1] = weekDict
+    else:
+        # add week
+        leagueOrError["weeks"].append(weekDict)
+
     print(leagueOrError)
     # update league in database
     mainController.updateLeague(leagueOrError["_id"], leagueOrError["leagueName"], leagueOrError["teams"],
                                 leagueOrError["weeks"])
+    newLeagueOrError = mainController.getLeague(leagueId)
+    return render_template("addUpdateWeeksPage.html", league=newLeagueOrError, week_number=weekNumber)
 
 
 if __name__ == "__main__":
