@@ -98,22 +98,41 @@ def deleteLeague():
 @app.route("/add-update-weeks", methods=["GET"])
 def addUpdateWeeks():
     leagueId = int(request.args.get("league_id"))
+    week = request.args.get("week")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    # DUMMY INFO ADDED TO LEAGUE
-    team1 = {"teamId": 1, "teamName": "team1"}
-    team2 = {"teamId": 2, "teamName": "team2"}
-    team3 = {"teamId": 3, "teamName": "team3"}
-    team4 = {"teamId": 4, "teamName": "team4"}
-    team5 = {"teamId": 5, "teamName": "team5"}
-    team6 = {"teamId": 6, "teamName": "team6"}
-    matchup1 = {"matchupId": 1, "teamA": team1, "teamB": team2, "teamAScore": 100.0, "teamBScore": 101.0}
-    matchup2 = {"matchupId": 2, "teamA": team3, "teamB": team4, "teamAScore": 102.0, "teamBScore": 103.0}
-    matchup3 = {"matchupId": 3, "teamA": team5, "teamB": team6, "teamAScore": 104.0, "teamBScore": 105.0}
-    week1 = {"weekNumber": 1, "matchups": [matchup1, matchup2, matchup3]}
-    leagueOrError["weeks"].append(week1)
-    print(leagueOrError)
-    return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=1)
+    if week:
+        # if we got a week passed in, render the page with that week displayed
+        return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week)
+    else:
+        if len(leagueOrError["weeks"]) == 0:
+            # no weeks added yet, add an empty week
+            weekDict = {"weekNumber": 1, "matchups": []}
+            for i in range(0, len(leagueOrError["teams"]), 2):
+                matchup = {"matchupId": i+1, "teamA": leagueOrError["teams"][i], "teamB": leagueOrError["teams"][i+1], "teamAScore": None, "teamBScore": None}
+                weekDict["matchups"].append(matchup)
+                leagueOrError["weeks"].append(weekDict)
+                print(leagueOrError)
+                return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=1)
+        else:
+            # default to last (most recent) week in this league
+            week = len(leagueOrError)-1
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week)
+
+    # # DUMMY INFO ADDED TO LEAGUE
+    # team1 = {"teamId": 1, "teamName": "team1"}
+    # team2 = {"teamId": 2, "teamName": "team2"}
+    # team3 = {"teamId": 3, "teamName": "team3"}
+    # team4 = {"teamId": 4, "teamName": "team4"}
+    # team5 = {"teamId": 5, "teamName": "team5"}
+    # team6 = {"teamId": 6, "teamName": "team6"}
+    # matchup1 = {"matchupId": 1, "teamA": team1, "teamB": team2, "teamAScore": 100.0, "teamBScore": 101.0}
+    # matchup2 = {"matchupId": 2, "teamA": team3, "teamB": team4, "teamAScore": 102.0, "teamBScore": 103.0}
+    # matchup3 = {"matchupId": 3, "teamA": team5, "teamB": team6, "teamAScore": 104.0, "teamBScore": 105.0}
+    # week1 = {"weekNumber": 1, "matchups": [matchup1, matchup2, matchup3]}
+    # leagueOrError["weeks"].append(week1)
+    # print(leagueOrError)
+    # return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=1)
 
 
 if __name__ == "__main__":
