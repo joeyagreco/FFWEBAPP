@@ -68,7 +68,7 @@ def updateLeague():
         for teamId in range(1, numberOfTeams + 1):
             teams.append({"teamId": int(teamId), "teamName": request.form[f"team_{teamId}"]})
         mainController = MainController()
-        updated = mainController.updateLeague(leagueId, leagueName, teams)
+        updated = mainController.updateLeague(leagueId, leagueName, teams, [])
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             # could not find league
@@ -118,11 +118,11 @@ def addUpdateWeeks():
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=1)
         else:
             # default to last (most recent) week in this league
-            week = len(leagueOrError) - 1
+            week = len(leagueOrError["weeks"])
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week)
 
 
-@app.route("/add-week", methods=["POST"])
+@app.route("/update-week", methods=["POST"])
 def addWeek():
     # helper function to get team by id
     def getTeamById(league: dict, teamId: int):
@@ -130,7 +130,6 @@ def addWeek():
             if team["teamId"] == teamId:
                 return team
 
-    print(request.form)
     leagueId = int(request.form["league_id"])
     weekNumber = int(request.form["week_number"])
     weekDict = {"weekNumber": weekNumber, "matchups": []}
@@ -142,13 +141,15 @@ def addWeek():
         matchup = {"matchupId": matchupIdCounter,
                    "teamA": getTeamById(leagueOrError, int(request.form[f"teamAId_matchup_{matchupIdCounter}"])),
                    "teamB": getTeamById(leagueOrError, int(request.form[f"teamBId_matchup_{matchupIdCounter}"])),
-                   "teamAScore": request.form[f"teamAScore_matchup_{matchupIdCounter}"],
-                   "teamBScore": request.form[f"teamBScore_matchup_{matchupIdCounter}"]}
+                   "teamAScore": int(request.form[f"teamAScore_matchup_{matchupIdCounter}"]),
+                   "teamBScore": int(request.form[f"teamBScore_matchup_{matchupIdCounter}"])}
         weekDict["matchups"].append(matchup)
         matchupIdCounter += 1
-    leagueOrError["weeks"].append(weekDict)
+    leagueOrError["weeks"][weekNumber-1] = weekDict
     print(leagueOrError)
-
+    # update league in database
+    mainController.updateLeague(leagueOrError["_id"], leagueOrError["leagueName"], leagueOrError["teams"],
+                                leagueOrError["weeks"])
 
 
 if __name__ == "__main__":

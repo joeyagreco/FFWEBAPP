@@ -18,7 +18,7 @@ class DatabaseService:
             teams.append({"teamId": x, "teamName": ""})
         return self.__databaseClient.addLeague(leagueName, numberOfTeams, teams)
 
-    def updateLeague(self, leagueId: int, leagueName: str, teams: list):
+    def updateLeague(self, leagueId: int, leagueName: str, teams: list, weeks: list):
         """
         Does checks on the updated league data
         Either passes the request to the client or returns an Error
@@ -27,7 +27,7 @@ class DatabaseService:
         if databaseVerifier.duplicateTeamNames(teams):
             return Error("Duplicate team names.")
         else:
-            return self.__databaseClient.updateLeague(leagueId, leagueName, teams)
+            return self.__databaseClient.updateLeague(leagueId, leagueName, teams, weeks)
 
     def deleteLeague(self, leagueId: int):
         return self.__databaseClient.deleteLeague(leagueId)

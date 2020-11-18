@@ -13,7 +13,7 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-<form class="weekForm" action="/add-week" method="POST">
+<form class="weekForm" action="/update-week" method="POST">
     <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
     <input class="weekHidden" type="number" name="week_number" id="week_number" value="{{week_number}}">
     <select class="selectWeekDropdown">
