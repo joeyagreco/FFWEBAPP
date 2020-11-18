@@ -13,7 +13,7 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-<form class="weekForm">
+<form class="weekForm" action="/add-week" method="POST">
     <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
     <input class="weekHidden" type="number" name="week_number" id="week_number" value="{{week_number}}">
     <select class="selectWeekDropdown">
@@ -41,7 +41,7 @@
                             {% endfor %}
                         </select>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="oddTeamScore" type="number" value="{{matchup.teamAScore}}" placeholder="Score" required>
+                            <input class="oddTeamScore" name="teamAScore_{{matchup.teamA.teamId}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" required>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -63,14 +63,14 @@
                             {% endfor %}
                         </select>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="evenTeamScore" type="number" value="{{matchup.teamBScore}}" placeholder="Score" required>
+                            <input class="evenTeamScore" name="teamAScore_{{matchup.teamB.teamId}}" type="number" value="{{matchup.teamBScore}}" placeholder="Score" required>
                         {% endif %}
                     </div>
                 {% endfor %}
             {% endfor %}
         </div>
     </div>
-
+    <button type="submit">Add Week</button>
 
 </form>
 

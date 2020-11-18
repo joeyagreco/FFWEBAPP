@@ -121,20 +121,10 @@ def addUpdateWeeks():
             week = len(leagueOrError) - 1
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week)
 
-    # # DUMMY INFO ADDED TO LEAGUE
-    # team1 = {"teamId": 1, "teamName": "team1"}
-    # team2 = {"teamId": 2, "teamName": "team2"}
-    # team3 = {"teamId": 3, "teamName": "team3"}
-    # team4 = {"teamId": 4, "teamName": "team4"}
-    # team5 = {"teamId": 5, "teamName": "team5"}
-    # team6 = {"teamId": 6, "teamName": "team6"}
-    # matchup1 = {"matchupId": 1, "teamA": team1, "teamB": team2, "teamAScore": 100.0, "teamBScore": 101.0}
-    # matchup2 = {"matchupId": 2, "teamA": team3, "teamB": team4, "teamAScore": 102.0, "teamBScore": 103.0}
-    # matchup3 = {"matchupId": 3, "teamA": team5, "teamB": team6, "teamAScore": 104.0, "teamBScore": 105.0}
-    # week1 = {"weekNumber": 1, "matchups": [matchup1, matchup2, matchup3]}
-    # leagueOrError["weeks"].append(week1)
-    # print(leagueOrError)
-    # return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=1)
+
+@app.route("/add-week", methods=["POST"])
+def addWeek():
+    print(request.form)
 
 
 if __name__ == "__main__":
