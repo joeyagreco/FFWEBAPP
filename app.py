@@ -108,15 +108,18 @@ def addUpdateWeeks():
         if len(leagueOrError["weeks"]) == 0:
             # no weeks added yet, add an empty week
             weekDict = {"weekNumber": 1, "matchups": []}
-            for i in range(0, len(leagueOrError["teams"]), 2):
-                matchup = {"matchupId": i+1, "teamA": leagueOrError["teams"][i], "teamB": leagueOrError["teams"][i+1], "teamAScore": None, "teamBScore": None}
+            matchupIdCounter = 1
+            for i in range(1, len(leagueOrError["teams"]), 2):
+                matchup = {"matchupId": matchupIdCounter, "teamA": leagueOrError["teams"][i - 1],
+                           "teamB": leagueOrError["teams"][i], "teamAScore": None, "teamBScore": None}
+                matchupIdCounter += 1
                 weekDict["matchups"].append(matchup)
-                leagueOrError["weeks"].append(weekDict)
-                print(leagueOrError)
-                return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=1)
+            leagueOrError["weeks"].append(weekDict)
+            print(leagueOrError)
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=1)
         else:
             # default to last (most recent) week in this league
-            week = len(leagueOrError)-1
+            week = len(leagueOrError) - 1
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week)
 
     # # DUMMY INFO ADDED TO LEAGUE
