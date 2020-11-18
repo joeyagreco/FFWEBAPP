@@ -160,7 +160,6 @@ def addWeek():
         # add week
         leagueOrError["weeks"].append(weekDict)
 
-    print(leagueOrError)
     # update league in database
     mainController.updateLeague(leagueOrError["_id"], leagueOrError["leagueName"], leagueOrError["teams"],
                                 leagueOrError["weeks"])
