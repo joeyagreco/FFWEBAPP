@@ -182,7 +182,7 @@ def addWeek():
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     else:
-        weekNumber = len(leagueOrError["weeks"])+1
+        weekNumber = len(leagueOrError["weeks"]) + 1
         # add an empty week
         weekDict = {"weekNumber": weekNumber, "matchups": []}
         matchupIdCounter = 1
@@ -193,6 +193,13 @@ def addWeek():
             weekDict["matchups"].append(matchup)
         leagueOrError["weeks"].append(weekDict)
         return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber)
+
+
+@app.route("/delete-week", methods=["GET"])
+def deleteWeek():
+    leagueId = int(request.args.get("league_id"))
+    mainController = MainController()
+    leagueOrError = mainController.getLeague(leagueId)
 
 
 if __name__ == "__main__":

@@ -8,3 +8,7 @@ function updateWeekDropdown() {
     newWeek = document.getElementById("select_week_dropdown").value;
     window.location = "/add-update-weeks?league_id="+leagueId+"&week="+newWeek;
 }
+
+function deleteWeek() {
+    alert("week deleted")
+}

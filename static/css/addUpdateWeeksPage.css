@@ -126,3 +126,10 @@ input::-webkit-inner-spin-button {
     margin: auto;
     order: 4;
 }
+
+.deleteWeekButton {
+    width: 10%;
+    height: auto;
+    margin: auto;
+    order: 5;
+}
