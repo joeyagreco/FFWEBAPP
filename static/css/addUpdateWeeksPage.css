@@ -17,6 +17,7 @@
 
 .selectWeekDropdown {
     width: 10%;
+    order: 1;
     height: auto;
     margin: auto;
     text-align: center;
@@ -110,4 +111,18 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.updateWeekButton {
+    width: 10%;
+    height: auto;
+    margin: auto;
+    order: 3;
+}
+
+.addWeekButton {
+    width: 10%;
+    height: auto;
+    margin: auto;
+    order: 4;
 }

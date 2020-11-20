@@ -103,6 +103,7 @@ def addUpdateWeeks():
     leagueOrError = mainController.getLeague(leagueId)
     if week:
         # if we got a week passed in, render the page with that week displayed
+        week = int(week)
         return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week)
     else:
         if len(leagueOrError["weeks"]) == 0:
@@ -123,7 +124,7 @@ def addUpdateWeeks():
 
 
 @app.route("/update-week", methods=["POST"])
-def addWeek():
+def updateWeek():
     # helper function to get team by id
     def getTeamById(league: dict, teamId: int):
         for team in league["teams"]:
@@ -165,6 +166,28 @@ def addWeek():
                                 leagueOrError["weeks"])
     newLeagueOrError = mainController.getLeague(leagueId)
     return render_template("addUpdateWeeksPage.html", league=newLeagueOrError, week_number=weekNumber)
+
+
+@app.route("/add-week", methods=["GET"])
+def addWeek():
+    leagueId = int(request.args.get("league_id"))
+    mainController = MainController()
+    leagueOrError = mainController.getLeague(leagueId)
+    weekNumber = len(leagueOrError["weeks"])+1
+    print(weekNumber)
+
+    # add an empty week
+    weekDict = {"weekNumber": weekNumber, "matchups": []}
+    matchupIdCounter = 1
+    for i in range(1, len(leagueOrError["teams"]), 2):
+        matchup = {"matchupId": matchupIdCounter, "teamA": leagueOrError["teams"][i - 1],
+                   "teamB": leagueOrError["teams"][i], "teamAScore": None, "teamBScore": None}
+        matchupIdCounter += 1
+        weekDict["matchups"].append(matchup)
+    leagueOrError["weeks"].append(weekDict)
+    print(leagueOrError)
+    print(weekNumber)
+    return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber)
 
 
 if __name__ == "__main__":
