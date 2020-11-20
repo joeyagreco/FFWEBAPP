@@ -198,8 +198,23 @@ def addWeek():
 @app.route("/delete-week", methods=["GET"])
 def deleteWeek():
     leagueId = int(request.args.get("league_id"))
+    week = int(request.args.get("week"))
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
+
+    if week == len(leagueOrError["weeks"]):
+        # if this is the last week added [most recent week]
+        leagueOrError = mainController.deleteWeek(leagueId)
+        if isinstance(leagueOrError, Error):
+            # couldn't delete week
+            return redirect(url_for('index'))
+        else:
+            # successfully deleted week
+            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"]))
+    else:
+        error = Error("Only the most recent week can be deleted.")
+        return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week,
+                               error_message=error.errorMessage())
 
 
 if __name__ == "__main__":

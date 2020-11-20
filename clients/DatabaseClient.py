@@ -85,3 +85,21 @@ class DatabaseClient:
         else:
             # could not delete the league
             return Error("Could not delete league.")
+
+    def deleteWeek(self, leagueId: int):
+        """
+        Deletes the most recent week of the league with the given ID
+        Returns league if successfully deleted or an Error if not.
+        https://docs.mongodb.com/manual/reference/method/db.collection.remove/
+        """
+        league = self.getLeague(leagueId)
+        if isinstance(league, Error):
+            return league
+        else:
+            league["weeks"] = league["weeks"][:-1]
+            response = self.__collection.update({"_id": leagueId}, league)
+            if response:
+                league = self.getLeague(leagueId)
+                return league
+            else:
+                return Error("Could not delete week.")

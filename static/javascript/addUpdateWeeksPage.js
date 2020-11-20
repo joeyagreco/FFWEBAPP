@@ -10,5 +10,7 @@ function updateWeekDropdown() {
 }
 
 function deleteWeek() {
-    alert("week deleted")
+    leagueId = document.getElementById("league_id").value;
+    week = document.getElementById("select_week_dropdown").value;
+    window.location = "/delete-week?league_id="+leagueId+"&week="+week;
 }
