@@ -174,7 +174,6 @@ def addWeek():
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     weekNumber = len(leagueOrError["weeks"])+1
-    print(weekNumber)
 
     # add an empty week
     weekDict = {"weekNumber": weekNumber, "matchups": []}
@@ -185,8 +184,6 @@ def addWeek():
         matchupIdCounter += 1
         weekDict["matchups"].append(matchup)
     leagueOrError["weeks"].append(weekDict)
-    print(leagueOrError)
-    print(weekNumber)
     return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber)
 
 
