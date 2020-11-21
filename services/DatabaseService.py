@@ -1,6 +1,7 @@
 from clients.DatabaseClient import DatabaseClient
 from helpers.Error import Error
 from packages.Verifiers.DatabaseVerifier import DatabaseVerifier
+from packages.Verifiers.LeagueDictVerifier import LeagueDictVerifier
 
 
 class DatabaseService:
@@ -24,8 +25,11 @@ class DatabaseService:
         Either passes the request to the client or returns an Error
         """
         databaseVerifier = DatabaseVerifier()
+        leagueDictVerifier = LeagueDictVerifier()
         if databaseVerifier.duplicateTeamNames(teams):
             return Error("Duplicate team names.")
+        elif leagueDictVerifier.teamPlaysItself(weeks):
+            return Error("A team cannot play itself.")
         else:
             return self.__databaseClient.updateLeague(leagueId, leagueName, teams, weeks)
 
