@@ -90,7 +90,8 @@ class DatabaseClient:
         """
         Deletes the most recent week of the league with the given ID
         Returns league if successfully deleted or an Error if not.
-        https://docs.mongodb.com/manual/reference/method/db.collection.remove/
+        https://docs.mongodb.com/manual/reference/method/db.collection.update/
+        https://specify.io/how-tos/mongodb-update-documents
         """
         league = self.getLeague(leagueId)
         if isinstance(league, Error):
