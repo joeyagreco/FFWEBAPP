@@ -8,16 +8,22 @@ class TestDatabaseVerifier(unittest.TestCase):
         databaseVerifier = DatabaseVerifier()
         dummyTeams = [{"teamId": 1, "teamName": "a"}, {"teamId": 2, "teamName": "a"}]
         self.assertEqual(True, databaseVerifier.duplicateTeamNames(dummyTeams))
+        dummyTeams = [{"teamId": 1, "teamName": "a"}, {"teamId": 2, "teamName": "b"}]
+        self.assertEqual(False, databaseVerifier.duplicateTeamNames(dummyTeams))
 
     def test_duplicateTeamNamesUpperCaseDuplicate(self):
         databaseVerifier = DatabaseVerifier()
         dummyTeams = [{"teamId": 1, "teamName": "A"}, {"teamId": 2, "teamName": "A"}]
         self.assertEqual(True, databaseVerifier.duplicateTeamNames(dummyTeams))
+        dummyTeams = [{"teamId": 1, "teamName": "A"}, {"teamId": 2, "teamName": "B"}]
+        self.assertEqual(False, databaseVerifier.duplicateTeamNames(dummyTeams))
 
     def test_duplicateTeamNamesMixedCaseDuplicate(self):
         databaseVerifier = DatabaseVerifier()
         dummyTeams = [{"teamId": 1, "teamName": "Ab"}, {"teamId": 2, "teamName": "aB"}]
         self.assertEqual(True, databaseVerifier.duplicateTeamNames(dummyTeams))
+        dummyTeams = [{"teamId": 1, "teamName": "Ab"}, {"teamId": 2, "teamName": "bC"}]
+        self.assertEqual(False, databaseVerifier.duplicateTeamNames(dummyTeams))
 
     def test_duplicateTeamNamesWhiteSpace(self):
         databaseVerifier = DatabaseVerifier()
@@ -27,3 +33,5 @@ class TestDatabaseVerifier(unittest.TestCase):
         self.assertEqual(True, databaseVerifier.duplicateTeamNames(dummyTeams1))
         self.assertEqual(True, databaseVerifier.duplicateTeamNames(dummyTeams2))
         self.assertEqual(True, databaseVerifier.duplicateTeamNames(dummyTeams3))
+        dummyTeams1 = [{"teamId": 1, "teamName": " a "}, {"teamId": 2, "teamName": "b"}]
+        self.assertEqual(False, databaseVerifier.duplicateTeamNames(dummyTeams1))
