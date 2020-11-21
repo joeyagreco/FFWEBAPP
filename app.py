@@ -102,6 +102,7 @@ def addUpdateWeeks():
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
+        # could not load league
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     else:
         if week:
@@ -168,10 +169,20 @@ def updateWeek():
             leagueOrError["weeks"].append(weekDict)
 
         # update league in database
-        mainController.updateLeague(leagueOrError["_id"], leagueOrError["leagueName"], leagueOrError["teams"],
-                                    leagueOrError["weeks"])
+        response = mainController.updateLeague(leagueOrError["_id"],
+                                               leagueOrError["leagueName"],
+                                               leagueOrError["teams"],
+                                               leagueOrError["weeks"])
+        if isinstance(response, Error):
+            # could not update week
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber,
+                                   error_message=response.errorMessage())
         newLeagueOrError = mainController.getLeague(leagueId)
-        return render_template("addUpdateWeeksPage.html", league=newLeagueOrError, week_number=weekNumber)
+
+        if isinstance(newLeagueOrError, Error):
+            return render_template("indexHomepage.html", error_message=newLeagueOrError.errorMessage())
+        else:
+            return render_template("addUpdateWeeksPage.html", league=newLeagueOrError, week_number=weekNumber)
 
 
 @app.route("/add-week", methods=["GET"])
