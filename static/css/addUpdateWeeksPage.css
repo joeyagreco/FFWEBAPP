@@ -8,7 +8,7 @@
 
 .weekForm {
     width: 100%;
-    height: 60%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -25,7 +25,7 @@
 
 .teams {
     width: 40%;
-    height: 90%;
+    height: 60%;
     order: 2;
     margin-left: auto;
     margin-right: auto;
@@ -133,7 +133,7 @@ input::-webkit-inner-spin-button {
 
 .actionButtons {
     width: 100%;
-    height: 30%;
+    height: 40%;
     order: 3;
     display: flex;
     flex-direction: column;
@@ -143,21 +143,24 @@ input::-webkit-inner-spin-button {
 
 .saveChangesButton {
     width: 10%;
-    height: auto;
+    height: 20%;
+    font-size: 120%;
     margin: auto;
     order: 1;
 }
 
 .addWeekButton {
     width: 10%;
-    height: auto;
+    height: 20%;
+    font-size: 120%;
     margin: auto;
     order: 2;
 }
 
 .deleteWeekButton {
     width: 10%;
-    height: auto;
+    height: 20%;
+    font-size: 120%;
     margin: auto;
     order: 3;
 }
