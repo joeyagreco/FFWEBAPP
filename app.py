@@ -192,18 +192,17 @@ def addWeek():
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-    else:
-        weekNumber = len(leagueOrError["weeks"]) + 1
-        # add an empty week
-        weekDict = {"weekNumber": weekNumber, "matchups": []}
-        matchupIdCounter = 1
-        for i in range(1, len(leagueOrError["teams"]), 2):
-            matchup = {"matchupId": matchupIdCounter, "teamA": leagueOrError["teams"][i - 1],
-                       "teamB": leagueOrError["teams"][i], "teamAScore": None, "teamBScore": None}
-            matchupIdCounter += 1
-            weekDict["matchups"].append(matchup)
-        leagueOrError["weeks"].append(weekDict)
-        return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber)
+    weekNumber = len(leagueOrError["weeks"]) + 1
+    # add an empty week
+    weekDict = {"weekNumber": weekNumber, "matchups": []}
+    matchupIdCounter = 1
+    for i in range(1, len(leagueOrError["teams"]), 2):
+        matchup = {"matchupId": matchupIdCounter, "teamA": leagueOrError["teams"][i - 1],
+                   "teamB": leagueOrError["teams"][i], "teamAScore": None, "teamBScore": None}
+        matchupIdCounter += 1
+        weekDict["matchups"].append(matchup)
+    leagueOrError["weeks"].append(weekDict)
+    return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber)
 
 
 @app.route("/delete-week", methods=["GET"])
@@ -212,7 +211,9 @@ def deleteWeek():
     week = int(request.args.get("week"))
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-
+    if isinstance(leagueOrError, Error):
+        # couldn't get league from database
+        return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     # returnWeek is where the user is returned if the week is ineligible for deletion
     returnWeek = len(leagueOrError["weeks"])
 
