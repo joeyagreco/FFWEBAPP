@@ -217,7 +217,14 @@ def deleteWeek():
     # don't allow user to delete week 1
     if week == 1:
         error = Error("Week 1 cannot be deleted.")
-        return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week, error_message=error.errorMessage())
+        # check if week 1 already existed
+        if len(leagueOrError["weeks"]) == 0:
+            # week 1 didn't exist
+            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"]))
+        else:
+            # week 1 exists
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week,
+                                   error_message=error.errorMessage())
     # returnWeek is where the user is returned if the week is ineligible for deletion
     returnWeek = len(leagueOrError["weeks"])
     if week == len(leagueOrError["weeks"]):
