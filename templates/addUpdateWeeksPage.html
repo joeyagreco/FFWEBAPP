@@ -48,6 +48,14 @@
             {% endfor %}
         </div>
 
+        <div class="vs">
+            {% for week in league.weeks if week.weekNumber == week_number %}
+                {% for matchup in week.matchups %}
+                    <div class="vsText">vs</div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
         <div class="evenTeamForms">
             {% for week in league.weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
@@ -70,10 +78,11 @@
             {% endfor %}
         </div>
     </div>
-    <button class="updateWeekButton" type="submit">Save Changes</button>
-    <button class="addWeekButton" type="button" onclick="addWeek()">Add a Week</button>
-    <button class="deleteWeekButton" type="button" onclick="deleteWeek()">Delete Week</button>
-
+    <div class="actionButtons">
+        <button class="saveChangesButton" type="submit">Save Changes</button>
+        <button class="addWeekButton" type="button" onclick="addWeek()">Add a Week</button>
+        <button class="deleteWeekButton" type="button" onclick="deleteWeek()">Delete Week</button>
+    </div>
 </form>
 
 {% endblock %}

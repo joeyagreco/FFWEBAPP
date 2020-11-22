@@ -221,7 +221,6 @@ def deleteWeek():
     # returnWeek is where the user is returned if the week is ineligible for deletion
     returnWeek = len(leagueOrError["weeks"])
     if week == len(leagueOrError["weeks"]):
-        print("eligible deletion")
         # if this is the last week added [most recent week]
         leagueOrError = mainController.deleteWeek(leagueId)
         if isinstance(leagueOrError, Error):
@@ -231,7 +230,6 @@ def deleteWeek():
             # successfully deleted week
             return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"]))
     else:
-        print("ineligible deletion")
         # determine if this is an unsaved, added week that is being deleted OR a non-last week
         if week > returnWeek:
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek)

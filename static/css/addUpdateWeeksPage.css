@@ -8,7 +8,7 @@
 
 .weekForm {
     width: 100%;
-    height: 50%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -46,10 +46,28 @@
     background-color: purple;
 }
 
+.vs {
+    width: 10%;
+    height: 100%;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: orange:
+}
+
+.vsText {
+    width: 100%;
+    height: auto;
+    font-size: 180%;
+    background-color: pink;
+
+}
+
 .evenTeamForms {
     width: 50%;
     height: 100%;
-    order: 2;
+    order: 3;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -113,23 +131,33 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.updateWeekButton {
+.actionButtons {
+    width: 100%;
+    height: 30%;
+    order: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: green;
+}
+
+.saveChangesButton {
     width: 10%;
     height: auto;
     margin: auto;
-    order: 3;
+    order: 1;
 }
 
 .addWeekButton {
     width: 10%;
     height: auto;
     margin: auto;
-    order: 4;
+    order: 2;
 }
 
 .deleteWeekButton {
     width: 10%;
     height: auto;
     margin: auto;
-    order: 5;
+    order: 3;
 }
