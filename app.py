@@ -214,9 +214,12 @@ def deleteWeek():
     if isinstance(leagueOrError, Error):
         # couldn't get league from database
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
+    # don't allow user to delete week 1
+    if week == 1:
+        error = Error("Week 1 cannot be deleted.")
+        return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week, error_message=error.errorMessage())
     # returnWeek is where the user is returned if the week is ineligible for deletion
     returnWeek = len(leagueOrError["weeks"])
-
     if week == len(leagueOrError["weeks"]):
         print("eligible deletion")
         # if this is the last week added [most recent week]
