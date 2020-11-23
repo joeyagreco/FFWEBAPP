@@ -65,7 +65,8 @@ class DatabaseClient:
         else:
             league["leagueName"] = leagueName
             league["teams"] = teams
-            league["weeks"] = weeks
+            if weeks:
+                league["weeks"] = weeks
             response = self.__collection.update({"_id": leagueId}, league)
             if response:
                 return response

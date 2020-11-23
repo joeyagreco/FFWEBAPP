@@ -29,10 +29,11 @@ class DatabaseService:
         leagueDictVerifier = LeagueDictVerifier()
         if databaseVerifier.duplicateTeamNames(teams):
             return Error("Duplicate team names.")
-        elif leagueDictVerifier.teamPlaysItself(weeks):
-            return Error("A team cannot play itself.")
-        elif leagueDictVerifier.teamPlaysTwice(weeks):
-            return Error("A team can not play twice in the same week.")
+        if weeks:
+            if leagueDictVerifier.teamPlaysItself(weeks):
+                return Error("A team cannot play itself.")
+            if leagueDictVerifier.teamPlaysTwice(weeks):
+                return Error("A team can not play twice in the same week.")
         else:
             return self.__databaseClient.updateLeague(leagueId, leagueName, teams, weeks)
 

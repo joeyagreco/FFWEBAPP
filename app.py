@@ -68,7 +68,7 @@ def updateLeague():
         for teamId in range(1, numberOfTeams + 1):
             teams.append({"teamId": int(teamId), "teamName": request.form[f"team_{teamId}"]})
         mainController = MainController()
-        updated = mainController.updateLeague(leagueId, leagueName, teams, [])
+        updated = mainController.updateLeague(leagueId, leagueName, teams, None)
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             # could not find league
