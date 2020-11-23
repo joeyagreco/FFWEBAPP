@@ -246,5 +246,11 @@ def deleteWeek():
                                    error_message=error.errorMessage())
 
 
+@app.route("/test-stats", methods=["GET"])
+def testStats():
+    leagueId = int(request.args.get("league_id"))
+    mainController = MainController()
+    leagueModelOrError = mainController.getLeagueModel(leagueId)
+
 if __name__ == "__main__":
     app.run(debug=True)
