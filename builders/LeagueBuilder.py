@@ -1,7 +1,7 @@
-from models.LeagueModel import LeagueModel
-from models.MatchupModel import MatchupModel
-from models.TeamModel import TeamModel
-from models.WeekModel import WeekModel
+from models.league_models.LeagueModel import LeagueModel
+from models.league_models.MatchupModel import MatchupModel
+from models.league_models.TeamModel import TeamModel
+from models.league_models.WeekModel import WeekModel
 
 
 class LeagueBuilder:

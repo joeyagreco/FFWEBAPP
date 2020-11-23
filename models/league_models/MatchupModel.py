@@ -1,4 +1,4 @@
-from models import TeamModel
+from models.league_models.TeamModel import TeamModel
 
 
 class MatchupModel:

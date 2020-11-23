@@ -1,8 +1,3 @@
-from typing import List
-
-from models import MatchupModel
-
-
 class WeekModel:
 
     # def __init__(self, weekNumber: int, matchups: List[MatchupModel]):

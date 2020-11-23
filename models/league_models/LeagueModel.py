@@ -1,8 +1,3 @@
-from typing import List
-
-from models import WeekModel, TeamModel
-
-
 class LeagueModel:
 
     # def __init__(self, leagueId: int, leagueName: str, numberOfTeams: int, teams: List[TeamModel], weeks: List[WeekModel]):
