@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from controllers.MainController import MainController
 from fixtures.LeagueModelFixtureGeneratorDict import LeagueModelFixtureGeneratorDict
 from helpers.Error import Error
+from services.StatCalculatorService import StatCalculatorService
 
 app = Flask(__name__)
 
@@ -271,6 +272,10 @@ def testStats():
     fullString = ""
     for s in printStrings:
         fullString += s + "\n"
+
+    # test statCalculatorService
+    statCalculatorService = StatCalculatorService(leagueModelOrError)
+    print(statCalculatorService.getTeamStats())
 
     return fullString
 

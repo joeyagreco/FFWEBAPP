@@ -34,8 +34,8 @@ class DatabaseService:
                 return Error("A team cannot play itself.")
             if leagueDictVerifier.teamPlaysTwice(weeks):
                 return Error("A team can not play twice in the same week.")
-        else:
-            return self.__databaseClient.updateLeague(leagueId, leagueName, teams, weeks)
+
+        return self.__databaseClient.updateLeague(leagueId, leagueName, teams, weeks)
 
     def deleteLeague(self, leagueId: int):
         return self.__databaseClient.deleteLeague(leagueId)
