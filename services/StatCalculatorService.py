@@ -8,7 +8,7 @@ class StatCalculatorService:
 
     def getTeamStats(self):
         """
-        Returns a list of TeamStatsModels, 1 for each team in the given league.
+        Returns a list of TeamStatsModels, one for each team in the given league.
         """
         return None
 
