@@ -1,6 +1,6 @@
 from typing import List
 
-from models import LeagueStatMarginOfVictoryModel, LeagueStatScoreModel
+from models.league_stat_models import LeagueStatMarginOfVictoryModel, LeagueStatScoreModel
 
 
 class LeagueStatsModel:
