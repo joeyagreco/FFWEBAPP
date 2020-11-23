@@ -13,3 +13,9 @@ function copyUrl() {
   alert("Copied to clipboard!");
 }
 
+function testStats() {
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/test-stats?league_id="+leagueId;
+
+}
+

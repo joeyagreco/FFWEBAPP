@@ -5,7 +5,8 @@ from models import WeekModel, TeamModel
 
 class LeagueModel:
 
-    def __init__(self, leagueId: int, leagueName: str, numberOfTeams: int, teams: List[TeamModel], weeks: List[WeekModel]):
+    # def __init__(self, leagueId: int, leagueName: str, numberOfTeams: int, teams: List[TeamModel], weeks: List[WeekModel]):
+    def __init__(self, leagueId: int, leagueName: str, numberOfTeams: int, teams, weeks):
         self.__leagueId = leagueId
         self.__leagueName = leagueName
         self.__numberOfTeams = numberOfTeams

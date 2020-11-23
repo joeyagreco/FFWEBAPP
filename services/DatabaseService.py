@@ -1,3 +1,4 @@
+from builders.LeagueBuilder import LeagueBuilder
 from clients.DatabaseClient import DatabaseClient
 from helpers.Error import Error
 from packages.Verifiers.DatabaseVerifier import DatabaseVerifier
@@ -40,3 +41,11 @@ class DatabaseService:
 
     def deleteWeek(self, leagueId: int):
         return self.__databaseClient.deleteWeek(leagueId)
+
+    def getLeagueModel(self, leagueId: int):
+        """
+        This takes in a league ID and returns a Python object version of that league
+        """
+        leagueDict = self.__databaseClient.getLeague(leagueId)
+        leagueBuilder = LeagueBuilder(leagueDict)
+        return leagueBuilder.getLeagueObject()

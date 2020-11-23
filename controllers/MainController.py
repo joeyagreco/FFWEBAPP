@@ -21,3 +21,6 @@ class MainController:
     def deleteWeek(self, leagueId: int):
         return self.__databaseService.deleteWeek(leagueId)
 
+    def getLeagueModel(self, leagueId: int):
+        return self.__databaseService.getLeagueModel(leagueId)
+

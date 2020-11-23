@@ -251,6 +251,29 @@ def testStats():
     leagueId = int(request.args.get("league_id"))
     mainController = MainController()
     leagueModelOrError = mainController.getLeagueModel(leagueId)
+    printStrings = []
+    strId = f"leagueId: {leagueModelOrError.getLeagueId()}"
+    printStrings.append(strId)
+    strName = f"leagueName: {leagueModelOrError.getLeagueName()}"
+    printStrings.append(strName)
+    strNumTeams = f"numberOfTeams: {leagueModelOrError.getNumberOfTeams()}"
+    printStrings.append(strNumTeams)
+    for team in leagueModelOrError.getTeams():
+        printStrings.append(f"teamId: {team.getTeamId()} teamName: {team.getTeamName()}")
+    for week in leagueModelOrError.getWeeks():
+        printStrings.append(f"weekNumber: {week.getWeekNumber()}")
+        for matchup in week.getMatchups():
+            printStrings.append(f"teamAId: {matchup.getTeamA().getTeamId()}")
+            printStrings.append(f"teamBId: {matchup.getTeamB().getTeamId()}")
+            printStrings.append(f"teamAScore: {matchup.getTeamAScore()}")
+            printStrings.append(f"teamBScore: {matchup.getTeamBScore()}")
+
+    fullString = ""
+    for s in printStrings:
+        fullString += s + "\n"
+
+    return fullString
+
 
 if __name__ == "__main__":
     app.run(debug=True)

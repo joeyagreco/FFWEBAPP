@@ -33,7 +33,7 @@ class LeagueBuilder:
 
     def __getMatchupModelsByWeekNumber(self, weekNumber: int):
         matchups = []
-        for matchup in self.__leagueDict["weeks"][weekNumber]:
+        for matchup in self.__leagueDict["weeks"][weekNumber-1]:
             matchups.append(MatchupModel(self.__getTeamModelById(matchup["teamA"]["teamId"]),
                                          self.__getTeamModelById(matchup["teamB"]["teamId"]),
                                          matchup["teamAScore"],
