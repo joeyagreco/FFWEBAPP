@@ -23,4 +23,11 @@ class Ppg:
         totalPoints = 0
         for score in scores:
             totalPoints += score
-        return totalPoints/numberOfWeeks
+        return self.__normalRound(totalPoints / numberOfWeeks)
+
+    def __normalRound(self, score):
+        """
+        Rounds a float rounded to 1 decimal place.
+        """
+        digit_value = 10
+        return int(score * digit_value + 0.5) / digit_value
