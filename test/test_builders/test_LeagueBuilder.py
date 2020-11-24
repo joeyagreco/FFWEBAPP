@@ -59,4 +59,10 @@ class TestLeagueBuilder(unittest.TestCase):
         self.assertEqual(1, len(leagueWeeks))
         self.assertEqual(3, len(leagueWeeks[0].getMatchups()))
         self.assertEqual(1, leagueWeeks[0].getMatchups()[0].getMatchupId())
+        self.assertEqual(1, leagueWeeks[0].getMatchups()[0].getTeamA().getTeamId())
+        self.assertEqual("team1", leagueWeeks[0].getMatchups()[0].getTeamA().getTeamName())
+        self.assertEqual(2, leagueWeeks[0].getMatchups()[0].getTeamB().getTeamId())
+        self.assertEqual("team2", leagueWeeks[0].getMatchups()[0].getTeamB().getTeamName())
+        self.assertEqual(100, leagueWeeks[0].getMatchups()[0].getTeamAScore())
+        self.assertEqual(101, leagueWeeks[0].getMatchups()[0].getTeamBScore())
 
