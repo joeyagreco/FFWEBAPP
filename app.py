@@ -264,6 +264,7 @@ def testStats():
     for week in leagueModelOrError.getWeeks():
         printStrings.append(f"weekNumber: {week.getWeekNumber()}")
         for matchup in week.getMatchups():
+            printStrings.append(f"matchupId: {matchup.getMatchupId()}")
             printStrings.append(f"teamAId: {matchup.getTeamA().getTeamId()}")
             printStrings.append(f"teamBId: {matchup.getTeamB().getTeamId()}")
             printStrings.append(f"teamAScore: {matchup.getTeamAScore()}")

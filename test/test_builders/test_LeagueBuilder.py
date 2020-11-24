@@ -24,7 +24,7 @@ class TestLeagueBuilder(unittest.TestCase):
         leagueNumberOfTeams = leagueObject.getNumberOfTeams()
         self.assertEqual(6, leagueNumberOfTeams)
 
-    def test_getLeagueObjectTeam(self):
+    def test_getLeagueObjectTeams(self):
         team1 = {"teamId": 1, "teamName": "team1"}
         team2 = {"teamId": 2, "teamName": "team2"}
         team3 = {"teamId": 3, "teamName": "team3"}
@@ -37,3 +37,26 @@ class TestLeagueBuilder(unittest.TestCase):
         leagueTeams = leagueObject.getTeams()
         self.assertEqual(1, leagueTeams[0].getTeamId())
         self.assertEqual("team1", leagueTeams[0].getTeamName())
+        self.assertEqual(6, len(leagueTeams))
+
+    def test_getLeagueObjectWeeks(self):
+        team1 = {"teamId": 1, "teamName": "team1"}
+        team2 = {"teamId": 2, "teamName": "team2"}
+        team3 = {"teamId": 3, "teamName": "team3"}
+        team4 = {"teamId": 4, "teamName": "team4"}
+        team5 = {"teamId": 5, "teamName": "team5"}
+        team6 = {"teamId": 6, "teamName": "team6"}
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = {"matchupId": 1, "teamA": team1, "teamB": team2, "teamAScore": 100, "teamBScore": 101}
+        matchup2 = {"matchupId": 2, "teamA": team3, "teamB": team4, "teamAScore": 102, "teamBScore": 103}
+        matchup3 = {"matchupId": 3, "teamA": team5, "teamB": team6, "teamAScore": 104, "teamBScore": 105}
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = {"weekNumber": 1, "matchups": matchupList}
+        leagueDict = {"_id": 123456, "leagueName": "test", "numberOfTeams": 6, "teams": teamList, "weeks": [week1]}
+        leagueObject = LeagueBuilder(leagueDict).getLeagueObject()
+        leagueWeeks = leagueObject.getWeeks()
+        self.assertEqual(1, leagueWeeks[0].getWeekNumber())
+        self.assertEqual(1, len(leagueWeeks))
+        self.assertEqual(3, len(leagueWeeks[0].getMatchups()))
+        self.assertEqual(1, leagueWeeks[0].getMatchups()[0].getMatchupId())
+

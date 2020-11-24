@@ -3,11 +3,15 @@ from models.league_models.TeamModel import TeamModel
 
 class MatchupModel:
 
-    def __init__(self, teamA: TeamModel, teamB: TeamModel, teamAScore: float, teamBScore: float):
+    def __init__(self, matchupId: int, teamA: TeamModel, teamB: TeamModel, teamAScore: float, teamBScore: float):
+        self.__matchupId = matchupId
         self.__teamA = teamA
         self.__teamB = teamB
         self.__teamAScore = teamAScore
         self.__teamBScore = teamBScore
+
+    def getMatchupId(self):
+        return self.__matchupId
 
     def getTeamA(self):
         return self.__teamA
