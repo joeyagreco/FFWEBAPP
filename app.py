@@ -276,7 +276,7 @@ def testStats():
 
     # test statCalculatorService
     statCalculatorService = StatCalculatorService(leagueModelOrError)
-    print(statCalculatorService.getTeamStats())
+    statCalculatorService.getTeamStats()
 
     return fullString
 

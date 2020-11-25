@@ -13,8 +13,13 @@ class StatCalculatorService:
         """
         Returns a list of TeamStatsModels, one for each team in the given league.
         """
-        minScoreCalculator = MinScore(1, self.__leagueModel)
-        return minScoreCalculator.getMinScore()
+        for team in self.__leagueModel.getTeams():
+            minScoreCalculator = MinScore(team.getTeamId(), self.__leagueModel)
+            print(minScoreCalculator.getMinScore())
+            maxScoreCalculator = MaxScore(team.getTeamId(), self.__leagueModel)
+            print(maxScoreCalculator.getMaxScore())
+            ppgCalculator = Ppg(team.getTeamId(), self.__leagueModel)
+            print(ppgCalculator.getPpg())
 
     def getLeagueStats(self):
         """
