@@ -8,4 +8,14 @@ class MaxScore:
         self.__leagueModel = leagueModel
 
     def getMaxScore(self):
-        pass
+        """
+        Returns the maximum score the team with the given ID has in the given league
+        """
+        scores = []
+        for week in self.__leagueModel.getWeeks():
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == self.__teamId:
+                    scores.append(matchup.getTeamAScore())
+                elif matchup.getTeamB().getTeamId() == self.__teamId:
+                    scores.append(matchup.getTeamBScore())
+        return max(scores)
