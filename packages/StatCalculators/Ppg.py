@@ -1,3 +1,5 @@
+import math
+
 from models.league_models.LeagueModel import LeagueModel
 
 
@@ -27,7 +29,13 @@ class Ppg:
 
     def __normalRound(self, score):
         """
-        Rounds a float rounded to 1 decimal place.
+        Rounds a float rounded to 2 decimal places.
         """
-        digit_value = 10
-        return int(score * digit_value + 0.5) / digit_value
+        part = score * 100
+        delta = part - int(part)
+        # always round "away from 0"
+        if delta >= 0.5 or -0.5 < delta <= 0:
+            part = math.ceil(part)
+        else:
+            part = math.floor(part)
+        return part / 100

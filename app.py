@@ -157,8 +157,8 @@ def updateWeek():
             matchup = {"matchupId": matchupIdCounter,
                        "teamA": getTeamById(leagueOrError, int(request.form[f"teamAId_matchup_{matchupIdCounter}"])),
                        "teamB": getTeamById(leagueOrError, int(request.form[f"teamBId_matchup_{matchupIdCounter}"])),
-                       "teamAScore": int(request.form[f"teamAScore_matchup_{matchupIdCounter}"]),
-                       "teamBScore": int(request.form[f"teamBScore_matchup_{matchupIdCounter}"])}
+                       "teamAScore": float(request.form[f"teamAScore_matchup_{matchupIdCounter}"]),
+                       "teamBScore": float(request.form[f"teamBScore_matchup_{matchupIdCounter}"])}
             weekDict["matchups"].append(matchup)
             matchupIdCounter += 1
         # check if this league has this week already, if so, overwrite it, if not, add it
