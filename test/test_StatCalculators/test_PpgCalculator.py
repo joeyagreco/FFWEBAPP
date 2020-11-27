@@ -4,10 +4,10 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
-from packages.StatCalculators.Ppg import Ppg
+from packages.StatCalculators.PpgCalculator import PpgCalculator
 
 
-class TestPpg(unittest.TestCase):
+class TestPpgCalculator(unittest.TestCase):
 
     def test_getPpg(self):
         team1 = TeamModel(1, "team1")
@@ -34,10 +34,10 @@ class TestPpg(unittest.TestCase):
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        ppgTeam1 = Ppg(1, leagueModel)
-        ppgTeam2 = Ppg(2, leagueModel)
-        ppgTeam3 = Ppg(3, leagueModel)
-        ppgTeam4 = Ppg(4, leagueModel)
+        ppgTeam1 = PpgCalculator(1, leagueModel)
+        ppgTeam2 = PpgCalculator(2, leagueModel)
+        ppgTeam3 = PpgCalculator(3, leagueModel)
+        ppgTeam4 = PpgCalculator(4, leagueModel)
         self.assertIsInstance(ppgTeam1.getPpg(), float)
         self.assertEqual(99.33, ppgTeam1.getPpg())
         self.assertEqual(100.3, ppgTeam2.getPpg())

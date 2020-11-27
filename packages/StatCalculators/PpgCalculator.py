@@ -3,7 +3,7 @@ import math
 from models.league_models.LeagueModel import LeagueModel
 
 
-class Ppg:
+class PpgCalculator:
 
     def __init__(self, teamId: int, leagueModel: LeagueModel):
         self.__teamId = teamId

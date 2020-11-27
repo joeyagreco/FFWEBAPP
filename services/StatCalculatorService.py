@@ -1,7 +1,6 @@
 from models.league_models.LeagueModel import LeagueModel
-from packages.StatCalculators.MaxScore import MaxScore
-from packages.StatCalculators.MinScore import MinScore
-from packages.StatCalculators.Ppg import Ppg
+from packages.StatCalculators.MinMaxScoreCalculator import MinMaxScoreCalculator
+from packages.StatCalculators.PpgCalculator import Ppg
 
 
 class StatCalculatorService:
@@ -14,10 +13,9 @@ class StatCalculatorService:
         Returns a list of TeamStatsModels, one for each team in the given league.
         """
         for team in self.__leagueModel.getTeams():
-            minScoreCalculator = MinScore(team.getTeamId(), self.__leagueModel)
-            print(minScoreCalculator.getMinScore())
-            maxScoreCalculator = MaxScore(team.getTeamId(), self.__leagueModel)
-            print(maxScoreCalculator.getMaxScore())
+            minMaxScoreCalculator = MinMaxScoreCalculator(team.getTeamId(), self.__leagueModel)
+            print(minMaxScoreCalculator.getMinScore())
+            print(minMaxScoreCalculator.getMaxScore())
             ppgCalculator = Ppg(team.getTeamId(), self.__leagueModel)
             print(ppgCalculator.getPpg())
 
