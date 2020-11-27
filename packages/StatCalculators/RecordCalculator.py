@@ -24,3 +24,37 @@ class RecordCalculator:
                         wins += 1
         return wins
 
+    def getLosses(self):
+        """
+        Returns as an int the number of losses the team with the given ID has in this league.
+        """
+        losses = 0
+        for week in self.__leagueModel.getWeeks():
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == self.__teamId:
+                    # see if they lost as team A
+                    if matchup.getTeamAScore() < matchup.getTeamBScore():
+                        losses += 1
+                elif matchup.getTeamB().getTeamId() == self.__teamId:
+                    # see if they lost as team B
+                    if matchup.getTeamBScore() < matchup.getTeamAScore():
+                        losses += 1
+        return losses
+
+    def getTies(self):
+        """
+        Returns as an int the number of ties the team with the given ID has in this league.
+        """
+        ties = 0
+        for week in self.__leagueModel.getWeeks():
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == self.__teamId:
+                    # see if they lost as team A
+                    if matchup.getTeamAScore() == matchup.getTeamBScore():
+                        ties += 1
+                elif matchup.getTeamB().getTeamId() == self.__teamId:
+                    # see if they lost as team B
+                    if matchup.getTeamBScore() == matchup.getTeamAScore():
+                        ties += 1
+        return ties
+
