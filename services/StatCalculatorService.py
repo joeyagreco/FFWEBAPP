@@ -25,6 +25,7 @@ class StatCalculatorService:
             print(f"Losses: {recordCalculator.getLosses()}")
             print(f"Ties: {recordCalculator.getTies()}")
             print(f"Plus/Minus: {scoresCalculator.getPlusMinus()}")
+            print(f"Standard Deviation: {scoresCalculator.getStandardDeviation()}")
             print()
 
     def getLeagueStats(self):
