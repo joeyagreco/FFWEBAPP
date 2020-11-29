@@ -1,5 +1,5 @@
 from models.league_models.LeagueModel import LeagueModel
-from packages.StatCalculators.MinMaxScoreCalculator import MinMaxScoreCalculator
+from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
 
@@ -15,15 +15,16 @@ class StatCalculatorService:
         """
         for team in self.__leagueModel.getTeams():
             print(f"Team ID: {team.getTeamId()}")
-            minMaxScoreCalculator = MinMaxScoreCalculator(team.getTeamId(), self.__leagueModel)
-            print(f"Min Score: {minMaxScoreCalculator.getMinScore()}")
-            print(f"Max Score: {minMaxScoreCalculator.getMaxScore()}")
+            scoresCalculator = ScoresCalculator(team.getTeamId(), self.__leagueModel)
+            print(f"Min Score: {scoresCalculator.getMinScore()}")
+            print(f"Max Score: {scoresCalculator.getMaxScore()}")
             ppgCalculator = PpgCalculator(team.getTeamId(), self.__leagueModel)
             print(f"PPG: {ppgCalculator.getPpg()}")
             recordCalculator = RecordCalculator(team.getTeamId(), self.__leagueModel)
             print(f"Wins: {recordCalculator.getWins()}")
             print(f"Losses: {recordCalculator.getLosses()}")
             print(f"Ties: {recordCalculator.getTies()}")
+            print(f"Plus/Minus: {scoresCalculator.getPlusMinus()}")
             print()
 
     def getLeagueStats(self):
