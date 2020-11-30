@@ -1,3 +1,5 @@
+import math
+
 from models.league_models.LeagueModel import LeagueModel
 from models.league_models.WeekModel import WeekModel
 
@@ -35,7 +37,7 @@ class AwalCalculator:
             print(f"A: {A}")
         print(f"Total Adjustment: {totalAdjustment}")
         print(f"Total WAL: {totalWal}")
-        return totalAdjustment + totalWal
+        return self.__normalRound(totalAdjustment + totalWal)
 
     def __getTeamOutcomeOfWeek(self, week: WeekModel):
         """
@@ -94,11 +96,24 @@ class AwalCalculator:
             allScores[matchup.getTeamB().getTeamId()] = matchup.getTeamBScore()
         allScoresList = []
         for teamId in allScores:
-            allScoresList.append(allScores[teamId])
+            if teamId != self.__teamId:
+                allScoresList.append(allScores[teamId])
         targetTeamScore = allScores[self.__teamId]
         teamsTied = 0
-        print(allScoresList)
         for score in allScoresList:
             if targetTeamScore == score:
                 teamsTied += 1
         return teamsTied
+
+    def __normalRound(self, number):
+        """
+        Rounds a float rounded to 2 decimal places.
+        """
+        part = number * 100
+        delta = part - int(part)
+        # always round "away from 0"
+        if delta >= 0.5 or -0.5 < delta <= 0:
+            part = math.ceil(part)
+        else:
+            part = math.floor(part)
+        return part / 100
