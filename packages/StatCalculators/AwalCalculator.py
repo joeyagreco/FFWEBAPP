@@ -30,15 +30,6 @@ class AwalCalculator:
             A = W * (1/L) + T * (0.5/L) - WAL
             totalAdjustment += A
             totalWal += WAL
-            print(f"Team {self.__teamId}")
-            print(f"WAL: {WAL}")
-            print(f"W: {W}")
-            print(f"T: {T}")
-            print(f"A: {A}")
-        print(f"Total Adjustment: {totalAdjustment}")
-        print(f"Total WAL: {totalWal}")
-        print(self.__normalRound(totalAdjustment + totalWal))
-        print()
         return self.__normalRound(totalAdjustment + totalWal)
 
     def __getTeamOutcomeOfWeek(self, week: WeekModel):

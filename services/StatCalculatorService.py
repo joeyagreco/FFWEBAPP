@@ -1,4 +1,5 @@
 from models.league_models.LeagueModel import LeagueModel
+from packages.StatCalculators.AwalCalculator import AwalCalculator
 from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
@@ -26,6 +27,8 @@ class StatCalculatorService:
             print(f"Ties: {recordCalculator.getTies()}")
             print(f"Plus/Minus: {scoresCalculator.getPlusMinus()}")
             print(f"Standard Deviation: {scoresCalculator.getStandardDeviation()}")
+            awalCalculator = AwalCalculator(team.getTeamId(), self.__leagueModel)
+            print(f"AWAL: {awalCalculator.getAwal()}")
             print()
 
     def getLeagueStats(self):
