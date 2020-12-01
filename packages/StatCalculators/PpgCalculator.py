@@ -25,5 +25,5 @@ class PpgCalculator:
         totalPoints = 0
         for score in scores:
             totalPoints += score
-        return float(self.__rounder.normalRound(totalPoints / numberOfWeeks))
+        return float(self.__rounder.normalRound2(totalPoints / numberOfWeeks))
 

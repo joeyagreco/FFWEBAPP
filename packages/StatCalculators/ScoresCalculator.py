@@ -22,7 +22,7 @@ class ScoresCalculator:
                     scores.append(matchup.getTeamAScore())
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
                     scores.append(matchup.getTeamBScore())
-        return self.__rounder.normalRound(max(scores))
+        return self.__rounder.normalRound2(max(scores))
 
     def getMinScore(self):
         """
@@ -35,7 +35,7 @@ class ScoresCalculator:
                     scores.append(matchup.getTeamAScore())
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
                     scores.append(matchup.getTeamBScore())
-        return self.__rounder.normalRound(min(scores))
+        return self.__rounder.normalRound2(min(scores))
 
     def getPlusMinus(self):
         """
@@ -53,7 +53,7 @@ class ScoresCalculator:
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
                     totalTeamScore += matchup.getTeamBScore()
                     totalOpponentScore += matchup.getTeamAScore()
-        return float(self.__rounder.normalRound(totalTeamScore - totalOpponentScore))
+        return float(self.__rounder.normalRound2(totalTeamScore - totalOpponentScore))
 
     def getStandardDeviation(self):
         """
@@ -67,4 +67,4 @@ class ScoresCalculator:
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
                     scores.append(matchup.getTeamBScore())
         standardDeviation = statistics.pstdev(scores)
-        return float(self.__rounder.normalRound(standardDeviation))
+        return float(self.__rounder.normalRound2(standardDeviation))
