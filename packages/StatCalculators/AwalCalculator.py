@@ -1,5 +1,4 @@
-import math
-
+from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
 from models.league_models.WeekModel import WeekModel
 
@@ -11,12 +10,13 @@ class AwalCalculator:
         self.__leagueModel = leagueModel
         self.__wins = wins
         self.__ties = ties
+        self.__rounder = Rounder()
 
     def getAwal(self):
         """
         Returns a float that is the AWAL for the team with self.__teamId
         """
-        return self.__normalRound(self.getAdjustment() + self.getWal())
+        return self.__rounder.normalRound(self.getAdjustment() + self.getWal())
 
     def getAdjustment(self):
         """
@@ -36,14 +36,14 @@ class AwalCalculator:
             T = self.__getTeamsTiedOfWeek(week)
             A = W * (1 / L) + T * (0.5 / L) - WAL
             totalAdjustment += A
-        return self.__normalRound(totalAdjustment)
+        return self.__rounder.normalRound(totalAdjustment)
 
     def getWal(self):
         """
         Returns the total wins against the league for the team with self.__teamId
         """
         wal = self.__wins + (0.5 * self.__ties)
-        return self.__normalRound(wal)
+        return self.__rounder.normalRound(wal)
 
     def __getTeamOutcomeOfWeek(self, week: WeekModel):
         """
@@ -111,15 +111,3 @@ class AwalCalculator:
                 teamsTied += 1
         return teamsTied
 
-    def __normalRound(self, number):
-        """
-        Rounds a float rounded to 2 decimal places.
-        """
-        part = number * 100
-        delta = part - int(part)
-        # always round "away from 0"
-        if delta >= 0.5 or -0.5 < delta <= 0:
-            part = math.ceil(part)
-        else:
-            part = math.floor(part)
-        return part / 100

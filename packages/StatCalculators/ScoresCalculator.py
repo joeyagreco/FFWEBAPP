@@ -1,6 +1,6 @@
-import math
 import statistics
 
+from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
 
 
@@ -9,19 +9,7 @@ class ScoresCalculator:
     def __init__(self, teamId: int, leagueModel: LeagueModel):
         self.__teamId = teamId
         self.__leagueModel = leagueModel
-
-    def __normalRound(self, score):
-        """
-        Rounds a float rounded to 2 decimal places.
-        """
-        part = score * 100
-        delta = part - int(part)
-        # always round "away from 0"
-        if delta >= 0.5 or -0.5 < delta <= 0:
-            part = math.ceil(part)
-        else:
-            part = math.floor(part)
-        return part / 100
+        self.__rounder = Rounder()
 
     def getMaxScore(self):
         """
@@ -34,7 +22,7 @@ class ScoresCalculator:
                     scores.append(matchup.getTeamAScore())
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
                     scores.append(matchup.getTeamBScore())
-        return float(max(scores))
+        return self.__rounder.normalRound(max(scores))
 
     def getMinScore(self):
         """
@@ -47,7 +35,7 @@ class ScoresCalculator:
                     scores.append(matchup.getTeamAScore())
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
                     scores.append(matchup.getTeamBScore())
-        return float(min(scores))
+        return self.__rounder.normalRound(min(scores))
 
     def getPlusMinus(self):
         """
@@ -65,7 +53,7 @@ class ScoresCalculator:
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
                     totalTeamScore += matchup.getTeamBScore()
                     totalOpponentScore += matchup.getTeamAScore()
-        return float(self.__normalRound(totalTeamScore - totalOpponentScore))
+        return float(self.__rounder.normalRound(totalTeamScore - totalOpponentScore))
 
     def getStandardDeviation(self):
         """
@@ -79,4 +67,4 @@ class ScoresCalculator:
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
                     scores.append(matchup.getTeamBScore())
         standardDeviation = statistics.pstdev(scores)
-        return float(self.__normalRound(standardDeviation))
+        return float(self.__rounder.normalRound(standardDeviation))

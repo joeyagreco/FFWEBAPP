@@ -1,5 +1,4 @@
-import math
-
+from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
 
 
@@ -8,6 +7,7 @@ class PpgCalculator:
     def __init__(self, teamId: int, leagueModel: LeagueModel):
         self.__teamId = teamId
         self.__leagueModel = leagueModel
+        self.__rounder = Rounder()
 
     def getPpg(self):
         """
@@ -25,17 +25,5 @@ class PpgCalculator:
         totalPoints = 0
         for score in scores:
             totalPoints += score
-        return float(self.__normalRound(totalPoints / numberOfWeeks))
+        return float(self.__rounder.normalRound(totalPoints / numberOfWeeks))
 
-    def __normalRound(self, score):
-        """
-        Rounds a float rounded to 2 decimal places.
-        """
-        part = score * 100
-        delta = part - int(part)
-        # always round "away from 0"
-        if delta >= 0.5 or -0.5 < delta <= 0:
-            part = math.ceil(part)
-        else:
-            part = math.floor(part)
-        return part / 100
