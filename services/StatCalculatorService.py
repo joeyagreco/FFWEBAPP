@@ -27,6 +27,7 @@ class StatCalculatorService:
             print(f"Losses: {recordCalculator.getLosses()}")
             ties = recordCalculator.getTies()
             print(f"Ties: {ties}")
+            print(f"Win %: {recordCalculator.getWinPercentage()}")
             print(f"Plus/Minus: {scoresCalculator.getPlusMinus()}")
             print(f"Standard Deviation: {scoresCalculator.getStandardDeviation()}")
             awalCalculator = AwalCalculator(team.getTeamId(), self.__leagueModel, wins, ties)
