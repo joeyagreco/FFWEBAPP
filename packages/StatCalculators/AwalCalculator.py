@@ -6,13 +6,21 @@ from models.league_models.WeekModel import WeekModel
 
 class AwalCalculator:
 
-    def __init__(self, teamId: int, leagueModel: LeagueModel):
+    def __init__(self, teamId: int, leagueModel: LeagueModel, wins: int, ties: int):
         self.__teamId = teamId
         self.__leagueModel = leagueModel
+        self.__wins = wins
+        self.__ties = ties
 
     def getAwal(self):
         """
-        Returns a float that is the AWAL for the team with the given ID.
+        Returns a float that is the AWAL for the team with self.__teamId
+        """
+        return self.__normalRound(self.getAdjustment() + self.getWal())
+
+    def getAdjustment(self):
+        """
+        Returns a float that is the adjustment [A] for the team with self.__teamId
         A = W * (1/L) + T * (0.5/L) - WAL
         Where:
         WAL = Game outcome (1=win, 0=loss, 0.5=tie)
@@ -21,16 +29,21 @@ class AwalCalculator:
         L = Opponents in league (league size - 1)
         """
         totalAdjustment = 0
-        totalWal = 0
         L = self.__leagueModel.getNumberOfTeams() - 1
         for week in self.__leagueModel.getWeeks():
             WAL = self.__getTeamOutcomeOfWeek(week)
             W = self.__getTeamsOutscoredOfWeek(week)
             T = self.__getTeamsTiedOfWeek(week)
-            A = W * (1/L) + T * (0.5/L) - WAL
+            A = W * (1 / L) + T * (0.5 / L) - WAL
             totalAdjustment += A
-            totalWal += WAL
-        return self.__normalRound(totalAdjustment + totalWal)
+        return self.__normalRound(totalAdjustment)
+
+    def getWal(self):
+        """
+        Returns the total wins against the league for the team with self.__teamId
+        """
+        wal = self.__wins + (0.5 * self.__ties)
+        return self.__normalRound(wal)
 
     def __getTeamOutcomeOfWeek(self, week: WeekModel):
         """
