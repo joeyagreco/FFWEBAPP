@@ -37,6 +37,8 @@ class AwalCalculator:
             print(f"A: {A}")
         print(f"Total Adjustment: {totalAdjustment}")
         print(f"Total WAL: {totalWal}")
+        print(self.__normalRound(totalAdjustment + totalWal))
+        print()
         return self.__normalRound(totalAdjustment + totalWal)
 
     def __getTeamOutcomeOfWeek(self, week: WeekModel):
