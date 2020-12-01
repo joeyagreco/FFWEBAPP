@@ -155,6 +155,40 @@ class TestAwalCalculator(unittest.TestCase):
         self.assertEqual(0.50, awalTeam5)
         self.assertEqual(0.50, awalTeam6)
 
+    def test_getAwalNormalTwoWeeks(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
+        awalTeam1 = AwalCalculator(1, leagueModel).getAwal()
+        awalTeam2 = AwalCalculator(2, leagueModel).getAwal()
+        awalTeam3 = AwalCalculator(3, leagueModel).getAwal()
+        awalTeam4 = AwalCalculator(4, leagueModel).getAwal()
+        awalTeam5 = AwalCalculator(5, leagueModel).getAwal()
+        awalTeam6 = AwalCalculator(6, leagueModel).getAwal()
+        self.assertIsInstance(awalTeam1, float)
+        self.assertEqual(0.40, awalTeam1)
+        self.assertEqual(0.80, awalTeam2)
+        self.assertEqual(0.00, awalTeam3)
+        self.assertEqual(1.20, awalTeam4)
+        self.assertEqual(1.60, awalTeam5)
+        self.assertEqual(2.00, awalTeam6)
+
     def test_getAwalNormalSixteenTeams(self):
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
