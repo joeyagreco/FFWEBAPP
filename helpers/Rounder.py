@@ -3,6 +3,19 @@ import math
 
 class Rounder:
 
+    def normalRound1(self, number):
+        """
+        Rounds a float rounded to 1 decimal place.
+        """
+        part = number * 10
+        delta = part - int(part)
+        # always round "away from 0"
+        if delta >= 0.5 or -0.5 < delta <= 0:
+            part = math.ceil(part)
+        else:
+            part = math.floor(part)
+        return part / 10
+
     def normalRound2(self, number):
         """
         Rounds a float rounded to 2 decimal places.
