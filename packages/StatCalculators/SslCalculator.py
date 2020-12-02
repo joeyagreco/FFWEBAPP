@@ -21,3 +21,13 @@ class SslCalculator:
         rawTeamScore = ((self.__awal * awalMultiplier) + (self.__ppg * ppgMultiplier) + (
                     self.__maxScore + self.__minScore)) / 10
         return self.__rounder.normalRound1(rawTeamScore)
+
+    def getRawTeamSuccess(self):
+        """
+        Returns the Raw Team Success that the team with self.__teamId has in the given league.
+        """
+        walMultiplier = 50
+        ppgMultiplier = 2
+        rawTeamSuccess = ((self.__wal * walMultiplier) + (self.__ppg * ppgMultiplier) + (
+                    self.__maxScore + self.__minScore)) / 10
+        return self.__rounder.normalRound1(rawTeamSuccess)
