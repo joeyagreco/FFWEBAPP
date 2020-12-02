@@ -3,6 +3,7 @@ from packages.StatCalculators.AwalCalculator import AwalCalculator
 from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
+from packages.StatCalculators.SslCalculator import SslCalculator
 
 
 class StatCalculatorService:
@@ -17,10 +18,13 @@ class StatCalculatorService:
         for team in self.__leagueModel.getTeams():
             print(f"Team ID: {team.getTeamId()}")
             scoresCalculator = ScoresCalculator(team.getTeamId(), self.__leagueModel)
-            print(f"Min Score: {scoresCalculator.getMinScore()}")
-            print(f"Max Score: {scoresCalculator.getMaxScore()}")
+            maxScore = scoresCalculator.getMaxScore()
+            minScore = scoresCalculator.getMinScore()
+            print(f"Max Score: {maxScore}")
+            print(f"Min Score: {minScore}")
             ppgCalculator = PpgCalculator(team.getTeamId(), self.__leagueModel)
-            print(f"PPG: {ppgCalculator.getPpg()}")
+            ppg = ppgCalculator.getPpg()
+            print(f"PPG: {ppg}")
             recordCalculator = RecordCalculator(team.getTeamId(), self.__leagueModel)
             wins = recordCalculator.getWins()
             print(f"Wins: {wins}")
@@ -31,7 +35,17 @@ class StatCalculatorService:
             print(f"Plus/Minus: {scoresCalculator.getPlusMinus()}")
             print(f"Standard Deviation: {scoresCalculator.getStandardDeviation()}")
             awalCalculator = AwalCalculator(team.getTeamId(), self.__leagueModel, wins, ties)
-            print(f"AWAL: {awalCalculator.getAwal()}")
+            awal = awalCalculator.getAwal()
+            wal = awalCalculator.getWal()
+            print(f"AWAL: {awal}")
+            print(f"WAL: {wal}")
+            sslCalculator = SslCalculator(awal, wal, ppg, maxScore, minScore)
+            rtsc = sslCalculator.getRawTeamScore()
+            rtsu = sslCalculator.getRawTeamSuccess()
+            rtl = sslCalculator.getRawTeamLuck()
+            print(f"Raw Team Score: {rtsc}")
+            print(f"Raw Team Success: {rtsu}")
+            print(f"Raw Team Luck: {rtl}")
             print()
 
     def getLeagueStats(self):
