@@ -1,9 +1,5 @@
 import unittest
 
-from models.league_models.LeagueModel import LeagueModel
-from models.league_models.MatchupModel import MatchupModel
-from models.league_models.TeamModel import TeamModel
-from models.league_models.WeekModel import WeekModel
 from packages.StatCalculators.SslCalculator import SslCalculator
 
 
@@ -24,4 +20,14 @@ class TestSslCalculator(unittest.TestCase):
         self.assertIsInstance(rawTeamSuccessTeam1, float)
         self.assertEqual(74.0, rawTeamSuccessTeam1)
         self.assertEqual(74.0, rawTeamSuccessTeam2)
+
+    def test_getRawTeamLuck(self):
+        rawTeamLuckTeam1 = SslCalculator(5.0, 5.0, 120.0, 150.0, 100.0).getRawTeamLuck()
+        rawTeamLuckTeam2 = SslCalculator(1.0, 5.0, 120.0, 150.0, 100.0).getRawTeamLuck()
+        rawTeamLuckTeam3 = SslCalculator(3.2, 1.0, 120.0, 150.0, 100.0).getRawTeamLuck()
+        self.assertIsInstance(rawTeamLuckTeam1, float)
+        self.assertEqual(0.0, rawTeamLuckTeam1)
+        self.assertEqual(20.0, rawTeamLuckTeam2)
+        self.assertEqual(-11.0, rawTeamLuckTeam3)
+
 
