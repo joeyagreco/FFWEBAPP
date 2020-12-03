@@ -12,12 +12,12 @@
 
     <header>
       {% block header %}{% endblock %}
+      <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
     </header>
 
     <div class="navBar">
-      <form class="navButtonForm">
-        <button class="navButton" type="button" onclick="homeRedirect()">Home</button>
-      </form>
+      <button class="navButton" type="button" onclick="homeRedirect()">Leeger.io</button>
+      <button class="navButton" type="button" onclick="leagueHomepageRedirect()">League Homepage</button>
     </div>
 
     <div class="topSection">
