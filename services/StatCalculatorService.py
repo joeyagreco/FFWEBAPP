@@ -25,6 +25,8 @@ class StatCalculatorService:
             ppgCalculator = PpgCalculator(team.getTeamId(), self.__leagueModel)
             ppg = ppgCalculator.getPpg()
             print(f"PPG: {ppg}")
+            ppgAgainst = ppgCalculator.getPpgAgainst()
+            print(f"PPG Against: {ppgAgainst}")
             recordCalculator = RecordCalculator(team.getTeamId(), self.__leagueModel)
             wins = recordCalculator.getWins()
             print(f"Wins: {wins}")

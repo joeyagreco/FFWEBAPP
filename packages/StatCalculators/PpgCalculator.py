@@ -27,3 +27,21 @@ class PpgCalculator:
             totalPoints += score
         return self.__rounder.normalRound(totalPoints / numberOfWeeks, 2)
 
+    def getPpgAgainst(self):
+        """
+        Returns a float that is the Points Per Game against the team with the given ID.
+        """
+        scores = []
+        numberOfWeeks = 0
+        for week in self.__leagueModel.getWeeks():
+            numberOfWeeks += 1
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == self.__teamId:
+                    scores.append(matchup.getTeamBScore())
+                elif matchup.getTeamB().getTeamId() == self.__teamId:
+                    scores.append(matchup.getTeamAScore())
+        totalPoints = 0
+        for score in scores:
+            totalPoints += score
+        return self.__rounder.normalRound(totalPoints / numberOfWeeks, 2)
+
