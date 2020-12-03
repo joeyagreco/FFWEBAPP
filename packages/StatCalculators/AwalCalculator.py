@@ -16,7 +16,7 @@ class AwalCalculator:
         """
         Returns a float that is the AWAL for the team with self.__teamId
         """
-        return self.__rounder.normalRound2(self.getAdjustment() + self.getWal())
+        return self.__rounder.normalRound(self.getAdjustment() + self.getWal(), 2)
 
     def getAdjustment(self):
         """
@@ -36,14 +36,14 @@ class AwalCalculator:
             T = self.__getTeamsTiedOfWeek(week)
             A = W * (1 / L) + T * (0.5 / L) - WAL
             totalAdjustment += A
-        return self.__rounder.normalRound2(totalAdjustment)
+        return self.__rounder.normalRound(totalAdjustment, 2)
 
     def getWal(self):
         """
         Returns the total wins against the league for the team with self.__teamId
         """
         wal = self.__wins + (0.5 * self.__ties)
-        return self.__rounder.normalRound2(wal)
+        return self.__rounder.normalRound(wal, 2)
 
     def __getTeamOutcomeOfWeek(self, week: WeekModel):
         """

@@ -69,4 +69,4 @@ class RecordCalculator:
         ties = self.getTies()
         totalGames = wins + losses + ties
 
-        return self.__rounder.normalRound3((wins + (0.5 * ties)) / totalGames)
+        return self.__rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)
