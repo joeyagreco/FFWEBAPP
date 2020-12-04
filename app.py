@@ -53,6 +53,12 @@ def leagueHomepage():
 
 @app.route("/update-league", methods=["GET", "POST"])
 def updateLeague():
+    # helper function to get team by id
+    def getTeamNameById(teams: list, teamId: int):
+        for team in teams:
+            if team["teamId"] == teamId:
+                return team["teamName"]
+
     if request.method == "GET":
         leagueId = int(request.args.get("league_id"))
         mainController = MainController()
@@ -63,13 +69,27 @@ def updateLeague():
             return render_template("updateLeaguePage.html", league=leagueOrError)
     elif request.method == "POST":
         leagueId = int(request.form["league_id"])
+        # update league name
         leagueName = request.form["league_name"]
+        # number of teams cant be changed by the user, but we send it into our request
         numberOfTeams = int(request.form["number_of_teams"])
+        # update team names
         teams = []
         for teamId in range(1, numberOfTeams + 1):
             teams.append({"teamId": int(teamId), "teamName": request.form[f"team_{teamId}"]})
         mainController = MainController()
-        updated = mainController.updateLeague(leagueId, leagueName, teams, None)
+        # update weeks
+        leagueOrError = mainController.getLeague(leagueId)
+        if isinstance(leagueOrError, Error):
+            # could not find league
+            return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
+        weeks = leagueOrError["weeks"]
+        for week in weeks:
+            for matchup in week["matchups"]:
+                matchup["teamA"]["teamName"] = getTeamNameById(teams, matchup["teamA"]["teamId"])
+                matchup["teamB"]["teamName"] = getTeamNameById(teams, matchup["teamB"]["teamId"])
+        # now update league in database
+        updated = mainController.updateLeague(leagueId, leagueName, teams, weeks)
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             # could not find league
