@@ -16,15 +16,18 @@
 <form class="weekForm" action="/update-week" method="POST">
     <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
     <input class="weekHidden" type="number" name="week_number" id="week_number" value="{{week_number}}">
-    <select class="selectWeekDropdown" id="select_week_dropdown" onchange="updateWeekDropdown();">
-        {% for week in league.weeks %}
-            {% if week.weekNumber == week_number %}
-                <option value="{{week.weekNumber}}" selected>Week {{week.weekNumber}}</option>
-            {% else %}
-                <option value="{{week.weekNumber}}">Week {{week.weekNumber}}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
+    <div class="selectAndAddWeek">
+        <select class="selectWeekDropdown" id="select_week_dropdown" onchange="updateWeekDropdown();">
+            {% for week in league.weeks %}
+                {% if week.weekNumber == week_number %}
+                    <option value="{{week.weekNumber}}" selected>Week {{week.weekNumber}}</option>
+                {% else %}
+                    <option value="{{week.weekNumber}}">Week {{week.weekNumber}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <button class="addWeekButtonPlus" type="button" onclick="addWeek()">+</button>
+    </div>
     <div class="teams">
         <div class="oddTeamForms">
             {% for week in league.weeks if week.weekNumber == week_number %}
@@ -80,7 +83,6 @@
     </div>
     <div class="actionButtons">
         <button class="saveChangesButton" type="submit">Save Changes</button>
-        <button class="addWeekButton" type="button" onclick="addWeek()">Add a Week</button>
         <button class="deleteWeekButton" type="button" onclick="deleteWeek()">Delete Week</button>
     </div>
 </form>
