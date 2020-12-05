@@ -16,8 +16,8 @@ class StatCalculatorService:
         Returns a list of TeamStatsModels, one for each team in the given league.
         """
         for team in self.__leagueModel.getTeams():
-            print(f"Team Name: {team.getTeamName()}")
             print(f"Team ID: {team.getTeamId()}")
+            print(f"Team Name: {team.getTeamName()}")
             scoresCalculator = ScoresCalculator(team.getTeamId(), self.__leagueModel)
             maxScore = scoresCalculator.getMaxScore()
             minScore = scoresCalculator.getMinScore()

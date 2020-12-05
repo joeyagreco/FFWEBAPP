@@ -1,26 +1,56 @@
 class TeamStatsModel:
 
-    def __init__(self, teamId: int, ppg: float, stddev: float, awal: float, rawTeamScore: float, rawTeamSuccess: float,
-                 rawTeamLuck: int, plusMinus: float, maxScore: float, minScore: float):
+    def __init__(self, teamId: int, teamName: str, maxScore: float, minScore: float, ppg: float, ppgAgainst: float,
+                 plusMinus: float, stddev: float, wins: int, losses: int, ties: int, awal: float,
+                 rawTeamScore: float, rawTeamSuccess: float, rawTeamLuck: int):
         self.__teamId = teamId
+        self.__teamName = teamName
+        self.__maxScore = maxScore
+        self.__minScore = minScore
         self.__ppg = ppg
+        self.__ppgAgainst = ppgAgainst
+        self.__plusMinus = plusMinus
         self.__stddev = stddev
+        self.__wins = wins
+        self.__losses = losses
+        self.__ties = ties
         self.__awal = awal
         self.__rawTeamScore = rawTeamScore
         self.__rawTeamSuccess = rawTeamSuccess
         self.__rawTeamLuck = rawTeamLuck
-        self.__plusMinus = plusMinus
-        self.__maxScore = maxScore
-        self.__minScore = minScore
 
     def getTeamId(self):
         return self.__teamId
 
+    def getTeamName(self):
+        return self.__teamName
+
+    def getMaxScore(self):
+        return self.__maxScore
+
+    def getMinScore(self):
+        return self.__minScore
+
     def getPpg(self):
         return self.__ppg
 
+    def getPpgAgainst(self):
+        return self.__ppgAgainst
+
+    def getPlusMinus(self):
+        return self.__plusMinus
+
     def getStddev(self):
         return self.__stddev
+
+    def getWins(self):
+        return self.__wins
+
+    def getLosses(self):
+        return self.__losses
+
+    def getTies(self):
+        return self.__ties
 
     def getAwal(self):
         return self.__awal
@@ -34,11 +64,5 @@ class TeamStatsModel:
     def getRawTeamLuck(self):
         return self.__rawTeamLuck
 
-    def getPlusMinus(self):
-        return self.__plusMinus
 
-    def getMaxScore(self):
-        return self.__maxScore
 
-    def getMinScore(self):
-        return self.__minScore
