@@ -136,8 +136,8 @@ input::-webkit-inner-spin-button {
     height: 40%;
     order: 3;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center;
     background-color: green;
 }
 
@@ -145,22 +145,23 @@ input::-webkit-inner-spin-button {
     width: 10%;
     height: 20%;
     font-size: 120%;
-    margin: auto;
     order: 1;
+    margin: 2%;
 }
 
 .addWeekButton {
     width: 10%;
     height: 20%;
     font-size: 120%;
-    margin: auto;
     order: 2;
+    margin: 2%;
 }
 
 .deleteWeekButton {
     width: 10%;
     height: 20%;
     font-size: 120%;
-    margin: auto;
     order: 3;
+    margin: 2%;
+    background-color: red;
 }
