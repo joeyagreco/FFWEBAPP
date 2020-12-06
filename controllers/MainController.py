@@ -1,10 +1,13 @@
+from models.league_models.LeagueModel import LeagueModel
 from services.DatabaseService import DatabaseService
+from services.StatCalculatorService import StatCalculatorService
 
 
 class MainController:
 
     def __init__(self):
         self.__databaseService = DatabaseService()
+        self.__statCalculatorService = StatCalculatorService()
 
     def getLeague(self, leagueId: int):
         return self.__databaseService.getLeague(leagueId)
@@ -23,4 +26,7 @@ class MainController:
 
     def getLeagueModel(self, leagueId: int):
         return self.__databaseService.getLeagueModel(leagueId)
+
+    def getTeamStatsModel(self, leagueModel: LeagueModel):
+        return self.__statCalculatorService.getTeamStats(leagueModel)
 

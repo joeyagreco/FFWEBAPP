@@ -271,7 +271,9 @@ def teamStats():
     leagueId = int(request.args.get("league_id"))
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    return render_template("teamStatsPage.html", league=leagueOrError)
+    leagueModelOrError = mainController.getLeagueModel(leagueId)
+    statsModels = mainController.getTeamStatsModel(leagueModelOrError)
+    return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels)
 
 
 @app.route("/test-stats", methods=["GET"])

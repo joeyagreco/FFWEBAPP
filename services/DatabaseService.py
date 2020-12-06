@@ -46,7 +46,7 @@ class DatabaseService:
     def getLeagueModel(self, leagueId: int):
         """
         This takes in a league ID
-        It returns a Python object version of that league or an Error
+        It returns a Python object version of the given league or an Error
         """
         leagueDict = self.__databaseClient.getLeague(leagueId)
         leagueBuilder = LeagueBuilder(leagueDict)
