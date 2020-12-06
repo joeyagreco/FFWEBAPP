@@ -17,16 +17,16 @@
     <table>
         <tr>
             <th>Team Name</th>
-            <th>Max Score</th>
-            <th>Min Score</th>
-            <th>PPG</th>
-            <th>PPG Against</th>
-            <th>Plus/Minus</th>
-            <th>STDEV</th>
             <th>Wins</th>
             <th>Losses</th>
             <th>Ties</th>
             <th>Win Percentage</th>
+            <th>PPG</th>
+            <th>PPG Against</th>
+            <th>Plus/Minus</th>
+            <th>STDEV</th>
+            <th>Max Score</th>
+            <th>Min Score</th>
             <th>AWAL</th>
             <th>Raw Team Score</th>
             <th>Raw Team Success</th>
@@ -35,16 +35,16 @@
         {% for teamStats in stats_models %}
             <tr>
                 <td>{{teamStats.getTeamName()}}</td>
-                <td>{{teamStats.getMaxScore()}}</td>
-                <td>{{teamStats.getMinScore()}}</td>
-                <td>{{teamStats.getPpg()}}</td>
-                <td>{{teamStats.getPpgAgainst()}}</td>
-                <td>{{teamStats.getPlusMinus()}}</td>
-                <td>{{teamStats.getStddev()}}</td>
                 <td>{{teamStats.getWins()}}</td>
                 <td>{{teamStats.getLosses()}}</td>
                 <td>{{teamStats.getTies()}}</td>
                 <td>{{teamStats.getWinPercentage()}}</td>
+                <td>{{teamStats.getPpg()}}</td>
+                <td>{{teamStats.getPpgAgainst()}}</td>
+                <td>{{teamStats.getPlusMinus()}}</td>
+                <td>{{teamStats.getStddev()}}</td>
+                <td>{{teamStats.getMaxScore()}}</td>
+                <td>{{teamStats.getMinScore()}}</td>
                 <td>{{teamStats.getAwal()}}</td>
                 <td>{{teamStats.getRawTeamScore()}}</td>
                 <td>{{teamStats.getRawTeamSuccess()}}</td>

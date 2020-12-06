@@ -1,20 +1,20 @@
 class TeamStatsModel:
 
-    def __init__(self, teamId: int, teamName: str, maxScore: float, minScore: float, ppg: float, ppgAgainst: float,
-                 plusMinus: float, stddev: float, wins: int, losses: int, ties: int, winPercentage: float,
+    def __init__(self, teamId: int, teamName: str, wins: int, losses: int, ties: int, winPercentage: float,
+                 ppg: float, ppgAgainst: float, plusMinus: float, stddev: float, maxScore: float, minScore: float,
                  awal: float, rawTeamScore: float, rawTeamSuccess: float, rawTeamLuck: int):
         self.__teamId = teamId
         self.__teamName = teamName
-        self.__maxScore = maxScore
-        self.__minScore = minScore
-        self.__ppg = ppg
-        self.__ppgAgainst = ppgAgainst
-        self.__plusMinus = plusMinus
-        self.__stddev = stddev
         self.__wins = wins
         self.__losses = losses
         self.__ties = ties
         self.__winPercentage = winPercentage
+        self.__ppg = ppg
+        self.__ppgAgainst = ppgAgainst
+        self.__plusMinus = plusMinus
+        self.__stddev = stddev
+        self.__maxScore = maxScore
+        self.__minScore = minScore
         self.__awal = awal
         self.__rawTeamScore = rawTeamScore
         self.__rawTeamSuccess = rawTeamSuccess
