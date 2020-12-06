@@ -1,8 +1,8 @@
 class TeamStatsModel:
 
     def __init__(self, teamId: int, teamName: str, maxScore: float, minScore: float, ppg: float, ppgAgainst: float,
-                 plusMinus: float, stddev: float, wins: int, losses: int, ties: int, awal: float,
-                 rawTeamScore: float, rawTeamSuccess: float, rawTeamLuck: int):
+                 plusMinus: float, stddev: float, wins: int, losses: int, ties: int, winPercentage: float,
+                 awal: float, rawTeamScore: float, rawTeamSuccess: float, rawTeamLuck: int):
         self.__teamId = teamId
         self.__teamName = teamName
         self.__maxScore = maxScore
@@ -14,6 +14,7 @@ class TeamStatsModel:
         self.__wins = wins
         self.__losses = losses
         self.__ties = ties
+        self.__winPercentage = winPercentage
         self.__awal = awal
         self.__rawTeamScore = rawTeamScore
         self.__rawTeamSuccess = rawTeamSuccess
@@ -51,6 +52,9 @@ class TeamStatsModel:
 
     def getTies(self):
         return self.__ties
+
+    def getWinPercentage(self):
+        return self.__winPercentage
 
     def getAwal(self):
         return self.__awal

@@ -32,6 +32,7 @@ class StatCalculatorService:
             wins = recordCalculator.getWins()
             losses = recordCalculator.getLosses()
             ties = recordCalculator.getTies()
+            winPercentage = recordCalculator.getWinPercentage()
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwal()
             wal = awalCalculator.getWal()
@@ -51,6 +52,7 @@ class StatCalculatorService:
                                        wins,
                                        losses,
                                        ties,
+                                       winPercentage,
                                        awal,
                                        rawTeamScore,
                                        rawTeamSuccess,
