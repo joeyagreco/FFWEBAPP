@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Team Stats</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teamStatsPage.css') }}">
+<script src="{{ url_for('static', filename='javascript/teamStatsPage.js') }}"></script>
+{% endblock %}
+
+{% block pageTitle %}Team Stats{% endblock %}
+
+{% block pageSubtitle %}{{league.leagueName}}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+    <p>in team stats page</p>
+{% endblock %}

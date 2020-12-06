@@ -16,6 +16,10 @@ function copyUrl() {
 function testStats() {
     var leagueId = document.getElementById("league_id").value;
     window.location = "/test-stats?league_id="+leagueId;
+}
 
+function teamStatsRedirect() {
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/team-stats?league_id="+leagueId;
 }
 
