@@ -9,8 +9,6 @@ from packages.StatCalculators.SslCalculator import SslCalculator
 
 class StatCalculatorService:
 
-    def __init__(self):
-        pass
 
     def getTeamStats(self, leagueModel: LeagueModel):
         """
