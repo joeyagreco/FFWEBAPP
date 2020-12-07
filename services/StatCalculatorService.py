@@ -41,22 +41,22 @@ class StatCalculatorService:
             rawTeamSuccess = sslCalculator.getRawTeamSuccess()
             rawTeamLuck = sslCalculator.getRawTeamLuck()
 
-            teamModel = TeamStatsModel(teamId,
-                                       teamName,
-                                       wins,
-                                       losses,
-                                       ties,
-                                       winPercentage,
-                                       ppg,
-                                       ppgAgainst,
-                                       plusMinus,
-                                       stddev,
-                                       maxScore,
-                                       minScore,
-                                       awal,
-                                       rawTeamScore,
-                                       rawTeamSuccess,
-                                       rawTeamLuck)
+            teamModel = TeamStatsModel(teamId=teamId,
+                                       teamName=teamName,
+                                       wins=wins,
+                                       losses=losses,
+                                       ties=ties,
+                                       winPercentage=winPercentage,
+                                       ppg=ppg,
+                                       ppgAgainst=ppgAgainst,
+                                       plusMinus=plusMinus,
+                                       stddev=stddev,
+                                       maxScore=maxScore,
+                                       minScore=minScore,
+                                       awal=awal,
+                                       rawTeamScore=rawTeamScore,
+                                       rawTeamSuccess=rawTeamSuccess,
+                                       rawTeamLuck=rawTeamLuck)
             teamStatModels.append(teamModel)
         return teamStatModels
 

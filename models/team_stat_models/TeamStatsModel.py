@@ -1,24 +1,22 @@
 class TeamStatsModel:
 
-    def __init__(self, teamId: int, teamName: str, wins: int, losses: int, ties: int, winPercentage: float,
-                 ppg: float, ppgAgainst: float, plusMinus: float, stddev: float, maxScore: float, minScore: float,
-                 awal: float, rawTeamScore: float, rawTeamSuccess: float, rawTeamLuck: int):
-        self.__teamId = teamId
-        self.__teamName = teamName
-        self.__wins = wins
-        self.__losses = losses
-        self.__ties = ties
-        self.__winPercentage = winPercentage
-        self.__ppg = ppg
-        self.__ppgAgainst = ppgAgainst
-        self.__plusMinus = plusMinus
-        self.__stddev = stddev
-        self.__maxScore = maxScore
-        self.__minScore = minScore
-        self.__awal = awal
-        self.__rawTeamScore = rawTeamScore
-        self.__rawTeamSuccess = rawTeamSuccess
-        self.__rawTeamLuck = rawTeamLuck
+    def __init__(self, **stats):
+        self.__teamId = stats["teamId"]
+        self.__teamName = stats["teamName"]
+        self.__wins = stats["wins"]
+        self.__losses = stats["losses"]
+        self.__ties = stats["ties"]
+        self.__winPercentage = stats["winPercentage"]
+        self.__ppg = stats["ppg"]
+        self.__ppgAgainst = stats["ppgAgainst"]
+        self.__plusMinus = stats["plusMinus"]
+        self.__stddev = stats["stddev"]
+        self.__maxScore = stats["maxScore"]
+        self.__minScore = stats["minScore"]
+        self.__awal = stats["awal"]
+        self.__rawTeamScore = stats["rawTeamScore"]
+        self.__rawTeamSuccess = stats["rawTeamSuccess"]
+        self.__rawTeamLuck = stats["rawTeamLuck"]
 
     def getTeamId(self):
         return self.__teamId
