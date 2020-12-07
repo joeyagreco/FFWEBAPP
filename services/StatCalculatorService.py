@@ -9,7 +9,6 @@ from packages.StatCalculators.SslCalculator import SslCalculator
 
 class StatCalculatorService:
 
-
     def getTeamStats(self, leagueModel: LeagueModel):
         """
         Returns a list of TeamStatsModels, one for each team in the given league.
@@ -57,7 +56,6 @@ class StatCalculatorService:
                                        rawTeamLuck=rawTeamLuck)
             teamStatModels.append(teamModel)
         return teamStatModels
-
 
     def getLeagueStats(self):
         """
