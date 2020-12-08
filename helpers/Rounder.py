@@ -22,17 +22,23 @@ class Rounder:
         """
         Returns an int that represents how many decimal places the scores in this league are rounded to.
         Ex: score of 132.55 -> 2, score of 130.10 -> 1
+        Defaults to 1 for return value.
         """
 
-        maxDecimalPlaces = 0
+        maxDecimalPlaces = 1
         for week in league.getWeeks():
             for matchup in week.getMatchups():
-                aScoreStr = str(matchup.getTeamAScore())
-                bScoreStr = str(matchup.getTeamBScore())
-                aScoreDecimalLength = len(aScoreStr.split(".")[1])
-                bScoreDecimalLength = len(bScoreStr.split(".")[1])
-                testDecimalLength = max(aScoreDecimalLength, bScoreDecimalLength)
-                if testDecimalLength > maxDecimalPlaces:
-                    maxDecimalPlaces = testDecimalLength
+                aScore = matchup.getTeamAScore()
+                bScore = matchup.getTeamBScore()
+                if isinstance(aScore, float):
+                    aScoreStr = str(aScore)
+                    aScoreDecimalLength = len(aScoreStr.split(".")[1])
+                    if aScoreDecimalLength > maxDecimalPlaces:
+                        maxDecimalPlaces = aScoreDecimalLength
+                if isinstance(bScore, float):
+                    bScoreStr = str(bScore)
+                    bScoreDecimalLength = len(bScoreStr.split(".")[1])
+                    if bScoreDecimalLength > maxDecimalPlaces:
+                        maxDecimalPlaces = bScoreDecimalLength
         return maxDecimalPlaces
 
