@@ -25,7 +25,7 @@ class PpgCalculator:
         totalPoints = 0
         for score in scores:
             totalPoints += score
-        return self.__rounder.normalRound(totalPoints / numberOfWeeks, 2)
+        return self.__rounder.normalRound(totalPoints / numberOfWeeks, self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 
     def getPpgAgainst(self):
         """
@@ -43,5 +43,5 @@ class PpgCalculator:
         totalPoints = 0
         for score in scores:
             totalPoints += score
-        return self.__rounder.normalRound(totalPoints / numberOfWeeks, 2)
+        return self.__rounder.normalRound(totalPoints / numberOfWeeks, self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 
