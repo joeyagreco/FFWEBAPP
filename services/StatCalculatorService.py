@@ -13,7 +13,7 @@ class StatCalculatorService:
         """
         Returns a list of TeamStatsModels, one for each team in the given league.
         """
-        teamStatModels = []
+        teamStatsModels = []
         for team in leagueModel.getTeams():
             scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel)
             teamId = team.getTeamId()
@@ -54,8 +54,8 @@ class StatCalculatorService:
                                        rawTeamScore=rawTeamScore,
                                        rawTeamSuccess=rawTeamSuccess,
                                        rawTeamLuck=rawTeamLuck)
-            teamStatModels.append(teamModel)
-        return teamStatModels
+            teamStatsModels.append(teamModel)
+        return teamStatsModels
 
     def getLeagueStats(self):
         """
