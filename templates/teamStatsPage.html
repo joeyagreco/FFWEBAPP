@@ -4,6 +4,7 @@
 <title>Team Stats</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/teamStatsPage.css') }}">
 <script src="{{ url_for('static', filename='javascript/teamStatsPage.js') }}"></script>
+<!--Script for sorting a table with class "sortable"-->
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 {% endblock %}
 
@@ -15,47 +16,51 @@
 
 {% block content %}
 
-    <table class="sortable">
-        <thead>
-            <tr>
-                <th>Team Name</th>
-                <th>Wins</th>
-                <th>Losses</th>
-                <th>Ties</th>
-                <th>Win Percentage</th>
-                <th>PPG</th>
-                <th>PPG Against</th>
-                <th>Plus/Minus</th>
-                <th>Max Score</th>
-                <th>Min Score</th>
-                <th>STDEV</th>
-                <th>AWAL</th>
-                <th>Raw Team Score</th>
-                <th>Raw Team Success</th>
-                <th>Raw Team Luck</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for teamStats in stats_models %}
+    <div class="statsContainer">
+
+        <table class="sortable statsTable">
+            <thead>
                 <tr>
-                    <td>{{teamStats.getTeamName()}}</td>
-                    <td>{{teamStats.getWins()}}</td>
-                    <td>{{teamStats.getLosses()}}</td>
-                    <td>{{teamStats.getTies()}}</td>
-                    <td>{{teamStats.getWinPercentage()}}</td>
-                    <td>{{teamStats.getPpg()}}</td>
-                    <td>{{teamStats.getPpgAgainst()}}</td>
-                    <td>{{teamStats.getPlusMinus()}}</td>
-                    <td>{{teamStats.getMaxScore()}}</td>
-                    <td>{{teamStats.getMinScore()}}</td>
-                    <td>{{teamStats.getStddev()}}</td>
-                    <td>{{teamStats.getAwal()}}</td>
-                    <td>{{teamStats.getRawTeamScore()}}</td>
-                    <td>{{teamStats.getRawTeamSuccess()}}</td>
-                    <td>{{teamStats.getRawTeamLuck()}}</td>
+                    <th>Team Name</th>
+                    <th>Wins</th>
+                    <th>Losses</th>
+                    <th>Ties</th>
+                    <th>Win Percentage</th>
+                    <th>PPG</th>
+                    <th>PPG Against</th>
+                    <th>Plus/Minus</th>
+                    <th>Max Score</th>
+                    <th>Min Score</th>
+                    <th>STDEV</th>
+                    <th>AWAL</th>
+                    <th>Raw Team Score</th>
+                    <th>Raw Team Success</th>
+                    <th>Raw Team Luck</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for teamStats in stats_models %}
+                    <tr>
+                        <td>{{teamStats.getTeamName()}}</td>
+                        <td>{{teamStats.getWins()}}</td>
+                        <td>{{teamStats.getLosses()}}</td>
+                        <td>{{teamStats.getTies()}}</td>
+                        <td>{{teamStats.getWinPercentage()}}</td>
+                        <td>{{teamStats.getPpg()}}</td>
+                        <td>{{teamStats.getPpgAgainst()}}</td>
+                        <td>{{teamStats.getPlusMinus()}}</td>
+                        <td>{{teamStats.getMaxScore()}}</td>
+                        <td>{{teamStats.getMinScore()}}</td>
+                        <td>{{teamStats.getStddev()}}</td>
+                        <td>{{teamStats.getAwal()}}</td>
+                        <td>{{teamStats.getRawTeamScore()}}</td>
+                        <td>{{teamStats.getRawTeamSuccess()}}</td>
+                        <td>{{teamStats.getRawTeamLuck()}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
 
 {% endblock %}
