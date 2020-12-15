@@ -3,8 +3,8 @@
 {% block head %}
 <title>Team Stats</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/teamStatsPage.css') }}">
-<!--<script src="{{ url_for('static', filename='javascript/teamStatsPage.js') }}"></script>-->
-<!--We load the javascript at the bottom of this file so the table can load first-->
+<script src="{{ url_for('static', filename='javascript/teamStatsPage.js') }}"></script>
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 {% endblock %}
 
 {% block pageTitle %}Team Stats{% endblock %}
@@ -15,7 +15,7 @@
 
 {% block content %}
 
-    <table class="table-sortable">
+    <table class="sortable">
         <thead>
             <tr>
                 <th>Team Name</th>
@@ -57,7 +57,5 @@
             {% endfor %}
         </tbody>
     </table>
-
- <script src="{{ url_for('static', filename='javascript/teamStatsPage.js') }}"></script>
 
 {% endblock %}
