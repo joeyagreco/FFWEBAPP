@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
 html {
   width: 100%;
@@ -50,6 +51,7 @@ header {
 .errorMessage {
     width: 100%;
     height: 30%;
+    font-family: 'Roboto Slab', serif;
     text-align: center;
     color: red;
     background-color: pink;
@@ -77,6 +79,7 @@ header {
     width: 100%;
     height: 40%;
     font-size: 150%;
+    cursor: pointer;
     background-color: white;
 }
 
@@ -116,6 +119,7 @@ input::-webkit-inner-spin-button {
     width: 100%;
     height: 40%;
     font-size: 150%;
+    cursor: pointer;
     background-color: white;
 }
 
