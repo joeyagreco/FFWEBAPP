@@ -45,3 +45,10 @@
     margin-right: auto;
     order: 2;
 }
+
+.headToHeadTable {
+    width: 100%;
+    height: auto;
+    order: 3;
+    background-color: pink;
+}
