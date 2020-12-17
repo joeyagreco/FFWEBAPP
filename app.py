@@ -279,6 +279,10 @@ def teamStats():
 @app.route("/head-to-head-stats", methods=["GET"])
 def headToHeadStats():
     leagueId = int(request.args.get("league_id"))
+    team1Id = request.args.get("team1")
+    team2Id = request.args.get("team2")
+    print(team1Id)
+    print(team2Id)
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     return render_template("headToHeadStatsPage.html", league=leagueOrError)
