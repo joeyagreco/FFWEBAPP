@@ -23,3 +23,8 @@ function teamStatsRedirect() {
     window.location = "/team-stats?league_id="+leagueId;
 }
 
+function headToHeadStatsRedirect() {
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/head-to-head-stats?league_id="+leagueId;
+}
+

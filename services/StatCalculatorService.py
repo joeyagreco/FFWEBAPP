@@ -57,6 +57,9 @@ class StatCalculatorService:
             teamStatsModels.append(teamModel)
         return teamStatsModels
 
+    def getHeadToHeadStats(self):
+        return None
+
     def getLeagueStats(self):
         """
         Returns a LeagueStatsModel for the given league.

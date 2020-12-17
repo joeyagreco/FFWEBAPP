@@ -21,10 +21,17 @@
     text-align: center;
 }
 
-.updateLeagueForm {
+.headToHeadStatsForm {
     width: 100%;
     height: 15%;
     order: 3;
+    text-align: center;
+}
+
+.updateLeagueForm {
+    width: 100%;
+    height: 15%;
+    order: 4;
     text-align: center;
 }
 
