@@ -16,8 +16,22 @@
 
 {% block content %}
     <div class="selectionsAndTable">
-        <div class="team1Dropdown"></div>
-        <div class="vs">VS</div>
-        <div class="team2Dropdown"></div>
-    </div>
+        <div class="teamsAndVs">
+            <div class="team1Dropdown">
+                <select class="team1Name" name="team1Id" id="team1Id">
+                    {% for team in league.teams %}
+                    <option value="{{team.teamId}}">{{team.teamName}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="vs">VS</div>
+            <div class="team2Dropdown">
+                <select class="team2Name" name="team2Id" id="team2Id">
+                    {% for team in league.teams %}
+                    <option value="{{team.teamId}}">{{team.teamName}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            </div>
+        </div>
 {% endblock %}
