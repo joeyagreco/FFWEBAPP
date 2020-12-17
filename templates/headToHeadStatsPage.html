@@ -20,7 +20,11 @@
             <div class="team1Dropdown">
                 <select class="team1Name" name="team1Id" id="team1Id">
                     {% for team in league.teams %}
-                    <option value="{{team.teamId}}">{{team.teamName}}</option>
+                        {% if team.teamId == givenTeam1Id %}
+                            <option value="{{team.teamId}}" selected>{{team.teamName}}</option>
+                        {% else %}
+                            <option value="{{team.teamId}}">{{team.teamName}}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
             </div>
@@ -28,7 +32,11 @@
             <div class="team2Dropdown">
                 <select class="team2Name" name="team2Id" id="team2Id">
                     {% for team in league.teams %}
-                    <option value="{{team.teamId}}">{{team.teamName}}</option>
+                        {% if team.teamId == givenTeam2Id %}
+                            <option value="{{team.teamId}}" selected>{{team.teamName}}</option>
+                        {% else %}
+                            <option value="{{team.teamId}}">{{team.teamName}}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
             </div>
