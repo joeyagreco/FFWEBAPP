@@ -30,3 +30,6 @@ class MainController:
     def getTeamStatsModel(self, leagueModel: LeagueModel):
         return self.__statCalculatorService.getTeamStats(leagueModel)
 
+    def getHeadToHeadStatsModel(self, leagueModel: LeagueModel, team1Id: int, team2Id: int):
+        return self.__statCalculatorService.getHeadToHeadStats(leagueModel, team1Id, team2Id)
+

@@ -287,8 +287,9 @@ def headToHeadStats():
         # if the user clicked the button to get matchups for 2 teams
         team1Id = int(team1Id)
         team2Id = int(team2Id)
-        print(team1Id)
-        print(team2Id)
+        leagueModelOrError = mainController.getLeagueModel(leagueId)
+        statsModel = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
+        print(statsModel)
         return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=team1Id, givenTeam2Id=team2Id)
     return render_template("headToHeadStatsPage.html", league=leagueOrError)
 
