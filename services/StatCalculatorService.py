@@ -76,6 +76,7 @@ class StatCalculatorService:
         leagueModelNavigator = LeagueModelNavigator()
         for teamId in teamIds:
             teamName = leagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
+            # stats calculated below this line are not correct yet
             recordCalculator = RecordCalculator(teamId, leagueModel)
             wins = recordCalculator.getWins()
             losses = recordCalculator.getLosses()

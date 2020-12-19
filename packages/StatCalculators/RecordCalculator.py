@@ -26,6 +26,23 @@ class RecordCalculator:
                         wins += 1
         return wins
 
+    def getWinsVsTeam(self, opponentTeamId: int):
+        """
+        Returns as an int the number of wins the team with self.__teamId has against the team with the given ID.
+        """
+        wins = 0
+        for week in self.__leagueModel.getWeeks():
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == self.__teamId:
+                    # see if they won as team A
+                    if matchup.getTeamAScore() > matchup.getTeamBScore():
+                        wins += 1
+                elif matchup.getTeamB().getTeamId() == self.__teamId:
+                    # see if they won as team B
+                    if matchup.getTeamBScore() > matchup.getTeamAScore():
+                        wins += 1
+        return wins
+
     def getLosses(self):
         """
         Returns as an int the number of losses the team with self.__teamId has in this league.

@@ -29,6 +29,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         team1 = leagueModelNavigator.getTeamById(leagueModel, 1)
         self.assertEqual("team1", team1.getTeamName())
         self.assertEqual(1, team1.getTeamId())
+        self.assertRaises(Exception, leagueModelNavigator.getTeamById, leagueModel, 7)
 
 
 
