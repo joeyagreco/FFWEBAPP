@@ -57,6 +57,9 @@
                     <th>Min Score</th>
                     <th>STDEV</th>
                     <th>AWAL</th>
+                    <th>Raw Team Score</th>
+                    <th>Raw Team Success</th>
+                    <th>Raw Team Luck</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,6 +76,9 @@
                     <td>{{teamStats.getMinScore()}}</td>
                     <td>{{teamStats.getStddev()}}</td>
                     <td>{{teamStats.getAwal()}}</td>
+                    <td>{{teamStats.getRawTeamScore()}}</td>
+                    <td>{{teamStats.getRawTeamSuccess()}}</td>
+                    <td>{{teamStats.getRawTeamLuck()}}</td>
                 </tr>
                 {% endfor %}
                 </tbody>

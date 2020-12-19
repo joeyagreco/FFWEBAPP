@@ -91,6 +91,11 @@ class StatCalculatorService:
             minScore = scoresCalculator.getMinScoreVsTeam(opponentTeamId)
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwalVsTeam(opponentTeamId)
+            wal = awalCalculator.getWal()
+            sslCalculator = SslCalculator(awal, wal, ppg, maxScore, minScore)
+            rawTeamScore = sslCalculator.getRawTeamScore()
+            rawTeamSuccess = sslCalculator.getRawTeamSuccess()
+            rawTeamLuck = sslCalculator.getRawTeamLuck()
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
                                                         teamName=teamName,
                                                         wins=wins,
@@ -102,7 +107,10 @@ class StatCalculatorService:
                                                         stddev=stddev,
                                                         maxScore=maxScore,
                                                         minScore=minScore,
-                                                        awal=awal)
+                                                        awal=awal,
+                                                        rawTeamScore=rawTeamScore,
+                                                        rawTeamSuccess=rawTeamSuccess,
+                                                        rawTeamLuck=rawTeamLuck)
             statsModels.append(headToHeadStatsModel)
         return statsModels
 

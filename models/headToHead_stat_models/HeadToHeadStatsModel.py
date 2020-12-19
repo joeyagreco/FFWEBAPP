@@ -13,6 +13,9 @@ class HeadToHeadStatsModel:
         self.__maxScore = stats["maxScore"]
         self.__minScore = stats["minScore"]
         self.__awal = stats["awal"]
+        self.__rawTeamScore = stats["rawTeamScore"]
+        self.__rawTeamSuccess = stats["rawTeamSuccess"]
+        self.__rawTeamLuck = stats["rawTeamLuck"]
 
     def getTeamId(self):
         return self.__teamId
@@ -49,6 +52,15 @@ class HeadToHeadStatsModel:
 
     def getAwal(self):
         return self.__awal
+
+    def getRawTeamScore(self):
+        return self.__rawTeamScore
+
+    def getRawTeamSuccess(self):
+        return self.__rawTeamSuccess
+
+    def getRawTeamLuck(self):
+        return self.__rawTeamLuck
 
 
 
