@@ -82,9 +82,9 @@ class StatCalculatorService:
             losses = recordCalculator.getLossesVsTeam(opponentTeamId)
             ties = recordCalculator.getTiesVsTeam(opponentTeamId)
             winPercentage = recordCalculator.getWinPercentageVsTeam(opponentTeamId)
-            # stats calculated below this line are not correct yet
             ppgCalculator = PpgCalculator(teamId, leagueModel)
-            ppg = ppgCalculator.getPpg()
+            ppg = ppgCalculator.getPpgVsTeam(opponentTeamId)
+            # stats calculated below this line are not correct yet
             scoresCalculator = ScoresCalculator(teamId, leagueModel)
             plusMinus = scoresCalculator.getPlusMinus()
             stddev = scoresCalculator.getStandardDeviation()
