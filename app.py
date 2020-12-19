@@ -288,8 +288,10 @@ def headToHeadStats():
         team1Id = int(team1Id)
         team2Id = int(team2Id)
         leagueModelOrError = mainController.getLeagueModel(leagueId)
-        statsModel = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
-        print(statsModel)
+        statsModelOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
+        if isinstance(statsModelOrError, Error):
+            return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=None, givenTeam2Id=None, error_message=statsModelOrError.errorMessage())
+        print(statsModelOrError)
         return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=team1Id, givenTeam2Id=team2Id)
     return render_template("headToHeadStatsPage.html", league=leagueOrError)
 

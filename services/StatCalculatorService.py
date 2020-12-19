@@ -1,3 +1,4 @@
+from helpers.Error import Error
 from models.league_models.LeagueModel import LeagueModel
 from models.team_stat_models.TeamStatsModel import TeamStatsModel
 from packages.StatCalculators.AwalCalculator import AwalCalculator
@@ -5,9 +6,13 @@ from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
 from packages.StatCalculators.SslCalculator import SslCalculator
+from packages.Verifiers.StatVerifier import StatVerifier
 
 
 class StatCalculatorService:
+
+    def __init__(self):
+        self.__statVerifier = StatVerifier()
 
     def getTeamStats(self, leagueModel: LeagueModel):
         """
@@ -61,7 +66,8 @@ class StatCalculatorService:
         """
         Returns a HeadToHeadStatsModel for the teams with the given IDs.
         """
-
+        if self.__statVerifier.comparingSameHeadToHeadTeam(team1Id, team2Id):
+            return Error("Cannot compare a team to itself.")
         return "stats model"
 
     def getLeagueStats(self):
