@@ -12,7 +12,6 @@ class AwalCalculator:
         self.__wins = wins
         self.__ties = ties
         self.__rounder = Rounder()
-        self.__leagueModelNavigator = LeagueModelNavigator
 
     def getAwal(self):
         """
@@ -56,10 +55,11 @@ class AwalCalculator:
         T = Teams tied
         L = Opponents in league (league size - 1)
         """
+        leagueModelNavigator = LeagueModelNavigator()
         totalAdjustment = 0
         L = self.__leagueModel.getNumberOfTeams() - 1
         for week in self.__leagueModel.getWeeks():
-            if self.__leagueModelNavigator.teamsPlayInWeek(week, self.__teamId, opponentTeamId):
+            if leagueModelNavigator.teamsPlayInWeek(week, self.__teamId, opponentTeamId):
                 # only count weeks where the this team plays the team with opponentTeamId
                 WAL = self.__getTeamOutcomeOfWeek(week)
                 W = self.__getTeamsOutscoredOfWeek(week)
