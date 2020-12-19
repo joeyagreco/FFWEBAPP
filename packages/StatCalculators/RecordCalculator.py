@@ -33,11 +33,11 @@ class RecordCalculator:
         wins = 0
         for week in self.__leagueModel.getWeeks():
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
                     # see if they won as team A
                     if matchup.getTeamAScore() > matchup.getTeamBScore():
                         wins += 1
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
                     # see if they won as team B
                     if matchup.getTeamBScore() > matchup.getTeamAScore():
                         wins += 1

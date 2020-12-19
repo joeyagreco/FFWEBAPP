@@ -74,11 +74,11 @@ class StatCalculatorService:
         teamIds = (team1Id, team2Id)
         statsModels = []
         leagueModelNavigator = LeagueModelNavigator()
-        for teamId in teamIds:
+        for i, teamId in enumerate(teamIds):
             teamName = leagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
-            # stats calculated below this line are not correct yet
             recordCalculator = RecordCalculator(teamId, leagueModel)
-            wins = recordCalculator.getWins()
+            wins = recordCalculator.getWinsVsTeam(teamIds[i-1])
+            # stats calculated below this line are not correct yet
             losses = recordCalculator.getLosses()
             ties = recordCalculator.getTies()
             winPercentage = recordCalculator.getWinPercentage()
