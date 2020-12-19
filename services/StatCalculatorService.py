@@ -1,4 +1,5 @@
 from helpers.Error import Error
+from models.headToHead_stat_models.HeadToHeadStatsModel import HeadToHeadStatsModel
 from models.league_models.LeagueModel import LeagueModel
 from models.team_stat_models.TeamStatsModel import TeamStatsModel
 from packages.StatCalculators.AwalCalculator import AwalCalculator
@@ -64,11 +65,19 @@ class StatCalculatorService:
 
     def getHeadToHeadStats(self, leagueModel: LeagueModel, team1Id: int, team2Id: int):
         """
-        Returns a HeadToHeadStatsModel for the teams with the given IDs.
+        Returns 2 HeadToHeadStatsModels for the teams with the given IDs.
         """
         if self.__statVerifier.comparingSameHeadToHeadTeam(team1Id, team2Id):
             return Error("Cannot compare a team to itself.")
-        return "stats model"
+
+        teamIds = (team1Id, team2Id)
+        statsModels = []
+        for teamId in teamIds:
+            teamName
+            headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
+                                                        )
+            statsModels.append(headToHeadStatsModel)
+        return statsModels
 
     def getLeagueStats(self):
         """
