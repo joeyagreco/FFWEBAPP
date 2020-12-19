@@ -1,4 +1,5 @@
 from helpers.Error import Error
+from helpers.LeagueModelNavigator import LeagueModelNavigator
 from models.headToHead_stat_models.HeadToHeadStatsModel import HeadToHeadStatsModel
 from models.league_models.LeagueModel import LeagueModel
 from models.team_stat_models.TeamStatsModel import TeamStatsModel
@@ -72,10 +73,21 @@ class StatCalculatorService:
 
         teamIds = (team1Id, team2Id)
         statsModels = []
+        leagueModelNavigator = LeagueModelNavigator()
         for teamId in teamIds:
-            teamName
+            teamName = leagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
-                                                        )
+                                                        teamName=teamName,
+                                                        wins=None,
+                                                        losses=None,
+                                                        ties=None,
+                                                        winPercentage=None,
+                                                        ppg=None,
+                                                        plusMinus=None,
+                                                        stddev=None,
+                                                        maxScore=None,
+                                                        minScore=None,
+                                                        awal=None)
             statsModels.append(headToHeadStatsModel)
         return statsModels
 
