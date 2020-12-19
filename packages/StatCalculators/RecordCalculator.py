@@ -85,11 +85,28 @@ class RecordCalculator:
         for week in self.__leagueModel.getWeeks():
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
-                    # see if they lost as team A
+                    # see if they tied as team A
                     if matchup.getTeamAScore() == matchup.getTeamBScore():
                         ties += 1
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
-                    # see if they lost as team B
+                    # see if they tied as team B
+                    if matchup.getTeamBScore() == matchup.getTeamAScore():
+                        ties += 1
+        return ties
+
+    def getTiesVsTeam(self, opponentTeamId: int):
+        """
+        Returns as an int the number of ties the team with self.__teamId has against the team with the given ID.
+        """
+        ties = 0
+        for week in self.__leagueModel.getWeeks():
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
+                    # see if they tied as team A
+                    if matchup.getTeamAScore() == matchup.getTeamBScore():
+                        ties += 1
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
+                    # see if they tied as team B
                     if matchup.getTeamBScore() == matchup.getTeamAScore():
                         ties += 1
         return ties
