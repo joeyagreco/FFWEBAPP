@@ -1,3 +1,4 @@
+from helpers.LeagueModelNavigator import LeagueModelNavigator
 from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
 from models.league_models.WeekModel import WeekModel
@@ -11,12 +12,19 @@ class AwalCalculator:
         self.__wins = wins
         self.__ties = ties
         self.__rounder = Rounder()
+        self.__leagueModelNavigator = LeagueModelNavigator
 
     def getAwal(self):
         """
         Returns a float that is the AWAL for the team with self.__teamId
         """
         return self.__rounder.normalRound(self.getAdjustment() + self.getWal(), 2)
+
+    def getAwalVsTeam(self, opponentTeamId: int):
+        """
+        Returns a float that is the AWAL for the team with self.__teamId vs the team with opponentTeamId
+        """
+        return self.__rounder.normalRound(self.getAdjustmentVsTeam(opponentTeamId) + self.getWal(), 2)
 
     def getAdjustment(self):
         """
@@ -38,9 +46,31 @@ class AwalCalculator:
             totalAdjustment += A
         return self.__rounder.normalRound(totalAdjustment, 2)
 
+    def getAdjustmentVsTeam(self, opponentTeamId: int):
+        """
+        Returns a float that is the adjustment [A] for the team with self.__teamId vs the team with opponentTeamId
+        A = W * (1/L) + T * (0.5/L) - WAL
+        Where:
+        WAL = Game outcome (1=win, 0=loss, 0.5=tie)
+        W = Teams outscored
+        T = Teams tied
+        L = Opponents in league (league size - 1)
+        """
+        totalAdjustment = 0
+        L = self.__leagueModel.getNumberOfTeams() - 1
+        for week in self.__leagueModel.getWeeks():
+            if self.__leagueModelNavigator.teamsPlayInWeek(week, self.__teamId, opponentTeamId):
+                # only count weeks where the this team plays the team with opponentTeamId
+                WAL = self.__getTeamOutcomeOfWeek(week)
+                W = self.__getTeamsOutscoredOfWeek(week)
+                T = self.__getTeamsTiedOfWeek(week)
+                A = W * (1 / L) + T * (0.5 / L) - WAL
+                totalAdjustment += A
+        return self.__rounder.normalRound(totalAdjustment, 2)
+
     def getWal(self):
         """
-        Returns the total wins against the league for the team with self.__teamId
+        Returns the total wins against the league for the team with self.__teamId [from class instance variables].
         """
         wal = self.__wins + (0.5 * self.__ties)
         return self.__rounder.normalRound(wal, 2)

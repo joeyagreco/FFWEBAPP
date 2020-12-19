@@ -91,7 +91,7 @@ class StatCalculatorService:
             minScore = scoresCalculator.getMinScoreVsTeam(opponentTeamId)
             # stats calculated below this line are not correct yet
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
-            awal = awalCalculator.getAwal()
+            awal = awalCalculator.getAwalVsTeam(opponentTeamId)
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
                                                         teamName=teamName,
                                                         wins=wins,
