@@ -60,6 +60,23 @@ class RecordCalculator:
                         losses += 1
         return losses
 
+    def getLossesVsTeam(self, opponentTeamId: int):
+        """
+        Returns as an int the number of losses the team with self.__teamId has against the team with the given ID.
+        """
+        losses = 0
+        for week in self.__leagueModel.getWeeks():
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
+                    # see if they lost as team A
+                    if matchup.getTeamAScore() < matchup.getTeamBScore():
+                        losses += 1
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
+                    # see if they lost as team B
+                    if matchup.getTeamBScore() < matchup.getTeamAScore():
+                        losses += 1
+        return losses
+
     def getTies(self):
         """
         Returns as an int the number of ties the team with self.__teamId has in this league.
