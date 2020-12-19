@@ -46,21 +46,13 @@
     order: 2;
 }
 
-.headToHeadTable {
+.statsTable {
     width: 100%;
     height: auto;
     display: flex;
     justify-content: center;
     order: 3;
     background-color: pink;
-}
-
-.statsTable {
-    width: 90%;
-    order: 1;
-    font-size: 120%;
-    border-collapse: collapse;
-    text-align: center;
 }
 
 .statsTable th {
@@ -89,4 +81,12 @@
 
 .statsTable, th, td {
     border: 2px solid black;
+}
+
+.teamsDontPlayDisplay {
+    width: 100%;
+    height: auto;
+    order: 4;
+    text-align: center;
+    background-color: orange;
 }

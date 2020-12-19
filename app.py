@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from controllers.MainController import MainController
 from helpers.Error import Error
+from helpers.LeagueModelNavigator import LeagueModelNavigator
 
 app = Flask(__name__)
 
@@ -286,6 +287,10 @@ def headToHeadStats():
         team1Id = int(team1Id)
         team2Id = int(team2Id)
         leagueModelOrError = mainController.getLeagueModel(leagueId)
+        # check if these teams play each other ever
+        leagueModelNavigator = LeagueModelNavigator()
+        if not leagueModelNavigator.teamsPlayEachOther(leagueModelOrError, team1Id, team2Id):
+            return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=team1Id, givenTeam2Id=team2Id, teams_play=False)
         statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
         if isinstance(statsModelsOrError, Error):
             return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=None, givenTeam2Id=None, error_message=statsModelsOrError.errorMessage())

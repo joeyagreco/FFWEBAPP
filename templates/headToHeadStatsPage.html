@@ -42,8 +42,7 @@
             </div>
         </div>
         <button class="submitMatchupButton" type="button" onclick="getHeadToHeadTable();">Get Matchup Stats</button>
-        {% if givenTeam1Id and givenTeam2Id %}
-        <div class="headToHeadTable">
+        {% if stats_models %}
             <table class="sortable statsTable">
                 <thead>
                 <tr>
@@ -84,7 +83,9 @@
                 {% endfor %}
                 </tbody>
             </table>
-        </div>
+        {% endif %}
+        {% if not teams_play %}
+            <div class="teamsDontPlayDisplay">These Teams Do Not Play Each Other.</div>
         {% endif %}
     </div>
 {% endblock %}
