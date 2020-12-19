@@ -61,6 +61,7 @@ class StatCalculatorService:
         """
         Returns a HeadToHeadStatsModel for the teams with the given IDs.
         """
+
         return "stats model"
 
     def getLeagueStats(self):
