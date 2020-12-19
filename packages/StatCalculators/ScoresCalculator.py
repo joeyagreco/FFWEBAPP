@@ -24,6 +24,19 @@ class ScoresCalculator:
                     scores.append(matchup.getTeamBScore())
         return self.__rounder.normalRound(max(scores), self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 
+    def getMaxScoreVsTeam(self, opponentTeamId: int):
+        """
+        Returns the maximum score the team with the given ID has against the team with opponentTeamId.
+        """
+        scores = []
+        for week in self.__leagueModel.getWeeks():
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
+                    scores.append(matchup.getTeamAScore())
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
+                    scores.append(matchup.getTeamBScore())
+        return self.__rounder.normalRound(max(scores), self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
+
     def getMinScore(self):
         """
         Returns the minimum score the team with the given ID has in the given league.

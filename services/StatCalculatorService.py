@@ -87,8 +87,8 @@ class StatCalculatorService:
             scoresCalculator = ScoresCalculator(teamId, leagueModel)
             plusMinus = scoresCalculator.getPlusMinusVsTeam(opponentTeamId)
             stddev = scoresCalculator.getStandardDeviation()
+            maxScore = scoresCalculator.getMaxScoreVsTeam(opponentTeamId)
             # stats calculated below this line are not correct yet
-            maxScore = scoresCalculator.getMaxScore()
             minScore = scoresCalculator.getMinScore()
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwal()
