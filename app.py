@@ -290,7 +290,7 @@ def headToHeadStats():
         # check if these teams play each other ever
         leagueModelNavigator = LeagueModelNavigator()
         if not leagueModelNavigator.teamsPlayEachOther(leagueModelOrError, team1Id, team2Id):
-            return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=team1Id, givenTeam2Id=team2Id, teams_play=False)
+            return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=team1Id, givenTeam2Id=team2Id, teams_dont_play=True)
         statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
         if isinstance(statsModelsOrError, Error):
             return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=None, givenTeam2Id=None, error_message=statsModelsOrError.errorMessage())
