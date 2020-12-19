@@ -42,6 +42,7 @@
             </div>
         </div>
         <button class="submitMatchupButton" type="button" onclick="getHeadToHeadTable();">Get Matchup Stats</button>
+        {% if givenTeam1Id and givenTeam2Id %}
         <div class="headToHeadTable">
             <table class="sortable statsTable">
                 <thead>
@@ -84,5 +85,6 @@
                 </tbody>
             </table>
         </div>
+        {% endif %}
     </div>
 {% endblock %}

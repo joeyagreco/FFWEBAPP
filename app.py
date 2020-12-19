@@ -289,20 +289,6 @@ def headToHeadStats():
         statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
         if isinstance(statsModelsOrError, Error):
             return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=None, givenTeam2Id=None, error_message=statsModelsOrError.errorMessage())
-        for model in statsModelsOrError:
-            print(f"Team Name: {model.getTeamName()}")
-            print(f"Team Id: {model.getTeamId()}")
-            print(f"Wins: {model.getWins()}")
-            print(f"Losses: {model.getLosses()}")
-            print(f"Ties: {model.getTies()}")
-            print(f"Win %: {model.getWinPercentage()}")
-            print(f"PPG: {model.getPpg()}")
-            print(f"+/-: {model.getPlusMinus()}")
-            print(f"STDDEV: {model.getStddev()}")
-            print(f"Max Score: {model.getMaxScore()}")
-            print(f"Min Score: {model.getMinScore()}")
-            print(f"AWAL: {model.getAwal()}")
-
         return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=team1Id, givenTeam2Id=team2Id, stats_models=statsModelsOrError)
     return render_template("headToHeadStatsPage.html", league=leagueOrError)
 
