@@ -76,18 +76,32 @@ class StatCalculatorService:
         leagueModelNavigator = LeagueModelNavigator()
         for teamId in teamIds:
             teamName = leagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
+            recordCalculator = RecordCalculator(teamId, leagueModel)
+            wins = recordCalculator.getWins()
+            losses = recordCalculator.getLosses()
+            ties = recordCalculator.getTies()
+            winPercentage = recordCalculator.getWinPercentage()
+            ppgCalculator = PpgCalculator(teamId, leagueModel)
+            ppg = ppgCalculator.getPpg()
+            scoresCalculator = ScoresCalculator(teamId, leagueModel)
+            plusMinus = scoresCalculator.getPlusMinus()
+            stddev = scoresCalculator.getStandardDeviation()
+            maxScore = scoresCalculator.getMaxScore()
+            minScore = scoresCalculator.getMinScore()
+            awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
+            awal = awalCalculator.getAwal()
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
                                                         teamName=teamName,
-                                                        wins=None,
-                                                        losses=None,
-                                                        ties=None,
-                                                        winPercentage=None,
-                                                        ppg=None,
-                                                        plusMinus=None,
-                                                        stddev=None,
-                                                        maxScore=None,
-                                                        minScore=None,
-                                                        awal=None)
+                                                        wins=wins,
+                                                        losses=losses,
+                                                        ties=ties,
+                                                        winPercentage=winPercentage,
+                                                        ppg=ppg,
+                                                        plusMinus=plusMinus,
+                                                        stddev=stddev,
+                                                        maxScore=maxScore,
+                                                        minScore=minScore,
+                                                        awal=awal)
             statsModels.append(headToHeadStatsModel)
         return statsModels
 
