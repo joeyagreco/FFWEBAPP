@@ -84,10 +84,10 @@ class StatCalculatorService:
             winPercentage = recordCalculator.getWinPercentageVsTeam(opponentTeamId)
             ppgCalculator = PpgCalculator(teamId, leagueModel)
             ppg = ppgCalculator.getPpgVsTeam(opponentTeamId)
-            # stats calculated below this line are not correct yet
             scoresCalculator = ScoresCalculator(teamId, leagueModel)
             plusMinus = scoresCalculator.getPlusMinusVsTeam(opponentTeamId)
             stddev = scoresCalculator.getStandardDeviation()
+            # stats calculated below this line are not correct yet
             maxScore = scoresCalculator.getMaxScore()
             minScore = scoresCalculator.getMinScore()
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)

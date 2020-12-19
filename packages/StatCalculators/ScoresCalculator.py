@@ -86,3 +86,17 @@ class ScoresCalculator:
                     scores.append(matchup.getTeamBScore())
         standardDeviation = statistics.pstdev(scores)
         return float(self.__rounder.normalRound(standardDeviation, 2))
+
+    def getStandardDeviationVsTeam(self, opponentTeamId: int):
+        """
+        Returns the standard deviation of the scores for the team with the given ID has vs the team with opponentTeamId.
+        """
+        scores = []
+        for week in self.__leagueModel.getWeeks():
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
+                    scores.append(matchup.getTeamAScore())
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
+                    scores.append(matchup.getTeamBScore())
+        standardDeviation = statistics.pstdev(scores)
+        return float(self.__rounder.normalRound(standardDeviation, 2))
