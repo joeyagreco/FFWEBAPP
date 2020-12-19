@@ -22,7 +22,7 @@ class Rounder:
         """
         Returns an int that represents how many decimal places the scores in this league are rounded to.
         Ex: score of 132.55 -> 2, score of 130.10 -> 1
-        Defaults to 1 for return value.
+        Default return value is 1.
         """
 
         maxDecimalPlaces = 1

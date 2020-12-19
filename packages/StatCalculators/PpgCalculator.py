@@ -29,7 +29,7 @@ class PpgCalculator:
 
     def getPpgVsTeam(self, opponentTeamId: int):
         """
-        Returns a float that is the Points Per Game for the team with self.__teamId against the team with the given ID
+        Returns a float that is the Points Per Game for the team with self.__teamId against the team with opponentTeamId
         """
         scores = []
         numberOfWeeks = 0

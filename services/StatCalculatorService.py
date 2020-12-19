@@ -86,7 +86,7 @@ class StatCalculatorService:
             ppg = ppgCalculator.getPpgVsTeam(opponentTeamId)
             # stats calculated below this line are not correct yet
             scoresCalculator = ScoresCalculator(teamId, leagueModel)
-            plusMinus = scoresCalculator.getPlusMinus()
+            plusMinus = scoresCalculator.getPlusMinusVsTeam(opponentTeamId)
             stddev = scoresCalculator.getStandardDeviation()
             maxScore = scoresCalculator.getMaxScore()
             minScore = scoresCalculator.getMinScore()
