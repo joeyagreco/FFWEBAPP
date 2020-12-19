@@ -303,7 +303,7 @@ def headToHeadStats():
             print(f"Min Score: {model.getMinScore()}")
             print(f"AWAL: {model.getAwal()}")
 
-        return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=team1Id, givenTeam2Id=team2Id)
+        return render_template("headToHeadStatsPage.html", league=leagueOrError, givenTeam1Id=team1Id, givenTeam2Id=team2Id, stats_models=statsModelsOrError)
     return render_template("headToHeadStatsPage.html", league=leagueOrError)
 
 
