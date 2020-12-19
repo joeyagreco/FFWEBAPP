@@ -121,3 +121,14 @@ class RecordCalculator:
         totalGames = wins + losses + ties
 
         return self.__rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)
+
+    def getWinPercentageVsTeam(self, opponentTeamId):
+        """
+        Returns as a float the win percentage of the team with self.__teamId vs the team with the given ID
+        """
+        wins = self.getWinsVsTeam(opponentTeamId)
+        losses = self.getLossesVsTeam(opponentTeamId)
+        ties = self.getTiesVsTeam(opponentTeamId)
+        totalGames = wins + losses + ties
+
+        return self.__rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)

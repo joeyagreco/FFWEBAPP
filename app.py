@@ -2,9 +2,7 @@ import os
 
 from flask import Flask, render_template, request, redirect, url_for
 from controllers.MainController import MainController
-from fixtures.LeagueModelFixtureGeneratorDict import LeagueModelFixtureGeneratorDict
 from helpers.Error import Error
-from services.StatCalculatorService import StatCalculatorService
 
 app = Flask(__name__)
 

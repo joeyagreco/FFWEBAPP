@@ -182,7 +182,6 @@ class TestRecordCalculator(unittest.TestCase):
         self.assertEqual(1, tiesTeam2)
         self.assertEqual(0, tiesTeam3)
 
-
     def test_getWinPercentage(self):
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
@@ -214,6 +213,45 @@ class TestRecordCalculator(unittest.TestCase):
         winPercentageTeam4 = RecordCalculator(4, leagueModel).getWinPercentage()
         winPercentageTeam5 = RecordCalculator(5, leagueModel).getWinPercentage()
         winPercentageTeam6 = RecordCalculator(6, leagueModel).getWinPercentage()
+        self.assertIsInstance(winPercentageTeam1, float)
+        self.assertEqual(0.167, winPercentageTeam1)
+        self.assertEqual(0.833, winPercentageTeam2)
+        self.assertEqual(0.333, winPercentageTeam3)
+        self.assertEqual(0.667, winPercentageTeam4)
+        self.assertEqual(0.500, winPercentageTeam5)
+        self.assertEqual(0.500, winPercentageTeam6)
+
+    def test_getWinPercentageVsTeam(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.00)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 104)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100.5, 100.6)
+        matchup2 = MatchupModel(2, team3, team4, 100.1, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 104)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100.5, 100.6)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 104)
+        matchupList = [matchup1, matchup2, matchup3]
+        week3 = WeekModel(3, matchupList)
+        weekList = [week1, week2, week3]
+        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
+        winPercentageTeam1 = RecordCalculator(1, leagueModel).getWinPercentageVsTeam(2)
+        winPercentageTeam2 = RecordCalculator(2, leagueModel).getWinPercentageVsTeam(1)
+        winPercentageTeam3 = RecordCalculator(3, leagueModel).getWinPercentageVsTeam(4)
+        winPercentageTeam4 = RecordCalculator(4, leagueModel).getWinPercentageVsTeam(3)
+        winPercentageTeam5 = RecordCalculator(5, leagueModel).getWinPercentageVsTeam(6)
+        winPercentageTeam6 = RecordCalculator(6, leagueModel).getWinPercentageVsTeam(5)
         self.assertIsInstance(winPercentageTeam1, float)
         self.assertEqual(0.167, winPercentageTeam1)
         self.assertEqual(0.833, winPercentageTeam2)
