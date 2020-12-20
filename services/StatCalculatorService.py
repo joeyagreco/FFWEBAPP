@@ -21,6 +21,7 @@ class StatCalculatorService:
         Returns a list of TeamStatsModels, one for each team in the given league.
         """
         teamStatsModels = []
+        leagueModelNavigator = LeagueModelNavigator()
         for team in leagueModel.getTeams():
             scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel)
             teamId = team.getTeamId()
@@ -40,7 +41,10 @@ class StatCalculatorService:
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwal()
             wal = awalCalculator.getWal()
-            sslCalculator = SslCalculator(awal, wal, ppg, maxScore, minScore)
+            gamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId)
+            # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
+            # this SHOULD not happen, because currently, a team has to play every week
+            sslCalculator = SslCalculator(awal, wal, ppg, maxScore, minScore, gamesPlayed)
             rawTeamScore = sslCalculator.getRawTeamScore()
             rawTeamSuccess = sslCalculator.getRawTeamSuccess()
             rawTeamLuck = sslCalculator.getRawTeamLuck()
@@ -92,7 +96,10 @@ class StatCalculatorService:
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwalVsTeam(opponentTeamId)
             wal = awalCalculator.getWal()
-            sslCalculator = SslCalculator(awal, wal, ppg, maxScore, minScore)
+            gamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId)
+            # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
+            # this SHOULD not happen, because currently, a team has to play every week
+            sslCalculator = SslCalculator(awal, wal, ppg, maxScore, minScore, gamesPlayed)
             rawTeamScore = sslCalculator.getRawTeamScore()
             rawTeamSuccess = sslCalculator.getRawTeamSuccess()
             rawTeamLuck = sslCalculator.getRawTeamLuck()

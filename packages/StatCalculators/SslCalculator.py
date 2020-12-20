@@ -4,22 +4,23 @@ from models.league_models.LeagueModel import LeagueModel
 
 class SslCalculator:
 
-    def __init__(self, awal: float, wal: float, ppg: float, maxScore: float, minScore: float):
+    def __init__(self, awal: float, wal: float, ppg: float, maxScore: float, minScore: float, gamesPlayed: int):
         self.__awal = awal
         self.__wal = wal
         self.__ppg = ppg
         self.__maxScore = maxScore
         self.__minScore = minScore
+        self.__gamesPlayed = gamesPlayed
         self.__rounder = Rounder()
-        self.__awalMultiplier = 50
-        self.__walMultiplier = 50
+        self.__awalMultiplier = 1000
+        self.__walMultiplier = 1000
         self.__ppgMultiplier = 2
 
     def getRawTeamScore(self):
         """
         Returns the Raw Team Score that the team with the given stats has.
         """
-        rawTeamScore = ((self.__awal * self.__awalMultiplier) + (self.__ppg * self.__ppgMultiplier) + (
+        rawTeamScore = (((self.__awal/self.__gamesPlayed) * self.__awalMultiplier) + (self.__ppg * self.__ppgMultiplier) + (
                     self.__maxScore + self.__minScore)) / 10
         return self.__rounder.normalRound(rawTeamScore, 1)
 
@@ -27,7 +28,7 @@ class SslCalculator:
         """
         Returns the Raw Team Success that the team with the given stats has.
         """
-        rawTeamSuccess = ((self.__wal * self.__walMultiplier) + (self.__ppg * self.__ppgMultiplier) + (
+        rawTeamSuccess = (((self.__wal/self.__gamesPlayed) * self.__walMultiplier) + (self.__ppg * self.__ppgMultiplier) + (
                     self.__maxScore + self.__minScore)) / 10
         return self.__rounder.normalRound(rawTeamSuccess, 1)
 

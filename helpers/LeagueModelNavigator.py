@@ -31,3 +31,14 @@ class LeagueModelNavigator:
             if self.teamsPlayInWeek(week, team1Id, team2Id):
                 return True
         return False
+
+    def gamesPlayedByTeam(self, leagueModel: LeagueModel, teamId: int):
+        """
+        Returns as an int the number of games played in the given league by the team with the given ID
+        """
+        gamesPlayed = 0
+        for week in leagueModel.getWeeks():
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == teamId or matchup.getTeamB().getTeamId() == teamId:
+                    gamesPlayed += 1
+        return gamesPlayed
