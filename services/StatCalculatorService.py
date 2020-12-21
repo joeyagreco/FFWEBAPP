@@ -44,7 +44,9 @@ class StatCalculatorService:
             gamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId)
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team has to play every week
-            sslCalculator = SslCalculator(awal, wal, ppg, maxScore, minScore, gamesPlayed)
+            totalTeamPoints = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId)
+            totalLeaguePoints = leagueModelNavigator.totalLeaguePoints(leagueModel)
+            sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
             rawTeamScore = sslCalculator.getRawTeamScore()
             rawTeamSuccess = sslCalculator.getRawTeamSuccess()
             rawTeamLuck = sslCalculator.getRawTeamLuck()
@@ -99,7 +101,9 @@ class StatCalculatorService:
             gamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId)
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team has to play every week
-            sslCalculator = SslCalculator(awal, wal, ppg, maxScore, minScore, gamesPlayed)
+            totalTeamPoints = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId)
+            totalLeaguePoints = leagueModelNavigator.totalLeaguePoints(leagueModel)
+            sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
             rawTeamScore = sslCalculator.getRawTeamScore()
             rawTeamSuccess = sslCalculator.getRawTeamSuccess()
             rawTeamLuck = sslCalculator.getRawTeamLuck()
