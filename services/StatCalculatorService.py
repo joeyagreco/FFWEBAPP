@@ -47,9 +47,9 @@ class StatCalculatorService:
             totalTeamPoints = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId)
             totalLeaguePoints = leagueModelNavigator.totalLeaguePoints(leagueModel)
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
-            rawTeamScore = sslCalculator.getRawTeamScore()
-            rawTeamSuccess = sslCalculator.getRawTeamSuccess()
-            rawTeamLuck = sslCalculator.getRawTeamLuck()
+            teamScore = sslCalculator.getTeamScore()
+            teamSuccess = sslCalculator.getTeamSuccess()
+            teamLuck = sslCalculator.getTeamLuck()
 
             teamModel = TeamStatsModel(teamId=teamId,
                                        teamName=teamName,
@@ -64,9 +64,9 @@ class StatCalculatorService:
                                        maxScore=maxScore,
                                        minScore=minScore,
                                        awal=awal,
-                                       rawTeamScore=rawTeamScore,
-                                       rawTeamSuccess=rawTeamSuccess,
-                                       rawTeamLuck=rawTeamLuck)
+                                       teamScore=teamScore,
+                                       teamSuccess=teamSuccess,
+                                       teamLuck=teamLuck)
             teamStatsModels.append(teamModel)
         return teamStatsModels
 
@@ -104,9 +104,9 @@ class StatCalculatorService:
             totalTeamPoints = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId)
             totalLeaguePoints = leagueModelNavigator.totalLeaguePoints(leagueModel)
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
-            rawTeamScore = sslCalculator.getRawTeamScore()
-            rawTeamSuccess = sslCalculator.getRawTeamSuccess()
-            rawTeamLuck = sslCalculator.getRawTeamLuck()
+            teamScore = sslCalculator.getTeamScore()
+            teamSuccess = sslCalculator.getTeamSuccess()
+            teamLuck = sslCalculator.getTeamLuck()
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
                                                         teamName=teamName,
                                                         wins=wins,
@@ -119,9 +119,9 @@ class StatCalculatorService:
                                                         maxScore=maxScore,
                                                         minScore=minScore,
                                                         awal=awal,
-                                                        rawTeamScore=rawTeamScore,
-                                                        rawTeamSuccess=rawTeamSuccess,
-                                                        rawTeamLuck=rawTeamLuck)
+                                                        teamScore=teamScore,
+                                                        teamSuccess=teamSuccess,
+                                                        teamLuck=teamLuck)
             statsModels.append(headToHeadStatsModel)
         return statsModels
 

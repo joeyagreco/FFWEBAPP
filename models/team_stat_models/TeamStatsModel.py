@@ -14,9 +14,9 @@ class TeamStatsModel:
         self.__maxScore = stats["maxScore"]
         self.__minScore = stats["minScore"]
         self.__awal = stats["awal"]
-        self.__rawTeamScore = stats["rawTeamScore"]
-        self.__rawTeamSuccess = stats["rawTeamSuccess"]
-        self.__rawTeamLuck = stats["rawTeamLuck"]
+        self.__teamScore = stats["teamScore"]
+        self.__teamSuccess = stats["teamSuccess"]
+        self.__teamLuck = stats["teamLuck"]
 
     def getTeamId(self):
         return self.__teamId
@@ -57,14 +57,14 @@ class TeamStatsModel:
     def getAwal(self):
         return self.__awal
 
-    def getRawTeamScore(self):
-        return self.__rawTeamScore
+    def getTeamScore(self):
+        return self.__teamScore
 
-    def getRawTeamSuccess(self):
-        return self.__rawTeamSuccess
+    def getTeamSuccess(self):
+        return self.__teamSuccess
 
-    def getRawTeamLuck(self):
-        return self.__rawTeamLuck
+    def getTeamLuck(self):
+        return self.__teamLuck
 
 
 
