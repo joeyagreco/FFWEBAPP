@@ -270,7 +270,11 @@ def teamStats():
     leagueId = int(request.args.get("league_id"))
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
+    if isinstance(leagueOrError, Error):
+        return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     leagueModelOrError = mainController.getLeagueModel(leagueId)
+    if isinstance(leagueModelOrError, Error):
+        return render_template("teamStatsPage.html", league=leagueOrError, error_message=leagueModelOrError.errorMessage())
     statsModels = mainController.getTeamStatsModel(leagueModelOrError)
     return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels)
 
@@ -282,6 +286,8 @@ def headToHeadStats():
     team2Id = request.args.get("team2")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
+    if isinstance(leagueOrError, Error):
+        return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     if team1Id and team2Id:
         # if the user clicked the button to get matchups for 2 teams
         team1Id = int(team1Id)
