@@ -23,7 +23,17 @@
                         {% if team.teamId == givenTeam1Id %}
                             <option value="{{team.teamId}}" selected>{{team.teamName}}</option>
                         {% else %}
-                            <option value="{{team.teamId}}">{{team.teamName}}</option>
+                            {% if not givenTeam1Id %}
+                                <!--no ids given, exclude ID # 2 from this dropdown by default-->
+                                {% if team.teamId != 2 %}
+                                    <option value="{{team.teamId}}">{{team.teamName}}</option>
+                                {% endif %}
+                            {% else %}
+                                <!--ids given, exclude givenTeam2Id from this dropdown-->
+                                {% if team.teamId != givenTeam2Id %}
+                                    <option value="{{team.teamId}}">{{team.teamName}}</option>
+                                {% endif %}
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </select>
@@ -35,7 +45,17 @@
                         {% if team.teamId == givenTeam2Id %}
                             <option value="{{team.teamId}}" selected>{{team.teamName}}</option>
                         {% else %}
-                            <option value="{{team.teamId}}">{{team.teamName}}</option>
+                            {% if not givenTeam2Id %}
+                                <!--no ids given, exclude ID # 1 from this dropdown by default-->
+                                {% if team.teamId != 1 %}
+                                    <option value="{{team.teamId}}">{{team.teamName}}</option>
+                                {% endif %}
+                            {% else %}
+                                <!--ids given, exclude givenTeam1Id from this dropdown-->
+                                {% if team.teamId != givenTeam1Id %}
+                                    <option value="{{team.teamId}}">{{team.teamName}}</option>
+                                {% endif %}
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </select>

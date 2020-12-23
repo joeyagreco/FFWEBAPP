@@ -74,9 +74,6 @@ class StatCalculatorService:
         """
         Returns 2 HeadToHeadStatsModels for the teams with the given IDs.
         """
-        if self.__statVerifier.comparingSameHeadToHeadTeam(team1Id, team2Id):
-            return Error("Cannot compare a team to itself.")
-
         teamIds = (team1Id, team2Id)
         statsModels = []
         leagueModelNavigator = LeagueModelNavigator()
