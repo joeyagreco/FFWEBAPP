@@ -1,4 +1,3 @@
-from helpers.Error import Error
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from helpers.Rounder import Rounder
 from models.headToHead_stat_models.HeadToHeadStatsModel import HeadToHeadStatsModel
@@ -41,6 +40,7 @@ class StatCalculatorService:
             plusMinus = scoresCalculator.getPlusMinus()
             plusMinusStr = rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
             stddev = scoresCalculator.getStandardDeviation()
+            stddevStr = rounder.keepTrailingZeros(stddev, 2)
             recordCalculator = RecordCalculator(teamId, leagueModel)
             wins = recordCalculator.getWins()
             losses = recordCalculator.getLosses()
@@ -69,7 +69,7 @@ class StatCalculatorService:
                                        ppg=ppgStr,
                                        ppgAgainst=ppgAgainstStr,
                                        plusMinus=plusMinusStr,
-                                       stddev=stddev,
+                                       stddev=stddevStr,
                                        maxScore=maxScoreStr,
                                        minScore=minScoreStr,
                                        awal=awal,
@@ -104,6 +104,7 @@ class StatCalculatorService:
             plusMinus = scoresCalculator.getPlusMinusVsTeam(opponentTeamId)
             plusMinusStr = rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
             stddev = scoresCalculator.getStandardDeviationVsTeam(opponentTeamId)
+            stddevStr = rounder.keepTrailingZeros(stddev, 2)
             maxScore = scoresCalculator.getMaxScoreVsTeam(opponentTeamId)
             maxScoreStr = rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
             minScore = scoresCalculator.getMinScoreVsTeam(opponentTeamId)
@@ -128,7 +129,7 @@ class StatCalculatorService:
                                                         winPercentage=winPercentageStr,
                                                         ppg=ppgStr,
                                                         plusMinus=plusMinusStr,
-                                                        stddev=stddev,
+                                                        stddev=stddevStr,
                                                         maxScore=maxScoreStr,
                                                         minScore=minScoreStr,
                                                         awal=awal,
