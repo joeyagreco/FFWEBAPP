@@ -25,7 +25,9 @@ class PpgCalculator:
         totalPoints = 0
         for score in scores:
             totalPoints += score
-        return self.__rounder.normalRound(totalPoints / numberOfWeeks, self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
+        decimalPlacesRoundedTo = self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
+        return self.__rounder.keepTrailingZeros(
+            self.__rounder.normalRound(totalPoints / numberOfWeeks, decimalPlacesRoundedTo), decimalPlacesRoundedTo)
 
     def getPpgVsTeam(self, opponentTeamId: int):
         """
@@ -44,7 +46,9 @@ class PpgCalculator:
         totalPoints = 0
         for score in scores:
             totalPoints += score
-        return self.__rounder.normalRound(totalPoints / numberOfWeeks, self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
+        decimalPlacesRoundedTo = self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
+        return self.__rounder.keepTrailingZeros(
+            self.__rounder.normalRound(totalPoints / numberOfWeeks, decimalPlacesRoundedTo), decimalPlacesRoundedTo)
 
     def getPpgAgainst(self):
         """
@@ -62,5 +66,7 @@ class PpgCalculator:
         totalPoints = 0
         for score in scores:
             totalPoints += score
-        return self.__rounder.normalRound(totalPoints / numberOfWeeks, self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
-
+        decimalPlacesRoundedTo = self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
+        return self.__rounder.keepTrailingZeros(self.__rounder.normalRound(totalPoints / numberOfWeeks,
+                                                                           decimalPlacesRoundedTo),
+                                                decimalPlacesRoundedTo)
