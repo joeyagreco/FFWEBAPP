@@ -40,7 +40,7 @@ class TestPpgCalculator(unittest.TestCase):
         ppgTeam4 = PpgCalculator(4, leagueModel).getPpg()
         self.assertIsInstance(ppgTeam1, float)
         self.assertEqual(99.33, ppgTeam1)
-        self.assertEqual(100.3, ppgTeam2)
+        self.assertEqual(100.30, ppgTeam2)
         self.assertEqual(0, ppgTeam3)
         self.assertEqual(66.67, ppgTeam4)
 

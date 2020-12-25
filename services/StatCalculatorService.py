@@ -1,5 +1,6 @@
 from helpers.Error import Error
 from helpers.LeagueModelNavigator import LeagueModelNavigator
+from helpers.Rounder import Rounder
 from models.headToHead_stat_models.HeadToHeadStatsModel import HeadToHeadStatsModel
 from models.league_models.LeagueModel import LeagueModel
 from models.team_stat_models.TeamStatsModel import TeamStatsModel
@@ -23,6 +24,8 @@ class StatCalculatorService:
         teamStatsModels = []
         leagueModelNavigator = LeagueModelNavigator()
         for team in leagueModel.getTeams():
+            rounder = Rounder()
+            decimalPlacesRoundedToScores = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel)
             teamId = team.getTeamId()
             teamName = team.getTeamName()
@@ -31,6 +34,8 @@ class StatCalculatorService:
             ppgCalculator = PpgCalculator(teamId, leagueModel)
             ppg = ppgCalculator.getPpg()
             ppgAgainst = ppgCalculator.getPpgAgainst()
+            ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
+            ppgAgainstStr = rounder.keepTrailingZeros(ppgAgainst, decimalPlacesRoundedToScores)
             plusMinus = scoresCalculator.getPlusMinus()
             stddev = scoresCalculator.getStandardDeviation()
             recordCalculator = RecordCalculator(teamId, leagueModel)
@@ -38,6 +43,7 @@ class StatCalculatorService:
             losses = recordCalculator.getLosses()
             ties = recordCalculator.getTies()
             winPercentage = recordCalculator.getWinPercentage()
+            winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwal()
             wal = awalCalculator.getWal()
@@ -56,9 +62,9 @@ class StatCalculatorService:
                                        wins=wins,
                                        losses=losses,
                                        ties=ties,
-                                       winPercentage=winPercentage,
-                                       ppg=ppg,
-                                       ppgAgainst=ppgAgainst,
+                                       winPercentage=winPercentageStr,
+                                       ppg=ppgStr,
+                                       ppgAgainst=ppgAgainstStr,
                                        plusMinus=plusMinus,
                                        stddev=stddev,
                                        maxScore=maxScore,
@@ -78,6 +84,8 @@ class StatCalculatorService:
         statsModels = []
         leagueModelNavigator = LeagueModelNavigator()
         for i, teamId in enumerate(teamIds):
+            rounder = Rounder()
+            decimalPlacesRoundedToScores = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             opponentTeamId = teamIds[i-1]
             teamName = leagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
             recordCalculator = RecordCalculator(teamId, leagueModel)
@@ -85,8 +93,10 @@ class StatCalculatorService:
             losses = recordCalculator.getLossesVsTeam(opponentTeamId)
             ties = recordCalculator.getTiesVsTeam(opponentTeamId)
             winPercentage = recordCalculator.getWinPercentageVsTeam(opponentTeamId)
+            winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
             ppgCalculator = PpgCalculator(teamId, leagueModel)
             ppg = ppgCalculator.getPpgVsTeam(opponentTeamId)
+            ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
             scoresCalculator = ScoresCalculator(teamId, leagueModel)
             plusMinus = scoresCalculator.getPlusMinusVsTeam(opponentTeamId)
             stddev = scoresCalculator.getStandardDeviationVsTeam(opponentTeamId)
@@ -109,8 +119,8 @@ class StatCalculatorService:
                                                         wins=wins,
                                                         losses=losses,
                                                         ties=ties,
-                                                        winPercentage=winPercentage,
-                                                        ppg=ppg,
+                                                        winPercentage=winPercentageStr,
+                                                        ppg=ppgStr,
                                                         plusMinus=plusMinus,
                                                         stddev=stddev,
                                                         maxScore=maxScore,
