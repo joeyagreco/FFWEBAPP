@@ -42,3 +42,18 @@ class Rounder:
                         maxDecimalPlaces = bScoreDecimalLength
         return maxDecimalPlaces
 
+    def keepTrailingZeros(self, number, zeros: int):
+        """
+        This takes in a number and returns a float of that number that has the amount of trailing zeros that is passed in.
+        Note: If zeros is less than 1, it is set to 1 by default
+        """
+        if zeros < 1:
+            zeros = 1
+        strNumber = str(float(number))
+        # add zeros to end of number
+        for x in range(zeros):
+            strNumber += "0"
+        # remove unnecessary zeros from the end
+        splitNumber = strNumber.split(".")
+        splitNumber[1] = splitNumber[1][:zeros]
+        return f"{splitNumber[0]}.{splitNumber[1]}"

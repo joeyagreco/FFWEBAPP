@@ -54,5 +54,21 @@ class TestRounder(unittest.TestCase):
 
         self.assertEqual(2, rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
+    def test_keepTrailingZeros(self):
+        rounder = Rounder()
+        score1 = 100
+        score2 = 100.1
+        score1_0places = rounder.keepTrailingZeros(score1, 0)
+        score1_1place = rounder.keepTrailingZeros(score1, 1)
+        score1_2places = rounder.keepTrailingZeros(score1, 2)
+        score2_0places = rounder.keepTrailingZeros(score2, 0)
+        score2_1place = rounder.keepTrailingZeros(score2, 1)
+        score2_2places = rounder.keepTrailingZeros(score2, 2)
+        self.assertEqual("100.0", score1_0places)
+        self.assertEqual("100.0", score1_1place)
+        self.assertEqual("100.00", score1_2places)
+        self.assertEqual("100.1", score2_0places)
+        self.assertEqual("100.1", score2_1place)
+        self.assertEqual("100.10", score2_2places)
 
 
