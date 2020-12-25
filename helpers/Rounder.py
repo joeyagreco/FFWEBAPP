@@ -45,7 +45,8 @@ class Rounder:
     def keepTrailingZeros(self, number, zeros: int):
         """
         This takes in a number and returns a float of that number that has the amount of trailing zeros that is passed in.
-        Note: If zeros is less than 1, it is set to 1 by default
+        Note: If zeros is less than 1, it is set to 1 by default.
+        Note2: This method DOES NOT round, any extra decimals can and will be cut off to meet zeros length.
         """
         if zeros < 1:
             zeros = 1
