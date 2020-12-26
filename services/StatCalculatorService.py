@@ -81,7 +81,7 @@ class StatCalculatorService:
 
     def getHeadToHeadStats(self, leagueModel: LeagueModel, team1Id: int, team2Id: int):
         """
-        Returns 2 HeadToHeadStatsModels for the teams with the given IDs.
+        Returns 2 HeadToHeadStatsModels in a list for the teams with the given IDs.
         """
         teamIds = (team1Id, team2Id)
         statsModels = []
