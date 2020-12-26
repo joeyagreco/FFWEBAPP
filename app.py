@@ -318,7 +318,7 @@ def leagueStats():
     statOptions = ["All Scores", "Margins of Victory"]
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions)
+    return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions, selected_stat=statSelection)
 
 
 if __name__ == "__main__":

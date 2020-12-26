@@ -17,12 +17,15 @@
 {% block content %}
     <div class="dropdownSelectionAndTable">
         <div class="statsDropdown">
-            <select class="statNameDropdown" name="league_stat" id="league_stat">
+            <select class="statNameDropdown" name="league_stat" id="league_stat" onchange="submitLeagueStat()">
                 {% for stat in stat_options %}
-                    <option value="{{stat}}">{{stat}}</option>
+                    {% if stat == selected_stat %}
+                        <option value="{{stat}}" selected>{{stat}}</option>
+                    {% else %}
+                        <option value="{{stat}}">{{stat}}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>
-        <button class="submitLeagueStatButton" type="button" onclick="submitLeagueStat();">Get League Stats</button>
     </div>
 {% endblock %}
