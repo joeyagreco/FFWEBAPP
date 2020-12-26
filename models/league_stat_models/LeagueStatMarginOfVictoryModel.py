@@ -1,24 +1,27 @@
+from models.league_models.TeamModel import TeamModel
+
+
 class LeagueStatMarginOfVictoryModel:
 
-    def __init__(self, marginOfVictory: float, winningTeamName: str, winningTeamPoints: float, losingTeamName: str, losingTeamPoints: float, week: int):
+    def __init__(self, marginOfVictory: float, winningTeam: TeamModel, winningTeamPoints: float, losingTeam: TeamModel, losingTeamPoints: float, week: int):
         self.__marginOfVictory = marginOfVictory
-        self.__winningTeamName = winningTeamName
+        self.__winningTeam = winningTeam
         self.__winningTeamPoints = winningTeamPoints
-        self.__losingTeamName = losingTeamName
+        self.__losingTeam = losingTeam
         self.__losingTeamPoints = losingTeamPoints
         self.__week = week
 
     def getMarginOfVictory(self):
         return self.__marginOfVictory
 
-    def getWinningTeamName(self):
-        return self.__winningTeamName
+    def getWinningTeam(self):
+        return self.__winningTeam
 
     def getWinningTeamPoints(self):
         return self.__winningTeamPoints
 
-    def getLosingTeamName(self):
-        return self.__losingTeamName
+    def getLosingTeam(self):
+        return self.__losingTeam
 
     def getLosingTeamPoints(self):
         return self.__losingTeamPoints
