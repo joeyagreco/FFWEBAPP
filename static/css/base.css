@@ -85,6 +85,10 @@ body {
     background-color: white;
 }
 
+.navButton:hover {
+    background-color: grey;
+}
+
 .mainButton {
     font-family: 'Russo One', sans-serif;
 }

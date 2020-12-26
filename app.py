@@ -311,6 +311,10 @@ def headToHeadStats():
 
 @app.route("/league-stats", methods=["GET"])
 def leagueStats():
+    leagueId = int(request.args.get("league_id"))
+    category = request.args.get("category")
+    print(leagueId)
+    print(category)
     return "league stats page"
 
 
