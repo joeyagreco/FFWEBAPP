@@ -16,6 +16,12 @@
 
 {% block content %}
     <div class="dropdownAndTable">
-
+        <div class="statsDropdown">
+            <select class="statNameDropdown" name="statName" id="statName">
+                {% for stat in statOptions %}
+                    <option value="{{stat}}">{{stat}}</option>
+                {% endfor %}
+            </select>
+        </div>
     </div>
 {% endblock %}

@@ -315,9 +315,10 @@ def leagueStats():
     category = request.args.get("category")
     print(leagueId)
     print(category)
+    statOptions = ["All Scores", "Margins of Victory"]
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    return render_template("leagueStatsPage.html", league=leagueOrError)
+    return render_template("leagueStatsPage.html", league=leagueOrError, statOptions=statOptions)
 
 
 if __name__ == "__main__":
