@@ -38,17 +38,9 @@
     order: 3;
 }
 
-.submitMatchupButton {
-    width: 10%;
-    height: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    order: 2;
-}
-
 .statsTable {
     width: 90%;
-    order: 3;
+    order: 2;
     font-size: 120%;
     border-collapse: collapse;
     text-align: center;

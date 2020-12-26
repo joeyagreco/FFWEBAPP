@@ -18,7 +18,7 @@
     <div class="selectionsAndTable">
         <div class="teamsAndVs">
             <div class="team1Dropdown">
-                <select class="team1Name" name="team1Id" id="team1Id">
+                <select class="team1Name" name="team1Id" id="team1Id" onchange="getHeadToHeadTable();">
                     {% for team in league.teams %}
                         {% if team.teamId == given_team_1_id %}
                             <option value="{{team.teamId}}" selected>{{team.teamName}}</option>
@@ -40,7 +40,7 @@
             </div>
             <div class="vs">VS</div>
             <div class="team2Dropdown">
-                <select class="team2Name" name="team2Id" id="team2Id">
+                <select class="team2Name" name="team2Id" id="team2Id" onchange="getHeadToHeadTable();">
                     {% for team in league.teams %}
                         {% if team.teamId == given_team_2_id %}
                             <option value="{{team.teamId}}" selected>{{team.teamName}}</option>
@@ -61,7 +61,6 @@
                 </select>
             </div>
         </div>
-        <button class="submitMatchupButton" type="button" onclick="getHeadToHeadTable();">Get Matchup Stats</button>
         {% if stats_models %}
             <table class="sortable statsTable">
                 <thead>
