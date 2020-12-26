@@ -20,17 +20,17 @@
             <div class="team1Dropdown">
                 <select class="team1Name" name="team1Id" id="team1Id">
                     {% for team in league.teams %}
-                        {% if team.teamId == givenTeam1Id %}
+                        {% if team.teamId == given_team_1_id %}
                             <option value="{{team.teamId}}" selected>{{team.teamName}}</option>
                         {% else %}
-                            {% if not givenTeam1Id %}
+                            {% if not given_team_1_id %}
                                 <!--no ids given, exclude ID # 2 from this dropdown by default-->
                                 {% if team.teamId != 2 %}
                                     <option value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% else %}
                                 <!--ids given, exclude givenTeam2Id from this dropdown-->
-                                {% if team.teamId != givenTeam2Id %}
+                                {% if team.teamId != given_team_2_id %}
                                     <option value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endif %}
@@ -42,17 +42,17 @@
             <div class="team2Dropdown">
                 <select class="team2Name" name="team2Id" id="team2Id">
                     {% for team in league.teams %}
-                        {% if team.teamId == givenTeam2Id %}
+                        {% if team.teamId == given_team_2_id %}
                             <option value="{{team.teamId}}" selected>{{team.teamName}}</option>
                         {% else %}
-                            {% if not givenTeam2Id %}
+                            {% if not given_team_2_id %}
                                 <!--no ids given, exclude ID # 1 from this dropdown by default-->
                                 {% if team.teamId != 1 %}
                                     <option value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% else %}
                                 <!--ids given, exclude givenTeam1Id from this dropdown-->
-                                {% if team.teamId != givenTeam1Id %}
+                                {% if team.teamId != given_team_1_id %}
                                     <option value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endif %}
