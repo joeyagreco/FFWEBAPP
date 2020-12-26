@@ -290,23 +290,26 @@ def headToHeadStats():
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     if team1Id and team2Id:
-        # if the user clicked the button to get matchups for 2 teams
+        # if the user submitted this matchup
         team1Id = int(team1Id)
         team2Id = int(team2Id)
-        leagueModelOrError = mainController.getLeagueModel(leagueId)
-        if isinstance(leagueModelOrError, Error):
-            return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=None,
-                                   given_team_2_id=None, error_message=leagueModelOrError.errorMessage())
-        # check if these teams play each other ever
-        leagueModelNavigator = LeagueModelNavigator()
-        if not leagueModelNavigator.teamsPlayEachOther(leagueModelOrError, team1Id, team2Id):
-            return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
-                                   given_team_2_id=team2Id, teams_dont_play=True)
-        # get the stats model
-        statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
+    else:
+        # no submitted matchup, default to first 2 teams
+        team1Id = 1
+        team2Id = 2
+    leagueModelOrError = mainController.getLeagueModel(leagueId)
+    if isinstance(leagueModelOrError, Error):
+        return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=None,
+                               given_team_2_id=None, error_message=leagueModelOrError.errorMessage())
+    # check if these teams play each other ever
+    leagueModelNavigator = LeagueModelNavigator()
+    if not leagueModelNavigator.teamsPlayEachOther(leagueModelOrError, team1Id, team2Id):
         return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
-                               given_team_2_id=team2Id, stats_models=statsModelsOrError)
-    return render_template("headToHeadStatsPage.html", league=leagueOrError)
+                               given_team_2_id=team2Id, teams_dont_play=True)
+    # get the stats model
+    statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
+    return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
+                           given_team_2_id=team2Id, stats_models=statsModelsOrError)
 
 
 @app.route("/league-stats", methods=["GET"])
