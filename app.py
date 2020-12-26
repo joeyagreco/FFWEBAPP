@@ -312,13 +312,13 @@ def headToHeadStats():
 @app.route("/league-stats", methods=["GET"])
 def leagueStats():
     leagueId = int(request.args.get("league_id"))
-    category = request.args.get("category")
+    statSelection = request.args.get("stat_selection")
     print(leagueId)
-    print(category)
+    print(statSelection)
     statOptions = ["All Scores", "Margins of Victory"]
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    return render_template("leagueStatsPage.html", league=leagueOrError, statOptions=statOptions)
+    return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions)
 
 
 if __name__ == "__main__":

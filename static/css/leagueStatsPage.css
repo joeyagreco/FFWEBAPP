@@ -1,5 +1,24 @@
-.dropdownAndTable {
+.dropdownSelectionAndTable {
     width: 100%;
     height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     background-color: blue;
+}
+
+.statsDropdown {
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    order: 1;
+}
+
+.submitLeagueStatButton {
+    width: 5%;
+    height: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    order: 2;
 }

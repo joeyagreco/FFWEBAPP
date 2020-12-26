@@ -15,13 +15,14 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-    <div class="dropdownAndTable">
+    <div class="dropdownSelectionAndTable">
         <div class="statsDropdown">
-            <select class="statNameDropdown" name="statName" id="statName">
-                {% for stat in statOptions %}
+            <select class="statNameDropdown" name="league_stat" id="league_stat">
+                {% for stat in stat_options %}
                     <option value="{{stat}}">{{stat}}</option>
                 {% endfor %}
             </select>
         </div>
+        <button class="submitLeagueStatButton" type="button" onclick="submitLeagueStat();">Get League Stats</button>
     </div>
 {% endblock %}
