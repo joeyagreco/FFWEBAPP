@@ -28,3 +28,8 @@ function headToHeadStatsRedirect() {
     window.location = "/head-to-head-stats?league_id="+leagueId;
 }
 
+function leagueStatsRedirect() {
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/league-stats?league_id="+leagueId;
+}
+
