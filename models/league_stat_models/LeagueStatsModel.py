@@ -1,12 +1,12 @@
 from typing import List
 
-from models.league_stat_models import LeagueStatMarginOfVictoryModel, LeagueStatScoreModel
+from models.league_stat_models import MarginOfVictoryModel, ScoreModel
 
 
 class LeagueStatsModel:
 
-    def __init__(self, allMarginsOfVictory: List[LeagueStatMarginOfVictoryModel],
-                 allScores: List[LeagueStatScoreModel]):
+    def __init__(self, allMarginsOfVictory: List[MarginOfVictoryModel],
+                 allScores: List[ScoreModel]):
         self.__allMarginsOfVictory = allMarginsOfVictory
         self.__allScores = allScores
 
