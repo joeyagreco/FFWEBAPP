@@ -87,9 +87,9 @@ class StatCalculatorService:
         statsModels = []
         leagueModelNavigator = LeagueModelNavigator()
         for i, teamId in enumerate(teamIds):
+            opponentTeamId = teamIds[i - 1]
             rounder = Rounder()
             decimalPlacesRoundedToScores = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-            opponentTeamId = teamIds[i-1]
             teamName = leagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
             recordCalculator = RecordCalculator(teamId, leagueModel)
             wins = recordCalculator.getWinsVsTeam(opponentTeamId)
