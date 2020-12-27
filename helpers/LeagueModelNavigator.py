@@ -1,5 +1,6 @@
 from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
+from models.league_models.MatchupModel import MatchupModel
 from models.league_models.WeekModel import WeekModel
 
 
@@ -69,3 +70,30 @@ class LeagueModelNavigator:
                 elif matchup.getTeamB().getTeamId() == teamId:
                     totalPoints += matchup.getTeamBScore()
         return rounder.normalRound(totalPoints, rounder.getDecimalPlacesRoundedToInScores(leagueModel))
+
+    def getGameOutcomeAsString(self, matchup: MatchupModel, teamId: int):
+        """
+        Returns a string representation [win/loss/tie] of the outcome of the given game for the team with the given ID.
+        Returns None if a team with the given ID does not play in this matchup.
+        """
+        if teamId != matchup.getTeamA().getTeamId() and teamId != matchup.getTeamB().getTeamId():
+            # the given team doesn't play in the given matchup
+            return None
+        if teamId == matchup.getTeamA().getTeamId():
+            # given team is team A
+            isTeamA = True
+        else:
+            # given team is team B
+            isTeamA = False
+        if matchup.getTeamAScore() > matchup.getTeamBScore():
+            if isTeamA:
+                return "win"
+            return "loss"
+        elif matchup.getTeamAScore() < matchup.getTeamBScore():
+            if isTeamA:
+                return "loss"
+            return "win"
+        else:
+            return "tie"
+
+

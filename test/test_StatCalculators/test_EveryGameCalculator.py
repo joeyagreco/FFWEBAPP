@@ -10,7 +10,7 @@ from packages.StatCalculators.EveryGameCalculator import EveryGameCalculator
 
 class TestEveryGameCalculator(unittest.TestCase):
 
-    def test_getMarginOfVictories(self):
+    def test_getAllMarginOfVictories(self):
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
         team3 = TeamModel(3, "team3")
@@ -27,7 +27,7 @@ class TestEveryGameCalculator(unittest.TestCase):
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
 
         everyGameCalculator = EveryGameCalculator(leagueModel)
-        movs = everyGameCalculator.getMarginOfVictories()
+        movs = everyGameCalculator.getAllMarginOfVictories()
         self.assertEqual(1, len(movs))
         self.assertIsInstance(movs[0], MarginOfVictoryModel)
         self.assertEqual(0.5, movs[0].getMarginOfVictory())
