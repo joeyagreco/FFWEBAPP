@@ -12,7 +12,7 @@ class EveryGameCalculator:
         Returns a list of MarginOfVictoryModels.
         """
         models = []
-        for week in self.__leagueModel:
+        for week in self.__leagueModel.getWeeks():
             for matchup in week.getMatchups():
                 if matchup.getTeamAScore() > matchup.getTeamBScore():
                     # team A won
@@ -34,3 +34,5 @@ class EveryGameCalculator:
                     # tie, dont care about this
                     continue
                 model = MarginOfVictoryModel(mov, teamFor, teamForPoints, teamAgainst, teamAgainstPoints, weekNumber)
+                models.append(model)
+        return models
