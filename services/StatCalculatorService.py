@@ -141,6 +141,6 @@ class StatCalculatorService:
 
     def getLeagueStats(self):
         """
-        Returns a LeagueStatsModel for the given league.
+        Returns a model for the given stat for self.__leagueModel.
         """
         return None
