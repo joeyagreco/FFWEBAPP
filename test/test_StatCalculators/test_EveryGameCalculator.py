@@ -4,6 +4,7 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
+from models.league_stat_models.MarginOfVictoryModel import MarginOfVictoryModel
 from packages.StatCalculators.EveryGameCalculator import EveryGameCalculator
 
 
@@ -28,6 +29,7 @@ class TestEveryGameCalculator(unittest.TestCase):
         everyGameCalculator = EveryGameCalculator(leagueModel)
         movs = everyGameCalculator.getMarginOfVictories()
         self.assertEqual(1, len(movs))
+        self.assertIsInstance(movs[0], MarginOfVictoryModel)
         self.assertEqual(0.5, movs[0].getMarginOfVictory())
         self.assertEqual(team2, movs[0].getWinningTeam())
         self.assertEqual(100.5, movs[0].getWinningTeamPoints())
