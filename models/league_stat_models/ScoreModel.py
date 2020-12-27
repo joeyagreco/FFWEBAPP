@@ -1,7 +1,7 @@
 from models.league_models.TeamModel import TeamModel
 
 
-class LeagueStatScoreModel:
+class ScoreModel:
 
     def __init__(self, score: float, teamFor: TeamModel, teamAgainst: TeamModel, outcome: str, week: int):
         self.__score = score

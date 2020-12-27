@@ -1,7 +1,7 @@
 from models.league_models.TeamModel import TeamModel
 
 
-class LeagueStatMarginOfVictoryModel:
+class MarginOfVictoryModel:
 
     def __init__(self, marginOfVictory: float, winningTeam: TeamModel, winningTeamPoints: float, losingTeam: TeamModel, losingTeamPoints: float, week: int):
         self.__marginOfVictory = marginOfVictory

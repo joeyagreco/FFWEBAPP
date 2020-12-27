@@ -1,4 +1,5 @@
 from models.league_models.LeagueModel import LeagueModel
+from models.league_stat_models.MarginOfVictoryModel import MarginOfVictoryModel
 
 
 class EveryGameCalculator:
