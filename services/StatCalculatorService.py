@@ -2,6 +2,8 @@ from helpers.LeagueModelNavigator import LeagueModelNavigator
 from helpers.Rounder import Rounder
 from models.headToHead_stat_models.HeadToHeadStatsModel import HeadToHeadStatsModel
 from models.league_models.LeagueModel import LeagueModel
+from models.league_stat_models.MarginOfVictoryModel import MarginOfVictoryModel
+from models.league_stat_models.ScoreModel import ScoreModel
 from models.team_stat_models.TeamStatsModel import TeamStatsModel
 from packages.StatCalculators.AwalCalculator import AwalCalculator
 from packages.StatCalculators.EveryGameCalculator import EveryGameCalculator
@@ -145,10 +147,38 @@ class StatCalculatorService:
         Returns a model/models for the given stat for self.__leagueModel.
         """
         statOptions = ["All Scores", "Margins of Victory"]
+        rounder = Rounder()
+        decimalPlacesForScores = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         everyGameCalculator = EveryGameCalculator(leagueModel)
         if statSelection not in statOptions:
             return None
         elif statSelection == "All Scores":
-            return everyGameCalculator.getAllScores()
+            allScores = everyGameCalculator.getAllScores()
+            allScoresStr = []
+            for scoreModel in allScores:
+                score = scoreModel.getScore()
+                score = rounder.keepTrailingZeros(score, decimalPlacesForScores)
+                teamFor = scoreModel.getTeamFor()
+                teamAgainst = scoreModel.getTeamAgainst()
+                outcome = scoreModel.getOutcome()
+                weekNumber = scoreModel.getWeek()
+                newModel = ScoreModel(score, teamFor, teamAgainst, outcome, weekNumber)
+                allScoresStr.append(newModel)
+            return allScoresStr
         elif statSelection == "Margins of Victory":
-            return everyGameCalculator.getAllMarginOfVictories()
+            allMovs = everyGameCalculator.getAllMarginOfVictories()
+            allMovsStr = []
+            for movModel in allMovs:
+                mov = movModel.getMarginOfVictory()
+                mov = rounder.keepTrailingZeros(mov, decimalPlacesForScores)
+                teamFor = movModel.getWinningTeam()
+                teamForPoints = movModel.getWinningTeamPoints()
+                teamForPoints = rounder.keepTrailingZeros(teamForPoints, decimalPlacesForScores)
+                teamAgainst = movModel.getLosingTeam()
+                teamAgainstPoints = movModel.getLosingTeamPoints()
+                teamAgainstPoints = rounder.keepTrailingZeros(teamAgainstPoints, decimalPlacesForScores)
+                weekNumber = movModel.getWeek()
+                newModel = MarginOfVictoryModel(mov, teamFor, teamForPoints, teamAgainst, teamAgainstPoints, weekNumber)
+                allMovsStr.append(newModel)
+            return allMovsStr
+

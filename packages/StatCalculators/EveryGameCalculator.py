@@ -50,16 +50,20 @@ class EveryGameCalculator:
         """
         leagueModelNavigator = LeagueModelNavigator()
         models = []
+        rounder = Rounder()
+        decimalPlacesRoundedTo = rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         for week in self.__leagueModel.getWeeks():
             for matchup in week.getMatchups():
                 weekNumber = week.getWeekNumber()
                 # team A score
                 teamAScore = matchup.getTeamAScore()
+                teamAScore = rounder.normalRound(teamAScore, decimalPlacesRoundedTo)
                 teamAFor = matchup.getTeamA()
                 teamAAgainst = matchup.getTeamB()
                 teamAOutcome = leagueModelNavigator.getGameOutcomeAsString(matchup, matchup.getTeamA().getTeamId())
                 # team B score
                 teamBScore = matchup.getTeamBScore()
+                teamBScore = rounder.normalRound(teamBScore, decimalPlacesRoundedTo)
                 teamBFor = matchup.getTeamB()
                 teamBAgainst = matchup.getTeamA()
                 teamBOutcome = leagueModelNavigator.getGameOutcomeAsString(matchup, matchup.getTeamB().getTeamId())
