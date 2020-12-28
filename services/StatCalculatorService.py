@@ -4,6 +4,7 @@ from models.headToHead_stat_models.HeadToHeadStatsModel import HeadToHeadStatsMo
 from models.league_models.LeagueModel import LeagueModel
 from models.team_stat_models.TeamStatsModel import TeamStatsModel
 from packages.StatCalculators.AwalCalculator import AwalCalculator
+from packages.StatCalculators.EveryGameCalculator import EveryGameCalculator
 from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
@@ -143,4 +144,11 @@ class StatCalculatorService:
         """
         Returns a model for the given stat for self.__leagueModel.
         """
-        return None
+        statOptions = ["All Scores", "Margins of Victory"]
+        everyGameCalculator = EveryGameCalculator(leagueModel)
+        if statSelection not in statOptions:
+            return None
+        elif statSelection == "All Scores":
+            return everyGameCalculator.getAllScores()
+        elif statSelection == "Margins of Victory":
+            return everyGameCalculator.getAllMarginOfVictories()

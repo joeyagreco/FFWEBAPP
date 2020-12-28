@@ -316,13 +316,18 @@ def headToHeadStats():
 def leagueStats():
     leagueId = int(request.args.get("league_id"))
     statSelection = request.args.get("stat_selection")
-    print(leagueId)
-    print(statSelection)
     statOptions = ["All Scores", "Margins of Victory"]
+    if not statSelection:
+        statSelection = statOptions[0]
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    statsModelOrError = mainController.getLeagueStatsModel(leagueOrError, statSelection)
-    return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions, selected_stat=statSelection, stats_model = statsModelOrError)
+    leagueModelOrError = mainController.getLeagueModel(leagueId)
+    statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, statSelection)
+    print(leagueId)
+    print(statSelection)
+    print(statsModelOrError)
+    return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
+                           selected_stat=statSelection, stats_model=statsModelOrError)
 
 
 if __name__ == "__main__":
