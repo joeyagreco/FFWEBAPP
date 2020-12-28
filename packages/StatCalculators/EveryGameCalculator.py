@@ -1,4 +1,5 @@
 from helpers.LeagueModelNavigator import LeagueModelNavigator
+from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
 from models.league_stat_models.MarginOfVictoryModel import MarginOfVictoryModel
 from models.league_stat_models.ScoreModel import ScoreModel
@@ -13,12 +14,15 @@ class EveryGameCalculator:
         """
         Returns a list of MarginOfVictoryModels.
         """
+        rounder = Rounder()
         models = []
+        decimalPlacesRoundedTo = rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         for week in self.__leagueModel.getWeeks():
             for matchup in week.getMatchups():
                 if matchup.getTeamAScore() > matchup.getTeamBScore():
                     # team A won
                     mov = matchup.getTeamAScore() - matchup.getTeamBScore()
+                    mov = rounder.normalRound(mov, decimalPlacesRoundedTo)
                     teamFor = matchup.getTeamA()
                     teamForPoints = matchup.getTeamAScore()
                     teamAgainst = matchup.getTeamB()
@@ -27,6 +31,7 @@ class EveryGameCalculator:
                 elif matchup.getTeamBScore() > matchup.getTeamAScore():
                     # team B won
                     mov = matchup.getTeamBScore() - matchup.getTeamAScore()
+                    mov = rounder.normalRound(mov, decimalPlacesRoundedTo)
                     teamFor = matchup.getTeamB()
                     teamForPoints = matchup.getTeamBScore()
                     teamAgainst = matchup.getTeamA()
