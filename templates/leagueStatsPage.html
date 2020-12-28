@@ -33,9 +33,9 @@
                     <thead>
                         <tr>
                             <th>Score</th>
+                            <th>Outcome</th>
                             <th>Team For</th>
                             <th>Team Against</th>
-                            <th>Outcome</th>
                             <th>Week</th>
                         </tr>
                     </thead>
@@ -43,9 +43,9 @@
                         {% for leagueStat in stats_models %}
                             <tr>
                                 <td>{{leagueStat.getScore()}}</td>
+                                <td>{{leagueStat.getOutcome()}}</td>
                                 <td>{{leagueStat.getTeamFor().getTeamName()}}</td>
                                 <td>{{leagueStat.getTeamAgainst().getTeamName()}}</td>
-                                <td>{{leagueStat.getOutcome()}}</td>
                                 <td>{{leagueStat.getWeek()}}</td>
                             </tr>
                         {% endfor %}

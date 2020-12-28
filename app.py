@@ -323,9 +323,6 @@ def leagueStats():
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
     statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, statSelection)
-    print(leagueId)
-    print(statSelection)
-    print(statsModelOrError)
     return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
                            selected_stat=statSelection, stats_models=statsModelOrError)
 
