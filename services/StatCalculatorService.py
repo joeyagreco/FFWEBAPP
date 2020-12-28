@@ -154,6 +154,8 @@ class StatCalculatorService:
             return None
         elif statSelection == "All Scores":
             allScores = everyGameCalculator.getAllScores()
+            # sort from score high -> low
+            allScores.sort(key=lambda x: x.getScore(), reverse=True)
             allScoresStr = []
             for scoreModel in allScores:
                 score = scoreModel.getScore()
@@ -167,6 +169,8 @@ class StatCalculatorService:
             return allScoresStr
         elif statSelection == "Margins of Victory":
             allMovs = everyGameCalculator.getAllMarginOfVictories()
+            # sort from MOV high -> low
+            allMovs.sort(key=lambda x: x.getMarginOfVictory(), reverse=True)
             allMovsStr = []
             for movModel in allMovs:
                 mov = movModel.getMarginOfVictory()
