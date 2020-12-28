@@ -80,6 +80,8 @@ class StatCalculatorService:
                                        teamSuccess=teamSuccess,
                                        teamLuck=teamLuck)
             teamStatsModels.append(teamModel)
+        # sort from win percentage high -> low
+        teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
         return teamStatsModels
 
     def getHeadToHeadStats(self, leagueModel: LeagueModel, team1Id: int, team2Id: int):
