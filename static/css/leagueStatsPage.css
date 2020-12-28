@@ -16,6 +16,8 @@
 }
 
 .tableContainer {
+    width: 100%;
+    height: 100%;
     order: 2;
     display: flex;
     justify-content: center;
@@ -23,6 +25,7 @@
 
 .statsTable {
     width: 90%;
+    height: 100%;
     order: 1;
     font-size: 120%;
     border-collapse: collapse;
