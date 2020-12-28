@@ -142,7 +142,7 @@ class StatCalculatorService:
 
     def getLeagueStats(self, leagueModel: LeagueModel, statSelection: str):
         """
-        Returns a model for the given stat for self.__leagueModel.
+        Returns a model/models for the given stat for self.__leagueModel.
         """
         statOptions = ["All Scores", "Margins of Victory"]
         everyGameCalculator = EveryGameCalculator(leagueModel)

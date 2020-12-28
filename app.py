@@ -327,7 +327,7 @@ def leagueStats():
     print(statSelection)
     print(statsModelOrError)
     return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
-                           selected_stat=statSelection, stats_model=statsModelOrError)
+                           selected_stat=statSelection, stats_models=statsModelOrError)
 
 
 if __name__ == "__main__":
