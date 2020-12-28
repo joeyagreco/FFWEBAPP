@@ -33,3 +33,6 @@ class MainController:
     def getHeadToHeadStatsModel(self, leagueModel: LeagueModel, team1Id: int, team2Id: int):
         return self.__statCalculatorService.getHeadToHeadStats(leagueModel, team1Id, team2Id)
 
+    def getLeagueStatsModel(self, leagueModel: LeagueModel, statSelection: str):
+        return self.__statCalculatorService.getLeagueStats(leagueModel, statSelection)
+

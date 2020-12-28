@@ -139,7 +139,7 @@ class StatCalculatorService:
             statsModels.append(headToHeadStatsModel)
         return statsModels
 
-    def getLeagueStats(self):
+    def getLeagueStats(self, leagueModel: LeagueModel, statSelection: str):
         """
         Returns a model for the given stat for self.__leagueModel.
         """
