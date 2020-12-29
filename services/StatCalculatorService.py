@@ -132,6 +132,10 @@ class StatCalculatorService:
             teamScore = sslCalculator.getTeamScore()
             teamSuccess = sslCalculator.getTeamSuccess()
             teamLuck = sslCalculator.getTeamLuck()
+            allScores = leagueModelNavigator.getAllScoresOfTeamVsTeam(leagueModel, teamId, opponentTeamId)
+            smartCalculator = SmartCalculator(leagueModel)
+            smartWins = smartCalculator.getSmartWinsOfScores(allScores)
+            smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
                                                         teamName=teamName,
                                                         wins=wins,
@@ -146,7 +150,8 @@ class StatCalculatorService:
                                                         awal=awal,
                                                         teamScore=teamScore,
                                                         teamSuccess=teamSuccess,
-                                                        teamLuck=teamLuck)
+                                                        teamLuck=teamLuck,
+                                                        smartWins=smartWinsStr)
             statsModels.append(headToHeadStatsModel)
         return statsModels
 

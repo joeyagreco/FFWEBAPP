@@ -16,6 +16,7 @@ class HeadToHeadStatsModel:
         self.__teamScore = stats["teamScore"]
         self.__teamSuccess = stats["teamSuccess"]
         self.__teamLuck = stats["teamLuck"]
+        self.__smartWins = stats["smartWins"]
 
     def getTeamId(self):
         return self.__teamId
@@ -61,6 +62,9 @@ class HeadToHeadStatsModel:
 
     def getTeamLuck(self):
         return self.__teamLuck
+
+    def getSmartWins(self):
+        return self.__smartWins
 
 
 
