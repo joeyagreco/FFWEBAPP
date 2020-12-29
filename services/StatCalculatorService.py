@@ -10,6 +10,7 @@ from packages.StatCalculators.EveryGameCalculator import EveryGameCalculator
 from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
+from packages.StatCalculators.SmartCalculator import SmartCalculator
 from packages.StatCalculators.SslCalculator import SslCalculator
 from packages.Verifiers.StatVerifier import StatVerifier
 
@@ -62,6 +63,9 @@ class StatCalculatorService:
             teamScore = sslCalculator.getTeamScore()
             teamSuccess = sslCalculator.getTeamSuccess()
             teamLuck = sslCalculator.getTeamLuck()
+            allScores = leagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId)
+            smartCalculator = SmartCalculator(leagueModel)
+            deservedWins = smartCalculator.getDeservedWinsOfScores(allScores)
 
             teamModel = TeamStatsModel(teamId=teamId,
                                        teamName=teamName,
@@ -78,7 +82,8 @@ class StatCalculatorService:
                                        awal=awal,
                                        teamScore=teamScore,
                                        teamSuccess=teamSuccess,
-                                       teamLuck=teamLuck)
+                                       teamLuck=teamLuck,
+                                       deservedWins=deservedWins)
             teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
         teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
