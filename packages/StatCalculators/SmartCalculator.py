@@ -8,7 +8,7 @@ class SmartCalculator:
     def __init__(self, leagueModel: LeagueModel):
         self.__leagueModel = leagueModel
 
-    def getPercentileOfScore(self, score: float):
+    def getDeservedWinsOfScore(self, score: float):
         """
         Returns the percentile of which this score would rank in self.__leagueModel.
         This is the percentage of games this score would win if it played against every other score.
@@ -33,5 +33,5 @@ class SmartCalculator:
         scoresTied -= 1
         totalScores -= 1
         rawPercentile = (scoresBeat + (scoresTied * 0.5)) / totalScores
-        percentile = rounder.normalRound(rawPercentile, 3) * 100
-        return percentile
+        deservedWins = rounder.normalRound(rawPercentile, 2)
+        return deservedWins
