@@ -114,5 +114,25 @@ class LeagueModelNavigator:
                 allScores.append(scoreB)
         return allScores
 
+    def getAllScoresOfTeam(self, leagueModel: LeagueModel, teamId: int):
+        """
+        Returns as a list of floats all of the scores in the given leagueModel that the team with the given ID had.
+        Note: These scores will be properly rounded.
+        """
+        rounder = Rounder()
+        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
+        allScores = []
+        for week in leagueModel.getWeeks():
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == teamId:
+                    score = matchup.getTeamAScore()
+                    score = rounder.normalRound(score, decimalPlacesToRoundTo)
+                    allScores.append(score)
+                elif matchup.getTeamB().getTeamId() == teamId:
+                    score = matchup.getTeamBScore()
+                    score = rounder.normalRound(score, decimalPlacesToRoundTo)
+                    allScores.append(score)
+        return allScores
+
 
 
