@@ -35,3 +35,13 @@ class SmartCalculator:
         rawPercentile = (scoresBeat + (scoresTied * 0.5)) / totalScores
         deservedWins = rounder.normalRound(rawPercentile, 2)
         return deservedWins
+
+    def getDeservedWinsOfScores(self, scores: list):
+        """
+        Returns a combination of the deserved wins a team with the given scores should have.
+        Note: This assumes that the given scores already exist in self.__leagueModel.
+        """
+        deservedWins = 0
+        for score in scores:
+            deservedWins += self.getDeservedWinsOfScore(score)
+        return deservedWins
