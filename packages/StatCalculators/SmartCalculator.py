@@ -10,8 +10,8 @@ class SmartCalculator:
 
     def getDeservedWinsOfScore(self, score: float):
         """
-        Returns the percentile of which this score would rank in self.__leagueModel.
-        This is the percentage of games this score would win if it played against every other score.
+        Returns [essentially] the percentile of which this score would rank in self.__leagueModel.
+        This is the percentage of games this score would win if it played against every other score [thus, deserved wins].
         Note: This assumes that the given score already exists in self.__leagueModel.
         """
         leagueModelNavigator = LeagueModelNavigator()
