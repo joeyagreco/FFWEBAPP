@@ -9,7 +9,7 @@ from packages.StatCalculators.SmartCalculator import SmartCalculator
 
 class TestSmartCalculator(unittest.TestCase):
 
-    def test_getPercentileOfScore(self):
+    def test_getDeservedWinsOfScore(self):
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
         team3 = TeamModel(3, "team3")
