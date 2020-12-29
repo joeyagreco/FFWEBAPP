@@ -27,6 +27,8 @@ class TestSmartCalculator(unittest.TestCase):
         smartCalculator = SmartCalculator(leagueModel)
         percentile1 = smartCalculator.getPercentileOfScore(100)
         percentile2 = smartCalculator.getPercentileOfScore(105)
+        percentile3 = smartCalculator.getPercentileOfScore(0)
         self.assertIsInstance(percentile1, float)
         self.assertEqual(30, percentile1)
         self.assertEqual(100, percentile2)
+        self.assertEqual(0, percentile3)

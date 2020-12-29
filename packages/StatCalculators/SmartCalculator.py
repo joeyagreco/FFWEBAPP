@@ -33,5 +33,5 @@ class SmartCalculator:
         scoresTied -= 1
         totalScores -= 1
         rawPercentile = (scoresBeat + (scoresTied * 0.5)) / totalScores
-        percentile = rounder.normalRound(rawPercentile, 1) * 100
+        percentile = rounder.normalRound(rawPercentile, 3) * 100
         return percentile
