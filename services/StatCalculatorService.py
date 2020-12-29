@@ -66,6 +66,7 @@ class StatCalculatorService:
             allScores = leagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId)
             smartCalculator = SmartCalculator(leagueModel)
             deservedWins = smartCalculator.getDeservedWinsOfScores(allScores)
+            deservedWinsStr = rounder.keepTrailingZeros(deservedWins, 2)
 
             teamModel = TeamStatsModel(teamId=teamId,
                                        teamName=teamName,
@@ -83,7 +84,7 @@ class StatCalculatorService:
                                        teamScore=teamScore,
                                        teamSuccess=teamSuccess,
                                        teamLuck=teamLuck,
-                                       deservedWins=deservedWins)
+                                       deservedWins=deservedWinsStr)
             teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
         teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)

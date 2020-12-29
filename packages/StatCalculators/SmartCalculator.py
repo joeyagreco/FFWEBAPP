@@ -41,7 +41,10 @@ class SmartCalculator:
         Returns a combination of the deserved wins a team with the given scores should have.
         Note: This assumes that the given scores already exist in self.__leagueModel.
         """
+        rounder = Rounder()
         deservedWins = 0
         for score in scores:
             deservedWins += self.getDeservedWinsOfScore(score)
+        # round to 2 decimal places by default
+        deservedWins = rounder.normalRound(deservedWins, 2)
         return deservedWins
