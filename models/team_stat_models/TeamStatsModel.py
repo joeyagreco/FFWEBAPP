@@ -17,7 +17,7 @@ class TeamStatsModel:
         self.__teamScore = stats["teamScore"]
         self.__teamSuccess = stats["teamSuccess"]
         self.__teamLuck = stats["teamLuck"]
-        self.__deservedWins = stats["deservedWins"]
+        self.__smartWins = stats["smartWins"]
 
     def getTeamId(self):
         return self.__teamId
@@ -67,8 +67,8 @@ class TeamStatsModel:
     def getTeamLuck(self):
         return self.__teamLuck
 
-    def getDeservedWins(self):
-        return self.__deservedWins
+    def getSmartWins(self):
+        return self.__smartWins
 
 
 

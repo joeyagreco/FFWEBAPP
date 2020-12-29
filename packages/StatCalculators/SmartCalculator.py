@@ -8,10 +8,10 @@ class SmartCalculator:
     def __init__(self, leagueModel: LeagueModel):
         self.__leagueModel = leagueModel
 
-    def getDeservedWinsOfScore(self, score: float):
+    def getSmartWinsOfScore(self, score: float):
         """
         Returns [essentially] the percentile of which this score would rank in self.__leagueModel.
-        This is the percentage of games this score would win if it played against every other score [thus, deserved wins].
+        This is the percentage of games this score would win if it played against every other score.
         Note: This assumes that the given score already exists in self.__leagueModel.
         """
         leagueModelNavigator = LeagueModelNavigator()
@@ -33,18 +33,18 @@ class SmartCalculator:
         scoresTied -= 1
         totalScores -= 1
         rawPercentile = (scoresBeat + (scoresTied * 0.5)) / totalScores
-        deservedWins = rounder.normalRound(rawPercentile, 2)
-        return deservedWins
+        smartWins = rounder.normalRound(rawPercentile, 2)
+        return smartWins
 
-    def getDeservedWinsOfScores(self, scores: list):
+    def getSmartWinsOfScores(self, scores: list):
         """
-        Returns a combination of the deserved wins a team with the given scores should have.
+        Returns a combination of the smart wins a team with the given scores should have.
         Note: This assumes that the given scores already exist in self.__leagueModel.
         """
         rounder = Rounder()
-        deservedWins = 0
+        smartWins = 0
         for score in scores:
-            deservedWins += self.getDeservedWinsOfScore(score)
+            smartWins += self.getSmartWinsOfScore(score)
         # round to 2 decimal places by default
-        deservedWins = rounder.normalRound(deservedWins, 2)
-        return deservedWins
+        smartWins = rounder.normalRound(smartWins, 2)
+        return smartWins

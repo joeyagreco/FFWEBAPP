@@ -9,7 +9,7 @@ from packages.StatCalculators.SmartCalculator import SmartCalculator
 
 class TestSmartCalculator(unittest.TestCase):
 
-    def test_getDeservedWinsOfScore(self):
+    def test_getSmartWinsOfScore(self):
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
         team3 = TeamModel(3, "team3")
@@ -25,15 +25,15 @@ class TestSmartCalculator(unittest.TestCase):
         weekList = [week1]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         smartCalculator = SmartCalculator(leagueModel)
-        deservedWins1 = smartCalculator.getDeservedWinsOfScore(100)
-        deservedWins2 = smartCalculator.getDeservedWinsOfScore(105)
-        deservedWins3 = smartCalculator.getDeservedWinsOfScore(0)
-        self.assertIsInstance(deservedWins1, float)
-        self.assertEqual(0.3, deservedWins1)
-        self.assertEqual(1.0, deservedWins2)
-        self.assertEqual(0.0, deservedWins3)
+        smartWins1 = smartCalculator.getSmartWinsOfScore(100)
+        smartWins2 = smartCalculator.getSmartWinsOfScore(105)
+        smartWins3 = smartCalculator.getSmartWinsOfScore(0)
+        self.assertIsInstance(smartWins1, float)
+        self.assertEqual(0.3, smartWins1)
+        self.assertEqual(1.0, smartWins2)
+        self.assertEqual(0.0, smartWins3)
 
-    def test_getDeservedWinsOfScores(self):
+    def test_getSmartWinsOfScores(self):
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
         team3 = TeamModel(3, "team3")
@@ -49,7 +49,7 @@ class TestSmartCalculator(unittest.TestCase):
         weekList = [week1]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         smartCalculator = SmartCalculator(leagueModel)
-        deservedWins1 = smartCalculator.getDeservedWinsOfScore(100)
-        self.assertIsInstance(deservedWins1, float)
-        self.assertEqual(0.3, deservedWins1)
+        smartWins1 = smartCalculator.getSmartWinsOfScores([100])
+        self.assertIsInstance(smartWins1, float)
+        self.assertEqual(0.3, smartWins1)
 
