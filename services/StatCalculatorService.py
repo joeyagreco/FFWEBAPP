@@ -67,6 +67,8 @@ class StatCalculatorService:
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScores(allScores)
             smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
+            smartLuck = smartCalculator.getSmartLuckOfScores(allScores, wal)
+            smartLuckStr = rounder.keepTrailingZeros(smartLuck, 2)
 
             teamModel = TeamStatsModel(teamId=teamId,
                                        teamName=teamName,
@@ -84,7 +86,8 @@ class StatCalculatorService:
                                        teamScore=teamScore,
                                        teamSuccess=teamSuccess,
                                        teamLuck=teamLuck,
-                                       smartWins=smartWinsStr)
+                                       smartWins=smartWinsStr,
+                                       smartLuck=smartLuckStr)
             teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
         teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
@@ -136,6 +139,8 @@ class StatCalculatorService:
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScores(allScores)
             smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
+            smartLuck = smartCalculator.getSmartLuckOfScores(allScores, wal)
+            smartLuckStr = rounder.keepTrailingZeros(smartLuck, 2)
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
                                                         teamName=teamName,
                                                         wins=wins,
@@ -151,7 +156,8 @@ class StatCalculatorService:
                                                         teamScore=teamScore,
                                                         teamSuccess=teamSuccess,
                                                         teamLuck=teamLuck,
-                                                        smartWins=smartWinsStr)
+                                                        smartWins=smartWinsStr,
+                                                        smartLuck=smartLuckStr)
             statsModels.append(headToHeadStatsModel)
         return statsModels
 

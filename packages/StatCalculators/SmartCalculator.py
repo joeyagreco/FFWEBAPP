@@ -38,7 +38,7 @@ class SmartCalculator:
 
     def getSmartWinsOfScores(self, scores: list):
         """
-        Returns a combination of the smart wins a team with the given scores should have.
+        Returns the smart wins a team with the given scores should have.
         Note: This assumes that the given scores already exist in self.__leagueModel.
         """
         rounder = Rounder()
@@ -48,3 +48,12 @@ class SmartCalculator:
         # round to 2 decimal places by default
         smartWins = rounder.normalRound(smartWins, 2)
         return smartWins
+
+    def getSmartLuckOfScores(self, scores: list, wal: float):
+        """
+        Returns the smart luck of a team with the given scores and the given wal.
+        Note: This assumes that the given scores already exist in self.__leagueModel.
+        """
+        rounder = Rounder()
+        smartWins = self.getSmartWinsOfScores(scores)
+        return rounder.normalRound(wal - smartWins, 2)
