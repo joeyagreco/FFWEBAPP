@@ -67,8 +67,8 @@ class StatCalculatorService:
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScores(allScores)
             smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
-            smartLuck = smartCalculator.getSmartLuckOfScores(allScores, wal)
-            smartLuckStr = rounder.keepTrailingZeros(smartLuck, 2)
+            smartWinsAdjustment = smartCalculator.getSmartWinsAdjustmentOfScores(allScores, wal)
+            smartWinsAdjustmentStr = rounder.keepTrailingZeros(smartWinsAdjustment, 2)
 
             teamModel = TeamStatsModel(teamId=teamId,
                                        teamName=teamName,
@@ -87,7 +87,7 @@ class StatCalculatorService:
                                        teamSuccess=teamSuccess,
                                        teamLuck=teamLuck,
                                        smartWins=smartWinsStr,
-                                       smartLuck=smartLuckStr)
+                                       smartWinsAdjustment=smartWinsAdjustmentStr)
             teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
         teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
@@ -139,8 +139,8 @@ class StatCalculatorService:
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScores(allScores)
             smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
-            smartLuck = smartCalculator.getSmartLuckOfScores(allScores, wal)
-            smartLuckStr = rounder.keepTrailingZeros(smartLuck, 2)
+            smartWinsAdjustment = smartCalculator.getSmartWinsAdjustmentOfScores(allScores, wal)
+            smartWinsAdjustmentStr = rounder.keepTrailingZeros(smartWinsAdjustment, 2)
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
                                                         teamName=teamName,
                                                         wins=wins,
@@ -157,7 +157,7 @@ class StatCalculatorService:
                                                         teamSuccess=teamSuccess,
                                                         teamLuck=teamLuck,
                                                         smartWins=smartWinsStr,
-                                                        smartLuck=smartLuckStr)
+                                                        smartWinsAdjustment=smartWinsAdjustmentStr)
             statsModels.append(headToHeadStatsModel)
         return statsModels
 

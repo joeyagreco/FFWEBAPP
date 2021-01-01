@@ -53,7 +53,7 @@ class TestSmartCalculator(unittest.TestCase):
         self.assertIsInstance(smartWins1, float)
         self.assertEqual(0.3, smartWins1)
 
-    def test_getSmartLuckOfScores(self):
+    def test_getSmartWinsAdjustmentOfScores(self):
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
         team3 = TeamModel(3, "team3")
@@ -69,7 +69,7 @@ class TestSmartCalculator(unittest.TestCase):
         weekList = [week1]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         smartCalculator = SmartCalculator(leagueModel)
-        smartLuck1 = smartCalculator.getSmartLuckOfScores([100], 0)
-        self.assertIsInstance(smartLuck1, float)
-        self.assertEqual(-0.3, smartLuck1)
+        swa1 = smartCalculator.getSmartWinsAdjustmentOfScores([100], 0)
+        self.assertIsInstance(swa1, float)
+        self.assertEqual(0.3, swa1)
 
