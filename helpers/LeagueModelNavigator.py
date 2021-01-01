@@ -87,14 +87,14 @@ class LeagueModelNavigator:
             isTeamA = False
         if matchup.getTeamAScore() > matchup.getTeamBScore():
             if isTeamA:
-                return "win"
-            return "loss"
+                return "Win"
+            return "Loss"
         elif matchup.getTeamAScore() < matchup.getTeamBScore():
             if isTeamA:
-                return "loss"
-            return "win"
+                return "Loss"
+            return "Win"
         else:
-            return "tie"
+            return "Tie"
 
     def getAllScoresInLeague(self, leagueModel: LeagueModel):
         """
