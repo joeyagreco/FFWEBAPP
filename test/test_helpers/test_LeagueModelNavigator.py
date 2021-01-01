@@ -153,9 +153,9 @@ class TestLeagueModelNavigator(unittest.TestCase):
         team1Outcome = leagueModelNavigator.getGameOutcomeAsString(matchup1, 1)
         team2Outcome = leagueModelNavigator.getGameOutcomeAsString(matchup1, 2)
         team3Outcome = leagueModelNavigator.getGameOutcomeAsString(matchup2, 3)
-        self.assertEqual("loss", team1Outcome)
-        self.assertEqual("win", team2Outcome)
-        self.assertEqual("tie", team3Outcome)
+        self.assertEqual("Loss", team1Outcome)
+        self.assertEqual("Win", team2Outcome)
+        self.assertEqual("Tie", team3Outcome)
 
     def test_getAllScoresInLeague(self):
         team1 = TeamModel(1, "team1")
