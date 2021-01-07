@@ -14,15 +14,9 @@
 
 {% block content %}
 <div class="buttonStack">
-    <form class="leagueStatsForm">
-        <button class="stackButton" type="button" onclick="leagueStatsRedirect();">League Stats</button>
-    </form>
-    <form class="teamStatsForm">
-        <button class="stackButton" type="button" onclick="teamStatsRedirect();">Team Stats</button>
-    </form>
-    <form class="headToHeadStatsForm">
-        <button class="stackButton" type="button" onclick="headToHeadStatsRedirect();">Head to Head Stats</button>
-    </form>
+    <button class="stackButton" type="button" onclick="leagueStatsRedirect();">League Stats</button>
+    <button class="stackButton" type="button" onclick="teamStatsRedirect();">Team Stats</button>
+    <button class="stackButton" type="button" onclick="headToHeadStatsRedirect();">Head to Head Stats</button>
     <form class="updateLeagueForm" action="/update-league" method="GET">
         <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
         <button class="stackButton" type="submit">Update League</button>

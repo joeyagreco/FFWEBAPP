@@ -4,28 +4,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
     background-color: blue;
-}
-
-.leagueStatsForm {
-    width: 100%;
-    height: 15%;
-    order: 1;
-    text-align: center;
-}
-
-.teamStatsForm {
-    width: 100%;
-    height: 15%;
-    order: 2;
-    text-align: center;
-}
-
-.headToHeadStatsForm {
-    width: 100%;
-    height: 15%;
-    order: 3;
-    text-align: center;
 }
 
 .updateLeagueForm {
@@ -37,8 +17,10 @@
 
 .stackButton {
     width: 10%;
-    height: 100%;
+    height: 20%;
     font-size: 120%;
+    margin-left: 0;
+    margin-right: 0;
     background-color: white;
 }
 
