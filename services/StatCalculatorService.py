@@ -69,6 +69,8 @@ class StatCalculatorService:
             smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
             smartWinsAdjustment = smartCalculator.getSmartWinsAdjustmentOfScores(allScores, wal)
             smartWinsAdjustmentStr = rounder.keepTrailingZeros(smartWinsAdjustment, 2)
+            percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
+            percentageOfLeagueScoringStr = rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
 
             teamModel = TeamStatsModel(teamId=teamId,
                                        teamName=teamName,
@@ -87,7 +89,8 @@ class StatCalculatorService:
                                        teamSuccess=teamSuccess,
                                        teamLuck=teamLuck,
                                        smartWins=smartWinsStr,
-                                       smartWinsAdjustment=smartWinsAdjustmentStr)
+                                       smartWinsAdjustment=smartWinsAdjustmentStr,
+                                       percentageOfLeagueScoring=percentageOfLeagueScoringStr)
             teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
         teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)

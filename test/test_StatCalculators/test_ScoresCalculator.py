@@ -282,4 +282,28 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(0.08, standardDeviationTeam2)
         self.assertEqual(0, standardDeviationTeam3)
 
+    def test_getPercentageOfLeagueScoring(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 100, 100)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 10.01)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        weekList = [week1]
+        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
+        percentageTeam1 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring()
+        percentageTeam2 = ScoresCalculator(2, leagueModel).getPercentageOfLeagueScoring()
+        percentageTeam3 = ScoresCalculator(3, leagueModel).getPercentageOfLeagueScoring()
+        self.assertIsInstance(percentageTeam1, float)
+        self.assertEqual(23.87, percentageTeam1)
+        self.assertEqual(23.87, percentageTeam2)
+        self.assertEqual(0, percentageTeam3)
+
+
 
