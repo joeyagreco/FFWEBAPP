@@ -33,3 +33,8 @@ function leagueStatsRedirect() {
     window.location = "/league-stats?league_id="+leagueId;
 }
 
+function updateLeagueRedirect() {
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/update-league?league_id="+leagueId;
+}
+
