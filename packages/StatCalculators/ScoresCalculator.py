@@ -12,12 +12,20 @@ class ScoresCalculator:
         self.__leagueModel = leagueModel
         self.__rounder = Rounder()
 
-    def getMaxScore(self):
+    def getMaxScore(self, **params: int):
         """
-        Returns the maximum score the team with the given ID has in the given league.
+        Returns the maximum score the team with the given ID has in the given league through the given week.
+        NOTE: If no week is given, the calculation will use all weeks in self.__leagueModel.
         """
+        leagueModelNavigator = LeagueModelNavigator()
+        if "week" not in params:
+            weekNumber = leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel)
+        else:
+            weekNumber = params["week"]
         scores = []
         for week in self.__leagueModel.getWeeks():
+            if week.getWeekNumber() > weekNumber:
+                break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
                     scores.append(matchup.getTeamAScore())
@@ -148,5 +156,5 @@ class ScoresCalculator:
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
                     totalTeamScore += matchup.getTeamBScore()
         rounder = Rounder()
-        percentageOfScoring = rounder.normalRound((totalTeamScore / totalLeagueScore)*100, 2)
+        percentageOfScoring = rounder.normalRound((totalTeamScore / totalLeagueScore) * 100, 2)
         return percentageOfScoring

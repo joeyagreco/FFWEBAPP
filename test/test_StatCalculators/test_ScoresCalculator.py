@@ -17,7 +17,7 @@ class TestScoresCalculator(unittest.TestCase):
         team5 = TeamModel(5, "team5")
         team6 = TeamModel(6, "team6")
         teamList = [team1, team2, team3, team4, team5, team6]
-        matchup1 = MatchupModel(1, team1, team2, 100, 100)
+        matchup1 = MatchupModel(1, team1, team2, 98, 100)
         matchup2 = MatchupModel(2, team3, team4, 0.0, 10)
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
@@ -27,21 +27,22 @@ class TestScoresCalculator(unittest.TestCase):
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
-        matchup1 = MatchupModel(1, team1, team2, 99, 100.2)
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.2)
         matchup2 = MatchupModel(2, team3, team4, 0, 50.01)
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        maxScoreTeam1 = ScoresCalculator(1, leagueModel).getMaxScore()
-        maxScoreTeam2 = ScoresCalculator(2, leagueModel).getMaxScore()
-        maxScoreTeam3 = ScoresCalculator(3, leagueModel).getMaxScore()
-        maxScoreTeam4 = ScoresCalculator(4, leagueModel).getMaxScore()
-        self.assertEqual(100, maxScoreTeam1)
-        self.assertEqual(100.2, maxScoreTeam2)
-        self.assertEqual(0, maxScoreTeam3)
-        self.assertEqual(50.01, maxScoreTeam4)
+        maxScoreTeam1_1 = ScoresCalculator(1, leagueModel).getMaxScore(week=1)
+        maxScoreTeam1_2 = ScoresCalculator(1, leagueModel).getMaxScore(week=2)
+        maxScoreTeam1_3 = ScoresCalculator(1, leagueModel).getMaxScore(week=3)
+        maxScoreTeam1_Default = ScoresCalculator(1, leagueModel).getMaxScore()
+        self.assertEqual(98, maxScoreTeam1_1)
+        self.assertEqual(99, maxScoreTeam1_2)
+        self.assertEqual(100, maxScoreTeam1_3)
+        self.assertEqual(100, maxScoreTeam1_Default)
+
 
     def test_getMaxScoreVsTeam(self):
         team1 = TeamModel(1, "team1")

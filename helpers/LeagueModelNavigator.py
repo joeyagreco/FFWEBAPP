@@ -154,5 +154,11 @@ class LeagueModelNavigator:
                     allScores.append(score)
         return allScores
 
+    def getNumberOfWeeksInLeague(self, leagueModel: LeagueModel):
+        """
+        Returns as an int the number of weeks that are in the given leagueModel.
+        """
+        return len(leagueModel.getWeeks())
+
 
 
