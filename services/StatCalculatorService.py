@@ -37,8 +37,8 @@ class StatCalculatorService:
             minScore = scoresCalculator.getMinScore()
             minScoreStr = rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
             ppgCalculator = PpgCalculator(teamId, leagueModel)
-            # Everything above this has week number kwargs support added
             ppg = ppgCalculator.getPpg()
+            # Everything above this has week number kwargs support added
             ppgAgainst = ppgCalculator.getPpgAgainst()
             ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
             ppgAgainstStr = rounder.keepTrailingZeros(ppgAgainst, decimalPlacesRoundedToScores)
