@@ -37,12 +37,11 @@ class TestScoresCalculator(unittest.TestCase):
         maxScoreTeam1_1 = ScoresCalculator(1, leagueModel).getMaxScore(week=1)
         maxScoreTeam1_2 = ScoresCalculator(1, leagueModel).getMaxScore(week=2)
         maxScoreTeam1_3 = ScoresCalculator(1, leagueModel).getMaxScore(week=3)
-        maxScoreTeam1_Default = ScoresCalculator(1, leagueModel).getMaxScore()
+        maxScoreTeam1_default = ScoresCalculator(1, leagueModel).getMaxScore()
         self.assertEqual(98, maxScoreTeam1_1)
         self.assertEqual(99, maxScoreTeam1_2)
         self.assertEqual(100, maxScoreTeam1_3)
-        self.assertEqual(100, maxScoreTeam1_Default)
-
+        self.assertEqual(100, maxScoreTeam1_default)
 
     def test_getMaxScoreVsTeam(self):
         team1 = TeamModel(1, "team1")
@@ -96,21 +95,21 @@ class TestScoresCalculator(unittest.TestCase):
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
-        matchup1 = MatchupModel(1, team1, team2, 99, 100.2)
+        matchup1 = MatchupModel(1, team1, team2, 98, 100.2)
         matchup2 = MatchupModel(2, team3, team4, 0, 50.01)
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        minScoreTeam1 = ScoresCalculator(1, leagueModel).getMinScore()
-        minScoreTeam2 = ScoresCalculator(2, leagueModel).getMinScore()
-        minScoreTeam3 = ScoresCalculator(3, leagueModel).getMinScore()
-        minScoreTeam4 = ScoresCalculator(4, leagueModel).getMinScore()
-        self.assertEqual(99, minScoreTeam1)
-        self.assertEqual(100, minScoreTeam2)
-        self.assertEqual(0, minScoreTeam3)
-        self.assertEqual(10.01, minScoreTeam4)
+        minScoreTeam1_1 = ScoresCalculator(1, leagueModel).getMinScore(week=1)
+        minScoreTeam1_2 = ScoresCalculator(1, leagueModel).getMinScore(week=2)
+        minScoreTeam1_3 = ScoresCalculator(1, leagueModel).getMinScore(week=3)
+        minScoreTeam1_default = ScoresCalculator(1, leagueModel).getMinScore()
+        self.assertEqual(100, minScoreTeam1_1)
+        self.assertEqual(99, minScoreTeam1_2)
+        self.assertEqual(98, minScoreTeam1_3)
+        self.assertEqual(98, minScoreTeam1_default)
 
     def test_getMinScoreVsTeam(self):
         team1 = TeamModel(1, "team1")
@@ -305,6 +304,3 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(23.87, percentageTeam1)
         self.assertEqual(23.87, percentageTeam2)
         self.assertEqual(0, percentageTeam3)
-
-
-
