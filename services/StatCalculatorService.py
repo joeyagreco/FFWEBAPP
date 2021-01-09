@@ -110,8 +110,8 @@ class StatCalculatorService:
             teamName = leagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
             recordCalculator = RecordCalculator(teamId, leagueModel)
             wins = recordCalculator.getWins(vsTeamIds=[opponentTeamId])
+            losses = recordCalculator.getLosses(vsTeamIds=[opponentTeamId])
             # Stats above this line have vsTeamId kwargs support
-            losses = recordCalculator.getLossesVsTeam(opponentTeamId)
             ties = recordCalculator.getTiesVsTeam(opponentTeamId)
             winPercentage = recordCalculator.getWinPercentageVsTeam(opponentTeamId)
             winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)

@@ -38,36 +38,21 @@ class RecordCalculator:
         """
         Returns as an int the number of losses the team with self.__teamId has in this league.
         WEEK: [int] Gives losses through that week.
+        VSTEAMIDS: [list] Gives losses vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         losses = 0
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
                     # see if they lost as team A
                     if matchup.getTeamAScore() < matchup.getTeamBScore():
                         losses += 1
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
-                    # see if they lost as team B
-                    if matchup.getTeamBScore() < matchup.getTeamAScore():
-                        losses += 1
-        return losses
-
-    def getLossesVsTeam(self, opponentTeamId: int):
-        """
-        Returns as an int the number of losses the team with self.__teamId has against the team with the given ID.
-        """
-        losses = 0
-        for week in self.__leagueModel.getWeeks():
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
-                    # see if they lost as team A
-                    if matchup.getTeamAScore() < matchup.getTeamBScore():
-                        losses += 1
-                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     # see if they lost as team B
                     if matchup.getTeamBScore() < matchup.getTeamAScore():
                         losses += 1
@@ -131,7 +116,7 @@ class RecordCalculator:
         Returns as a float the win percentage of the team with self.__teamId vs the team with the given ID
         """
         wins = self.getWins(vsTeamIds=[opponentTeamId])
-        losses = self.getLossesVsTeam(opponentTeamId)
+        losses = self.getLosses(vsTeamIds=[opponentTeamId])
         ties = self.getTiesVsTeam(opponentTeamId)
         totalGames = wins + losses + ties
 
