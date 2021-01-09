@@ -126,12 +126,21 @@ class TestLeagueModelNavigator(unittest.TestCase):
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
-        weekList = [week1]
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
 
         leagueModelNavigator = LeagueModelNavigator()
-        totalTeam1Points = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, 1)
-        self.assertEqual(100, totalTeam1Points)
+        totalTeamPoints1_1 = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, 1, week=1)
+        totalTeamPoints1_2 = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, 1, week=2)
+        totalTeamPoints1_default = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, 1)
+        self.assertEqual(100, totalTeamPoints1_1)
+        self.assertEqual(200, totalTeamPoints1_2)
+        self.assertEqual(200, totalTeamPoints1_default)
 
     def test_getGameOutcomeAsString(self):
         team1 = TeamModel(1, "team1")

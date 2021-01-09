@@ -57,13 +57,17 @@ class LeagueModelNavigator:
                 totalPoints += matchup.getTeamBScore()
         return rounder.normalRound(totalPoints, rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
-    def totalPointsScoredByTeam(self, leagueModel: LeagueModel, teamId: int):
+    def totalPointsScoredByTeam(self, leagueModel: LeagueModel, teamId: int, **params):
         """
         Returns a float that is the total amount of points scored by the team with the given ID in the given league.
+        WEEK: [int] Gives total points scored through that week.
         """
+        weekNumber = params.pop("week", self.getNumberOfWeeksInLeague(leagueModel))
         rounder = Rounder()
         totalPoints = 0
         for week in leagueModel.getWeeks():
+            if week.getWeekNumber() > weekNumber:
+                break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == teamId:
                     totalPoints += matchup.getTeamAScore()
