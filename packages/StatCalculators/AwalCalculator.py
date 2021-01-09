@@ -13,11 +13,14 @@ class AwalCalculator:
         self.__ties = ties
         self.__rounder = Rounder()
 
-    def getAwal(self):
+    def getAwal(self, **params):
         """
-        Returns a float that is the AWAL for the team with self.__teamId
+        Returns a float that is the AWAL for the team with self.__teamId.
+        WEEK: [int] Gives AWAL through that week.
         """
-        return self.__rounder.normalRound(self.getAdjustment() + self.getWal(), 2)
+        leagueModelNavigator = LeagueModelNavigator()
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        return self.__rounder.normalRound(self.getAdjustment(week=weekNumber) + self.getWal(), 2)
 
     def getAwalVsTeam(self, opponentTeamId: int):
         """
@@ -25,7 +28,7 @@ class AwalCalculator:
         """
         return self.__rounder.normalRound(self.getAdjustmentVsTeam(opponentTeamId) + self.getWal(), 2)
 
-    def getAdjustment(self):
+    def getAdjustment(self, **params):
         """
         Returns a float that is the adjustment [A] for the team with self.__teamId
         A = W * (1/L) + T * (0.5/L) - WAL
@@ -34,10 +37,15 @@ class AwalCalculator:
         W = Teams outscored
         T = Teams tied
         L = Opponents in league (league size - 1)
+        WEEK: [int] Gives AWAL through that week.
         """
+        leagueModelNavigator = LeagueModelNavigator()
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         totalAdjustment = 0
         L = self.__leagueModel.getNumberOfTeams() - 1
         for week in self.__leagueModel.getWeeks():
+            if week.getWeekNumber() > weekNumber:
+                break
             WAL = self.__getTeamOutcomeOfWeek(week)
             W = self.__getTeamsOutscoredOfWeek(week)
             T = self.__getTeamsTiedOfWeek(week)
