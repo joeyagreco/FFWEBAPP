@@ -22,18 +22,23 @@ class TestSmartCalculator(unittest.TestCase):
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
-        weekList = [week1]
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         smartCalculator = SmartCalculator(leagueModel)
-        smartWins1 = smartCalculator.getSmartWinsOfScore(100)
-        smartWins2 = smartCalculator.getSmartWinsOfScore(105)
-        smartWins3 = smartCalculator.getSmartWinsOfScore(0)
+        smartWins1 = smartCalculator.getSmartWinsOfScore(100, week=1)
+        smartWins2 = smartCalculator.getSmartWinsOfScore(100, week=2)
+        smartWinsDefault = smartCalculator.getSmartWinsOfScore(100)
         self.assertIsInstance(smartWins1, float)
         self.assertEqual(0.3, smartWins1)
-        self.assertEqual(1.0, smartWins2)
-        self.assertEqual(0.0, smartWins3)
+        self.assertEqual(0.32, smartWins2)
+        self.assertEqual(0.32, smartWinsDefault)
 
-    def test_getSmartWinsOfScores(self):
+    def test_getSmartWinsOfScoresList(self):
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
         team3 = TeamModel(3, "team3")
@@ -46,12 +51,21 @@ class TestSmartCalculator(unittest.TestCase):
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
-        weekList = [week1]
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         smartCalculator = SmartCalculator(leagueModel)
-        smartWins1 = smartCalculator.getSmartWinsOfScores([100])
+        smartWins1 = smartCalculator.getSmartWinsOfScoresList([100], week=1)
+        smartWins2 = smartCalculator.getSmartWinsOfScoresList([100, 100], week=2)
+        smartWinsDefault = smartCalculator.getSmartWinsOfScoresList([100, 100])
         self.assertIsInstance(smartWins1, float)
         self.assertEqual(0.3, smartWins1)
+        self.assertEqual(0.64, smartWins2)
+        self.assertEqual(0.64, smartWinsDefault)
 
     def test_getSmartWinsAdjustmentOfScores(self):
         team1 = TeamModel(1, "team1")

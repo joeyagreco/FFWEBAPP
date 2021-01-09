@@ -104,15 +104,19 @@ class LeagueModelNavigator:
         else:
             return "Tie"
 
-    def getAllScoresInLeague(self, leagueModel: LeagueModel):
+    def getAllScoresInLeague(self, leagueModel: LeagueModel, **params):
         """
         Returns as a list of floats all of the scores in the given leagueModel.
         Note: These scores will be properly rounded.
+        WEEK: [int] Gives all league scores through that week.
         """
+        weekNumber = params.pop("week", self.getNumberOfWeeksInLeague(leagueModel))
         rounder = Rounder()
         decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         allScores = []
         for week in leagueModel.getWeeks():
+            if week.getWeekNumber() > weekNumber:
+                break
             for matchup in week.getMatchups():
                 scoreA = matchup.getTeamAScore()
                 scoreB = matchup.getTeamBScore()
