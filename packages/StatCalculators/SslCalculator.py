@@ -21,19 +21,19 @@ class SslCalculator:
         """
         Returns the Team Score that the team with the given stats has.
         """
-        rawTeamScore = (((self.__awal / self.__gamesPlayed) * self.__awalMultiplier) + (
+        teamScore = (((self.__awal / self.__gamesPlayed) * self.__awalMultiplier) + (
                     (self.__totalTeamPoints / self.__totalLeaguePoints) * self.__pointsMultiplier) + (
                                 self.__maxScore + self.__minScore)) / 10
-        return self.__rounder.normalRound(rawTeamScore, 1)
+        return self.__rounder.normalRound(teamScore, 1)
 
     def getTeamSuccess(self):
         """
         Returns the Team Success that the team with the given stats has.
         """
-        rawTeamSuccess = (((self.__wal / self.__gamesPlayed) * self.__walMultiplier) + (
+        teamSuccess = (((self.__wal / self.__gamesPlayed) * self.__walMultiplier) + (
                     (self.__totalTeamPoints / self.__totalLeaguePoints) * self.__pointsMultiplier) + (
                                   self.__maxScore + self.__minScore)) / 10
-        return self.__rounder.normalRound(rawTeamSuccess, 1)
+        return self.__rounder.normalRound(teamSuccess, 1)
 
     def getTeamLuck(self):
         """

@@ -56,14 +56,14 @@ class StatCalculatorService:
             wal = awalCalculator.getWal()
             gamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId)
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
-            # this SHOULD not happen, because currently, a team has to play every week
+            # this SHOULD not happen, because currently, a team HAS to play every week
             totalTeamPoints = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId)
             totalLeaguePoints = leagueModelNavigator.totalLeaguePoints(leagueModel)
-            # Everything above this has week number kwargs support added
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
             teamScore = sslCalculator.getTeamScore()
             teamSuccess = sslCalculator.getTeamSuccess()
             teamLuck = sslCalculator.getTeamLuck()
+            # Everything above this has week number kwargs support added
             allScores = leagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId)
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScores(allScores)
