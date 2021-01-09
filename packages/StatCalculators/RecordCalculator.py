@@ -127,13 +127,16 @@ class RecordCalculator:
                         ties += 1
         return ties
 
-    def getWinPercentage(self):
+    def getWinPercentage(self, **params):
         """
-        Returns as a float the win percentage of the team with self.__teamId
+        Returns as a float the win percentage of the team with self.__teamId.
+        WEEK: [int] Gives win percentage through that week.
         """
-        wins = self.getWins()
-        losses = self.getLosses()
-        ties = self.getTies()
+        leagueModelNavigator = LeagueModelNavigator()
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        wins = self.getWins(week=weekNumber)
+        losses = self.getLosses(week=weekNumber)
+        ties = self.getTies(week=weekNumber)
         totalGames = wins + losses + ties
 
         return self.__rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)
