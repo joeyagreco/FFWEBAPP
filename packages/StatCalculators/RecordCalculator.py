@@ -86,23 +86,16 @@ class RecordCalculator:
         """
         Returns as a float the win percentage of the team with self.__teamId.
         WEEK: [int] Gives win percentage through that week.
+        VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
-        wins = self.getWins(week=weekNumber)
-        losses = self.getLosses(week=weekNumber)
-        ties = self.getTies(week=weekNumber)
+        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        wins = self.getWins(week=weekNumber, vsTeamIds=vsTeamIds)
+        losses = self.getLosses(week=weekNumber, vsTeamIds=vsTeamIds)
+        ties = self.getTies(week=weekNumber, vsTeamIds=vsTeamIds)
         totalGames = wins + losses + ties
-
-        return self.__rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)
-
-    def getWinPercentageVsTeam(self, opponentTeamId):
-        """
-        Returns as a float the win percentage of the team with self.__teamId vs the team with the given ID
-        """
-        wins = self.getWins(vsTeamIds=[opponentTeamId])
-        losses = self.getLosses(vsTeamIds=[opponentTeamId])
-        ties = self.getTies(vsTeamIds=[opponentTeamId])
-        totalGames = wins + losses + ties
-
+        # if there are no games played, return 0.0 for win percentage
+        if totalGames == 0:
+            return 0.0
         return self.__rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)

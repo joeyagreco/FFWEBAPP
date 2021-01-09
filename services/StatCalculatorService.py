@@ -112,9 +112,9 @@ class StatCalculatorService:
             wins = recordCalculator.getWins(vsTeamIds=[opponentTeamId])
             losses = recordCalculator.getLosses(vsTeamIds=[opponentTeamId])
             ties = recordCalculator.getTies(vsTeamIds=[opponentTeamId])
-            # Stats above this line have vsTeamId kwargs support
-            winPercentage = recordCalculator.getWinPercentageVsTeam(opponentTeamId)
+            winPercentage = recordCalculator.getWinPercentage(vsTeamIds=[opponentTeamId])
             winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
+            # Stats above this line have vsTeamId kwargs support
             ppgCalculator = PpgCalculator(teamId, leagueModel)
             ppg = ppgCalculator.getPpgVsTeam(opponentTeamId)
             ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
