@@ -17,7 +17,7 @@ class TestRecordCalculator(unittest.TestCase):
         team5 = TeamModel(5, "team5")
         team6 = TeamModel(6, "team6")
         teamList = [team1, team2, team3, team4, team5, team6]
-        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup1 = MatchupModel(1, team1, team2, 101, 100.5)
         matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
@@ -29,16 +29,13 @@ class TestRecordCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        winsTeam1 = RecordCalculator(1, leagueModel).getWins()
-        winsTeam2 = RecordCalculator(2, leagueModel).getWins()
-        winsTeam3 = RecordCalculator(3, leagueModel).getWins()
-        winsTeam4 = RecordCalculator(4, leagueModel).getWins()
-        winsTeam5 = RecordCalculator(5, leagueModel).getWins()
-        winsTeam6 = RecordCalculator(6, leagueModel).getWins()
-        self.assertIsInstance(winsTeam1, int)
-        self.assertEqual(0, winsTeam1)
-        self.assertEqual(1, winsTeam2)
-        self.assertEqual(2, winsTeam6)
+        winsTeam1_1 = RecordCalculator(1, leagueModel).getWins(week=1)
+        winsTeam1_2 = RecordCalculator(1, leagueModel).getWins(week=2)
+        winsTeam1_default = RecordCalculator(1, leagueModel).getWins()
+        self.assertIsInstance(winsTeam1_1, int)
+        self.assertEqual(1, winsTeam1_1)
+        self.assertEqual(1, winsTeam1_2)
+        self.assertEqual(1, winsTeam1_default)
 
     def test_getWinsVsTeam(self):
         team1 = TeamModel(1, "team1")
