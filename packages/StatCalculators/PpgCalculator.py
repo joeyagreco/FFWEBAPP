@@ -16,10 +16,7 @@ class PpgCalculator:
         WEEK: [int] Gives Max Score through that week.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        if "week" not in params:
-            weekNumber = leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel)
-        else:
-            weekNumber = params["week"]
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         scores = []
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:
