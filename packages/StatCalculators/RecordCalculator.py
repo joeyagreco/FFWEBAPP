@@ -62,36 +62,21 @@ class RecordCalculator:
         """
         Returns as an int the number of ties the team with self.__teamId has in this league.
         WEEK: [int] Gives ties through that week.
+        VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         ties = 0
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
                     # see if they tied as team A
                     if matchup.getTeamAScore() == matchup.getTeamBScore():
                         ties += 1
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
-                    # see if they tied as team B
-                    if matchup.getTeamBScore() == matchup.getTeamAScore():
-                        ties += 1
-        return ties
-
-    def getTiesVsTeam(self, opponentTeamId: int):
-        """
-        Returns as an int the number of ties the team with self.__teamId has against the team with the given ID.
-        """
-        ties = 0
-        for week in self.__leagueModel.getWeeks():
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
-                    # see if they tied as team A
-                    if matchup.getTeamAScore() == matchup.getTeamBScore():
-                        ties += 1
-                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     # see if they tied as team B
                     if matchup.getTeamBScore() == matchup.getTeamAScore():
                         ties += 1
@@ -117,7 +102,7 @@ class RecordCalculator:
         """
         wins = self.getWins(vsTeamIds=[opponentTeamId])
         losses = self.getLosses(vsTeamIds=[opponentTeamId])
-        ties = self.getTiesVsTeam(opponentTeamId)
+        ties = self.getTies(vsTeamIds=[opponentTeamId])
         totalGames = wins + losses + ties
 
         return self.__rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)
