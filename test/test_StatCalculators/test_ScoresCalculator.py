@@ -240,14 +240,15 @@ class TestScoresCalculator(unittest.TestCase):
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        standardDeviationTeam1 = ScoresCalculator(1, leagueModel).getStandardDeviation()
-        standardDeviationTeam2 = ScoresCalculator(2, leagueModel).getStandardDeviation()
-        standardDeviationTeam3 = ScoresCalculator(3, leagueModel).getStandardDeviation()
-        standardDeviationTeam4 = ScoresCalculator(4, leagueModel).getStandardDeviation()
-        self.assertIsInstance(standardDeviationTeam1, float)
-        self.assertEqual(0.47, standardDeviationTeam1)
-        self.assertEqual(0.08, standardDeviationTeam2)
-        self.assertEqual(0, standardDeviationTeam3)
+        standardDeviationTeam1_1 = ScoresCalculator(1, leagueModel).getStandardDeviation(week=1)
+        standardDeviationTeam1_2 = ScoresCalculator(1, leagueModel).getStandardDeviation(week=2)
+        standardDeviationTeam1_3 = ScoresCalculator(1, leagueModel).getStandardDeviation(week=3)
+        standardDeviationTeam1_default = ScoresCalculator(1, leagueModel).getStandardDeviation()
+        self.assertIsInstance(standardDeviationTeam1_1, float)
+        self.assertEqual(0, standardDeviationTeam1_1)
+        self.assertEqual(0.5, standardDeviationTeam1_2)
+        self.assertEqual(0.47, standardDeviationTeam1_3)
+        self.assertEqual(0.47, standardDeviationTeam1_default)
 
     def test_getStandardDeviationVsTeam(self):
         team1 = TeamModel(1, "team1")

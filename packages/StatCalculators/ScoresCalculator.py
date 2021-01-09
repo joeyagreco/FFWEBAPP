@@ -48,7 +48,7 @@ class ScoresCalculator:
     def getMinScore(self, **params):
         """
         Returns the minimum score the team with the given ID has in the given league through the given week.
-        WEEK: [int] Gives Max Score through that week.
+        WEEK: [int] Gives Min Score through that week.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
@@ -83,7 +83,7 @@ class ScoresCalculator:
         Returns the +/- for the team with the given ID has in the given league.
         Example: Team abc has scored 100 points and has had 75 points scored against him.
                  Team abc has a +/- of +25.
-        WEEK: [int] Gives Max Score through that week.
+        WEEK: [int] Gives Plus/Minus through that week.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
@@ -121,12 +121,17 @@ class ScoresCalculator:
         return float(self.__rounder.normalRound(totalTeamScore - totalOpponentScore,
                                                 self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)))
 
-    def getStandardDeviation(self):
+    def getStandardDeviation(self, **params):
         """
         Returns the standard deviation of the scores for the team with the given ID has in the given league.
+        WEEK: [int] Gives Standard Deviation through that week.
         """
+        leagueModelNavigator = LeagueModelNavigator()
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         scores = []
         for week in self.__leagueModel.getWeeks():
+            if week.getWeekNumber() > weekNumber:
+                break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
                     scores.append(matchup.getTeamAScore())

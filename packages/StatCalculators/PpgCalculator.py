@@ -13,7 +13,7 @@ class PpgCalculator:
     def getPpg(self, **params):
         """
         Returns a float that is the Points Per Game for the team with the given ID.
-        WEEK: [int] Gives Max Score through that week.
+        WEEK: [int] Gives PPG through that week.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
@@ -55,7 +55,7 @@ class PpgCalculator:
     def getPpgAgainst(self, **params):
         """
         Returns a float that is the Points Per Game against the team with the given ID.
-        WEEK: [int] Gives Max Score through that week.
+        WEEK: [int] Gives PPG Against through that week.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
