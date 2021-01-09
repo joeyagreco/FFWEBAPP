@@ -109,7 +109,8 @@ class StatCalculatorService:
             decimalPlacesRoundedToScores = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             teamName = leagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
             recordCalculator = RecordCalculator(teamId, leagueModel)
-            wins = recordCalculator.getWinsVsTeam(opponentTeamId)
+            wins = recordCalculator.getWins(vsTeamIds=[opponentTeamId])
+            # Stats above this line have vsTeamId kwargs support
             losses = recordCalculator.getLossesVsTeam(opponentTeamId)
             ties = recordCalculator.getTiesVsTeam(opponentTeamId)
             winPercentage = recordCalculator.getWinPercentageVsTeam(opponentTeamId)

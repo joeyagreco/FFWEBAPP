@@ -31,37 +31,17 @@ class TestRecordCalculator(unittest.TestCase):
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         winsTeam1_1 = RecordCalculator(1, leagueModel).getWins(week=1)
         winsTeam1_2 = RecordCalculator(1, leagueModel).getWins(week=2)
+        winsTeam1_vs2 = RecordCalculator(1, leagueModel).getWins(vsTeamIds=[2])
+        winsTeam1_vs3 = RecordCalculator(1, leagueModel).getWins(vsTeamIds=[3])
+        winsTeam1_testAllParams = RecordCalculator(1, leagueModel).getWins(week=2, vsTeamIds=[2])
         winsTeam1_default = RecordCalculator(1, leagueModel).getWins()
         self.assertIsInstance(winsTeam1_1, int)
         self.assertEqual(0, winsTeam1_1)
         self.assertEqual(1, winsTeam1_2)
+        self.assertEqual(1, winsTeam1_vs2)
+        self.assertEqual(0, winsTeam1_vs3)
+        self.assertEqual(1, winsTeam1_testAllParams)
         self.assertEqual(1, winsTeam1_default)
-
-    def test_getWinsVsTeam(self):
-        team1 = TeamModel(1, "team1")
-        team2 = TeamModel(2, "team2")
-        team3 = TeamModel(3, "team3")
-        team4 = TeamModel(4, "team4")
-        team5 = TeamModel(5, "team5")
-        team6 = TeamModel(6, "team6")
-        teamList = [team1, team2, team3, team4, team5, team6]
-        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
-        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
-        matchup3 = MatchupModel(3, team5, team6, 104, 105)
-        matchupList = [matchup1, matchup2, matchup3]
-        week1 = WeekModel(1, matchupList)
-        matchup1 = MatchupModel(1, team1, team2, 100.5, 100.5)
-        matchup2 = MatchupModel(2, team3, team4, 100.1, 100)
-        matchup3 = MatchupModel(3, team5, team6, 104, 105)
-        matchupList = [matchup1, matchup2, matchup3]
-        week2 = WeekModel(2, matchupList)
-        weekList = [week1, week2]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        winsTeam1 = RecordCalculator(1, leagueModel).getWinsVsTeam(2)
-        winsTeam2 = RecordCalculator(2, leagueModel).getWinsVsTeam(1)
-        self.assertIsInstance(winsTeam1, int)
-        self.assertEqual(0, winsTeam1)
-        self.assertEqual(1, winsTeam2)
 
     def test_getLosses(self):
         team1 = TeamModel(1, "team1")

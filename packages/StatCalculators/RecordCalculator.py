@@ -14,36 +14,21 @@ class RecordCalculator:
         """
         Returns as an int the number of wins the team with self.__teamId has in this league.
         WEEK: [int] Gives wins through that week.
+        VSTEAMIDS: [list] Gives wins vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         wins = 0
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
                     # see if they won as team A
                     if matchup.getTeamAScore() > matchup.getTeamBScore():
                         wins += 1
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
-                    # see if they won as team B
-                    if matchup.getTeamBScore() > matchup.getTeamAScore():
-                        wins += 1
-        return wins
-
-    def getWinsVsTeam(self, opponentTeamId: int):
-        """
-        Returns as an int the number of wins the team with self.__teamId has against the team with the given ID.
-        """
-        wins = 0
-        for week in self.__leagueModel.getWeeks():
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
-                    # see if they won as team A
-                    if matchup.getTeamAScore() > matchup.getTeamBScore():
-                        wins += 1
-                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     # see if they won as team B
                     if matchup.getTeamBScore() > matchup.getTeamAScore():
                         wins += 1

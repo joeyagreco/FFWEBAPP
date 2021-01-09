@@ -277,6 +277,30 @@ class TestLeagueModelNavigator(unittest.TestCase):
         self.assertIsInstance(numberOfWeeks, int)
         self.assertEqual(1, numberOfWeeks)
 
+    def test_getAllTeamIdsInLeague(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        weekList = [week1]
+        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
+
+        leagueModelNavigator = LeagueModelNavigator()
+        allTeamIds = leagueModelNavigator.getAllTeamIdsInLeague(leagueModel)
+        allTeamIds_exclude1 = leagueModelNavigator.getAllTeamIdsInLeague(leagueModel, excludeId=1)
+        self.assertIsInstance(allTeamIds, list)
+        self.assertEqual(6, len(allTeamIds))
+        self.assertEqual(5, len(allTeamIds_exclude1))
+        self.assertFalse(1 in allTeamIds_exclude1)
+
 
 
 

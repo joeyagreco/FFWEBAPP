@@ -176,5 +176,16 @@ class LeagueModelNavigator:
         """
         return len(leagueModel.getWeeks())
 
+    def getAllTeamIdsInLeague(self, leagueModel: LeagueModel, **params):
+        """
+        Returns as a list of ints all of the team IDs in the given leagueModel.
+        """
+        excludedId = params.pop("excludeId", None)
+        teamIds = []
+        for team in leagueModel.getTeams():
+            if team.getTeamId() is not excludedId:
+                teamIds.append(team.getTeamId())
+        return teamIds
+
 
 
