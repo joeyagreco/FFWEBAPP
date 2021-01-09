@@ -67,9 +67,9 @@ class StatCalculatorService:
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
             smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
-            # Everything above this has week number kwargs support added
             smartWinsAdjustment = smartCalculator.getSmartWinsAdjustmentOfScores(allScores, wal)
             smartWinsAdjustmentStr = rounder.keepTrailingZeros(smartWinsAdjustment, 2)
+            # Everything above this has week number kwargs support added
             percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
             percentageOfLeagueScoringStr = rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
 

@@ -80,10 +80,19 @@ class TestSmartCalculator(unittest.TestCase):
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
-        weekList = [week1]
+        matchup1 = MatchupModel(1, team1, team2, 100, 99)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         smartCalculator = SmartCalculator(leagueModel)
-        swa1 = smartCalculator.getSmartWinsAdjustmentOfScores([100], 0)
+        swa1 = smartCalculator.getSmartWinsAdjustmentOfScores([100], 0, week=1)
+        swa2 = smartCalculator.getSmartWinsAdjustmentOfScores([100, 100], 1, week=2)
+        swaDefault = smartCalculator.getSmartWinsAdjustmentOfScores([100, 100], 1)
         self.assertIsInstance(swa1, float)
         self.assertEqual(0.3, swa1)
+        self.assertEqual(-0.18, swa2)
+        self.assertEqual(-0.18, swaDefault)
 

@@ -54,11 +54,14 @@ class SmartCalculator:
         smartWins = rounder.normalRound(smartWins, 2)
         return smartWins
 
-    def getSmartWinsAdjustmentOfScores(self, scores: list, wal: float):
+    def getSmartWinsAdjustmentOfScores(self, scores: list, wal: float, **params):
         """
         Returns the smart wins adjustment of a team with the given scores and the given wal.
         Note: This assumes that the given scores already exist in self.__leagueModel.
+        WEEK: [int] Gives smart wins adjustment through that week.
         """
+        leagueModelNavigator = LeagueModelNavigator()
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         rounder = Rounder()
-        smartWins = self.getSmartWinsOfScoresList(scores)
+        smartWins = self.getSmartWinsOfScoresList(scores, week=weekNumber)
         return rounder.normalRound(smartWins - wal, 2)
