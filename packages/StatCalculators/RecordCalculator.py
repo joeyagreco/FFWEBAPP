@@ -130,7 +130,7 @@ class RecordCalculator:
         """
         Returns as a float the win percentage of the team with self.__teamId vs the team with the given ID
         """
-        wins = self.getWinsVsTeam(opponentTeamId)
+        wins = self.getWins(vsTeamIds=[opponentTeamId])
         losses = self.getLossesVsTeam(opponentTeamId)
         ties = self.getTiesVsTeam(opponentTeamId)
         totalGames = wins + losses + ties
