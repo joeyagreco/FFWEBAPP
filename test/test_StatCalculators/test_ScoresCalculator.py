@@ -296,12 +296,17 @@ class TestScoresCalculator(unittest.TestCase):
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
-        weekList = [week1]
+        matchup1 = MatchupModel(1, team1, team2, 101, 100)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 10.01)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        percentageTeam1 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring()
-        percentageTeam2 = ScoresCalculator(2, leagueModel).getPercentageOfLeagueScoring()
-        percentageTeam3 = ScoresCalculator(3, leagueModel).getPercentageOfLeagueScoring()
-        self.assertIsInstance(percentageTeam1, float)
-        self.assertEqual(23.87, percentageTeam1)
-        self.assertEqual(23.87, percentageTeam2)
-        self.assertEqual(0, percentageTeam3)
+        percentageTeam1_1 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(week=1)
+        percentageTeam1_2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(week=2)
+        percentageTeam1_default = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring()
+        self.assertIsInstance(percentageTeam1_1, float)
+        self.assertEqual(23.87, percentageTeam1_1)
+        self.assertEqual(23.96, percentageTeam1_2)
+        self.assertEqual(23.96, percentageTeam1_default)

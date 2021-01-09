@@ -154,14 +154,18 @@ class ScoresCalculator:
         standardDeviation = statistics.pstdev(scores)
         return float(self.__rounder.normalRound(standardDeviation, 2))
 
-    def getPercentageOfLeagueScoring(self):
+    def getPercentageOfLeagueScoring(self, **params):
         """
         Returns as a percentage the amount of total league scoring the team with self.__teamID was responsible for.
+        WEEK: [int] Gives percentage of league scoring through that week.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        totalLeagueScore = leagueModelNavigator.totalLeaguePoints(self.__leagueModel)
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        totalLeagueScore = leagueModelNavigator.totalLeaguePoints(self.__leagueModel, week=weekNumber)
         totalTeamScore = 0
         for week in self.__leagueModel.getWeeks():
+            if week.getWeekNumber() > weekNumber:
+                break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
                     totalTeamScore += matchup.getTeamAScore()
