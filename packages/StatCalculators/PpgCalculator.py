@@ -52,14 +52,17 @@ class PpgCalculator:
         decimalPlacesRoundedTo = self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         return self.__rounder.normalRound(totalPoints / numberOfWeeks, decimalPlacesRoundedTo)
 
-    def getPpgAgainst(self):
+    def getPpgAgainst(self, **params):
         """
         Returns a float that is the Points Per Game against the team with the given ID.
+        WEEK: [int] Gives Max Score through that week.
         """
+        leagueModelNavigator = LeagueModelNavigator()
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         scores = []
-        numberOfWeeks = 0
         for week in self.__leagueModel.getWeeks():
-            numberOfWeeks += 1
+            if week.getWeekNumber() > weekNumber:
+                break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
                     scores.append(matchup.getTeamBScore())
@@ -69,5 +72,5 @@ class PpgCalculator:
         for score in scores:
             totalPoints += score
         decimalPlacesRoundedTo = self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
-        return self.__rounder.normalRound(totalPoints / numberOfWeeks, decimalPlacesRoundedTo)
+        return self.__rounder.normalRound(totalPoints / weekNumber, decimalPlacesRoundedTo)
 
