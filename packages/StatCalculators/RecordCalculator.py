@@ -88,12 +88,17 @@ class RecordCalculator:
                         losses += 1
         return losses
 
-    def getTies(self):
+    def getTies(self, **params):
         """
         Returns as an int the number of ties the team with self.__teamId has in this league.
+        WEEK: [int] Gives ties through that week.
         """
+        leagueModelNavigator = LeagueModelNavigator()
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         ties = 0
         for week in self.__leagueModel.getWeeks():
+            if week.getWeekNumber() > weekNumber:
+                break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
                     # see if they tied as team A
