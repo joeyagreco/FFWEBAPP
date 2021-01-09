@@ -78,15 +78,20 @@ class ScoresCalculator:
         return self.__rounder.normalRound(min(scores),
                                           self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 
-    def getPlusMinus(self):
+    def getPlusMinus(self, **params):
         """
         Returns the +/- for the team with the given ID has in the given league.
         Example: Team abc has scored 100 points and has had 75 points scored against him.
                  Team abc has a +/- of +25.
+        WEEK: [int] Gives Max Score through that week.
         """
+        leagueModelNavigator = LeagueModelNavigator()
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         totalTeamScore = 0
         totalOpponentScore = 0
         for week in self.__leagueModel.getWeeks():
+            if week.getWeekNumber() > weekNumber:
+                break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
                     totalTeamScore += matchup.getTeamAScore()
