@@ -83,16 +83,13 @@ class TestRecordCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        lossesTeam1 = RecordCalculator(1, leagueModel).getLosses()
-        lossesTeam2 = RecordCalculator(2, leagueModel).getLosses()
-        lossesTeam3 = RecordCalculator(3, leagueModel).getLosses()
-        lossesTeam4 = RecordCalculator(4, leagueModel).getLosses()
-        lossesTeam5 = RecordCalculator(5, leagueModel).getLosses()
-        lossesTeam6 = RecordCalculator(6, leagueModel).getLosses()
-        self.assertIsInstance(lossesTeam1, int)
-        self.assertEqual(1, lossesTeam1)
-        self.assertEqual(0, lossesTeam2)
-        self.assertEqual(2, lossesTeam5)
+        lossesTeam1_1 = RecordCalculator(1, leagueModel).getLosses(week=1)
+        lossesTeam1_2 = RecordCalculator(1, leagueModel).getLosses(week=2)
+        lossesTeam1_default = RecordCalculator(1, leagueModel).getLosses()
+        self.assertIsInstance(lossesTeam1_1, int)
+        self.assertEqual(1, lossesTeam1_1)
+        self.assertEqual(1, lossesTeam1_2)
+        self.assertEqual(1, lossesTeam1_default)
 
     def test_getLossesVsTeam(self):
         team1 = TeamModel(1, "team1")

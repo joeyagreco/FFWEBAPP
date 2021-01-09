@@ -49,12 +49,17 @@ class RecordCalculator:
                         wins += 1
         return wins
 
-    def getLosses(self):
+    def getLosses(self, **params):
         """
         Returns as an int the number of losses the team with self.__teamId has in this league.
+        WEEK: [int] Gives losses through that week.
         """
+        leagueModelNavigator = LeagueModelNavigator()
+        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         losses = 0
         for week in self.__leagueModel.getWeeks():
+            if week.getWeekNumber() > weekNumber:
+                break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
                     # see if they lost as team A
