@@ -207,14 +207,24 @@ class TestLeagueModelNavigator(unittest.TestCase):
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
-        weekList = [week1]
+        matchup1 = MatchupModel(1, team1, team2, 101, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-
         leagueModelNavigator = LeagueModelNavigator()
-        allScores1 = leagueModelNavigator.getAllScoresOfTeam(leagueModel, 1)
-        self.assertIsInstance(allScores1, list)
-        self.assertEqual(1, len(allScores1))
-        self.assertEqual(100, allScores1[0])
+        allScores1_1 = leagueModelNavigator.getAllScoresOfTeam(leagueModel, 1, week=1)
+        allScores1_2 = leagueModelNavigator.getAllScoresOfTeam(leagueModel, 1, week=2)
+        allScores1_default = leagueModelNavigator.getAllScoresOfTeam(leagueModel, 1)
+        self.assertIsInstance(allScores1_1, list)
+        self.assertEqual(1, len(allScores1_1))
+        self.assertEqual(2, len(allScores1_2))
+        self.assertEqual(2, len(allScores1_default))
+        self.assertEqual(100, allScores1_1[0])
+        self.assertEqual(101, allScores1_2[1])
+        self.assertEqual(101, allScores1_default[1])
 
     def test_getAllScoresOfTeamVsTeam(self):
         team1 = TeamModel(1, "team1")
