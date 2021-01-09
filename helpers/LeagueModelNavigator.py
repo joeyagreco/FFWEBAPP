@@ -45,13 +45,17 @@ class LeagueModelNavigator:
                     gamesPlayed += 1
         return gamesPlayed
 
-    def totalLeaguePoints(self, leagueModel: LeagueModel):
+    def totalLeaguePoints(self, leagueModel: LeagueModel, **params):
         """
         Returns a float that is the total amount of points scored in the given league.
+        WEEK: [int] Gives total league points scored through that week.
         """
+        weekNumber = params.pop("week", self.getNumberOfWeeksInLeague(leagueModel))
         rounder = Rounder()
         totalPoints = 0
         for week in leagueModel.getWeeks():
+            if week.getWeekNumber() > weekNumber:
+                break
             for matchup in week.getMatchups():
                 totalPoints += matchup.getTeamAScore()
                 totalPoints += matchup.getTeamBScore()
