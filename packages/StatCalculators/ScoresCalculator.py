@@ -16,32 +16,22 @@ class ScoresCalculator:
         """
         Returns the maximum score the team with the given ID has in the given league.
         WEEK: [int] Gives Max Score through that week.
+        VSTEAMIDS: [list] Gives +/- vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         scores = []
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
                     scores.append(matchup.getTeamAScore())
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     scores.append(matchup.getTeamBScore())
-        return self.__rounder.normalRound(max(scores),
-                                          self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
-
-    def getMaxScoreVsTeam(self, opponentTeamId: int):
-        """
-        Returns the maximum score the team with the given ID has against the team with opponentTeamId.
-        """
-        scores = []
-        for week in self.__leagueModel.getWeeks():
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
-                    scores.append(matchup.getTeamAScore())
-                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
-                    scores.append(matchup.getTeamBScore())
+        if not scores:
+            return 0.0
         return self.__rounder.normalRound(max(scores),
                                           self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 
