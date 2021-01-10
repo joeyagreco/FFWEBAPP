@@ -14,43 +14,27 @@ class PpgCalculator:
         """
         Returns a float that is the Points Per Game for the team with the given ID.
         WEEK: [int] Gives PPG through that week.
+        VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
-        scores = []
+        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        points = 0
+        gameCount = 0
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
-                    scores.append(matchup.getTeamAScore())
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
-                    scores.append(matchup.getTeamBScore())
-        totalPoints = 0
-        for score in scores:
-            totalPoints += score
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
+                    points += matchup.getTeamAScore()
+                    gameCount += 1
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
+                    points += matchup.getTeamBScore()
+                    gameCount += 1
+        if gameCount == 0:
+            return 0.0
         decimalPlacesRoundedTo = self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
-        return self.__rounder.normalRound(totalPoints / weekNumber, decimalPlacesRoundedTo)
-
-    def getPpgVsTeam(self, opponentTeamId: int):
-        """
-        Returns a float that is the Points Per Game for the team with self.__teamId against the team with opponentTeamId
-        """
-        scores = []
-        numberOfWeeks = 0
-        for week in self.__leagueModel.getWeeks():
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
-                    scores.append(matchup.getTeamAScore())
-                    numberOfWeeks += 1
-                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
-                    scores.append(matchup.getTeamBScore())
-                    numberOfWeeks += 1
-        totalPoints = 0
-        for score in scores:
-            totalPoints += score
-        decimalPlacesRoundedTo = self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
-        return self.__rounder.normalRound(totalPoints / numberOfWeeks, decimalPlacesRoundedTo)
+        return self.__rounder.normalRound(points / gameCount, decimalPlacesRoundedTo)
 
     def getPpgAgainst(self, **params):
         """

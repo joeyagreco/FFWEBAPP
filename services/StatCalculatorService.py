@@ -116,7 +116,7 @@ class StatCalculatorService:
             winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
             # Stats above this line have vsTeamId kwargs support
             ppgCalculator = PpgCalculator(teamId, leagueModel)
-            ppg = ppgCalculator.getPpgVsTeam(opponentTeamId)
+            ppg = ppgCalculator.getPpg(vsTeamIds=[opponentTeamId])
             ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
             scoresCalculator = ScoresCalculator(teamId, leagueModel)
             plusMinus = scoresCalculator.getPlusMinusVsTeam(opponentTeamId)
