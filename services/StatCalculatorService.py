@@ -128,7 +128,7 @@ class StatCalculatorService:
             minScoreStr = rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
             # Stats above this line have vsTeamId kwargs support
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
-            awal = awalCalculator.getAwalVsTeam(opponentTeamId)
+            awal = awalCalculator.getAwal(vsTeamIds=[opponentTeamId])
             wal = awalCalculator.getWal()
             gamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId)
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error

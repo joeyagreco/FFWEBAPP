@@ -16,12 +16,12 @@ class LeagueModelNavigator:
                 return team
         raise Exception("Given TeamID is not in the given LeagueModel")
 
-    def teamsPlayInWeek(self, week: WeekModel, team1Id: int, team2Id: int):
+    def teamsPlayInWeek(self, week: WeekModel, team1Id: int, opponentIds: list):
         """
         Returns a boolean on whether teams with the given IDs play in the given week.
         """
         for matchup in week.getMatchups():
-            if matchup.getTeamA().getTeamId() == team1Id and matchup.getTeamB().getTeamId() == team2Id or matchup.getTeamB().getTeamId() == team1Id and matchup.getTeamA().getTeamId() == team2Id:
+            if matchup.getTeamA().getTeamId() == team1Id and matchup.getTeamB().getTeamId() in opponentIds or matchup.getTeamB().getTeamId() == team1Id and matchup.getTeamA().getTeamId() in opponentIds:
                 return True
         return False
 
@@ -30,7 +30,7 @@ class LeagueModelNavigator:
         Returns a boolean on whether the teams with the given IDs play at all in the given league.
         """
         for week in leagueModel.getWeeks():
-            if self.teamsPlayInWeek(week, team1Id, team2Id):
+            if self.teamsPlayInWeek(week, team1Id, [team2Id]):
                 return True
         return False
 
