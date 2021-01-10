@@ -14,7 +14,7 @@ class PpgCalculator:
         """
         Returns a float that is the Points Per Game for the team with the given ID.
         WEEK: [int] Gives PPG through that week.
-        VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
+        VSTEAMIDS: [list] Gives PPG vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))

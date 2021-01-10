@@ -114,13 +114,13 @@ class StatCalculatorService:
             ties = recordCalculator.getTies(vsTeamIds=[opponentTeamId])
             winPercentage = recordCalculator.getWinPercentage(vsTeamIds=[opponentTeamId])
             winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
-            # Stats above this line have vsTeamId kwargs support
             ppgCalculator = PpgCalculator(teamId, leagueModel)
             ppg = ppgCalculator.getPpg(vsTeamIds=[opponentTeamId])
             ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
             scoresCalculator = ScoresCalculator(teamId, leagueModel)
-            plusMinus = scoresCalculator.getPlusMinusVsTeam(opponentTeamId)
+            plusMinus = scoresCalculator.getPlusMinus(vsTeamIds=[opponentTeamId])
             plusMinusStr = rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
+            # Stats above this line have vsTeamId kwargs support
             stddev = scoresCalculator.getStandardDeviationVsTeam(opponentTeamId)
             stddevStr = rounder.keepTrailingZeros(stddev, 2)
             maxScore = scoresCalculator.getMaxScoreVsTeam(opponentTeamId)

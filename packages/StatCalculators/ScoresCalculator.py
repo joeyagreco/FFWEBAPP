@@ -84,38 +84,21 @@ class ScoresCalculator:
         Example: Team abc has scored 100 points and has had 75 points scored against him.
                  Team abc has a +/- of +25.
         WEEK: [int] Gives Plus/Minus through that week.
+        VSTEAMIDS: [list] Gives +/- vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         totalTeamScore = 0
         totalOpponentScore = 0
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
                     totalTeamScore += matchup.getTeamAScore()
                     totalOpponentScore += matchup.getTeamBScore()
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
-                    totalTeamScore += matchup.getTeamBScore()
-                    totalOpponentScore += matchup.getTeamAScore()
-        return float(self.__rounder.normalRound(totalTeamScore - totalOpponentScore,
-                                                self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)))
-
-    def getPlusMinusVsTeam(self, opponentTeamId: int):
-        """
-        Returns the +/- for the team with the given ID has against the team with opponentTeamId.
-        Example: Team abc has scored 100 points vs team def and has had 75 points scored against him by team def.
-                 Team abc has a +/- of +25 vs team def.
-        """
-        totalTeamScore = 0
-        totalOpponentScore = 0
-        for week in self.__leagueModel.getWeeks():
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
-                    totalTeamScore += matchup.getTeamAScore()
-                    totalOpponentScore += matchup.getTeamBScore()
-                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     totalTeamScore += matchup.getTeamBScore()
                     totalOpponentScore += matchup.getTeamAScore()
         return float(self.__rounder.normalRound(totalTeamScore - totalOpponentScore,
