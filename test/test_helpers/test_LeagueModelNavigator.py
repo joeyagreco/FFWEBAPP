@@ -83,15 +83,29 @@ class TestLeagueModelNavigator(unittest.TestCase):
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
-        weekList = [week1]
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-
         leagueModelNavigator = LeagueModelNavigator()
         team1GamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1)
         team2GamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 2)
+        team1GamesPlayed_1 = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, week=1)
+        team1GamesPlayed_2 = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, week=2)
+        team1GamesPlayed_vs2 = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, vsTeamIds=[2])
+        team1GamesPlayed_vs3 = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, vsTeamIds=[3])
+        team1GamesPlayed_allParams = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, week=1, vsTeamIds=[2])
         nonTeamGamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 7)
-        self.assertEqual(1, team1GamesPlayed)
-        self.assertEqual(1, team2GamesPlayed)
+        self.assertEqual(2, team1GamesPlayed)
+        self.assertEqual(2, team2GamesPlayed)
+        self.assertEqual(1, team1GamesPlayed_1)
+        self.assertEqual(2, team1GamesPlayed_2)
+        self.assertEqual(2, team1GamesPlayed_vs2)
+        self.assertEqual(0, team1GamesPlayed_vs3)
+        self.assertEqual(1, team1GamesPlayed_allParams)
         self.assertEqual(0, nonTeamGamesPlayed)
 
     def test_totalLeaguePoints(self):
@@ -117,9 +131,13 @@ class TestLeagueModelNavigator(unittest.TestCase):
         leagueModelNavigator = LeagueModelNavigator()
         totalLeaguePoints1 = leagueModelNavigator.totalLeaguePoints(leagueModel, week=1)
         totalLeaguePoints2 = leagueModelNavigator.totalLeaguePoints(leagueModel, week=2)
+        totalLeaguePoints1_1and2 = leagueModelNavigator.totalLeaguePoints(leagueModel, onlyIncludeWeeks=[1, 2])
+        totalLeaguePoints1_2 = leagueModelNavigator.totalLeaguePoints(leagueModel, onlyIncludeWeeks=[2])
         totalLeaguePointsDefault = leagueModelNavigator.totalLeaguePoints(leagueModel)
         self.assertEqual(510.5, totalLeaguePoints1)
         self.assertEqual(1021, totalLeaguePoints2)
+        self.assertEqual(1021, totalLeaguePoints1_1and2)
+        self.assertEqual(510.5, totalLeaguePoints1_2)
         self.assertEqual(1021, totalLeaguePointsDefault)
 
     def test_totalPointsScoredByTeam(self):
@@ -145,9 +163,15 @@ class TestLeagueModelNavigator(unittest.TestCase):
         leagueModelNavigator = LeagueModelNavigator()
         totalTeamPoints1_1 = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, 1, week=1)
         totalTeamPoints1_2 = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, 1, week=2)
+        totalTeamPoints1_vs2 = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, 1, vsTeamIds=[2])
+        totalTeamPoints1_vs3 = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, 1, vsTeamIds=[3])
+        totalTeamPoints1_allParams = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, 1, week=1, vsTeamIds=[2])
         totalTeamPoints1_default = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, 1)
         self.assertEqual(100, totalTeamPoints1_1)
         self.assertEqual(200, totalTeamPoints1_2)
+        self.assertEqual(200, totalTeamPoints1_vs2)
+        self.assertEqual(0, totalTeamPoints1_vs3)
+        self.assertEqual(100, totalTeamPoints1_allParams)
         self.assertEqual(200, totalTeamPoints1_default)
 
     def test_getGameOutcomeAsString(self):
@@ -302,10 +326,33 @@ class TestLeagueModelNavigator(unittest.TestCase):
         self.assertEqual(5, len(allTeamIds_exclude1))
         self.assertFalse(1 in allTeamIds_exclude1)
 
-
-
-
-
-
-
-
+    def test_getAllWeeksTeamsPlayEachOther(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
+        leagueModelNavigator = LeagueModelNavigator()
+        weeks1_vs2 = leagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 1, [2])
+        weeks1_vs3 = leagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 1, [3])
+        weeks1_vs2and3 = leagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 1, [2, 3])
+        weeks1_vsNone = leagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 1, [])
+        self.assertIsInstance(weeks1_vs2, list)
+        self.assertEqual(2, len(weeks1_vs2))
+        self.assertEqual(0, len(weeks1_vs3))
+        self.assertEqual(2, len(weeks1_vs2and3))
+        self.assertEqual(0, len(weeks1_vsNone))
