@@ -18,6 +18,7 @@ class HeadToHeadStatsModel:
         self.__teamLuck = stats["teamLuck"]
         self.__smartWins = stats["smartWins"]
         self.__smartWinsAdjustment = stats["smartWinsAdjustment"]
+        self.__percentageOfLeagueScoring = stats["percentageOfLeagueScoring"]
 
     def getTeamId(self):
         return self.__teamId
@@ -69,6 +70,9 @@ class HeadToHeadStatsModel:
 
     def getSmartWinsAdjustment(self):
         return self.__smartWinsAdjustment
+
+    def getPercentageOfLeagueScoring(self):
+        return self.__percentageOfLeagueScoring
 
 
 

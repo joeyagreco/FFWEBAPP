@@ -111,18 +111,21 @@ class ScoresCalculator:
         """
         Returns as a percentage the amount of total league scoring the team with self.__teamID was responsible for.
         WEEK: [int] Gives percentage of league scoring through that week.
+        VSTEAMIDS: [list] Gives STDEV vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
-        totalLeagueScore = leagueModelNavigator.totalLeaguePoints(self.__leagueModel, week=weekNumber)
+        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        allWeeksTeamsPlay = leagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, self.__teamId, vsTeamIds)
+        totalLeagueScore = leagueModelNavigator.totalLeaguePoints(self.__leagueModel, week=weekNumber, onlyIncludeWeeks=allWeeksTeamsPlay)
         totalTeamScore = 0
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
                     totalTeamScore += matchup.getTeamAScore()
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     totalTeamScore += matchup.getTeamBScore()
         rounder = Rounder()
         percentageOfScoring = rounder.normalRound((totalTeamScore / totalLeagueScore) * 100, 2)

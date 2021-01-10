@@ -140,12 +140,13 @@ class StatCalculatorService:
             teamSuccess = sslCalculator.getTeamSuccess()
             teamLuck = sslCalculator.getTeamLuck()
             allScores = leagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
-            # Stats above this line have vsTeamId kwargs support
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
             smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
             smartWinsAdjustment = smartCalculator.getSmartWinsAdjustmentOfScores(allScores, wal)
             smartWinsAdjustmentStr = rounder.keepTrailingZeros(smartWinsAdjustment, 2)
+            percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring(vsTeamIds=[opponentTeamId])
+            percentageOfLeagueScoringStr = rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
                                                         teamName=teamName,
                                                         wins=wins,
@@ -162,7 +163,8 @@ class StatCalculatorService:
                                                         teamSuccess=teamSuccess,
                                                         teamLuck=teamLuck,
                                                         smartWins=smartWinsStr,
-                                                        smartWinsAdjustment=smartWinsAdjustmentStr)
+                                                        smartWinsAdjustment=smartWinsAdjustmentStr,
+                                                        percentageOfLeagueScoring=percentageOfLeagueScoringStr)
             statsModels.append(headToHeadStatsModel)
         return statsModels
 
