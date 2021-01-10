@@ -120,9 +120,9 @@ class StatCalculatorService:
             scoresCalculator = ScoresCalculator(teamId, leagueModel)
             plusMinus = scoresCalculator.getPlusMinus(vsTeamIds=[opponentTeamId])
             plusMinusStr = rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
-            # Stats above this line have vsTeamId kwargs support
-            stddev = scoresCalculator.getStandardDeviationVsTeam(opponentTeamId)
+            stddev = scoresCalculator.getStandardDeviation(vsTeamIds=[opponentTeamId])
             stddevStr = rounder.keepTrailingZeros(stddev, 2)
+            # Stats above this line have vsTeamId kwargs support
             maxScore = scoresCalculator.getMaxScoreVsTeam(opponentTeamId)
             maxScoreStr = rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
             minScore = scoresCalculator.getMinScoreVsTeam(opponentTeamId)

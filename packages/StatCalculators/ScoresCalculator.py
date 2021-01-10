@@ -108,32 +108,22 @@ class ScoresCalculator:
         """
         Returns the standard deviation of the scores for the team with the given ID has in the given league.
         WEEK: [int] Gives Standard Deviation through that week.
+        VSTEAMIDS: [list] Gives STDEV vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         scores = []
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
                     scores.append(matchup.getTeamAScore())
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     scores.append(matchup.getTeamBScore())
-        standardDeviation = statistics.pstdev(scores)
-        return float(self.__rounder.normalRound(standardDeviation, 2))
-
-    def getStandardDeviationVsTeam(self, opponentTeamId: int):
-        """
-        Returns the standard deviation of the scores for the team with the given ID has vs the team with opponentTeamId.
-        """
-        scores = []
-        for week in self.__leagueModel.getWeeks():
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
-                    scores.append(matchup.getTeamAScore())
-                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
-                    scores.append(matchup.getTeamBScore())
+        if not scores:
+            return 0.0
         standardDeviation = statistics.pstdev(scores)
         return float(self.__rounder.normalRound(standardDeviation, 2))
 
