@@ -132,8 +132,6 @@ class StatCalculatorService:
             gamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team has to play every week
-
-            # Stats above this line have vsTeamId kwargs support
             totalTeamPoints = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
             allWeeksTeamsPlay = leagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, team1Id, [team2Id])
             totalLeaguePoints = leagueModelNavigator.totalLeaguePoints(leagueModel, onlyIncludeWeeks=allWeeksTeamsPlay)
@@ -141,7 +139,8 @@ class StatCalculatorService:
             teamScore = sslCalculator.getTeamScore()
             teamSuccess = sslCalculator.getTeamSuccess()
             teamLuck = sslCalculator.getTeamLuck()
-            allScores = leagueModelNavigator.getAllScoresOfTeamVsTeam(leagueModel, teamId, opponentTeamId)
+            allScores = leagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
+            # Stats above this line have vsTeamId kwargs support
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
             smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)

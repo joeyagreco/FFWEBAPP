@@ -147,8 +147,10 @@ class LeagueModelNavigator:
         Returns as a list of floats all of the scores in the given leagueModel that the team with the given ID had.
         Note: These scores will be properly rounded.
         WEEK: [int] Gives all scores through that week.
+        VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
         """
         weekNumber = params.pop("week", self.getNumberOfWeeksInLeague(leagueModel))
+        vsTeamIds = params.pop("vsTeamIds", self.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
         rounder = Rounder()
         decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         allScores = []
@@ -156,31 +158,11 @@ class LeagueModelNavigator:
             if week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == teamId:
+                if matchup.getTeamA().getTeamId() == teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
                     score = matchup.getTeamAScore()
                     score = rounder.normalRound(score, decimalPlacesToRoundTo)
                     allScores.append(score)
-                elif matchup.getTeamB().getTeamId() == teamId:
-                    score = matchup.getTeamBScore()
-                    score = rounder.normalRound(score, decimalPlacesToRoundTo)
-                    allScores.append(score)
-        return allScores
-
-    def getAllScoresOfTeamVsTeam(self, leagueModel: LeagueModel, teamId: int, vsTeamId: int):
-        """
-        Returns as a list of floats all of the scores in the given leagueModel that the team with the given ID had vs the team with the given vsTeamId.
-        Note: These scores will be properly rounded.
-        """
-        rounder = Rounder()
-        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-        allScores = []
-        for week in leagueModel.getWeeks():
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == teamId and matchup.getTeamB().getTeamId() == vsTeamId:
-                    score = matchup.getTeamAScore()
-                    score = rounder.normalRound(score, decimalPlacesToRoundTo)
-                    allScores.append(score)
-                elif matchup.getTeamB().getTeamId() == teamId and matchup.getTeamA().getTeamId() == vsTeamId:
+                elif matchup.getTeamB().getTeamId() == teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     score = matchup.getTeamBScore()
                     score = rounder.normalRound(score, decimalPlacesToRoundTo)
                     allScores.append(score)
