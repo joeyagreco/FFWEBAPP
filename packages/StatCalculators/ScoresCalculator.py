@@ -16,7 +16,7 @@ class ScoresCalculator:
         """
         Returns the maximum score the team with the given ID has in the given league.
         WEEK: [int] Gives Max Score through that week.
-        VSTEAMIDS: [list] Gives +/- vs teams with the given IDs.
+        VSTEAMIDS: [list] Gives max score vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
@@ -39,32 +39,22 @@ class ScoresCalculator:
         """
         Returns the minimum score the team with the given ID has in the given league through the given week.
         WEEK: [int] Gives Min Score through that week.
+        VSTEAMIDS: [list] Gives min score vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         scores = []
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
+                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
                     scores.append(matchup.getTeamAScore())
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
+                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     scores.append(matchup.getTeamBScore())
-        return self.__rounder.normalRound(min(scores),
-                                          self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
-
-    def getMinScoreVsTeam(self, opponentTeamId: int):
-        """
-        Returns the minimum score the team with the given ID has vs the team with opponentTeamId.
-        """
-        scores = []
-        for week in self.__leagueModel.getWeeks():
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() == opponentTeamId:
-                    scores.append(matchup.getTeamAScore())
-                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() == opponentTeamId:
-                    scores.append(matchup.getTeamBScore())
+        if not scores:
+            return 0.0
         return self.__rounder.normalRound(min(scores),
                                           self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 

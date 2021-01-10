@@ -124,9 +124,9 @@ class StatCalculatorService:
             stddevStr = rounder.keepTrailingZeros(stddev, 2)
             maxScore = scoresCalculator.getMaxScore(vsTeamIds=[opponentTeamId])
             maxScoreStr = rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
-            # Stats above this line have vsTeamId kwargs support
-            minScore = scoresCalculator.getMinScoreVsTeam(opponentTeamId)
+            minScore = scoresCalculator.getMinScore(vsTeamIds=[opponentTeamId])
             minScoreStr = rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
+            # Stats above this line have vsTeamId kwargs support
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwalVsTeam(opponentTeamId)
             wal = awalCalculator.getWal()

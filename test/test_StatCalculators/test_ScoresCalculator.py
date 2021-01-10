@@ -77,45 +77,17 @@ class TestScoresCalculator(unittest.TestCase):
         minScoreTeam1_1 = ScoresCalculator(1, leagueModel).getMinScore(week=1)
         minScoreTeam1_2 = ScoresCalculator(1, leagueModel).getMinScore(week=2)
         minScoreTeam1_3 = ScoresCalculator(1, leagueModel).getMinScore(week=3)
+        minScoreTeam1_vs2 = ScoresCalculator(1, leagueModel).getMinScore(vsTeamIds=[2])
+        minScoreTeam1_vs3 = ScoresCalculator(1, leagueModel).getMinScore(vsTeamIds=[3])
+        minScoreTeam1_allParams = ScoresCalculator(1, leagueModel).getMinScore(week=1, vsTeamIds=[2])
         minScoreTeam1_default = ScoresCalculator(1, leagueModel).getMinScore()
         self.assertEqual(100, minScoreTeam1_1)
         self.assertEqual(99, minScoreTeam1_2)
         self.assertEqual(98, minScoreTeam1_3)
+        self.assertEqual(98, minScoreTeam1_vs2)
+        self.assertEqual(0, minScoreTeam1_vs3)
+        self.assertEqual(100, minScoreTeam1_allParams)
         self.assertEqual(98, minScoreTeam1_default)
-
-    def test_getMinScoreVsTeam(self):
-        team1 = TeamModel(1, "team1")
-        team2 = TeamModel(2, "team2")
-        team3 = TeamModel(3, "team3")
-        team4 = TeamModel(4, "team4")
-        team5 = TeamModel(5, "team5")
-        team6 = TeamModel(6, "team6")
-        teamList = [team1, team2, team3, team4, team5, team6]
-        matchup1 = MatchupModel(1, team1, team2, 100, 100)
-        matchup2 = MatchupModel(2, team3, team4, 0.0, 10.01)
-        matchup3 = MatchupModel(3, team5, team6, 104, 105)
-        matchupList = [matchup1, matchup2, matchup3]
-        week1 = WeekModel(1, matchupList)
-        matchup1 = MatchupModel(1, team1, team2, 99, 100.1)
-        matchup2 = MatchupModel(2, team3, team4, 0, 50.01)
-        matchup3 = MatchupModel(3, team5, team6, 104, 105)
-        matchupList = [matchup1, matchup2, matchup3]
-        week2 = WeekModel(2, matchupList)
-        matchup1 = MatchupModel(1, team1, team2, 99, 100.2)
-        matchup2 = MatchupModel(2, team3, team4, 0, 50.01)
-        matchup3 = MatchupModel(3, team5, team6, 104, 105)
-        matchupList = [matchup1, matchup2, matchup3]
-        week3 = WeekModel(3, matchupList)
-        weekList = [week1, week2, week3]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        minScoreTeam1 = ScoresCalculator(1, leagueModel).getMinScoreVsTeam(2)
-        minScoreTeam2 = ScoresCalculator(2, leagueModel).getMinScoreVsTeam(1)
-        minScoreTeam3 = ScoresCalculator(3, leagueModel).getMinScoreVsTeam(4)
-        minScoreTeam4 = ScoresCalculator(4, leagueModel).getMinScoreVsTeam(3)
-        self.assertEqual(99, minScoreTeam1)
-        self.assertEqual(100, minScoreTeam2)
-        self.assertEqual(0, minScoreTeam3)
-        self.assertEqual(10.01, minScoreTeam4)
 
     def test_getPlusMinus(self):
         team1 = TeamModel(1, "team1")
