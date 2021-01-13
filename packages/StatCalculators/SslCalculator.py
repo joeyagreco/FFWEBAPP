@@ -17,7 +17,7 @@ class SslCalculator:
         self.__walMultiplier = 1000
         self.__pointsMultiplier = 200
 
-    def getTeamScore(self):
+    def getTeamScore(self) -> float:
         """
         Returns the Team Score that the team with the given stats has.
         """
@@ -26,7 +26,7 @@ class SslCalculator:
                                 self.__maxScore + self.__minScore)) / 10
         return self.__rounder.normalRound(teamScore, 1)
 
-    def getTeamSuccess(self):
+    def getTeamSuccess(self) -> float:
         """
         Returns the Team Success that the team with the given stats has.
         """
@@ -35,7 +35,7 @@ class SslCalculator:
                                   self.__maxScore + self.__minScore)) / 10
         return self.__rounder.normalRound(teamSuccess, 1)
 
-    def getTeamLuck(self):
+    def getTeamLuck(self) -> float:
         """
         Returns the Team Luck that the team with the given stats has.
         """

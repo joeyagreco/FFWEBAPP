@@ -12,7 +12,7 @@ class ScoresCalculator:
         self.__leagueModel = leagueModel
         self.__rounder = Rounder()
 
-    def getMaxScore(self, **params):
+    def getMaxScore(self, **params) -> float:
         """
         Returns the maximum score the team with the given ID has in the given league.
         THROUGHWEEK: [int] Gives Max Score through that week.
@@ -35,7 +35,7 @@ class ScoresCalculator:
         return self.__rounder.normalRound(max(scores),
                                           self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 
-    def getMinScore(self, **params):
+    def getMinScore(self, **params) -> float:
         """
         Returns the minimum score the team with the given ID has in the given league through the given week.
         THROUGHWEEK: [int] Gives Min Score through that week.
@@ -58,7 +58,7 @@ class ScoresCalculator:
         return self.__rounder.normalRound(min(scores),
                                           self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 
-    def getPlusMinus(self, **params):
+    def getPlusMinus(self, **params) -> float:
         """
         Returns the +/- for the team with the given ID has in the given league.
         Example: Team abc has scored 100 points and has had 75 points scored against him.
@@ -84,7 +84,7 @@ class ScoresCalculator:
         return float(self.__rounder.normalRound(totalTeamScore - totalOpponentScore,
                                                 self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)))
 
-    def getStandardDeviation(self, **params):
+    def getStandardDeviation(self, **params) -> float:
         """
         Returns the standard deviation of the scores for the team with the given ID has in the given league.
         THROUGHWEEK: [int] Gives Standard Deviation through that week.
@@ -107,7 +107,7 @@ class ScoresCalculator:
         standardDeviation = statistics.pstdev(scores)
         return float(self.__rounder.normalRound(standardDeviation, 2))
 
-    def getPercentageOfLeagueScoring(self, **params):
+    def getPercentageOfLeagueScoring(self, **params) -> float:
         """
         Returns as a percentage the amount of total league scoring the team with self.__teamID was responsible for.
         THROUGHWEEK: [int] Gives percentage of league scoring through that week.

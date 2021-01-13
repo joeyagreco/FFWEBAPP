@@ -10,7 +10,7 @@ class PpgCalculator:
         self.__leagueModel = leagueModel
         self.__rounder = Rounder()
 
-    def getPpg(self, **params):
+    def getPpg(self, **params) -> float:
         """
         Returns a float that is the Points Per Game for the team with the given ID.
         THROUGHWEEK: [int] Gives PPG through that week.
@@ -36,7 +36,7 @@ class PpgCalculator:
         decimalPlacesRoundedTo = self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         return self.__rounder.normalRound(points / gameCount, decimalPlacesRoundedTo)
 
-    def getPpgAgainst(self, **params):
+    def getPpgAgainst(self, **params) -> float:
         """
         Returns a float that is the Points Per Game against the team with the given ID.
         THROUGHWEEK: [int] Gives PPG Against through that week.

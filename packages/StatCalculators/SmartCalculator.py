@@ -8,7 +8,7 @@ class SmartCalculator:
     def __init__(self, leagueModel: LeagueModel):
         self.__leagueModel = leagueModel
 
-    def getSmartWinsOfScore(self, score: float, **params):
+    def getSmartWinsOfScore(self, score: float, **params) -> float:
         """
         Returns [essentially] the percentile of which this score would rank in self.__leagueModel.
         This is the percentage of games this score would win if it played against every other score.
@@ -38,7 +38,7 @@ class SmartCalculator:
         smartWins = rounder.normalRound(rawPercentile, 2)
         return smartWins
 
-    def getSmartWinsOfScoresList(self, scoresList: list, **params):
+    def getSmartWinsOfScoresList(self, scoresList: list, **params) -> float:
         """
         Returns the smart wins a team with the given scores should have.
         Note: This assumes that the given scores already exist in self.__leagueModel.
@@ -54,7 +54,7 @@ class SmartCalculator:
         smartWins = rounder.normalRound(smartWins, 2)
         return smartWins
 
-    def getSmartWinsAdjustmentOfScores(self, scores: list, wal: float, **params):
+    def getSmartWinsAdjustmentOfScores(self, scores: list, wal: float, **params) -> float:
         """
         Returns the smart wins adjustment of a team with the given scores and the given wal.
         Note: This assumes that the given scores already exist in self.__leagueModel.

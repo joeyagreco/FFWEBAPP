@@ -10,7 +10,7 @@ class RecordCalculator:
         self.__leagueModel = leagueModel
         self.__rounder = Rounder()
 
-    def getWins(self, **params):
+    def getWins(self, **params) -> int:
         """
         Returns as an int the number of wins the team with self.__teamId has in this league.
         THROUGHWEEK: [int] Gives wins through that week.
@@ -34,7 +34,7 @@ class RecordCalculator:
                         wins += 1
         return wins
 
-    def getLosses(self, **params):
+    def getLosses(self, **params) -> int:
         """
         Returns as an int the number of losses the team with self.__teamId has in this league.
         THROUGHWEEK: [int] Gives losses through that week.
@@ -58,7 +58,7 @@ class RecordCalculator:
                         losses += 1
         return losses
 
-    def getTies(self, **params):
+    def getTies(self, **params) -> int:
         """
         Returns as an int the number of ties the team with self.__teamId has in this league.
         THROUGHWEEK: [int] Gives ties through that week.
@@ -82,7 +82,7 @@ class RecordCalculator:
                         ties += 1
         return ties
 
-    def getWinPercentage(self, **params):
+    def getWinPercentage(self, **params) -> float:
         """
         Returns as a float the win percentage of the team with self.__teamId.
         THROUGHWEEK: [int] Gives win percentage through that week.

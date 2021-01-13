@@ -13,7 +13,7 @@ class AwalCalculator:
         self.__ties = ties
         self.__rounder = Rounder()
 
-    def getAwal(self, **params):
+    def getAwal(self, **params) -> float:
         """
         Returns a float that is the AWAL for the team with self.__teamId.
         THROUGHWEEK: [int] Gives AWAL through that week.
@@ -24,9 +24,9 @@ class AwalCalculator:
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         return self.__rounder.normalRound(self.getAdjustment(throughWeek=weekNumber, vsTeamIds=vsTeamIds) + self.getWal(), 2)
 
-    def getAdjustment(self, **params):
+    def getAdjustment(self, **params) -> float:
         """
-        Returns a float that is the adjustment [A] for the team with self.__teamId
+        Returns a float that is the adjustment [A] for the team with self.__teamId.
         A = W * (1/L) + T * (0.5/L) - WAL
         Where:
         WAL = Game outcome (1=win, 0=loss, 0.5=tie)
@@ -52,16 +52,16 @@ class AwalCalculator:
                 totalAdjustment += A
         return self.__rounder.normalRound(totalAdjustment, 2)
 
-    def getWal(self):
+    def getWal(self) -> float:
         """
         Returns the total wins against the league for the team with self.__teamId [from class instance variables].
         """
         wal = self.__wins + (0.5 * self.__ties)
         return self.__rounder.normalRound(wal, 2)
 
-    def __getTeamOutcomeOfWeek(self, week: WeekModel):
+    def __getTeamOutcomeOfWeek(self, week: WeekModel) -> float:
         """
-        Returns the outcome in the given week for the team with self.__teamId
+        Returns the outcome in the given week for the team with self.__teamId.
         (1=win, 0=loss, 0.5=tie)
         """
         for matchup in week.getMatchups():
@@ -88,9 +88,9 @@ class AwalCalculator:
                     # our target team tied
                     return 0.5
 
-    def __getTeamsOutscoredOfWeek(self, week: WeekModel):
+    def __getTeamsOutscoredOfWeek(self, week: WeekModel) -> int:
         """
-        Returns the number of teams outscored in the given week for the team with self.__teamId
+        Returns the number of teams outscored in the given week for the team with self.__teamId.
         """
         allScores = {}
         for matchup in week.getMatchups():
@@ -106,9 +106,9 @@ class AwalCalculator:
                 teamsOutscored += 1
         return teamsOutscored
 
-    def __getTeamsTiedOfWeek(self, week: WeekModel):
+    def __getTeamsTiedOfWeek(self, week: WeekModel) -> int:
         """
-        Returns the number of teams tied in the given week for the team with self.__teamId
+        Returns the number of teams tied in the given week for the team with self.__teamId.
         """
         allScores = {}
         for matchup in week.getMatchups():

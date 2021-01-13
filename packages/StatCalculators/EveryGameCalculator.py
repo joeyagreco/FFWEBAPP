@@ -1,3 +1,5 @@
+from typing import List
+
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
@@ -10,7 +12,7 @@ class EveryGameCalculator:
     def __init__(self, leagueModel: LeagueModel):
         self.__leagueModel = leagueModel
 
-    def getAllMarginOfVictories(self):
+    def getAllMarginOfVictories(self) -> List[MarginOfVictoryModel]:
         """
         Returns a list of MarginOfVictoryModels.
         """
@@ -44,7 +46,7 @@ class EveryGameCalculator:
                 models.append(model)
         return models
 
-    def getAllScores(self):
+    def getAllScores(self) -> List[ScoreModel]:
         """
         Returns a list of ScoreModels.
         """

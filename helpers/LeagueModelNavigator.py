@@ -1,12 +1,15 @@
+from typing import List
+
 from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
+from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
 
 
 class LeagueModelNavigator:
 
-    def getTeamById(self, leagueModel: LeagueModel, teamId: int):
+    def getTeamById(self, leagueModel: LeagueModel, teamId: int) -> TeamModel:
         """
         Returns a Team object for the team with the given ID in the given league.
         Throws Exception if a team with the given ID is not in the given league.
@@ -16,7 +19,7 @@ class LeagueModelNavigator:
                 return team
         raise Exception("Given TeamID is not in the given LeagueModel")
 
-    def teamsPlayInWeek(self, week: WeekModel, team1Id: int, opponentIds: list):
+    def teamsPlayInWeek(self, week: WeekModel, team1Id: int, opponentIds: list) -> bool:
         """
         Returns a boolean on whether teams with the given IDs play in the given week.
         """
@@ -25,7 +28,7 @@ class LeagueModelNavigator:
                 return True
         return False
 
-    def teamsPlayEachOther(self, leagueModel: LeagueModel, team1Id: int, team2Id: int):
+    def teamsPlayEachOther(self, leagueModel: LeagueModel, team1Id: int, team2Id: int) -> bool:
         """
         Returns a boolean on whether the teams with the given IDs play at all in the given league.
         """
@@ -34,7 +37,7 @@ class LeagueModelNavigator:
                 return True
         return False
 
-    def gamesPlayedByTeam(self, leagueModel: LeagueModel, teamId: int, **params):
+    def gamesPlayedByTeam(self, leagueModel: LeagueModel, teamId: int, **params) -> int:
         """
         Returns as an int the number of games played in the given league by the team with the given ID.
         THROUGHWEEK: [int] Gives games played through that week.
@@ -51,7 +54,7 @@ class LeagueModelNavigator:
                     gamesPlayed += 1
         return gamesPlayed
 
-    def totalLeaguePoints(self, leagueModel: LeagueModel, **params):
+    def totalLeaguePoints(self, leagueModel: LeagueModel, **params) -> float:
         """
         Returns a float that is the total amount of points scored in the given league.
         THROUGHWEEK: [int] Gives total league points scored through that week.
@@ -75,7 +78,7 @@ class LeagueModelNavigator:
                     totalPoints += matchup.getTeamBScore()
         return rounder.normalRound(totalPoints, rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
-    def totalPointsScoredByTeam(self, leagueModel: LeagueModel, teamId: int, **params):
+    def totalPointsScoredByTeam(self, leagueModel: LeagueModel, teamId: int, **params) -> float:
         """
         Returns a float that is the total amount of points scored by the team with the given ID in the given league.
         THROUGHWEEK: [int] Gives total points scored through that week.
@@ -120,7 +123,7 @@ class LeagueModelNavigator:
         else:
             return "Tie"
 
-    def getAllScoresInLeague(self, leagueModel: LeagueModel, **params):
+    def getAllScoresInLeague(self, leagueModel: LeagueModel, **params) -> List[float]:
         """
         Returns as a list of floats all of the scores in the given leagueModel.
         Note: These scores will be properly rounded.
@@ -142,7 +145,7 @@ class LeagueModelNavigator:
                 allScores.append(scoreB)
         return allScores
 
-    def getAllScoresOfTeam(self, leagueModel: LeagueModel, teamId: int, **params):
+    def getAllScoresOfTeam(self, leagueModel: LeagueModel, teamId: int, **params) -> List[float]:
         """
         Returns as a list of floats all of the scores in the given leagueModel that the team with the given ID had.
         Note: These scores will be properly rounded.
@@ -168,13 +171,13 @@ class LeagueModelNavigator:
                     allScores.append(score)
         return allScores
 
-    def getNumberOfWeeksInLeague(self, leagueModel: LeagueModel):
+    def getNumberOfWeeksInLeague(self, leagueModel: LeagueModel) -> int:
         """
         Returns as an int the number of weeks that are in the given leagueModel.
         """
         return len(leagueModel.getWeeks())
 
-    def getAllTeamIdsInLeague(self, leagueModel: LeagueModel, **params):
+    def getAllTeamIdsInLeague(self, leagueModel: LeagueModel, **params) -> List[int]:
         """
         Returns as a list of ints all of the team IDs in the given leagueModel.
         """
@@ -185,7 +188,7 @@ class LeagueModelNavigator:
                 teamIds.append(team.getTeamId())
         return teamIds
 
-    def getAllWeeksTeamsPlayEachOther(self, leagueModel: LeagueModel, team1Id: int, opponentTeamIds: list):
+    def getAllWeeksTeamsPlayEachOther(self, leagueModel: LeagueModel, team1Id: int, opponentTeamIds: list) -> List[int]:
         """
         Returns as a list of ints all of the weeks that the team with team1Id plays any of the teams with ids in opponentTeamIds.
         """
