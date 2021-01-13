@@ -87,11 +87,11 @@ class ScoresCalculator:
     def getStandardDeviation(self, **params):
         """
         Returns the standard deviation of the scores for the team with the given ID has in the given league.
-        WEEK: [int] Gives Standard Deviation through that week.
+        THROUGHWEEK: [int] Gives Standard Deviation through that week.
         VSTEAMIDS: [list] Gives STDEV vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         scores = []
         for week in self.__leagueModel.getWeeks():
