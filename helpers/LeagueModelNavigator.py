@@ -146,10 +146,10 @@ class LeagueModelNavigator:
         """
         Returns as a list of floats all of the scores in the given leagueModel that the team with the given ID had.
         Note: These scores will be properly rounded.
-        WEEK: [int] Gives all scores through that week.
+        THROUGHWEEK: [int] Gives all scores through that week.
         VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
         """
-        weekNumber = params.pop("week", self.getNumberOfWeeksInLeague(leagueModel))
+        weekNumber = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
         vsTeamIds = params.pop("vsTeamIds", self.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
         rounder = Rounder()
         decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
