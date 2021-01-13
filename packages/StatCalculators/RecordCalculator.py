@@ -37,11 +37,11 @@ class RecordCalculator:
     def getLosses(self, **params):
         """
         Returns as an int the number of losses the team with self.__teamId has in this league.
-        WEEK: [int] Gives losses through that week.
+        THROUGHWEEK: [int] Gives losses through that week.
         VSTEAMIDS: [list] Gives losses vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         losses = 0
         for week in self.__leagueModel.getWeeks():
@@ -61,11 +61,11 @@ class RecordCalculator:
     def getTies(self, **params):
         """
         Returns as an int the number of ties the team with self.__teamId has in this league.
-        WEEK: [int] Gives ties through that week.
+        THROUGHWEEK: [int] Gives ties through that week.
         VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         ties = 0
         for week in self.__leagueModel.getWeeks():
@@ -85,15 +85,15 @@ class RecordCalculator:
     def getWinPercentage(self, **params):
         """
         Returns as a float the win percentage of the team with self.__teamId.
-        WEEK: [int] Gives win percentage through that week.
+        THROUGHWEEK: [int] Gives win percentage through that week.
         VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
-        wins = self.getWins(week=weekNumber, vsTeamIds=vsTeamIds)
-        losses = self.getLosses(week=weekNumber, vsTeamIds=vsTeamIds)
-        ties = self.getTies(week=weekNumber, vsTeamIds=vsTeamIds)
+        wins = self.getWins(throughWeek=weekNumber, vsTeamIds=vsTeamIds)
+        losses = self.getLosses(throughWeek=weekNumber, vsTeamIds=vsTeamIds)
+        ties = self.getTies(throughWeek=weekNumber, vsTeamIds=vsTeamIds)
         totalGames = wins + losses + ties
         # if there are no games played, return 0.0 for win percentage
         if totalGames == 0:

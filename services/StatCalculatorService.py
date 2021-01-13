@@ -47,11 +47,11 @@ class StatCalculatorService:
             stddevStr = rounder.keepTrailingZeros(stddev, 2)
             recordCalculator = RecordCalculator(teamId, leagueModel)
             wins = recordCalculator.getWins()
-            # everything above this has had the "week" kwarg changed to "throughWeek"
             losses = recordCalculator.getLosses()
             ties = recordCalculator.getTies()
             winPercentage = recordCalculator.getWinPercentage()
             winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
+            # everything above this has had the "week" kwarg changed to "throughWeek"
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwal()
             wal = awalCalculator.getWal()
