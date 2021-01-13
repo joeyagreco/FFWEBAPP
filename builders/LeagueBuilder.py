@@ -1,3 +1,5 @@
+from typing import List
+
 from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
@@ -9,10 +11,10 @@ class LeagueBuilder:
     def __init__(self, leagueDict: dict):
         self.__leagueDict = leagueDict
 
-    def getLeagueObject(self):
+    def getLeagueObject(self) -> LeagueModel:
         return self.__getLeagueModel()
 
-    def __getLeagueModel(self):
+    def __getLeagueModel(self) -> LeagueModel:
         league = LeagueModel(self.__leagueDict["_id"],
                              self.__leagueDict["leagueName"],
                              self.__leagueDict["numberOfTeams"],
@@ -20,18 +22,18 @@ class LeagueBuilder:
                              self.__getWeeks())
         return league
 
-    def __getTeamModels(self):
+    def __getTeamModels(self) -> List[TeamModel]:
         teams = []
         for team in self.__leagueDict["teams"]:
             teams.append(TeamModel(team["teamId"], team["teamName"]))
         return teams
 
-    def __getTeamModelById(self, teamId: int):
+    def __getTeamModelById(self, teamId: int) -> TeamModel:
         for team in self.__leagueDict["teams"]:
             if team["teamId"] == teamId:
                 return TeamModel(team["teamId"], team["teamName"])
 
-    def __getMatchupModelsByWeekNumber(self, weekNumber: int):
+    def __getMatchupModelsByWeekNumber(self, weekNumber: int) -> List[MatchupModel]:
         matchups = []
         matchupId = 1
         for matchup in self.__leagueDict["weeks"][weekNumber - 1]["matchups"]:
@@ -43,7 +45,7 @@ class LeagueBuilder:
             matchupId += 1
         return matchups
 
-    def __getWeeks(self):
+    def __getWeeks(self) -> List[WeekModel]:
         weeks = []
         for i, week in enumerate(self.__leagueDict["weeks"]):
             weeks.append(WeekModel(i + 1,
