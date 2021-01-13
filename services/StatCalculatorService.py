@@ -59,7 +59,6 @@ class StatCalculatorService:
             # this SHOULD not happen, because currently, a team HAS to play every week
             totalTeamPoints = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId)
             totalLeaguePoints = leagueModelNavigator.totalLeaguePoints(leagueModel)
-            # everything above this has had the "week" kwarg changed to "throughWeek"
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
             teamScore = sslCalculator.getTeamScore()
             teamSuccess = sslCalculator.getTeamSuccess()
