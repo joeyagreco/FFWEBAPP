@@ -41,9 +41,9 @@ class StatCalculatorService:
             ppgAgainst = ppgCalculator.getPpgAgainst()
             ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
             ppgAgainstStr = rounder.keepTrailingZeros(ppgAgainst, decimalPlacesRoundedToScores)
-            # everything above this has had the "week" kwarg changed to "throughWeek"
             plusMinus = scoresCalculator.getPlusMinus()
             plusMinusStr = rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
+            # everything above this has had the "week" kwarg changed to "throughWeek"
             stddev = scoresCalculator.getStandardDeviation()
             stddevStr = rounder.keepTrailingZeros(stddev, 2)
             recordCalculator = RecordCalculator(teamId, leagueModel)

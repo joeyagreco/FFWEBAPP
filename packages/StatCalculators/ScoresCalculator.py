@@ -63,11 +63,11 @@ class ScoresCalculator:
         Returns the +/- for the team with the given ID has in the given league.
         Example: Team abc has scored 100 points and has had 75 points scored against him.
                  Team abc has a +/- of +25.
-        WEEK: [int] Gives Plus/Minus through that week.
+        THROUGHWEEK: [int] Gives Plus/Minus through that week.
         VSTEAMIDS: [list] Gives +/- vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         totalTeamScore = 0
         totalOpponentScore = 0
