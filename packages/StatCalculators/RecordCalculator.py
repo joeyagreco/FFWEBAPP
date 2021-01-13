@@ -13,11 +13,11 @@ class RecordCalculator:
     def getWins(self, **params):
         """
         Returns as an int the number of wins the team with self.__teamId has in this league.
-        WEEK: [int] Gives wins through that week.
+        THROUGHWEEK: [int] Gives wins through that week.
         VSTEAMIDS: [list] Gives wins vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         wins = 0
         for week in self.__leagueModel.getWeeks():

@@ -45,9 +45,9 @@ class StatCalculatorService:
             plusMinusStr = rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
             stddev = scoresCalculator.getStandardDeviation()
             stddevStr = rounder.keepTrailingZeros(stddev, 2)
-            # everything above this has had the "week" kwarg changed to "throughWeek"
             recordCalculator = RecordCalculator(teamId, leagueModel)
             wins = recordCalculator.getWins()
+            # everything above this has had the "week" kwarg changed to "throughWeek"
             losses = recordCalculator.getLosses()
             ties = recordCalculator.getTies()
             winPercentage = recordCalculator.getWinPercentage()
