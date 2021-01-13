@@ -75,9 +75,9 @@ class TestPpgCalculator(unittest.TestCase):
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        ppgAgainstTeam1_1 = PpgCalculator(1, leagueModel).getPpgAgainst(week=1)
-        ppgAgainstTeam1_2 = PpgCalculator(1, leagueModel).getPpgAgainst(week=2)
-        ppgAgainstTeam1_3 = PpgCalculator(1, leagueModel).getPpgAgainst(week=3)
+        ppgAgainstTeam1_1 = PpgCalculator(1, leagueModel).getPpgAgainst(throughWeek=1)
+        ppgAgainstTeam1_2 = PpgCalculator(1, leagueModel).getPpgAgainst(throughWeek=2)
+        ppgAgainstTeam1_3 = PpgCalculator(1, leagueModel).getPpgAgainst(throughWeek=3)
         ppgAgainstTeam1_default = PpgCalculator(1, leagueModel).getPpgAgainst()
         self.assertIsInstance(ppgAgainstTeam1_1, float)
         self.assertEqual(100.5, ppgAgainstTeam1_1)

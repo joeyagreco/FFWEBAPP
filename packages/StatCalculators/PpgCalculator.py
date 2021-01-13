@@ -39,10 +39,10 @@ class PpgCalculator:
     def getPpgAgainst(self, **params):
         """
         Returns a float that is the Points Per Game against the team with the given ID.
-        WEEK: [int] Gives PPG Against through that week.
+        THROUGHWEEK: [int] Gives PPG Against through that week.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         scores = []
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:

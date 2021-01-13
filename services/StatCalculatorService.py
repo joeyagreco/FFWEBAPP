@@ -38,10 +38,10 @@ class StatCalculatorService:
             minScoreStr = rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
             ppgCalculator = PpgCalculator(teamId, leagueModel)
             ppg = ppgCalculator.getPpg()
-            # everything above this has had the "week" kwarg changed to "throughWeek"
             ppgAgainst = ppgCalculator.getPpgAgainst()
             ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
             ppgAgainstStr = rounder.keepTrailingZeros(ppgAgainst, decimalPlacesRoundedToScores)
+            # everything above this has had the "week" kwarg changed to "throughWeek"
             plusMinus = scoresCalculator.getPlusMinus()
             plusMinusStr = rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
             stddev = scoresCalculator.getStandardDeviation()
