@@ -15,11 +15,11 @@ class ScoresCalculator:
     def getMaxScore(self, **params):
         """
         Returns the maximum score the team with the given ID has in the given league.
-        WEEK: [int] Gives Max Score through that week.
+        THROUGHWEEK: [int] Gives Max Score through that week.
         VSTEAMIDS: [list] Gives max score vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         scores = []
         for week in self.__leagueModel.getWeeks():
