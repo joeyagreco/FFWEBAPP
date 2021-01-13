@@ -36,9 +36,9 @@ class StatCalculatorService:
             maxScoreStr = rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
             minScore = scoresCalculator.getMinScore()
             minScoreStr = rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
-            # everything above this has had the "week" kwarg changed to "throughWeek"
             ppgCalculator = PpgCalculator(teamId, leagueModel)
             ppg = ppgCalculator.getPpg()
+            # everything above this has had the "week" kwarg changed to "throughWeek"
             ppgAgainst = ppgCalculator.getPpgAgainst()
             ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
             ppgAgainstStr = rounder.keepTrailingZeros(ppgAgainst, decimalPlacesRoundedToScores)
