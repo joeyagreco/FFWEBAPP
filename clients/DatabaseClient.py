@@ -16,7 +16,7 @@ class DatabaseClient:
         self.__database = self.__cluster[os.getenv("DATABASE_DATABASE")]
         self.__collection = self.__database[os.getenv("DATABASE_COLLECTION")]
 
-    def __generateLeagueId(self):
+    def __generateLeagueId(self) -> int:
         """
         Returns a new and unused random league id
         Will be between 100000-999999 [always 6 digits]
@@ -26,7 +26,7 @@ class DatabaseClient:
             newLeagueId = random.randint(100000, 999999)
         return newLeagueId
 
-    def getLeague(self, leagueId):
+    def getLeague(self, leagueId: int):
         """
         Returns a dictionary object of the league or an Error object if not inserted
         https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
