@@ -110,14 +110,14 @@ class ScoresCalculator:
     def getPercentageOfLeagueScoring(self, **params):
         """
         Returns as a percentage the amount of total league scoring the team with self.__teamID was responsible for.
-        WEEK: [int] Gives percentage of league scoring through that week.
+        THROUGHWEEK: [int] Gives percentage of league scoring through that week.
         VSTEAMIDS: [list] Gives STDEV vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         allWeeksTeamsPlay = leagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, self.__teamId, vsTeamIds)
-        totalLeagueScore = leagueModelNavigator.totalLeaguePoints(self.__leagueModel, week=weekNumber, onlyIncludeWeeks=allWeeksTeamsPlay)
+        totalLeagueScore = leagueModelNavigator.totalLeaguePoints(self.__leagueModel, throughWeek=weekNumber, onlyIncludeWeeks=allWeeksTeamsPlay)
         totalTeamScore = 0
         for week in self.__leagueModel.getWeeks():
             if week.getWeekNumber() > weekNumber:

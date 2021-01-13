@@ -37,10 +37,10 @@ class LeagueModelNavigator:
     def gamesPlayedByTeam(self, leagueModel: LeagueModel, teamId: int, **params):
         """
         Returns as an int the number of games played in the given league by the team with the given ID.
-        WEEK: [int] Gives games played through that week.
+        THROUGHWEEK: [int] Gives games played through that week.
         VSTEAMIDS: [list] Gives games played vs teams with the given IDs.
         """
-        weekNumber = params.pop("week", self.getNumberOfWeeksInLeague(leagueModel))
+        weekNumber = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
         vsTeamIds = params.pop("vsTeamIds", self.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
         gamesPlayed = 0
         for week in leagueModel.getWeeks():
@@ -54,10 +54,10 @@ class LeagueModelNavigator:
     def totalLeaguePoints(self, leagueModel: LeagueModel, **params):
         """
         Returns a float that is the total amount of points scored in the given league.
-        WEEK: [int] Gives total league points scored through that week.
+        THROUGHWEEK: [int] Gives total league points scored through that week.
         ONLYINCLUDEWEEKS: [list] Gives total league points scored in the weeks given.
         """
-        weekNumber = params.pop("week", self.getNumberOfWeeksInLeague(leagueModel))
+        weekNumber = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
         onlyIncludeWeeks = params.pop("onlyIncludeWeeks", None)
         rounder = Rounder()
         totalPoints = 0
@@ -78,10 +78,10 @@ class LeagueModelNavigator:
     def totalPointsScoredByTeam(self, leagueModel: LeagueModel, teamId: int, **params):
         """
         Returns a float that is the total amount of points scored by the team with the given ID in the given league.
-        WEEK: [int] Gives total points scored through that week.
+        THROUGHWEEK: [int] Gives total points scored through that week.
         VSTEAMIDS: [list] Gives total points vs teams with the given IDs.
         """
-        weekNumber = params.pop("week", self.getNumberOfWeeksInLeague(leagueModel))
+        weekNumber = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
         vsTeamIds = params.pop("vsTeamIds", self.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
         rounder = Rounder()
         totalPoints = 0

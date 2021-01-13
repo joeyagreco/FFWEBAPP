@@ -51,13 +51,14 @@ class StatCalculatorService:
             ties = recordCalculator.getTies()
             winPercentage = recordCalculator.getWinPercentage()
             winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
-            # everything above this has had the "week" kwarg changed to "throughWeek"
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwal()
             wal = awalCalculator.getWal()
             gamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId)
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team HAS to play every week
+
+            # everything above this has had the "week" kwarg changed to "throughWeek"
             totalTeamPoints = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId)
             totalLeaguePoints = leagueModelNavigator.totalLeaguePoints(leagueModel)
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
