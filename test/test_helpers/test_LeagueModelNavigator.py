@@ -219,8 +219,8 @@ class TestLeagueModelNavigator(unittest.TestCase):
         weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         leagueModelNavigator = LeagueModelNavigator()
-        allScores1 = leagueModelNavigator.getAllScoresInLeague(leagueModel, week=1)
-        allScores2 = leagueModelNavigator.getAllScoresInLeague(leagueModel, week=2)
+        allScores1 = leagueModelNavigator.getAllScoresInLeague(leagueModel, throughWeek=1)
+        allScores2 = leagueModelNavigator.getAllScoresInLeague(leagueModel, throughWeek=2)
         allScoresDefault = leagueModelNavigator.getAllScoresInLeague(leagueModel)
         self.assertIsInstance(allScores1, list)
         self.assertEqual(6, len(allScores1))

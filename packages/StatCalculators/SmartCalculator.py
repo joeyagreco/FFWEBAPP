@@ -13,10 +13,10 @@ class SmartCalculator:
         Returns [essentially] the percentile of which this score would rank in self.__leagueModel.
         This is the percentage of games this score would win if it played against every other score.
         Note: This assumes that the given score already exists in self.__leagueModel.
-        WEEK: [int] Gives smart wins through that week.
+        THROUGHWEEK: [int] Gives smart wins through that week.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         rounder = Rounder()
         # round the given score properly
         decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
@@ -24,7 +24,7 @@ class SmartCalculator:
         scoresBeat = 0
         scoresTied = 0
         totalScores = 0
-        allScores = leagueModelNavigator.getAllScoresInLeague(self.__leagueModel, week=weekNumber)
+        allScores = leagueModelNavigator.getAllScoresInLeague(self.__leagueModel, throughWeek=weekNumber)
         for s in allScores:
             totalScores += 1
             if score > s:
@@ -42,14 +42,14 @@ class SmartCalculator:
         """
         Returns the smart wins a team with the given scores should have.
         Note: This assumes that the given scores already exist in self.__leagueModel.
-        WEEK: [int] Gives smart wins through that week.
+        THROUGHWEEK: [int] Gives smart wins through that week.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         rounder = Rounder()
         smartWins = 0
         for score in scoresList:
-            smartWins += self.getSmartWinsOfScore(score, week=weekNumber)
+            smartWins += self.getSmartWinsOfScore(score, throughWeek=weekNumber)
         # round to 2 decimal places by default
         smartWins = rounder.normalRound(smartWins, 2)
         return smartWins
@@ -58,10 +58,10 @@ class SmartCalculator:
         """
         Returns the smart wins adjustment of a team with the given scores and the given wal.
         Note: This assumes that the given scores already exist in self.__leagueModel.
-        WEEK: [int] Gives smart wins adjustment through that week.
+        THROUGHWEEK: [int] Gives smart wins adjustment through that week.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("week", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         rounder = Rounder()
-        smartWins = self.getSmartWinsOfScoresList(scores, week=weekNumber)
+        smartWins = self.getSmartWinsOfScoresList(scores, throughWeek=weekNumber)
         return rounder.normalRound(smartWins - wal, 2)
