@@ -127,6 +127,8 @@ class TestScoresCalculator(unittest.TestCase):
         plusMinusTeam1_3 = ScoresCalculator(1, leagueModel).getPlusMinus(throughWeek=3)
         plusMinusTeam1_vs2 = ScoresCalculator(1, leagueModel).getPlusMinus(vsTeamIds=[2])
         plusMinusTeam1_vs3 = ScoresCalculator(1, leagueModel).getPlusMinus(vsTeamIds=[3])
+        plusMinusTeam1_only1 = ScoresCalculator(1, leagueModel).getPlusMinus(onlyWeeks=[1])
+        plusMinusTeam1_only1and3 = ScoresCalculator(1, leagueModel).getPlusMinus(onlyWeeks=[1, 3])
         plusMinusTeam1_allParams = ScoresCalculator(1, leagueModel).getPlusMinus(throughWeek=2, vsTeamIds=[2])
         plusMinusTeam1_default = ScoresCalculator(1, leagueModel).getPlusMinus()
         self.assertIsInstance(plusMinusTeam1_1, float)
@@ -135,6 +137,8 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(-2.3, plusMinusTeam1_3)
         self.assertEqual(-2.3, plusMinusTeam1_vs2)
         self.assertEqual(0, plusMinusTeam1_vs3)
+        self.assertEqual(0, plusMinusTeam1_only1)
+        self.assertEqual(-1.2, plusMinusTeam1_only1and3)
         self.assertEqual(-1.1, plusMinusTeam1_allParams)
         self.assertEqual(-2.3, plusMinusTeam1_default)
 
