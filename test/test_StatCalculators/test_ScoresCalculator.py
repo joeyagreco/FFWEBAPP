@@ -83,6 +83,8 @@ class TestScoresCalculator(unittest.TestCase):
         minScoreTeam1_3 = ScoresCalculator(1, leagueModel).getMinScore(throughWeek=3)
         minScoreTeam1_vs2 = ScoresCalculator(1, leagueModel).getMinScore(vsTeamIds=[2])
         minScoreTeam1_vs3 = ScoresCalculator(1, leagueModel).getMinScore(vsTeamIds=[3])
+        minScoreTeam1_only1 = ScoresCalculator(1, leagueModel).getMinScore(onlyWeeks=[1])
+        minScoreTeam1_only1and3 = ScoresCalculator(1, leagueModel).getMinScore(onlyWeeks=[1, 3])
         minScoreTeam1_allParams = ScoresCalculator(1, leagueModel).getMinScore(throughWeek=1, vsTeamIds=[2])
         minScoreTeam1_default = ScoresCalculator(1, leagueModel).getMinScore()
         self.assertEqual(100, minScoreTeam1_1)
@@ -90,6 +92,8 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(98, minScoreTeam1_3)
         self.assertEqual(98, minScoreTeam1_vs2)
         self.assertEqual(0, minScoreTeam1_vs3)
+        self.assertEqual(100, minScoreTeam1_only1)
+        self.assertEqual(98, minScoreTeam1_only1and3)
         self.assertEqual(100, minScoreTeam1_allParams)
         self.assertEqual(98, minScoreTeam1_default)
 

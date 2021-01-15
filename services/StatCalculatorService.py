@@ -32,9 +32,9 @@ class StatCalculatorService:
             scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel)
             teamId = team.getTeamId()
             teamName = team.getTeamName()
-            # Everything above this has had an "only weeks" kwarg added to it
             maxScore = scoresCalculator.getMaxScore()
             maxScoreStr = rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
+            # Everything above this has had an "only weeks" kwarg added to it
             minScore = scoresCalculator.getMinScore()
             minScoreStr = rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
             ppgCalculator = PpgCalculator(teamId, leagueModel)
