@@ -44,21 +44,27 @@ class PpgCalculator:
         """
         Returns a float that is the Points Per Game against the team with the given ID.
         THROUGHWEEK: [int] Gives PPG Against through that week.
+        ONLYWEEKS: [list] Gives PPG Against for the given week numbers.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
-        scores = []
+        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
+        points = 0
+        gameCount = 0
         for week in self.__leagueModel.getWeeks():
-            if week.getWeekNumber() > weekNumber:
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
+            elif week.getWeekNumber() > throughWeek:
                 break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
-                    scores.append(matchup.getTeamBScore())
+                    points += matchup.getTeamBScore()
+                    gameCount += 1
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
-                    scores.append(matchup.getTeamAScore())
-        totalPoints = 0
-        for score in scores:
-            totalPoints += score
+                    points += matchup.getTeamAScore()
+                    gameCount += 1
+        if gameCount == 0:
+            return 0.0
         decimalPlacesRoundedTo = self.__rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
-        return self.__rounder.normalRound(totalPoints / weekNumber, decimalPlacesRoundedTo)
+        return self.__rounder.normalRound(points / gameCount, decimalPlacesRoundedTo)
 
