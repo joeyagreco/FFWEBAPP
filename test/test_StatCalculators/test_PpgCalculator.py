@@ -39,6 +39,8 @@ class TestPpgCalculator(unittest.TestCase):
         ppgTeam1_3 = PpgCalculator(1, leagueModel).getPpg(throughWeek=3)
         ppgTeam1_vs2 = PpgCalculator(1, leagueModel).getPpg(vsTeamIds=[2])
         ppgTeam1_vs3 = PpgCalculator(1, leagueModel).getPpg(vsTeamIds=[3])
+        ppgTeam1_only1 = PpgCalculator(1, leagueModel).getPpg(onlyWeeks=[1])
+        ppgTeam1_only1and3 = PpgCalculator(1, leagueModel).getPpg(onlyWeeks=[1, 3])
         ppgTeam1_allParams = PpgCalculator(1, leagueModel).getPpg(vsTeamIds=[2], throughWeek=1)
         ppgTeam1_default = PpgCalculator(1, leagueModel).getPpg()
         self.assertIsInstance(ppgTeam1_1, float)
@@ -47,6 +49,8 @@ class TestPpgCalculator(unittest.TestCase):
         self.assertEqual(99.33, ppgTeam1_3)
         self.assertEqual(99.33, ppgTeam1_vs2)
         self.assertEqual(0, ppgTeam1_vs3)
+        self.assertEqual(100, ppgTeam1_only1)
+        self.assertEqual(99.5, ppgTeam1_only1and3)
         self.assertEqual(100, ppgTeam1_allParams)
         self.assertEqual(99.33, ppgTeam1_default)
 

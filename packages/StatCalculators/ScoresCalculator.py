@@ -47,14 +47,14 @@ class ScoresCalculator:
         VSTEAMIDS: [list] Gives Min Score vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         scores = []
         for week in self.__leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                 continue
-            elif week.getWeekNumber() > weekNumber:
+            elif week.getWeekNumber() > throughWeek:
                 break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
