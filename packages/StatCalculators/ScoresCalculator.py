@@ -72,8 +72,8 @@ class ScoresCalculator:
         Example: Team abc has scored 100 points and has had 75 points scored against him.
                  Team abc has a +/- of +25.
         THROUGHWEEK: [int] Gives Plus/Minus through that week.
-        ONLYWEEKS: [list] Gives +/- for the given week numbers.
-        VSTEAMIDS: [list] Gives +/- vs teams with the given IDs.
+        ONLYWEEKS: [list] Gives Plus/Minus for the given week numbers.
+        VSTEAMIDS: [list] Gives Plus/Minus vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
@@ -100,14 +100,18 @@ class ScoresCalculator:
         """
         Returns the standard deviation of the scores for the team with the given ID has in the given league.
         THROUGHWEEK: [int] Gives Standard Deviation through that week.
-        VSTEAMIDS: [list] Gives STDEV vs teams with the given IDs.
+        ONLYWEEKS: [list] Gives Standard Deviation for the given week numbers.
+        VSTEAMIDS: [list] Gives Standard Deviation vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         scores = []
         for week in self.__leagueModel.getWeeks():
-            if week.getWeekNumber() > weekNumber:
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
+            elif week.getWeekNumber() > throughWeek:
                 break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:

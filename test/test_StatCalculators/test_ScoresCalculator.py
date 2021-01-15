@@ -172,6 +172,8 @@ class TestScoresCalculator(unittest.TestCase):
         standardDeviationTeam1_3 = ScoresCalculator(1, leagueModel).getStandardDeviation(throughWeek=3)
         standardDeviationTeam1_vs2 = ScoresCalculator(1, leagueModel).getStandardDeviation(vsTeamIds=[2])
         standardDeviationTeam1_vs3 = ScoresCalculator(1, leagueModel).getStandardDeviation(vsTeamIds=[3])
+        standardDeviationTeam1_only1 = ScoresCalculator(1, leagueModel).getStandardDeviation(onlyWeeks=[1])
+        standardDeviationTeam1_only1and3 = ScoresCalculator(1, leagueModel).getStandardDeviation(onlyWeeks=[1, 3])
         standardDeviationTeam1_allParams = ScoresCalculator(1, leagueModel).getStandardDeviation(throughWeek=1,
                                                                                                  vsTeamIds=[2])
         standardDeviationTeam1_default = ScoresCalculator(1, leagueModel).getStandardDeviation()
@@ -181,6 +183,8 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(0.47, standardDeviationTeam1_3)
         self.assertEqual(0.47, standardDeviationTeam1_vs2)
         self.assertEqual(0, standardDeviationTeam1_vs3)
+        self.assertEqual(0, standardDeviationTeam1_only1)
+        self.assertEqual(0.5, standardDeviationTeam1_only1and3)
         self.assertEqual(0, standardDeviationTeam1_allParams)
         self.assertEqual(0.47, standardDeviationTeam1_default)
 
