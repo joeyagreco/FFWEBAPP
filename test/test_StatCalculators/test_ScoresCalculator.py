@@ -39,6 +39,8 @@ class TestScoresCalculator(unittest.TestCase):
         maxScoreTeam1_3 = ScoresCalculator(1, leagueModel).getMaxScore(throughWeek=3)
         maxScoreTeam1_vs2 = ScoresCalculator(1, leagueModel).getMaxScore(vsTeamIds=[2])
         maxScoreTeam1_vs3 = ScoresCalculator(1, leagueModel).getMaxScore(vsTeamIds=[3])
+        maxScoreTeam1_only1 = ScoresCalculator(1, leagueModel).getMaxScore(onlyWeeks=[1])
+        maxScoreTeam1_only1and3 = ScoresCalculator(1, leagueModel).getMaxScore(onlyWeeks=[1, 3])
         maxScoreTeam1_allParams = ScoresCalculator(1, leagueModel).getMaxScore(throughWeek=2, vsTeamIds=[2])
         maxScoreTeam1_default = ScoresCalculator(1, leagueModel).getMaxScore()
         self.assertEqual(98, maxScoreTeam1_1)
@@ -46,6 +48,8 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(100, maxScoreTeam1_3)
         self.assertEqual(100, maxScoreTeam1_vs2)
         self.assertEqual(0, maxScoreTeam1_vs3)
+        self.assertEqual(98, maxScoreTeam1_only1)
+        self.assertEqual(100, maxScoreTeam1_only1and3)
         self.assertEqual(99, maxScoreTeam1_allParams)
         self.assertEqual(100, maxScoreTeam1_default)
 
@@ -160,7 +164,8 @@ class TestScoresCalculator(unittest.TestCase):
         standardDeviationTeam1_3 = ScoresCalculator(1, leagueModel).getStandardDeviation(throughWeek=3)
         standardDeviationTeam1_vs2 = ScoresCalculator(1, leagueModel).getStandardDeviation(vsTeamIds=[2])
         standardDeviationTeam1_vs3 = ScoresCalculator(1, leagueModel).getStandardDeviation(vsTeamIds=[3])
-        standardDeviationTeam1_allParams = ScoresCalculator(1, leagueModel).getStandardDeviation(throughWeek=1, vsTeamIds=[2])
+        standardDeviationTeam1_allParams = ScoresCalculator(1, leagueModel).getStandardDeviation(throughWeek=1,
+                                                                                                 vsTeamIds=[2])
         standardDeviationTeam1_default = ScoresCalculator(1, leagueModel).getStandardDeviation()
         self.assertIsInstance(standardDeviationTeam1_1, float)
         self.assertEqual(0, standardDeviationTeam1_1)
@@ -195,7 +200,8 @@ class TestScoresCalculator(unittest.TestCase):
         percentageTeam1_2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(throughWeek=2)
         percentageTeam1_vs2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(vsTeamIds=[2])
         percentageTeam1_vs3 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(vsTeamIds=[3])
-        percentageTeam1_allParams = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(throughWeek=1, vsTeamIds=[2])
+        percentageTeam1_allParams = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(throughWeek=1,
+                                                                                                  vsTeamIds=[2])
         percentageTeam1_default = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring()
         self.assertIsInstance(percentageTeam1_1, float)
         self.assertEqual(23.87, percentageTeam1_1)
