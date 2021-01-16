@@ -47,8 +47,8 @@ class StatCalculatorService:
             stddevStr = rounder.keepTrailingZeros(stddev, 2)
             recordCalculator = RecordCalculator(teamId, leagueModel)
             wins = recordCalculator.getWins()
-            # Everything above this has had an "only weeks" kwarg added to it
             losses = recordCalculator.getLosses()
+            # Everything above this has had an "only weeks" kwarg added to it
             ties = recordCalculator.getTies()
             winPercentage = recordCalculator.getWinPercentage()
             winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
