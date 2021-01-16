@@ -98,14 +98,16 @@ class RecordCalculator:
         """
         Returns as a float the win percentage of the team with self.__teamId.
         THROUGHWEEK: [int] Gives win percentage through that week.
+        ONLYWEEKS: [list] Gives ties for the given week numbers.
         VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
-        wins = self.getWins(throughWeek=weekNumber, vsTeamIds=vsTeamIds)
-        losses = self.getLosses(throughWeek=weekNumber, vsTeamIds=vsTeamIds)
-        ties = self.getTies(throughWeek=weekNumber, vsTeamIds=vsTeamIds)
+        wins = self.getWins(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
+        losses = self.getLosses(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
+        ties = self.getTies(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
         totalGames = wins + losses + ties
         # if there are no games played, return 0.0 for win percentage
         if totalGames == 0:
