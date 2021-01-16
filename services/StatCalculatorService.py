@@ -64,12 +64,12 @@ class StatCalculatorService:
             teamSuccess = sslCalculator.getTeamSuccess()
             teamLuck = sslCalculator.getTeamLuck()
             allScores = leagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId)
-            # Everything above this has had an "only weeks" kwarg added to it
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
             smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
             smartWinsAdjustment = smartCalculator.getSmartWinsAdjustmentOfScores(allScores, wal)
             smartWinsAdjustmentStr = rounder.keepTrailingZeros(smartWinsAdjustment, 2)
+            # Everything above this has had an "only weeks" kwarg added to it
             percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
             percentageOfLeagueScoringStr = rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
 

@@ -200,12 +200,16 @@ class LeagueModelNavigator:
                 teamIds.append(team.getTeamId())
         return teamIds
 
-    def getAllWeeksTeamsPlayEachOther(self, leagueModel: LeagueModel, team1Id: int, opponentTeamIds: list) -> List[int]:
+    def getAllWeeksTeamsPlayEachOther(self, leagueModel: LeagueModel, team1Id: int, opponentTeamIds: list, **params) -> List[int]:
         """
         Returns as a list of ints all of the weeks that the team with team1Id plays any of the teams with ids in opponentTeamIds.
+        ONLYWEEKS: [list] Gives weeks teams play each other for the given week numbers.
         """
+        onlyWeeks = params.pop("onlyWeeks", None)
         weeks = []
         for week in leagueModel.getWeeks():
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == team1Id and matchup.getTeamB().getTeamId() in opponentTeamIds or matchup.getTeamB().getTeamId() == team1Id and matchup.getTeamA().getTeamId() in opponentTeamIds:
                     weeks.append(week.getWeekNumber())

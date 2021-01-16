@@ -127,16 +127,21 @@ class ScoresCalculator:
         """
         Returns as a percentage the amount of total league scoring the team with self.__teamID was responsible for.
         THROUGHWEEK: [int] Gives percentage of league scoring through that week.
-        VSTEAMIDS: [list] Gives STDEV vs teams with the given IDs.
+        ONLYWEEKS: [list] Gives percentage of league scoring for the given week numbers.
+        VSTEAMIDS: [list] Gives percentage of league scoring vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
-        allWeeksTeamsPlay = leagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, self.__teamId, vsTeamIds)
-        totalLeagueScore = leagueModelNavigator.totalLeaguePoints(self.__leagueModel, throughWeek=weekNumber, onlyIncludeWeeks=allWeeksTeamsPlay)
+
+        allWeeksTeamsPlay = leagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, self.__teamId, vsTeamIds, onlyWeeks=onlyWeeks)
+        totalLeagueScore = leagueModelNavigator.totalLeaguePoints(self.__leagueModel, throughWeek=weekNumber, onlyWeeks=allWeeksTeamsPlay)
         totalTeamScore = 0
         for week in self.__leagueModel.getWeeks():
-            if week.getWeekNumber() > weekNumber:
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
+            elif week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:

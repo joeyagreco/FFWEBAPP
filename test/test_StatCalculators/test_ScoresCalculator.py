@@ -212,6 +212,8 @@ class TestScoresCalculator(unittest.TestCase):
         percentageTeam1_2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(throughWeek=2)
         percentageTeam1_vs2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(vsTeamIds=[2])
         percentageTeam1_vs3 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(vsTeamIds=[3])
+        percentageTeam1_only2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(onlyWeeks=[2])
+        percentageTeam1_only1and2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(onlyWeeks=[1, 2])
         percentageTeam1_allParams = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(throughWeek=1,
                                                                                                   vsTeamIds=[2])
         percentageTeam1_default = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring()
@@ -220,5 +222,7 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(23.96, percentageTeam1_2)
         self.assertEqual(23.96, percentageTeam1_vs2)
         self.assertEqual(0, percentageTeam1_vs3)
+        self.assertEqual(24.05, percentageTeam1_only2)
+        self.assertEqual(23.96, percentageTeam1_only1and2)
         self.assertEqual(23.87, percentageTeam1_allParams)
         self.assertEqual(23.96, percentageTeam1_default)
