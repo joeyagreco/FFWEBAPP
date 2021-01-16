@@ -48,8 +48,8 @@ class StatCalculatorService:
             recordCalculator = RecordCalculator(teamId, leagueModel)
             wins = recordCalculator.getWins()
             losses = recordCalculator.getLosses()
-            # Everything above this has had an "only weeks" kwarg added to it
             ties = recordCalculator.getTies()
+            # Everything above this has had an "only weeks" kwarg added to it
             winPercentage = recordCalculator.getWinPercentage()
             winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)

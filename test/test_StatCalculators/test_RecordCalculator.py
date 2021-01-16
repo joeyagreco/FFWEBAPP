@@ -109,6 +109,8 @@ class TestRecordCalculator(unittest.TestCase):
         tiesTeam1_2 = RecordCalculator(1, leagueModel).getTies(throughWeek=2)
         tiesTeam1_vs2 = RecordCalculator(1, leagueModel).getTies(vsTeamIds=[2])
         tiesTeam1_vs3 = RecordCalculator(1, leagueModel).getTies(vsTeamIds=[3])
+        tiesTeam1_only2 = RecordCalculator(1, leagueModel).getTies(onlyWeeks=[2])
+        tiesTeam1_only1and2 = RecordCalculator(1, leagueModel).getTies(onlyWeeks=[1, 2])
         tiesTeam1_allParams = RecordCalculator(1, leagueModel).getTies(throughWeek=1, vsTeamIds=[2])
         tiesTeam1_default = RecordCalculator(1, leagueModel).getTies()
         self.assertIsInstance(tiesTeam1_1, int)
@@ -116,6 +118,8 @@ class TestRecordCalculator(unittest.TestCase):
         self.assertEqual(1, tiesTeam1_2)
         self.assertEqual(1, tiesTeam1_vs2)
         self.assertEqual(0, tiesTeam1_vs3)
+        self.assertEqual(1, tiesTeam1_only2)
+        self.assertEqual(1, tiesTeam1_only1and2)
         self.assertEqual(0, tiesTeam1_allParams)
         self.assertEqual(1, tiesTeam1_default)
 

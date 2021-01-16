@@ -70,14 +70,18 @@ class RecordCalculator:
         """
         Returns as an int the number of ties the team with self.__teamId has in this league.
         THROUGHWEEK: [int] Gives ties through that week.
+        ONLYWEEKS: [list] Gives ties for the given week numbers.
         VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         ties = 0
         for week in self.__leagueModel.getWeeks():
-            if week.getWeekNumber() > weekNumber:
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
+            elif week.getWeekNumber() > throughWeek:
                 break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
