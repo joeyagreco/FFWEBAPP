@@ -188,7 +188,11 @@ class StatCalculatorService:
                 teamAgainst = scoreModel.getTeamAgainst()
                 outcome = scoreModel.getOutcome()
                 weekNumber = scoreModel.getWeek()
-                newModel = ScoreModel(score=score, teamFor=teamFor, teamAgainst=teamAgainst, outcome=outcome, weekNumber=weekNumber)
+                newModel = ScoreModel(score=score,
+                                      teamFor=teamFor,
+                                      teamAgainst=teamAgainst,
+                                      outcome=outcome,
+                                      week=weekNumber)
                 allScoresStr.append(newModel)
             return allScoresStr
         elif statSelection == "Margins of Victory":
@@ -206,7 +210,12 @@ class StatCalculatorService:
                 teamAgainstPoints = movModel.getLosingTeamPoints()
                 teamAgainstPoints = Rounder.keepTrailingZeros(teamAgainstPoints, decimalPlacesForScores)
                 weekNumber = movModel.getWeek()
-                newModel = MarginOfVictoryModel(mov=mov, teamFor=teamFor, teamForPoints=teamForPoints, teamAgainst=teamAgainstPoints, teamAgainstPoints=teamAgainstPoints, weekNumber=weekNumber)
+                newModel = MarginOfVictoryModel(marginOfVictory=mov,
+                                                winningTeam=teamFor,
+                                                winningTeamPoints=teamForPoints,
+                                                losingTeam=teamAgainst,
+                                                losingTeamPoints=teamAgainstPoints,
+                                                week=weekNumber)
                 allMovsStr.append(newModel)
             return allMovsStr
 

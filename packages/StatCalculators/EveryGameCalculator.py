@@ -42,7 +42,12 @@ class EveryGameCalculator:
                 else:
                     # tie, dont care about this
                     continue
-                model = MarginOfVictoryModel(mov, teamFor, teamForPoints, teamAgainst, teamAgainstPoints, weekNumber)
+                model = MarginOfVictoryModel(marginOfVictory=mov,
+                                             winningTeam=teamFor,
+                                             winningTeamPoints=teamForPoints,
+                                             losingTeam=teamAgainst,
+                                             losingTeamPoints=teamAgainstPoints,
+                                             week=weekNumber)
                 models.append(model)
         return models
 
@@ -70,8 +75,16 @@ class EveryGameCalculator:
                 teamBAgainst = matchup.getTeamA()
                 teamBOutcome = leagueModelNavigator.getGameOutcomeAsString(matchup, matchup.getTeamB().getTeamId())
                 # create both team models and add to list
-                teamAModel = ScoreModel(teamAScore, teamAFor, teamAAgainst, teamAOutcome, weekNumber)
-                teamBModel = ScoreModel(teamBScore, teamBFor, teamBAgainst, teamBOutcome, weekNumber)
+                teamAModel = ScoreModel(score=teamAScore,
+                                        teamFor=teamAFor,
+                                        teamAgainst=teamAAgainst,
+                                        outcome=teamAOutcome,
+                                        week=weekNumber)
+                teamBModel = ScoreModel(score=teamBScore,
+                                        teamFor=teamBFor,
+                                        teamAgainst=teamBAgainst,
+                                        outcome=teamBOutcome,
+                                        week=weekNumber)
                 models.append(teamAModel)
                 models.append(teamBModel)
         return models
