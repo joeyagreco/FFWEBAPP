@@ -8,7 +8,6 @@ class RecordCalculator:
     def __init__(self, teamId: int, leagueModel: LeagueModel):
         self.__teamId = teamId
         self.__leagueModel = leagueModel
-        self.__rounder = Rounder()
 
     def getWins(self, **params) -> int:
         """
@@ -17,10 +16,9 @@ class RecordCalculator:
         ONLYWEEKS: [list] Gives wins for the given week numbers.
         VSTEAMIDS: [list] Gives wins vs teams with the given IDs.
         """
-        leagueModelNavigator = LeagueModelNavigator()
-        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         wins = 0
         for week in self.__leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -45,10 +43,9 @@ class RecordCalculator:
         ONLYWEEKS: [list] Gives losses for the given week numbers.
         VSTEAMIDS: [list] Gives losses vs teams with the given IDs.
         """
-        leagueModelNavigator = LeagueModelNavigator()
-        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         losses = 0
         for week in self.__leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -73,10 +70,9 @@ class RecordCalculator:
         ONLYWEEKS: [list] Gives ties for the given week numbers.
         VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
         """
-        leagueModelNavigator = LeagueModelNavigator()
-        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         ties = 0
         for week in self.__leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -101,10 +97,9 @@ class RecordCalculator:
         ONLYWEEKS: [list] Gives win percentage for the given week numbers.
         VSTEAMIDS: [list] Gives win percentage vs teams with the given IDs.
         """
-        leagueModelNavigator = LeagueModelNavigator()
-        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         wins = self.getWins(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
         losses = self.getLosses(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
         ties = self.getTies(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
@@ -112,4 +107,4 @@ class RecordCalculator:
         # if there are no games played, return 0.0 for win percentage
         if totalGames == 0:
             return 0.0
-        return self.__rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)
+        return Rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)

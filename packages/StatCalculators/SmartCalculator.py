@@ -14,15 +14,13 @@ class SmartCalculator:
         This is the percentage of games this score would win if it played against every other score.
         Note: This assumes that the given score already exists in self.__leagueModel.
         """
-        leagueModelNavigator = LeagueModelNavigator()
-        rounder = Rounder()
         # round the given score properly
-        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
-        score = rounder.normalRound(score, decimalPlacesToRoundTo)
+        decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
+        score = Rounder.normalRound(score, decimalPlacesToRoundTo)
         scoresBeat = 0
         scoresTied = 0
         totalScores = 0
-        allScores = leagueModelNavigator.getAllScoresInLeague(self.__leagueModel)
+        allScores = LeagueModelNavigator.getAllScoresInLeague(self.__leagueModel)
         for s in allScores:
             totalScores += 1
             if score > s:
@@ -33,7 +31,7 @@ class SmartCalculator:
         scoresTied -= 1
         totalScores -= 1
         rawPercentile = (scoresBeat + (scoresTied * 0.5)) / totalScores
-        smartWins = rounder.normalRound(rawPercentile, 2)
+        smartWins = Rounder.normalRound(rawPercentile, 2)
         return smartWins
 
     def getSmartWinsOfScoresList(self, scoresList: list) -> float:
@@ -41,12 +39,11 @@ class SmartCalculator:
         Returns the smart wins a team with the given scores should have.
         Note: This assumes that the given scores already exist in self.__leagueModel.
         """
-        rounder = Rounder()
         smartWins = 0
         for score in scoresList:
             smartWins += self.getSmartWinsOfScore(score)
         # round to 2 decimal places by default
-        smartWins = rounder.normalRound(smartWins, 2)
+        smartWins = Rounder.normalRound(smartWins, 2)
         return smartWins
 
     def getSmartWinsAdjustmentOfScores(self, scores: list, wal: float) -> float:
@@ -55,6 +52,5 @@ class SmartCalculator:
         Smart Wins Adjustment is Smart Wins - WAL
         Note: This assumes that the given scores already exist in self.__leagueModel.
         """
-        rounder = Rounder()
         smartWins = self.getSmartWinsOfScoresList(scores)
-        return rounder.normalRound(smartWins - wal, 2)
+        return Rounder.normalRound(smartWins - wal, 2)
