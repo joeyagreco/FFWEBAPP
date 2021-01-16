@@ -98,8 +98,8 @@ class RecordCalculator:
         """
         Returns as a float the win percentage of the team with self.__teamId.
         THROUGHWEEK: [int] Gives win percentage through that week.
-        ONLYWEEKS: [list] Gives ties for the given week numbers.
-        VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
+        ONLYWEEKS: [list] Gives win percentage for the given week numbers.
+        VSTEAMIDS: [list] Gives win percentage vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
         throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
