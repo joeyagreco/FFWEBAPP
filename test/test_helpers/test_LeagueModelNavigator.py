@@ -97,6 +97,8 @@ class TestLeagueModelNavigator(unittest.TestCase):
         team1GamesPlayed_2 = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, throughWeek=2)
         team1GamesPlayed_vs2 = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, vsTeamIds=[2])
         team1GamesPlayed_vs3 = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, vsTeamIds=[3])
+        team1GamesPlayed_only2 = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, onlyWeeks=[2])
+        team1GamesPlayed_only1and2 = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, onlyWeeks=[1, 2])
         team1GamesPlayed_allParams = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 1, throughWeek=1, vsTeamIds=[2])
         nonTeamGamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, 7)
         self.assertEqual(2, team1GamesPlayed)
@@ -105,6 +107,8 @@ class TestLeagueModelNavigator(unittest.TestCase):
         self.assertEqual(2, team1GamesPlayed_2)
         self.assertEqual(2, team1GamesPlayed_vs2)
         self.assertEqual(0, team1GamesPlayed_vs3)
+        self.assertEqual(1, team1GamesPlayed_only2)
+        self.assertEqual(2, team1GamesPlayed_only1and2)
         self.assertEqual(1, team1GamesPlayed_allParams)
         self.assertEqual(0, nonTeamGamesPlayed)
 

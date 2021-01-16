@@ -41,13 +41,17 @@ class LeagueModelNavigator:
         """
         Returns as an int the number of games played in the given league by the team with the given ID.
         THROUGHWEEK: [int] Gives games played through that week.
+        ONLYWEEKS: [list] Gives games played for the given week numbers.
         VSTEAMIDS: [list] Gives games played vs teams with the given IDs.
         """
         weekNumber = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", self.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
         gamesPlayed = 0
         for week in leagueModel.getWeeks():
-            if week.getWeekNumber() > weekNumber:
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
+            elif week.getWeekNumber() > weekNumber:
                 break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == teamId and matchup.getTeamB().getTeamId() in vsTeamIds or matchup.getTeamB().getTeamId() == teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
