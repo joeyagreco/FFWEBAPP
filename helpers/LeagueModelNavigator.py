@@ -44,14 +44,14 @@ class LeagueModelNavigator:
         ONLYWEEKS: [list] Gives games played for the given week numbers.
         VSTEAMIDS: [list] Gives games played vs teams with the given IDs.
         """
-        weekNumber = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
+        throughWeek = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", self.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
         gamesPlayed = 0
         for week in leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                 continue
-            elif week.getWeekNumber() > weekNumber:
+            elif week.getWeekNumber() > throughWeek:
                 break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == teamId and matchup.getTeamB().getTeamId() in vsTeamIds or matchup.getTeamB().getTeamId() == teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
@@ -62,38 +62,38 @@ class LeagueModelNavigator:
         """
         Returns a float that is the total amount of points scored in the given league.
         THROUGHWEEK: [int] Gives total league points scored through that week.
-        ONLYINCLUDEWEEKS: [list] Gives total league points scored in the weeks given.
+        ONLYWEEKS: [list] Gives total league points for the given week numbers.
         """
-        weekNumber = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
-        onlyIncludeWeeks = params.pop("onlyIncludeWeeks", None)
+        throughWeek = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         rounder = Rounder()
         totalPoints = 0
         for week in leagueModel.getWeeks():
-            if week.getWeekNumber() > weekNumber:
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
+            elif week.getWeekNumber() > throughWeek:
                 break
-            if onlyIncludeWeeks:
-                if week.getWeekNumber() in onlyIncludeWeeks:
-                    for matchup in week.getMatchups():
-                        totalPoints += matchup.getTeamAScore()
-                        totalPoints += matchup.getTeamBScore()
-            else:
-                for matchup in week.getMatchups():
-                    totalPoints += matchup.getTeamAScore()
-                    totalPoints += matchup.getTeamBScore()
+            for matchup in week.getMatchups():
+                totalPoints += matchup.getTeamAScore()
+                totalPoints += matchup.getTeamBScore()
         return rounder.normalRound(totalPoints, rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
     def totalPointsScoredByTeam(self, leagueModel: LeagueModel, teamId: int, **params) -> float:
         """
         Returns a float that is the total amount of points scored by the team with the given ID in the given league.
         THROUGHWEEK: [int] Gives total points scored through that week.
+        ONLYWEEKS: [list] Gives total points for the given week numbers.
         VSTEAMIDS: [list] Gives total points vs teams with the given IDs.
         """
-        weekNumber = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
+        throughWeek = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", self.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
         rounder = Rounder()
         totalPoints = 0
         for week in leagueModel.getWeeks():
-            if week.getWeekNumber() > weekNumber:
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
+            elif week.getWeekNumber() > throughWeek:
                 break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
@@ -132,13 +132,17 @@ class LeagueModelNavigator:
         Returns as a list of floats all of the scores in the given leagueModel.
         Note: These scores will be properly rounded.
         THROUGHWEEK: [int] Gives all league scores through that week.
+        ONLYWEEKS: [list] Gives all league scores for the given week numbers.
         """
-        weekNumber = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
+        throughWeek = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         rounder = Rounder()
         decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         allScores = []
         for week in leagueModel.getWeeks():
-            if week.getWeekNumber() > weekNumber:
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
+            elif week.getWeekNumber() > throughWeek:
                 break
             for matchup in week.getMatchups():
                 scoreA = matchup.getTeamAScore()
@@ -154,15 +158,19 @@ class LeagueModelNavigator:
         Returns as a list of floats all of the scores in the given leagueModel that the team with the given ID had.
         Note: These scores will be properly rounded.
         THROUGHWEEK: [int] Gives all scores through that week.
-        VSTEAMIDS: [list] Gives ties vs teams with the given IDs.
+        ONLYWEEKS: [list] Gives all scores for the given week numbers.
+        VSTEAMIDS: [list] Gives all scores vs teams with the given IDs.
         """
-        weekNumber = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
+        throughWeek = params.pop("throughWeek", self.getNumberOfWeeksInLeague(leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", self.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
         rounder = Rounder()
         decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         allScores = []
         for week in leagueModel.getWeeks():
-            if week.getWeekNumber() > weekNumber:
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
+            elif week.getWeekNumber() > throughWeek:
                 break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == teamId and matchup.getTeamB().getTeamId() in vsTeamIds:

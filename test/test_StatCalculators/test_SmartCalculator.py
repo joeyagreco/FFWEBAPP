@@ -30,11 +30,11 @@ class TestSmartCalculator(unittest.TestCase):
         weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         smartCalculator = SmartCalculator(leagueModel)
-        smartWins1 = smartCalculator.getSmartWinsOfScore(100, throughWeek=1)
-        smartWins2 = smartCalculator.getSmartWinsOfScore(100, throughWeek=2)
+        smartWins1 = smartCalculator.getSmartWinsOfScore(100)
+        smartWins2 = smartCalculator.getSmartWinsOfScore(100)
         smartWinsDefault = smartCalculator.getSmartWinsOfScore(100)
         self.assertIsInstance(smartWins1, float)
-        self.assertEqual(0.3, smartWins1)
+        self.assertEqual(0.32, smartWins1)
         self.assertEqual(0.32, smartWins2)
         self.assertEqual(0.32, smartWinsDefault)
 
@@ -59,11 +59,9 @@ class TestSmartCalculator(unittest.TestCase):
         weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         smartCalculator = SmartCalculator(leagueModel)
-        smartWins1 = smartCalculator.getSmartWinsOfScoresList([100], throughWeek=1)
-        smartWins2 = smartCalculator.getSmartWinsOfScoresList([100, 100], throughWeek=2)
+        smartWins2 = smartCalculator.getSmartWinsOfScoresList([100, 100])
         smartWinsDefault = smartCalculator.getSmartWinsOfScoresList([100, 100])
-        self.assertIsInstance(smartWins1, float)
-        self.assertEqual(0.3, smartWins1)
+        self.assertIsInstance(smartWins2, float)
         self.assertEqual(0.64, smartWins2)
         self.assertEqual(0.64, smartWinsDefault)
 
@@ -88,11 +86,9 @@ class TestSmartCalculator(unittest.TestCase):
         weekList = [week1, week2]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         smartCalculator = SmartCalculator(leagueModel)
-        swa1 = smartCalculator.getSmartWinsAdjustmentOfScores([100], 0, throughWeek=1)
-        swa2 = smartCalculator.getSmartWinsAdjustmentOfScores([100, 100], 1, throughWeek=2)
+        swa2 = smartCalculator.getSmartWinsAdjustmentOfScores([100, 100], 1)
         swaDefault = smartCalculator.getSmartWinsAdjustmentOfScores([100, 100], 1)
-        self.assertIsInstance(swa1, float)
-        self.assertEqual(0.3, swa1)
+        self.assertIsInstance(swa2, float)
         self.assertEqual(-0.18, swa2)
         self.assertEqual(-0.18, swaDefault)
 
