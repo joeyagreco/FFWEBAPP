@@ -20,58 +20,56 @@ class StatCalculatorService:
     It contains logic where the controller can/should not.
     """
 
-
-    def getTeamStats(self, leagueModel: LeagueModel):
+    @staticmethod
+    def getTeamStats(leagueModel: LeagueModel):
         """
         Returns a list of TeamStatsModels, one for each team in the given league.
         """
         teamStatsModels = []
-        leagueModelNavigator = LeagueModelNavigator()
         for team in leagueModel.getTeams():
-            rounder = Rounder()
-            decimalPlacesRoundedToScores = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
+            decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel)
             teamId = team.getTeamId()
             teamName = team.getTeamName()
             maxScore = scoresCalculator.getMaxScore()
-            maxScoreStr = rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
+            maxScoreStr = Rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
             minScore = scoresCalculator.getMinScore()
-            minScoreStr = rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
+            minScoreStr = Rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
             ppgCalculator = PpgCalculator(teamId, leagueModel)
             ppg = ppgCalculator.getPpg()
             ppgAgainst = ppgCalculator.getPpgAgainst()
-            ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
-            ppgAgainstStr = rounder.keepTrailingZeros(ppgAgainst, decimalPlacesRoundedToScores)
+            ppgStr = Rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
+            ppgAgainstStr = Rounder.keepTrailingZeros(ppgAgainst, decimalPlacesRoundedToScores)
             plusMinus = scoresCalculator.getPlusMinus()
-            plusMinusStr = rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
+            plusMinusStr = Rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
             stddev = scoresCalculator.getStandardDeviation()
-            stddevStr = rounder.keepTrailingZeros(stddev, 2)
+            stddevStr = Rounder.keepTrailingZeros(stddev, 2)
             recordCalculator = RecordCalculator(teamId, leagueModel)
             wins = recordCalculator.getWins()
             losses = recordCalculator.getLosses()
             ties = recordCalculator.getTies()
             winPercentage = recordCalculator.getWinPercentage()
-            winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
+            winPercentageStr = Rounder.keepTrailingZeros(winPercentage, 3)
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwal()
             wal = awalCalculator.getWal()
-            gamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId)
+            gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId)
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team HAS to play every week
-            totalTeamPoints = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId)
-            totalLeaguePoints = leagueModelNavigator.totalLeaguePoints(leagueModel)
+            totalTeamPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId)
+            totalLeaguePoints = LeagueModelNavigator.totalLeaguePoints(leagueModel)
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
             teamScore = sslCalculator.getTeamScore()
             teamSuccess = sslCalculator.getTeamSuccess()
             teamLuck = sslCalculator.getTeamLuck()
-            allScores = leagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId)
+            allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId)
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
-            smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
+            smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
             smartWinsAdjustment = smartCalculator.getSmartWinsAdjustmentOfScores(allScores, wal)
-            smartWinsAdjustmentStr = rounder.keepTrailingZeros(smartWinsAdjustment, 2)
+            smartWinsAdjustmentStr = Rounder.keepTrailingZeros(smartWinsAdjustment, 2)
             percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
-            percentageOfLeagueScoringStr = rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
+            percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
 
             teamModel = TeamStatsModel(teamId=teamId,
                                        teamName=teamName,
@@ -97,57 +95,56 @@ class StatCalculatorService:
         teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
         return teamStatsModels
 
-    def getHeadToHeadStats(self, leagueModel: LeagueModel, team1Id: int, team2Id: int):
+    @staticmethod
+    def getHeadToHeadStats(leagueModel: LeagueModel, team1Id: int, team2Id: int):
         """
         Returns 2 HeadToHeadStatsModels in a list for the teams with the given IDs.
         """
         teamIds = (team1Id, team2Id)
         statsModels = []
-        leagueModelNavigator = LeagueModelNavigator()
         for i, teamId in enumerate(teamIds):
             opponentTeamId = teamIds[i - 1]
-            rounder = Rounder()
-            decimalPlacesRoundedToScores = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-            teamName = leagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
+            decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
+            teamName = LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
             recordCalculator = RecordCalculator(teamId, leagueModel)
             wins = recordCalculator.getWins(vsTeamIds=[opponentTeamId])
             losses = recordCalculator.getLosses(vsTeamIds=[opponentTeamId])
             ties = recordCalculator.getTies(vsTeamIds=[opponentTeamId])
             winPercentage = recordCalculator.getWinPercentage(vsTeamIds=[opponentTeamId])
-            winPercentageStr = rounder.keepTrailingZeros(winPercentage, 3)
+            winPercentageStr = Rounder.keepTrailingZeros(winPercentage, 3)
             ppgCalculator = PpgCalculator(teamId, leagueModel)
             ppg = ppgCalculator.getPpg(vsTeamIds=[opponentTeamId])
-            ppgStr = rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
+            ppgStr = Rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
             scoresCalculator = ScoresCalculator(teamId, leagueModel)
             plusMinus = scoresCalculator.getPlusMinus(vsTeamIds=[opponentTeamId])
-            plusMinusStr = rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
+            plusMinusStr = Rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
             stddev = scoresCalculator.getStandardDeviation(vsTeamIds=[opponentTeamId])
-            stddevStr = rounder.keepTrailingZeros(stddev, 2)
+            stddevStr = Rounder.keepTrailingZeros(stddev, 2)
             maxScore = scoresCalculator.getMaxScore(vsTeamIds=[opponentTeamId])
-            maxScoreStr = rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
+            maxScoreStr = Rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
             minScore = scoresCalculator.getMinScore(vsTeamIds=[opponentTeamId])
-            minScoreStr = rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
+            minScoreStr = Rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwal(vsTeamIds=[opponentTeamId])
             wal = awalCalculator.getWal()
-            gamesPlayed = leagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
+            gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team has to play every week
-            totalTeamPoints = leagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
-            allWeeksTeamsPlay = leagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, team1Id, [team2Id])
-            totalLeaguePoints = leagueModelNavigator.totalLeaguePoints(leagueModel, onlyIncludeWeeks=allWeeksTeamsPlay)
+            totalTeamPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
+            allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, team1Id, [team2Id])
+            totalLeaguePoints = LeagueModelNavigator.totalLeaguePoints(leagueModel, onlyIncludeWeeks=allWeeksTeamsPlay)
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
             teamScore = sslCalculator.getTeamScore()
             teamSuccess = sslCalculator.getTeamSuccess()
             teamLuck = sslCalculator.getTeamLuck()
-            allScores = leagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
+            allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
-            smartWinsStr = rounder.keepTrailingZeros(smartWins, 2)
+            smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
             smartWinsAdjustment = smartCalculator.getSmartWinsAdjustmentOfScores(allScores, wal)
-            smartWinsAdjustmentStr = rounder.keepTrailingZeros(smartWinsAdjustment, 2)
+            smartWinsAdjustmentStr = Rounder.keepTrailingZeros(smartWinsAdjustment, 2)
             percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring(vsTeamIds=[opponentTeamId])
-            percentageOfLeagueScoringStr = rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
+            percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
                                                         teamName=teamName,
                                                         wins=wins,
@@ -169,13 +166,13 @@ class StatCalculatorService:
             statsModels.append(headToHeadStatsModel)
         return statsModels
 
-    def getLeagueStats(self, leagueModel: LeagueModel, statSelection: str):
+    @staticmethod
+    def getLeagueStats(leagueModel: LeagueModel, statSelection: str):
         """
         Returns a model/models for the given stat for self.__leagueModel.
         """
         statOptions = ["All Scores", "Margins of Victory"]
-        rounder = Rounder()
-        decimalPlacesForScores = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
+        decimalPlacesForScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         everyGameCalculator = EveryGameCalculator(leagueModel)
         if statSelection not in statOptions:
             return None
@@ -186,12 +183,12 @@ class StatCalculatorService:
             allScoresStr = []
             for scoreModel in allScores:
                 score = scoreModel.getScore()
-                score = rounder.keepTrailingZeros(score, decimalPlacesForScores)
+                score = Rounder.keepTrailingZeros(score, decimalPlacesForScores)
                 teamFor = scoreModel.getTeamFor()
                 teamAgainst = scoreModel.getTeamAgainst()
                 outcome = scoreModel.getOutcome()
                 weekNumber = scoreModel.getWeek()
-                newModel = ScoreModel(score, teamFor, teamAgainst, outcome, weekNumber)
+                newModel = ScoreModel(score=score, teamFor=teamFor, teamAgainst=teamAgainst, outcome=outcome, weekNumber=weekNumber)
                 allScoresStr.append(newModel)
             return allScoresStr
         elif statSelection == "Margins of Victory":
@@ -201,15 +198,15 @@ class StatCalculatorService:
             allMovsStr = []
             for movModel in allMovs:
                 mov = movModel.getMarginOfVictory()
-                mov = rounder.keepTrailingZeros(mov, decimalPlacesForScores)
+                mov = Rounder.keepTrailingZeros(mov, decimalPlacesForScores)
                 teamFor = movModel.getWinningTeam()
                 teamForPoints = movModel.getWinningTeamPoints()
-                teamForPoints = rounder.keepTrailingZeros(teamForPoints, decimalPlacesForScores)
+                teamForPoints = Rounder.keepTrailingZeros(teamForPoints, decimalPlacesForScores)
                 teamAgainst = movModel.getLosingTeam()
                 teamAgainstPoints = movModel.getLosingTeamPoints()
-                teamAgainstPoints = rounder.keepTrailingZeros(teamAgainstPoints, decimalPlacesForScores)
+                teamAgainstPoints = Rounder.keepTrailingZeros(teamAgainstPoints, decimalPlacesForScores)
                 weekNumber = movModel.getWeek()
-                newModel = MarginOfVictoryModel(mov, teamFor, teamForPoints, teamAgainst, teamAgainstPoints, weekNumber)
+                newModel = MarginOfVictoryModel(mov=mov, teamFor=teamFor, teamForPoints=teamForPoints, teamAgainst=teamAgainstPoints, teamAgainstPoints=teamAgainstPoints, weekNumber=weekNumber)
                 allMovsStr.append(newModel)
             return allMovsStr
 

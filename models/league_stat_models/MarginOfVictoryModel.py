@@ -3,13 +3,13 @@ from models.league_models.TeamModel import TeamModel
 
 class MarginOfVictoryModel:
 
-    def __init__(self, marginOfVictory: float, winningTeam: TeamModel, winningTeamPoints: float, losingTeam: TeamModel, losingTeamPoints: float, week: int):
-        self.__marginOfVictory = marginOfVictory
-        self.__winningTeam = winningTeam
-        self.__winningTeamPoints = winningTeamPoints
-        self.__losingTeam = losingTeam
-        self.__losingTeamPoints = losingTeamPoints
-        self.__week = week
+    def __init__(self, **stats):
+        self.__marginOfVictory = stats["marginOfVictory"]
+        self.__winningTeam = stats["winningTeam"]
+        self.__winningTeamPoints = stats["winningTeamPoints"]
+        self.__losingTeam = stats["losingTeam"]
+        self.__losingTeamPoints = stats["losingTeamPoints"]
+        self.__week = stats["week"]
 
     def getMarginOfVictory(self):
         return self.__marginOfVictory

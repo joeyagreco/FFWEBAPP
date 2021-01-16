@@ -3,7 +3,8 @@ class LeagueDictVerifier:
     This class is used check a league Dictionary to ensure it is well formed.
     """
 
-    def teamPlaysItself(self, weeks: list) -> bool:
+    @staticmethod
+    def teamPlaysItself(weeks: list) -> bool:
         """
         Returns a boolean of whether any teams play themselves in the given weeks.
         """
@@ -13,7 +14,8 @@ class LeagueDictVerifier:
                     return True
         return False
 
-    def teamPlaysTwice(self, weeks: list) -> bool:
+    @staticmethod
+    def teamPlaysTwice(weeks: list) -> bool:
         """
         Returns a boolean of whether a team plays twice in any week in the given weeks.
         """

@@ -1,14 +1,13 @@
-from models.league_models.TeamModel import TeamModel
 
 
 class ScoreModel:
 
-    def __init__(self, score: float, teamFor: TeamModel, teamAgainst: TeamModel, outcome: str, week: int):
-        self.__score = score
-        self.__teamFor = teamFor
-        self.__teamAgainst = teamAgainst
-        self.__outcome = outcome
-        self.__week = week
+    def __init__(self, **stats):
+        self.__score = stats["score"]
+        self.__teamFor = stats["teamFor"]
+        self.__teamAgainst = stats["teamAgainst"]
+        self.__outcome = stats["outcome"]
+        self.__week = stats["week"]
 
     def getScore(self):
         return self.__score

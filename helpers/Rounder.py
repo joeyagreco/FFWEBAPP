@@ -8,7 +8,8 @@ class Rounder:
     This class is used to round numbers.
     """
 
-    def normalRound(self, number, decimalPlaces: int) -> float:
+    @staticmethod
+    def normalRound(number, decimalPlaces: int) -> float:
         """
         Rounds a float rounded decimalPlaces places.
         """
@@ -21,7 +22,8 @@ class Rounder:
             part = math.floor(part)
         return part / (10 ** decimalPlaces)
 
-    def getDecimalPlacesRoundedToInScores(self, league: LeagueModel) -> int:
+    @staticmethod
+    def getDecimalPlacesRoundedToInScores(league: LeagueModel) -> int:
         """
         Returns an int that represents how many decimal places the scores in this league are rounded to.
         Ex: score of 132.55 -> 2, score of 130.10 -> 1
@@ -45,7 +47,8 @@ class Rounder:
                         maxDecimalPlaces = bScoreDecimalLength
         return maxDecimalPlaces
 
-    def keepTrailingZeros(self, number, zeros: int) -> str:
+    @staticmethod
+    def keepTrailingZeros(number, zeros: int) -> str:
         """
         This takes in a number and returns a string of that number that has the amount of trailing zeros that is passed in.
         Note: If zeros is less than 1, it is set to 1 by default.
