@@ -17,12 +17,14 @@ class AwalCalculator:
         """
         Returns a float that is the AWAL for the team with self.__teamId.
         THROUGHWEEK: [int] Gives AWAL through that week.
+        ONLYWEEKS: [list] Gives AWAL for the given week numbers.
         VSTEAMIDS: [list] Gives AWAL vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
-        return self.__rounder.normalRound(self.getAdjustment(throughWeek=weekNumber, vsTeamIds=vsTeamIds) + self.getWal(), 2)
+        return self.__rounder.normalRound(self.getAdjustment(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds) + self.getWal(), 2)
 
     def getAdjustment(self, **params) -> float:
         """
@@ -34,15 +36,19 @@ class AwalCalculator:
         T = Teams tied
         L = Opponents in league (league size - 1)
         THROUGHWEEK: [int] Gives Adjustment through that week.
+        ONLYWEEKS: [list] Gives Adjustment for the given week numbers.
         VSTEAMIDS: [list] Gives Adjustment vs teams with the given IDs.
         """
         leagueModelNavigator = LeagueModelNavigator()
-        weekNumber = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        throughWeek = params.pop("throughWeek", leagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
+        onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", leagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
         totalAdjustment = 0
         L = self.__leagueModel.getNumberOfTeams() - 1
         for week in self.__leagueModel.getWeeks():
-            if week.getWeekNumber() > weekNumber:
+            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                continue
+            elif week.getWeekNumber() > throughWeek:
                 break
             if leagueModelNavigator.teamsPlayInWeek(week, self.__teamId, vsTeamIds):
                 WAL = self.__getTeamOutcomeOfWeek(week)

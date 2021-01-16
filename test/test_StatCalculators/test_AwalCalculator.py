@@ -33,6 +33,8 @@ class TestAwalCalculator(unittest.TestCase):
         awalTeam1_2 = AwalCalculator(1, leagueModel, 0, 0).getAwal(throughWeek=2)
         awalTeam1_vs2 = AwalCalculator(1, leagueModel, 0, 0).getAwal(vsTeamIds=[2])
         awalTeam1_vs3 = AwalCalculator(1, leagueModel, 0, 0).getAwal(vsTeamIds=[3])
+        awalTeam1_only2 = AwalCalculator(1, leagueModel, 0, 0).getAwal(onlyWeeks=[2])
+        awalTeam1_only1and2 = AwalCalculator(1, leagueModel, 0, 0).getAwal(onlyWeeks=[1, 2])
         awalTeam1_allParams = AwalCalculator(1, leagueModel, 0, 0).getAwal(throughWeek=1, vsTeamIds=[2])
         awalTeam1_default = AwalCalculator(1, leagueModel, 0, 0).getAwal()
         self.assertIsInstance(awalTeam1_1, float)
@@ -40,6 +42,8 @@ class TestAwalCalculator(unittest.TestCase):
         self.assertEqual(0.4, awalTeam1_2)
         self.assertEqual(0.4, awalTeam1_vs2)
         self.assertEqual(0, awalTeam1_vs3)
+        self.assertEqual(0.2, awalTeam1_only2)
+        self.assertEqual(0.4, awalTeam1_only1and2)
         self.assertEqual(0.2, awalTeam1_allParams)
         self.assertEqual(0.4, awalTeam1_default)
 
