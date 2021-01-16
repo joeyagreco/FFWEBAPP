@@ -33,6 +33,8 @@ class TestRecordCalculator(unittest.TestCase):
         winsTeam1_2 = RecordCalculator(1, leagueModel).getWins(throughWeek=2)
         winsTeam1_vs2 = RecordCalculator(1, leagueModel).getWins(vsTeamIds=[2])
         winsTeam1_vs3 = RecordCalculator(1, leagueModel).getWins(vsTeamIds=[3])
+        winsTeam1_only1 = RecordCalculator(1, leagueModel).getWins(onlyWeeks=[2])
+        winsTeam1_only1and2 = RecordCalculator(1, leagueModel).getWins(onlyWeeks=[1, 2])
         winsTeam1_allParams = RecordCalculator(1, leagueModel).getWins(throughWeek=2, vsTeamIds=[2])
         winsTeam1_default = RecordCalculator(1, leagueModel).getWins()
         self.assertIsInstance(winsTeam1_1, int)
@@ -40,6 +42,8 @@ class TestRecordCalculator(unittest.TestCase):
         self.assertEqual(1, winsTeam1_2)
         self.assertEqual(1, winsTeam1_vs2)
         self.assertEqual(0, winsTeam1_vs3)
+        self.assertEqual(1, winsTeam1_only1)
+        self.assertEqual(1, winsTeam1_only1and2)
         self.assertEqual(1, winsTeam1_allParams)
         self.assertEqual(1, winsTeam1_default)
 
