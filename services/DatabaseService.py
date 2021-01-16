@@ -6,6 +6,10 @@ from packages.Verifiers.LeagueDictVerifier import LeagueDictVerifier
 
 
 class DatabaseService:
+    """
+    This class connects the DatabaseClient to the main Controller.
+    It contains logic where the client and controller can/should not.
+    """
 
     def __init__(self):
         self.__databaseClient = DatabaseClient()

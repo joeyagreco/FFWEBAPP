@@ -4,6 +4,9 @@ from models.league_models.LeagueModel import LeagueModel
 
 
 class Rounder:
+    """
+    This class is used to round numbers.
+    """
 
     def normalRound(self, number, decimalPlaces: int) -> float:
         """

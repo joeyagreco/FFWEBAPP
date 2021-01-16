@@ -8,6 +8,9 @@ from models.league_models.WeekModel import WeekModel
 
 
 class LeagueModelNavigator:
+    """
+    This class is used to navigate a LeagueModel object [or other object models contained within it].
+    """
 
     def getTeamById(self, leagueModel: LeagueModel, teamId: int) -> TeamModel:
         """

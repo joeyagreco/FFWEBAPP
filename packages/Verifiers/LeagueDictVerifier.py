@@ -1,4 +1,7 @@
 class LeagueDictVerifier:
+    """
+    This class is used check a league Dictionary to ensure it is well formed.
+    """
 
     def teamPlaysItself(self, weeks: list) -> bool:
         """

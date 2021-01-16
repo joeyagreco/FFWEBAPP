@@ -12,13 +12,14 @@ from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
 from packages.StatCalculators.SmartCalculator import SmartCalculator
 from packages.StatCalculators.SslCalculator import SslCalculator
-from packages.Verifiers.StatVerifier import StatVerifier
 
 
 class StatCalculatorService:
+    """
+    This class connects stat calculators to the main Controller.
+    It contains logic where the controller can/should not.
+    """
 
-    def __init__(self):
-        self.__statVerifier = StatVerifier()
 
     def getTeamStats(self, leagueModel: LeagueModel):
         """

@@ -4,6 +4,9 @@ from services.StatCalculatorService import StatCalculatorService
 
 
 class MainController:
+    """
+    This class is used to connect the main Flask app to existing services.
+    """
 
     def __init__(self):
         self.__databaseService = DatabaseService()

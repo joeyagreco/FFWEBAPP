@@ -7,6 +7,9 @@ from models.league_models.WeekModel import WeekModel
 
 
 class LeagueBuilder:
+    """
+    This class takes a league in the form of a Dictionary and converts it into League Model objects.
+    """
 
     def __init__(self, leagueDict: dict):
         self.__leagueDict = leagueDict

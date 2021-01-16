@@ -1,4 +1,7 @@
 class DatabaseVerifier:
+    """
+    This class is used to verify data before it is placed into the database.
+    """
 
     def duplicateTeamNames(self, teams: list) -> bool:
         """

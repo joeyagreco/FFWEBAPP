@@ -10,6 +10,9 @@ load_dotenv()
 
 
 class DatabaseClient:
+    """
+    This class is used to connect directly to the Mongo Database.
+    """
 
     def __init__(self):
         self.__cluster = MongoClient(os.getenv("DATABASE_CLUSTER"))
