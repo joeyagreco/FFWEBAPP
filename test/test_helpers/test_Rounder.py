@@ -10,13 +10,12 @@ from models.league_models.WeekModel import WeekModel
 class TestRounder(unittest.TestCase):
 
     def test_normalRound(self):
-        rounder = Rounder()
 
-        self.assertIsInstance(rounder.normalRound(100, 1), float)
-        self.assertEqual(100.1, rounder.normalRound(100.11, 1))
-        self.assertEqual(100.2, rounder.normalRound(100.15, 1))
-        self.assertEqual(100.11, rounder.normalRound(100.114, 2))
-        self.assertEqual(100.12, rounder.normalRound(100.115, 2))
+        self.assertIsInstance(Rounder.normalRound(100, 1), float)
+        self.assertEqual(100.1, Rounder.normalRound(100.11, 1))
+        self.assertEqual(100.2, Rounder.normalRound(100.15, 1))
+        self.assertEqual(100.11, Rounder.normalRound(100.114, 2))
+        self.assertEqual(100.12, Rounder.normalRound(100.115, 2))
 
     def test_getDecimalPlacesRoundedToInScores(self):
         team1 = TeamModel(1, "team1")
@@ -33,10 +32,7 @@ class TestRounder(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        rounder = Rounder()
-
-        self.assertEqual(1, rounder.getDecimalPlacesRoundedToInScores(leagueModel))
-
+        self.assertEqual(1, Rounder.getDecimalPlacesRoundedToInScores(leagueModel))
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
         team3 = TeamModel(3, "team3")
@@ -51,23 +47,21 @@ class TestRounder(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-
-        self.assertEqual(2, rounder.getDecimalPlacesRoundedToInScores(leagueModel))
+        self.assertEqual(2, Rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
     def test_keepTrailingZeros(self):
-        rounder = Rounder()
         score1 = 100
         score2 = 100.1
         score3 = 100.12
-        score1_0places = rounder.keepTrailingZeros(score1, 0)
-        score1_1place = rounder.keepTrailingZeros(score1, 1)
-        score1_2places = rounder.keepTrailingZeros(score1, 2)
-        score2_0places = rounder.keepTrailingZeros(score2, 0)
-        score2_1place = rounder.keepTrailingZeros(score2, 1)
-        score2_2places = rounder.keepTrailingZeros(score2, 2)
-        score3_0places = rounder.keepTrailingZeros(score3, 0)
-        score3_1place = rounder.keepTrailingZeros(score3, 1)
-        score3_2places = rounder.keepTrailingZeros(score3, 2)
+        score1_0places = Rounder.keepTrailingZeros(score1, 0)
+        score1_1place = Rounder.keepTrailingZeros(score1, 1)
+        score1_2places = Rounder.keepTrailingZeros(score1, 2)
+        score2_0places = Rounder.keepTrailingZeros(score2, 0)
+        score2_1place = Rounder.keepTrailingZeros(score2, 1)
+        score2_2places = Rounder.keepTrailingZeros(score2, 2)
+        score3_0places = Rounder.keepTrailingZeros(score3, 0)
+        score3_1place = Rounder.keepTrailingZeros(score3, 1)
+        score3_2places = Rounder.keepTrailingZeros(score3, 2)
         self.assertEqual("100.0", score1_0places)
         self.assertEqual("100.0", score1_1place)
         self.assertEqual("100.00", score1_2places)

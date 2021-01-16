@@ -1,7 +1,6 @@
 import unittest
 
 from builders.LeagueBuilder import LeagueBuilder
-from models.league_models.TeamModel import TeamModel
 
 
 class TestLeagueBuilder(unittest.TestCase):

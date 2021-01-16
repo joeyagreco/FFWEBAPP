@@ -1,4 +1,3 @@
-from models.league_models.TeamModel import TeamModel
 
 
 class MarginOfVictoryModel:
