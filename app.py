@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from controllers.MainController import MainController
 from helpers.Error import Error
 from helpers.LeagueModelNavigator import LeagueModelNavigator
+from packages.Exceptions.InvalidTeamForStatError import InvalidTeamForStatError
 
 app = Flask(__name__)
 
