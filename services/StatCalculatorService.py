@@ -5,6 +5,7 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_stat_models.MarginOfVictoryModel import MarginOfVictoryModel
 from models.league_stat_models.ScoreModel import ScoreModel
 from models.team_stat_models.TeamStatsModel import TeamStatsModel
+from packages.Exceptions.InvalidStatSelectionError import InvalidStatSelectionError
 from packages.StatCalculators.AwalCalculator import AwalCalculator
 from packages.StatCalculators.EveryGameCalculator import EveryGameCalculator
 from packages.StatCalculators.ScoresCalculator import ScoresCalculator
@@ -175,7 +176,7 @@ class StatCalculatorService:
         decimalPlacesForScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         everyGameCalculator = EveryGameCalculator(leagueModel)
         if statSelection not in statOptions:
-            return None
+            raise InvalidStatSelectionError(f"Unknown League Stat: {statSelection}.")
         elif statSelection == "All Scores":
             allScores = everyGameCalculator.getAllScores()
             # sort from score high -> low
