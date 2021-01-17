@@ -35,7 +35,7 @@ class ScoresCalculator:
                 elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     scores.append(matchup.getTeamBScore())
         if not scores:
-            raise InvalidTeamForStatError(f"Max Score Not Found for Team with ID: {self.__teamId}")
+            return 0.0
         return Rounder.normalRound(max(scores),
                                    Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 
@@ -62,7 +62,7 @@ class ScoresCalculator:
                 elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     scores.append(matchup.getTeamBScore())
         if not scores:
-            raise InvalidTeamForStatError(f"Min Score Not Found for Team with ID: {self.__teamId}")
+            return 0.0
         return Rounder.normalRound(min(scores), Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 
     def getPlusMinus(self, **params) -> float:
@@ -118,7 +118,7 @@ class ScoresCalculator:
                 elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     scores.append(matchup.getTeamBScore())
         if not scores:
-            raise InvalidTeamForStatError(f"STDEV Not Found for Team with ID: {self.__teamId}")
+            return 0.0
         standardDeviation = statistics.pstdev(scores)
         return float(Rounder.normalRound(standardDeviation, 2))
 

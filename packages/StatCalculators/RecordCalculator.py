@@ -107,5 +107,5 @@ class RecordCalculator:
         totalGames = wins + losses + ties
         # if there are no games played, return 0.0 for win percentage
         if totalGames == 0:
-            raise InvalidTeamForStatError(f"Win Percentage Not Found for Team with ID: {self.__teamId}")
+            return 0.0
         return Rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)

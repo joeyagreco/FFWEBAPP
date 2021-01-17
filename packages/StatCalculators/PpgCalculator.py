@@ -35,7 +35,7 @@ class PpgCalculator:
                     points += matchup.getTeamBScore()
                     gameCount += 1
         if gameCount == 0:
-            raise InvalidTeamForStatError(f"PPG Not Found for Team with ID: {self.__teamId}")
+            return 0.0
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         return Rounder.normalRound(points / gameCount, decimalPlacesRoundedTo)
 
@@ -62,7 +62,7 @@ class PpgCalculator:
                     points += matchup.getTeamAScore()
                     gameCount += 1
         if gameCount == 0:
-            raise InvalidTeamForStatError(f"PPG Against Not Found for Team with ID: {self.__teamId}")
+            return 0.0
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         return Rounder.normalRound(points / gameCount, decimalPlacesRoundedTo)
 
