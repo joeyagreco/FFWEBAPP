@@ -1,6 +1,7 @@
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
+from packages.Exceptions.InvalidTeamForStatError import InvalidTeamForStatError
 
 
 class PpgCalculator:
@@ -34,7 +35,7 @@ class PpgCalculator:
                     points += matchup.getTeamBScore()
                     gameCount += 1
         if gameCount == 0:
-            return 0.0
+            raise InvalidTeamForStatError(f"PPG Not Found for Team with ID: {self.__teamId}")
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         return Rounder.normalRound(points / gameCount, decimalPlacesRoundedTo)
 
@@ -61,7 +62,7 @@ class PpgCalculator:
                     points += matchup.getTeamAScore()
                     gameCount += 1
         if gameCount == 0:
-            return 0.0
+            raise InvalidTeamForStatError(f"PPG Against Not Found for Team with ID: {self.__teamId}")
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         return Rounder.normalRound(points / gameCount, decimalPlacesRoundedTo)
 

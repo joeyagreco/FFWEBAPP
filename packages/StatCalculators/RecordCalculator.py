@@ -1,6 +1,7 @@
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
+from packages.Exceptions.InvalidTeamForStatError import InvalidTeamForStatError
 
 
 class RecordCalculator:
@@ -106,5 +107,5 @@ class RecordCalculator:
         totalGames = wins + losses + ties
         # if there are no games played, return 0.0 for win percentage
         if totalGames == 0:
-            return 0.0
+            raise InvalidTeamForStatError(f"Win Percentage Not Found for Team with ID: {self.__teamId}")
         return Rounder.normalRound((wins + (0.5 * ties)) / totalGames, 3)

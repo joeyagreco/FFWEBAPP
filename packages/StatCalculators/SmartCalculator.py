@@ -27,7 +27,8 @@ class SmartCalculator:
                 scoresBeat += 1
             elif score == s:
                 scoresTied += 1
-        # don't include *this* score in with the other scores tied or total scores(the score will always find and tie itself)
+        # don't include *this* score in with the other scores tied
+        # or total scores(the score will always find and tie itself)
         scoresTied -= 1
         totalScores -= 1
         rawPercentile = (scoresBeat + (scoresTied * 0.5)) / totalScores
