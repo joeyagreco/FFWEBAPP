@@ -3,7 +3,6 @@ import statistics
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
-from packages.Exceptions.InvalidTeamForStatError import InvalidTeamForStatError
 
 
 class ScoresCalculator:
