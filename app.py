@@ -1,6 +1,8 @@
 import os
 
 from flask import Flask, render_template, request, redirect, url_for
+
+from builders.GraphBuilder import GraphBuilder
 from controllers.MainController import MainController
 from helpers.Error import Error
 from helpers.LeagueModelNavigator import LeagueModelNavigator
@@ -325,6 +327,14 @@ def leagueStats():
     statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, statSelection)
     return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
                            selected_stat=statSelection, stats_models=statsModelOrError)
+
+
+@app.route("/test")
+def test():
+    leagueId = 339779
+    mainController = MainController()
+    leagueModelOrError = mainController.getLeagueModel(leagueId)
+    return GraphBuilder.getHtmlForPpg(leagueModelOrError)
 
 
 if __name__ == "__main__":
