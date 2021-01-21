@@ -14,8 +14,6 @@ class GraphBuilder:
 
     @staticmethod
     def getHtmlForPpg(leagueModel: LeagueModel):
-        # data = {1: [100, 110, 115, 95, 112, 120, 110, 99], 2: [115, 99, 75, 111, 120, 77, 80, 110],
-        #         3: [100, 105, 102, 115, 99, 99, 100, 134]}
 
         data = dict()
         for team in leagueModel.getTeams():
