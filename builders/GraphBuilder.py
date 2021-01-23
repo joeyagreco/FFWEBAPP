@@ -24,7 +24,6 @@ class GraphBuilder:
                 data[matchup.getTeamB().getTeamId()].append(matchup.getTeamBScore())
 
         # df_scores = pd.DataFrame(data=data)
-        print(data)
         xAxisTicks = list(range(1, len(data[list(data.keys())[0]]) + 1))
 
         fig = go.Figure()

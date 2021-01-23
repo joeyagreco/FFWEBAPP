@@ -5,7 +5,11 @@ function submitGraph() {
 }
 
 function testInject() {
-    var injectDiv = '<div> <div id="758c7e19-d0c8-4645-be3c-a71d675c0ed7" class="plotly-graph-div" style="height:100%; width:100%;">';
-//    var injectDiv = document.getElementById("graphDiv");
-    document.getElementById("generatedGraph").innerHTML += injectDiv;
+    var injectDiv = document.getElementById("graphDiv");
+//    document.getElementById("generatedGraph").appendChild(injectDiv);
+//    document.getElementById("generatedGraph").innerHTML += injectDiv;
+
+
+    parentDiv = document.querySelector(".generatedGraph");
+    parentDiv.appendChild(injectDiv);
 }

@@ -14,3 +14,7 @@
     margin-right: auto;
     order: 1;
 }
+
+.graphDiv {
+    display: none;
+}
