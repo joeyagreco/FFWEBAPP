@@ -337,6 +337,7 @@ def graphs():
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
     divAsString = GraphBuilder.getHtmlForPpg(leagueModelOrError)
+    # divAsString = '<h1 style="color:purple">testing</h1>'
     dummyGraphOptions = ["PPG", "dummyGraph1", "dummyGraph2"]
     return render_template("graphsPage.html", league=leagueOrError, graph_options=dummyGraphOptions,
                            selected_graph=selectedGraph, graph_div=divAsString)
