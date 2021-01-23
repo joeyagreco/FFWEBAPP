@@ -44,12 +44,13 @@ class GraphBuilder:
     @staticmethod
     def getHtmlForScoringShare(leagueModel: LeagueModel):
 
-        # TODO MAKE THIS INTO A LMN METHOD
+        # TODO make this into a LMN method
         # get list of team names
         teamNames = []
         for team in leagueModel.getTeams():
             teamNames.append(team.getTeamName())
 
+        # TODO use total points instead of PPG
         ppgByTeam = []
         for team in leagueModel.getTeams():
             ppgCalculator = PpgCalculator(team.getTeamId(), leagueModel)
