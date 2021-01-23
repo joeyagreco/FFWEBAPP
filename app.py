@@ -331,12 +331,16 @@ def leagueStats():
 
 @app.route("/graphs", methods=["GET"])
 def graphs():
-    leagueId = 339779
+    print("in graphs")
+    # leagueId = 339779
+    leagueId = int(request.args.get("league_id"))
+    selectedGraph = request.args.get("graph_selection")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
     # return GraphBuilder.getHtmlForPpg(leagueModelOrError)
-    return render_template("graphsPage.html", league=leagueOrError)
+    dummyGraphOptions = ["PPG", "dummyGraph1", "dummyGraph2"]
+    return render_template("graphsPage.html", league=leagueOrError, graph_options=dummyGraphOptions, selected_graph=selectedGraph)
 
 
 if __name__ == "__main__":
