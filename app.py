@@ -331,8 +331,6 @@ def leagueStats():
 
 @app.route("/graphs", methods=["GET"])
 def graphs():
-    print("in graphs")
-    # leagueId = 339779
     leagueId = int(request.args.get("league_id"))
     selectedGraph = request.args.get("graph_selection")
     mainController = MainController()
