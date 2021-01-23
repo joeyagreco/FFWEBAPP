@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from models.league_models.LeagueModel import LeagueModel
+from packages.StatCalculators.PpgCalculator import PpgCalculator
 
 
 class GraphBuilder:
@@ -40,4 +41,30 @@ class GraphBuilder:
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
+    @staticmethod
+    def getHtmlForScoringShare(leagueModel: LeagueModel):
 
+        # TODO MAKE THIS INTO A LMN METHOD
+        # get list of team names
+        teamNames = []
+        for team in leagueModel.getTeams():
+            teamNames.append(team.getTeamName())
+
+        ppgByTeam = []
+        for team in leagueModel.getTeams():
+            ppgCalculator = PpgCalculator(team.getTeamId(), leagueModel)
+            ppgByTeam.append(ppgCalculator.getPpg())
+
+        trace = go.Pie(labels=teamNames, values=ppgByTeam)
+
+        data = [trace]
+
+        fig = go.Figure(data=data)
+
+        fig.update_layout(
+            title="Scoring Share"
+        )
+
+        # fig.show()
+        html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
+        return html
