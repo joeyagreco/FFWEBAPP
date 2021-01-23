@@ -215,7 +215,8 @@ class LeagueModelNavigator:
         return teamIds
 
     @staticmethod
-    def getAllWeeksTeamsPlayEachOther(leagueModel: LeagueModel, team1Id: int, opponentTeamIds: list, **params) -> List[int]:
+    def getAllWeeksTeamsPlayEachOther(leagueModel: LeagueModel, team1Id: int, opponentTeamIds: list, **params) -> List[
+        int]:
         """
         Returns as a list of ints all of the weeks that the team with team1Id plays any of the teams with ids in opponentTeamIds.
         ONLYWEEKS: [list] Gives weeks teams play each other for the given week numbers.
@@ -230,5 +231,21 @@ class LeagueModelNavigator:
                     weeks.append(week.getWeekNumber())
         return weeks
 
+    @classmethod
+    def getListOfTeamScores(cls, leagueModel: LeagueModel, teamId: int, **params) -> List[float]:
+        """
+        Returns as a list of floats all of the scores in order that the team with the given ID scored.
+        THROUGHWEEK: [int] Gives list of scores through that week.
+        """
+        throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel))
 
-
+        scores = []
+        for week in leagueModel.getWeeks():
+            if week.getWeekNumber() > throughWeek:
+                break
+            for matchup in week.getMatchups():
+                if matchup.getTeamA().getTeamId() == teamId:
+                    scores.append(matchup.getTeamAScore())
+                elif matchup.getTeamB().getTeamId() == teamId:
+                    scores.append(matchup.getTeamBScore())
+        return scores

@@ -331,3 +331,36 @@ class TestLeagueModelNavigator(unittest.TestCase):
         self.assertEqual(0, len(weeks1_vsNone))
         self.assertEqual(1, len(weeks1_vs2_only1))
         self.assertEqual(1, len(weeks1_vs2_only2))
+
+    def test_getListOfTeamScores(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 100, 95.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 102, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
+        team1_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 1)
+        team2_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2)
+        team1_through1 = LeagueModelNavigator.getListOfTeamScores(leagueModel, 1, throughWeek=1)
+        team2_through1 = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2, throughWeek=1)
+        self.assertIsInstance(team1_all, list)
+        self.assertEqual(2, len(team1_all))
+        self.assertEqual(100, team1_all[0])
+        self.assertEqual(100.5, team2_all[1])
+        self.assertEqual(1, len(team1_through1))
+        self.assertEqual(100, team1_through1[0])
+        self.assertEqual(95.5, team2_through1[0])
+

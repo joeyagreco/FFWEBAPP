@@ -17,11 +17,7 @@ class GraphBuilder:
 
         data = dict()
         for team in leagueModel.getTeams():
-            data[team.getTeamId()] = []
-        for week in leagueModel.getWeeks():
-            for matchup in week.getMatchups():
-                data[matchup.getTeamA().getTeamId()].append(matchup.getTeamAScore())
-                data[matchup.getTeamB().getTeamId()].append(matchup.getTeamBScore())
+            data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
 
         # df_scores = pd.DataFrame(data=data)
         xAxisTicks = list(range(1, len(data[list(data.keys())[0]]) + 1))
