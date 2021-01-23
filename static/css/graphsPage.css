@@ -18,3 +18,7 @@
 .graphDiv {
     display: none;
 }
+
+.generatedGraph {
+    order: 2;
+}

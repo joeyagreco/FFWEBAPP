@@ -30,12 +30,18 @@
             </select>
         </div>
 
-        <button class="testButton" type="submit" onclick="testInject();">Inject Div</button>
-
-        <div class="graphDiv" id="graphDiv">{{graph_div}}</div>
+        <div class="graphDiv" id="graphDiv">
+            {{graph_div}}
+            <!-- the only purpose of this div is to hold the div we will be injecting as a string for Javascript to extract -->
+        </div>
 
         <div class="generatedGraph" id="generatedGraph">
-        <!-- an HTML Div for the selected graph will be inserted here -->
+        <!-- an HTML Div with the selected graph will be inserted here -->
         </div>
+
+        {% if graph_div %}
+            <!-- this script will run only if a div was given on load of this page-->
+            <script type="text/javascript">testInject();</script>
+        {% endif %}
     </div>
 {% endblock %}

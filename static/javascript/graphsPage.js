@@ -11,8 +11,8 @@ function htmlDecode(input){
     return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 }
 
-
 function testInject() {
+//alert("in js");
     var injectDiv = document.getElementById("graphDiv").innerHTML;
     $('#generatedGraph').append(htmlDecode(injectDiv));
 }
