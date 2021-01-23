@@ -20,10 +20,11 @@ function testInject() {
 //    injectDiv = '<h1 style="color:purple">testing</h1>'
 //    console.log(typeof injectDiv);
 //    injectDiv = stringToHTML(injectDiv);
-//    console.log(typeof injectDiv);
+    console.log(typeof injectDiv);
 //    document.getElementById("generatedGraph").appendChild(injectDiv);
 
-    document.getElementById("generatedGraph").innerHTML += injectDiv;
+//    document.getElementById("generatedGraph").innerHTML += injectDiv;
+$('#generatedGraph').append(injectDiv);
 
 //    console.log(injectDiv);
 //    parentDiv = document.getElementById("generatedGraph");
