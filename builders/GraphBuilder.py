@@ -20,7 +20,7 @@ class GraphBuilder:
             data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
 
         # df_scores = pd.DataFrame(data=data)
-        xAxisTicks = list(range(1, len(data[list(data.keys())[0]]) + 1))
+        xAxisTicks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
 
         fig = go.Figure()
 
@@ -36,9 +36,7 @@ class GraphBuilder:
             yaxis=dict(title="Points Scored"),
             title="PPG by Week"
         )
-
         # fig.show()
-        #html = fig.to_html(full_html=True, auto_play=False, include_plotlyjs=True)
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 

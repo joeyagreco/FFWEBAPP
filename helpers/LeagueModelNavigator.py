@@ -196,11 +196,17 @@ class LeagueModelNavigator:
         return allScores
 
     @staticmethod
-    def getNumberOfWeeksInLeague(leagueModel: LeagueModel) -> int:
+    def getNumberOfWeeksInLeague(leagueModel: LeagueModel, **params):
         """
         Returns as an int the number of weeks that are in the given leagueModel.
+        ASLIST: [boolean] Gives all week numbers as an ordered list.
         """
-        return len(leagueModel.getWeeks())
+        asList = params.pop("asList", False)
+
+        numberOfWeeks = len(leagueModel.getWeeks())
+        if asList:
+            return [x+1 for x in range(numberOfWeeks)]
+        return numberOfWeeks
 
     @staticmethod
     def getAllTeamIdsInLeague(leagueModel: LeagueModel, **params) -> List[int]:

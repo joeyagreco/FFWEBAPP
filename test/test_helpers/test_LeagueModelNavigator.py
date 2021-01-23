@@ -273,8 +273,11 @@ class TestLeagueModelNavigator(unittest.TestCase):
         weekList = [week1]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         numberOfWeeks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel)
+        numberOfWeeksAsList = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
         self.assertIsInstance(numberOfWeeks, int)
+        self.assertIsInstance(numberOfWeeksAsList, list)
         self.assertEqual(1, numberOfWeeks)
+        self.assertEqual(1, numberOfWeeksAsList[0])
 
     def test_getAllTeamIdsInLeague(self):
         team1 = TeamModel(1, "team1")
