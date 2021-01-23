@@ -38,3 +38,8 @@ function updateLeagueRedirect() {
     window.location = "/update-league?league_id="+leagueId;
 }
 
+function graphsRedirect() {
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/graphs?league_id="+leagueId;
+}
+

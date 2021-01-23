@@ -329,8 +329,8 @@ def leagueStats():
                            selected_stat=statSelection, stats_models=statsModelOrError)
 
 
-@app.route("/test")
-def test():
+@app.route("/graphs", methods=["GET"])
+def graphs():
     leagueId = 339779
     mainController = MainController()
     leagueModelOrError = mainController.getLeagueModel(leagueId)
