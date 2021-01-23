@@ -43,7 +43,8 @@ class GraphBuilder:
         )
 
         # fig.show()
-        html = fig.to_html(full_html=True, auto_play=False, include_plotlyjs=True)
+        #html = fig.to_html(full_html=True, auto_play=False, include_plotlyjs=True)
+        html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
 
