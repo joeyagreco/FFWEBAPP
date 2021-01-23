@@ -333,8 +333,10 @@ def leagueStats():
 def graphs():
     leagueId = 339779
     mainController = MainController()
+    leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
-    return GraphBuilder.getHtmlForPpg(leagueModelOrError)
+    # return GraphBuilder.getHtmlForPpg(leagueModelOrError)
+    return render_template("graphsPage.html", league=leagueOrError)
 
 
 if __name__ == "__main__":

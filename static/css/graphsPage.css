@@ -1,0 +1,16 @@
+.dropdownSelectionAndGraph {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: blue;
+}
+
+.graphDropdown {
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    order: 1;
+}

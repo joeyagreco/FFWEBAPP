@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Graphs</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/graphsPage.css') }}">
+<script src="{{ url_for('static', filename='javascript/graphsPage.js') }}"></script>
+{% endblock %}
+
+{% block pageTitle %}Graphs{% endblock %}
+
+{% block pageSubtitle %}{{league.leagueName}}{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+    <div class="dropdownSelectionAndGraph">
+        <div class="graphDropdown">
+            <select class="graphNameDropdown" name="graph_name" id="graph_name" onchange="submitGraph()">
+                {% for graph in graph_options %}
+                    {% if graph == selected_graph %}
+                        <option value="{{graph}}" selected>{{graph}}</option>
+                    {% else %}
+                        <option value="{{graph}}">{{graph}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+{% endblock %}
