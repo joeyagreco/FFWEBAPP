@@ -102,7 +102,7 @@ class GraphBuilder:
         m, b = np.polyfit(np.array(awalList), np.array(ppgList), 1)
         fig.add_trace(go.Scatter(x=awalList,
                                  y=m * np.array(awalList) + b,
-                                 name="Linear Regression",
+                                 showlegend=False,
                                  mode="lines",
                                  marker=dict(color="rgba(0,0,0,0.25)")
                                  )
