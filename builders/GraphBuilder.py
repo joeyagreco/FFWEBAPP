@@ -138,3 +138,41 @@ class GraphBuilder:
 
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
+
+    @staticmethod
+    def getHtmlForPointsOverPointsAgainst(leagueModel: LeagueModel):
+        print("graphing...")
+        data = dict()
+        for team in leagueModel.getTeams():
+            data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(), andOpponentScore=True)
+            # print(type(data[team.getTeamId()][0][1]))
+
+        fig = go.Figure()
+
+        for teamId in data.keys():
+            fig.add_trace(go.Scatter(x=[matchup[0] for matchup in data[teamId]],
+                                     y=[matchup[1] for matchup in data[teamId]],
+                                     name=LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName(),
+                                     mode="markers",
+                                     marker=dict(size=10)
+                                     )
+                          )
+
+        # draw average line [linear regression]
+        # m, b = np.polyfit(np.array(awalList), np.array(ppgList), 1)
+        # fig.add_trace(go.Scatter(x=awalList,
+        #                          y=m * np.array(awalList) + b,
+        #                          showlegend=False,
+        #                          mode="lines",
+        #                          marker=dict(color="rgba(0,0,0,0.25)")
+        #                          )
+        #               )
+
+        fig.update_layout(
+            xaxis=dict(title="Points For"),
+            yaxis=dict(title="Points Against"),
+            title="Points For / Points Against"
+        )
+
+        html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
+        return html

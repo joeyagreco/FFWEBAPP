@@ -359,6 +359,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         team2_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2)
         team1_through1 = LeagueModelNavigator.getListOfTeamScores(leagueModel, 1, throughWeek=1)
         team2_through1 = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2, throughWeek=1)
+        team1_andOpponent = LeagueModelNavigator.getListOfTeamScores(leagueModel, 1, andOpponentScore=True)
         self.assertIsInstance(team1_all, list)
         self.assertEqual(2, len(team1_all))
         self.assertEqual(100, team1_all[0])
@@ -366,4 +367,9 @@ class TestLeagueModelNavigator(unittest.TestCase):
         self.assertEqual(1, len(team1_through1))
         self.assertEqual(100, team1_through1[0])
         self.assertEqual(95.5, team2_through1[0])
+        self.assertIsInstance(team1_andOpponent, list)
+        self.assertIsInstance(team1_andOpponent[0], tuple)
+        self.assertEqual(2, len(team1_andOpponent))
+        self.assertEqual(team1_andOpponent[0][0], 100)
+        self.assertEqual(team1_andOpponent[0][1], 95.5)
 

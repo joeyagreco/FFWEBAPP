@@ -238,12 +238,14 @@ class LeagueModelNavigator:
         return weeks
 
     @classmethod
-    def getListOfTeamScores(cls, leagueModel: LeagueModel, teamId: int, **params) -> List[float]:
+    def getListOfTeamScores(cls, leagueModel: LeagueModel, teamId: int, **params):
         """
         Returns as a list of floats all of the scores in order that the team with the given ID scored.
         THROUGHWEEK: [int] Gives list of scores through that week.
+        ANDOPPONENTSCORE: [int] Gives list of tuples with (teamIdScore, opponentTeamIdScore)
         """
         throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel))
+        andOpponentScore = params.pop("andOpponentScore", False)
 
         scores = []
         for week in leagueModel.getWeeks():
@@ -251,7 +253,13 @@ class LeagueModelNavigator:
                 break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == teamId:
+                    if andOpponentScore:
+                        scores.append((matchup.getTeamAScore(), matchup.getTeamBScore()))
+                        continue
                     scores.append(matchup.getTeamAScore())
                 elif matchup.getTeamB().getTeamId() == teamId:
+                    if andOpponentScore:
+                        scores.append((matchup.getTeamBScore(), matchup.getTeamAScore()))
+                        continue
                     scores.append(matchup.getTeamBScore())
         return scores
