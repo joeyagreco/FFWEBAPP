@@ -68,7 +68,6 @@ class GraphBuilder:
             title="Scoring Share"
         )
 
-        # fig.show()
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
@@ -99,12 +98,21 @@ class GraphBuilder:
                                      marker=dict(size=20)
                                      )
                           )
+        # draw average line [linear regression]
+        m, b = np.polyfit(np.array(awalList), np.array(ppgList), 1)
+        fig.add_trace(go.Scatter(x=awalList,
+                                 y=m * np.array(awalList) + b,
+                                 name="Linear Regression",
+                                 mode="lines",
+                                 marker=dict(color="rgba(0,0,0,0.25)")
+                                 )
+                      )
 
         fig.update_layout(
-            xaxis=dict(title="AWAL"),
+            xaxis=dict(title="AWAL", dtick=0.5),
             yaxis=dict(title="PPG"),
             title="AWAL/PPG by Team"
         )
-        # fig.show()
+
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
