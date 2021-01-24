@@ -5,7 +5,9 @@ import plotly.graph_objects as go
 
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from models.league_models.LeagueModel import LeagueModel
+from packages.StatCalculators.AwalCalculator import AwalCalculator
 from packages.StatCalculators.PpgCalculator import PpgCalculator
+from packages.StatCalculators.RecordCalculator import RecordCalculator
 
 
 class GraphBuilder:
@@ -66,6 +68,43 @@ class GraphBuilder:
             title="Scoring Share"
         )
 
+        # fig.show()
+        html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
+        return html
+
+    @staticmethod
+    def getHtmlForAwalOverPpg(leagueModel: LeagueModel):
+
+        data = dict()
+        ppgList = []
+        awalList = []
+        for team in leagueModel.getTeams():
+            recordCalculator = RecordCalculator(team.getTeamId(), leagueModel)
+            ppgCalculator = PpgCalculator(team.getTeamId(), leagueModel)
+            awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, recordCalculator.getWins(),
+                                            recordCalculator.getTies())
+            ppg = ppgCalculator.getPpg()
+            awal = awalCalculator.getAwal()
+            ppgList.append(ppg)
+            awalList.append(awal)
+            data[team.getTeamId()] = ([awal], [ppg])
+
+        fig = go.Figure()
+
+        for teamId in data.keys():
+            fig.add_trace(go.Scatter(x=data[teamId][0],
+                                     y=data[teamId][1],
+                                     name=LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName(),
+                                     mode="markers",
+                                     marker=dict(size=20)
+                                     )
+                          )
+
+        fig.update_layout(
+            xaxis=dict(title="AWAL"),
+            yaxis=dict(title="PPG"),
+            title="AWAL/PPG by Team"
+        )
         # fig.show()
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
