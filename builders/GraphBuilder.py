@@ -141,11 +141,9 @@ class GraphBuilder:
 
     @staticmethod
     def getHtmlForPointsOverPointsAgainst(leagueModel: LeagueModel):
-        print("graphing...")
         data = dict()
         for team in leagueModel.getTeams():
             data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(), andOpponentScore=True)
-            # print(type(data[team.getTeamId()][0][1]))
 
         fig = go.Figure()
 
@@ -159,9 +157,15 @@ class GraphBuilder:
                           )
 
         # draw average line [linear regression]
-        # m, b = np.polyfit(np.array(awalList), np.array(ppgList), 1)
-        # fig.add_trace(go.Scatter(x=awalList,
-        #                          y=m * np.array(awalList) + b,
+        # pointsForList = []
+        # pointsAgainstList = []
+        # for teamId in data.keys():
+        #     for matchup in data[teamId]:
+        #         pointsForList.append(matchup[0])
+        #         pointsAgainstList.append(matchup[1])
+        # m, b = np.polyfit(np.array(pointsForList), np.array(pointsAgainstList), 1)
+        # fig.add_trace(go.Scatter(x=pointsForList,
+        #                          y=m * np.array(pointsAgainstList) + b,
         #                          showlegend=False,
         #                          mode="lines",
         #                          marker=dict(color="rgba(0,0,0,0.25)")

@@ -341,7 +341,7 @@ def graphs():
     # divAsString = GraphBuilder.getHtmlForAwalOverPpg(leagueModelOrError)
     # divAsString = GraphBuilder.getHtmlForAllScores(leagueModelOrError)
     divAsString = GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModelOrError)
-    dummyGraphOptions = ["PPG by Week", "Scoring Share", "AWAL/PPG", "Frequency of Scores"]
+    dummyGraphOptions = ["PPG by Week", "Scoring Share", "AWAL/PPG", "Frequency of Scores", "Points For/Points Against"]
     return render_template("graphsPage.html", league=leagueOrError, graph_options=dummyGraphOptions,
                            selected_graph=selectedGraph, graph_div=divAsString)
 
