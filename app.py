@@ -338,8 +338,9 @@ def graphs():
     leagueModelOrError = mainController.getLeagueModel(leagueId)
     # divAsString = GraphBuilder.getHtmlForPpg(leagueModelOrError)
     # divAsString = GraphBuilder.getHtmlForScoringShare(leagueModelOrError)
-    divAsString = GraphBuilder.getHtmlForAwalOverPpg(leagueModelOrError)
-    dummyGraphOptions = ["PPG by Week", "Scoring Share"]
+    # divAsString = GraphBuilder.getHtmlForAwalOverPpg(leagueModelOrError)
+    divAsString = GraphBuilder.getHtmlForAllScores(leagueModelOrError)
+    dummyGraphOptions = ["PPG by Week", "Scoring Share", "AWAL/PPG", "Frequency of Scores"]
     return render_template("graphsPage.html", league=leagueOrError, graph_options=dummyGraphOptions,
                            selected_graph=selectedGraph, graph_div=divAsString)
 

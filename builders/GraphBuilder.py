@@ -39,7 +39,7 @@ class GraphBuilder:
             yaxis=dict(title="Points Scored"),
             title="PPG by Week"
         )
-        # fig.show()
+
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
@@ -112,6 +112,28 @@ class GraphBuilder:
             xaxis=dict(title="AWAL", dtick=0.5),
             yaxis=dict(title="PPG"),
             title="AWAL/PPG by Team"
+        )
+
+        html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
+        return html
+
+    @staticmethod
+    def getHtmlForAllScores(leagueModel: LeagueModel):
+
+        allScores = []
+        for team in leagueModel.getTeams():
+            allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
+
+        data = np.array(allScores)
+        data = [go.Histogram(x=data,
+                             nbinsx=int(len(allScores)/2))]
+
+        fig = go.Figure(data)
+
+        fig.update_layout(
+            xaxis=dict(title="Points Scored"),
+            yaxis=dict(title="Occurrences"),
+            title="Frequency of Scores"
         )
 
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
