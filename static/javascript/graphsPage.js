@@ -1,7 +1,8 @@
 function submitGraph() {
     var leagueId = document.getElementById("league_id").value;
     var graphName = document.getElementById("graph_name").value;
-    window.location = "/graphs?league_id="+leagueId+"&graph_selection="+graphName;
+    var screenWidth = window.innerWidth;
+    window.location = "/graphs?league_id="+leagueId+"&graph_selection="+graphName+"&screen_width="+screenWidth;
 }
 
 function htmlDecode(input){
@@ -12,7 +13,6 @@ function htmlDecode(input){
 }
 
 function testInject() {
-//alert("in js");
     var injectDiv = document.getElementById("graphDiv").innerHTML;
     $('#generatedGraph').append(htmlDecode(injectDiv));
 }

@@ -140,7 +140,7 @@ class GraphBuilder:
         return html
 
     @staticmethod
-    def getHtmlForPointsOverPointsAgainst(leagueModel: LeagueModel):
+    def getHtmlForPointsOverPointsAgainst(leagueModel: LeagueModel, screenWidth: int):
         data = dict()
         for team in leagueModel.getTeams():
             data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(), andOpponentScore=True)
@@ -171,13 +171,19 @@ class GraphBuilder:
         #                          marker=dict(color="rgba(0,0,0,0.25)")
         #                          )
         #               )
-
+        if screenWidth:
+            width = int(screenWidth)/2
+        else:
+            print("no width gotten")
+            width = 960
+        print(width)
+        height = 0.8 * width
         fig.update_layout(
             xaxis=dict(title="Points For"),
             yaxis=dict(title="Points Against"),
             title="Points For / Points Against",
-            width=1000,
-            height=800
+            width=width,
+            height=height
         )
 
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)

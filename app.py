@@ -333,6 +333,7 @@ def leagueStats():
 def graphs():
     leagueId = int(request.args.get("league_id"))
     selectedGraph = request.args.get("graph_selection")
+    screenWidth = request.args.get("screen_width")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
@@ -340,7 +341,7 @@ def graphs():
     # divAsString = GraphBuilder.getHtmlForScoringShare(leagueModelOrError)
     # divAsString = GraphBuilder.getHtmlForAwalOverPpg(leagueModelOrError)
     # divAsString = GraphBuilder.getHtmlForAllScores(leagueModelOrError)
-    divAsString = GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModelOrError)
+    divAsString = GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModelOrError, screenWidth)
     dummyGraphOptions = ["PPG by Week", "Scoring Share", "AWAL/PPG", "Frequency of Scores", "Points For/Points Against"]
     return render_template("graphsPage.html", league=leagueOrError, graph_options=dummyGraphOptions,
                            selected_graph=selectedGraph, graph_div=divAsString)
