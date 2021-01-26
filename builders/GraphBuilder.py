@@ -176,8 +176,8 @@ class GraphBuilder:
             xaxis=dict(title="Points For"),
             yaxis=dict(title="Points Against"),
             title="Points For / Points Against",
-            width=800,
-            height=600
+            width=1000,
+            height=800
         )
 
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
