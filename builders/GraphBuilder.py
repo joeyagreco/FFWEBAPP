@@ -171,12 +171,13 @@ class GraphBuilder:
         #                          marker=dict(color="rgba(0,0,0,0.25)")
         #                          )
         #               )
+
+        # TODO fix how screen width is used in this class
         if screenWidth:
             width = int(screenWidth)/2
         else:
             print("no width gotten")
             width = 960
-        print(width)
         height = 0.8 * width
         fig.update_layout(
             xaxis=dict(title="Points For"),
