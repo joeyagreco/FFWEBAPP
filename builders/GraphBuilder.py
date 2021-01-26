@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 
 import plotly.graph_objects as go
+from plotly.graph_objs import Figure
 
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from models.league_models.LeagueModel import LeagueModel
@@ -14,9 +15,21 @@ class GraphBuilder:
     """
     This class is used to create graphs.
     """
-
     @staticmethod
-    def getHtmlForPpg(leagueModel: LeagueModel):
+    def __setWidthOfFig(fig: Figure, screenWidth: float):
+        if screenWidth:
+            width = int(screenWidth)/2
+        else:
+            width = 960
+        height = 0.8 * width
+        fig.update_layout(
+            width=width,
+            height=height
+        )
+        print(type(fig))
+
+    @classmethod
+    def getHtmlForPpg(cls, leagueModel: LeagueModel, screenWidth: float):
 
         data = dict()
         for team in leagueModel.getTeams():
@@ -40,11 +53,13 @@ class GraphBuilder:
             title="PPG by Week"
         )
 
+        cls.__setWidthOfFig(fig, screenWidth)
+
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
-    @staticmethod
-    def getHtmlForScoringShare(leagueModel: LeagueModel):
+    @classmethod
+    def getHtmlForScoringShare(cls, leagueModel: LeagueModel, screenWidth: float):
 
         # TODO make this into a LMN method
         # get list of team names
@@ -68,11 +83,13 @@ class GraphBuilder:
             title="Scoring Share"
         )
 
+        cls.__setWidthOfFig(fig, screenWidth)
+
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
-    @staticmethod
-    def getHtmlForAwalOverPpg(leagueModel: LeagueModel):
+    @classmethod
+    def getHtmlForAwalOverPpg(cls, leagueModel: LeagueModel, screenWidth: float):
 
         data = dict()
         ppgList = []
@@ -114,11 +131,13 @@ class GraphBuilder:
             title="AWAL/PPG by Team"
         )
 
+        cls.__setWidthOfFig(fig, screenWidth)
+
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
-    @staticmethod
-    def getHtmlForAllScores(leagueModel: LeagueModel):
+    @classmethod
+    def getHtmlForFrequencyOfScores(cls, leagueModel: LeagueModel, screenWidth: float):
 
         allScores = []
         for team in leagueModel.getTeams():
@@ -136,11 +155,13 @@ class GraphBuilder:
             title="Frequency of Scores"
         )
 
+        cls.__setWidthOfFig(fig, screenWidth)
+
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
-    @staticmethod
-    def getHtmlForPointsOverPointsAgainst(leagueModel: LeagueModel, screenWidth: int):
+    @classmethod
+    def getHtmlForPointsOverPointsAgainst(cls, leagueModel: LeagueModel, screenWidth: float):
         data = dict()
         for team in leagueModel.getTeams():
             data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(), andOpponentScore=True)
@@ -156,36 +177,13 @@ class GraphBuilder:
                                      )
                           )
 
-        # draw average line [linear regression]
-        # pointsForList = []
-        # pointsAgainstList = []
-        # for teamId in data.keys():
-        #     for matchup in data[teamId]:
-        #         pointsForList.append(matchup[0])
-        #         pointsAgainstList.append(matchup[1])
-        # m, b = np.polyfit(np.array(pointsForList), np.array(pointsAgainstList), 1)
-        # fig.add_trace(go.Scatter(x=pointsForList,
-        #                          y=m * np.array(pointsAgainstList) + b,
-        #                          showlegend=False,
-        #                          mode="lines",
-        #                          marker=dict(color="rgba(0,0,0,0.25)")
-        #                          )
-        #               )
-
-        # TODO fix how screen width is used in this class
-        if screenWidth:
-            width = int(screenWidth)/2
-        else:
-            print("no width gotten")
-            width = 960
-        height = 0.8 * width
         fig.update_layout(
             xaxis=dict(title="Points For"),
             yaxis=dict(title="Points Against"),
-            title="Points For / Points Against",
-            width=width,
-            height=height
+            title="Points For / Points Against"
         )
+
+        cls.__setWidthOfFig(fig, screenWidth)
 
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html

@@ -39,3 +39,6 @@ class MainController:
     def getLeagueStatsModel(self, leagueModel: LeagueModel, statSelection: str):
         return self.__statCalculatorService.getLeagueStats(leagueModel, statSelection)
 
+    def getGraphDiv(self, leagueModel: LeagueModel, screenWidth: float, graphSelection: str):
+        return self.__statCalculatorService.getGraphDiv(leagueModel, screenWidth, graphSelection)
+

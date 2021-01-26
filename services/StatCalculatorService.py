@@ -1,3 +1,4 @@
+from builders.GraphBuilder import GraphBuilder
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from helpers.Rounder import Rounder
 from models.headToHead_stat_models.HeadToHeadStatsModel import HeadToHeadStatsModel
@@ -219,4 +220,20 @@ class StatCalculatorService:
                                                 week=weekNumber)
                 allMovsStr.append(newModel)
             return allMovsStr
+
+    @staticmethod
+    def getGraphDiv(leagueModel: LeagueModel, screenWidth: float, graphSelection: str):
+        if graphSelection == "PPG by Week":
+            return GraphBuilder.getHtmlForPpg(leagueModel, screenWidth)
+        elif graphSelection == "Scoring Share":
+            return GraphBuilder.getHtmlForScoringShare(leagueModel, screenWidth)
+        elif graphSelection == "AWAL/PPG":
+            return GraphBuilder.getHtmlForAwalOverPpg(leagueModel, screenWidth)
+        elif graphSelection == "Frequency of Scores":
+            return GraphBuilder.getHtmlForFrequencyOfScores(leagueModel, screenWidth)
+        elif graphSelection == "Points For/Points Against":
+            return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, screenWidth)
+        else:
+            return "..."
+
 
