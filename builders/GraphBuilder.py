@@ -70,11 +70,10 @@ class GraphBuilder:
         for team in leagueModel.getTeams():
             teamNames.append(team.getTeamName())
 
-        # TODO use total points instead of PPG
         ppgByTeam = []
         for team in leagueModel.getTeams():
-            ppgCalculator = PpgCalculator(team.getTeamId(), leagueModel)
-            ppgByTeam.append(ppgCalculator.getPpg())
+            totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, team.getTeamId())
+            ppgByTeam.append(totalPoints)
 
         trace = go.Pie(labels=teamNames, values=ppgByTeam)
 
