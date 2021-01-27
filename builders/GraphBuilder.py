@@ -64,14 +64,10 @@ class GraphBuilder:
     @classmethod
     def getHtmlForScoringShare(cls, leagueModel: LeagueModel, screenWidth: float):
 
-        # TODO make this into a LMN method
-        # get list of team names
         teamNames = []
-        for team in leagueModel.getTeams():
-            teamNames.append(team.getTeamName())
-
         ppgByTeam = []
         for team in leagueModel.getTeams():
+            teamNames.append(team.getTeamName())
             totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, team.getTeamId())
             ppgByTeam.append(totalPoints)
 
