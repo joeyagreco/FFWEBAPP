@@ -10,7 +10,6 @@ class MainController:
 
     def __init__(self):
         self.__databaseService = DatabaseService()
-        self.__statCalculatorService = StatCalculatorService()
 
     def getLeague(self, leagueId: int):
         return self.__databaseService.getLeague(leagueId)
@@ -30,15 +29,19 @@ class MainController:
     def getLeagueModel(self, leagueId: int):
         return self.__databaseService.getLeagueModel(leagueId)
 
-    def getTeamStatsModel(self, leagueModel: LeagueModel):
-        return self.__statCalculatorService.getTeamStats(leagueModel)
+    @staticmethod
+    def getTeamStatsModel(leagueModel: LeagueModel):
+        return StatCalculatorService.getTeamStats(leagueModel)
 
-    def getHeadToHeadStatsModel(self, leagueModel: LeagueModel, team1Id: int, team2Id: int):
-        return self.__statCalculatorService.getHeadToHeadStats(leagueModel, team1Id, team2Id)
+    @staticmethod
+    def getHeadToHeadStatsModel(leagueModel: LeagueModel, team1Id: int, team2Id: int):
+        return StatCalculatorService.getHeadToHeadStats(leagueModel, team1Id, team2Id)
 
-    def getLeagueStatsModel(self, leagueModel: LeagueModel, statSelection: str):
-        return self.__statCalculatorService.getLeagueStats(leagueModel, statSelection)
+    @staticmethod
+    def getLeagueStatsModel(leagueModel: LeagueModel, statSelection: str):
+        return StatCalculatorService.getLeagueStats(leagueModel, statSelection)
 
-    def getGraphDiv(self, leagueModel: LeagueModel, screenWidth: float, graphSelection: str):
-        return self.__statCalculatorService.getGraphDiv(leagueModel, screenWidth, graphSelection)
+    @staticmethod
+    def getGraphDiv(leagueModel: LeagueModel, screenWidth: float, graphSelection: str):
+        return StatCalculatorService.getGraphDiv(leagueModel, screenWidth, graphSelection)
 
