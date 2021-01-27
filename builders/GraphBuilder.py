@@ -15,18 +15,21 @@ class GraphBuilder:
     """
     This class is used to create graphs.
     """
-    @staticmethod
-    def __setWidthOfFig(fig: Figure, screenWidth: float):
+    DEFAULT_WIDTH = 960
+    WIDTH_MULTIPLIER = 0.5
+    HEIGHT_MULTIPLIER = 0.8
+
+    @classmethod
+    def __setWidthOfFig(cls, fig: Figure, screenWidth: float):
         if screenWidth:
-            width = int(screenWidth)/2
+            width = int(screenWidth) * cls.WIDTH_MULTIPLIER
         else:
-            width = 960
-        height = 0.8 * width
+            width = cls.DEFAULT_WIDTH
+        height = cls.HEIGHT_MULTIPLIER * width
         fig.update_layout(
             width=width,
             height=height
         )
-        print(type(fig))
 
     @classmethod
     def getHtmlForPpg(cls, leagueModel: LeagueModel, screenWidth: float):
@@ -145,7 +148,7 @@ class GraphBuilder:
 
         data = np.array(allScores)
         data = [go.Histogram(x=data,
-                             nbinsx=int(len(allScores)/2))]
+                             nbinsx=int(len(allScores) / 2))]
 
         fig = go.Figure(data)
 
@@ -164,7 +167,8 @@ class GraphBuilder:
     def getHtmlForPointsOverPointsAgainst(cls, leagueModel: LeagueModel, screenWidth: float):
         data = dict()
         for team in leagueModel.getTeams():
-            data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(), andOpponentScore=True)
+            data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(),
+                                                                              andOpponentScore=True)
 
         fig = go.Figure()
 
