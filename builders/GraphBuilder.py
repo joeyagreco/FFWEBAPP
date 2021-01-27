@@ -4,6 +4,7 @@ import numpy as np
 import plotly.graph_objects as go
 from plotly.graph_objs import Figure
 
+from helpers.Constants import Constants
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from models.league_models.LeagueModel import LeagueModel
 from packages.StatCalculators.AwalCalculator import AwalCalculator
@@ -58,7 +59,7 @@ class GraphBuilder:
             xaxis=dict(title="Week",
                        tickvals=xAxisTicks),
             yaxis=dict(title="Points Scored"),
-            title="PPG by Week"
+            title=Constants.PPG_BY_WEEK
         )
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
@@ -86,7 +87,7 @@ class GraphBuilder:
         fig = go.Figure(data=data)
 
         fig.update_layout(
-            title="Scoring Share"
+            title=Constants.SCORING_SHARE
         )
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
@@ -137,7 +138,7 @@ class GraphBuilder:
         fig.update_layout(
             xaxis=dict(title="AWAL", dtick=0.5),
             yaxis=dict(title="PPG"),
-            title="AWAL/PPG by Team"
+            title=Constants.AWAL_OVER_PPG
         )
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
@@ -164,7 +165,7 @@ class GraphBuilder:
         fig.update_layout(
             xaxis=dict(title="Points Scored"),
             yaxis=dict(title="Occurrences"),
-            title="Frequency of Scores"
+            title=Constants.FREQUENCY_OF_SCORES
         )
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
@@ -197,7 +198,7 @@ class GraphBuilder:
         fig.update_layout(
             xaxis=dict(title="Points For"),
             yaxis=dict(title="Points Against"),
-            title="Points For / Points Against"
+            title=Constants.POINTS_FOR_OVER_POINTS_AGAINST
         )
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
