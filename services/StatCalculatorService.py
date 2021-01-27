@@ -1,4 +1,5 @@
 from builders.GraphBuilder import GraphBuilder
+from helpers.Constants import Constants
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from helpers.Rounder import Rounder
 from models.headToHead_stat_models.HeadToHeadStatsModel import HeadToHeadStatsModel
@@ -173,12 +174,12 @@ class StatCalculatorService:
         """
         Returns a model/models for the given stat for self.__leagueModel.
         """
-        statOptions = ["All Scores", "Margins of Victory"]
+        statOptions = Constants.STAT_OPTIONS
         decimalPlacesForScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         everyGameCalculator = EveryGameCalculator(leagueModel)
         if statSelection not in statOptions:
             raise InvalidStatSelectionError(f"Unknown League Stat: {statSelection}.")
-        elif statSelection == "All Scores":
+        elif statSelection == Constants.ALL_SCORES:
             allScores = everyGameCalculator.getAllScores()
             # sort from score high -> low
             allScores.sort(key=lambda x: x.getScore(), reverse=True)
@@ -197,7 +198,7 @@ class StatCalculatorService:
                                       week=weekNumber)
                 allScoresStr.append(newModel)
             return allScoresStr
-        elif statSelection == "Margins of Victory":
+        elif statSelection == Constants.MARGINS_OF_VICTORY:
             allMovs = everyGameCalculator.getAllMarginOfVictories()
             # sort from MOV high -> low
             allMovs.sort(key=lambda x: x.getMarginOfVictory(), reverse=True)
@@ -223,17 +224,18 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, screenWidth: float, graphSelection: str):
-        if graphSelection == "PPG by Week":
+        if graphSelection == Constants.PPG_BY_WEEK:
             return GraphBuilder.getHtmlForPpg(leagueModel, screenWidth)
-        elif graphSelection == "Scoring Share":
+        elif graphSelection == Constants.SCORING_SHARE:
             return GraphBuilder.getHtmlForScoringShare(leagueModel, screenWidth)
-        elif graphSelection == "AWAL/PPG":
+        elif graphSelection == Constants.AWAL_OVER_PPG:
             return GraphBuilder.getHtmlForAwalOverPpg(leagueModel, screenWidth)
-        elif graphSelection == "Frequency of Scores":
+        elif graphSelection == Constants.FREQUENCY_OF_SCORES:
             return GraphBuilder.getHtmlForFrequencyOfScores(leagueModel, screenWidth)
-        elif graphSelection == "Points For/Points Against":
+        elif graphSelection == Constants.POINTS_FOR_OVER_POINTS_AGAINST:
             return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, screenWidth)
         else:
+            # TODO decide what to return here
             return "..."
 
 

@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 
 from controllers.MainController import MainController
+from helpers.Constants import Constants
 from helpers.Error import Error
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 
@@ -318,7 +319,7 @@ def headToHeadStats():
 def leagueStats():
     leagueId = int(request.args.get("league_id"))
     statSelection = request.args.get("stat_selection")
-    statOptions = ["All Scores", "Margins of Victory"]
+    statOptions = Constants.STAT_OPTIONS
     if not statSelection:
         statSelection = statOptions[0]
     mainController = MainController()
@@ -343,8 +344,8 @@ def graphs():
     # divAsString = GraphBuilder.getHtmlForFrequencyOfScores(leagueModelOrError, screenWidth)
     # divAsString = GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModelOrError, screenWidth)
     divAsString = mainController.getGraphDiv(leagueModelOrError, screenWidth, selectedGraph)
-    dummyGraphOptions = ["PPG by Week", "Scoring Share", "AWAL/PPG", "Frequency of Scores", "Points For/Points Against"]
-    return render_template("graphsPage.html", league=leagueOrError, graph_options=dummyGraphOptions,
+    graphOptions = Constants.GRAPH_OPTIONS
+    return render_template("graphsPage.html", league=leagueOrError, graph_options=graphOptions,
                            selected_graph=selectedGraph, graph_div=divAsString)
 
 
