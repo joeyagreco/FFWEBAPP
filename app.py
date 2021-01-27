@@ -338,11 +338,6 @@ def graphs():
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
-    # divAsString = GraphBuilder.getHtmlForPpg(leagueModelOrError, screenWidth)
-    # divAsString = GraphBuilder.getHtmlForScoringShare(leagueModelOrError, screenWidth)
-    # divAsString = GraphBuilder.getHtmlForAwalOverPpg(leagueModelOrError, screenWidth)
-    # divAsString = GraphBuilder.getHtmlForFrequencyOfScores(leagueModelOrError, screenWidth)
-    # divAsString = GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModelOrError, screenWidth)
     divAsString = mainController.getGraphDiv(leagueModelOrError, screenWidth, selectedGraph)
     graphOptions = Constants.GRAPH_OPTIONS
     return render_template("graphsPage.html", league=leagueOrError, graph_options=graphOptions,

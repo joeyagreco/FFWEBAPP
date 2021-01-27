@@ -24,11 +24,11 @@ function getWidthFromDivString(divString) {
         }
     }
     return widthValueRaw.substring(0,indexOfPeriod);
-
-
 }
 
 function injectGraphAsDiv() {
+    // this injects the HTML code we have "waiting" in a div in our HTML into the proper div as HTML.
+    // it first checks if the graph within the div should be resized, and generates a new one if so.
     // TODO update calculation to not be hardcoded
     var injectDiv = document.getElementById("graphDiv").innerHTML;
     if(getWidthFromDivString(injectDiv) !=  parseInt(window.innerWidth/2, 10)) {
