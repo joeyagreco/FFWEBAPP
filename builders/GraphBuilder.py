@@ -20,7 +20,10 @@ class GraphBuilder:
     HEIGHT_MULTIPLIER = 0.8
 
     @classmethod
-    def __setWidthOfFig(cls, fig: Figure, screenWidth: float):
+    def __setWidthAndHeightOfFig(cls, fig: Figure, screenWidth: float):
+        """
+        This sets the width and height of the given figure.
+        """
         if screenWidth:
             width = int(screenWidth) * cls.WIDTH_MULTIPLIER
         else:
@@ -32,13 +35,15 @@ class GraphBuilder:
         )
 
     @classmethod
-    def getHtmlForPpg(cls, leagueModel: LeagueModel, screenWidth: float):
+    def getHtmlForPpg(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
+        """
+        This creates a line graph for PPG for each team in the given leagueModel.
+        """
 
         data = dict()
         for team in leagueModel.getTeams():
             data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
 
-        # df_scores = pd.DataFrame(data=data)
         xAxisTicks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
 
         fig = go.Figure()
@@ -56,13 +61,16 @@ class GraphBuilder:
             title="PPG by Week"
         )
 
-        cls.__setWidthOfFig(fig, screenWidth)
+        cls.__setWidthAndHeightOfFig(fig, screenWidth)
 
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
     @classmethod
-    def getHtmlForScoringShare(cls, leagueModel: LeagueModel, screenWidth: float):
+    def getHtmlForScoringShare(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
+        """
+        This creates a pie graph for percentage of league scoring that includes every team in the given leagueModel.
+        """
 
         teamNames = []
         ppgByTeam = []
@@ -81,13 +89,16 @@ class GraphBuilder:
             title="Scoring Share"
         )
 
-        cls.__setWidthOfFig(fig, screenWidth)
+        cls.__setWidthAndHeightOfFig(fig, screenWidth)
 
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
     @classmethod
-    def getHtmlForAwalOverPpg(cls, leagueModel: LeagueModel, screenWidth: float):
+    def getHtmlForAwalOverPpg(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
+        """
+        This creates a scatter plot for AWAL/PPG for each team in the given leagueModel.
+        """
 
         data = dict()
         ppgList = []
@@ -129,13 +140,16 @@ class GraphBuilder:
             title="AWAL/PPG by Team"
         )
 
-        cls.__setWidthOfFig(fig, screenWidth)
+        cls.__setWidthAndHeightOfFig(fig, screenWidth)
 
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
     @classmethod
-    def getHtmlForFrequencyOfScores(cls, leagueModel: LeagueModel, screenWidth: float):
+    def getHtmlForFrequencyOfScores(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
+        """
+        This creates a histogram for all scores in the given leagueModel.
+        """
 
         allScores = []
         for team in leagueModel.getTeams():
@@ -153,13 +167,17 @@ class GraphBuilder:
             title="Frequency of Scores"
         )
 
-        cls.__setWidthOfFig(fig, screenWidth)
+        cls.__setWidthAndHeightOfFig(fig, screenWidth)
 
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
 
     @classmethod
-    def getHtmlForPointsOverPointsAgainst(cls, leagueModel: LeagueModel, screenWidth: float):
+    def getHtmlForPointsOverPointsAgainst(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
+        """
+        This creates a scatter plot for points scored/points against for every team in the given leagueModel.
+        """
+
         data = dict()
         for team in leagueModel.getTeams():
             data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(),
@@ -182,7 +200,7 @@ class GraphBuilder:
             title="Points For / Points Against"
         )
 
-        cls.__setWidthOfFig(fig, screenWidth)
+        cls.__setWidthAndHeightOfFig(fig, screenWidth)
 
         html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
         return html
