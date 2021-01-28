@@ -36,6 +36,28 @@ class GraphBuilder:
         )
 
     @classmethod
+    def getHtmlForByWeekLineGraph(cls, leagueModel: LeagueModel, screenWidth: float, data: dict, title: str, yAxisName: str):
+        """
+        This turns the given data into a by week line graph.
+        """
+        fig = go.Figure()
+        xAxisTicks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
+        for teamId in data.keys():
+            fig.add_trace(go.Scatter(x=xAxisTicks,
+                                     y=data[teamId],
+                                     name=LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName(),
+                                     mode="lines+markers"))
+
+        fig.update_layout(
+            xaxis=dict(title="Week",
+                       tickvals=xAxisTicks),
+            yaxis=dict(title=yAxisName),
+            title=title
+        )
+        cls.__setWidthAndHeightOfFig(fig, screenWidth)
+        return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
+
+    @classmethod
     def getHtmlForPpgByWeek(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
         """
         This creates a line graph for PPG for each team in the given leagueModel.
