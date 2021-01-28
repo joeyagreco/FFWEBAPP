@@ -225,7 +225,7 @@ class StatCalculatorService:
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, screenWidth: float, graphSelection: str):
         if graphSelection == Constants.PPG_BY_WEEK:
-            return GraphBuilder.getHtmlForPpg(leagueModel, screenWidth)
+            return GraphBuilder.getHtmlForPpgByWeek(leagueModel, screenWidth)
         elif graphSelection == Constants.SCORING_SHARE:
             return GraphBuilder.getHtmlForScoringShare(leagueModel, screenWidth)
         elif graphSelection == Constants.AWAL_OVER_PPG:

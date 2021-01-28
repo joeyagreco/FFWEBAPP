@@ -36,7 +36,7 @@ class GraphBuilder:
         )
 
     @classmethod
-    def getHtmlForPpg(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
+    def getHtmlForPpgByWeek(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
         """
         This creates a line graph for PPG for each team in the given leagueModel.
         """
@@ -64,8 +64,7 @@ class GraphBuilder:
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
 
-        html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
-        return html
+        return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
     def getHtmlForScoringShare(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
@@ -92,8 +91,7 @@ class GraphBuilder:
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
 
-        html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
-        return html
+        return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
     def getHtmlForAwalOverPpg(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
@@ -143,8 +141,7 @@ class GraphBuilder:
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
 
-        html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
-        return html
+        return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
     def getHtmlForFrequencyOfScores(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
@@ -170,8 +167,7 @@ class GraphBuilder:
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
 
-        html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
-        return html
+        return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
     def getHtmlForPointsOverPointsAgainst(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
@@ -203,5 +199,4 @@ class GraphBuilder:
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
 
-        html = fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
-        return html
+        return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
