@@ -240,11 +240,13 @@ class StatCalculatorService:
         elif graphSelection == Constants.AWAL_OVER_PPG:
             return GraphBuilder.getHtmlForAwalOverPpg(leagueModel, screenWidth)
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
-            return GraphBuilder.getHtmlForFrequencyOfScores(leagueModel, screenWidth)
+            allScores = []
+            for team in leagueModel.getTeams():
+                allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
+            return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores)/2), "Points Scored", "Occurrences", Constants.FREQUENCY_OF_SCORES)
         elif graphSelection == Constants.POINTS_FOR_OVER_POINTS_AGAINST:
             return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, screenWidth)
         else:
-            # TODO decide what to return here
-            return "..."
+            return "Graph Not Found"
 
 

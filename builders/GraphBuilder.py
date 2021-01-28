@@ -71,6 +71,22 @@ class GraphBuilder:
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
+    def getHtmlForHistogram(cls, screenWidth: float, data: list, bucketSize: int, xAxisName: str, yAxisName: str, title: str) -> str:
+        """
+        This creates a histogram for the given data.
+        """
+        data = np.array(data)
+        data = [go.Histogram(x=data, nbinsx=bucketSize)]
+        fig = go.Figure(data)
+        fig.update_layout(
+            xaxis=dict(title=xAxisName),
+            yaxis=dict(title=yAxisName),
+            title=title
+        )
+        cls.__setWidthAndHeightOfFig(fig, screenWidth)
+        return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
+
+    @classmethod
     def getHtmlForAwalOverPpg(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
         """
         This creates a scatter plot for AWAL/PPG for each team in the given leagueModel.
@@ -114,32 +130,6 @@ class GraphBuilder:
             xaxis=dict(title="AWAL", dtick=0.5),
             yaxis=dict(title="PPG"),
             title=Constants.AWAL_OVER_PPG
-        )
-
-        cls.__setWidthAndHeightOfFig(fig, screenWidth)
-
-        return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
-
-    @classmethod
-    def getHtmlForFrequencyOfScores(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
-        """
-        This creates a histogram for all scores in the given leagueModel.
-        """
-
-        allScores = []
-        for team in leagueModel.getTeams():
-            allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
-
-        data = np.array(allScores)
-        data = [go.Histogram(x=data,
-                             nbinsx=int(len(allScores) / 2))]
-
-        fig = go.Figure(data)
-
-        fig.update_layout(
-            xaxis=dict(title="Points Scored"),
-            yaxis=dict(title="Occurrences"),
-            title=Constants.FREQUENCY_OF_SCORES
         )
 
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
