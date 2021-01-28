@@ -91,7 +91,6 @@ class GraphBuilder:
         """
         This creates a scatter plot for AWAL/PPG for each team in the given leagueModel.
         """
-
         data = dict()
         ppgList = []
         awalList = []
@@ -141,7 +140,6 @@ class GraphBuilder:
         """
         This creates a scatter plot for points scored/points against for every team in the given leagueModel.
         """
-
         data = dict()
         for team in leagueModel.getTeams():
             data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(),
