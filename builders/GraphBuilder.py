@@ -58,61 +58,16 @@ class GraphBuilder:
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
-    def getHtmlForPpgByWeek(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
+    def getHtmlForPieGraph(cls, screenWidth: float, dataNames: list, dataValues: list, title: str) -> str:
         """
-        This creates a line graph for PPG for each team in the given leagueModel.
+        This creates a pie graph for the given dataNames at the given dataValues.
+        NOTE: dataNames should be in the same order as their corresponding dataValues.
         """
-
-        data = dict()
-        for team in leagueModel.getTeams():
-            data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
-
-        xAxisTicks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
-
-        fig = go.Figure()
-
-        for teamId in data.keys():
-            fig.add_trace(go.Scatter(x=xAxisTicks,
-                                     y=data[teamId],
-                                     name=LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName(),
-                                     mode="lines+markers"))
-
-        fig.update_layout(
-            xaxis=dict(title="Week",
-                       tickvals=xAxisTicks),
-            yaxis=dict(title="Points Scored"),
-            title=Constants.PPG_BY_WEEK
-        )
-
-        cls.__setWidthAndHeightOfFig(fig, screenWidth)
-
-        return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
-
-    @classmethod
-    def getHtmlForScoringShare(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
-        """
-        This creates a pie graph for percentage of league scoring that includes every team in the given leagueModel.
-        """
-
-        teamNames = []
-        ppgByTeam = []
-        for team in leagueModel.getTeams():
-            teamNames.append(team.getTeamName())
-            totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, team.getTeamId())
-            ppgByTeam.append(totalPoints)
-
-        trace = go.Pie(labels=teamNames, values=ppgByTeam)
-
+        trace = go.Pie(labels=dataNames, values=dataValues)
         data = [trace]
-
         fig = go.Figure(data=data)
-
-        fig.update_layout(
-            title=Constants.SCORING_SHARE
-        )
-
+        fig.update_layout(title=title)
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
-
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod

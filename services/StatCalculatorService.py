@@ -230,7 +230,13 @@ class StatCalculatorService:
                 data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
             return GraphBuilder.getHtmlForByWeekLineGraph(leagueModel, screenWidth, data, Constants.PPG_BY_WEEK, "Points Scored")
         elif graphSelection == Constants.SCORING_SHARE:
-            return GraphBuilder.getHtmlForScoringShare(leagueModel, screenWidth)
+            teamNames = [team.getTeamName() for team in leagueModel.getTeams()]
+            teamPoints = [team.getTeamName() for team in leagueModel.getTeams()]
+            for team in leagueModel.getTeams():
+                teamNames.append(team.getTeamName())
+                totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, team.getTeamId())
+                teamPoints.append(totalPoints)
+            return GraphBuilder.getHtmlForPieGraph(screenWidth, teamNames, teamPoints, Constants.SCORING_SHARE)
         elif graphSelection == Constants.AWAL_OVER_PPG:
             return GraphBuilder.getHtmlForAwalOverPpg(leagueModel, screenWidth)
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
