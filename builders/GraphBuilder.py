@@ -36,7 +36,7 @@ class GraphBuilder:
         )
 
     @classmethod
-    def getHtmlForByWeekLineGraph(cls, screenWidth: float, data: dict, title: str, xAxisTicks: list, yAxisName: str):
+    def getHtmlForByWeekLineGraph(cls, screenWidth: float, data: dict, xAxisTicks: list, yAxisName: str, title: str):
         """
         This turns the given data into a by week line graph.
         """
@@ -102,9 +102,7 @@ class GraphBuilder:
             ppgList.append(ppg)
             awalList.append(awal)
             data[team.getTeamId()] = ([awal], [ppg])
-
         fig = go.Figure()
-
         for teamId in data.keys():
             fig.add_trace(go.Scatter(x=data[teamId][0],
                                      y=data[teamId][1],
@@ -122,15 +120,12 @@ class GraphBuilder:
                                  marker=dict(color="rgba(0,0,0,0.25)")
                                  )
                       )
-
         fig.update_layout(
             xaxis=dict(title="AWAL", dtick=0.5),
             yaxis=dict(title="PPG"),
             title=Constants.AWAL_OVER_PPG
         )
-
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
-
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
@@ -142,9 +137,7 @@ class GraphBuilder:
         for team in leagueModel.getTeams():
             data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(),
                                                                               andOpponentScore=True)
-
         fig = go.Figure()
-
         for teamId in data.keys():
             fig.add_trace(go.Scatter(x=[matchup[0] for matchup in data[teamId]],
                                      y=[matchup[1] for matchup in data[teamId]],
@@ -153,13 +146,10 @@ class GraphBuilder:
                                      marker=dict(size=10)
                                      )
                           )
-
         fig.update_layout(
             xaxis=dict(title="Points For"),
             yaxis=dict(title="Points Against"),
             title=Constants.POINTS_FOR_OVER_POINTS_AGAINST
         )
-
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
-
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
