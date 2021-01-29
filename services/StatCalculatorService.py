@@ -260,7 +260,7 @@ class StatCalculatorService:
             allScores = []
             for team in leagueModel.getTeams():
                 allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
-            return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores)/2), "Points Scored", "Occurrences", Constants.FREQUENCY_OF_SCORES)
+            return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores)/5), "Points Scored", "Occurrences", Constants.FREQUENCY_OF_SCORES)
 
         elif graphSelection == Constants.POINTS_FOR_OVER_POINTS_AGAINST:
             return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, screenWidth)
