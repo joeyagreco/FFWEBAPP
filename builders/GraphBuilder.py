@@ -36,7 +36,7 @@ class GraphBuilder:
         )
 
     @classmethod
-    def getHtmlForByWeekLineGraph(cls, screenWidth: float, data: dict, xAxisTicks: list, yAxisName: str, title: str):
+    def getHtmlForByWeekLineGraph(cls, screenWidth: float, data: dict, xAxisTicks: list, yAxisName: str, yAxisDTick: float, title: str):
         """
         This turns the given data into a by week line graph.
         """
@@ -49,7 +49,7 @@ class GraphBuilder:
         fig.update_layout(
             xaxis=dict(title="Week",
                        tickvals=xAxisTicks),
-            yaxis=dict(title=yAxisName),
+            yaxis=dict(title=yAxisName, dtick=yAxisDTick),
             title=title
         )
         cls.__setWidthAndHeightOfFig(fig, screenWidth)

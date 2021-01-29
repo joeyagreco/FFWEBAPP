@@ -224,12 +224,26 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, screenWidth: float, graphSelection: str):
+
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             for team in leagueModel.getTeams():
                 data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
             xAxisTicks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
-            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "Points Scored", Constants.PPG_BY_WEEK)
+            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "Points Scored", 10, Constants.PPG_BY_WEEK)
+
+        elif graphSelection == Constants.AWAL_BY_WEEK:
+            data = dict()
+            xAxisTicks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
+            for team in leagueModel.getTeams():
+                data[team.getTeamName()] = []
+                for weekNumber in xAxisTicks:
+                    recordCalculator = RecordCalculator(team.getTeamId(), leagueModel)
+                    awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, recordCalculator.getWins(throughWeek=weekNumber), recordCalculator.getTies(throughWeek=weekNumber))
+                    awal = awalCalculator.getAwal(throughWeek=weekNumber)
+                    data[team.getTeamName()].append(awal)
+            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "AWAL", 1, Constants.AWAL_BY_WEEK)
+
         elif graphSelection == Constants.SCORING_SHARE:
             teamNames = [team.getTeamName() for team in leagueModel.getTeams()]
             teamPoints = [team.getTeamName() for team in leagueModel.getTeams()]
@@ -238,15 +252,19 @@ class StatCalculatorService:
                 totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, team.getTeamId())
                 teamPoints.append(totalPoints)
             return GraphBuilder.getHtmlForPieGraph(screenWidth, teamNames, teamPoints, Constants.SCORING_SHARE)
+
         elif graphSelection == Constants.AWAL_OVER_PPG:
             return GraphBuilder.getHtmlForAwalOverPpg(leagueModel, screenWidth)
+
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
             allScores = []
             for team in leagueModel.getTeams():
                 allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
             return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores)/2), "Points Scored", "Occurrences", Constants.FREQUENCY_OF_SCORES)
+
         elif graphSelection == Constants.POINTS_FOR_OVER_POINTS_AGAINST:
             return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, screenWidth)
+
         else:
             return "Graph Not Found"
 
