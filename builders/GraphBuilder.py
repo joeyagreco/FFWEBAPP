@@ -36,18 +36,16 @@ class GraphBuilder:
         )
 
     @classmethod
-    def getHtmlForByWeekLineGraph(cls, leagueModel: LeagueModel, screenWidth: float, data: dict, title: str, yAxisName: str):
+    def getHtmlForByWeekLineGraph(cls, screenWidth: float, data: dict, title: str, xAxisTicks: list, yAxisName: str):
         """
         This turns the given data into a by week line graph.
         """
         fig = go.Figure()
-        xAxisTicks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
-        for teamId in data.keys():
+        for teamName in data.keys():
             fig.add_trace(go.Scatter(x=xAxisTicks,
-                                     y=data[teamId],
-                                     name=LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName(),
+                                     y=data[teamName],
+                                     name=teamName,
                                      mode="lines+markers"))
-
         fig.update_layout(
             xaxis=dict(title="Week",
                        tickvals=xAxisTicks),

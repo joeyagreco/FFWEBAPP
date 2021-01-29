@@ -227,8 +227,9 @@ class StatCalculatorService:
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             for team in leagueModel.getTeams():
-                data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
-            return GraphBuilder.getHtmlForByWeekLineGraph(leagueModel, screenWidth, data, Constants.PPG_BY_WEEK, "Points Scored")
+                data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
+            xAxisTicks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
+            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, Constants.PPG_BY_WEEK, xAxisTicks, "Points Scored")
         elif graphSelection == Constants.SCORING_SHARE:
             teamNames = [team.getTeamName() for team in leagueModel.getTeams()]
             teamPoints = [team.getTeamName() for team in leagueModel.getTeams()]
