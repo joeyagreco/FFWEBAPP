@@ -4,6 +4,11 @@ class Constants:
     The variables declared within this class are NOT meant to be modified.
     """
 
+    # used for League Model Navigator
+    WIN = "Win"
+    LOSS = "Loss"
+    TIE = "Tie"
+
     # used for League Stats
     ALL_SCORES = "All Scores"
     MARGINS_OF_VICTORY = "Margins of Victory"

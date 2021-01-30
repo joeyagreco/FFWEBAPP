@@ -1,5 +1,6 @@
 from typing import List
 
+from helpers.Constants import Constants
 from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
@@ -128,14 +129,14 @@ class LeagueModelNavigator:
             isTeamA = False
         if matchup.getTeamAScore() > matchup.getTeamBScore():
             if isTeamA:
-                return "Win"
-            return "Loss"
+                return Constants.WIN
+            return Constants.LOSS
         elif matchup.getTeamAScore() < matchup.getTeamBScore():
             if isTeamA:
-                return "Loss"
-            return "Win"
+                return Constants.LOSS
+            return Constants.WIN
         else:
-            return "Tie"
+            return Constants.TIE
 
     @classmethod
     def getAllScoresInLeague(cls, leagueModel: LeagueModel, **params) -> List[float]:
@@ -202,7 +203,6 @@ class LeagueModelNavigator:
         ASLIST: [boolean] Gives all week numbers as an ordered list.
         """
         asList = params.pop("asList", False)
-
         numberOfWeeks = len(leagueModel.getWeeks())
         if asList:
             return [x+1 for x in range(numberOfWeeks)]
@@ -213,6 +213,7 @@ class LeagueModelNavigator:
         """
         Returns as a list of ints all of the team IDs in the given leagueModel.
         """
+        # TODO make excludedId into a list instead of a single ID
         excludedId = params.pop("excludeId", None)
         teamIds = []
         for team in leagueModel.getTeams():
@@ -221,8 +222,7 @@ class LeagueModelNavigator:
         return teamIds
 
     @staticmethod
-    def getAllWeeksTeamsPlayEachOther(leagueModel: LeagueModel, team1Id: int, opponentTeamIds: list, **params) -> List[
-        int]:
+    def getAllWeeksTeamsPlayEachOther(leagueModel: LeagueModel, team1Id: int, opponentTeamIds: list, **params) -> List[int]:
         """
         Returns as a list of ints all of the weeks that the team with team1Id plays any of the teams with ids in opponentTeamIds.
         ONLYWEEKS: [list] Gives weeks teams play each other for the given week numbers.
