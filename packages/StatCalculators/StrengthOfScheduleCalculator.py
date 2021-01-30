@@ -31,5 +31,4 @@ class StrengthOfScheduleCalculator:
                     gameCount += 1
         if gameCount == 0:
             return 0.0
-        print(f"{LeagueModelNavigator.getTeamById(self.__leagueModel, self.__teamId).getTeamName()} Opponent AWAL: {totalOpponentAwal}, Total Weeks: {gameCount}")
         return Rounder.normalRound(totalOpponentAwal / gameCount, 3)
