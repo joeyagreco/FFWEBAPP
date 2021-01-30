@@ -14,18 +14,10 @@ class StrengthOfScheduleCalculator:
     def getStrengthOfSchedule(self, **params) -> float:
         """
         Returns the Strength of Schedule that the team with the given id has had.
-        THROUGHWEEK: [int] Gives SoS through that week.
-        ONLYWEEKS: [list] Gives SoS for the given week numbers.
         """
-        throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
-        onlyWeeks = params.pop("onlyWeeks", None)
         totalOpponentAwal = 0
         gameCount = 0
         for week in self.__leagueModel.getWeeks():
-            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
-                continue
-            elif week.getWeekNumber() > throughWeek:
-                break
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
                     recordCalculator = RecordCalculator(matchup.getTeamB().getTeamId(), self.__leagueModel)
