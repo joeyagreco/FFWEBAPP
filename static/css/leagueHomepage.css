@@ -24,6 +24,10 @@
     background-color: white;
 }
 
+#updateButton {
+    background-color: orange;
+}
+
 .leagueIdHidden {
     display: none;
 }

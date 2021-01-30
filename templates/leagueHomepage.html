@@ -15,11 +15,11 @@
 {% block content %}
 <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
 <div class="buttonStack">
-    <button class="stackButton" type="button" onclick="leagueStatsRedirect();">League Stats</button>
     <button class="stackButton" type="button" onclick="teamStatsRedirect();">Team Stats</button>
+    <button class="stackButton" type="button" onclick="leagueStatsRedirect();">League Stats</button>
     <button class="stackButton" type="button" onclick="headToHeadStatsRedirect();">Head to Head Stats</button>
     <button class="stackButton" type="button" onclick="graphsRedirect();">Graphs</button>
-    <button class="stackButton" type="submit" onclick="updateLeagueRedirect();">Update League</button>
+    <button class="stackButton" id="updateButton" type="submit" onclick="updateLeagueRedirect();">Update League</button>
 
 </div>
 
