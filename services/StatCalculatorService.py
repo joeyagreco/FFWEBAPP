@@ -134,7 +134,9 @@ class StatCalculatorService:
             minScoreStr = Rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwal(vsTeamIds=[opponentTeamId])
+            awalStr = Rounder.keepTrailingZeros(awal, 2)
             wal = awalCalculator.getWal()
+            walStr = Rounder.keepTrailingZeros(wal, 2)
             gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team has to play every week
@@ -149,8 +151,6 @@ class StatCalculatorService:
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
             smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
-            smartWinsAdjustment = smartCalculator.getSmartWinsAdjustmentOfScores(allScores, wal)
-            smartWinsAdjustmentStr = Rounder.keepTrailingZeros(smartWinsAdjustment, 2)
             percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring(vsTeamIds=[opponentTeamId])
             percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
@@ -164,13 +164,13 @@ class StatCalculatorService:
                                                         stddev=stddevStr,
                                                         maxScore=maxScoreStr,
                                                         minScore=minScoreStr,
-                                                        awal=awal,
+                                                        awal=awalStr,
                                                         teamScore=teamScore,
                                                         teamSuccess=teamSuccess,
                                                         teamLuck=teamLuck,
                                                         smartWins=smartWinsStr,
-                                                        smartWinsAdjustment=smartWinsAdjustmentStr,
-                                                        percentageOfLeagueScoring=percentageOfLeagueScoringStr)
+                                                        percentageOfLeagueScoring=percentageOfLeagueScoringStr,
+                                                        wal=walStr)
             statsModels.append(headToHeadStatsModel)
         return statsModels
 

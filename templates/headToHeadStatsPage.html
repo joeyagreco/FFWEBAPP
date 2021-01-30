@@ -70,18 +70,18 @@
                     <th>Losses</th>
                     <th>Ties</th>
                     <th>Win %</th>
+                    <th>WAL</th>
+                    <th>AWAL</th>
+                    <th>Smart Wins</th>
                     <th>PPG</th>
                     <th>% of League Scoring</th>
                     <th>Plus/Minus</th>
                     <th>Max Score</th>
                     <th>Min Score</th>
                     <th>STDEV</th>
-                    <th>AWAL</th>
                     <th>Team Score</th>
                     <th>Team Success</th>
                     <th>Team Luck</th>
-                    <th>Smart Wins</th>
-                    <th>Smart Wins Adjustment</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -92,18 +92,18 @@
                     <td>{{teamStats.getLosses()}}</td>
                     <td>{{teamStats.getTies()}}</td>
                     <td>{{teamStats.getWinPercentage()}}</td>
+                    <td>{{teamStats.getWal()}}</td>
+                    <td>{{teamStats.getAwal()}}</td>
+                    <td>{{teamStats.getSmartWins()}}</td>
                     <td>{{teamStats.getPpg()}}</td>
                     <td>{{teamStats.getPercentageOfLeagueScoring()}}</td>
                     <td>{{teamStats.getPlusMinus()}}</td>
                     <td>{{teamStats.getMaxScore()}}</td>
                     <td>{{teamStats.getMinScore()}}</td>
                     <td>{{teamStats.getStddev()}}</td>
-                    <td>{{teamStats.getAwal()}}</td>
                     <td>{{teamStats.getTeamScore()}}</td>
                     <td>{{teamStats.getTeamSuccess()}}</td>
                     <td>{{teamStats.getTeamLuck()}}</td>
-                    <td>{{teamStats.getSmartWins()}}</td>
-                    <td>{{teamStats.getSmartWinsAdjustment()}}</td>
                 </tr>
                 {% endfor %}
                 </tbody>
