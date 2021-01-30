@@ -19,8 +19,6 @@ class StrengthOfScheduleCalculator:
         """
         throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        # vsTeamIds holds all IDs except *this* team. this is because we want awal from weeks when opponents DIDNT face *this* team.
-        vsTeamIds = LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId)
         totalOpponentAwal = 0
         gameCount = 0
         for week in self.__leagueModel.getWeeks():
@@ -31,15 +29,15 @@ class StrengthOfScheduleCalculator:
             for matchup in week.getMatchups():
                 if matchup.getTeamA().getTeamId() == self.__teamId:
                     recordCalculator = RecordCalculator(matchup.getTeamB().getTeamId(), self.__leagueModel)
-                    awalCalculator = AwalCalculator(matchup.getTeamB().getTeamId(), self.__leagueModel, recordCalculator.getWins(throughWeek=throughWeek, vsTeamIds=vsTeamIds), recordCalculator.getTies(throughWeek=throughWeek, vsTeamIds=vsTeamIds))
-                    totalOpponentAwal += awalCalculator.getAwal(throughWeek=throughWeek, vsTeamIds=vsTeamIds)
+                    awalCalculator = AwalCalculator(matchup.getTeamB().getTeamId(), self.__leagueModel, recordCalculator.getWins(onlyWeeks=[week.getWeekNumber()]), recordCalculator.getTies(onlyWeeks=[week.getWeekNumber()]))
+                    totalOpponentAwal += awalCalculator.getAwal(onlyWeeks=[week.getWeekNumber()])
                     gameCount += 1
                 elif matchup.getTeamB().getTeamId() == self.__teamId:
                     recordCalculator = RecordCalculator(matchup.getTeamA().getTeamId(), self.__leagueModel)
-                    awalCalculator = AwalCalculator(matchup.getTeamA().getTeamId(), self.__leagueModel, recordCalculator.getWins(throughWeek=throughWeek, vsTeamIds=vsTeamIds), recordCalculator.getTies(throughWeek=throughWeek, vsTeamIds=vsTeamIds))
-                    totalOpponentAwal += awalCalculator.getAwal(throughWeek=throughWeek, vsTeamIds=vsTeamIds)
+                    awalCalculator = AwalCalculator(matchup.getTeamA().getTeamId(), self.__leagueModel, recordCalculator.getWins(onlyWeeks=[week.getWeekNumber()]), recordCalculator.getTies(onlyWeeks=[week.getWeekNumber()]))
+                    totalOpponentAwal += awalCalculator.getAwal(onlyWeeks=[week.getWeekNumber()])
                     gameCount += 1
         if gameCount == 0:
             return 0.0
         print(f"{LeagueModelNavigator.getTeamById(self.__leagueModel, self.__teamId).getTeamName()} Opponent AWAL: {totalOpponentAwal}, Total Weeks: {gameCount}")
-        return Rounder.normalRound(totalOpponentAwal / gameCount**2, 3)
+        return Rounder.normalRound(totalOpponentAwal / gameCount, 3)
