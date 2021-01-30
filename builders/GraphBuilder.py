@@ -116,6 +116,7 @@ class GraphBuilder:
         fig.add_trace(go.Scatter(x=awalList,
                                  y=m * np.array(awalList) + b,
                                  showlegend=False,
+                                 name="Linear Regression",
                                  mode="lines",
                                  marker=dict(color="rgba(0,0,0,0.25)")
                                  )
