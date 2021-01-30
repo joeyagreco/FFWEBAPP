@@ -4,7 +4,6 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
-from packages.StatCalculators.RecordCalculator import RecordCalculator
 from packages.StatCalculators.StrengthOfScheduleCalculator import StrengthOfScheduleCalculator
 
 
