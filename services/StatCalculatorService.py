@@ -56,7 +56,9 @@ class StatCalculatorService:
             winPercentageStr = Rounder.keepTrailingZeros(winPercentage, 3)
             awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
             awal = awalCalculator.getAwal()
+            awalStr = Rounder.keepTrailingZeros(awal, 2)
             wal = awalCalculator.getWal()
+            walStr = Rounder.keepTrailingZeros(wal, 2)
             gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId)
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team HAS to play every week
@@ -88,13 +90,14 @@ class StatCalculatorService:
                                        stddev=stddevStr,
                                        maxScore=maxScoreStr,
                                        minScore=minScoreStr,
-                                       awal=awal,
+                                       awal=awalStr,
                                        teamScore=teamScore,
                                        teamSuccess=teamSuccess,
                                        teamLuck=teamLuck,
                                        smartWins=smartWinsStr,
                                        percentageOfLeagueScoring=percentageOfLeagueScoringStr,
-                                       strengthOfSchedule=strengthOfScheduleStr)
+                                       strengthOfSchedule=strengthOfScheduleStr,
+                                       wal=walStr)
             teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
         teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
