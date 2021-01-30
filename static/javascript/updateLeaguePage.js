@@ -7,8 +7,7 @@ function deleteLeague() {
 }
 
 function addUpdateWeeksRedirect() {
-    // GET request
     var leagueId = document.getElementById("league_id").value;
-    window.location = "/add-update-weeks?league_id="+leagueId;
-
+    // GET request
+     window.location = "/add-update-weeks?league_id="+leagueId;
 }

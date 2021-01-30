@@ -18,10 +18,10 @@ class DatabaseService:
         return self.__databaseClient.getLeague(leagueId)
 
     def addLeague(self, leagueName: str, numberOfTeams: int):
-        # build out the teams list
+        # build out the teams list with default team names
         teams = []
         for x in range(1, numberOfTeams + 1):
-            teams.append({"teamId": x, "teamName": ""})
+            teams.append({"teamId": x, "teamName": f"Team {x}"})
         return self.__databaseClient.addLeague(leagueName, numberOfTeams, teams)
 
     def updateLeague(self, leagueId: int, leagueName: str, teams: list, weeks: list):
