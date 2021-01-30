@@ -20,6 +20,7 @@ class TeamStatsModel:
         self.__smartWins = stats["smartWins"]
         self.__smartWinsAdjustment = stats["smartWinsAdjustment"]
         self.__percentageOfLeagueScoring = stats["percentageOfLeagueScoring"]
+        self.__strengthOfSchedule = stats["strengthOfSchedule"]
 
     def getTeamId(self):
         return self.__teamId
@@ -77,6 +78,9 @@ class TeamStatsModel:
 
     def getPercentageOfLeagueScoring(self):
         return self.__percentageOfLeagueScoring
+
+    def getStrengthOfSchedule(self):
+        return self.__strengthOfSchedule
 
 
 

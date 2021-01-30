@@ -15,6 +15,7 @@ from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
 from packages.StatCalculators.SmartCalculator import SmartCalculator
 from packages.StatCalculators.SslCalculator import SslCalculator
+from packages.StatCalculators.StrengthOfScheduleCalculator import StrengthOfScheduleCalculator
 
 
 class StatCalculatorService:
@@ -73,6 +74,9 @@ class StatCalculatorService:
             smartWinsAdjustmentStr = Rounder.keepTrailingZeros(smartWinsAdjustment, 2)
             percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
             percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
+            strengthOfScheduleCalculator = StrengthOfScheduleCalculator(teamId, leagueModel)
+            strengthOfSchedule = strengthOfScheduleCalculator.getStrengthOfSchedule()
+            strengthOfScheduleStr = Rounder.keepTrailingZeros(strengthOfSchedule, 3)
 
             teamModel = TeamStatsModel(teamId=teamId,
                                        teamName=teamName,
@@ -92,7 +96,8 @@ class StatCalculatorService:
                                        teamLuck=teamLuck,
                                        smartWins=smartWinsStr,
                                        smartWinsAdjustment=smartWinsAdjustmentStr,
-                                       percentageOfLeagueScoring=percentageOfLeagueScoringStr)
+                                       percentageOfLeagueScoring=percentageOfLeagueScoringStr,
+                                       strengthOfSchedule=strengthOfScheduleStr)
             teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
         teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)

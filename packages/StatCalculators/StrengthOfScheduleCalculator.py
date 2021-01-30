@@ -36,9 +36,10 @@ class StrengthOfScheduleCalculator:
                     gameCount += 1
                 elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     recordCalculator = RecordCalculator(matchup.getTeamA().getTeamId(), self.__leagueModel)
-                    awalCalculator = AwalCalculator(matchup.getTeamB().getTeamId(), self.__leagueModel, recordCalculator.getWins(throughWeek=throughWeek), recordCalculator.getTies(throughWeek=throughWeek))
+                    awalCalculator = AwalCalculator(matchup.getTeamA().getTeamId(), self.__leagueModel, recordCalculator.getWins(throughWeek=throughWeek), recordCalculator.getTies(throughWeek=throughWeek))
                     totalOpponentAwal += awalCalculator.getAwal(throughWeek=throughWeek)
                     gameCount += 1
         if gameCount == 0:
             return 0.0
-        return Rounder.normalRound(totalOpponentAwal / gameCount, 3)
+        print(f"{LeagueModelNavigator.getTeamById(self.__leagueModel, self.__teamId).getTeamName()} Opponent AWAL: {totalOpponentAwal}, Total Weeks: {gameCount}")
+        return Rounder.normalRound(totalOpponentAwal / gameCount**2, 3)
