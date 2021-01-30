@@ -33,7 +33,7 @@ def addLeague():
     if isinstance(newLeagueIdOrError, Error):
         return render_template("addLeaguePage.html", error_message=newLeagueIdOrError.errorMessage())
     else:
-        return redirect(url_for("leagueHomepage", league_id=newLeagueIdOrError))
+        return redirect(url_for("updateLeague", league_id=newLeagueIdOrError))
 
 
 @app.route("/new-league")
@@ -48,6 +48,11 @@ def leagueHomepage():
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
+    # check if this league has at least 1 week. if not, redirect to update league page.
+    leagueModelOrError = mainController.getLeagueModel(leagueId)
+    if LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModelOrError) < 1:
+        # return render_template("updateLeaguePage.html", league=leagueOrError)
+        return redirect(url_for("updateLeague", league_id=leagueId))
     else:
         leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
         return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
@@ -55,6 +60,7 @@ def leagueHomepage():
 
 @app.route("/update-league", methods=["GET", "POST"])
 def updateLeague():
+    # TODO replace with LMN method
     # helper function to get team by id
     def getTeamNameById(teams: list, teamId: int):
         for team in teams:
