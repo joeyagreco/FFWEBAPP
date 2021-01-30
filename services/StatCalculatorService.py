@@ -70,8 +70,6 @@ class StatCalculatorService:
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
             smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
-            smartWinsAdjustment = smartCalculator.getSmartWinsAdjustmentOfScores(allScores, wal)
-            smartWinsAdjustmentStr = Rounder.keepTrailingZeros(smartWinsAdjustment, 2)
             percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
             percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
             strengthOfScheduleCalculator = StrengthOfScheduleCalculator(teamId, leagueModel)
@@ -95,7 +93,6 @@ class StatCalculatorService:
                                        teamSuccess=teamSuccess,
                                        teamLuck=teamLuck,
                                        smartWins=smartWinsStr,
-                                       smartWinsAdjustment=smartWinsAdjustmentStr,
                                        percentageOfLeagueScoring=percentageOfLeagueScoringStr,
                                        strengthOfSchedule=strengthOfScheduleStr)
             teamStatsModels.append(teamModel)
