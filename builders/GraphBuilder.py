@@ -138,15 +138,31 @@ class GraphBuilder:
         for team in leagueModel.getTeams():
             data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(),
                                                                               andOpponentScore=True)
+        pointsForList = []
+        pointsAgainstList = []
         fig = go.Figure()
         for teamId in data.keys():
-            fig.add_trace(go.Scatter(x=[matchup[0] for matchup in data[teamId]],
-                                     y=[matchup[1] for matchup in data[teamId]],
+            teamPointsFor = [matchup[0] for matchup in data[teamId]]
+            teamPointsAgainst = [matchup[1] for matchup in data[teamId]]
+            pointsForList += teamPointsFor
+            pointsAgainstList += teamPointsAgainst
+            fig.add_trace(go.Scatter(x=teamPointsFor,
+                                     y=teamPointsAgainst,
                                      name=LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName(),
                                      mode="markers",
                                      marker=dict(size=10)
                                      )
                           )
+        # draw average line [linear regression]
+        m, b = np.polyfit(np.array(pointsForList), np.array(pointsAgainstList), 1)
+        fig.add_trace(go.Scatter(x=pointsForList,
+                                 y=m * np.array(pointsForList) + b,
+                                 showlegend=False,
+                                 name="Linear Regression",
+                                 mode="lines",
+                                 marker=dict(color="rgba(0,0,0,0.25)")
+                                 )
+                      )
         fig.update_layout(
             xaxis=dict(title="Points For"),
             yaxis=dict(title="Points Against"),
