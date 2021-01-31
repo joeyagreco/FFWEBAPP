@@ -33,9 +33,9 @@ function getWidthFromDivString(divString) {
 function injectGraphAsDiv() {
     // this injects the HTML code we have "waiting" in a div in our HTML into the proper div as HTML.
     // it first checks if the graph within the div should be resized, and generates a new one if so.
-    // TODO update calculation to not be hardcoded
     var injectDiv = document.getElementById("graphDiv").innerHTML;
     injectDiv = htmlDecode(injectDiv);
+    // TODO update calculation to not be hardcoded
     if(getWidthFromDivString(injectDiv) !=  parseInt(window.innerWidth/2, 10) && isDiv(injectDiv)) {
         // width of given div does not match the screen size
         submitGraph();

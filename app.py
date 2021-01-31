@@ -60,7 +60,6 @@ def leagueHomepage():
 
 @app.route("/update-league", methods=["GET", "POST"])
 def updateLeague():
-    # TODO replace with LMN method
     # helper function to get team by id
     def getTeamNameById(teams: list, teamId: int):
         for team in teams:
