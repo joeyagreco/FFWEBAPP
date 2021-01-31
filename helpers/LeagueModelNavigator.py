@@ -54,7 +54,7 @@ class LeagueModelNavigator:
         """
         throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
+        vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, excludeId=[teamId]))
         gamesPlayed = 0
         for week in leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -97,7 +97,7 @@ class LeagueModelNavigator:
         """
         throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
+        vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, excludeId=[teamId]))
         rounder = Rounder()
         totalPoints = 0
         for week in leagueModel.getWeeks():
@@ -176,7 +176,7 @@ class LeagueModelNavigator:
         """
         throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, excludeId=teamId))
+        vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, excludeId=[teamId]))
         rounder = Rounder()
         decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         allScores = []
@@ -212,12 +212,12 @@ class LeagueModelNavigator:
     def getAllTeamIdsInLeague(leagueModel: LeagueModel, **params) -> List[int]:
         """
         Returns as a list of ints all of the team IDs in the given leagueModel.
+        EXCLUDEIDS: [list] List of team IDs that will be excluded from the return list.
         """
-        # TODO make excludedId into a list instead of a single ID
-        excludedId = params.pop("excludeId", None)
+        excludeIds = params.pop("excludeIds", [])
         teamIds = []
         for team in leagueModel.getTeams():
-            if team.getTeamId() is not excludedId:
+            if team.getTeamId() not in excludeIds:
                 teamIds.append(team.getTeamId())
         return teamIds
 

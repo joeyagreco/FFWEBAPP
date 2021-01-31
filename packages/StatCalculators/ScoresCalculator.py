@@ -21,7 +21,7 @@ class ScoresCalculator:
         throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds",
-                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         scores = []
         for week in self.__leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -48,7 +48,7 @@ class ScoresCalculator:
         throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds",
-                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         scores = []
         for week in self.__leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -76,7 +76,7 @@ class ScoresCalculator:
         throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds",
-                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         totalTeamScore = 0
         totalOpponentScore = 0
         for week in self.__leagueModel.getWeeks():
@@ -104,7 +104,7 @@ class ScoresCalculator:
         throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds",
-                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         scores = []
         for week in self.__leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -131,7 +131,7 @@ class ScoresCalculator:
         weekNumber = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds",
-                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
 
         allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, self.__teamId,
                                                                                vsTeamIds, onlyWeeks=onlyWeeks)

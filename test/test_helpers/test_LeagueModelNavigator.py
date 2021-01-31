@@ -295,7 +295,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         weekList = [week1]
         leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
         allTeamIds = LeagueModelNavigator.getAllTeamIdsInLeague(leagueModel)
-        allTeamIds_exclude1 = LeagueModelNavigator.getAllTeamIdsInLeague(leagueModel, excludeId=1)
+        allTeamIds_exclude1 = LeagueModelNavigator.getAllTeamIdsInLeague(leagueModel, excludeIds=[1])
         self.assertIsInstance(allTeamIds, list)
         self.assertEqual(6, len(allTeamIds))
         self.assertEqual(5, len(allTeamIds_exclude1))

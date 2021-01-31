@@ -18,7 +18,7 @@ class RecordCalculator:
         """
         throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         wins = 0
         for week in self.__leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -45,7 +45,7 @@ class RecordCalculator:
         """
         throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         losses = 0
         for week in self.__leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -72,7 +72,7 @@ class RecordCalculator:
         """
         throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         ties = 0
         for week in self.__leagueModel.getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -99,7 +99,7 @@ class RecordCalculator:
         """
         throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         wins = self.getWins(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
         losses = self.getLosses(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
         ties = self.getTies(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)

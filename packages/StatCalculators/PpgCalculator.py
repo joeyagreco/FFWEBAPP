@@ -18,7 +18,7 @@ class PpgCalculator:
         """
         throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeId=self.__teamId))
+        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         points = 0
         gameCount = 0
         for week in self.__leagueModel.getWeeks():
