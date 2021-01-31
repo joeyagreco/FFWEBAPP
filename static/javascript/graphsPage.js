@@ -12,6 +12,10 @@ function htmlDecode(input) {
     return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 }
 
+function isDiv(input) {
+    return input.trim().substring(0, 5) == "<div>";
+}
+
 function getWidthFromDivString(divString) {
     // this retrieves the first "width" from the given string and returns the value of the width
     var i = divString.indexOf("width:");
@@ -30,11 +34,11 @@ function injectGraphAsDiv() {
     // this injects the HTML code we have "waiting" in a div in our HTML into the proper div as HTML.
     // it first checks if the graph within the div should be resized, and generates a new one if so.
     // TODO update calculation to not be hardcoded
-    // TODO check to make sure actual div was given before calling submitGraph() to avoid loop
     var injectDiv = document.getElementById("graphDiv").innerHTML;
-    if(getWidthFromDivString(injectDiv) !=  parseInt(window.innerWidth/2, 10)) {
+    injectDiv = htmlDecode(injectDiv);
+    if(getWidthFromDivString(injectDiv) !=  parseInt(window.innerWidth/2, 10) && isDiv(injectDiv)) {
         // width of given div does not match the screen size
         submitGraph();
     }
-    $('#generatedGraph').append(htmlDecode(injectDiv));
+    $('#generatedGraph').append(injectDiv);
 }
