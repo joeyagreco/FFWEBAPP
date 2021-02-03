@@ -7,7 +7,6 @@ from helpers.Constants import Constants
 from helpers.Error import Error
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 
-
 app = Flask(__name__)
 
 
@@ -347,6 +346,14 @@ def graphs():
     graphOptions = Constants.GRAPH_OPTIONS
     return render_template("graphsPage.html", league=leagueOrError, graph_options=graphOptions,
                            selected_graph=selectedGraph, graph_div=divAsString)
+
+
+@app.route("/stats-explained", methods=["GET"])
+def statsExplained():
+    leagueId = int(request.args.get("league_id"))
+    mainController = MainController()
+    leagueOrError = mainController.getLeague(leagueId)
+    return render_template("statsExplainedPage.html", league=leagueOrError)
 
 
 if __name__ == "__main__":
