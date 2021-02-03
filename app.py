@@ -284,7 +284,9 @@ def teamStats():
         return render_template("teamStatsPage.html", league=leagueOrError,
                                error_message=leagueModelOrError.errorMessage())
     statsModels = mainController.getTeamStatsModel(leagueModelOrError)
-    return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels)
+    # grab Constants class to use for titles of table
+    constants = Constants
+    return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels, constants=constants)
 
 
 @app.route("/head-to-head-stats", methods=["GET"])
@@ -315,15 +317,17 @@ def headToHeadStats():
                                given_team_2_id=team2Id, teams_dont_play=True)
     # get the stats model
     statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
+    # grab Constants class to use for titles of table
+    constants = Constants
     return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
-                           given_team_2_id=team2Id, stats_models=statsModelsOrError)
+                           given_team_2_id=team2Id, stats_models=statsModelsOrError, constants=constants)
 
 
 @app.route("/league-stats", methods=["GET"])
 def leagueStats():
     leagueId = int(request.args.get("league_id"))
     statSelection = request.args.get("stat_selection")
-    statOptions = Constants.STAT_OPTIONS
+    statOptions = Constants.LEAGUE_STATS_STAT_TITLES
     if not statSelection:
         statSelection = statOptions[0]
     mainController = MainController()

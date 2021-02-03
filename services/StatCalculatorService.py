@@ -179,12 +179,12 @@ class StatCalculatorService:
         """
         Returns a model/models for the given stat for self.__leagueModel.
         """
-        statOptions = Constants.STAT_OPTIONS
+        statOptions = Constants.LEAGUE_STATS_STAT_TITLES
         decimalPlacesForScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         everyGameCalculator = EveryGameCalculator(leagueModel)
         if statSelection not in statOptions:
             raise InvalidStatSelectionError(f"Unknown League Stat: {statSelection}.")
-        elif statSelection == Constants.ALL_SCORES:
+        elif statSelection == Constants.ALL_SCORES_STAT_TITLE:
             allScores = everyGameCalculator.getAllScores()
             # sort from score high -> low
             allScores.sort(key=lambda x: x.getScore(), reverse=True)
@@ -203,7 +203,7 @@ class StatCalculatorService:
                                       week=weekNumber)
                 allScoresStr.append(newModel)
             return allScoresStr
-        elif statSelection == Constants.MARGINS_OF_VICTORY:
+        elif statSelection == Constants.MARGINS_OF_VICTORY_STAT_TITLE:
             allMovs = everyGameCalculator.getAllMarginOfVictories()
             # sort from MOV high -> low
             allMovs.sort(key=lambda x: x.getMarginOfVictory(), reverse=True)

@@ -9,11 +9,6 @@ class Constants:
     LOSS = "Loss"
     TIE = "Tie"
 
-    # used for League Stats
-    ALL_SCORES = "All Scores"
-    MARGINS_OF_VICTORY = "Margins of Victory"
-    STAT_OPTIONS = [ALL_SCORES, MARGINS_OF_VICTORY]
-
     # used for Graphs
     PPG_BY_WEEK = "PPG by Week"
     SCORING_SHARE = "Scoring Share"
@@ -25,11 +20,13 @@ class Constants:
                      AWAL_BY_WEEK]
 
     # used for Stats Explained
+    # and dropdowns
+    # and stat table headers
     # team stats
     WINS_STAT_TITLE = "Wins"
     LOSSES_STAT_TITLE = "Losses"
     TIES_STAT_TITLE = "Ties"
-    WIN_PERCENTAGE_STAT_TITLE = "Win Percentage"
+    WIN_PERCENTAGE_STAT_TITLE = "Win %"
     WAL_STAT_TITLE = "WAL"
     AWAL_STAT_TITLE = "AWAL"
     SMART_WINS_STAT_TITLE = "Smart Wins"
