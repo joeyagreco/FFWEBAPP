@@ -8,9 +8,22 @@
 
 {% block pageTitle %}Stats Explained{% endblock %}
 
-{% block pageSubtitle %}{{league.leagueName}}{% endblock %}
+{% block pageSubtitle %}{{stat_header_name}}{% endblock %}
 
-{% block header %}{{stat_name}}{% endblock %}
+{% block header %}{% endblock %}
 
 {% block content %}
+    <div class="dropdownSelectionAndContent">
+        <div class="statDropdown">
+            <select class="statNameDropdown" name="stat_name" id="stat_name" onchange="SOME_METHOD()">
+                {% for stat in stat_options %}
+                    {% if stat == selected_stat %}
+                        <option value="{{stat}}" selected>{{stat}}</option>
+                    {% else %}
+                        <option value="{{stat}}">{{stat}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
 {% endblock %}
