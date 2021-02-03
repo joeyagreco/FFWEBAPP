@@ -11,3 +11,26 @@
 .statDropdown {
     order: 1;
 }
+
+.chunkMaster {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: red;
+}
+
+.chunkHeader {
+    order: 1;
+    background-color: purple;
+}
+
+.chunkBody {
+    order: 2;
+    background-color: teal;
+}
+
+#purposeMaster {
+    order: 2;
+}
