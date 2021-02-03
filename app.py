@@ -317,7 +317,7 @@ def headToHeadStats():
                                given_team_2_id=team2Id, teams_dont_play=True)
     # get the stats model
     statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
-    # grab Constants class to use for titles of table
+    # grab Constants class to use for dropdown
     constants = Constants
     return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
                            given_team_2_id=team2Id, stats_models=statsModelsOrError, constants=constants)
@@ -357,7 +357,9 @@ def statsExplained():
     leagueId = int(request.args.get("league_id"))
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    return render_template("statsBase.html", league=leagueOrError, stat_header_name="STAT NAME HERE")
+    # grab Constants class
+    constants = Constants
+    return render_template("statsBase.html", league=leagueOrError, stat_header_name="STAT NAME HERE", constants=constants)
 
 
 if __name__ == "__main__":
