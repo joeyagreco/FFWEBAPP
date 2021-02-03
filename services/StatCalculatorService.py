@@ -271,6 +271,6 @@ class StatCalculatorService:
             return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, screenWidth)
 
         else:
-            return "Graph Not Found"
+            raise InvalidStatSelectionError("No Valid Graph Given to Generate.")
 
 
