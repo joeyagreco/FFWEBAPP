@@ -353,7 +353,7 @@ def statsExplained():
     leagueId = int(request.args.get("league_id"))
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    return render_template("statsExplainedPage.html", league=leagueOrError)
+    return render_template("statsBase.html", league=leagueOrError)
 
 
 if __name__ == "__main__":
