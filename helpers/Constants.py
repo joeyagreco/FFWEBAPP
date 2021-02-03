@@ -34,7 +34,7 @@ class Constants:
     SCORING_SHARE_STAT_TITLE = "Scoring Share"
     PPG_AGAINST_STAT_TITLE = "PPG Against"
     STRENGTH_OF_SCHEDULE_STAT_TITLE = "Strength of Schedule"
-    PLUS_MINUS_STAT_TITLE = "+/-"
+    PLUS_MINUS_STAT_TITLE = "Plus/Minus"
     MAX_SCORE_STAT_TITLE = "Max Score"
     MIN_SCORE_STAT_TITLE = "Min Score"
     STDEV_STAT_TITLE = "STDEV"
