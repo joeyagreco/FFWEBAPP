@@ -8,15 +8,15 @@
 
 {% block pageTitle %}Stats Explained{% endblock %}
 
-{% block pageSubtitle %}{{stat_header_name}}{% endblock %}
+{% block pageSubtitle %}{{selected_stat}}{% endblock %}
 
 {% block header %}{% endblock %}
 
 {% block content %}
     <div class="dropdownSelectionAndContent">
         <div class="statDropdown">
-            <select class="statNameDropdown" name="stat_name" id="stat_name" onchange="SOME_METHOD()">
-                {% for stat in constants.ALL_STAT_TITLES %}
+            <select class="statNameDropdown" name="stat_name" id="stat_name" onchange="submitStat()">
+                {% for stat in stat_list %}
                     {% if stat == selected_stat %}
                         <option value="{{stat}}" selected>{{stat}}</option>
                     {% else %}

@@ -355,11 +355,15 @@ def graphs():
 @app.route("/stats-explained", methods=["GET"])
 def statsExplained():
     leagueId = int(request.args.get("league_id"))
+    selectedStat = request.args.get("selected_stat")
+    statList = Constants.ALL_STAT_TITLES
+    # set default stat selection if none given
+    if not selectedStat:
+        selectedStat = statList[0]
+    print(f"selected stat: {selectedStat}")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    # grab Constants class
-    constants = Constants
-    return render_template("statsBase.html", league=leagueOrError, stat_header_name="STAT NAME HERE", constants=constants)
+    return render_template("statsBase.html", league=leagueOrError, stat_list=statList, selected_stat=selectedStat)
 
 
 if __name__ == "__main__":
