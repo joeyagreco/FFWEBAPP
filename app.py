@@ -360,7 +360,6 @@ def statsExplained():
     # set default stat selection if none given
     if not selectedStat:
         selectedStat = statList[0]
-    print(f"selected stat: {selectedStat}")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     return render_template("statsBase.html", league=leagueOrError, stat_list=statList, selected_stat=selectedStat)
