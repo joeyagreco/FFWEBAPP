@@ -26,7 +26,7 @@ class Constants:
     WINS_STAT_TITLE = "Wins"
     LOSSES_STAT_TITLE = "Losses"
     TIES_STAT_TITLE = "Ties"
-    WIN_PERCENTAGE_STAT_TITLE = "Win %"
+    WIN_PERCENTAGE_STAT_TITLE = "Win Percentage"
     WAL_STAT_TITLE = "WAL"
     AWAL_STAT_TITLE = "AWAL"
     SMART_WINS_STAT_TITLE = "Smart Wins"

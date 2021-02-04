@@ -342,6 +342,9 @@ def leagueStats():
 def graphs():
     leagueId = int(request.args.get("league_id"))
     selectedGraph = request.args.get("graph_selection")
+    # default selected graph
+    if not selectedGraph:
+        selectedGraph = Constants.GRAPH_OPTIONS[0]
     screenWidth = request.args.get("screen_width")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
@@ -356,7 +359,7 @@ def graphs():
 def statsExplained():
     leagueId = int(request.args.get("league_id"))
     selectedStat = request.args.get("selected_stat")
-    statList = Constants.ALL_STAT_TITLES
+    statList = sorted(Constants.ALL_STAT_TITLES)
     # set default stat selection if none given
     if not selectedStat:
         selectedStat = statList[0]
