@@ -34,7 +34,7 @@ body {
 }
 
 .pageTitle {
-  font-size: 350%;
+  font-size: 400%;
   font-family: 'Fjalla One', sans-serif;
   order: 1;
   text-align: center;
@@ -42,7 +42,7 @@ body {
 }
 
 .pageSubtitle {
-  font-size: 150%;
+  font-size: 200%;
   font-family: 'Rubik', sans-serif;
   order: 2;
   text-align: center;
