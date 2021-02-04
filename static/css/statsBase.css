@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap');
+
 .dropdownSelectionAndContent {
     width: 100%;
     height: 80%;
@@ -19,20 +23,23 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: red;
+    background-color: yellow;
 }
 
 .chunkHeader {
     order: 1;
     font-weight: bold;
-    font-size: 200%;
-    background-color: purple;
+    font-family: 'Roboto Slab', serif;
+    font-size: 250%;
+    background-color: #FFFFFF;
 }
 
 .chunkBody {
+    margin-top: 1%;
     order: 2;
-    font-size: 120%;
-    background-color: teal;
+    font-family: 'Merriweather', serif;
+    font-size: 110%;
+    background-color: #BFBFBF;
 }
 
 #purposeMaster {
@@ -45,4 +52,8 @@
 
 #formulaExplainedMaster {
     order: 4;
+}
+
+#formulaBody {
+    font-family: 'Nanum Myeongjo', serif;
 }
