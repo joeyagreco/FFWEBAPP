@@ -19,6 +19,7 @@
 .chunkMaster {
     width: 70%;
     margin-top: 2%;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -36,6 +37,7 @@
 
 .chunkBody {
     margin-top: 1%;
+    line-height: 150%;
     order: 2;
     font-family: 'Merriweather', serif;
     font-size: 110%;

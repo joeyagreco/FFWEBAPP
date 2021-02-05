@@ -28,19 +28,27 @@
         <div class="chunkMaster" id="purposeMaster">
             <div class="chunkHeader">Purpose</div>
             <div class="chunkBody">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla massa sapien, sit amet interdum neque convallis nec. Nulla ut molestie tellus. Donec eu mi vitae libero lobortis dictum. Suspendisse id sapien porta ligula semper facilisis. Etiam sit amet nisl varius, congue lacus sed, tempor neque. Donec dictum mauris ex, id viverra arcu ornare et. Sed non dui est. Nulla tempor enim libero, eu egestas mi faucibus eu.
+                AWAL stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or WAL) of a team.<br>
+                In simple terms, this stat more accurately represents how many WAL any given team should have.<br>
+                Ex: A team with 6.3 AWAL "deserves" 6.3 WAL.
             </div>
         </div>
         <div class="chunkMaster" id="formulaMaster">
             <div class="chunkHeader">Formula</div>
             <div class="chunkBody" id="formulaBody">
-                a2 + b2 = c2
+                AWAL = W * (1/L) + T * (0.5/L)<br>
+                Where:<br>
+                W = Teams outscored<br>
+                T = Teams tied<br>
+                L = Opponents in league (league size - 1)<br>
             </div>
         </div>
         <div class="chunkMaster" id="formulaExplainedMaster">
             <div class="chunkHeader">Formula Explained</div>
             <div class="chunkBody">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla massa sapien, sit amet interdum neque convallis nec. Nulla ut molestie tellus. Donec eu mi vitae libero lobortis dictum. Suspendisse id sapien porta ligula semper facilisis. Etiam sit amet nisl varius, congue lacus sed, tempor neque. Donec dictum mauris ex, id viverra arcu ornare et. Sed non dui est. Nulla tempor enim libero, eu egestas mi faucibus eu.
+                To properly calculate AWAL, the AWAL must be calculated once for each team every week.<br>
+                Each week's AWAL can then be added together to create an aggregate AWAL for each team.<br>
+                A team's AWAL for any given week will ALWAYS be between 0 and 1 (inclusive).
             </div>
         </div>
     </div>
