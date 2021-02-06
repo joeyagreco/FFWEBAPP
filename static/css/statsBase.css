@@ -2,6 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap');
 
+.link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .dropdownSelectionAndContent {
     width: 100%;
     height: 80%;
