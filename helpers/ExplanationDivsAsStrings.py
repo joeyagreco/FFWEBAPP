@@ -17,12 +17,20 @@ class ExplanationDivsAsStrings:
         In simple terms, this stat more accurately represents how many WAL any given team should have.<br>
         Ex: A team with 6.3 AWAL "deserves" 6.3 WAL.
         """
+    AWAL_FORMULA = f"""
+        AWAL = W * (1/L) + T * (0.5/L)<br>
+        Where:<br>
+        W = Teams outscored<br>
+        T = Teams tied<br>
+        L = Opponents in league (league size - 1)<br>
+        """
 
     @classmethod
     def applyLinkSpans(cls, string: str) -> str:
         """
-        This finds and replaces the text %0% to %1% with valid HTML that is a span with a clickable reroute function call.
+        This finds and replaces the text %0% , %2% , and %2% with valid HTML that is a span with a clickable reroute function call.
         EXAMPLE:
+        __________________________________________________________________________
         THIS ->             %0%{Constants.PPG_STAT_TITLE}%1%PPG%2%
         BECOMES THIS ->     <span class="link" onclick="reroute('PPG')">PPG</span>
         """

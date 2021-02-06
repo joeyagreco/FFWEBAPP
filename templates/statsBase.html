@@ -31,6 +31,14 @@
             {{purpose_div}}
             <!-- the only purpose of this div is to hold the div we will be injecting as a string for Javascript to extract -->
         </div>
+        <div class="formulaDivHidden" id="formulaDivHidden">
+            {{formula_div}}
+            <!-- the only purpose of this div is to hold the div we will be injecting as a string for Javascript to extract -->
+        </div>
+        <div class="formulaExplainedDivHidden" id="formulaExplainedDivHidden">
+            {{formula_explained_div}}
+            <!-- the only purpose of this div is to hold the div we will be injecting as a string for Javascript to extract -->
+        </div>
         <div class="chunkMaster" id="purposeMaster">
             <div class="chunkHeader">Purpose</div>
             <div class="chunkBody" id="purposeBody">
@@ -40,16 +48,12 @@
         <div class="chunkMaster" id="formulaMaster">
             <div class="chunkHeader">Formula</div>
             <div class="chunkBody" id="formulaBody">
-                AWAL = W * (1/L) + T * (0.5/L)<br>
-                Where:<br>
-                W = Teams outscored<br>
-                T = Teams tied<br>
-                L = Opponents in league (league size - 1)<br>
+                <!-- formula will be injected here -->
             </div>
         </div>
         <div class="chunkMaster" id="formulaExplainedMaster">
             <div class="chunkHeader">Formula Explained</div>
-            <div class="chunkBody">
+            <div class="chunkBody" id="formulaExplainedBody">
                 To properly calculate AWAL, the AWAL must be calculated once for each team every week.<br>
                 Each week's AWAL can then be added together to create an aggregate AWAL for each team.<br>
                 A team's AWAL for any given week will ALWAYS be between 0 and 1 (inclusive).
