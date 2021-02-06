@@ -41,9 +41,9 @@ class ExplanationDivsAsStrings:
         return newList
 
     AWAL_PURPOSE = f"""
-        {Constants.AWAL_STAT_TITLE} stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or %0%{Constants.WAL_STAT_TITLE}%1%WAL%2%) of a team.<br>
-        In simple terms, this stat more accurately represents how many %0%{Constants.WAL_STAT_TITLE}%1%WAL%2% any given team should have.<br>
-        Ex: A team with 6.3 {Constants.AWAL_STAT_TITLE} "deserves" 6.3 %0%{Constants.WAL_STAT_TITLE}%1%WAL%2%.
+        {Constants.AWAL_STAT_TITLE} stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2%) of a team.<br>
+        In simple terms, this stat more accurately represents how many%0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% any given team should have.<br>
+        <strong>Ex:</strong> A team with 6.3 {Constants.AWAL_STAT_TITLE} "deserves" 6.3 %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2%.
         """
     AWAL_FORMULA = f"""
         {Constants.AWAL_STAT_TITLE} = W * (1/L) + T * (0.5/L)<br>
@@ -70,24 +70,25 @@ class ExplanationDivsAsStrings:
         """
 
     MARGINS_OF_VICTORY_FORMULA_EXPLAINED = f"""
-        Note: {Constants.MARGINS_OF_VICTORY_STAT_TITLE} must be greater than 0.
+        <strong>Note:</strong> {Constants.MARGINS_OF_VICTORY_STAT_TITLE} must be greater than 0.
         """
 
     MARGINS_OF_VICTORY_STATS_EXPLAINED = (MARGINS_OF_VICTORY_PURPOSE, MARGINS_OF_VICTORY_FORMULA, MARGINS_OF_VICTORY_FORMULA_EXPLAINED)
 
     MAX_SCORE_PURPOSE = f"""
-        {Constants.MAX_SCORE_STAT_TITLE} is used to retrieve the highest-scoring game for an individual team.
+        {Constants.MAX_SCORE_STAT_TITLE} is used to retrieve the highest score for an individual team.<br>
+        It is the inverse of %0%{Constants.MIN_SCORE_STAT_TITLE}%1%{Constants.MIN_SCORE_STAT_TITLE}%2%.
         """
 
     MAX_SCORE_FORMULA = f"""
         max(allTeamScores)<br>
         WHERE:<br>
-        allTeamScores = list of every score by a single team.
+        allTeamScores = List of every score by a single team.
         """
 
     MAX_SCORE_FORMULA_EXPLAINED = f"""
-        Note: If a team has multiple "max" scores, this does not change the outcome.<br>
-        Ex: A team with scores: [100, 105, 104, 102] has a {Constants.MAX_SCORE_STAT_TITLE} of 105.<br>
+        <strong>Note:</strong> If a team has multiple "max" scores, this does not change the outcome.<br>
+        <strong>Ex:</strong> A team with scores: [100, 105, 104, 102] has a {Constants.MAX_SCORE_STAT_TITLE} of 105.<br>
         AND<br>
         A team with scores: [99, 105, 105, 101] has a {Constants.MAX_SCORE_STAT_TITLE} of 105.
         """
