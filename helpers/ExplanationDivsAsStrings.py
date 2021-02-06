@@ -1,11 +1,32 @@
+from helpers.Constants import Constants
+
+
 class ExplanationDivsAsStrings:
     """
     This class is used to hold strings that will be converted into HTML divs later.
     The variables declared within this class are NOT meant to be modified.
     """
 
-    AWAL_PURPOSE = """
-        AWAL stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or <span class="link" onclick="reroute('WAL')">WAL</span>) of a team.<br>
+    # strings used by the applyLinkSpans() method
+    __SPAN0 = """<span class="link" onclick="reroute('"""
+    __SPAN1 = """')">"""
+    __SPAN2 = """</span>"""
+
+    AWAL_PURPOSE = f"""
+        AWAL stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or %0%{Constants.WAL_STAT_TITLE}%1%WAL%2%) of a team.<br>
         In simple terms, this stat more accurately represents how many WAL any given team should have.<br>
         Ex: A team with 6.3 AWAL "deserves" 6.3 WAL.
         """
+
+    @classmethod
+    def applyLinkSpans(cls, string: str) -> str:
+        """
+        This finds and replaces the text %0% to %1% with valid HTML that is a span with a clickable reroute function call.
+        EXAMPLE:
+        THIS ->             %0%{Constants.PPG_STAT_TITLE}%1%PPG%2%
+        BECOMES THIS ->     <span class="link" onclick="reroute('PPG')">PPG</span>
+        """
+        newStr = string.replace("%0%", cls.__SPAN0)
+        newStr = newStr.replace("%1%", cls.__SPAN1)
+        newStr = newStr.replace("%2%", cls.__SPAN2)
+        return newStr
