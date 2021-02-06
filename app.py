@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from controllers.MainController import MainController
 from helpers.Constants import Constants
 from helpers.Error import Error
+from helpers.ExplanationDivsAsStrings import ExplanationDivsAsStrings
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 
 app = Flask(__name__)
@@ -365,7 +366,7 @@ def statsExplained():
         selectedStat = statList[0]
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    return render_template("statsBase.html", league=leagueOrError, stat_list=statList, selected_stat=selectedStat)
+    return render_template("statsBase.html", league=leagueOrError, stat_list=statList, selected_stat=selectedStat, purpose_div=ExplanationDivsAsStrings.AWAL_PURPOSE)
 
 
 if __name__ == "__main__":

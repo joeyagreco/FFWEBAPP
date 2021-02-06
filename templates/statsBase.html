@@ -4,6 +4,8 @@
 <title>Stats Explained</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/statsBase.css') }}">
 <script src="{{ url_for('static', filename='javascript/statsBase.js') }}"></script>
+<!-- jquery script -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 {% endblock %}
 
 {% block pageTitle %}Stats Explained{% endblock %}
@@ -25,12 +27,14 @@
                 {% endfor %}
             </select>
         </div>
+        <div class="purposeDivHidden" id="purposeDivHidden">
+            {{purpose_div}}
+            <!-- the only purpose of this div is to hold the div we will be injecting as a string for Javascript to extract -->
+        </div>
         <div class="chunkMaster" id="purposeMaster">
             <div class="chunkHeader">Purpose</div>
-            <div class="chunkBody">
-                AWAL stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or <span class="link" onclick="reroute('WAL')">WAL</span>) of a team.<br>
-                In simple terms, this stat more accurately represents how many <span class="link" onclick="reroute('WAL')">WAL</span>) any given team should have.<br>
-                Ex: A team with 6.3 AWAL "deserves" 6.3 <span class="link" onclick="reroute('WAL')">WAL</span>).
+            <div class="chunkBody" id="purposeBody">
+                <!-- purpose will be injected here -->
             </div>
         </div>
         <div class="chunkMaster" id="formulaMaster">
@@ -52,4 +56,5 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">injectGraphAsDiv();</script>
 {% endblock %}
