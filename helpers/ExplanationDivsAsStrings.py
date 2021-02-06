@@ -14,8 +14,8 @@ class ExplanationDivsAsStrings:
 
     AWAL_PURPOSE = f"""
         AWAL stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or %0%{Constants.WAL_STAT_TITLE}%1%WAL%2%) of a team.<br>
-        In simple terms, this stat more accurately represents how many WAL any given team should have.<br>
-        Ex: A team with 6.3 AWAL "deserves" 6.3 WAL.
+        In simple terms, this stat more accurately represents how many %0%{Constants.WAL_STAT_TITLE}%1%WAL%2% any given team should have.<br>
+        Ex: A team with 6.3 AWAL "deserves" 6.3 %0%{Constants.WAL_STAT_TITLE}%1%WAL%2%.
         """
     AWAL_FORMULA = f"""
         AWAL = W * (1/L) + T * (0.5/L)<br>
