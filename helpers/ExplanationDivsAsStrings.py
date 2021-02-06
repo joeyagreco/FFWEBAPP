@@ -150,10 +150,29 @@ class ExplanationDivsAsStrings:
 
     PPG_AGAINST_STATS_EXPLAINED = (PPG_AGAINST_PURPOSE, PPG_AGAINST_FORMULA, PPG_AGAINST_FORMULA_EXPLAINED)
 
+    PLUS_MINUS_PURPOSE = f"""
+        {Constants.PLUS_MINUS_STAT_TITLE} (+/-) is used to show the net score differential for a team in a season.
+        """
+
+    PLUS_MINUS_FORMULA = f"""
+        ΣA - ΣB<br>
+        WHERE:<br>
+        A = All scores by a team<br>
+        B = All scores against a team
+        """
+
+    PLUS_MINUS_FORMULA_EXPLAINED = f"""
+        {Constants.PLUS_MINUS_STAT_TITLE} can be a misleading stat, as a team with a high {Constants.PLUS_MINUS_STAT_TITLE} isn't necessarily a better team than one with a low {Constants.PLUS_MINUS_STAT_TITLE}.<br>
+        However, it is typically a good indication of how successful a team was, as a positive net score differential typically translates to more wins.
+        """
+
+    PLUS_MINUS_STATS_EXPLAINED = (PLUS_MINUS_PURPOSE, PLUS_MINUS_FORMULA, PLUS_MINUS_FORMULA_EXPLAINED)
+
 
     __ALL_STATS_EXPLAINED_DICT = {Constants.AWAL_STAT_TITLE: AWAL_STATS_EXPLAINED,
                                   Constants.MARGINS_OF_VICTORY_STAT_TITLE: MARGINS_OF_VICTORY_STATS_EXPLAINED,
                                   Constants.MAX_SCORE_STAT_TITLE: MAX_SCORE_STATS_EXPLAINED,
                                   Constants.MIN_SCORE_STAT_TITLE: MIN_SCORE_STATS_EXPLAINED,
                                   Constants.PPG_STAT_TITLE: PPG_STATS_EXPLAINED,
-                                  Constants.PPG_AGAINST_STAT_TITLE: PPG_AGAINST_STATS_EXPLAINED}
+                                  Constants.PPG_AGAINST_STAT_TITLE: PPG_AGAINST_STATS_EXPLAINED,
+                                  Constants.PLUS_MINUS_STAT_TITLE: PLUS_MINUS_STATS_EXPLAINED}
