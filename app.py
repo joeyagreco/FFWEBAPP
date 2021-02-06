@@ -368,7 +368,8 @@ def statsExplained():
     leagueOrError = mainController.getLeague(leagueId)
     return render_template("statsBase.html", league=leagueOrError, stat_list=statList, selected_stat=selectedStat,
                            purpose_div=ExplanationDivsAsStrings.applyLinkSpans(ExplanationDivsAsStrings.AWAL_PURPOSE),
-                           formula_div=ExplanationDivsAsStrings.applyLinkSpans(ExplanationDivsAsStrings.AWAL_FORMULA))
+                           formula_div=ExplanationDivsAsStrings.applyLinkSpans(ExplanationDivsAsStrings.AWAL_FORMULA),
+                           formula_explained_div=ExplanationDivsAsStrings.applyLinkSpans(ExplanationDivsAsStrings.AWAL_FORMULA_EXPLAINED))
 
 
 if __name__ == "__main__":

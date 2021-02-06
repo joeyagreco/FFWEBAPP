@@ -24,6 +24,11 @@ class ExplanationDivsAsStrings:
         T = Teams tied<br>
         L = Opponents in league (league size - 1)<br>
         """
+    AWAL_FORMULA_EXPLAINED = f"""
+        To properly calculate AWAL, the AWAL must be calculated once for each team every week.<br>
+        Each week's AWAL can then be added together to create an aggregate AWAL for each team.<br>
+        A team's AWAL for any given week will ALWAYS be between 0 and 1 (inclusive).
+        """
 
     @classmethod
     def applyLinkSpans(cls, string: str) -> str:
