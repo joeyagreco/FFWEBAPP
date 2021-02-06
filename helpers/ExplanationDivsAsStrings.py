@@ -163,7 +163,7 @@ class ExplanationDivsAsStrings:
 
     PLUS_MINUS_FORMULA_EXPLAINED = f"""
         {Constants.PLUS_MINUS_STAT_TITLE} can be a misleading stat, as a team with a high {Constants.PLUS_MINUS_STAT_TITLE} isn't necessarily a better team than one with a low {Constants.PLUS_MINUS_STAT_TITLE}.<br>
-        However, it is typically a good indication of how successful a team was, as a positive net score differential typically translates to more wins.
+        However, it is typically a good indication of how <i>successful</i> a team was, as a positive net score differential typically translates to more wins.
         """
 
     PLUS_MINUS_STATS_EXPLAINED = (PLUS_MINUS_PURPOSE, PLUS_MINUS_FORMULA, PLUS_MINUS_FORMULA_EXPLAINED)
