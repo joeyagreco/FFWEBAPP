@@ -95,6 +95,27 @@ class ExplanationDivsAsStrings:
 
     MAX_SCORE_STATS_EXPLAINED = (MAX_SCORE_PURPOSE, MAX_SCORE_FORMULA, MAX_SCORE_FORMULA_EXPLAINED)
 
+    MIN_SCORE_PURPOSE = f"""
+        {Constants.MIN_SCORE_STAT_TITLE} is used to retrieve the lowest score for an individual team.<br>
+        It is the inverse of %0%{Constants.MAX_SCORE_STAT_TITLE}%1%{Constants.MAX_SCORE_STAT_TITLE}%2%.
+        """
+
+    MIN_SCORE_FORMULA = f"""
+        min(allTeamScores)<br>
+        WHERE:<br>
+        allTeamScores = List of every score by a single team.
+        """
+
+    MIN_SCORE_FORMULA_EXPLAINED = f"""
+        <strong>Note:</strong> If a team has multiple "min" scores, this does not change the outcome.<br>
+        <strong>Ex:</strong> A team with scores: [100, 105, 104, 102] has a {Constants.MIN_SCORE_STAT_TITLE} of 100.<br>
+        AND<br>
+        A team with scores: [99, 100, 100, 101] has a {Constants.MIN_SCORE_STAT_TITLE} of 100.
+        """
+
+    MIN_SCORE_STATS_EXPLAINED = (MIN_SCORE_PURPOSE, MIN_SCORE_FORMULA, MIN_SCORE_FORMULA_EXPLAINED)
+
     __ALL_STATS_EXPLAINED_DICT = {Constants.AWAL_STAT_TITLE: AWAL_STATS_EXPLAINED,
                                   Constants.MARGINS_OF_VICTORY_STAT_TITLE: MARGINS_OF_VICTORY_STATS_EXPLAINED,
-                                  Constants.MAX_SCORE_STAT_TITLE: MAX_SCORE_STATS_EXPLAINED}
+                                  Constants.MAX_SCORE_STAT_TITLE: MAX_SCORE_STATS_EXPLAINED,
+                                  Constants.MIN_SCORE_STAT_TITLE: MIN_SCORE_STATS_EXPLAINED}

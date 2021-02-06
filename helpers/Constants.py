@@ -53,5 +53,8 @@ class Constants:
     MARGINS_OF_VICTORY_STAT_TITLE = "Margins of Victory"
     LEAGUE_STATS_STAT_TITLES = [ALL_SCORES_STAT_TITLE, MARGINS_OF_VICTORY_STAT_TITLE]
 
-    # all stat titles
-    ALL_STAT_TITLES = TEAM_STATS_STAT_TITLES+LEAGUE_STATS_STAT_TITLES
+    # excluded stats (stats that don't need explanation)
+    EXCLUDED_STAT_TITLES = [ALL_SCORES_STAT_TITLE, LOSSES_STAT_TITLE, TIES_STAT_TITLE, WINS_STAT_TITLE]
+
+    # all stat titles without the excluded stats list
+    ALL_STAT_TITLES = list(set(TEAM_STATS_STAT_TITLES + LEAGUE_STATS_STAT_TITLES) - set(EXCLUDED_STAT_TITLES))
