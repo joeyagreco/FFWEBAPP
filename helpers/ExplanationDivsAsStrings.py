@@ -12,6 +12,34 @@ class ExplanationDivsAsStrings:
     __SPAN1 = """')">"""
     __SPAN2 = """</span>"""
 
+    @classmethod
+    def applyLinkSpans(cls, string: str) -> str:
+        """
+        This finds and replaces the text %0% , %2% , and %2% with valid HTML that is a span with a clickable reroute function call.
+        EXAMPLE:
+        __________________________________________________________________________
+        THIS ->             %0%{Constants.PPG_STAT_TITLE}%1%PPG%2%
+        BECOMES THIS ->     <span class="link" onclick="reroute('PPG')">PPG</span>
+        """
+        newStr = string.replace("%0%", cls.__SPAN0)
+        newStr = newStr.replace("%1%", cls.__SPAN1)
+        newStr = newStr.replace("%2%", cls.__SPAN2)
+        return newStr
+
+    @classmethod
+    def retrieveStatList(cls, statTitle: str) -> list:
+        """
+        This is used to retrieve the list of stat strings for the given statTitle.
+        Returns a list of empty strings if the statTitle isn't found.
+        """
+        newList = ["", "", ""]
+        if statTitle in cls.__ALL_STATS_EXPLAINED_DICT:
+            # apply class methods to convert theses
+            newList = []
+            for string in cls.__ALL_STATS_EXPLAINED_DICT[statTitle]:
+                newList.append(cls.applyLinkSpans(string))
+        return newList
+
     AWAL_PURPOSE = f"""
         AWAL stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or %0%{Constants.WAL_STAT_TITLE}%1%WAL%2%) of a team.<br>
         In simple terms, this stat more accurately represents how many %0%{Constants.WAL_STAT_TITLE}%1%WAL%2% any given team should have.<br>
@@ -29,17 +57,6 @@ class ExplanationDivsAsStrings:
         Each week's AWAL can then be added together to create an aggregate AWAL for each team.<br>
         A team's AWAL for any given week will ALWAYS be between 0 and 1 (inclusive).
         """
+    AWAL_STATS_EXPLAINED = (AWAL_PURPOSE, AWAL_FORMULA, AWAL_FORMULA_EXPLAINED)
 
-    @classmethod
-    def applyLinkSpans(cls, string: str) -> str:
-        """
-        This finds and replaces the text %0% , %2% , and %2% with valid HTML that is a span with a clickable reroute function call.
-        EXAMPLE:
-        __________________________________________________________________________
-        THIS ->             %0%{Constants.PPG_STAT_TITLE}%1%PPG%2%
-        BECOMES THIS ->     <span class="link" onclick="reroute('PPG')">PPG</span>
-        """
-        newStr = string.replace("%0%", cls.__SPAN0)
-        newStr = newStr.replace("%1%", cls.__SPAN1)
-        newStr = newStr.replace("%2%", cls.__SPAN2)
-        return newStr
+    __ALL_STATS_EXPLAINED_DICT = {Constants.AWAL_STAT_TITLE: AWAL_STATS_EXPLAINED}
