@@ -41,22 +41,39 @@ class ExplanationDivsAsStrings:
         return newList
 
     AWAL_PURPOSE = f"""
-        AWAL stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or %0%{Constants.WAL_STAT_TITLE}%1%WAL%2%) of a team.<br>
+        {Constants.AWAL_STAT_TITLE} stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or %0%{Constants.WAL_STAT_TITLE}%1%WAL%2%) of a team.<br>
         In simple terms, this stat more accurately represents how many %0%{Constants.WAL_STAT_TITLE}%1%WAL%2% any given team should have.<br>
-        Ex: A team with 6.3 AWAL "deserves" 6.3 %0%{Constants.WAL_STAT_TITLE}%1%WAL%2%.
+        Ex: A team with 6.3 {Constants.AWAL_STAT_TITLE} "deserves" 6.3 %0%{Constants.WAL_STAT_TITLE}%1%WAL%2%.
         """
     AWAL_FORMULA = f"""
-        AWAL = W * (1/L) + T * (0.5/L)<br>
+        {Constants.AWAL_STAT_TITLE} = W * (1/L) + T * (0.5/L)<br>
         Where:<br>
         W = Teams outscored<br>
         T = Teams tied<br>
         L = Opponents in league (league size - 1)<br>
         """
     AWAL_FORMULA_EXPLAINED = f"""
-        To properly calculate AWAL, the AWAL must be calculated once for each team every week.<br>
-        Each week's AWAL can then be added together to create an aggregate AWAL for each team.<br>
-        A team's AWAL for any given week will ALWAYS be between 0 and 1 (inclusive).
+        To properly calculate {Constants.AWAL_STAT_TITLE}, the {Constants.AWAL_STAT_TITLE} must be calculated once for each team every week.<br>
+        Each week's {Constants.AWAL_STAT_TITLE} can then be added together to create an aggregate {Constants.AWAL_STAT_TITLE} for each team.<br>
+        A team's {Constants.AWAL_STAT_TITLE} for any given week will ALWAYS be between 0 and 1 (inclusive).
         """
     AWAL_STATS_EXPLAINED = (AWAL_PURPOSE, AWAL_FORMULA, AWAL_FORMULA_EXPLAINED)
 
-    __ALL_STATS_EXPLAINED_DICT = {Constants.AWAL_STAT_TITLE: AWAL_STATS_EXPLAINED}
+    MARGINS_OF_VICTORY_PURPOSE = f"""
+        {Constants.MARGINS_OF_VICTORY_STAT_TITLE} is used to measure the magnitude of any given win.
+        """
+
+    MARGINS_OF_VICTORY_FORMULA = f"""
+        |Team A Score - Team B Score|<br>
+        OR<br>
+        Winning Team Score - Losing Team Score
+        """
+
+    MARGINS_OF_VICTORY_FORMULA_EXPLAINED = f"""
+        Note: {Constants.MARGINS_OF_VICTORY_STAT_TITLE} must be greater than 0.
+        """
+
+    MARGINS_OF_VICTORY_STATS_EXPLAINED = (MARGINS_OF_VICTORY_PURPOSE, MARGINS_OF_VICTORY_FORMULA, MARGINS_OF_VICTORY_FORMULA_EXPLAINED)
+
+    __ALL_STATS_EXPLAINED_DICT = {Constants.AWAL_STAT_TITLE: AWAL_STATS_EXPLAINED,
+                                  Constants.MARGINS_OF_VICTORY_STAT_TITLE: MARGINS_OF_VICTORY_STATS_EXPLAINED}
