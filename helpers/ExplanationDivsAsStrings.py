@@ -41,8 +41,9 @@ class ExplanationDivsAsStrings:
         return newList
 
     AWAL_PURPOSE = f"""
-        {Constants.AWAL_STAT_TITLE} stands for Adjusted Wins Against the League. It is exactly that, an adjustment added to the Wins Against the League (or %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2%) of a team.<br>
-        In simple terms, this stat more accurately represents how many%0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% any given team should have.<br>
+        {Constants.AWAL_STAT_TITLE} stands for Adjusted Wins Against the League.<br>
+        It is exactly that, an adjustment added to the Wins Against the League (or %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2%) of a team.<br>
+        In simple terms, this stat more accurately represents how many %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% any given team should have.<br>
         <strong>Ex:</strong> A team with 6.3 {Constants.AWAL_STAT_TITLE} "deserves" 6.3 %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2%.
         """
     AWAL_FORMULA = f"""
@@ -50,12 +51,12 @@ class ExplanationDivsAsStrings:
         Where:<br>
         W = Teams outscored<br>
         T = Teams tied<br>
-        L = Opponents in league (league size - 1)<br>
+        L = Opponents that week (usually league size - 1)<br>
         """
     AWAL_FORMULA_EXPLAINED = f"""
         To properly calculate {Constants.AWAL_STAT_TITLE}, the {Constants.AWAL_STAT_TITLE} must be calculated once for each team every week.<br>
         Each week's {Constants.AWAL_STAT_TITLE} can then be added together to create an aggregate {Constants.AWAL_STAT_TITLE} for each team.<br>
-        A team's {Constants.AWAL_STAT_TITLE} for any given week will ALWAYS be between 0 and 1 (inclusive).
+        A team's {Constants.AWAL_STAT_TITLE} for any given week will <strong>always</strong> be between 0 and 1 (inclusive).
         """
     AWAL_STATS_EXPLAINED = (AWAL_PURPOSE, AWAL_FORMULA, AWAL_FORMULA_EXPLAINED)
 
@@ -81,9 +82,9 @@ class ExplanationDivsAsStrings:
         """
 
     MAX_SCORE_FORMULA = f"""
-        max(allTeamScores)<br>
+        max(A)<br>
         WHERE:<br>
-        allTeamScores = List of every score by a single team.
+        A = List of every score by a single team
         """
 
     MAX_SCORE_FORMULA_EXPLAINED = f"""
@@ -101,9 +102,9 @@ class ExplanationDivsAsStrings:
         """
 
     MIN_SCORE_FORMULA = f"""
-        min(allTeamScores)<br>
+        min(A)<br>
         WHERE:<br>
-        allTeamScores = List of every score by a single team.
+        A = List of every score by a single team
         """
 
     MIN_SCORE_FORMULA_EXPLAINED = f"""
@@ -115,7 +116,44 @@ class ExplanationDivsAsStrings:
 
     MIN_SCORE_STATS_EXPLAINED = (MIN_SCORE_PURPOSE, MIN_SCORE_FORMULA, MIN_SCORE_FORMULA_EXPLAINED)
 
+    PPG_PURPOSE = f"""
+        {Constants.PPG_STAT_TITLE} (Points Per Game) is the average amount of points a team scores per week.
+        """
+
+    PPG_FORMULA = f"""
+        (ΣA) / B<br>
+        WHERE:<br>
+        A = All scores by a team<br>
+        B = Number of games played by a team
+        """
+
+    PPG_FORMULA_EXPLAINED = f"""
+        NA
+        """
+
+    PPG_STATS_EXPLAINED = (PPG_PURPOSE, PPG_FORMULA, PPG_FORMULA_EXPLAINED)
+
+    PPG_AGAINST_PURPOSE = f"""
+        {Constants.PPG_AGAINST_STAT_TITLE} (Points Per Game Against) is the average amount of points a team has scored against them per week.
+        """
+
+    PPG_AGAINST_FORMULA = f"""
+        (ΣA) / B<br>
+        WHERE:<br>
+        A = All scores against a team<br>
+        B = Number of games played by a team
+        """
+
+    PPG_AGAINST_FORMULA_EXPLAINED = f"""
+        NA
+        """
+
+    PPG_AGAINST_STATS_EXPLAINED = (PPG_AGAINST_PURPOSE, PPG_AGAINST_FORMULA, PPG_AGAINST_FORMULA_EXPLAINED)
+
+
     __ALL_STATS_EXPLAINED_DICT = {Constants.AWAL_STAT_TITLE: AWAL_STATS_EXPLAINED,
                                   Constants.MARGINS_OF_VICTORY_STAT_TITLE: MARGINS_OF_VICTORY_STATS_EXPLAINED,
                                   Constants.MAX_SCORE_STAT_TITLE: MAX_SCORE_STATS_EXPLAINED,
-                                  Constants.MIN_SCORE_STAT_TITLE: MIN_SCORE_STATS_EXPLAINED}
+                                  Constants.MIN_SCORE_STAT_TITLE: MIN_SCORE_STATS_EXPLAINED,
+                                  Constants.PPG_STAT_TITLE: PPG_STATS_EXPLAINED,
+                                  Constants.PPG_AGAINST_STAT_TITLE: PPG_AGAINST_STATS_EXPLAINED}
