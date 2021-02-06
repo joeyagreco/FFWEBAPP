@@ -60,13 +60,13 @@ class ExplanationDivsAsStrings:
     AWAL_STATS_EXPLAINED = (AWAL_PURPOSE, AWAL_FORMULA, AWAL_FORMULA_EXPLAINED)
 
     MARGINS_OF_VICTORY_PURPOSE = f"""
-        {Constants.MARGINS_OF_VICTORY_STAT_TITLE} is used to measure the magnitude of any given win.
+        {Constants.MARGINS_OF_VICTORY_STAT_TITLE} (or MOV) is used to measure the magnitude of any given win.
         """
 
     MARGINS_OF_VICTORY_FORMULA = f"""
-        |Team A Score - Team B Score|<br>
+        MOV = |Team A Score - Team B Score|<br>
         OR<br>
-        Winning Team Score - Losing Team Score
+        MOV = Winning Team Score - Losing Team Score
         """
 
     MARGINS_OF_VICTORY_FORMULA_EXPLAINED = f"""
@@ -75,5 +75,25 @@ class ExplanationDivsAsStrings:
 
     MARGINS_OF_VICTORY_STATS_EXPLAINED = (MARGINS_OF_VICTORY_PURPOSE, MARGINS_OF_VICTORY_FORMULA, MARGINS_OF_VICTORY_FORMULA_EXPLAINED)
 
+    MAX_SCORE_PURPOSE = f"""
+        {Constants.MAX_SCORE_STAT_TITLE} is used to retrieve the highest-scoring game for an individual team.
+        """
+
+    MAX_SCORE_FORMULA = f"""
+        max(allTeamScores)<br>
+        WHERE:<br>
+        allTeamScores = list of every score by a single team.
+        """
+
+    MAX_SCORE_FORMULA_EXPLAINED = f"""
+        Note: If a team has multiple "max" scores, this does not change the outcome.<br>
+        Ex: A team with scores: [100, 105, 104, 102] has a {Constants.MAX_SCORE_STAT_TITLE} of 105.<br>
+        AND<br>
+        A team with scores: [99, 105, 105, 101] has a {Constants.MAX_SCORE_STAT_TITLE} of 105.
+        """
+
+    MAX_SCORE_STATS_EXPLAINED = (MAX_SCORE_PURPOSE, MAX_SCORE_FORMULA, MAX_SCORE_FORMULA_EXPLAINED)
+
     __ALL_STATS_EXPLAINED_DICT = {Constants.AWAL_STAT_TITLE: AWAL_STATS_EXPLAINED,
-                                  Constants.MARGINS_OF_VICTORY_STAT_TITLE: MARGINS_OF_VICTORY_STATS_EXPLAINED}
+                                  Constants.MARGINS_OF_VICTORY_STAT_TITLE: MARGINS_OF_VICTORY_STATS_EXPLAINED,
+                                  Constants.MAX_SCORE_STAT_TITLE: MAX_SCORE_STATS_EXPLAINED}
