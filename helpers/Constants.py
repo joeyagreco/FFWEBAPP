@@ -37,7 +37,7 @@ class Constants:
     PLUS_MINUS_STAT_TITLE = "Plus/Minus"
     MAX_SCORE_STAT_TITLE = "Max Score"
     MIN_SCORE_STAT_TITLE = "Min Score"
-    STDEV_STAT_TITLE = "STDEV"
+    STDEV_STAT_TITLE = "Scoring STDEV"
     TEAM_SCORE_STAT_TITLE = "Team Score"
     TEAM_SUCCESS_STAT_TITLE = "Team Success"
     TEAM_LUCK_STAT_TITLE = "Team Luck"

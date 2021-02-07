@@ -74,7 +74,8 @@ class ExplanationDivsAsStrings:
         <strong>Note:</strong> {Constants.MARGINS_OF_VICTORY_STAT_TITLE} must be greater than 0.
         """
 
-    MARGINS_OF_VICTORY_STATS_EXPLAINED = (MARGINS_OF_VICTORY_PURPOSE, MARGINS_OF_VICTORY_FORMULA, MARGINS_OF_VICTORY_FORMULA_EXPLAINED)
+    MARGINS_OF_VICTORY_STATS_EXPLAINED = (
+    MARGINS_OF_VICTORY_PURPOSE, MARGINS_OF_VICTORY_FORMULA, MARGINS_OF_VICTORY_FORMULA_EXPLAINED)
 
     MAX_SCORE_PURPOSE = f"""
         {Constants.MAX_SCORE_STAT_TITLE} is used to retrieve the highest score for an individual team.<br>
@@ -168,6 +169,34 @@ class ExplanationDivsAsStrings:
 
     PLUS_MINUS_STATS_EXPLAINED = (PLUS_MINUS_PURPOSE, PLUS_MINUS_FORMULA, PLUS_MINUS_FORMULA_EXPLAINED)
 
+    STDEV_PURPOSE = f"""
+        {Constants.STDEV_STAT_TITLE} (Standard Deviation) is used to show how volatile a team's scoring was.<br>
+        This stat measures a team's scores relative to the mean (or %0%{Constants.PPG_STAT_TITLE}%1%{Constants.PPG_STAT_TITLE}%2%) of all of their scores. 
+        """
+
+    STDEV_FORMULA = f"""
+        {Constants.STDEV_STAT_TITLE} = sqrt((Σ|x-u|²)/N)<br>
+        WHERE:<br>
+        x = A score<br>
+        u = %0%{Constants.PPG_STAT_TITLE}%1%{Constants.PPG_STAT_TITLE}%2%<br>
+        N = Number of scores (typically weeks played)
+        """
+
+    STDEV_FORMULA_EXPLAINED = f"""
+        A team with low {Constants.STDEV_STAT_TITLE} has been consistent in their scoring patterns.<br>
+        A team with high {Constants.STDEV_STAT_TITLE} has been volatile in their scoring patterns.<br>
+        It should be noted that if a team has lower {Constants.STDEV_STAT_TITLE} than another team, it is <i>not</i> an indication that the team with lower {Constants.STDEV_STAT_TITLE} has performed better.<br>
+        <strong>Ex:</strong> Team A has scores: <strong>[100, 120, 150, 160]</strong> and a {Constants.STDEV_STAT_TITLE} of <strong>23.8</strong><br>
+        Team B has scores: <strong>[70, 72, 71, 69]</strong> and a {Constants.STDEV_STAT_TITLE} of <strong>1.12</strong><br>
+        Team B has a lower {Constants.STDEV_STAT_TITLE} than Team A, but has definitely performed worse.
+        """
+
+    STDEV_STATS_EXPLAINED = (STDEV_PURPOSE, STDEV_FORMULA, STDEV_FORMULA_EXPLAINED)
+
+
+
+
+
 
     __ALL_STATS_EXPLAINED_DICT = {Constants.AWAL_STAT_TITLE: AWAL_STATS_EXPLAINED,
                                   Constants.MARGINS_OF_VICTORY_STAT_TITLE: MARGINS_OF_VICTORY_STATS_EXPLAINED,
@@ -175,4 +204,5 @@ class ExplanationDivsAsStrings:
                                   Constants.MIN_SCORE_STAT_TITLE: MIN_SCORE_STATS_EXPLAINED,
                                   Constants.PPG_STAT_TITLE: PPG_STATS_EXPLAINED,
                                   Constants.PPG_AGAINST_STAT_TITLE: PPG_AGAINST_STATS_EXPLAINED,
-                                  Constants.PLUS_MINUS_STAT_TITLE: PLUS_MINUS_STATS_EXPLAINED}
+                                  Constants.PLUS_MINUS_STAT_TITLE: PLUS_MINUS_STATS_EXPLAINED,
+                                  Constants.STDEV_STAT_TITLE: STDEV_STATS_EXPLAINED}
