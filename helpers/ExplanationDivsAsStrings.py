@@ -74,8 +74,7 @@ class ExplanationDivsAsStrings:
         <strong>Note:</strong> {Constants.MARGINS_OF_VICTORY_STAT_TITLE} must be greater than 0.
         """
 
-    MARGINS_OF_VICTORY_STATS_EXPLAINED = (
-    MARGINS_OF_VICTORY_PURPOSE, MARGINS_OF_VICTORY_FORMULA, MARGINS_OF_VICTORY_FORMULA_EXPLAINED)
+    MARGINS_OF_VICTORY_STATS_EXPLAINED = (MARGINS_OF_VICTORY_PURPOSE, MARGINS_OF_VICTORY_FORMULA, MARGINS_OF_VICTORY_FORMULA_EXPLAINED)
 
     MAX_SCORE_PURPOSE = f"""
         {Constants.MAX_SCORE_STAT_TITLE} is used to retrieve the highest score for an individual team.<br>
@@ -83,7 +82,7 @@ class ExplanationDivsAsStrings:
         """
 
     MAX_SCORE_FORMULA = f"""
-        max(A)<br>
+        {Constants.MAX_SCORE_STAT_TITLE} = max(A)<br>
         WHERE:<br>
         A = List of every score by a single team
         """
@@ -103,7 +102,7 @@ class ExplanationDivsAsStrings:
         """
 
     MIN_SCORE_FORMULA = f"""
-        min(A)<br>
+        {Constants.MIN_SCORE_STAT_TITLE} = min(A)<br>
         WHERE:<br>
         A = List of every score by a single team
         """
@@ -122,7 +121,7 @@ class ExplanationDivsAsStrings:
         """
 
     PPG_FORMULA = f"""
-        (ΣA) / B<br>
+        {Constants.PPG_STAT_TITLE} = (ΣA) / B<br>
         WHERE:<br>
         A = All scores by a team<br>
         B = Number of games played by a team
@@ -139,7 +138,7 @@ class ExplanationDivsAsStrings:
         """
 
     PPG_AGAINST_FORMULA = f"""
-        (ΣA) / B<br>
+        {Constants.PPG_AGAINST_STAT_TITLE} = (ΣA) / B<br>
         WHERE:<br>
         A = All scores against a team<br>
         B = Number of games played by a team
@@ -156,7 +155,7 @@ class ExplanationDivsAsStrings:
         """
 
     PLUS_MINUS_FORMULA = f"""
-        ΣA - ΣB<br>
+        {Constants.PLUS_MINUS_STAT_TITLE} = ΣA - ΣB<br>
         WHERE:<br>
         A = All scores by a team<br>
         B = All scores against a team
