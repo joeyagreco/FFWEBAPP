@@ -71,7 +71,8 @@ class ExplanationDivsAsStrings:
         """
 
     MARGINS_OF_VICTORY_FORMULA_EXPLAINED = f"""
-        <strong>Note:</strong> {Constants.MARGINS_OF_VICTORY_STAT_TITLE} must be greater than 0.
+        <strong>Note:</strong> {Constants.MARGINS_OF_VICTORY_STAT_TITLE} must be greater than 0.<br>
+        Games that result in a Tie will never qualify for the {Constants.MARGINS_OF_VICTORY_STAT_TITLE} stat.
         """
 
     MARGINS_OF_VICTORY_STATS_EXPLAINED = (MARGINS_OF_VICTORY_PURPOSE, MARGINS_OF_VICTORY_FORMULA, MARGINS_OF_VICTORY_FORMULA_EXPLAINED)
