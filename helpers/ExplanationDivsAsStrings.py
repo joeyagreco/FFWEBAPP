@@ -192,6 +192,24 @@ class ExplanationDivsAsStrings:
 
     STDEV_STATS_EXPLAINED = (STDEV_PURPOSE, STDEV_FORMULA, STDEV_FORMULA_EXPLAINED)
 
+    SCORING_SHARE_PURPOSE = f"""
+        {Constants.SCORING_SHARE_STAT_TITLE} is used to show what percentage of league scoring a team was responsible for.
+        """
+
+    SCORING_SHARE_FORMULA = f"""
+        {Constants.SCORING_SHARE_STAT_TITLE} = (ΣA) / (ΣB)<br>
+        WHERE:<br>
+        A = All scores by a team<br>
+        B = All scores by all teams
+        """
+
+    SCORING_SHARE_FORMULA_EXPLAINED = f"""
+        {Constants.SCORING_SHARE_STAT_TITLE} is a good way to compare how a team performed in a league one year vs another year.<br>
+        While scoring 100  %0%{Constants.PPG_STAT_TITLE}%1%{Constants.PPG_STAT_TITLE}%2% one year may not be equivalent to scoring 100  %0%{Constants.PPG_STAT_TITLE}%1%{Constants.PPG_STAT_TITLE}%2% another year,<br>
+        scoring 10% of the league's points <i>will</i> be equivalent to scoring 10% of the league's points another year.
+        """
+
+    SCORING_SHARE_STATS_EXPLAINED = (SCORING_SHARE_PURPOSE, SCORING_SHARE_FORMULA, SCORING_SHARE_FORMULA_EXPLAINED)
 
 
 
@@ -204,4 +222,5 @@ class ExplanationDivsAsStrings:
                                   Constants.PPG_STAT_TITLE: PPG_STATS_EXPLAINED,
                                   Constants.PPG_AGAINST_STAT_TITLE: PPG_AGAINST_STATS_EXPLAINED,
                                   Constants.PLUS_MINUS_STAT_TITLE: PLUS_MINUS_STATS_EXPLAINED,
-                                  Constants.STDEV_STAT_TITLE: STDEV_STATS_EXPLAINED}
+                                  Constants.STDEV_STAT_TITLE: STDEV_STATS_EXPLAINED,
+                                  Constants.SCORING_SHARE: SCORING_SHARE_STATS_EXPLAINED}
