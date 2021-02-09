@@ -9,8 +9,13 @@ function copyUrl() {
   /* Copy the text inside the text field */
   document.execCommand("copy");
 
-  /* Alert the copied text */
-  alert("Copied to clipboard!");
+  /* Alert success */
+    Swal.fire({
+      icon: 'success',
+      title: 'League URL Copied',
+      text: 'Use it to get back here anytime!',
+      heightAuto: false
+    })
 }
 
 function testStats() {

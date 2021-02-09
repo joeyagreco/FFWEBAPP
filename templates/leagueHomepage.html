@@ -4,6 +4,8 @@
 <title>League Homepage</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/leagueHomepage.css') }}">
 <script src="{{ url_for('static', filename='javascript/leagueHomepage.js') }}"></script>
+<!-- custom alert script -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 {% endblock %}
 
 {% block pageTitle %}{{league.leagueName}}{% endblock %}
