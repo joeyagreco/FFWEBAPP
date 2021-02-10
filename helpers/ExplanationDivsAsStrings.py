@@ -212,6 +212,25 @@ class ExplanationDivsAsStrings:
 
     SCORING_SHARE_STATS_EXPLAINED = (SCORING_SHARE_PURPOSE, SCORING_SHARE_FORMULA, SCORING_SHARE_FORMULA_EXPLAINED)
 
+    SMART_WINS_PURPOSE = f"""
+        {Constants.SMART_WINS_STAT_TITLE} shows how many wins a team would have if it played against every score in the league this season.
+        """
+
+    SMART_WINS_FORMULA = f"""
+        {Constants.SMART_WINS_STAT_TITLE} = Σ((W + (T/2)) / S)<br>
+        WHERE:<br>
+        W = Total scores beat<br>
+        T = Total scores tied<br>
+        S = Number of scores in league - 1 (don't include the score being calculated)
+        """
+
+    SMART_WINS_FORMULA_EXPLAINED = f"""
+        {Constants.SMART_WINS_STAT_TITLE} is a good compliment to %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2%.<br>
+        {Constants.SMART_WINS_STAT_TITLE} is better than {Constants.AWAL_STAT_TITLE} at giving a team credit if they lose by a small margin in any given week.<br>
+        """
+
+    SMART_WINS_STATS_EXPLAINED = (SMART_WINS_PURPOSE, SMART_WINS_FORMULA, SMART_WINS_FORMULA_EXPLAINED)
+
 
 
 
@@ -224,4 +243,5 @@ class ExplanationDivsAsStrings:
                                   Constants.PPG_AGAINST_STAT_TITLE: PPG_AGAINST_STATS_EXPLAINED,
                                   Constants.PLUS_MINUS_STAT_TITLE: PLUS_MINUS_STATS_EXPLAINED,
                                   Constants.STDEV_STAT_TITLE: STDEV_STATS_EXPLAINED,
-                                  Constants.SCORING_SHARE: SCORING_SHARE_STATS_EXPLAINED}
+                                  Constants.SCORING_SHARE: SCORING_SHARE_STATS_EXPLAINED,
+                                  Constants.SMART_WINS_STAT_TITLE: SMART_WINS_STATS_EXPLAINED}
