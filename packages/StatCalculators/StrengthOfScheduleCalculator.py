@@ -14,6 +14,7 @@ class StrengthOfScheduleCalculator:
     def getStrengthOfSchedule(self, **params) -> float:
         """
         Returns the Strength of Schedule that the team with the given id has had.
+        SoS = totalOpponentAWAL / totalGamesPlayed
         """
         totalOpponentAwal = 0
         gameCount = 0

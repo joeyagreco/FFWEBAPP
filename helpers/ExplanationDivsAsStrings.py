@@ -231,6 +231,24 @@ class ExplanationDivsAsStrings:
 
     SMART_WINS_STATS_EXPLAINED = (SMART_WINS_PURPOSE, SMART_WINS_FORMULA, SMART_WINS_FORMULA_EXPLAINED)
 
+    STRENGTH_OF_SCHEDULE_PURPOSE = f"""
+        {Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE} is a metric that is used to show how difficult a given team's schedule was over the course of a season.
+        """
+
+    STRENGTH_OF_SCHEDULE_FORMULA = f"""
+        {Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE} = (Σ A) / T<br>
+        WHERE:<br>
+        A = Opponent's %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% in the week you played against them<br>
+        T = Total number of games played
+        """
+
+    STRENGTH_OF_SCHEDULE_FORMULA_EXPLAINED = f"""
+        {Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE} is a great metric when trying to see which teams within a league have had the most difficult schedule.<br>
+        It uses opponent's %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% in the form of %0%{Constants.WIN_PERCENTAGE_STAT_TITLE}%1%{Constants.WIN_PERCENTAGE_STAT_TITLE}%2% to show the combined strength of all opponents over the season.
+        """
+
+    STRENGTH_OF_SCHEDULE_STATS_EXPLAINED = (STRENGTH_OF_SCHEDULE_PURPOSE, STRENGTH_OF_SCHEDULE_FORMULA, STRENGTH_OF_SCHEDULE_FORMULA_EXPLAINED)
+
 
 
 
@@ -244,4 +262,5 @@ class ExplanationDivsAsStrings:
                                   Constants.PLUS_MINUS_STAT_TITLE: PLUS_MINUS_STATS_EXPLAINED,
                                   Constants.STDEV_STAT_TITLE: STDEV_STATS_EXPLAINED,
                                   Constants.SCORING_SHARE: SCORING_SHARE_STATS_EXPLAINED,
-                                  Constants.SMART_WINS_STAT_TITLE: SMART_WINS_STATS_EXPLAINED}
+                                  Constants.SMART_WINS_STAT_TITLE: SMART_WINS_STATS_EXPLAINED,
+                                  Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE: STRENGTH_OF_SCHEDULE_STATS_EXPLAINED}
