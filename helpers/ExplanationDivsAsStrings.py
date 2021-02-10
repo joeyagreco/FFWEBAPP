@@ -219,14 +219,14 @@ class ExplanationDivsAsStrings:
     SMART_WINS_FORMULA = f"""
         {Constants.SMART_WINS_STAT_TITLE} = Σ((W + (T/2)) / S)<br>
         WHERE:<br>
-        W = Total scores beat<br>
-        T = Total scores tied<br>
-        S = Number of scores in league - 1 (don't include the score being calculated)
+        W = Total scores in league beat<br>
+        T = Total scores in league tied<br>
+        S = Number of scores in league - 1
         """
 
     SMART_WINS_FORMULA_EXPLAINED = f"""
-        {Constants.SMART_WINS_STAT_TITLE} is a good compliment to %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2%.<br>
-        {Constants.SMART_WINS_STAT_TITLE} is better than {Constants.AWAL_STAT_TITLE} at giving a team credit if they lose by a small margin in any given week.<br>
+        {Constants.SMART_WINS_STAT_TITLE} is a good compliment to %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% when comparing both to a team's %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2%.<br>
+        {Constants.SMART_WINS_STAT_TITLE} is better than %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% at giving a team credit if they lose by a small margin in any given week.<br>
         """
 
     SMART_WINS_STATS_EXPLAINED = (SMART_WINS_PURPOSE, SMART_WINS_FORMULA, SMART_WINS_FORMULA_EXPLAINED)
