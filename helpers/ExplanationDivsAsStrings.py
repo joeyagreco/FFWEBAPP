@@ -249,6 +249,21 @@ class ExplanationDivsAsStrings:
 
     STRENGTH_OF_SCHEDULE_STATS_EXPLAINED = (STRENGTH_OF_SCHEDULE_PURPOSE, STRENGTH_OF_SCHEDULE_FORMULA, STRENGTH_OF_SCHEDULE_FORMULA_EXPLAINED)
 
+    TEAM_LUCK_PURPOSE = f"""
+        {Constants.TEAM_LUCK_STAT_TITLE} is used to show how much more successful a team was than what they <i>should</i> have been.
+        """
+
+    TEAM_LUCK_FORMULA = f"""
+        {Constants.TEAM_LUCK_STAT_TITLE} = %0%{Constants.TEAM_SUCCESS_STAT_TITLE}%1%{Constants.TEAM_SUCCESS_STAT_TITLE}%2% - %0%{Constants.TEAM_SCORE_STAT_TITLE}%1%{Constants.TEAM_SCORE_STAT_TITLE}%2%
+        """
+
+    TEAM_LUCK_FORMULA_EXPLAINED = f"""
+        A team with a higher %0%{Constants.TEAM_SUCCESS_STAT_TITLE}%1%{Constants.TEAM_SUCCESS_STAT_TITLE}%2% than %0%{Constants.TEAM_SCORE_STAT_TITLE}%1%{Constants.TEAM_SCORE_STAT_TITLE}%2% likely has a higher %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% than they deserve.<br>
+        {Constants.TEAM_LUCK_STAT_TITLE} helps to quantify just how much better a team ended up than they should have.
+        """
+
+    TEAM_LUCK_STATS_EXPLAINED = (TEAM_LUCK_PURPOSE, TEAM_LUCK_FORMULA, TEAM_LUCK_FORMULA_EXPLAINED)
+
 
 
 
@@ -263,4 +278,5 @@ class ExplanationDivsAsStrings:
                                   Constants.STDEV_STAT_TITLE: STDEV_STATS_EXPLAINED,
                                   Constants.SCORING_SHARE: SCORING_SHARE_STATS_EXPLAINED,
                                   Constants.SMART_WINS_STAT_TITLE: SMART_WINS_STATS_EXPLAINED,
-                                  Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE: STRENGTH_OF_SCHEDULE_STATS_EXPLAINED}
+                                  Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE: STRENGTH_OF_SCHEDULE_STATS_EXPLAINED,
+                                  Constants.TEAM_LUCK_STAT_TITLE: TEAM_LUCK_STATS_EXPLAINED}
