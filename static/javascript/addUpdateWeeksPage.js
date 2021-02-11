@@ -14,3 +14,22 @@ function deleteWeek() {
     var week = document.getElementById("select_week_dropdown").value;
     window.location = "/delete-week?league_id="+leagueId+"&week="+week;
 }
+
+function getChangeCount() {
+    return parseInt(sessionStorage["changeCount"]);
+}
+
+function clearChanges() {
+    // this sets/resets the change count to 0
+    sessionStorage["changeCount"] = "0";
+}
+
+function changeMade() {
+    // when this method is called, it increments the changeCount by 1
+    // it also enables the save button
+    var saveButton = document.getElementById("saveChangesButton");
+    saveButton.classList.remove("disabled");
+    var changeCount = getChangeCount();
+    changeCount++;
+    sessionStorage["changeCount"] = changeCount.toString();
+}
