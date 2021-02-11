@@ -4,6 +4,9 @@
 <title>Update League</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/updateLeaguePage.css') }}">
 <script src="{{ url_for('static', filename='javascript/updateLeaguePage.js') }}"></script>
+ <!-- bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block pageTitle %}Update Your League{% endblock %}
@@ -16,7 +19,7 @@
 
 <form class="inputsAndButtons" action="/update-league" method="POST">
     <div class="topForm">
-        <input class="leagueNameForm" type="text" name="league_name" id="league_name" value="{{league.leagueName}}" placeholder="League Name" required autocomplete="off">
+        <input class="leagueNameForm" type="text" name="league_name" id="league_name" value="{{league.leagueName}}" placeholder="League Name" required autocomplete="off" onchange="changeMade()">
         <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
         <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
     </div>
@@ -25,7 +28,7 @@
         <div class="oddTeamForms">
         {% for team in league.teams %}
             {% if team.teamId is not divisibleby 2 %}
-                <input class="teamFormOdd" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off">
+                <input class="teamFormOdd" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
             {% endif %}
         {% endfor %}
         </div>
@@ -33,19 +36,17 @@
         <div class="evenTeamForms">
         {% for team in league.teams %}
             {% if team.teamId is divisibleby 2 %}
-                <input class="teamFormEven" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off">
+                <input class="teamFormEven" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
             {% endif %}
         {% endfor %}
         </div>
     </div>
 
     <div class="bottomButtons">
-        <button class="saveChangesButton" type="submit">Save Changes</button>
-        <button class="addOrUpdateWeekButton" type="button" onclick="addUpdateWeeksRedirect()">Add/Update a Week</button>
-        <button class="deleteLeagueButton" type="button" onclick="deleteLeague()">Delete League</button>
+        <button class="saveChangesButton btn btn-primary disabled" id="saveChangesButton" type="submit">Save Changes</button>
+        <button class="addOrUpdateWeekButton btn btn-primary" type="button" onclick="addUpdateWeeksRedirect()">Add/Update a Week</button>
+        <button class="deleteLeagueButton btn btn-primary" type="button" onclick="deleteLeague()">Delete League</button>
     </div>
-
-
 </form>
-
+<script>clearChanges()</script>
 {% endblock %}

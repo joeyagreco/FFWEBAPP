@@ -21,3 +21,22 @@ function addUpdateWeeksRedirect() {
     // GET request
      window.location = "/add-update-weeks?league_id="+leagueId;
 }
+
+function getChangeCount() {
+    return parseInt(sessionStorage["changeCount"]);
+}
+
+function clearChanges() {
+    // this sets/resets the change count to 0
+    sessionStorage["changeCount"] = "0";
+}
+
+function changeMade() {
+    // when this method is called, it increments the changeCount by 1
+    // it also enables the save button
+    var saveButton = document.getElementById("saveChangesButton");
+    saveButton.classList.remove("disabled");
+    var changeCount = getChangeCount();
+    changeCount++;
+    sessionStorage["changeCount"] = changeCount.toString();
+}
