@@ -6,6 +6,11 @@
 <script src="{{ url_for('static', filename='javascript/leagueHomepage.js') }}"></script>
 <!-- custom alert script -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+ <!-- bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<!-- Add icon library -->
+<script src="https://kit.fontawesome.com/e509e6f024.js" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block pageTitle %}{{league.leagueName}}{% endblock %}
@@ -17,11 +22,11 @@
 {% block content %}
 <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
 <div class="buttonStack">
-    <button class="stackButton" type="button" onclick="teamStatsRedirect();">Team Stats</button>
-    <button class="stackButton" type="button" onclick="leagueStatsRedirect();">League Stats</button>
-    <button class="stackButton" type="button" onclick="headToHeadStatsRedirect();">Head to Head Stats</button>
-    <button class="stackButton" type="button" onclick="graphsRedirect();">Graphs</button>
-    <button class="stackButton" id="updateButton" type="submit" onclick="updateLeagueRedirect();">Update League</button>
+    <button class="stackButton btn btn-primary" type="button" onclick="teamStatsRedirect();">Team Stats</button>
+    <button class="stackButton btn btn-primary" type="button" onclick="leagueStatsRedirect();">League Stats</button>
+    <button class="stackButton btn btn-primary" type="button" onclick="headToHeadStatsRedirect();">Head to Head Stats</button>
+    <button class="stackButton btn btn-primary" type="button" onclick="graphsRedirect();">Graphs</button>
+    <button class="stackButton btn btn-warning" id="updateButton" type="submit" onclick="updateLeagueRedirect();">Update League</button>
 
 </div>
 
@@ -29,6 +34,6 @@
 
 <div class="copyUrlForm">
     <input class="urlForm" type="text" name="copyLeagueUrlForm" id="copyLeagueUrlForm" value="{{league_url}}" placeholder="League URL" readonly>
-    <button class="copyUrlButton" type="button" onclick="copyUrl();">Copy URL</button>
+    <button class="copyUrlButton" type="button" onclick="copyUrl();"><i class="far fa-copy"></i></button>
 </div>
 {% endblock %}
