@@ -93,7 +93,7 @@
 }
 
 .saveChangesButton {
-    width: 10%;
+    width: 15%;
     height: 20%;
     font-size: 1.5rem !important;
     order: 1;
@@ -101,15 +101,15 @@
 }
 
 .addOrUpdateWeekButton {
-    width: 10%;
+    width: 15%;
     height: 20%;
-    font-size: 1.1rem !important;
+    font-size: 1.5rem !important;
     order: 2;
     margin: 2%;
 }
 
 .deleteLeagueButton {
-    width: 10%;
+    width: 15%;
     height: 20%;
     font-size: 1.5rem !important;
     order: 3;
