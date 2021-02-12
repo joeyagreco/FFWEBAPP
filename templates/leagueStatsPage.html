@@ -6,9 +6,11 @@
 <script src="{{ url_for('static', filename='javascript/leagueStatsPage.js') }}"></script>
 <!--Script for sorting a table with class "sortable"-->
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<!-- Add icon library -->
+<script src="https://kit.fontawesome.com/e509e6f024.js" crossorigin="anonymous"></script>
 {% endblock %}
 
-{% block pageTitle %}League Stats{% endblock %}
+{% block pageTitle %}<i class="fas fa-globe"></i> League Stats{% endblock %}
 
 {% block pageSubtitle %}{{league.leagueName}}{% endblock %}
 
