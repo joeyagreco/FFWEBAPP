@@ -6,6 +6,11 @@
     <script src="{{ url_for('static', filename='javascript/base.js') }}"></script>
     <!-- custom alert script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <!-- Add icon library -->
+    <script src="https://kit.fontawesome.com/e509e6f024.js" crossorigin="anonymous"></script>
     {% block head %}
     {% endblock %}
   </head>
@@ -19,7 +24,7 @@
 
     <div class="navBar">
       <button class="navButton mainButton" type="button" onclick="homeRedirect()">Leeger.io</button>
-      <button class="navButton" type="button" onclick="leagueHomepageRedirect()">League Homepage</button>
+      <button class="navButton" type="button" onclick="leagueHomepageRedirect()"><i class="fas fa-home"></i> League</button>
       <button class="navButton" type="button" onclick="statExplanationRedirect()">Stats Explained</button>
     </div>
 
