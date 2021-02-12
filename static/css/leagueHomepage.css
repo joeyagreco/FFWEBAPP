@@ -50,13 +50,12 @@
 }
 
 .urlForm {
-    width: 20%;
-    margin-right: 0.25%;
+    width: 25% !important;
+    height: 18%;
     text-align: center;
 }
 
 .copyUrlButton {
-    width: auto;
     background-color: white;
 }
 
