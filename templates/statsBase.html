@@ -6,9 +6,11 @@
 <script src="{{ url_for('static', filename='javascript/statsBase.js') }}"></script>
 <!-- jquery script -->
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<!-- Add icon library -->
+<script src="https://kit.fontawesome.com/e509e6f024.js" crossorigin="anonymous"></script>
 {% endblock %}
 
-{% block pageTitle %}Stats Explained{% endblock %}
+{% block pageTitle %}<i class="fas fa-book"></i> Stats Explained{% endblock %}
 
 {% block pageSubtitle %}{{selected_stat}}{% endblock %}
 
