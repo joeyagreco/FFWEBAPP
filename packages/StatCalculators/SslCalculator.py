@@ -20,6 +20,9 @@ class SslCalculator:
     def getTeamScore(self) -> float:
         """
         Returns the Team Score that the team with the given stats has.
+        Team Score = ((AWAL / G) * 100) + (Scoring Share * 0.2) + ((Max Score + Min Score) * 0.1)
+        WHERE:
+        G = Total games played by a team
         """
         teamScore = ((self.__awal / self.__gamesPlayed) * self.__awalMultiplier) + ((self.__totalTeamPoints / self.__totalLeaguePoints) * self.__pointsMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
         return Rounder.normalRound(teamScore, 1)

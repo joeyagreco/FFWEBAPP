@@ -269,7 +269,7 @@ class ExplanationDivsAsStrings:
         """
 
     TEAM_SCORE_FORMULA = f"""
-        {Constants.TEAM_SCORE_STAT_TITLE} = ((%0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% / G) * 100) + (%0%{Constants.SCORING_SHARE_STAT_TITLE}%1%{Constants.SCORING_SHARE_STAT_TITLE}%2% / 5) + ((%0%{Constants.MAX_SCORE_STAT_TITLE}%1%{Constants.MAX_SCORE_STAT_TITLE}%2% + %0%{Constants.MIN_SCORE_STAT_TITLE}%1%{Constants.MIN_SCORE_STAT_TITLE}%2%) * 0.1)<br>
+        {Constants.TEAM_SCORE_STAT_TITLE} = ((%0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% / G) * 100) + (%0%{Constants.SCORING_SHARE_STAT_TITLE}%1%{Constants.SCORING_SHARE_STAT_TITLE}%2% * 0.2) + ((%0%{Constants.MAX_SCORE_STAT_TITLE}%1%{Constants.MAX_SCORE_STAT_TITLE}%2% + %0%{Constants.MIN_SCORE_STAT_TITLE}%1%{Constants.MIN_SCORE_STAT_TITLE}%2%) * 0.1)<br>
         WHERE:<br>
         G = Total games played by a team
         """
