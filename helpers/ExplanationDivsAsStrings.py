@@ -198,7 +198,7 @@ class ExplanationDivsAsStrings:
         """
 
     SCORING_SHARE_FORMULA = f"""
-        {Constants.SCORING_SHARE_STAT_TITLE} = (ΣA) / (ΣB)<br>
+        {Constants.SCORING_SHARE_STAT_TITLE} = ((ΣA) / (ΣB)) * 100<br>
         WHERE:<br>
         A = All scores by a team<br>
         B = All scores by all teams
@@ -264,6 +264,23 @@ class ExplanationDivsAsStrings:
 
     TEAM_LUCK_STATS_EXPLAINED = (TEAM_LUCK_PURPOSE, TEAM_LUCK_FORMULA, TEAM_LUCK_FORMULA_EXPLAINED)
 
+    TEAM_SCORE_PURPOSE = f"""
+        {Constants.TEAM_SCORE_STAT_TITLE} is a score given to a team that is representative of how good that team is.
+        """
+
+    TEAM_SCORE_FORMULA = f"""
+        {Constants.TEAM_SCORE_STAT_TITLE} = ((%0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% / G) * 100) + (%0%{Constants.SCORING_SHARE_STAT_TITLE}%1%{Constants.SCORING_SHARE_STAT_TITLE}%2% / 5) + ((%0%{Constants.MAX_SCORE_STAT_TITLE}%1%{Constants.MAX_SCORE_STAT_TITLE}%2% + %0%{Constants.MIN_SCORE_STAT_TITLE}%1%{Constants.MIN_SCORE_STAT_TITLE}%2%) * 0.1)<br>
+        WHERE:<br>
+        G = Total games played by a team
+        """
+
+    TEAM_SCORE_FORMULA_EXPLAINED = f"""
+        This formula uses several "magic" numbers as multipliers, which typically should be avoided.<br>
+        However, these numbers can be tweaked and the general {Constants.TEAM_SCORE_STAT_TITLE} for each team relative to the league will remain roughly the same.<br>
+        """
+
+    TEAM_SCORE_STATS_EXPLAINED = (TEAM_SCORE_PURPOSE, TEAM_SCORE_FORMULA, TEAM_SCORE_FORMULA_EXPLAINED)
+
 
 
 
@@ -279,4 +296,5 @@ class ExplanationDivsAsStrings:
                                   Constants.SCORING_SHARE: SCORING_SHARE_STATS_EXPLAINED,
                                   Constants.SMART_WINS_STAT_TITLE: SMART_WINS_STATS_EXPLAINED,
                                   Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE: STRENGTH_OF_SCHEDULE_STATS_EXPLAINED,
-                                  Constants.TEAM_LUCK_STAT_TITLE: TEAM_LUCK_STATS_EXPLAINED}
+                                  Constants.TEAM_LUCK_STAT_TITLE: TEAM_LUCK_STATS_EXPLAINED,
+                                  Constants.TEAM_SCORE_STAT_TITLE: TEAM_SCORE_STATS_EXPLAINED}

@@ -12,26 +12,24 @@ class SslCalculator:
         self.__minScore = minScore
         self.__gamesPlayed = gamesPlayed
         self.__totalLeaguePoints = totalLeaguePoints
-        self.__awalMultiplier = 1000
-        self.__walMultiplier = 1000
-        self.__pointsMultiplier = 200
+        self.__awalMultiplier = 100
+        self.__walMultiplier = 100
+        self.__pointsMultiplier = 20
+        self.__minMaxMultiplier = 0.1
 
     def getTeamScore(self) -> float:
         """
         Returns the Team Score that the team with the given stats has.
         """
-        teamScore = (((self.__awal / self.__gamesPlayed) * self.__awalMultiplier) + (
-                    (self.__totalTeamPoints / self.__totalLeaguePoints) * self.__pointsMultiplier) + (
-                                self.__maxScore + self.__minScore)) / 10
+        teamScore = ((self.__awal / self.__gamesPlayed) * self.__awalMultiplier) + ((self.__totalTeamPoints / self.__totalLeaguePoints) * self.__pointsMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
         return Rounder.normalRound(teamScore, 1)
 
     def getTeamSuccess(self) -> float:
         """
         Returns the Team Success that the team with the given stats has.
         """
-        teamSuccess = (((self.__wal / self.__gamesPlayed) * self.__walMultiplier) + (
-                    (self.__totalTeamPoints / self.__totalLeaguePoints) * self.__pointsMultiplier) + (
-                                  self.__maxScore + self.__minScore)) / 10
+        teamSuccess = ((self.__wal / self.__gamesPlayed) * self.__walMultiplier) + ((self.__totalTeamPoints / self.__totalLeaguePoints) * self.__pointsMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
+
         return Rounder.normalRound(teamSuccess, 1)
 
     def getTeamLuck(self) -> float:
