@@ -1,3 +1,7 @@
+.numberOfPagesHidden {
+    display: none;
+}
+
 .dropdownSelectionAndTable {
     width: 100%;
     height: 80%;

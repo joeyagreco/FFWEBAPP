@@ -32,20 +32,25 @@
                 {% endfor %}
             </select>
         </div>
+        <!-- set variable for amount of rows to show per page-->
+        {% set rows_per_page = 20 %}
+        <!-- this will hold the amount of pages that will be on this page-->
+        {% set number_of_pages = (stats_models|length/rows_per_page)|int %}
+        <div class="numberOfPagesHidden" id="number_of_pages_hidden">{{number_of_pages}}</div>
         <nav class="pageNavigationBar" aria-label="Page navigation">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" id="previous_page" href="#" onclick="submitLeagueStat('Previous')">Previous</a></li>
                 {% for stat in stats_models %}
-                    {% if loop.index % 20 == 0 %}
-                        {% set curPageNumber = (loop.index/20)|int %}
+                    {% if loop.index % rows_per_page == 0 %}
+                        {% set curPageNumber = (loop.index/rows_per_page)|int %}
                         {% if curPageNumber == page_number %}
-                            <li class="page-item active"><a class="page-link" href="#">{{curPageNumber}}</a></li>
+                            <li class="page-item active"><a class="page-link" id="current_page_number" href="#" onclick="submitLeagueStat({{curPageNumber}})">{{curPageNumber}}</a></li>
                         {% else %}
-                            <li class="page-item"><a class="page-link" href="#">{{curPageNumber}}</a></li>
+                            <li class="page-item"><a class="page-link" href="#" onclick="submitLeagueStat({{curPageNumber}})">{{curPageNumber}}</a></li>
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item"><a class="page-link" id="next_page" href="#" onclick="submitLeagueStat('Next')">Next</a></li>
             </ul>
         </nav>
         <div class="tableContainer">
@@ -62,13 +67,15 @@
                     </thead>
                     <tbody>
                         {% for leagueStat in stats_models %}
-                            <tr>
-                                <td>{{leagueStat.getScore()}}</td>
-                                <td>{{leagueStat.getOutcome()}}</td>
-                                <td>{{leagueStat.getTeamFor().getTeamName()}}</td>
-                                <td>{{leagueStat.getTeamAgainst().getTeamName()}}</td>
-                                <td>{{leagueStat.getWeek()}}</td>
-                            </tr>
+                            {% if loop.index > (page_number*rows_per_page) and loop.index <= (page_number*rows_per_page)+rows_per_page %}
+                                <tr>
+                                    <td>{{leagueStat.getScore()}}</td>
+                                    <td>{{leagueStat.getOutcome()}}</td>
+                                    <td>{{leagueStat.getTeamFor().getTeamName()}}</td>
+                                    <td>{{leagueStat.getTeamAgainst().getTeamName()}}</td>
+                                    <td>{{leagueStat.getWeek()}}</td>
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
