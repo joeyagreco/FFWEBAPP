@@ -22,12 +22,12 @@
     <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
     <input class="weekHidden" type="number" name="week_number" id="week_number" value="{{week_number}}">
     <div class="selectAndAddWeek">
-        <select class="selectWeekDropdown" id="select_week_dropdown" onchange="updateWeekDropdown();">
+        <select class="selectWeekDropdown btn btn-secondary dropdown-toggle" id="select_week_dropdown" onchange="updateWeekDropdown();">
             {% for week in league.weeks %}
                 {% if week.weekNumber == week_number %}
-                    <option value="{{week.weekNumber}}" selected>Week {{week.weekNumber}}</option>
+                    <option class="dropdown-item active" value="{{week.weekNumber}}" selected>Week {{week.weekNumber}}</option>
                 {% else %}
-                    <option value="{{week.weekNumber}}">Week {{week.weekNumber}}</option>
+                    <option class="dropdown-item" value="{{week.weekNumber}}">Week {{week.weekNumber}}</option>
                 {% endif %}
             {% endfor %}
         </select>

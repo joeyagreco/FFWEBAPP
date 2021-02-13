@@ -27,8 +27,10 @@
 
 .selectWeekDropdown {
     width: 10%;
-    order: 1;
     height: auto;
+    order: 1;
+    color: black !important;
+    background-color: white !important;
 }
 
 .addWeekButtonPlus {
