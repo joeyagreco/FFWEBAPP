@@ -334,6 +334,8 @@ def leagueStats():
         statSelection = statOptions[0]
     if not pageNumber:
         pageNumber = 1
+    else:
+        pageNumber = int(pageNumber)
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
