@@ -13,7 +13,7 @@ class ExplanationDivsAsStrings:
     __SPAN2 = """</span>"""
 
     @classmethod
-    def applyLinkSpans(cls, string: str) -> str:
+    def __applyLinkSpans(cls, string: str) -> str:
         """
         This finds and replaces the text %0% , %2% , and %2% with valid HTML that is a span with a clickable reroute function call.
         EXAMPLE:
@@ -37,7 +37,7 @@ class ExplanationDivsAsStrings:
             # apply class methods to convert theses
             newList = []
             for string in cls.__ALL_STATS_EXPLAINED_DICT[statTitle]:
-                newList.append(cls.applyLinkSpans(string))
+                newList.append(cls.__applyLinkSpans(string))
         return newList
 
     AWAL_PURPOSE = f"""

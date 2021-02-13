@@ -30,6 +30,9 @@ class SslCalculator:
     def getTeamSuccess(self) -> float:
         """
         Returns the Team Success that the team with the given stats has.
+        Team Success = ((WAL / G) * 100) + (Scoring Share * 0.2) + ((Max Score + Min Score) * 0.1)
+        WHERE:
+        G = Total games played by a team
         """
         teamSuccess = ((self.__wal / self.__gamesPlayed) * self.__walMultiplier) + ((self.__totalTeamPoints / self.__totalLeaguePoints) * self.__pointsMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
 
