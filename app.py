@@ -328,15 +328,18 @@ def headToHeadStats():
 def leagueStats():
     leagueId = int(request.args.get("league_id"))
     statSelection = request.args.get("stat_selection")
+    pageNumber = request.args.get("page_number")
     statOptions = Constants.LEAGUE_STATS_STAT_TITLES
     if not statSelection:
         statSelection = statOptions[0]
+    if not pageNumber:
+        pageNumber = 1
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
     statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, statSelection)
     return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
-                           selected_stat=statSelection, stats_models=statsModelOrError)
+                           selected_stat=statSelection, stats_models=statsModelOrError, page_number=pageNumber)
 
 
 @app.route("/graphs", methods=["GET"])
