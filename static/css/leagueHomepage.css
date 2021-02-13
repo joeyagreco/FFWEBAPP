@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: blue;
+    background-color: white;
 }
 
 .updateLeagueForm {
@@ -22,11 +22,6 @@
     margin-left: 0;
     margin-right: 0;
     font-family: "Arial" !important;
-    background-color: white;
-}
-
-#updateButton {
-    background-color: orange;
 }
 
 .leagueIdHidden {
