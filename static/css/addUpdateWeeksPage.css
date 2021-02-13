@@ -41,7 +41,7 @@
 }
 
 .teams {
-    width: 40%;
+    width: 60%;
     height: 60%;
     order: 2;
     margin-left: auto;
@@ -109,25 +109,20 @@
     justify-content: space-around;
 }
 
-.teamFormsOdd {
-    width: 80%;
-    height: auto;
-    margin: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
 .oddTeamName {
     width: 50%;
     height: auto;
     order: 1;
+    color: black !important;
+    background-color: white !important;
 }
 
 .evenTeamName {
     width: 50%;
     height: auto;
     order: 1;
+    color: black !important;
+    background-color: white !important;
 }
 
 .oddTeamScore {

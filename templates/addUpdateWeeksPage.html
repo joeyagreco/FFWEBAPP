@@ -38,13 +38,13 @@
             {% for week in league.weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsOdd">
-                        <select class="oddTeamName" name="teamAId_matchup_{{loop.index}}" id="teamAId_matchup_{{loop.index}}" onchange="changeMade()">
+                        <select class="oddTeamName btn btn-secondary dropdown-toggle" name="teamAId_matchup_{{loop.index}}" id="teamAId_matchup_{{loop.index}}" onchange="changeMade()">
                             {% if matchup.matchupId == loop.index %}
-                                <option value="{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
+                                <option class="dropdown-item active" value="{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
                             {% endif %}
                             {% for team in league.teams %}
                                 {% if team.teamId != matchup.teamA.teamId %}
-                                    <option value="{{team.teamId}}">{{team.teamName}}</option>
+                                    <option class="dropdown-item" value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
@@ -68,13 +68,13 @@
             {% for week in league.weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsEven">
-                        <select class="evenTeamName" name="teamBId_matchup_{{loop.index}}" id="teamBId_matchup_{{loop.index}}" onchange="changeMade()">
+                        <select class="evenTeamName btn btn-secondary dropdown-toggle" name="teamBId_matchup_{{loop.index}}" id="teamBId_matchup_{{loop.index}}" onchange="changeMade()">
                             {% if matchup.matchupId == loop.index %}
-                                <option value="{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
+                                <option class="dropdown-item active" value="{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
                             {% endif %}
                             {% for team in league.teams %}
                                 {% if team.teamId != matchup.teamB.teamId %}
-                                    <option value="{{team.teamId}}">{{team.teamName}}</option>
+                                    <option class="dropdown-item" value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
