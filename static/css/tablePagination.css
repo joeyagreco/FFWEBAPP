@@ -275,6 +275,7 @@ table.dataTable td {
 }
 .dataTables_wrapper .dataTables_length {
   float: left;
+  background-color: grey !important;
 }
 .dataTables_wrapper .dataTables_length select {
   border: 1px solid #aaa;
@@ -282,10 +283,12 @@ table.dataTable td {
   padding: 5px;
   background-color: transparent;
   padding: 4px;
+  background-color: white !important;
 }
 .dataTables_wrapper .dataTables_filter {
   float: right;
   text-align: right;
+  background-color: grey !important;
 }
 .dataTables_wrapper .dataTables_filter input {
   border: 1px solid #aaa;
@@ -293,16 +296,19 @@ table.dataTable td {
   padding: 5px;
   background-color: transparent;
   margin-left: 3px;
+  background-color: white !important;
 }
 .dataTables_wrapper .dataTables_info {
   clear: both;
   float: left;
   padding-top: 0.755em;
+  background-color: grey !important;
 }
 .dataTables_wrapper .dataTables_paginate {
   float: right;
   text-align: right;
   padding-top: 0.25em;
+  background-color: grey !important;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   box-sizing: border-box;
@@ -404,6 +410,7 @@ table.dataTable td {
 .dataTables_wrapper .dataTables_processing,
 .dataTables_wrapper .dataTables_paginate {
   color: #333333;
+  /* this controls the background of the things in the 4 corners outside the table */
 }
 .dataTables_wrapper .dataTables_scroll {
   clear: both;
