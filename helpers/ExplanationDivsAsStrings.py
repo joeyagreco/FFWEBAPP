@@ -263,7 +263,8 @@ class ExplanationDivsAsStrings:
         {Constants.TEAM_LUCK_STAT_TITLE} helps to quantify just how much better a team ended up than they should have.<br>
         A team with 0 {Constants.TEAM_LUCK_STAT_TITLE} has a "fair" amount of %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2%.<br>
         A team with positive (+) {Constants.TEAM_LUCK_STAT_TITLE} has a higher amount of %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% than they deserve.<br>
-        A team with negative (-) {Constants.TEAM_LUCK_STAT_TITLE} has a lower amount of %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% than they deserve.
+        A team with negative (-) {Constants.TEAM_LUCK_STAT_TITLE} has a lower amount of %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% than they deserve.<br>
+        <strong>Note:</strong> This stat is more accurate with larger sample sizes (the more games played, the better).
         """
 
     TEAM_LUCK_STATS_EXPLAINED = (TEAM_LUCK_PURPOSE, TEAM_LUCK_FORMULA, TEAM_LUCK_FORMULA_EXPLAINED)
@@ -282,6 +283,7 @@ class ExplanationDivsAsStrings:
     TEAM_SCORE_FORMULA_EXPLAINED = f"""
         This formula uses several "magic" numbers as multipliers, which typically should be avoided.<br>
         However, these numbers can be tweaked and the general {Constants.TEAM_SCORE_STAT_TITLE} for each team relative to the league will remain roughly the same.<br>
+        <strong>Note:</strong> This stat is more accurate with larger sample sizes (the more games played, the better).
         """
 
     TEAM_SCORE_STATS_EXPLAINED = (TEAM_SCORE_PURPOSE, TEAM_SCORE_FORMULA, TEAM_SCORE_FORMULA_EXPLAINED)
@@ -300,6 +302,7 @@ class ExplanationDivsAsStrings:
     TEAM_SUCCESS_FORMULA_EXPLAINED = f"""
         This formula uses several "magic" numbers as multipliers, which typically should be avoided.<br>
         However, these numbers can be tweaked and the general {Constants.TEAM_SUCCESS_STAT_TITLE} for each team relative to the league will remain roughly the same.<br>
+        <strong>Note:</strong> This stat is more accurate with larger sample sizes (the more games played, the better).
         """
 
     TEAM_SUCCESS_STATS_EXPLAINED = (TEAM_SUCCESS_PURPOSE, TEAM_SUCCESS_FORMULA, TEAM_SUCCESS_FORMULA_EXPLAINED)
