@@ -300,6 +300,20 @@ class ExplanationDivsAsStrings:
 
     TEAM_SUCCESS_STATS_EXPLAINED = (TEAM_SUCCESS_PURPOSE, TEAM_SUCCESS_FORMULA, TEAM_SUCCESS_FORMULA_EXPLAINED)
 
+    WAL_PURPOSE = f"""
+           {Constants.WAL_STAT_TITLE} stands for Wins Against the League.<br>
+           It is representative of the total amount of wins + ties a team has.
+           """
+    WAL_FORMULA = f"""
+            {Constants.WAL_STAT_TITLE} = W + (T * 0.5)<br>
+            WHERE:<br>
+            W = Total number of wins a team has<br>
+            T = Total number of ties a team has
+           """
+    WAL_FORMULA_EXPLAINED = f"""
+            {Constants.WAL_STAT_TITLE} is a quick and useful stat that is used typically to see how successful a team has been.
+           """
+    WAL_STATS_EXPLAINED = (WAL_PURPOSE, WAL_FORMULA, WAL_FORMULA_EXPLAINED)
 
 
 
@@ -317,4 +331,5 @@ class ExplanationDivsAsStrings:
                                   Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE: STRENGTH_OF_SCHEDULE_STATS_EXPLAINED,
                                   Constants.TEAM_LUCK_STAT_TITLE: TEAM_LUCK_STATS_EXPLAINED,
                                   Constants.TEAM_SCORE_STAT_TITLE: TEAM_SCORE_STATS_EXPLAINED,
-                                  Constants.TEAM_SUCCESS_STAT_TITLE: TEAM_SUCCESS_STATS_EXPLAINED}
+                                  Constants.TEAM_SUCCESS_STAT_TITLE: TEAM_SUCCESS_STATS_EXPLAINED,
+                                  Constants.WAL_STAT_TITLE: WAL_STATS_EXPLAINED}
