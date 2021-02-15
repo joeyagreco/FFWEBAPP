@@ -247,7 +247,8 @@ class ExplanationDivsAsStrings:
         It takes the %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% from every opponent of a team (the week they played them) and puts it in the form of %0%{Constants.WIN_PERCENTAGE_STAT_TITLE}%1%{Constants.WIN_PERCENTAGE_STAT_TITLE}%2% to show the combined strength of all opponents over the season.
         """
 
-    STRENGTH_OF_SCHEDULE_STATS_EXPLAINED = (STRENGTH_OF_SCHEDULE_PURPOSE, STRENGTH_OF_SCHEDULE_FORMULA, STRENGTH_OF_SCHEDULE_FORMULA_EXPLAINED)
+    STRENGTH_OF_SCHEDULE_STATS_EXPLAINED = (
+        STRENGTH_OF_SCHEDULE_PURPOSE, STRENGTH_OF_SCHEDULE_FORMULA, STRENGTH_OF_SCHEDULE_FORMULA_EXPLAINED)
 
     TEAM_LUCK_PURPOSE = f"""
         {Constants.TEAM_LUCK_STAT_TITLE} is used to show how much more successful a team was than what they <i>should</i> have been.
@@ -317,9 +318,6 @@ class ExplanationDivsAsStrings:
             {Constants.WAL_STAT_TITLE} is a quick and useful stat that is used typically to see how successful a team has been.
            """
     WAL_STATS_EXPLAINED = (WAL_PURPOSE, WAL_FORMULA, WAL_FORMULA_EXPLAINED)
-
-
-
 
     __ALL_STATS_EXPLAINED_DICT = {Constants.AWAL_STAT_TITLE: AWAL_STATS_EXPLAINED,
                                   Constants.MARGINS_OF_VICTORY_STAT_TITLE: MARGINS_OF_VICTORY_STATS_EXPLAINED,
