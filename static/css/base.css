@@ -93,6 +93,7 @@ body {
 }
 
 .mainButton {
+    font-size: 1.8rem !important;
     font-family: 'Russo One', sans-serif;
 }
 
