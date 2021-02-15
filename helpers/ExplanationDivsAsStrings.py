@@ -244,7 +244,7 @@ class ExplanationDivsAsStrings:
 
     STRENGTH_OF_SCHEDULE_FORMULA_EXPLAINED = f"""
         {Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE} is a great metric when trying to see which teams within a league have had the most difficult schedule.<br>
-        It uses opponent's %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% in the form of %0%{Constants.WIN_PERCENTAGE_STAT_TITLE}%1%{Constants.WIN_PERCENTAGE_STAT_TITLE}%2% to show the combined strength of all opponents over the season.
+        It takes the %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% from every opponent of a team (the week they played them) and puts it in the form of %0%{Constants.WIN_PERCENTAGE_STAT_TITLE}%1%{Constants.WIN_PERCENTAGE_STAT_TITLE}%2% to show the combined strength of all opponents over the season.
         """
 
     STRENGTH_OF_SCHEDULE_STATS_EXPLAINED = (STRENGTH_OF_SCHEDULE_PURPOSE, STRENGTH_OF_SCHEDULE_FORMULA, STRENGTH_OF_SCHEDULE_FORMULA_EXPLAINED)
