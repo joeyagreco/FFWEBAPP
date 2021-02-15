@@ -259,7 +259,10 @@ class ExplanationDivsAsStrings:
 
     TEAM_LUCK_FORMULA_EXPLAINED = f"""
         A team with a higher %0%{Constants.TEAM_SUCCESS_STAT_TITLE}%1%{Constants.TEAM_SUCCESS_STAT_TITLE}%2% than %0%{Constants.TEAM_SCORE_STAT_TITLE}%1%{Constants.TEAM_SCORE_STAT_TITLE}%2% likely has a higher %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% than they deserve.<br>
-        {Constants.TEAM_LUCK_STAT_TITLE} helps to quantify just how much better a team ended up than they should have.
+        {Constants.TEAM_LUCK_STAT_TITLE} helps to quantify just how much better a team ended up than they should have.<br>
+        A team with 0 {Constants.TEAM_LUCK_STAT_TITLE} has a "fair" amount of %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2%.<br>
+        A team with positive (+) {Constants.TEAM_LUCK_STAT_TITLE} has a higher amount of %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% than they deserve.<br>
+        A team with negative (-) {Constants.TEAM_LUCK_STAT_TITLE} has a lower amount of %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% than they deserve.
         """
 
     TEAM_LUCK_STATS_EXPLAINED = (TEAM_LUCK_PURPOSE, TEAM_LUCK_FORMULA, TEAM_LUCK_FORMULA_EXPLAINED)
