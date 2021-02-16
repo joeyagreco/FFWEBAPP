@@ -322,6 +322,19 @@ class ExplanationDivsAsStrings:
            """
     WAL_STATS_EXPLAINED = (WAL_PURPOSE, WAL_FORMULA, WAL_FORMULA_EXPLAINED)
 
+    WIN_PERCENTAGE_PURPOSE = f"""
+           {Constants.WIN_PERCENTAGE_STAT_TITLE} is %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% represented as a percentage (%).<br>
+           """
+    WIN_PERCENTAGE_FORMULA = f"""
+            {Constants.WIN_PERCENTAGE_STAT_TITLE} = %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% / G<br>
+            WHERE:<br>
+            G = Total number of games played by a team
+           """
+    WIN_PERCENTAGE_FORMULA_EXPLAINED = f"""
+            {Constants.WIN_PERCENTAGE_STAT_TITLE} is simply another way of representing how successful a team has been throughout a season.
+           """
+    WIN_PERCENTAGE_STATS_EXPLAINED = (WIN_PERCENTAGE_PURPOSE, WIN_PERCENTAGE_FORMULA, WIN_PERCENTAGE_FORMULA_EXPLAINED)
+
     __ALL_STATS_EXPLAINED_DICT = {Constants.AWAL_STAT_TITLE: AWAL_STATS_EXPLAINED,
                                   Constants.MARGINS_OF_VICTORY_STAT_TITLE: MARGINS_OF_VICTORY_STATS_EXPLAINED,
                                   Constants.MAX_SCORE_STAT_TITLE: MAX_SCORE_STATS_EXPLAINED,
@@ -336,4 +349,5 @@ class ExplanationDivsAsStrings:
                                   Constants.TEAM_LUCK_STAT_TITLE: TEAM_LUCK_STATS_EXPLAINED,
                                   Constants.TEAM_SCORE_STAT_TITLE: TEAM_SCORE_STATS_EXPLAINED,
                                   Constants.TEAM_SUCCESS_STAT_TITLE: TEAM_SUCCESS_STATS_EXPLAINED,
-                                  Constants.WAL_STAT_TITLE: WAL_STATS_EXPLAINED}
+                                  Constants.WAL_STAT_TITLE: WAL_STATS_EXPLAINED,
+                                  Constants.WIN_PERCENTAGE_STAT_TITLE: WIN_PERCENTAGE_STATS_EXPLAINED}
