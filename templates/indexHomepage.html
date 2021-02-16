@@ -3,17 +3,18 @@
     <head>
         <title>Leeger.io</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/indexHomepage.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
         <script src="{{ url_for('static', filename='javascript/indexHomepage.js') }}"></script>
         <!-- bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     </head>
 
-    <body>
+    <body class="primaryColorBackground">
         <header>
-            <div class="headerTitles">
-                <div class="pageTitle">Leeger.io</div>
-                <div class="pageSubtitle">Free, In-Depth Stats for YOUR Fantasy Football League!</div>
+            <div class="headerTitles primaryColorBackground">
+                <div class="pageTitle primaryFontColor">Leeger.io</div>
+                <div class="pageSubtitle secondaryFontColorLight">Free, In-Depth Stats for YOUR Fantasy Football League!</div>
             </div>
         </header>
 
@@ -23,14 +24,14 @@
 
         <div class="buttonSelection">
             <form class="newLeagueFormStack" action="/new-league">
-                <button class="newLeagueButton btn btn-primary" type="submit">New League</button>
+                <button class="newLeagueButton btn btn-primary primaryButtonColors" type="submit">New League</button>
             </form>
 
-            <div class="or">OR</div>
+            <div class="or secondaryFontColorDark">OR</div>
 
             <form class="leagueIdFormStack" action="/league-homepage" method="GET">
                 <input class="leagueIdInputForm" type="number" name="league_id" id="league_id" placeholder="League ID" required min="100000" max="999999" step="1" autocomplete="off">
-                <button class="loadLeagueButton btn btn-primary" type="submit">Load League</button>
+                <button class="loadLeagueButton btn btn-primary primaryButtonColors" type="submit">Load League</button>
             </form>
         </div>
     </body>

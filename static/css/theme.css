@@ -1,0 +1,38 @@
+/*
+
+PRIMARY BACKGROUND COLOR: #40916C
+PRIMARY FONT COLOR: WHITE
+SECONDARY FONT COLOR DARK: #081c15
+SECONDARY FONT COLOR LIGHT: #95d5b2
+
+BUTTON PRIMARY BACKGROUND COLOR: WHITE
+BUTTON PRIMARY FONT COLOR: #081c15
+
+*/
+
+
+.primaryColor {
+    color: #40916C !important;
+}
+
+.primaryColorBackground {
+    background-color: #40916C !important;
+}
+
+.primaryFontColor {
+    color: white !important;
+}
+
+.secondaryFontColorDark {
+    color: #081c15 !important;
+}
+
+.secondaryFontColorLight {
+    color: #95d5b2 !important;
+}
+
+.primaryButtonColors {
+    background-color: white !important;
+    border-color: white !important;
+    color: #081c15 !important;
+}
