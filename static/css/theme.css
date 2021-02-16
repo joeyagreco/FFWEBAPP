@@ -6,7 +6,11 @@ SECONDARY FONT COLOR DARK: #081c15
 SECONDARY FONT COLOR LIGHT: #95d5b2
 
 BUTTON PRIMARY BACKGROUND COLOR: WHITE
+BUTTON PRIMARY BACKGROUND COLOR HOVER: #d8f3dc
 BUTTON PRIMARY FONT COLOR: #081c15
+
+FORM BACKGROUND COLOR: #95d5b2
+FORM FONT COLOR: #081c15
 
 */
 
@@ -34,5 +38,14 @@ BUTTON PRIMARY FONT COLOR: #081c15
 .primaryButtonColors {
     background-color: white !important;
     border-color: white !important;
+    color: #081c15 !important;
+}
+
+.primaryButtonColors:hover {
+    background-color: #d8f3dc !important
+}
+
+.primaryFormColors {
+    background-color: #95d5b2 !important;
     color: #081c15 !important;
 }
