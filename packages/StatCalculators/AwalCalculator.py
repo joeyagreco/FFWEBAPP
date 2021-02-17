@@ -39,6 +39,7 @@ class AwalCalculator:
         W = Teams outscored
         T = Teams tied
         L = Opponents in league (league size - 1)
+
         THROUGHWEEK: [int] Gives Adjustment through that week.
         ONLYWEEKS: [list] Gives Adjustment for the given week numbers.
         VSTEAMIDS: [list] Gives Adjustment vs teams with the given IDs.
