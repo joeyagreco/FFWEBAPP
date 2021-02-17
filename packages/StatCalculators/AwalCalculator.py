@@ -15,6 +15,12 @@ class AwalCalculator:
     def getAwal(self, **params) -> float:
         """
         Returns a float that is the AWAL for the team with self.__teamId.
+        AWAL = W * (1/L) + T * (0.5/L)
+        Where:
+        W = Teams outscored
+        T = Teams tied
+        L = Opponents that week (usually league size - 1)
+
         THROUGHWEEK: [int] Gives AWAL through that week.
         ONLYWEEKS: [list] Gives AWAL for the given week numbers.
         VSTEAMIDS: [list] Gives AWAL vs teams with the given IDs.
