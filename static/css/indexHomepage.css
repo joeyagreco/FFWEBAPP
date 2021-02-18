@@ -72,7 +72,7 @@ header {
 .newLeagueButton {
     width: 100%;
     height: 40%;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     font-size: 1.5rem !important;
     cursor: pointer;
 }
@@ -80,7 +80,7 @@ header {
 .or {
     width: 10%;
     height: 100%;
-    padding-top: 1.5rem;
+    padding-top: 2rem;
     order: 2;
     font-size: 300%;
     text-align: center;
@@ -96,8 +96,9 @@ header {
 }
 
 .leagueIdInputForm {
-    height: 1.5rem;
     width: 100%;
+    height: 2rem;
+    font-size: 1.2rem !important;
     text-align: center;
     box-sizing:border-box
 }
