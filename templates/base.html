@@ -3,6 +3,7 @@
 
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
     <script src="{{ url_for('static', filename='javascript/base.js') }}"></script>
     <!-- custom alert script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -22,12 +23,12 @@
       <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
     </header>
 
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light primaryColorBackground">
       <a class="navbar-brand" href="#" onclick="homeRedirect()">
         <img src="static/icons/football_icon.ico" width="30" height="30" class="d-inline-block align-top" alt="">
       </a>
-      <a class="nav-item nav-link active" href="#" onclick="leagueHomepageRedirect()"><i class="fas fa-home"></i> League<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#" onclick="statExplanationRedirect()"><i class="fas fa-book"></i> Stats Explained</a>
+      <a class="nav-item nav-link primaryFontColor primaryFontColorWithHover" href="#" onclick="leagueHomepageRedirect()"><i class="fas fa-home"></i> League<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link primaryFontColor primaryFontColorWithHover" href="#" onclick="statExplanationRedirect()"><i class="fas fa-book"></i> Stats Explained</a>
     </nav>
 
     <div class="topSection">

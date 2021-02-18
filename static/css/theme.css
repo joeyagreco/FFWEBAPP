@@ -2,6 +2,7 @@
 
 PRIMARY BACKGROUND COLOR: #40916C
 PRIMARY FONT COLOR: WHITE
+PRIMARY FONT COLOR HOVER: #95d5b2
 SECONDARY FONT COLOR DARK: #081c15
 SECONDARY FONT COLOR LIGHT: #95d5b2
 
@@ -25,6 +26,10 @@ FORM FONT COLOR: #081c15
 
 .primaryFontColor {
     color: white !important;
+}
+
+.primaryFontColorWithHover:hover {
+    color: #95d5b2 !important;
 }
 
 .secondaryFontColorDark {
