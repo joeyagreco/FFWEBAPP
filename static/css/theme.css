@@ -50,6 +50,10 @@ FORM FONT COLOR: #081c15
     background-color: #d8f3dc !important
 }
 
+.primaryButtonColors:focus {
+    box-shadow: 0px 0px 0px white, 0px 0px 4px #40916C inset !important;
+}
+
 .primaryFormColors {
     background-color: #95d5b2 !important;
     color: #081c15 !important;
