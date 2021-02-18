@@ -58,3 +58,7 @@ FORM FONT COLOR: #081c15
     background-color: #95d5b2 !important;
     color: #081c15 !important;
 }
+
+.primaryFormColors:focus {
+    box-shadow: 0px 0px 0px white, 0px 0px 4px white inset !important;
+}
