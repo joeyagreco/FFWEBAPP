@@ -30,7 +30,7 @@
         <div class="oddTeamForms">
         {% for team in league.teams %}
             {% if team.teamId is not divisibleby 2 %}
-                <input class="teamFormOdd" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
+                <input class="teamFormOdd backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
             {% endif %}
         {% endfor %}
         </div>
@@ -38,7 +38,7 @@
         <div class="evenTeamForms">
         {% for team in league.teams %}
             {% if team.teamId is divisibleby 2 %}
-                <input class="teamFormEven" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
+                <input class="teamFormEven backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
             {% endif %}
         {% endfor %}
         </div>
