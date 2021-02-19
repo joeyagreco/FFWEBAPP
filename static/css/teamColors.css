@@ -19,6 +19,26 @@ This holds the colors used to represent each team in a league.
 16. #2CFF95 (Teal)
 */
 
-.teamId1Background {
+.backgroundTeamId1 {
     background-color: #FF7575 !important;
+}
+
+.backgroundTeamId2 {
+    background-color: #FFBA75 !important;
+}
+
+.backgroundTeamId3 {
+    background-color: #FFFF75 !important;
+}
+
+.backgroundTeamId4 {
+    background-color: #BAFF75 !important;
+}
+
+.backgroundTeamId5 {
+    background-color: #75FFBA !important;
+}
+
+.backgroundTeamId6 {
+    background-color: #75C9FF !important;
 }
