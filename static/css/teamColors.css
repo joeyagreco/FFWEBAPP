@@ -1,0 +1,24 @@
+/*
+This holds the colors used to represent each team in a league.
+
+1. #FF7575 (Light Red)
+2. #FFBA75 (Light Orange)
+3. #FFFF75 (Light Yellow)
+4. #BAFF75 (Light Green)
+5. #75FFBA (Light Teal)
+6. #75C9FF (Light Blue)
+7. #AB75FF (Light Purple)
+8. #FF75C9 (Light Pink)
+9. #7584FF (Blue)
+10. #78FF75 (Lime Green)
+11. #FB6248 (Red)
+12. #FB8F48 (Orange)
+13. #FBE848 (Yellow)
+14. #2CFF2C (Dark Lime Green)
+15. #2CFFCA (Mid Blue)
+16. #2CFF95 (Teal)
+*/
+
+.teamId1Background {
+    background-color: #FF7575 !important;
+}
