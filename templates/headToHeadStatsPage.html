@@ -88,7 +88,7 @@
                 </thead>
                 <tbody>
                 {% for teamStats in stats_models %}
-                <tr>
+                <tr class="backgroundTeamId{{teamStats.getTeamId()}}">
                     <td>{{teamStats.getTeamName()}}</td>
                     <td>{{teamStats.getWins()}}</td>
                     <td>{{teamStats.getLosses()}}</td>
