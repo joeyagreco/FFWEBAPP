@@ -49,7 +49,7 @@
                             {% endfor %}
                         </select>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="oddTeamScore" name="teamAScore_matchup_{{loop.index}}" id="teamAScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onchange="changeMade()">
+                            <input class="oddTeamScore backgroundTeamId{{matchup.teamA.teamId}}" name="teamAScore_matchup_{{loop.index}}" id="teamAScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onchange="changeMade()">
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -79,7 +79,7 @@
                             {% endfor %}
                         </select>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="evenTeamScore" name="teamBScore_matchup_{{loop.index}}" id="teamBScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamBScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onchange="changeMade()">
+                            <input class="evenTeamScore backgroundTeamId{{matchup.teamB.teamId}}" name="teamBScore_matchup_{{loop.index}}" id="teamBScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamBScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onchange="changeMade()">
                         {% endif %}
                     </div>
                 {% endfor %}
