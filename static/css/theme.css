@@ -1,5 +1,7 @@
 /*
 
+PALETTE: https://coolors.co/d8f3dc-b7e4c7-95d5b2-74c69d-52b788-40916c-2d6a4f-1b4332-081c15
+
 PRIMARY BACKGROUND COLOR: #40916C
 PRIMARY FONT COLOR: WHITE
 PRIMARY FONT COLOR HOVER: #95d5b2
@@ -12,6 +14,9 @@ BUTTON PRIMARY FONT COLOR: #081c15
 
 FORM BACKGROUND COLOR: #95d5b2
 FORM FONT COLOR: #081c15
+
+OPTION BACKGROUND COLOR: #40916C
+OPTION FONT COLOR: WHITE
 
 */
 
@@ -61,4 +66,9 @@ FORM FONT COLOR: #081c15
 
 .primaryFormColors:focus {
     box-shadow: 0px 0px 0px white, 0px 0px 4px white inset !important;
+}
+
+select option {
+    background-color: #40916C !important;
+    color: white !important;
 }
