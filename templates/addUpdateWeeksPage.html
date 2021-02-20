@@ -40,11 +40,11 @@
                     <div class="teamFormsOdd">
                         <select class="oddTeamName btn btn-secondary dropdown-toggle" name="teamAId_matchup_{{loop.index}}" id="teamAId_matchup_{{loop.index}}" onchange="changeMade()">
                             {% if matchup.matchupId == loop.index %}
-                                <option class="dropdown-item active" value="{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
+                                <option class="dropdown-item backgroundTeamId{{matchup.teamA.teamId}}" value="{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
                             {% endif %}
                             {% for team in league.teams %}
                                 {% if team.teamId != matchup.teamA.teamId %}
-                                    <option class="dropdown-item" value="{{team.teamId}}">{{team.teamName}}</option>
+                                    <option class="dropdown-item backgroundTeamId{{team.teamId}}" value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
@@ -70,11 +70,11 @@
                     <div class="teamFormsEven">
                         <select class="evenTeamName btn btn-secondary dropdown-toggle" name="teamBId_matchup_{{loop.index}}" id="teamBId_matchup_{{loop.index}}" onchange="changeMade()">
                             {% if matchup.matchupId == loop.index %}
-                                <option class="dropdown-item active" value="{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
+                                <option class="dropdown-item backgroundTeamId{{matchup.teamB.teamId}}" value="{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
                             {% endif %}
                             {% for team in league.teams %}
                                 {% if team.teamId != matchup.teamB.teamId %}
-                                    <option class="dropdown-item" value="{{team.teamId}}">{{team.teamName}}</option>
+                                    <option class="dropdown-item backgroundTeamId{{team.teamId}}" value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
