@@ -346,7 +346,9 @@ def graphs():
     # default selected graph
     if not selectedGraph:
         selectedGraph = Constants.GRAPH_OPTIONS[0]
-    screenWidth = float(request.args.get("screen_width"))
+    screenWidth = request.args.get("screen_width")
+    if screenWidth:
+        screenWidth = float(screenWidth)
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)

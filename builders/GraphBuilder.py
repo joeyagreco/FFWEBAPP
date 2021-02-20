@@ -65,6 +65,8 @@ class GraphBuilder:
         data = [trace]
         fig = go.Figure(data=data)
         fig.update_layout(title=title)
+        if not screenWidth:
+            screenWidth = cls.DEFAULT_WIDTH
         fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=screenWidth/100,
                           marker=dict(line=dict(color='#000000', width=2)))
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
