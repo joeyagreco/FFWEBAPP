@@ -264,7 +264,8 @@ class ExplanationDivsAsStrings:
         A team with 0 {Constants.TEAM_LUCK_STAT_TITLE} has a "fair" amount of %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2%.<br>
         A team with positive (+) {Constants.TEAM_LUCK_STAT_TITLE} has a higher amount of %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% than they deserve.<br>
         A team with negative (-) {Constants.TEAM_LUCK_STAT_TITLE} has a lower amount of %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% than they deserve.<br>
-        <strong>Note:</strong> This stat is more accurate with larger sample sizes (the more games played, the better).
+        <strong>Note:</strong> This stat is more accurate with larger sample sizes (the more games played, the better).<br>
+        <strong>Note2:</strong> The sum of all {Constants.TEAM_LUCK_STAT_TITLE}'s within a league will be ≈ 0.
         """
 
     TEAM_LUCK_STATS_EXPLAINED = (TEAM_LUCK_PURPOSE, TEAM_LUCK_FORMULA, TEAM_LUCK_FORMULA_EXPLAINED)
