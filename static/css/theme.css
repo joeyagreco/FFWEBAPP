@@ -18,6 +18,8 @@ FORM FONT COLOR: #081c15
 OPTION BACKGROUND COLOR: WHITE
 OPTION FONT COLOR: #40916C
 
+DROPDOWN ACTIVE BACKGROUND COLOR:
+
 */
 
 
@@ -71,4 +73,8 @@ OPTION FONT COLOR: #40916C
 .primaryDropdown option {
     background-color: white !important;
     color: #40916C !important;
+}
+
+.active {
+    background-color: #40916C !important;
 }
