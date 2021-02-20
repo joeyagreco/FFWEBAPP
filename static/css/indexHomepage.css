@@ -42,12 +42,13 @@ header {
     width: 100%;
     height: 15%;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 .errorMessage {
     width: 100%;
     height: 30%;
+    margin-top: 1.5rem;
     font-family: 'Roboto Slab', serif;
     text-align: center;
     color: red;
