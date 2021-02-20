@@ -21,7 +21,8 @@ def favicon():
 
 @app.route("/")
 def index():
-    return render_template("indexHomepage.html")
+    errorMessage = request.args.get("error_message")
+    return render_template("indexHomepage.html", error_message=errorMessage)
 
 
 @app.route("/add-league", methods=["POST"])
