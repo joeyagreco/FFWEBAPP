@@ -66,8 +66,11 @@ class StatCalculatorService:
             totalLeaguePoints = LeagueModelNavigator.totalLeaguePoints(leagueModel)
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
             teamScore = sslCalculator.getTeamScore()
+            teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
             teamSuccess = sslCalculator.getTeamSuccess()
+            teamSuccessStr = Rounder.keepTrailingZeros(teamSuccess, 2)
             teamLuck = sslCalculator.getTeamLuck()
+            teamLuckStr = Rounder.keepTrailingZeros(teamLuck, 2)
             allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId)
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
@@ -91,9 +94,9 @@ class StatCalculatorService:
                                        maxScore=maxScoreStr,
                                        minScore=minScoreStr,
                                        awal=awalStr,
-                                       teamScore=teamScore,
-                                       teamSuccess=teamSuccess,
-                                       teamLuck=teamLuck,
+                                       teamScore=teamScoreStr,
+                                       teamSuccess=teamSuccessStr,
+                                       teamLuck=teamLuckStr,
                                        smartWins=smartWinsStr,
                                        percentageOfLeagueScoring=percentageOfLeagueScoringStr,
                                        strengthOfSchedule=strengthOfScheduleStr,
@@ -145,8 +148,11 @@ class StatCalculatorService:
             totalLeaguePoints = LeagueModelNavigator.totalLeaguePoints(leagueModel, onlyIncludeWeeks=allWeeksTeamsPlay)
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
             teamScore = sslCalculator.getTeamScore()
+            teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
             teamSuccess = sslCalculator.getTeamSuccess()
+            teamSuccessStr = Rounder.keepTrailingZeros(teamSuccess, 2)
             teamLuck = sslCalculator.getTeamLuck()
+            teamLuckStr = Rounder.keepTrailingZeros(teamLuck, 2)
             allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
@@ -165,9 +171,9 @@ class StatCalculatorService:
                                                         maxScore=maxScoreStr,
                                                         minScore=minScoreStr,
                                                         awal=awalStr,
-                                                        teamScore=teamScore,
-                                                        teamSuccess=teamSuccess,
-                                                        teamLuck=teamLuck,
+                                                        teamScore=teamScoreStr,
+                                                        teamSuccess=teamSuccessStr,
+                                                        teamLuck=teamLuckStr,
                                                         smartWins=smartWinsStr,
                                                         percentageOfLeagueScoring=percentageOfLeagueScoringStr,
                                                         wal=walStr)
