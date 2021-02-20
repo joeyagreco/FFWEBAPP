@@ -3,10 +3,9 @@ function addWeek() {
     window.location = "/add-week?league_id="+leagueId;
 }
 
-function updateWeekDropdown() {
+function updateWeekDropdown(weekNumber) {
     var leagueId = document.getElementById("league_id").value;
-    var newWeek = document.getElementById("select_week_dropdown").value;
-    window.location = "/add-update-weeks?league_id="+leagueId+"&week="+newWeek;
+    window.location = "/add-update-weeks?league_id="+leagueId+"&week="+weekNumber;
 }
 
 function deleteWeek() {
