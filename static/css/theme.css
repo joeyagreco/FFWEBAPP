@@ -15,8 +15,8 @@ BUTTON PRIMARY FONT COLOR: #081c15
 FORM BACKGROUND COLOR: #95d5b2
 FORM FONT COLOR: #081c15
 
-OPTION BACKGROUND COLOR: #40916C
-OPTION FONT COLOR: WHITE
+OPTION BACKGROUND COLOR: WHITE
+OPTION FONT COLOR: #40916C
 
 */
 
@@ -69,6 +69,6 @@ OPTION FONT COLOR: WHITE
 }
 
 .primaryDropdown option {
-    background-color: #40916C !important;
-    color: white !important;
+    background-color: white !important;
+    color: #40916C !important;
 }
