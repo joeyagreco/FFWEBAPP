@@ -68,7 +68,7 @@ OPTION FONT COLOR: WHITE
     box-shadow: 0px 0px 0px white, 0px 0px 4px white inset !important;
 }
 
-select option {
+.primaryDropdown option {
     background-color: #40916C !important;
     color: white !important;
 }
