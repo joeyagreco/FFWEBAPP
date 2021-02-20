@@ -31,7 +31,7 @@
 {% block content %}
     <div class="dropdownSelectionAndTable">
         <div class="statsDropdown">
-            <select class="statNameDropdown" name="league_stat" id="league_stat" onchange="submitLeagueStat()">
+            <select class="statNameDropdown primaryDropdown" name="league_stat" id="league_stat" onchange="submitLeagueStat()">
                 {% for stat in stat_options %}
                     {% if stat == selected_stat %}
                         <option value="{{stat}}" selected>{{stat}}</option>
