@@ -19,7 +19,9 @@
         </header>
 
         <div class="errorSection">
-            <div class="errorMessage">{{error_message}}</div>
+            {% if error_message %}
+                <div class="errorMessage">{{error_message}}</div>
+            {% endif %}
         </div>
 
         <div class="buttonSelection">
