@@ -3,10 +3,14 @@
     <head>
         <title>Add Your League</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/addLeaguePage.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
         <script src="{{ url_for('static', filename='javascript/addLeaguePage.js') }}"></script>
          <!-- bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
 
     <body>
@@ -24,14 +28,18 @@
         <div class="inputSection">
             <form class="createLeagueFormStack" action="/add-league" method="POST">
                 <input class="leagueNameInputForm" type="text" name="league_name" id="league_name" placeholder="League Name" required maxlength="30">
-                <select class="numberOfTeamsDropdown"id="number_of_teams" name="number_of_teams">
-                    <option value="6" selected>6 Teams</option>
-                    <option value="8">8 Teams</option>
-                    <option value="10">10 Teams</option>
-                    <option value="12">12 Teams</option>
-                    <option value="14">14 Teams</option>
-                    <option value="16">16 Teams</option>
-                </select>
+<!--                <select class="numberOfTeamsDropdown" id="number_of_teams" name="number_of_teams">-->
+                    <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" id="number_of_teams" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        6 Teams
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item active" href="#">6 Teams</a>
+                        <a class="dropdown-item" href="#">8 Teams</a>
+                        <a class="dropdown-item" href="#">10 Teams</a>
+                        <a class="dropdown-item" href="#">12 Teams</a>
+                        <a class="dropdown-item" href="#">14 Teams</a>
+                        <a class="dropdown-item" href="#">16 Teams</a>
+                    </div>
                 <button class="createLeagueButton btn btn-primary" type="submit">Create League</button>
             </form>
 
