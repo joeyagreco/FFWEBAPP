@@ -31,15 +31,23 @@
 {% block content %}
     <div class="dropdownSelectionAndTable">
         <div class="statsDropdown">
-            <select class="statNameDropdown primaryDropdown" name="league_stat" id="league_stat" onchange="submitLeagueStat()">
+<!--            <select class="statNameDropdown primaryDropdown" name="league_stat" id="league_stat" onchange="submitLeagueStat()">-->
+            {% for stat in stat_options %}
+                {% if stat == selected_stat %}
+                    <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{stat}}
+                    </button>
+                {% endif %}
+            {% endfor %}
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {% for stat in stat_options %}
                     {% if stat == selected_stat %}
-                        <option value="{{stat}}" selected>{{stat}}</option>
+                        <a class="dropdown-item active" href="#" onclick="submitLeagueStat({{stat}});">{{stat}}</a>
                     {% else %}
-                        <option value="{{stat}}">{{stat}}</option>
+                        <a class="dropdown-item" href="#" onclick="submitLeagueStat({{stat}});">{{stat}}</a>
                     {% endif %}
                 {% endfor %}
-            </select>
+            </div>
         </div>
         <div class="tableContainer">
             {% if selected_stat == "All Scores" %}
