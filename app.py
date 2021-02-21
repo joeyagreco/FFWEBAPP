@@ -1,4 +1,5 @@
 import os
+import ast
 
 from flask import Flask, render_template, request, redirect, url_for
 
@@ -27,8 +28,12 @@ def index():
 
 @app.route("/add-league", methods=["POST"])
 def addLeague():
-    leagueName = request.form["league_name"]
-    numberOfTeams = int(request.form["number_of_teams"])
+    # convert the POST request headers into a python dictionary
+    newDataStr = request.data.decode("UTF-8")
+    newDataDict = ast.literal_eval(newDataStr)
+    # retrieve the values from our dictionary
+    leagueName = newDataDict["league_name"]
+    numberOfTeams = int(newDataDict["number_of_teams"])
     mainController = MainController()
     newLeagueIdOrError = mainController.addLeague(leagueName, numberOfTeams)
     if isinstance(newLeagueIdOrError, Error):
