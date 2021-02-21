@@ -18,6 +18,7 @@ function postNewLeague() {
     if(error) {
         // send back with error message
         window.location = "/new-league?error_message="+error;
+        return;
     }
     var numOfTeams = document.getElementById("number_of_teams").value;
     var data = {"league_name": leagueName, "number_of_teams": numOfTeams};
