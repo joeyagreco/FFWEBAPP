@@ -26,7 +26,6 @@
     <div class="selectionsAndTable">
         <div class="teamsAndVs">
             <div class="team1Dropdown">
-<!--                <select class="team1Name primaryDropdown" name="team1Id" id="team1Id" onchange="getHeadToHeadTable();">-->
                 {% for team in league.teams %}
                     {% if team.teamId == given_team_1_id %}
                         <button class="btn btn-secondary dropdown-toggle primaryButtonColors backgroundTeamId{{team.teamId}}" type="button" value={{team.teamId}} id="team1button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,13 +68,13 @@
                             <a class="dropdown-item active backgroundTeamId{{team.teamId}}" href="#" onclick="updateTeam2({{team.teamId}})">{{team.teamName}}</a>
                         {% else %}
                             {% if not given_team_2_id %}
-                                <!--no ids given, exclude ID # 1 from this dropdown by default-->
-                                {% if team.teamId != 1 %}
+                                <!--no ids given, exclude ID # 2 from this dropdown by default-->
+                                {% if team.teamId != 2 %}
                                     <a class="dropdown-item backgroundTeamId{{team.teamId}}" href="#" onclick="updateTeam2({{team.teamId}})">{{team.teamName}}</a>
                                 {% endif %}
                             {% else %}
                                 <!--ids given, exclude givenTeam1Id from this dropdown-->
-                                {% if team.teamId != given_team_2_id %}
+                                {% if team.teamId != given_team_1_id %}
                                     <a class="dropdown-item backgroundTeamId{{team.teamId}}" href="#" onclick="updateTeam2({{team.teamId}})">{{team.teamName}}</a>
                                 {% endif %}
                             {% endif %}
