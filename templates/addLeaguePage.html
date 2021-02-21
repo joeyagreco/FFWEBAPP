@@ -26,22 +26,21 @@
         </div>
 
         <div class="inputSection">
-            <form class="createLeagueFormStack" action="/add-league" method="POST">
-                    <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" id="number_of_teams" value=6 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        6 Teams
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item active" id="6teams" href="#">6 Teams</a>
-                        <a class="dropdown-item" id="8teams" href="#" onclick="setNumberOfTeams({{8}})">8 Teams</a>
-                        <a class="dropdown-item" id="10teams" href="#" onclick="setNumberOfTeams({{10}})">10 Teams</a>
-                        <a class="dropdown-item" id="12teams" href="#" onclick="setNumberOfTeams({{12}})">12 Teams</a>
-                        <a class="dropdown-item" id="14teams" href="#" onclick="setNumberOfTeams({{14}})">14 Teams</a>
-                        <a class="dropdown-item" id="16teams" href="#" onclick="setNumberOfTeams({{16}})">16 Teams</a>
-                    </div>
+            <div class="createLeagueFormStack">
+                <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" id="number_of_teams" value=6 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    6 Teams
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item active" id="6teams" href="#">6 Teams</a>
+                    <a class="dropdown-item" id="8teams" href="#" onclick="setNumberOfTeams({{8}})">8 Teams</a>
+                    <a class="dropdown-item" id="10teams" href="#" onclick="setNumberOfTeams({{10}})">10 Teams</a>
+                    <a class="dropdown-item" id="12teams" href="#" onclick="setNumberOfTeams({{12}})">12 Teams</a>
+                    <a class="dropdown-item" id="14teams" href="#" onclick="setNumberOfTeams({{14}})">14 Teams</a>
+                    <a class="dropdown-item" id="16teams" href="#" onclick="setNumberOfTeams({{16}})">16 Teams</a>
+                </div>
                 <input class="leagueNameInputForm" type="text" name="league_name" id="league_name" placeholder="League Name" required maxlength="30">
                 <button class="createLeagueButton btn btn-primary" type="button" onclick="postNewLeague()">Create League</button>
-<!--                <button class="createLeagueButton btn btn-primary" type="submit">Create League</button>-->
-            </form>
+            </div>
 
         </div>
     </body>
