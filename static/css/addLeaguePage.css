@@ -73,7 +73,7 @@ header {
 }
 
 .leagueNameInputForm {
-    width: 40%;
+    width: 50% !important;
     height: 10%;
     order: 1;
 }
