@@ -24,7 +24,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId1 {
-    -webkit-text-stroke: 1px #FF7575 !important;
+    color: #FF7575 !important;
 }
 
 .backgroundTeamId2 {
@@ -32,7 +32,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId2 {
-    -webkit-text-stroke: 1px #FFBA75 !important;
+    color: #FFBA75 !important;
 }
 
 .backgroundTeamId3 {
@@ -40,7 +40,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId3 {
-    -webkit-text-stroke: 1px #FFFF75 !important;
+    color: #FFFF75 !important;
 }
 
 .backgroundTeamId4 {
@@ -48,7 +48,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId4 {
-    -webkit-text-stroke: 1px #43FC43 !important;
+    color: #43FC43 !important;
 }
 
 .backgroundTeamId5 {
@@ -56,7 +56,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId5 {
-    -webkit-text-stroke: 1px #75FFBA !important;
+    color: #75FFBA !important;
 }
 
 .backgroundTeamId6 {
@@ -64,7 +64,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId6 {
-    -webkit-text-stroke: 1px #75C9FF !important;
+    color: #75C9FF !important;
 }
 
 .backgroundTeamId7 {
@@ -72,7 +72,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId7 {
-    -webkit-text-stroke: 1px #AB75FF !important;
+    color: #AB75FF !important;
 }
 
 .backgroundTeamId8 {
@@ -80,7 +80,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId8 {
-    -webkit-text-stroke: 1px #FF75C9 !important;
+    color: #FF75C9 !important;
 }
 
 .backgroundTeamId9 {
@@ -88,7 +88,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId9 {
-    -webkit-text-stroke: 1px #7584FF !important;
+    color: #7584FF !important;
 }
 
 .backgroundTeamId10 {
@@ -96,7 +96,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId10 {
-    -webkit-text-stroke: 1px #FF46F4 !important;
+    color: #FF46F4 !important;
 }
 
 .backgroundTeamId11 {
@@ -104,7 +104,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId11 {
-    -webkit-text-stroke: 1px #FB6248 !important;
+    color: #FB6248 !important;
 }
 
 .backgroundTeamId12 {
@@ -112,7 +112,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId12 {
-    -webkit-text-stroke: 1px #FB8F48 !important;
+    color: #FB8F48 !important;
 }
 
 .backgroundTeamId13 {
@@ -120,7 +120,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId13 {
-    -webkit-text-stroke: 1px #FBE848 !important;
+    color: #FBE848 !important;
 }
 
 .backgroundTeamId14 {
@@ -128,7 +128,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId14 {
-    -webkit-text-stroke: 1px #BAFF75 !important;
+    color: #BAFF75 !important;
 }
 
 .backgroundTeamId15 {
@@ -136,7 +136,7 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId15 {
-    -webkit-text-stroke: 1px #2CFFCA !important;
+    color: #2CFFCA !important;
 }
 
 .backgroundTeamId16 {
@@ -144,5 +144,5 @@ This holds the colors used to represent each team in a league.
 }
 
 .colorTeamId16 {
-    -webkit-text-stroke: 1px #2CFF95 !important;
+    color: #2CFF95 !important;
 }

@@ -59,7 +59,7 @@
                                 <td>{{leagueStat.getScore()}}</td>
                                 <td>{{leagueStat.getOutcome()}}</td>
                                 <td>{{leagueStat.getTeamFor().getTeamName()}}</td>
-                                <td class="colorTeamId{{leagueStat.getTeamAgainst().getTeamId()}}">{{leagueStat.getTeamAgainst().getTeamName()}}</td>
+                                <td>{{leagueStat.getTeamAgainst().getTeamName()}}</td>
                                 <td>{{leagueStat.getWeek()}}</td>
                             </tr>
                         {% endfor %}
@@ -83,8 +83,8 @@
                                 <td>{{leagueStat.getMarginOfVictory()}}</td>
                                 <td>{{leagueStat.getWinningTeam().getTeamName()}}</td>
                                 <td>{{leagueStat.getWinningTeamPoints()}}</td>
-                                <td class="colorTeamId{{leagueStat.getLosingTeam().getTeamId()}}">{{leagueStat.getLosingTeam().getTeamName()}}</td>
-                                <td class="colorTeamId{{leagueStat.getLosingTeam().getTeamId()}}">{{leagueStat.getLosingTeamPoints()}}</td>
+                                <td>{{leagueStat.getLosingTeam().getTeamName()}}</td>
+                                <td>{{leagueStat.getLosingTeamPoints()}}</td>
                                 <td>{{leagueStat.getWeek()}}</td>
                             </tr>
                         {% endfor %}
