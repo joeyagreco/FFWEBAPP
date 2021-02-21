@@ -15,13 +15,15 @@ function postNewLeague() {
     var leagueName = document.getElementById("league_name").value;
     var numOfTeams = document.getElementById("number_of_teams").value;
     var data = {"league_name": leagueName, "number_of_teams": numOfTeams};
-//    var data = "league_name="+leagueName"&number_of_teams="+numOfTeams;
     // send POST request
-    post("/add-league", data);
+    var fetchPromise = post("/add-league", data);
+    // redirect
+    fetchPromise.then(response => {
+      window.location.href = response.url;
+    });
 }
 
 // method for sending POST requests
 window.post = function(url, data) {
     return fetch(url, {method: "POST", body: JSON.stringify(data)});
-//    return fetch(url, {method: "POST", body: data});
 }
