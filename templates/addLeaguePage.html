@@ -22,7 +22,11 @@
         </header>
 
         <div class="errorSection">
-            <div class="errorMessage">{{error_message}}</div>
+                <div class="errorMessage">
+                    {% if error_message %}
+                        {{error_message}}
+                    {% endif %}
+                </div>
         </div>
 
         <div class="inputSection">
@@ -38,8 +42,8 @@
                     <a class="dropdown-item" id="14teams" href="#" onclick="setNumberOfTeams({{14}})">14 Teams</a>
                     <a class="dropdown-item" id="16teams" href="#" onclick="setNumberOfTeams({{16}})">16 Teams</a>
                 </div>
-                <input class="leagueNameInputForm form-control primaryFormColors" type="text" name="league_name" id="league_name" placeholder="League Name" required maxlength="30">
-                <button class="createLeagueButton btn btn-primary" type="button" onclick="postNewLeague()">Create League</button>
+                <input class="leagueNameInputForm form-control primaryFormColors" type="text" name="league_name" id="league_name" placeholder="League Name" maxlength="30" required>
+                <button class="createLeagueButton btn btn-primary primaryButtonColors" type="button" onclick="postNewLeague()">Create League</button>
             </div>
         </div>
     </body>

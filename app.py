@@ -42,9 +42,10 @@ def addLeague():
         return redirect(url_for("updateLeague", league_id=newLeagueIdOrError))
 
 
-@app.route("/new-league")
+@app.route("/new-league", methods=["GET"])
 def newLeague():
-    return render_template("addLeaguePage.html")
+    errorMessage = request.args.get("error_message")
+    return render_template("addLeaguePage.html", error_message=errorMessage)
 
 
 @app.route("/league-homepage", methods=["GET"])
