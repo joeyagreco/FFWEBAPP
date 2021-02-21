@@ -16,7 +16,7 @@
     <body class="primaryColorBackground">
         <header>
             <div class="headerTitles">
-                <div class="pageTitle">Add Your League</div>
+                <div class="pageTitle primaryFontColor">Add Your League</div>
                 <div class="pageSubtitle"></div>
             </div>
         </header>
@@ -42,7 +42,7 @@
                     <a class="dropdown-item" id="14teams" href="#" onclick="setNumberOfTeams({{14}})">14 Teams</a>
                     <a class="dropdown-item" id="16teams" href="#" onclick="setNumberOfTeams({{16}})">16 Teams</a>
                 </div>
-                <input class="leagueNameInputForm form-control primaryFormColors" type="text" name="league_name" id="league_name" placeholder="League Name" maxlength="30" required>
+                <input class="leagueNameInputForm form-control primaryFormColors requiredInput required" type="text" name="league_name" id="league_name" placeholder="League Name" maxlength="30" required>
                 <button class="createLeagueButton btn btn-primary primaryButtonColors" type="button" onclick="postNewLeague()">Create League</button>
             </div>
         </div>
