@@ -17,14 +17,11 @@ header {
     margin-top: 5%;
     position: relative;
     text-align: center;
-    background-color: red;
-
 }
 
 .headerTitles {
     position: absolute;
     bottom: 0;
-    background-color: grey;
     width: 100%;
 }
 
@@ -42,7 +39,6 @@ header {
     height: 15%;
     display: flex;
     align-items: flex-end;
-    background-color: orange;
 }
 
 .errorMessage {
@@ -50,7 +46,6 @@ header {
     height: 30%;
     text-align: center;
     color: red;
-    background-color: pink;
 }
 
 .inputSection {
@@ -59,7 +54,6 @@ header {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    background-color: blue;
 }
 
 .createLeagueFormStack {
@@ -69,7 +63,6 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background-color: yellow;
 }
 
 .leagueNameInputForm {
@@ -95,7 +88,6 @@ input::-webkit-inner-spin-button {
     height: 25%;
     font-size: 1.5rem !important;
     order: 3;
-    background-color: white;
 }
 
 
