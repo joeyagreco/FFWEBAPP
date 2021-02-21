@@ -42,9 +42,9 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {% for stat in stat_options %}
                     {% if stat == selected_stat %}
-                        <a class="dropdown-item active" href="#" onclick="submitLeagueStat({{stat}});">{{stat}}</a>
+                        <a class="dropdown-item active" href="#" onclick="submitLeagueStat('{{stat}}');">{{stat}}</a>
                     {% else %}
-                        <a class="dropdown-item" href="#" onclick="submitLeagueStat({{stat}});">{{stat}}</a>
+                        <a class="dropdown-item" href="#" onclick="submitLeagueStat('{{stat}}');">{{stat}}</a>
                     {% endif %}
                 {% endfor %}
             </div>
