@@ -23,62 +23,126 @@ This holds the colors used to represent each team in a league.
     background-color: #FF7575 !important;
 }
 
+.colorTeamId1 {
+    -webkit-text-stroke: 1px #FF7575 !important;
+}
+
 .backgroundTeamId2 {
     background-color: #FFBA75 !important;
+}
+
+.colorTeamId2 {
+    -webkit-text-stroke: 1px #FFBA75 !important;
 }
 
 .backgroundTeamId3 {
     background-color: #FFFF75 !important;
 }
 
+.colorTeamId3 {
+    -webkit-text-stroke: 1px #FFFF75 !important;
+}
+
 .backgroundTeamId4 {
     background-color: #43FC43 !important;
+}
+
+.colorTeamId4 {
+    -webkit-text-stroke: 1px #43FC43 !important;
 }
 
 .backgroundTeamId5 {
     background-color: #75FFBA !important;
 }
 
+.colorTeamId5 {
+    -webkit-text-stroke: 1px #75FFBA !important;
+}
+
 .backgroundTeamId6 {
     background-color: #75C9FF !important;
+}
+
+.colorTeamId6 {
+    -webkit-text-stroke: 1px #75C9FF !important;
 }
 
 .backgroundTeamId7 {
     background-color: #AB75FF !important;
 }
 
+.colorTeamId7 {
+    -webkit-text-stroke: 1px #AB75FF !important;
+}
+
 .backgroundTeamId8 {
     background-color: #FF75C9 !important;
+}
+
+.colorTeamId8 {
+    -webkit-text-stroke: 1px #FF75C9 !important;
 }
 
 .backgroundTeamId9 {
     background-color: #7584FF !important;
 }
 
+.colorTeamId9 {
+    -webkit-text-stroke: 1px #7584FF !important;
+}
+
 .backgroundTeamId10 {
     background-color: #FF46F4 !important;
+}
+
+.colorTeamId10 {
+    -webkit-text-stroke: 1px #FF46F4 !important;
 }
 
 .backgroundTeamId11 {
     background-color: #FB6248 !important;
 }
 
+.colorTeamId11 {
+    -webkit-text-stroke: 1px #FB6248 !important;
+}
+
 .backgroundTeamId12 {
     background-color: #FB8F48 !important;
+}
+
+.colorTeamId12 {
+    -webkit-text-stroke: 1px #FB8F48 !important;
 }
 
 .backgroundTeamId13 {
     background-color: #FBE848 !important;
 }
 
+.colorTeamId13 {
+    -webkit-text-stroke: 1px #FBE848 !important;
+}
+
 .backgroundTeamId14 {
     background-color: #BAFF75 !important;
+}
+
+.colorTeamId14 {
+    -webkit-text-stroke: 1px #BAFF75 !important;
 }
 
 .backgroundTeamId15 {
     background-color: #2CFFCA !important;
 }
 
+.colorTeamId15 {
+    -webkit-text-stroke: 1px #2CFFCA !important;
+}
+
 .backgroundTeamId16 {
     background-color: #2CFF95 !important;
+}
+
+.colorTeamId16 {
+    -webkit-text-stroke: 1px #2CFF95 !important;
 }
