@@ -47,6 +47,12 @@ function addYear() {
     window.location = "/add-year?league_id="+leagueId+"&selected_year="+currentYear;
 }
 
+function deleteYear() {
+    var leagueId = document.getElementById("league_id").value;
+    var currentYear = document.getElementById("original_year_number").value;
+    window.location = "/delete-year?league_id="+leagueId+"&selected_year="+currentYear;
+}
+
 function yearRedirect(year) {
     var leagueId = document.getElementById("league_id").value;
     // GET request

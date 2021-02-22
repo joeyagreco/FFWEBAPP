@@ -179,7 +179,6 @@ def addUpdateWeeks():
 @app.route("/add-year", methods=["GET"])
 def addYear():
     leagueId = int(request.args.get("league_id"))
-    currentYear = int(request.args.get("selected_year"))
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
@@ -196,8 +195,23 @@ def addYear():
     leagueName = leagueOrError["leagueName"]
     # now update league in database
     updated = mainController.updateLeague(leagueId, leagueName, updatedYears)
-    # leagueOrError = mainController.getLeague(leagueId)
+    # TODO check for errors
     return redirect(url_for("updateLeague", league_id=leagueId, year=newYear))
+
+
+@app.route("/delete-year", methods=["GET"])
+def deleteYear():
+    leagueId = int(request.args.get("league_id"))
+    selectedYear = int(request.args.get("selected_year"))
+    mainController = MainController()
+    leagueOrError = mainController.getLeague(leagueId)
+    updatedYears = []
+    for year in leagueOrError["years"]:
+        if year["year"] != selectedYear:
+            updatedYears.append(year)
+    leagueOrError = mainController.getLeague(leagueId)
+    updated = mainController.updateLeague(leagueId, leagueOrError["leagueName"], updatedYears)
+    return redirect(url_for("updateLeague", league_id=leagueId, year=updatedYears[0]["year"]))
 
 
 @app.route("/update-week", methods=["POST"])
