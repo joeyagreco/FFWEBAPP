@@ -43,6 +43,7 @@
 .yearForm {
     order: 3;
     width: 5rem !important;
+    text-align: center;
 }
 
 .addYearButtonPlus {
