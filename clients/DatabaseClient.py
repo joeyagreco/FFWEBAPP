@@ -3,6 +3,7 @@ import random
 
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from datetime import datetime
 
 from helpers.Error import Error
 
@@ -47,8 +48,12 @@ class DatabaseClient:
         Returns the new league's ID or an Error object if not inserted
         https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
+        # get the current year and set it as default
+        currentYear = datetime.now().year
+        # construct default year object
+        year = {"year": currentYear, "teams": teams, "weeks": []}
         league = {"_id": self.__generateLeagueId(), "leagueName": leagueName,
-                  "numberOfTeams": numberOfTeams, "teams": teams, "weeks": []}
+                  "numberOfTeams": numberOfTeams, "years": [year]}
         response = self.__collection.insert_one(league)
         if response.acknowledged:
             return response.inserted_id
