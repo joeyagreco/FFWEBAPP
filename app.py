@@ -211,6 +211,7 @@ def deleteYear():
             updatedYears.append(year)
     leagueOrError = mainController.getLeague(leagueId)
     updated = mainController.updateLeague(leagueId, leagueOrError["leagueName"], updatedYears)
+    # TODO check for errors
     return redirect(url_for("updateLeague", league_id=leagueId, year=updatedYears[0]["year"]))
 
 
