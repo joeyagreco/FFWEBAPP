@@ -78,14 +78,14 @@ def updateLeague():
 
     if request.method == "GET":
         leagueId = int(request.args.get("league_id"))
-        selectedYear = int(request.args.get("year"))
+        selectedYear = request.args.get("year")
         mainController = MainController()
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         # TODO LMN method to get "default" (probably lowest) year from league
-        # if not selectedYear:
-        #     selectedYear = leagueOrError["years"][0]["year"]
+        if not selectedYear:
+            selectedYear = leagueOrError["years"][0]["year"]
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
         print(request.form)
@@ -205,9 +205,14 @@ def addYear():
     # carry over teams from current year
     currentTeams = leagueOrError["years"][0]["teams"]
     # create an empty year
-    yearDict = {"year": newYear, "teams": currentTeams, "weeks": weekDict}
+    yearDict = {"year": newYear, "teams": currentTeams, "weeks": []}
     leagueOrError["years"].append(yearDict)
-    return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=newYear)
+    updatedYears = leagueOrError["years"]
+    leagueName = leagueOrError["leagueName"]
+    # now update league in database
+    updated = mainController.updateLeague(leagueId, leagueName, updatedYears)
+    # leagueOrError = mainController.getLeague(leagueId)
+    return redirect(url_for("updateLeague", league_id=leagueId, year=newYear))
 
 
 @app.route("/update-week", methods=["POST"])
