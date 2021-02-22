@@ -65,7 +65,7 @@ def leagueHomepage():
                 return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
     # no valid weeks found, send to update league page
     selectedYear = leagueOrError["years"][0]["year"]
-    return redirect(url_for("updateLeague", league_id=leagueId, selected_year=selectedYear))
+    return redirect(url_for("updateLeague", league_id=leagueId, year=selectedYear))
 
 
 @app.route("/update-league", methods=["GET", "POST"])
@@ -78,13 +78,14 @@ def updateLeague():
 
     if request.method == "GET":
         leagueId = int(request.args.get("league_id"))
-        selectedYear = request.args.get("year")
+        selectedYear = int(request.args.get("year"))
         mainController = MainController()
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-        if not selectedYear:
-            selectedYear = leagueOrError["years"][0]["year"]
+        # TODO LMN method to get "default" (probably lowest) year from league
+        # if not selectedYear:
+        #     selectedYear = leagueOrError["years"][0]["year"]
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
         print(request.form)
@@ -128,7 +129,7 @@ def updateLeague():
             return render_template("updateLeaguePage.html", league=leagueOrError, error_message=updated.errorMessage())
         else:
             # successfully updated league
-            return redirect(url_for("updateLeague", league_id=leagueId, selected_year=yearNumber))
+            return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber))
 
 
 @app.route("/delete-league", methods=["GET"])
