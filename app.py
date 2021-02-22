@@ -55,13 +55,16 @@ def leagueHomepage():
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
         return redirect(url_for("index", error_message=leagueOrError.errorMessage()))
-    # check if this league has at least 1 week. if not, redirect to update league page.
     leagueModelOrError = mainController.getLeagueModel(leagueId)
-    if LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModelOrError) < 1:
-        return redirect(url_for("updateLeague", league_id=leagueId))
-    else:
-        leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
-        return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
+    # check if this league has at least 1 week in any of its years. if not, redirect to update league page.
+    for year in leagueOrError["years"]:
+        for week in year["weeks"]:
+            # TODO make LMN method
+            if len(week) > 1:
+                leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
+                return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
+    # no valid weeks found, send to update league page
+    return redirect(url_for("updateLeague", league_id=leagueId))
 
 
 @app.route("/update-league", methods=["GET", "POST"])
@@ -74,12 +77,14 @@ def updateLeague():
 
     if request.method == "GET":
         leagueId = int(request.args.get("league_id"))
+        selectedYear = request.args.get("year")
         mainController = MainController()
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-        else:
-            return render_template("updateLeaguePage.html", league=leagueOrError)
+        if not selectedYear:
+            selectedYear = leagueOrError["years"][0]
+        return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
         # we got a POST
         leagueId = int(request.form["league_id"])

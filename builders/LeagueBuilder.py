@@ -4,6 +4,7 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
+from models.league_models.YearModel import YearModel
 
 
 class LeagueBuilder:
@@ -21,13 +22,20 @@ class LeagueBuilder:
         league = LeagueModel(self.__leagueDict["_id"],
                              self.__leagueDict["leagueName"],
                              self.__leagueDict["numberOfTeams"],
-                             self.__getTeamModels(),
-                             self.__getWeeks())
+                             self.__getYearModels())
         return league
 
-    def __getTeamModels(self) -> List[TeamModel]:
+    def __getYearModels(self) -> List[YearModel]:
+        years = []
+        for year in self.__leagueDict["years"]:
+            years.append(YearModel(year["year"],
+                                   self.__getTeamModels(year),
+                                   self.__getWeeks(year)))
+        return years
+
+    def __getTeamModels(self, year) -> List[TeamModel]:
         teams = []
-        for team in self.__leagueDict["teams"]:
+        for team in year["teams"]:
             teams.append(TeamModel(team["teamId"], team["teamName"]))
         return teams
 
@@ -48,9 +56,9 @@ class LeagueBuilder:
             matchupId += 1
         return matchups
 
-    def __getWeeks(self) -> List[WeekModel]:
+    def __getWeeks(self, year) -> List[WeekModel]:
         weeks = []
-        for i, week in enumerate(self.__leagueDict["weeks"]):
+        for i, week in enumerate(year["weeks"]):
             weeks.append(WeekModel(i + 1,
                                    self.__getMatchupModelsByWeekNumber(i + 1)))
         return weeks
