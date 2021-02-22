@@ -35,12 +35,16 @@
                     6 Teams
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item active" id="6teams" href="#" onclick="setNumberOfTeams({{6}})">6 Teams</a>
-                    <a class="dropdown-item" id="8teams" href="#" onclick="setNumberOfTeams({{8}})">8 Teams</a>
-                    <a class="dropdown-item" id="10teams" href="#" onclick="setNumberOfTeams({{10}})">10 Teams</a>
-                    <a class="dropdown-item" id="12teams" href="#" onclick="setNumberOfTeams({{12}})">12 Teams</a>
-                    <a class="dropdown-item" id="14teams" href="#" onclick="setNumberOfTeams({{14}})">14 Teams</a>
-                    <a class="dropdown-item" id="16teams" href="#" onclick="setNumberOfTeams({{16}})">16 Teams</a>
+                    {% for i in range(16) %}
+                        {% set num = i+1 %}
+                        {% if num % 2 == 0 and num <= 16 and num >= 6 %}
+                            {% if num == 6 %}
+                                <a class="dropdown-item active" id="{{num}}teams" href="#" onclick="setNumberOfTeams({{num}})">{{num}} Teams</a>
+                            {% else %}
+                            <a class="dropdown-item" id="{{num}}teams" href="#" onclick="setNumberOfTeams({{num}})">{{num}} Teams</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
                 </div>
                 <input class="leagueNameInputForm form-control primaryFormColors" type="text" name="league_name" id="league_name" placeholder="League Name" maxlength="30" required>
                 <button class="createLeagueButton btn btn-primary primaryButtonColors" type="button" onclick="postNewLeague()">Create League</button>
