@@ -93,7 +93,7 @@ def updateLeague():
         # update league name
         leagueName = request.form["league_name"]
         # update the given year
-        yearNumber = request.form["year_number"]
+        yearNumber = int(request.form["year_number"])
         # number of teams cant be changed by the user, but we send it into our request
         numberOfTeams = int(request.form["number_of_teams"])
         # update team names
@@ -108,9 +108,13 @@ def updateLeague():
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         years = leagueOrError["years"]
         for year in years:
+            print(f"year: {year}")
             if year["year"] == yearNumber:
-                for week in year["year"]["weeks"]:
+                year["teams"] = teams
+                for week in year["weeks"]:
+                    print(f"week: {week}")
                     for matchup in week["matchups"]:
+                        print(f"matchup: {matchup}")
                         matchup["teamA"]["teamName"] = getTeamNameById(teams, matchup["teamA"]["teamId"])
                         matchup["teamB"]["teamName"] = getTeamNameById(teams, matchup["teamB"]["teamId"])
         # now update league in database
@@ -124,7 +128,7 @@ def updateLeague():
             return render_template("updateLeaguePage.html", league=leagueOrError, error_message=updated.errorMessage())
         else:
             # successfully updated league
-            return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=yearNumber)
+            return redirect(url_for("updateLeague", league_id=leagueId, selected_year=yearNumber))
 
 
 @app.route("/delete-league", methods=["GET"])
