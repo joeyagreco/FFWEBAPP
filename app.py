@@ -87,10 +87,13 @@ def updateLeague():
             selectedYear = leagueOrError["years"][0]["year"]
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
+        print(request.form)
         # we got a POST
         leagueId = int(request.form["league_id"])
         # update league name
         leagueName = request.form["league_name"]
+        # update the given year
+        yearNumber = request.form["year_number"]
         # number of teams cant be changed by the user, but we send it into our request
         numberOfTeams = int(request.form["number_of_teams"])
         # update team names
@@ -103,13 +106,15 @@ def updateLeague():
         if isinstance(leagueOrError, Error):
             # could not find league
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-        weeks = leagueOrError["weeks"]
-        for week in weeks:
-            for matchup in week["matchups"]:
-                matchup["teamA"]["teamName"] = getTeamNameById(teams, matchup["teamA"]["teamId"])
-                matchup["teamB"]["teamName"] = getTeamNameById(teams, matchup["teamB"]["teamId"])
+        years = leagueOrError["years"]
+        for year in years:
+            if year["year"] == yearNumber:
+                for week in year["year"]["weeks"]:
+                    for matchup in week["matchups"]:
+                        matchup["teamA"]["teamName"] = getTeamNameById(teams, matchup["teamA"]["teamId"])
+                        matchup["teamB"]["teamName"] = getTeamNameById(teams, matchup["teamB"]["teamId"])
         # now update league in database
-        updated = mainController.updateLeague(leagueId, leagueName, teams, weeks)
+        updated = mainController.updateLeague(leagueId, leagueName, years)
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             # could not find league
@@ -119,7 +124,7 @@ def updateLeague():
             return render_template("updateLeaguePage.html", league=leagueOrError, error_message=updated.errorMessage())
         else:
             # successfully updated league
-            return render_template("updateLeaguePage.html", league=leagueOrError)
+            return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=yearNumber)
 
 
 @app.route("/delete-league", methods=["GET"])

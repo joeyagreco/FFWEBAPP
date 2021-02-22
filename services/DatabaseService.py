@@ -24,20 +24,20 @@ class DatabaseService:
             teams.append({"teamId": x, "teamName": f"Team {x}"})
         return self.__databaseClient.addLeague(leagueName, numberOfTeams, teams)
 
-    def updateLeague(self, leagueId: int, leagueName: str, teams: list, weeks: list):
+    def updateLeague(self, leagueId: int, leagueName: str, years):
         """
         Does checks on the updated league data
         Either passes the request to the client or returns an Error
         """
-        if DatabaseVerifier.duplicateTeamNames(teams):
-            return Error("Duplicate team names.")
-        if weeks:
-            if LeagueDictVerifier.teamPlaysItself(weeks):
-                return Error("A team cannot play itself.")
-            if LeagueDictVerifier.teamPlaysTwice(weeks):
-                return Error("A team can not play twice in the same week.")
+        # if DatabaseVerifier.duplicateTeamNames(teams):
+        #     return Error("Duplicate team names.")
+        # if weeks:
+        #     if LeagueDictVerifier.teamPlaysItself(weeks):
+        #         return Error("A team cannot play itself.")
+        #     if LeagueDictVerifier.teamPlaysTwice(weeks):
+        #         return Error("A team can not play twice in the same week.")
 
-        return self.__databaseClient.updateLeague(leagueId, leagueName, teams, weeks)
+        return self.__databaseClient.updateLeague(leagueId, leagueName, years)
 
     def deleteLeague(self, leagueId: int):
         return self.__databaseClient.deleteLeague(leagueId)

@@ -60,7 +60,7 @@ class DatabaseClient:
         else:
             return Error("Could not insert into database.")
 
-    def updateLeague(self, leagueId: int, leagueName: str, teams: list, weeks: list):
+    def updateLeague(self, leagueId: int, leagueName: str, years):
         """
         Updates a league with given parameters
         Returns a Document object or an Error object if not updated
@@ -72,9 +72,7 @@ class DatabaseClient:
             return league
         else:
             league["leagueName"] = leagueName
-            league["teams"] = teams
-            if weeks:
-                league["weeks"] = weeks
+            league["years"] = years
             response = self.__collection.update({"_id": leagueId}, league)
             if response:
                 return response
