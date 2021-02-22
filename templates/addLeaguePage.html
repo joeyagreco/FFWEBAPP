@@ -37,6 +37,7 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for i in range(16) %}
                         {% set num = i+1 %}
+                        <!-- allow leagues with 6, 8, 10, 12, 14, or 16 teams -->
                         {% if num % 2 == 0 and num <= 16 and num >= 6 %}
                             {% if num == 6 %}
                                 <a class="dropdown-item active" id="{{num}}teams" href="#" onclick="setNumberOfTeams({{num}})">{{num}} Teams</a>
