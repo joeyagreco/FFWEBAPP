@@ -52,12 +52,16 @@ class DatabaseClient:
         currentYear = datetime.now().year
         # construct default year object
         year = {"year": currentYear, "teams": teams, "weeks": []}
+        print(1)
         league = {"_id": self.__generateLeagueId(), "leagueName": leagueName,
-                  "numberOfTeams": numberOfTeams, "years": [year]}
+                  "numberOfTeams": numberOfTeams, "years": {str(currentYear): year}}
+        print(2)
         response = self.__collection.insert_one(league)
         if response.acknowledged:
+            print("no error")
             return response.inserted_id
         else:
+            print("error")
             return Error("Could not insert into database.")
 
     def updateLeague(self, leagueId: int, leagueName: str, years):

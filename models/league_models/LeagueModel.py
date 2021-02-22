@@ -1,6 +1,6 @@
 class LeagueModel:
 
-    def __init__(self, leagueId: int, leagueName: str, numberOfTeams: int, years):
+    def __init__(self, leagueId: int, leagueName: str, numberOfTeams: int, years: dict):
         self.__leagueId = leagueId
         self.__leagueName = leagueName
         self.__numberOfTeams = numberOfTeams

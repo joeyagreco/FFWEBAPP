@@ -29,6 +29,7 @@ def index():
 
 @app.route("/add-league", methods=["POST"])
 def addLeague():
+    print("in add league method")
     # convert the POST request headers into a python dictionary
     newDataStr = request.data.decode("UTF-8")
     newDataDict = ast.literal_eval(newDataStr)
@@ -65,7 +66,7 @@ def leagueHomepage():
                 leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
                 return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
     # no valid weeks found, send to update league page
-    selectedYear = leagueOrError["years"][0]["year"]
+    selectedYear = list(leagueOrError["years"].keys())[0]
     return redirect(url_for("updateLeague", league_id=leagueId, year=selectedYear))
 
 
