@@ -18,8 +18,9 @@ function deleteLeague() {
 
 function addUpdateWeeksRedirect() {
     var leagueId = document.getElementById("league_id").value;
+    var year = document.getElementById("original_year_number").value;
     // GET request
-     window.location = "/add-update-weeks?league_id="+leagueId;
+     window.location = "/add-update-weeks?league_id="+leagueId+"&year="+year;
 }
 
 function getChangeCount() {

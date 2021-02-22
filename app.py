@@ -7,6 +7,7 @@ from controllers.MainController import MainController
 from helpers.Constants import Constants
 from helpers.Error import Error
 from helpers.ExplanationDivsAsStrings import ExplanationDivsAsStrings
+from helpers.LeagueDictNavigator import LeagueDictNavigator
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 
 app = Flask(__name__)
@@ -147,6 +148,7 @@ def deleteLeague():
 @app.route("/add-update-weeks", methods=["GET"])
 def addUpdateWeeks():
     leagueId = int(request.args.get("league_id"))
+    year = int(request.args.get("year"))
     week = request.args.get("week")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
@@ -159,20 +161,25 @@ def addUpdateWeeks():
             week = int(week)
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week)
         else:
-            if len(leagueOrError["weeks"]) == 0:
+            yearDict = LeagueDictNavigator.getYear(leagueOrError, year)
+            print(yearDict)
+            if len(yearDict["weeks"]) == 0:
                 # no weeks added yet, add an empty week
                 weekDict = {"weekNumber": 1, "matchups": []}
                 matchupIdCounter = 1
-                for i in range(1, len(leagueOrError["teams"]), 2):
-                    matchup = {"matchupId": matchupIdCounter, "teamA": leagueOrError["teams"][i - 1],
-                               "teamB": leagueOrError["teams"][i], "teamAScore": None, "teamBScore": None}
+                for i in range(1, len(yearDict["teams"]), 2):
+                    matchup = {"matchupId": matchupIdCounter,
+                               "teamA": yearDict["teams"][i - 1],
+                               "teamB": yearDict["teams"][i],
+                               "teamAScore": None,
+                               "teamBScore": None}
                     matchupIdCounter += 1
                     weekDict["matchups"].append(matchup)
-                leagueOrError["weeks"].append(weekDict)
+                yearDict["weeks"].append(weekDict)
                 return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=1)
             else:
                 # default to last (most recent) week in this league
-                week = len(leagueOrError["weeks"])
+                week = len(yearDict["weeks"])
                 return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week)
 
 
