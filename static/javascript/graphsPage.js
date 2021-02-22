@@ -1,6 +1,5 @@
-function submitGraph() {
+function submitGraph(graphName) {
     var leagueId = document.getElementById("league_id").value;
-    var graphName = document.getElementById("graph_name").value;
     var screenWidth = window.innerWidth;
     window.location = "/graphs?league_id="+leagueId+"&graph_selection="+graphName+"&screen_width="+screenWidth;
 }
