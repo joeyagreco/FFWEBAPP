@@ -78,6 +78,7 @@
         <button class="deleteLeagueButton btn btn-danger" type="button" onclick="deleteLeague()"><i class="fas fa-trash-alt"></i> Delete League</button>
     </div>
 </form>
+<!--TODO move this to JS or check on client side-->
 {% if league.years|length > 1 %}
 <script>enableDeleteYearButton();</script>
 {% endif %}
