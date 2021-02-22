@@ -58,7 +58,6 @@ def leagueHomepage():
     # check if this league has at least 1 week. if not, redirect to update league page.
     leagueModelOrError = mainController.getLeagueModel(leagueId)
     if LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModelOrError) < 1:
-        # return render_template("updateLeaguePage.html", league=leagueOrError)
         return redirect(url_for("updateLeague", league_id=leagueId))
     else:
         leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
