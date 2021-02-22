@@ -28,7 +28,7 @@
             <div class="team1Dropdown">
                 {% for team in league.teams %}
                     {% if team.teamId == given_team_1_id %}
-                        <button class="btn btn-secondary dropdown-toggle primaryButtonColors backgroundTeamId{{team.teamId}}" type="button" value={{team.teamId}} id="team1button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle teamSelectButton backgroundTeamId{{team.teamId}}" type="button" value={{team.teamId}} id="team1button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{team.teamName}}
                         </button>
                     {% endif %}
@@ -57,7 +57,7 @@
            <div class="team2Dropdown">
                 {% for team in league.teams %}
                     {% if team.teamId == given_team_2_id %}
-                        <button class="btn btn-secondary dropdown-toggle primaryButtonColors backgroundTeamId{{team.teamId}}" type="button" value={{team.teamId}} id="team2button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle teamSelectButton backgroundTeamId{{team.teamId}}" type="button" value={{team.teamId}} id="team2button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{team.teamName}}
                         </button>
                     {% endif %}
