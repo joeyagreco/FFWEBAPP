@@ -64,7 +64,8 @@ def leagueHomepage():
                 leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
                 return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
     # no valid weeks found, send to update league page
-    return redirect(url_for("updateLeague", league_id=leagueId))
+    selectedYear = leagueOrError["years"][0]["year"]
+    return redirect(url_for("updateLeague", league_id=leagueId, selected_year=selectedYear))
 
 
 @app.route("/update-league", methods=["GET", "POST"])
