@@ -44,7 +44,7 @@
             {% for week in league.weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsOdd">
-                        <select class="oddTeamName btn btn-secondary dropdown-toggle" name="teamAId_matchup_{{loop.index}}" id="teamAId_matchup_{{loop.index}}" onchange="changeMade()">
+                        <select class="teamName btn btn-secondary dropdown-toggle" name="teamAId_matchup_{{loop.index}}" id="teamAId_matchup_{{loop.index}}" onchange="changeMade()">
                             {% if matchup.matchupId == loop.index %}
                                 <option class="dropdown-item backgroundTeamId{{matchup.teamA.teamId}}" value="{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
                             {% endif %}
@@ -74,7 +74,7 @@
             {% for week in league.weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsEven">
-                        <select class="evenTeamName btn btn-secondary dropdown-toggle" name="teamBId_matchup_{{loop.index}}" id="teamBId_matchup_{{loop.index}}" onchange="changeMade()">
+                        <select class="teamName btn btn-secondary dropdown-toggle" name="teamBId_matchup_{{loop.index}}" id="teamBId_matchup_{{loop.index}}" onchange="changeMade()">
                             {% if matchup.matchupId == loop.index %}
                                 <option class="dropdown-item backgroundTeamId{{matchup.teamB.teamId}}" value="{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
                             {% endif %}
