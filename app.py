@@ -60,7 +60,8 @@ def leagueHomepage():
     leagueModelOrError = mainController.getLeagueModel(leagueId)
     # check if this league has at least 1 week in any of its years. if not, redirect to update league page.
     for year in leagueOrError["years"]:
-        for week in year["weeks"]:
+        for week in leagueOrError["years"][year]["weeks"]:
+            print(f"week{week}")
             # TODO make LMN method maybe
             if len(week) > 1:
                 leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
@@ -112,14 +113,18 @@ def updateLeague():
             # could not find league
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         years = leagueOrError["years"]
-        for year in years:
-            if year["year"] == originalYear:
-                year["year"] = yearNumber
-                year["teams"] = teams
-                for week in year["weeks"]:
-                    for matchup in week["matchups"]:
-                        matchup["teamA"]["teamName"] = getTeamNameById(teams, matchup["teamA"]["teamId"])
-                        matchup["teamB"]["teamName"] = getTeamNameById(teams, matchup["teamB"]["teamId"])
+        currentYear = years[originalYear]
+        currentYear["year"] = yearNumber
+        currentYear["teams"] = teams
+        for week in currentYear["weeks"]:
+            for matchup in week["matchups"]:
+                matchup["teamA"]["teamName"] = getTeamNameById(teams, matchup["teamA"]["teamId"])
+                matchup["teamB"]["teamName"] = getTeamNameById(teams, matchup["teamB"]["teamId"])
+        # copy year
+        newYear = currentYear
+        # remove old year and put new one in
+        del years[originalYear]
+        years[yearNumber] = newYear
         # now update league in database
         updated = mainController.updateLeague(leagueId, leagueName, years)
         leagueOrError = mainController.getLeague(leagueId)

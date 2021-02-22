@@ -25,12 +25,13 @@ class LeagueBuilder:
                              self.__getYearModels())
         return league
 
-    def __getYearModels(self) -> List[YearModel]:
-        years = []
+    def __getYearModels(self) -> dict:
+        years = dict()
         for year in self.__leagueDict["years"]:
-            years.append(YearModel(year["year"],
-                                   self.__getTeamModels(year),
-                                   self.__getWeeks(year)))
+            currentYearDict = self.__leagueDict["years"][year]
+            years[year] = (YearModel(year,
+                                     self.__getTeamModels(currentYearDict),
+                                     self.__getWeeks(currentYearDict)))
         return years
 
     def __getTeamModels(self, year) -> List[TeamModel]:
