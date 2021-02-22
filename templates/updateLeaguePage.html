@@ -7,6 +7,9 @@
  <!-- bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!-- Add icon library -->
 <script src="https://kit.fontawesome.com/e509e6f024.js" crossorigin="anonymous"></script>
 {% endblock %}
@@ -24,6 +27,20 @@
         <input class="leagueNameForm form-control primaryFormColors" type="text" name="league_name" id="league_name" value="{{league.leagueName}}" placeholder="League Name" required autocomplete="off" onchange="changeMade()">
         <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
         <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
+        <div class="yearSelectDropdown">
+            <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{selected_year}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for year in league.years %}
+                    {% if year.year == selected_year %}
+                        <a class="dropdown-item active" href="#" onclick="">{{year.year}}</a>
+                    {% else %}
+                        <a class="dropdown-item" href="#" onclick="">{{year.year}}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
     <div class="middleForms">
