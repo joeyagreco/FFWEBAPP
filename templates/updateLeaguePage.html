@@ -27,7 +27,7 @@
         <input class="leagueNameForm form-control primaryFormColors" type="text" name="league_name" id="league_name" value="{{league.leagueName}}" placeholder="League Name" required autocomplete="off" onchange="changeMade()">
         <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
         <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
-        <div class="yearSelectDropdown">
+        <div class="yearSelect">
             <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{selected_year}}
             </button>
@@ -40,7 +40,9 @@
                     {% endif %}
                 {% endfor %}
             </div>
+            <button class="addYearButtonPlus primaryColorBackground" type="button" onclick=""><i class="fas fa-plus secondaryFontColorLight"></i></button>
         </div>
+        <input class="yearForm form-control primaryFormColors" type="text" name="year_form" id="year_form" value="{{selected_year}}" placeholder="Year" required autocomplete="off" onchange="changeMade()">
     </div>
 
     <div class="middleForms">
