@@ -58,16 +58,10 @@
     justify-content: space-around;
 }
 
-.teamFormOdd {
-    width: 50%;
+.teamForm {
+    width: auto;
     height: auto;
-    margin: auto;
-    text-align: center;
-}
-
-.teamFormEven {
-    width: 50%;
-    height: auto;
+    font-size: 1.5rem;
     margin: auto;
     text-align: center;
 }
