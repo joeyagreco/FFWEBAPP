@@ -29,11 +29,15 @@
                 Week {{week_number}}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for week in league.weeks %}
-                    {% if week.weekNumber == week_number %}
-                        <a class="dropdown-item active" href="#" onclick="updateWeekDropdown({{week.weekNumber}})">Week {{week.weekNumber}}</a>
-                    {% else %}
-                        <a class="dropdown-item" href="#" onclick="updateWeekDropdown({{week.weekNumber}})">Week {{week.weekNumber}}</a>
+                {% for year in league.years %}
+                    {% if year.year == year_number %}
+                        {% for week in league.weeks %}
+                            {% if week.weekNumber == week_number %}
+                                <a class="dropdown-item active" href="#" onclick="updateWeekDropdown({{week.weekNumber}})">Week {{week.weekNumber}}</a>
+                            {% else %}
+                                <a class="dropdown-item" href="#" onclick="updateWeekDropdown({{week.weekNumber}})">Week {{week.weekNumber}}</a>
+                            {% endif %}
+                        {% endfor %}
                     {% endif %}
                 {% endfor %}
             </div>
