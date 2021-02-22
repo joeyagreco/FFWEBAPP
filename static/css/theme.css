@@ -92,6 +92,10 @@ DROPDOWN ACTIVE BACKGROUND COLOR:
     box-shadow: 0px 0px 0px white, 0px 0px 4px white inset !important;
 }
 
+.defaultFormFocus:focus {
+    box-shadow: 0px 0px 0px white, 0px 0px 4px white inset !important;
+}
+
 .primaryDropdown option {
     background-color: white !important;
     color: #40916C !important;

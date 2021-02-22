@@ -109,15 +109,10 @@
     background-color: white !important;
 }
 
-.oddTeamScore {
-    width: 20%;
+.teamScore {
+    width: 5rem !important;
     height: auto;
-    order: 2;
-}
-
-.evenTeamScore {
-    width: 20%;
-    height: auto;
+    text-align: center;
     order: 2;
 }
 
