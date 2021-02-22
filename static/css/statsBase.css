@@ -26,7 +26,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: orange;
 }
 
 .statDropdown {
@@ -41,7 +40,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: yellow;
 }
 
 .chunkHeader {
@@ -49,7 +47,6 @@
     font-weight: bold;
     font-family: 'Roboto Slab', serif;
     font-size: 250%;
-    background-color: #FFFFFF;
 }
 
 .chunkBody {
@@ -58,7 +55,6 @@
     order: 2;
     font-family: 'Merriweather', serif;
     font-size: 110%;
-    background-color: #BFBFBF;
 }
 
 #purposeMaster {

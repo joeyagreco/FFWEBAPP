@@ -2,6 +2,8 @@
 
 PALETTE: https://coolors.co/d8f3dc-b7e4c7-95d5b2-74c69d-52b788-40916c-2d6a4f-1b4332-081c15
 
+DARKEST COLOR: #081c15
+
 PRIMARY BACKGROUND COLOR: #40916C
 PRIMARY FONT COLOR: WHITE
 PRIMARY FONT COLOR HOVER: #95d5b2
@@ -22,6 +24,9 @@ DROPDOWN ACTIVE BACKGROUND COLOR:
 
 */
 
+.darkestColor {
+    background-color: #081c15 !important;
+}
 
 .primaryColor {
     color: #40916C !important;
