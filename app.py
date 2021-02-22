@@ -189,7 +189,9 @@ def addYear():
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-    newYear = currentYear+1
+    # TODO LMN method to get the highest number year in the league
+    latestYear = leagueOrError["years"][-1]["year"]
+    newYear = latestYear+1
     # create an empty week
     weekDict = {"weekNumber": 1, "matchups": []}
     matchupIdCounter = 1
