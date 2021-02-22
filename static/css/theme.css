@@ -14,6 +14,10 @@ BUTTON PRIMARY BACKGROUND COLOR: WHITE
 BUTTON PRIMARY BACKGROUND COLOR HOVER: #d8f3dc
 BUTTON PRIMARY FONT COLOR: #081c15
 
+BUTTON SECONDARY BACKGROUND COLOR: #914440
+BUTTON PRIMARY BACKGROUND COLOR HOVER: #b5544d
+BUTTON PRIMARY FONT COLOR: #081c15
+
 FORM BACKGROUND COLOR: #95d5b2
 FORM FONT COLOR: #081c15
 
@@ -63,6 +67,19 @@ DROPDOWN ACTIVE BACKGROUND COLOR:
 }
 
 .primaryButtonColors:focus {
+    box-shadow: 0px 0px 0px white, 0px 0px 4px #40916C inset !important;
+}
+
+.secondaryButtonColors {
+    background-color: #914440 !important;
+    border-color: #914440 !important;
+}
+
+.secondaryButtonColors:hover {
+    background-color: #b5544d !important
+}
+
+.secondaryButtonColors:focus {
     box-shadow: 0px 0px 0px white, 0px 0px 4px #40916C inset !important;
 }
 
