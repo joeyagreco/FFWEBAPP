@@ -22,4 +22,4 @@ class LeagueDictNavigator:
             if year["year"] == newYear["year"]:
                 league["years"].remove(year)
                 league["years"].append(newYear)
-                return newYear
+                return league

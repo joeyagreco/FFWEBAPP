@@ -88,6 +88,7 @@ def updateLeague():
         if not selectedYear:
             selectedYear = leagueOrError["years"][0]["year"]
         selectedYear = int(selectedYear)
+        print(leagueOrError)
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
         # we got a POST
@@ -127,9 +128,11 @@ def updateLeague():
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         elif isinstance(updated, Error):
             # could not update league
+            print(leagueOrError)
             return render_template("updateLeaguePage.html", league=leagueOrError, error_message=updated.errorMessage())
         else:
             # successfully updated league
+            print(leagueOrError)
             return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber))
 
 
@@ -159,6 +162,7 @@ def addUpdateWeeks():
         if week:
             # if we got a week passed in, render the page with that week displayed
             week = int(week)
+            print(f"9 {leagueOrError}")
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, year_number=year, week_number=week)
         else:
             yearDict = LeagueDictNavigator.getYear(leagueOrError, year)
@@ -176,10 +180,12 @@ def addUpdateWeeks():
                     weekDict["matchups"].append(matchup)
                 yearDict["weeks"].append(weekDict)
                 leagueOrError = LeagueDictNavigator.updateYear(leagueOrError, yearDict)
+                print(f"8 {leagueOrError}")
                 return render_template("addUpdateWeeksPage.html", league=leagueOrError, year_number=year, week_number=1)
             else:
                 # default to last (most recent) week in this league
                 week = len(yearDict["weeks"])
+                print(f"7 {leagueOrError}")
                 return render_template("addUpdateWeeksPage.html", league=leagueOrError, year_number=year, week_number=week)
 
 
@@ -270,6 +276,7 @@ def updateWeek():
                                                leagueOrError["weeks"])
         if isinstance(response, Error):
             # could not update week
+            print(f"6 {leagueOrError}")
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber,
                                    error_message=response.errorMessage())
         newLeagueOrError = mainController.getLeague(leagueId)
@@ -277,6 +284,7 @@ def updateWeek():
         if isinstance(newLeagueOrError, Error):
             return render_template("indexHomepage.html", error_message=newLeagueOrError.errorMessage())
         else:
+            print(f"5 {leagueOrError}")
             return render_template("addUpdateWeeksPage.html", league=newLeagueOrError, week_number=weekNumber)
 
 
@@ -297,6 +305,7 @@ def addWeek():
         matchupIdCounter += 1
         weekDict["matchups"].append(matchup)
     leagueOrError["weeks"].append(weekDict)
+    print(f"4 {leagueOrError}")
     return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber)
 
 
@@ -318,6 +327,7 @@ def deleteWeek():
             return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"]))
         else:
             # week 1 exists
+            print(f"3 {leagueOrError}")
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week,
                                    error_message=error.errorMessage())
     # returnWeek is where the user is returned if the week is ineligible for deletion
@@ -334,9 +344,11 @@ def deleteWeek():
     else:
         # determine if this is an unsaved, added week that is being deleted OR a non-last week
         if week > returnWeek:
+            print(f"2 {leagueOrError}")
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek)
         else:
             error = Error("Only the most recent week can be deleted.")
+            print(f"1 {leagueOrError}")
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek,
                                    error_message=error.errorMessage())
 
