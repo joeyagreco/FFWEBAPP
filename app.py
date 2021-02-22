@@ -87,7 +87,7 @@ def updateLeague():
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         # TODO LMN method to get "default" (probably lowest) year from league
         if not selectedYear:
-            selectedYear = leagueOrError["years"][0]["year"]
+            selectedYear = list(leagueOrError["years"].keys())[0]
         selectedYear = int(selectedYear)
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
