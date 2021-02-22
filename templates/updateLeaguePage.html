@@ -41,7 +41,7 @@
                     {% endif %}
                 {% endfor %}
             </div>
-            <button class="addYearButtonPlus primaryColorBackground" type="button" onclick=""><i class="fas fa-plus secondaryFontColorLight"></i></button>
+            <button class="addYearButtonPlus primaryColorBackground" type="button" onclick="addYear()"><i class="fas fa-plus secondaryFontColorLight"></i></button>
         </div>
         <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" required autocomplete="off" onchange="changeMade()">
     </div>

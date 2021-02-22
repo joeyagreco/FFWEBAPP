@@ -40,3 +40,9 @@ function changeMade() {
     changeCount++;
     sessionStorage["changeCount"] = changeCount.toString();
 }
+
+function addYear() {
+    var leagueId = document.getElementById("league_id").value;
+    var currentYear = document.getElementById("original_year_number").value;
+    window.location = "/add-year?league_id="+leagueId+"&selected_year="+currentYear;
+}

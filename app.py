@@ -179,6 +179,37 @@ def addUpdateWeeks():
                 return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week)
 
 
+@app.route("/add-year", methods=["GET"])
+def addYear():
+    print("in add year")
+    leagueId = int(request.args.get("league_id"))
+    currentYear = int(request.args.get("selected_year"))
+    mainController = MainController()
+    leagueOrError = mainController.getLeague(leagueId)
+    if isinstance(leagueOrError, Error):
+        return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
+    newYear = currentYear+1
+    # create an empty week
+    weekDict = {"weekNumber": 1, "matchups": []}
+    matchupIdCounter = 1
+    print(leagueOrError)
+    for i in range(1, leagueOrError["numberOfTeams"], 2):
+        # TODO replace how we get the teams with either a LMN method or a default team name/owner name for a league
+        matchup = {"matchupId": matchupIdCounter,
+                   "teamA": leagueOrError["years"][0]["teams"][i - 1],
+                   "teamB": leagueOrError["years"][0]["teams"][i],
+                   "teamAScore": None,
+                   "teamBScore": None}
+        matchupIdCounter += 1
+        weekDict["matchups"].append(matchup)
+    # carry over teams from current year
+    currentTeams = leagueOrError["years"][0]["teams"]
+    # create an empty year
+    yearDict = {"year": newYear, "teams": currentTeams, "weeks": weekDict}
+    leagueOrError["years"].append(yearDict)
+    return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=newYear)
+
+
 @app.route("/update-week", methods=["POST"])
 def updateWeek():
     # helper function to get team by id
