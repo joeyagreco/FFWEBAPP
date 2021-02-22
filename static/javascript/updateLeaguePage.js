@@ -58,3 +58,16 @@ function yearRedirect(year) {
     // GET request
      window.location = "/update-league?league_id="+leagueId+"&year="+year;
 }
+
+function htmlDecode(input) {
+    // used to get rid of escape characters that have replaced needed HTML valid characters
+    var e = document.createElement('div');
+    e.innerHTML = input;
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+}
+
+function enableDeleteYearButton() {
+    // this will enable the delete year button if there is more than 1 year in the given league
+    document.getElementById("deleteYearButton").disabled = false;
+
+}

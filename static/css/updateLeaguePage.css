@@ -30,6 +30,10 @@
     display: none;
 }
 
+.leagueHidden {
+    display: none;
+}
+
 .leagueNumberOfTeamsHidden {
     display: none;
 }
