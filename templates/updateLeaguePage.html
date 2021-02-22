@@ -44,28 +44,20 @@
         <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" required autocomplete="off" onchange="changeMade()">
         <button class="primaryColorBackground" id="deleteYearButton" type="button" onclick="deleteYear()" disabled><i class="fas fa-trash-alt secondaryFontColorLight"></i></button>
     </div>
-
+    {% set yearStr = selected_year|string %}
     <div class="middleForms">
         <div class="oddTeamForms">
-            {% for year in league.years %}
-                {% if year.year == selected_year %}
-                    {% for team in year.teams %}
-                        {% if team.teamId is not divisibleby 2 %}
-                            <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
-                        {% endif %}
-                    {% endfor %}
+            {% for team in league.years[yearStr].teams %}
+                {% if team.teamId is not divisibleby 2 %}
+                    <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
                 {% endif %}
             {% endfor %}
         </div>
 
         <div class="evenTeamForms">
-            {% for year in league.years %}
-                {% if year.year == selected_year %}
-                    {% for team in year.teams %}
-                        {% if team.teamId is divisibleby 2 %}
-                            <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
-                        {% endif %}
-                    {% endfor %}
+            {% for team in league.years[yearStr].teams %}
+                {% if team.teamId is divisibleby 2 %}
+                    <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
                 {% endif %}
             {% endfor %}
         </div>
