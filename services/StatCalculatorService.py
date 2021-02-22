@@ -235,7 +235,6 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, screenWidth: float, graphSelection: str):
-
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             for team in leagueModel.getTeams():

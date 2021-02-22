@@ -1,5 +1,9 @@
 function submitGraph(graphName) {
     var leagueId = document.getElementById("league_id").value;
+    if(!graphName) {
+        // default to whatever the selected graph is
+        graphName = document.getElementById("selected_graph_button").value;
+    }
     var screenWidth = window.innerWidth;
     window.location = "/graphs?league_id="+leagueId+"&graph_selection="+graphName+"&screen_width="+screenWidth;
 }
@@ -37,7 +41,7 @@ function injectGraphAsDiv() {
     // TODO update calculation to not be hardcoded
     if(getWidthFromDivString(injectDiv) !=  parseInt(window.innerWidth/2, 10) && isDiv(injectDiv)) {
         // width of given div does not match the screen size
-        submitGraph();
+        submitGraph(0);
     }
     $('#generatedGraph').append(injectDiv);
 }
