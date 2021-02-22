@@ -89,7 +89,6 @@ def updateLeague():
         selectedYear = int(selectedYear)
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
-        print(request.form)
         # we got a POST
         leagueId = int(request.form["league_id"])
         # update league name
@@ -112,14 +111,11 @@ def updateLeague():
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         years = leagueOrError["years"]
         for year in years:
-            print(f"year: {year}")
             if year["year"] == originalYear:
                 year["year"] = yearNumber
                 year["teams"] = teams
                 for week in year["weeks"]:
-                    print(f"week: {week}")
                     for matchup in week["matchups"]:
-                        print(f"matchup: {matchup}")
                         matchup["teamA"]["teamName"] = getTeamNameById(teams, matchup["teamA"]["teamId"])
                         matchup["teamB"]["teamName"] = getTeamNameById(teams, matchup["teamB"]["teamId"])
         # now update league in database
@@ -182,7 +178,6 @@ def addUpdateWeeks():
 
 @app.route("/add-year", methods=["GET"])
 def addYear():
-    print("in add year")
     leagueId = int(request.args.get("league_id"))
     currentYear = int(request.args.get("selected_year"))
     mainController = MainController()
@@ -192,19 +187,6 @@ def addYear():
     # TODO LMN method to get the highest number year in the league
     latestYear = leagueOrError["years"][-1]["year"]
     newYear = latestYear+1
-    # create an empty week
-    weekDict = {"weekNumber": 1, "matchups": []}
-    matchupIdCounter = 1
-    print(leagueOrError)
-    for i in range(1, leagueOrError["numberOfTeams"], 2):
-        # TODO replace how we get the teams with either a LMN method or a default team name/owner name for a league
-        matchup = {"matchupId": matchupIdCounter,
-                   "teamA": leagueOrError["years"][0]["teams"][i - 1],
-                   "teamB": leagueOrError["years"][0]["teams"][i],
-                   "teamAScore": None,
-                   "teamBScore": None}
-        matchupIdCounter += 1
-        weekDict["matchups"].append(matchup)
     # carry over teams from current year
     currentTeams = leagueOrError["years"][0]["teams"]
     # create an empty year
