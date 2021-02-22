@@ -59,7 +59,7 @@ def leagueHomepage():
     # check if this league has at least 1 week in any of its years. if not, redirect to update league page.
     for year in leagueOrError["years"]:
         for week in year["weeks"]:
-            # TODO make LMN method
+            # TODO make LMN method maybe
             if len(week) > 1:
                 leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
                 return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
@@ -83,7 +83,7 @@ def updateLeague():
         if isinstance(leagueOrError, Error):
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         if not selectedYear:
-            selectedYear = leagueOrError["years"][0]
+            selectedYear = leagueOrError["years"][0]["year"]
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
         # we got a POST
