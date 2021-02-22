@@ -95,6 +95,8 @@ def updateLeague():
         leagueName = request.form["league_name"]
         # update the given year
         yearNumber = int(request.form["year_number"])
+        # get original year
+        originalYear = int(request.form["original_year_number"])
         # number of teams cant be changed by the user, but we send it into our request
         numberOfTeams = int(request.form["number_of_teams"])
         # update team names
@@ -110,7 +112,8 @@ def updateLeague():
         years = leagueOrError["years"]
         for year in years:
             print(f"year: {year}")
-            if year["year"] == yearNumber:
+            if year["year"] == originalYear:
+                year["year"] = yearNumber
                 year["teams"] = teams
                 for week in year["weeks"]:
                     print(f"week: {week}")
