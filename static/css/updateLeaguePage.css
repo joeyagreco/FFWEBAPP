@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    background-color: orange;
 }
 
 .topForm {
@@ -12,7 +11,6 @@
     height: 10%;
     order: 1;
     text-align: center;
-    background-color: green;
 }
 
 .leagueNameForm {
@@ -40,7 +38,6 @@
     flex-direction: row;
     justify-content: space-around;
     text-align: center;
-    background-color: yellow;
 }
 
 .oddTeamForms {
@@ -50,7 +47,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: purple;
 }
 
 .evenTeamForms {
@@ -60,7 +56,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: blue;
 }
 
 .teamFormOdd {
@@ -84,7 +79,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: teal;
 }
 
 .disabled {
@@ -114,5 +108,4 @@
     font-size: 1.5rem !important;
     order: 3;
     margin: 2%;
-    background-color: red;
 }
