@@ -59,7 +59,7 @@ function deleteYear() {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete the ' + currentYear + 'year.',
+    confirmButtonText: 'Yes, delete the ' + currentYear + ' year.',
     heightAuto: false
     }).then((result) => {
         if (result.isConfirmed) {

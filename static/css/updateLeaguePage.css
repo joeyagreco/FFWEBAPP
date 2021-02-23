@@ -12,7 +12,7 @@
     order: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
 }
@@ -21,7 +21,6 @@
     width: 15% !important;
     height: 3rem;
     font-size: 2rem !important;
-    margin: auto;
     text-align: center;
     order: 1;
 }
