@@ -167,7 +167,7 @@ def addUpdateWeeks():
             week = int(week)
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, year_number=year, week_number=week)
         else:
-            yearDict = LeagueDictNavigator.getYear(leagueOrError, year)
+            yearDict = leagueOrError["years"][str(year)]
             if len(yearDict["weeks"]) == 0:
                 # no weeks added yet, add an empty week
                 weekDict = {"weekNumber": 1, "matchups": []}
@@ -181,7 +181,7 @@ def addUpdateWeeks():
                     matchupIdCounter += 1
                     weekDict["matchups"].append(matchup)
                 yearDict["weeks"].append(weekDict)
-                leagueOrError = LeagueDictNavigator.updateYear(leagueOrError, yearDict)
+                leagueOrError["years"][str(year)] = yearDict
                 return render_template("addUpdateWeeksPage.html", league=leagueOrError, year_number=year, week_number=1)
             else:
                 # default to last (most recent) week in this league
