@@ -1,6 +1,7 @@
 function addWeek() {
     var leagueId = document.getElementById("league_id").value;
-    window.location = "/add-week?league_id="+leagueId;
+    var year = document.getElementById("year_number").value;
+    window.location = "/add-week?league_id="+leagueId+"&year_number="+year;
 }
 
 function updateWeekDropdown(weekNumber) {

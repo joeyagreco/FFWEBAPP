@@ -45,10 +45,10 @@ class LeagueBuilder:
             if team["teamId"] == teamId:
                 return TeamModel(team["teamId"], team["teamName"])
 
-    def __getMatchupModelsByWeekNumber(self, weekNumber: int) -> List[MatchupModel]:
+    def __getMatchupModelsByWeekNumber(self, weekNumber: int, yearNumber: int) -> List[MatchupModel]:
         matchups = []
         matchupId = 1
-        for matchup in self.__leagueDict["weeks"][weekNumber - 1]["matchups"]:
+        for matchup in self.__leagueDict["years"][str(yearNumber)]["weeks"][weekNumber - 1]["matchups"]:
             matchups.append(MatchupModel(matchupId,
                                          self.__getTeamModelById(matchup["teamA"]["teamId"]),
                                          self.__getTeamModelById(matchup["teamB"]["teamId"]),
@@ -60,6 +60,5 @@ class LeagueBuilder:
     def __getWeeks(self, year) -> List[WeekModel]:
         weeks = []
         for i, week in enumerate(year["weeks"]):
-            weeks.append(WeekModel(i + 1,
-                                   self.__getMatchupModelsByWeekNumber(i + 1)))
+            weeks.append(WeekModel(i + 1, self.__getMatchupModelsByWeekNumber(i + 1, year["year"])))
         return weeks

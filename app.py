@@ -294,21 +294,25 @@ def updateWeek():
 @app.route("/add-week", methods=["GET"])
 def addWeek():
     leagueId = int(request.args.get("league_id"))
+    yearNumber = request.args.get("year_number")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-    weekNumber = len(leagueOrError["weeks"]) + 1
+    weekNumber = len(leagueOrError["years"][yearNumber]["weeks"]) + 1
     # add an empty week
     weekDict = {"weekNumber": weekNumber, "matchups": []}
     matchupIdCounter = 1
-    for i in range(1, len(leagueOrError["teams"]), 2):
-        matchup = {"matchupId": matchupIdCounter, "teamA": leagueOrError["teams"][i - 1],
-                   "teamB": leagueOrError["teams"][i], "teamAScore": None, "teamBScore": None}
+    for i in range(1, len(leagueOrError["years"][yearNumber]["teams"]), 2):
+        matchup = {"matchupId": matchupIdCounter,
+                   "teamA": leagueOrError["years"][yearNumber]["teams"][i - 1],
+                   "teamB": leagueOrError["years"][yearNumber]["teams"][i],
+                   "teamAScore": None,
+                   "teamBScore": None}
         matchupIdCounter += 1
         weekDict["matchups"].append(matchup)
-    leagueOrError["weeks"].append(weekDict)
-    return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber)
+    leagueOrError["years"][yearNumber]["weeks"].append(weekDict)
+    return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber, selected_year=yearNumber)
 
 
 @app.route("/delete-week", methods=["GET"])
