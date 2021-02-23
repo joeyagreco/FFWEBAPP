@@ -52,10 +52,8 @@ class DatabaseClient:
         currentYear = datetime.now().year
         # construct default year object
         year = {"year": currentYear, "teams": teams, "weeks": []}
-        print(1)
         league = {"_id": self.__generateLeagueId(), "leagueName": leagueName,
                   "numberOfTeams": numberOfTeams, "years": {str(currentYear): year}}
-        print(2)
         response = self.__collection.insert_one(league)
         if response.acknowledged:
             print("no error")
