@@ -164,7 +164,7 @@ def addUpdateWeeks():
         if week:
             # if we got a week passed in, render the page with that week displayed
             week = int(week)
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, year_number=year, week_number=week)
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=week)
         else:
             yearDict = leagueOrError["years"][str(year)]
             if len(yearDict["weeks"]) == 0:
