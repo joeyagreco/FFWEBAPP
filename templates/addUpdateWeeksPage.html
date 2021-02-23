@@ -21,6 +21,7 @@
 {% block header %}{% endblock %}
 
 {% block content %}
+{% set yearStr = selected_year|string %}
 <form class="weekForm" action="/update-week" method="POST">
     <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
     <input class="weekHidden" type="number" name="week_number" id="week_number" value="{{week_number}}">
@@ -30,13 +31,9 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item active" href="#" onclick="updateWeekDropdown({{week_number}})">Week {{week_number}}</a>
-                {% for year in league.years %}
-                    {% if year.year == year_number %}
-                        {% for week in league.weeks %}
-                            {% if week.weekNumber != week_number %}
-                                <a class="dropdown-item" href="#" onclick="updateWeekDropdown({{week.weekNumber}})">Week {{week.weekNumber}}</a>
-                            {% endif %}
-                        {% endfor %}
+                {% for week in league.years[yearStr] %}
+                    {% if week.weekNumber != week_number %}
+                        <a class="dropdown-item" href="#" onclick="updateWeekDropdown({{week.weekNumber}})">Week {{week.weekNumber}}</a>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -44,7 +41,7 @@
     </div>
     <div class="teams">
         <div class="oddTeamForms">
-            {% for week in league.weeks if week.weekNumber == week_number %}
+            {% for week in league.years[yearStr].weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsOdd">
                         <select class="teamName btn btn-secondary dropdown-toggle" name="teamAId_matchup_{{loop.index}}" id="teamAId_matchup_{{loop.index}}" onchange="changeMade()">
@@ -66,7 +63,7 @@
         </div>
 
         <div class="vs">
-            {% for week in league.weeks if week.weekNumber == week_number %}
+            {% for week in league.years[yearStr].weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="vsText">vs</div>
                 {% endfor %}
@@ -74,7 +71,7 @@
         </div>
 
         <div class="evenTeamForms">
-            {% for week in league.weeks if week.weekNumber == week_number %}
+            {% for week in league.years[yearStr].weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsEven">
                         <select class="teamName btn btn-secondary dropdown-toggle" name="teamBId_matchup_{{loop.index}}" id="teamBId_matchup_{{loop.index}}" onchange="changeMade()">

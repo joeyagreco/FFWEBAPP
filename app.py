@@ -7,7 +7,6 @@ from controllers.MainController import MainController
 from helpers.Constants import Constants
 from helpers.Error import Error
 from helpers.ExplanationDivsAsStrings import ExplanationDivsAsStrings
-from helpers.LeagueDictNavigator import LeagueDictNavigator
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 
 app = Flask(__name__)
@@ -182,11 +181,11 @@ def addUpdateWeeks():
                     weekDict["matchups"].append(matchup)
                 yearDict["weeks"].append(weekDict)
                 leagueOrError["years"][str(year)] = yearDict
-                return render_template("addUpdateWeeksPage.html", league=leagueOrError, year_number=year, week_number=1)
+                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=1)
             else:
                 # default to last (most recent) week in this league
                 week = len(yearDict["weeks"])
-                return render_template("addUpdateWeeksPage.html", league=leagueOrError, year_number=year, week_number=week)
+                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=week)
 
 
 @app.route("/add-year", methods=["GET"])
