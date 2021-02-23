@@ -181,6 +181,7 @@ def addUpdateWeeks():
                     weekDict["matchups"].append(matchup)
                 yearDict["weeks"].append(weekDict)
                 leagueOrError["years"][str(year)] = yearDict
+                print(leagueOrError)
                 return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=1)
             else:
                 # default to last (most recent) week in this league

@@ -48,7 +48,7 @@
                             {% if matchup.matchupId == loop.index %}
                                 <option class="dropdown-item backgroundTeamId{{matchup.teamA.teamId}}" value="{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
                             {% endif %}
-                            {% for team in league.teams %}
+                            {% for team in league.years[yearStr].teams %}
                                 {% if team.teamId != matchup.teamA.teamId %}
                                     <option class="dropdown-item backgroundTeamId{{team.teamId}}" value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
@@ -78,7 +78,7 @@
                             {% if matchup.matchupId == loop.index %}
                                 <option class="dropdown-item backgroundTeamId{{matchup.teamB.teamId}}" value="{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
                             {% endif %}
-                            {% for team in league.teams %}
+                            {% for team in league.years[yearStr].teams %}
                                 {% if team.teamId != matchup.teamB.teamId %}
                                     <option class="dropdown-item backgroundTeamId{{team.teamId}}" value="{{team.teamId}}">{{team.teamName}}</option>
                                 {% endif %}
