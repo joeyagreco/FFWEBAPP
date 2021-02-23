@@ -33,8 +33,8 @@ class DatabaseService:
             return Error("Duplicate team names.")
         if LeagueDictVerifier.teamPlaysItself(years):
             return Error("A team cannot play itself.")
-        # if LeagueDictVerifier.teamPlaysTwice(years):
-        #     return Error("A team can not play twice in the same week.")
+        if LeagueDictVerifier.teamPlaysTwice(years):
+            return Error("A team can not play twice in the same week.")
         return self.__databaseClient.updateLeague(leagueId, leagueName, years)
 
     def deleteLeague(self, leagueId: int):
