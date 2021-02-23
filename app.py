@@ -28,7 +28,6 @@ def index():
 
 @app.route("/add-league", methods=["POST"])
 def addLeague():
-    print("in add league method")
     # convert the POST request headers into a python dictionary
     newDataStr = request.data.decode("UTF-8")
     newDataDict = ast.literal_eval(newDataStr)
@@ -60,7 +59,6 @@ def leagueHomepage():
     # check if this league has at least 1 week in any of its years. if not, redirect to update league page.
     for year in leagueOrError["years"]:
         for week in leagueOrError["years"][year]["weeks"]:
-            print(f"week{week}")
             # TODO make LMN method maybe
             if len(week) > 1:
                 leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
@@ -181,7 +179,6 @@ def addUpdateWeeks():
                     weekDict["matchups"].append(matchup)
                 yearDict["weeks"].append(weekDict)
                 leagueOrError["years"][str(year)] = yearDict
-                print(leagueOrError)
                 return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year,
                                        week_number=1)
             else:
@@ -246,7 +243,6 @@ def updateWeek():
                 return True
         return False
 
-    print(request.form)
     leagueId = int(request.form["league_id"])
     weekNumber = int(request.form["week_number"])
     yearNumber = request.form["year_number"]
@@ -282,8 +278,7 @@ def updateWeek():
                                                leagueOrError["years"])
         if isinstance(response, Error):
             # could not update week
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber,
-                                   error_message=response.errorMessage())
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber, selected_year=yearNumber, error_message=response.errorMessage())
         newLeagueOrError = mainController.getLeague(leagueId)
 
         if isinstance(newLeagueOrError, Error):

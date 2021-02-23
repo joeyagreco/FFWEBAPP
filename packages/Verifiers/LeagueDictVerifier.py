@@ -4,14 +4,15 @@ class LeagueDictVerifier:
     """
 
     @staticmethod
-    def teamPlaysItself(weeks: list) -> bool:
+    def teamPlaysItself(years: dict) -> bool:
         """
         Returns a boolean of whether any teams play themselves in the given weeks.
         """
-        for week in weeks:
-            for matchup in week["matchups"]:
-                if matchup["teamA"]["teamId"] == matchup["teamB"]["teamId"]:
-                    return True
+        for year in years.keys():
+            for week in years[year]["weeks"]:
+                for matchup in week["matchups"]:
+                    if matchup["teamA"]["teamId"] == matchup["teamB"]["teamId"]:
+                        return True
         return False
 
     @staticmethod
