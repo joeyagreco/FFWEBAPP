@@ -99,13 +99,20 @@ def updateLeague():
         originalYear = request.form["original_year_number"]
         # number of teams cant be changed by the user, but we send it into our request
         numberOfTeams = int(request.form["number_of_teams"])
+        mainController = MainController()
+        leagueOrError = mainController.getLeague(leagueId)
+        # check if user updated the year and if they updated the year to be one that already exists
+        # if so, return an error message
+        if yearNumber != originalYear:
+            # user updated year number
+            for year in leagueOrError["years"].keys():
+                if year == yearNumber:
+                    # user chose a year that is already in league
+                    return render_template("updateLeaguePage.html", league=leagueOrError, error_message="Year already exists in league.", selected_year=originalYear)
         # update team names
         teams = []
         for teamId in range(1, numberOfTeams + 1):
             teams.append({"teamId": int(teamId), "teamName": request.form[f"team_{teamId}"]})
-        mainController = MainController()
-        # update weeks
-        leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             # could not find league
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
