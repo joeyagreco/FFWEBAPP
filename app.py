@@ -231,20 +231,22 @@ def deleteYear():
 @app.route("/update-week", methods=["POST"])
 def updateWeek():
     # helper function to get team by id
-    def getTeamById(league: dict, teamId: int):
-        for team in league["teams"]:
+    def getTeamById(league: dict, teamId: int, year: int):
+        for team in league["years"][year]["teams"]:
             if team["teamId"] == teamId:
                 return team
 
     # helper function to check if week exists in league
-    def weekExists(league: dict, weekNum: int):
-        for week in league["weeks"]:
+    def weekExists(league: dict, weekNum: int, year: int):
+        for week in league["years"][year]["weeks"]:
             if week["weekNumber"] == weekNum:
                 return True
         return False
 
+    print(request.form)
     leagueId = int(request.form["league_id"])
     weekNumber = int(request.form["week_number"])
+    yearNumber = request.form["year_number"]
     weekDict = {"weekNumber": weekNumber, "matchups": []}
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
@@ -253,21 +255,21 @@ def updateWeek():
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     else:
         matchupIdCounter = 1
-        for i in range(1, len(leagueOrError["teams"]), 2):
+        for i in range(1, len(leagueOrError["years"][yearNumber]["teams"]), 2):
             matchup = {"matchupId": matchupIdCounter,
-                       "teamA": getTeamById(leagueOrError, int(request.form[f"teamAId_matchup_{matchupIdCounter}"])),
-                       "teamB": getTeamById(leagueOrError, int(request.form[f"teamBId_matchup_{matchupIdCounter}"])),
+                       "teamA": getTeamById(leagueOrError, int(request.form[f"teamAId_matchup_{matchupIdCounter}"]), yearNumber),
+                       "teamB": getTeamById(leagueOrError, int(request.form[f"teamBId_matchup_{matchupIdCounter}"]), yearNumber),
                        "teamAScore": float(request.form[f"teamAScore_matchup_{matchupIdCounter}"]),
                        "teamBScore": float(request.form[f"teamBScore_matchup_{matchupIdCounter}"])}
             weekDict["matchups"].append(matchup)
             matchupIdCounter += 1
         # check if this league has this week already, if so, overwrite it, if not, add it
-        if weekExists(leagueOrError, weekNumber):
+        if weekExists(leagueOrError, weekNumber, yearNumber):
             # overwrite week
             leagueOrError["weeks"][weekNumber - 1] = weekDict
         else:
             # add week
-            leagueOrError["weeks"].append(weekDict)
+            leagueOrError["years"][yearNumber]["weeks"].append(weekDict)
 
         # update league in database
         response = mainController.updateLeague(leagueOrError["_id"],

@@ -25,6 +25,7 @@
 <form class="weekForm" action="/update-week" method="POST">
     <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
     <input class="weekHidden" type="number" name="week_number" id="week_number" value="{{week_number}}">
+    <input class="yearHidden" type="number" name="year_number" id="year_number" value="{{selected_year}}">
     <div class="selectAndAddWeek">
             <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Week {{week_number}}
