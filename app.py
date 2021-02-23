@@ -132,7 +132,7 @@ def updateLeague():
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         elif isinstance(updated, Error):
             # could not update league
-            return render_template("updateLeaguePage.html", league=leagueOrError, error_message=updated.errorMessage())
+            return render_template("updateLeaguePage.html", league=leagueOrError, error_message=updated.errorMessage(), selected_year=originalYear)
         else:
             # successfully updated league
             return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber))

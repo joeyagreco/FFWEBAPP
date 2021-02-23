@@ -29,14 +29,12 @@ class DatabaseService:
         Does checks on the updated league data
         Either passes the request to the client or returns an Error
         """
-        # if DatabaseVerifier.duplicateTeamNames(teams):
-        #     return Error("Duplicate team names.")
-        # if weeks:
-        #     if LeagueDictVerifier.teamPlaysItself(weeks):
-        #         return Error("A team cannot play itself.")
-        #     if LeagueDictVerifier.teamPlaysTwice(weeks):
-        #         return Error("A team can not play twice in the same week.")
-
+        if DatabaseVerifier.duplicateTeamNames(years):
+            return Error("Duplicate team names.")
+        # if LeagueDictVerifier.teamPlaysItself(years):
+        #     return Error("A team cannot play itself.")
+        # if LeagueDictVerifier.teamPlaysTwice(years):
+        #     return Error("A team can not play twice in the same week.")
         return self.__databaseClient.updateLeague(leagueId, leagueName, years)
 
     def deleteLeague(self, leagueId: int):

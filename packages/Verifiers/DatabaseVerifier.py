@@ -4,12 +4,15 @@ class DatabaseVerifier:
     """
 
     @staticmethod
-    def duplicateTeamNames(teams: list) -> bool:
+    def duplicateTeamNames(years: dict) -> bool:
         """
-        Returns a boolean of whether the given team list has any duplicate team names.
+        Returns a boolean of whether the given years dict has any years duplicate team names.
         """
-        teamNames = []
-        for team in teams:
-            teamNames.append(team["teamName"].lower().strip())
-        teamNamesSet = set(teamNames)
-        return len(teamNames) != len(teamNamesSet)
+        for year in years.keys():
+            teamNames = []
+            for team in years[year]["teams"]:
+                teamNames.append(team["teamName"].lower().strip())
+            teamNamesSet = set(teamNames)
+            if len(teamNames) != len(teamNamesSet):
+                return True
+        return False
