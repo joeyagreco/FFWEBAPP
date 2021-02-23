@@ -199,13 +199,13 @@ def addYear():
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     # TODO LMN method to get the highest number year in the league
-    latestYear = leagueOrError["years"][-1]["year"]
+    latestYear = int(max(list(leagueOrError["years"].keys())))
     newYear = latestYear + 1
     # carry over teams from current year
-    currentTeams = leagueOrError["years"][0]["teams"]
+    currentTeams = leagueOrError["years"][str(latestYear)]["teams"]
     # create an empty year
     yearDict = {"year": newYear, "teams": currentTeams, "weeks": []}
-    leagueOrError["years"].append(yearDict)
+    leagueOrError["years"][str(newYear)] = yearDict
     updatedYears = leagueOrError["years"]
     leagueName = leagueOrError["leagueName"]
     # now update league in database

@@ -40,8 +40,8 @@ class LeagueBuilder:
             teams.append(TeamModel(team["teamId"], team["teamName"]))
         return teams
 
-    def __getTeamModelById(self, teamId: int) -> TeamModel:
-        for team in self.__leagueDict["teams"]:
+    def __getTeamModelById(self, teamId: int, yearNumber: int) -> TeamModel:
+        for team in self.__leagueDict["years"][str(yearNumber)]["teams"]:
             if team["teamId"] == teamId:
                 return TeamModel(team["teamId"], team["teamName"])
 
@@ -50,8 +50,8 @@ class LeagueBuilder:
         matchupId = 1
         for matchup in self.__leagueDict["years"][str(yearNumber)]["weeks"][weekNumber - 1]["matchups"]:
             matchups.append(MatchupModel(matchupId,
-                                         self.__getTeamModelById(matchup["teamA"]["teamId"]),
-                                         self.__getTeamModelById(matchup["teamB"]["teamId"]),
+                                         self.__getTeamModelById(matchup["teamA"]["teamId"], yearNumber),
+                                         self.__getTeamModelById(matchup["teamB"]["teamId"], yearNumber),
                                          matchup["teamAScore"],
                                          matchup["teamBScore"]))
             matchupId += 1
