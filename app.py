@@ -151,7 +151,7 @@ def deleteLeague():
 @app.route("/add-update-weeks", methods=["GET"])
 def addUpdateWeeks():
     leagueId = int(request.args.get("league_id"))
-    year = int(request.args.get("year"))
+    year = request.args.get("year")
     week = request.args.get("week")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
@@ -315,6 +315,7 @@ def addWeek():
 def deleteWeek():
     leagueId = int(request.args.get("league_id"))
     week = int(request.args.get("week"))
+    year = request.args.get("year")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
@@ -324,32 +325,30 @@ def deleteWeek():
     if week == 1:
         error = Error("Week 1 cannot be deleted.")
         # check if week 1 already existed
-        if len(leagueOrError["weeks"]) == 0:
+        if len(leagueOrError["years"][year]["weeks"]) == 0:
             # week 1 didn't exist
-            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"]))
+            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"], selected_year=year))
         else:
             # week 1 exists
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week,
-                                   error_message=error.errorMessage())
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week, selected_year=year, error_message=error.errorMessage())
     # returnWeek is where the user is returned if the week is ineligible for deletion
-    returnWeek = len(leagueOrError["weeks"])
-    if week == len(leagueOrError["weeks"]):
+    returnWeek = len(leagueOrError["years"][year]["weeks"])
+    if week == len(leagueOrError["years"][year]["weeks"]):
         # if this is the last week added [most recent week]
-        leagueOrError = mainController.deleteWeek(leagueId)
+        leagueOrError = mainController.deleteWeek(leagueId, int(year))
         if isinstance(leagueOrError, Error):
             # couldn't delete week
             return redirect(url_for('index'))
         else:
             # successfully deleted week
-            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"]))
+            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"], year=year))
     else:
         # determine if this is an unsaved, added week that is being deleted OR a non-last week
         if week > returnWeek:
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek)
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek, selected_year=year)
         else:
             error = Error("Only the most recent week can be deleted.")
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek,
-                                   error_message=error.errorMessage())
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek, selected_year=year, error_message=error.errorMessage())
 
 
 @app.route("/team-stats", methods=["GET"])

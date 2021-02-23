@@ -95,9 +95,9 @@ class DatabaseClient:
             # could not delete the league
             return Error("Could not delete league.")
 
-    def deleteWeek(self, leagueId: int):
+    def deleteWeek(self, leagueId: int, year: int):
         """
-        Deletes the most recent week of the league with the given ID
+        Deletes the most recent week of the year in the league with the given ID
         Returns league if successfully deleted or an Error if not.
         https://docs.mongodb.com/manual/reference/method/db.collection.update/
         https://specify.io/how-tos/mongodb-update-documents
@@ -106,7 +106,7 @@ class DatabaseClient:
         if isinstance(league, Error):
             return league
         else:
-            league["weeks"] = league["weeks"][:-1]
+            league["years"][str(year)]["weeks"] = league["years"][str(year)]["weeks"][:-1]
             response = self.__collection.update({"_id": leagueId}, league)
             if response:
                 league = self.getLeague(leagueId)

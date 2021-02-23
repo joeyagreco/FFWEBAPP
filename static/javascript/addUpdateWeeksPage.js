@@ -11,8 +11,9 @@ function updateWeekDropdown(weekNumber) {
 }
 
 function deleteWeek() {
-    var weekNumber = document.getElementById("select_week_dropdown").value;
+    var weekNumber = document.getElementById("week_number").value;
     var leagueId = document.getElementById("league_id").value;
+    var yearNumber = document.getElementById("year_number").value;
 
     Swal.fire({
     title: 'Are you sure you want to delete week ' + weekNumber + '?',
@@ -25,7 +26,7 @@ function deleteWeek() {
     heightAuto: false
     }).then((result) => {
         if (result.isConfirmed) {
-             window.location = "/delete-week?league_id="+leagueId+"&week="+weekNumber;
+             window.location = "/delete-week?league_id="+leagueId+"&week="+weekNumber+"&year="+yearNumber;
          }
     })
 }

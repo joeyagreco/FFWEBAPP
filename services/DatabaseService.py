@@ -40,8 +40,8 @@ class DatabaseService:
     def deleteLeague(self, leagueId: int):
         return self.__databaseClient.deleteLeague(leagueId)
 
-    def deleteWeek(self, leagueId: int):
-        return self.__databaseClient.deleteWeek(leagueId)
+    def deleteWeek(self, leagueId: int, year: int):
+        return self.__databaseClient.deleteWeek(leagueId, year)
 
     def getLeagueModel(self, leagueId: int):
         """
