@@ -43,15 +43,25 @@
 }
 
 .yearSelect {
+    order: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.yearEdit {
     order: 2;
     display: flex;
     flex-direction: row;
 }
 
 .yearForm {
-    order: 3;
+    order: 1;
     width: 5rem !important;
     text-align: center;
+}
+
+.deleteYearButton {
+    order: 2;
 }
 
 .addYearButtonPlus {
