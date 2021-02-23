@@ -251,7 +251,7 @@ def updateWeek():
     leagueOrError = mainController.getLeague(leagueId)
 
     if isinstance(leagueOrError, Error):
-        return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
+        return redirect(url_for('index', error_message=leagueOrError.errorMessage()))
     else:
         matchupIdCounter = 1
         for i in range(1, len(leagueOrError["years"][yearNumber]["teams"]), 2):
@@ -282,9 +282,9 @@ def updateWeek():
         newLeagueOrError = mainController.getLeague(leagueId)
 
         if isinstance(newLeagueOrError, Error):
-            return render_template("indexHomepage.html", error_message=newLeagueOrError.errorMessage())
+            return redirect(url_for('index', error_message=newLeagueOrError.errorMessage()))
         else:
-            return render_template("addUpdateWeeksPage.html", league=newLeagueOrError, week_number=weekNumber, selected_year=yearNumber)
+            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"], week=weekNumber, year=yearNumber))
 
 
 @app.route("/add-week", methods=["GET"])
