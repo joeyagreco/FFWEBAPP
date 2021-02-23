@@ -182,11 +182,13 @@ def addUpdateWeeks():
                 yearDict["weeks"].append(weekDict)
                 leagueOrError["years"][str(year)] = yearDict
                 print(leagueOrError)
-                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=1)
+                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year,
+                                       week_number=1)
             else:
                 # default to last (most recent) week in this league
                 week = len(yearDict["weeks"])
-                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=week)
+                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year,
+                                       week_number=week)
 
 
 @app.route("/add-year", methods=["GET"])
@@ -198,7 +200,7 @@ def addYear():
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     # TODO LMN method to get the highest number year in the league
     latestYear = leagueOrError["years"][-1]["year"]
-    newYear = latestYear+1
+    newYear = latestYear + 1
     # carry over teams from current year
     currentTeams = leagueOrError["years"][0]["teams"]
     # create an empty year
@@ -257,8 +259,10 @@ def updateWeek():
         matchupIdCounter = 1
         for i in range(1, len(leagueOrError["years"][yearNumber]["teams"]), 2):
             matchup = {"matchupId": matchupIdCounter,
-                       "teamA": getTeamById(leagueOrError, int(request.form[f"teamAId_matchup_{matchupIdCounter}"]), yearNumber),
-                       "teamB": getTeamById(leagueOrError, int(request.form[f"teamBId_matchup_{matchupIdCounter}"]), yearNumber),
+                       "teamA": getTeamById(leagueOrError, int(request.form[f"teamAId_matchup_{matchupIdCounter}"]),
+                                            yearNumber),
+                       "teamB": getTeamById(leagueOrError, int(request.form[f"teamBId_matchup_{matchupIdCounter}"]),
+                                            yearNumber),
                        "teamAScore": float(request.form[f"teamAScore_matchup_{matchupIdCounter}"]),
                        "teamBScore": float(request.form[f"teamBScore_matchup_{matchupIdCounter}"])}
             weekDict["matchups"].append(matchup)
@@ -266,7 +270,7 @@ def updateWeek():
         # check if this league has this week already, if so, overwrite it, if not, add it
         if weekExists(leagueOrError, weekNumber, yearNumber):
             # overwrite week
-            leagueOrError["weeks"][weekNumber - 1] = weekDict
+            leagueOrError["years"][yearNumber]["weeks"][weekNumber - 1] = weekDict
         else:
             # add week
             leagueOrError["years"][yearNumber]["weeks"].append(weekDict)
@@ -274,8 +278,7 @@ def updateWeek():
         # update league in database
         response = mainController.updateLeague(leagueOrError["_id"],
                                                leagueOrError["leagueName"],
-                                               leagueOrError["teams"],
-                                               leagueOrError["weeks"])
+                                               leagueOrError["years"])
         if isinstance(response, Error):
             # could not update week
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber,
@@ -285,7 +288,7 @@ def updateWeek():
         if isinstance(newLeagueOrError, Error):
             return render_template("indexHomepage.html", error_message=newLeagueOrError.errorMessage())
         else:
-            return render_template("addUpdateWeeksPage.html", league=newLeagueOrError, week_number=weekNumber)
+            return render_template("addUpdateWeeksPage.html", league=newLeagueOrError, week_number=weekNumber, selected_year=yearNumber)
 
 
 @app.route("/add-week", methods=["GET"])
