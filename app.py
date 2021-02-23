@@ -202,8 +202,9 @@ def addYear():
     latestYear = int(max(list(leagueOrError["years"].keys())))
     newYear = latestYear + 1
     # carry over teams from current year
+    # TODO maybe make a LMN method that will give default team names like "team1", "team2" for each team so every new year has default team names
     currentTeams = leagueOrError["years"][str(latestYear)]["teams"]
-    # create an empty year
+    # create a new year
     yearDict = {"year": newYear, "teams": currentTeams, "weeks": []}
     leagueOrError["years"][str(newYear)] = yearDict
     updatedYears = leagueOrError["years"]
