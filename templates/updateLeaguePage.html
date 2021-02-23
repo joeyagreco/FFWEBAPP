@@ -33,9 +33,10 @@
                 {{selected_year}}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
-                {% for year in league.years.keys() %}
-                    {% if year != selected_year|string %}
+                {% for year in league.years.keys()|sort %}
+                    {% if year == selected_year|string %}
+                        <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
+                    {% else %}
                         <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
                     {% endif %}
                 {% endfor %}
