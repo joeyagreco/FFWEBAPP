@@ -58,11 +58,16 @@ def leagueHomepage():
     leagueModelOrError = mainController.getLeagueModel(leagueId)
     # check if this league has at least 1 week in any of its years. if not, redirect to update league page.
     for year in leagueOrError["years"]:
-        for week in leagueOrError["years"][year]["weeks"]:
-            # TODO make LMN method maybe
-            if len(week) > 1:
-                leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
-                return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
+        # check if this is year 0
+        # TODO make a LMN method to check for year 0
+        if year != str(0):
+            print(year)
+            for week in leagueOrError["years"][year]["weeks"]:
+                # TODO make LMN method maybe
+                # check if this is year 0
+                if len(week) > 1:
+                    leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
+                    return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
     # no valid weeks found, send to update league page
     selectedYear = list(leagueOrError["years"].keys())[0]
     return redirect(url_for("updateLeague", league_id=leagueId, year=selectedYear))

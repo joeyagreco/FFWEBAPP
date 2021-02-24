@@ -106,3 +106,7 @@ function preparePageForYearZero() {
     // then disable the edit button
     document.getElementById("editYearButton").disabled = true;
 }
+
+function test() {
+    alert("test");
+}

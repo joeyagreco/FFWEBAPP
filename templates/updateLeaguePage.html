@@ -16,7 +16,13 @@
 
 {% block pageTitle %}<i class="fas fa-edit"></i> Update Your League{% endblock %}
 
-{% block pageSubtitle %}{{selected_year}} Season{% endblock %}
+{% block pageSubtitle %}
+{% if selected_year == 0 %}
+    All Time
+{% else %}
+    {{selected_year}} Season {{allTime}}
+{% endif %}
+{% endblock %}
 
 {% block header %}{% endblock %}
 
@@ -32,12 +38,22 @@
             <button class="editYearButton primaryColorBackground" id="editYearButton" type="button" onclick="toggleYearEdit()"><i class="fas fa-edit secondaryFontColorLight"></i></button>
             <div class="yearDropdown">
                 <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{selected_year}}
+                    {% if selected_year == 0 %}
+                        All Time
+                    {% else %}
+                        {{selected_year}}
+                    {% endif %}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for year in league.years.keys()|sort %}
                         {% if year == selected_year|string %}
-                            <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
+                            {% if year == 0 %}
+                                <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">All Time</a>
+                            {% else %}
+                                <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
+                            {% endif %}
+                        {% elif year == '0' %}
+                            <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">All Time</a>
                         {% else %}
                             <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
                         {% endif %}

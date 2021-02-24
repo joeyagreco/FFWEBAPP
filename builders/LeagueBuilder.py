@@ -58,6 +58,9 @@ class LeagueBuilder:
         return matchups
 
     def __getWeeks(self, year) -> List[WeekModel]:
+        # return None if this is year 0
+        if year["year"] == 0:
+            return None
         weeks = []
         for i, week in enumerate(year["weeks"]):
             weeks.append(WeekModel(i + 1, self.__getMatchupModelsByWeekNumber(i + 1, year["year"])))
