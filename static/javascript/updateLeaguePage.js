@@ -125,14 +125,12 @@ function postLeagueChanges() {
         var teamName = document.getElementById("team_"+i).value;
         data["team_"+i] = teamName;
     }
-    console.log(data);
-    alert(data);
     // send POST request
     var fetchPromise = post("/update-league", data);
     // redirect
-//    fetchPromise.then(response => {
-//      window.location.href = response.url;
-//    });
+    fetchPromise.then(response => {
+      window.location.href = response.url;
+    });
 }
 
 // method for sending POST requests

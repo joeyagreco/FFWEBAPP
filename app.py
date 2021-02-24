@@ -82,6 +82,7 @@ def updateLeague():
                 return team["teamName"]
 
     if request.method == "GET":
+        print("get request")
         leagueId = int(request.args.get("league_id"))
         selectedYear = request.args.get("year")
         mainController = MainController()
@@ -92,9 +93,10 @@ def updateLeague():
         if not selectedYear:
             selectedYear = list(leagueOrError["years"].keys())[-1]
         selectedYear = int(selectedYear)
+        print("rendering league page")
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
-        print("posting")
+        print("post request")
         # we got a POST
         # convert the POST request headers into a python dictionary
         newDataStr = request.data.decode("UTF-8")
@@ -159,7 +161,9 @@ def updateLeague():
         else:
             # successfully updated league
             print(4)
-            return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber))
+            print("sending get request")
+            return redirect(url_for("updateLeague", league_id=leagueId, year=originalYear))
+            # return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=originalYear)
 
 
 @app.route("/delete-league", methods=["GET"])
