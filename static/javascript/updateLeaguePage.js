@@ -143,6 +143,7 @@ function postLeagueChanges() {
 
 function getErrorInData(data) {
     // this validates the dict about to be posted
+    var numberOfTeams = document.getElementById("number_of_teams").value;
     if(data["league_name"].replaceAll(/\s/g,'').length == 0) {
         // check if the league name is empty
         return "League name cannot be empty.";
@@ -150,6 +151,16 @@ function getErrorInData(data) {
     if(data["year_number"] != parseInt(data["year_number"], 10)) {
         // check if the year is an int
         return "Year must be an integer.";
+    }
+    if(data["year_number"] < 1920 || data["year_number"] >= 3000) {
+        // check if the year is in a valid range
+        return "Year must be in a valid range.";
+    }
+    // check team names
+    for(i=1; i<=numberOfTeams; i++) {
+        if(data["team_"+i].replaceAll(/\s/g,'').length == 0) {
+            return "Team names cannot be empty."
+        }
     }
     return "";
 }
