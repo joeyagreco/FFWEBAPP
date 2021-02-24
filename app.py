@@ -123,7 +123,7 @@ def updateLeague():
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         years = leagueOrError["years"]
         currentYear = years[originalYear]
-        currentYear["year"] = yearNumber
+        currentYear["year"] = int(yearNumber)
         currentYear["teams"] = teams
         for week in currentYear["weeks"]:
             for matchup in week["matchups"]:
