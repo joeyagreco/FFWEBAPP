@@ -47,7 +47,7 @@
             <button class="addYearButtonPlus primaryColorBackground" type="button" onclick="addYear()"><i class="fas fa-plus secondaryFontColorLight"></i></button>
         </div>
         <div class="yearEdit" id="yearEdit">
-            <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" required autocomplete="off" onchange="changeMade()">
+            <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" autocomplete="off" onchange="changeMade()" step="1" min="1920" max="3000" required>
             <button class="deleteYearButton primaryColorBackground" id="deleteYearButton" type="button" onclick="deleteYear()" disabled><i class="fas fa-trash-alt secondaryFontColorLight"></i></button>
         </div>
     </div>
