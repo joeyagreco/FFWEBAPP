@@ -61,7 +61,6 @@ def leagueHomepage():
         # check if this is year 0
         # TODO make a LMN method to check for year 0
         if year != str(0):
-            print(year)
             for week in leagueOrError["years"][year]["weeks"]:
                 # TODO make LMN method maybe
                 # check if this is year 0
@@ -82,11 +81,9 @@ def updateLeague():
                 return team["teamName"]
 
     if request.method == "GET":
-        print("get request")
         leagueId = int(request.args.get("league_id"))
         selectedYear = request.args.get("year")
         errorMessage = request.args.get("error_message")
-        print(errorMessage)
         mainController = MainController()
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
@@ -97,18 +94,12 @@ def updateLeague():
         if not selectedYear:
             selectedYear = list(leagueOrError["years"].keys())[-1]
         selectedYear = int(selectedYear)
-        print("rendering league page")
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
-        print("post request")
         # we got a POST
         # convert headers
         newDataStr = request.data.decode("UTF-8")
         newDataDict = ast.literal_eval(newDataStr)
-        print(newDataDict)
-        # newDataStr = request.data.decode("UTF-8")
-        # newDataDict = ast.literal_eval(newDataStr)
-        # print(newDataDict)
         leagueId = int(newDataDict["league_id"])
         # update league name
         leagueName = newDataDict["league_name"]
@@ -127,17 +118,14 @@ def updateLeague():
             for year in leagueOrError["years"].keys():
                 if year == yearNumber:
                     # user chose a year that is already in league
-                    print(1)
                     return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber, error_message="Year already exists."))
-                    # return render_template("updateLeaguePage.html", league=leagueOrError, error_message="Year already exists in league.", selected_year=originalYear)
         # update team names
         teams = []
         for teamId in range(1, numberOfTeams + 1):
             teams.append({"teamId": int(teamId), "teamName": newDataDict[f"team_{teamId}"]})
         if isinstance(leagueOrError, Error):
             # could not find league
-            print(1.5)
-            return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
+            return redirect(url_for("index", error_message=leagueOrError.errorMessage()))
         years = leagueOrError["years"]
         currentYear = years[originalYear]
         currentYear["year"] = int(yearNumber)
@@ -159,18 +147,13 @@ def updateLeague():
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             # could not find league
-            print(2)
-            return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
+            return redirect(url_for("index", error_message=leagueOrError.errorMessage()))
         elif isinstance(updated, Error):
             # could not update league
-            print(3)
-            return render_template("updateLeaguePage.html", league=leagueOrError, error_message=updated.errorMessage(), selected_year=originalYear)
+            return redirect(url_for("updateLeague", league_id=leagueId, year=originalYear, error_message=updated.errorMessage()))
         else:
             # successfully updated league
-            print(4)
-            print("sending get request")
             return redirect(url_for("updateLeague", league_id=leagueId, year=originalYear))
-            # return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=originalYear)
 
 
 @app.route("/delete-league", methods=["GET"])
