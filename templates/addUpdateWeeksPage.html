@@ -46,7 +46,7 @@
             {% for week in league.years[yearStr].weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsOdd">
-                        <button class="btn btn-secondary dropdown-toggle backgroundTeamId{{matchup.teamA.teamId}} matchupButton{{matchup.matchupId}}" type="button" id="teamAId_matchup_{{matchup.teamA.teamId}}" value="{{matchup.teamA.teamId}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle backgroundTeamId{{matchup.teamA.teamId}} matchupButton{{matchup.matchupId}}" type="button" id="teamAId_matchup_{{matchup.matchupId}}" value="{{matchup.teamA.teamId}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{matchup.teamA.teamName}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

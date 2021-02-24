@@ -68,6 +68,7 @@ function makeActiveTeam(newTeam, matchupId) {
     // now update the display button
     var displayButtonElement = document.getElementsByClassName("matchupButton"+matchupId)[0];
     displayButtonElement.innerHTML = newTeam["teamName"];
+    displayButtonElement.value = newTeam["teamId"];
     // remove teamId styling class
     for(var i=displayButtonElement.classList.length-1; i>=0; i--) {
         var className = displayButtonElement.classList[i];
