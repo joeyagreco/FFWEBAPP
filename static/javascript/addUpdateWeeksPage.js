@@ -52,6 +52,10 @@ function changeMade() {
 
 function makeActiveTeam(newTeam) {
     // this makes the given team active
+    var activeClassName = "activeOdd";
+    if(newTeam["teamId"] % 2 == 0) {
+        activeClassName = "activeEven";
+    }
     var newTeamElement = document.getElementsByClassName("backgroundTeamId"+newTeam["teamId"])[0];
     var activeElement = document.getElementsByClassName("activeOdd")[0];
     // make the selected element have the active class and take it from the old active element
