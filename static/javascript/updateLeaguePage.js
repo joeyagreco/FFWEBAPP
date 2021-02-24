@@ -106,3 +106,35 @@ function preparePageForYearZero() {
     // then disable the edit button
     document.getElementById("editYearButton").disabled = true;
 }
+
+function postLeagueChanges() {
+    // get all the values we need and put them in a dictionary
+    var leagueId = document.getElementById("league_id").value;
+    var leagueName = document.getElementById("league_name").value;
+    var originalYear = document.getElementById("selectYearButton").value;
+    var newYear = document.getElementById("year_form").value;
+    var numberOfTeams = document.getElementById("number_of_teams").value;
+    var teamNames = [];
+    // put all data into a dict
+    data = {"league_id": leagueId,
+            "league_name": leagueName,
+            "year_number": newYear,
+            "original_year": originalYear,
+            "numberOfTeams": numberOfTeams}
+    // grab all team names and put them into the data dict
+    for (i=1; i<=numberOfTeams; i++) {
+        var teamName = document.getElementById("team_"+i).value;
+        data["team_"+i] = teamName;
+    }
+    // send POST request
+    var fetchPromise = post("/update-league", data);
+    // redirect
+    fetchPromise.then(response => {
+      window.location.href = response.url;
+    });
+}
+
+// method for sending POST requests
+window.post = function(url, data) {
+    return fetch(url, {method: "POST", body: JSON.stringify(data)});
+}
