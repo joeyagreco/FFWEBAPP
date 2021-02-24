@@ -29,7 +29,7 @@
         <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
         <input class="originalYearHidden" type="number" name="original_year_number" id="original_year_number" value="{{selected_year}}">
         <div class="yearSelect">
-            <button class="editYearButton primaryColorBackground" type="button" onclick=""><i class="fas fa-edit secondaryFontColorLight"></i></button>
+            <button class="editYearButton primaryColorBackground" type="button" onclick="toggleYearEdit()"><i class="fas fa-edit secondaryFontColorLight"></i></button>
             <div class="yearDropdown">
                 <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{selected_year}}
@@ -46,7 +46,7 @@
             </div>
             <button class="addYearButtonPlus primaryColorBackground" type="button" onclick="addYear()"><i class="fas fa-plus secondaryFontColorLight"></i></button>
         </div>
-        <div class="yearEdit">
+        <div class="yearEdit" id="yearEdit">
             <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" required autocomplete="off" onchange="changeMade()">
             <button class="deleteYearButton primaryColorBackground" id="deleteYearButton" type="button" onclick="deleteYear()" disabled><i class="fas fa-trash-alt secondaryFontColorLight"></i></button>
         </div>

@@ -84,5 +84,16 @@ function htmlDecode(input) {
 function enableDeleteYearButton() {
     // this will enable the delete year button if there is more than 1 year in the given league
     document.getElementById("deleteYearButton").disabled = false;
+}
 
+function toggleYearEdit() {
+    // this will toggle the year edit "bar" which includes an input form and the league delete button
+    var yearEditBar = document.getElementById("yearEdit");
+    if(window.getComputedStyle(yearEditBar).display === "none") {
+        // year edit bar is currently hidden
+        yearEditBar.style.display = "flex";
+    }
+    else {
+        yearEditBar.style.display = "none";
+    }
 }
