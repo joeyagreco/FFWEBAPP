@@ -118,7 +118,7 @@ def updateLeague():
             for year in leagueOrError["years"].keys():
                 if year == yearNumber:
                     # user chose a year that is already in league
-                    return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber, error_message="Year already exists."))
+                    return redirect(url_for("updateLeague", league_id=leagueId, year=originalYear, error_message="Year already exists."))
         # update team names
         teams = []
         for teamId in range(1, numberOfTeams + 1):
