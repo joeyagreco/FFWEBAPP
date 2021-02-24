@@ -86,14 +86,14 @@ def updateLeague():
         errorMessage = request.args.get("error_message")
         mainController = MainController()
         leagueOrError = mainController.getLeague(leagueId)
+        # TODO LMN method to get "default" (probably highest) year from league
+        if not selectedYear:
+            selectedYear = list(sorted(leagueOrError["years"].keys()))[-1]
+        selectedYear = int(selectedYear)
         if isinstance(leagueOrError, Error):
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         if errorMessage:
             return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear, error_message=errorMessage)
-        # TODO LMN method to get "default" (probably highest) year from league
-        if not selectedYear:
-            selectedYear = list(leagueOrError["years"].keys())[-1]
-        selectedYear = int(selectedYear)
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
         # we got a POST

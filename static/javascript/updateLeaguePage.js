@@ -125,6 +125,12 @@ function postLeagueChanges() {
         var teamName = document.getElementById("team_"+i).value;
         data["team_"+i] = teamName;
     }
+    // validate data here
+    var error = getErrorInData(data);
+    if (error) {
+        window.location = "/update-league?league_id="+leagueId+"&error_message="+error;
+        return;
+    }
     // send POST request
     var fetchPromise = fetch("/update-league", {method: "POST",
                                                 headers: {"Content-Type": "application/json"},
@@ -133,4 +139,17 @@ function postLeagueChanges() {
     fetchPromise.then(response => {
       window.location.href = response.url;
     });
+}
+
+function getErrorInData(data) {
+    // this validates the dict about to be posted
+    if(data["league_name"].replaceAll(/\s/g,'').length == 0) {
+        // check if the league name is empty
+        return "League name cannot be empty.";
+    }
+    if(data["year_number"] != parseInt(data["year_number"], 10)) {
+        // check if the year is an int
+        return "Year must be an integer.";
+    }
+    return "";
 }
