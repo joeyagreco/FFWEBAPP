@@ -74,6 +74,16 @@ function makeActiveTeam(newTeam, matchupId) {
         }
     }
     displayButtonElement.classList.add("backgroundTeamId"+newTeam["teamId"]);
+    // update the score input
+    var scoreElement = document.getElementById("teamAScore_matchup_"+matchupId);
+        // remove teamId styling class
+    for(var i=scoreElement.classList.length-1; i>=0; i--) {
+        var className = scoreElement.classList[i];
+        if(className.startsWith("backgroundTeamId")) {
+            scoreElement.classList.remove(className);
+        }
+    }
+    scoreElement.classList.add("backgroundTeamId"+newTeam["teamId"]);
     // mark this as a change
     changeMade();
 }
