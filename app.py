@@ -88,6 +88,7 @@ def updateLeague():
         leagueOrError = mainController.getLeague(leagueId)
         # TODO LMN method to get "default" (probably highest) year from league
         if not selectedYear:
+            print("no year given")
             selectedYear = list(sorted(leagueOrError["years"].keys()))[-1]
         selectedYear = int(selectedYear)
         if isinstance(leagueOrError, Error):
@@ -153,7 +154,7 @@ def updateLeague():
             return redirect(url_for("updateLeague", league_id=leagueId, year=originalYear, error_message=updated.errorMessage()))
         else:
             # successfully updated league
-            return redirect(url_for("updateLeague", league_id=leagueId, year=originalYear))
+            return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber))
 
 
 @app.route("/delete-league", methods=["GET"])
