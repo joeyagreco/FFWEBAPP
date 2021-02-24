@@ -93,7 +93,7 @@
     </div>
 </form>
 <!--TODO move this to JS or check on client side-->
-{% if league.years|length > 1 %}
+{% if league.years|length > 2 %}
     <script>enableDeleteYearButton();</script>
 {% endif %}
 {% if league.years[yearStr].weeks is none %}

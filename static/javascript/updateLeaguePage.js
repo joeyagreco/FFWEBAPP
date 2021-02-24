@@ -82,7 +82,7 @@ function htmlDecode(input) {
 }
 
 function enableDeleteYearButton() {
-    // this will enable the delete year button if there is more than 1 year in the given league
+    // this will enable the delete year button if there is more than 1 year in the given league (2 including year 0)
     document.getElementById("deleteYearButton").disabled = false;
 }
 
