@@ -48,6 +48,7 @@
                     {% for year in league.years.keys()|sort %}
                         {% if year == selected_year|string %}
                             {% if year == 0 %}
+                                <script>test();</script>
                                 <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">All Time</a>
                             {% else %}
                                 <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
