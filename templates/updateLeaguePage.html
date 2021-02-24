@@ -29,7 +29,7 @@
         <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
         <input class="originalYearHidden" type="number" name="original_year_number" id="original_year_number" value="{{selected_year}}">
         <div class="yearSelect">
-            <button class="editYearButton primaryColorBackground" type="button" onclick="toggleYearEdit()"><i class="fas fa-edit secondaryFontColorLight"></i></button>
+            <button class="editYearButton primaryColorBackground" id="editYearButton" type="button" onclick="toggleYearEdit()"><i class="fas fa-edit secondaryFontColorLight"></i></button>
             <div class="yearDropdown">
                 <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{selected_year}}
@@ -72,13 +72,16 @@
 
     <div class="bottomButtons">
         <button class="saveChangesButton btn btn-warning secondaryButtonColors disabled" id="saveChangesButton" type="submit"><i class="fas fa-save"></i> Save Changes</button>
-        <button class="addOrUpdateWeekButton btn btn-primary primaryButtonColors" type="button" onclick="addUpdateWeeksRedirect()"><i class="fas fa-edit"></i> Add/Update a Week</button>
+        <button class="addOrUpdateWeekButton btn btn-primary primaryButtonColors" id="addOrUpdateWeekButton" type="button" onclick="addUpdateWeeksRedirect()"><i class="fas fa-edit"></i> Add/Update a Week</button>
         <button class="deleteLeagueButton btn btn-danger" type="button" onclick="deleteLeague()"><i class="fas fa-trash-alt"></i> Delete League</button>
     </div>
 </form>
 <!--TODO move this to JS or check on client side-->
 {% if league.years|length > 1 %}
-<script>enableDeleteYearButton();</script>
+    <script>enableDeleteYearButton();</script>
+{% endif %}
+{% if league.years[yearStr].weeks is none %}
+    <script>preparePageForYearZero();</script>
 {% endif %}
 <script>clearChanges();</script>
 {% endblock %}

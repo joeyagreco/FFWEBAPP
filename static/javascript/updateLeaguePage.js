@@ -97,3 +97,12 @@ function toggleYearEdit() {
         yearEditBar.style.display = "none";
     }
 }
+
+function preparePageForYearZero() {
+    // this disables the add/update week button and the edit button.
+    // it is used when the update league page is on the "all time" year [year 0]
+    // first make the add/update week button not visible
+    document.getElementById("addOrUpdateWeekButton").style.display = "none";
+    // then disable the edit button
+    document.getElementById("editYearButton").disabled = true;
+}

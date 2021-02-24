@@ -48,12 +48,17 @@ class DatabaseClient:
         Returns the new league's ID or an Error object if not inserted
         https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
+        # set "year 0", which will be the "all time" year selection
+        year0 = {"year": 0, "teams": teams, "weeks": None}
         # get the current year and set it as default
         currentYear = datetime.now().year
         # construct default year object
         year = {"year": currentYear, "teams": teams, "weeks": []}
-        league = {"_id": self.__generateLeagueId(), "leagueName": leagueName,
-                  "numberOfTeams": numberOfTeams, "years": {str(currentYear): year}}
+        league = {"_id": self.__generateLeagueId(),
+                  "leagueName": leagueName,
+                  "numberOfTeams": numberOfTeams,
+                  "years": {"0": year0,
+                            str(currentYear): year}}
         response = self.__collection.insert_one(league)
         if response.acknowledged:
             print("no error")
