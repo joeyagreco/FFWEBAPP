@@ -50,7 +50,7 @@ function changeMade() {
     sessionStorage["changeCount"] = changeCount.toString();
 }
 
-function makeActiveTeam(newTeam) {
+function makeActiveTeam(newTeam, matchupId) {
     // this makes the given team active
     var activeClassName = "activeOdd";
     if(newTeam["teamId"] % 2 == 0) {
@@ -63,4 +63,15 @@ function makeActiveTeam(newTeam) {
     newTeamElement.classList.add("activeOdd");
     activeElement.classList.remove("active");
     activeElement.classList.remove("activeOdd");
+    // now update the display button
+    var displayButtonElement = document.getElementsByClassName("matchupButton"+matchupId)[0];
+    displayButtonElement.innerHTML = newTeam["teamName"];
+    // remove teamId styling class
+    for(var i=displayButtonElement.classList.length-1; i>=0; i--) {
+        var className = displayButtonElement.classList[i];
+        if(className.startsWith("backgroundTeamId")) {
+            displayButtonElement.classList.remove(className);
+        }
+    }
+    displayButtonElement.classList.add("backgroundTeamId"+newTeam["teamId"]);
 }
