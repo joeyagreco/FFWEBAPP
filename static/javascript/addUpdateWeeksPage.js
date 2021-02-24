@@ -44,12 +44,16 @@ function changeMade() {
     // when this method is called, it increments the changeCount by 1
     // it also enables the save button
     // it also disables the add week button
+    // it also disabled the week select dropdown
     var saveButton = document.getElementById("saveChangesButton");
     saveButton.classList.remove("disabled");
     saveButton.disabled = false;
     var addWeekButton = document.getElementById("addWeekButton");
     addWeekButton.classList.add("disabled");
     addWeekButton.disabled = true;
+    var weekSelectButton = document.getElementById("dropdownMenuButton");
+    weekSelectButton.classList.add("disabled");
+    weekSelectButton.disabled = true;
     var changeCount = getChangeCount();
     changeCount++;
     sessionStorage["changeCount"] = changeCount.toString();
