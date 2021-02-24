@@ -88,7 +88,6 @@ def updateLeague():
         leagueOrError = mainController.getLeague(leagueId)
         # TODO LMN method to get "default" (probably highest) year from league
         if not selectedYear:
-            print("no year given")
             selectedYear = list(sorted(leagueOrError["years"].keys()))[-1]
         selectedYear = int(selectedYear)
         if isinstance(leagueOrError, Error):

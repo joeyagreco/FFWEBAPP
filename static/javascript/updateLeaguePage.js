@@ -152,7 +152,7 @@ function getErrorInData(data) {
         // check if the year is an int
         return "Year must be an integer.";
     }
-    if(data["year_number"] < 1920 || data["year_number"] >= 3000) {
+    if((data["year_number"] < 1920 && data["year_number"] != 0) || data["year_number"] >= 3000) {
         // check if the year is in a valid range
         return "Year must be in a valid range.";
     }
