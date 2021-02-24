@@ -50,23 +50,24 @@ function changeMade() {
     sessionStorage["changeCount"] = changeCount.toString();
 }
 
-function makeActiveTeam(newTeam, matchupId) {
+function makeActiveTeam(newTeamElement, newTeam, matchupId) {
     // this makes the given team active
-    var newTeamElement = document.getElementsByClassName("backgroundTeamId"+newTeam["teamId"])[0];
     var activeClassName = "activeOdd";
     var teamAorB = "teamA";
+    console.log(newTeamElement.classList);
     if(newTeamElement.classList.contains("evenTeam")) {
+        console.log("even team");
         activeClassName = "activeEven";
         teamAorB = "teamB"
     }
     var activeElement = document.getElementsByClassName(activeClassName)[0];
     // make the selected element have the active class and take it from the old active element
     newTeamElement.classList.add("active");
-    newTeamElement.classList.add("activeOdd");
+    newTeamElement.classList.add(activeClassName);
     activeElement.classList.remove("active");
-    activeElement.classList.remove("activeOdd");
+    activeElement.classList.remove(activeClassName);
     // now update the display button
-    var displayButtonElement = document.getElementsByClassName("matchupButton"+matchupId)[0];
+    var displayButtonElement = document.getElementsByClassName(teamAorB+"MatchupButton"+matchupId)[0];
     displayButtonElement.innerHTML = newTeam["teamName"];
     displayButtonElement.value = newTeam["teamId"];
     // remove teamId styling class
