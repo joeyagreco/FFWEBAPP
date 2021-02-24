@@ -74,4 +74,6 @@ function makeActiveTeam(newTeam, matchupId) {
         }
     }
     displayButtonElement.classList.add("backgroundTeamId"+newTeam["teamId"]);
+    // mark this as a change
+    changeMade();
 }
