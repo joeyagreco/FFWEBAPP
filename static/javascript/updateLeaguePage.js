@@ -114,13 +114,12 @@ function postLeagueChanges() {
     var originalYear = document.getElementById("selectYearButton").value;
     var newYear = document.getElementById("year_form").value;
     var numberOfTeams = document.getElementById("number_of_teams").value;
-    var teamNames = [];
     // put all data into a dict
     data = {"league_id": leagueId,
             "league_name": leagueName,
             "year_number": newYear,
-            "original_year": originalYear,
-            "numberOfTeams": numberOfTeams}
+            "original_year_number": originalYear,
+            "number_of_teams": numberOfTeams}
     // grab all team names and put them into the data dict
     for (i=1; i<=numberOfTeams; i++) {
         var teamName = document.getElementById("team_"+i).value;
