@@ -49,3 +49,14 @@ function changeMade() {
     changeCount++;
     sessionStorage["changeCount"] = changeCount.toString();
 }
+
+function makeActiveTeam(newTeam) {
+    // this makes the given team active
+    var newTeamElement = document.getElementsByClassName("backgroundTeamId"+newTeam["teamId"])[0];
+    var activeElement = document.getElementsByClassName("activeOdd")[0];
+    // make the selected element have the active class and take it from the old active element
+    newTeamElement.classList.add("active");
+    newTeamElement.classList.add("activeOdd");
+    activeElement.classList.remove("active");
+    activeElement.classList.remove("activeOdd");
+}

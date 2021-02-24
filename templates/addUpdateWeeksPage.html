@@ -46,16 +46,19 @@
             {% for week in league.years[yearStr].weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsOdd">
-                        <select class="teamName btn btn-secondary dropdown-toggle" name="teamAId_matchup_{{loop.index}}" id="teamAId_matchup_{{loop.index}}" onchange="changeMade()">
+                        <button class="btn btn-secondary dropdown-toggle backgroundTeamId{{matchup.teamA.teamId}}" type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{matchup.teamA.teamName}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {% if matchup.matchupId == loop.index %}
-                                <option class="dropdown-item backgroundTeamId{{matchup.teamA.teamId}}" value="{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
+                                <a class="dropdown-item backgroundTeamId{{matchup.teamA.teamId}} activeOdd active" href="#" onclick="makeActiveTeam({{matchup.teamA}})">{{matchup.teamA.teamName}}</a>
                             {% endif %}
                             {% for team in league.years[yearStr].teams %}
                                 {% if team.teamId != matchup.teamA.teamId %}
-                                    <option class="dropdown-item backgroundTeamId{{team.teamId}}" value="{{team.teamId}}">{{team.teamName}}</option>
+                                    <a class="dropdown-item backgroundTeamId{{team.teamId}}" href="#" onclick="makeActiveTeam({{team}})">{{team.teamName}}</a>
                                 {% endif %}
                             {% endfor %}
-                        </select>
+                        </div>
                         {% if matchup.matchupId == loop.index %}
                             <input class="teamScore form-control defaultFormFocus backgroundTeamId{{matchup.teamA.teamId}}" name="teamAScore_matchup_{{loop.index}}" id="teamAScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onchange="changeMade()">
                         {% endif %}
