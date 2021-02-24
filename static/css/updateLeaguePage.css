@@ -47,6 +47,18 @@
     flex-direction: row;
 }
 
+.editYearButton {
+    order: 1;
+}
+
+.yearDropdown {
+    order: 2;
+}
+
+.addYearButtonPlus {
+    order: 3;
+}
+
 .yearEdit {
     order: 2;
     display: flex;
@@ -60,10 +72,6 @@
 }
 
 .deleteYearButton {
-    order: 2;
-}
-
-.addYearButtonPlus {
     order: 2;
 }
 

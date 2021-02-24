@@ -29,17 +29,20 @@
         <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
         <input class="originalYearHidden" type="number" name="original_year_number" id="original_year_number" value="{{selected_year}}">
         <div class="yearSelect">
-            <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{selected_year}}
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for year in league.years.keys()|sort %}
-                    {% if year == selected_year|string %}
-                        <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
-                    {% else %}
-                        <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
-                    {% endif %}
-                {% endfor %}
+            <button class="editYearButton primaryColorBackground" type="button" onclick=""><i class="fas fa-edit secondaryFontColorLight"></i></button>
+            <div class="yearDropdown">
+                <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{selected_year}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% for year in league.years.keys()|sort %}
+                        {% if year == selected_year|string %}
+                            <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
+                        {% else %}
+                            <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
             <button class="addYearButtonPlus primaryColorBackground" type="button" onclick="addYear()"><i class="fas fa-plus secondaryFontColorLight"></i></button>
         </div>
