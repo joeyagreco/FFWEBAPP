@@ -126,14 +126,11 @@ function postLeagueChanges() {
         data["team_"+i] = teamName;
     }
     // send POST request
-    var fetchPromise = post("/update-league", data);
+    var fetchPromise = fetch("/update-league", {method: "POST",
+                                                headers: {"Content-Type": "application/json"},
+                                                body: JSON.stringify(data)});
     // redirect
     fetchPromise.then(response => {
       window.location.href = response.url;
     });
-}
-
-// method for sending POST requests
-window.post = function(url, data) {
-    return fetch(url, {method: "POST", body: JSON.stringify(data)});
 }

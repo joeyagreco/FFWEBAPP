@@ -98,10 +98,13 @@ def updateLeague():
     else:
         print("post request")
         # we got a POST
-        # convert the POST request headers into a python dictionary
+        # convert headers
         newDataStr = request.data.decode("UTF-8")
         newDataDict = ast.literal_eval(newDataStr)
         print(newDataDict)
+        # newDataStr = request.data.decode("UTF-8")
+        # newDataDict = ast.literal_eval(newDataStr)
+        # print(newDataDict)
         leagueId = int(newDataDict["league_id"])
         # update league name
         leagueName = newDataDict["league_name"]
