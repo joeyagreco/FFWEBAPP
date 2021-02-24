@@ -49,7 +49,10 @@ class DatabaseClient:
         https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
         # set "year 0", which will be the "all time" year selection
-        year0 = {"year": 0, "teams": teams, "weeks": None}
+        owners = []
+        for i in range(1, len(teams)+1):
+            owners.append({"teamId": i, "teamName": f"Owner {i}"})
+        year0 = {"year": 0, "teams": owners, "weeks": None}
         # get the current year and set it as default
         currentYear = datetime.now().year
         # construct default year object
