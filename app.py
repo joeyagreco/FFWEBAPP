@@ -85,10 +85,14 @@ def updateLeague():
         print("get request")
         leagueId = int(request.args.get("league_id"))
         selectedYear = request.args.get("year")
+        errorMessage = request.args.get("error_message")
+        print(errorMessage)
         mainController = MainController()
         leagueOrError = mainController.getLeague(leagueId)
         if isinstance(leagueOrError, Error):
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
+        if errorMessage:
+            return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear, error_message=errorMessage)
         # TODO LMN method to get "default" (probably highest) year from league
         if not selectedYear:
             selectedYear = list(leagueOrError["years"].keys())[-1]
@@ -124,7 +128,7 @@ def updateLeague():
                 if year == yearNumber:
                     # user chose a year that is already in league
                     print(1)
-                    return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber))
+                    return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber, error_message="Year already exists."))
                     # return render_template("updateLeaguePage.html", league=leagueOrError, error_message="Year already exists in league.", selected_year=originalYear)
         # update team names
         teams = []
