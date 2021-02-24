@@ -263,6 +263,7 @@ def updateWeek():
                 return True
         return False
 
+    print(request.form)
     leagueId = int(request.form["league_id"])
     weekNumber = int(request.form["week_number"])
     yearNumber = request.form["year_number"]

@@ -52,12 +52,14 @@ function changeMade() {
 
 function makeActiveTeam(newTeam, matchupId) {
     // this makes the given team active
-    var activeClassName = "activeOdd";
-    if(newTeam["teamId"] % 2 == 0) {
-        activeClassName = "activeEven";
-    }
     var newTeamElement = document.getElementsByClassName("backgroundTeamId"+newTeam["teamId"])[0];
-    var activeElement = document.getElementsByClassName("activeOdd")[0];
+    var activeClassName = "activeOdd";
+    var teamAorB = "teamA";
+    if(newTeamElement.classList.contains("evenTeam")) {
+        activeClassName = "activeEven";
+        teamAorB = "teamB"
+    }
+    var activeElement = document.getElementsByClassName(activeClassName)[0];
     // make the selected element have the active class and take it from the old active element
     newTeamElement.classList.add("active");
     newTeamElement.classList.add("activeOdd");
@@ -75,8 +77,8 @@ function makeActiveTeam(newTeam, matchupId) {
     }
     displayButtonElement.classList.add("backgroundTeamId"+newTeam["teamId"]);
     // update the score input
-    var scoreElement = document.getElementById("teamAScore_matchup_"+matchupId);
-        // remove teamId styling class
+    var scoreElement = document.getElementById(teamAorB+"Score_matchup_"+matchupId);
+    // remove teamId styling class
     for(var i=scoreElement.classList.length-1; i>=0; i--) {
         var className = scoreElement.classList[i];
         if(className.startsWith("backgroundTeamId")) {
@@ -84,6 +86,8 @@ function makeActiveTeam(newTeam, matchupId) {
         }
     }
     scoreElement.classList.add("backgroundTeamId"+newTeam["teamId"]);
+    // change id of score element
+    scoreElement.id = teamAorB+"Score_matchup_"+matchupId;
     // mark this as a change
     changeMade();
 }
