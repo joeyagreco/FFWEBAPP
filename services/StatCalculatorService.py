@@ -75,7 +75,7 @@ class StatCalculatorService:
             teamSuccessStr = Rounder.keepTrailingZeros(teamSuccess, 2)
             teamLuck = sslCalculator.getTeamLuck()
             teamLuckStr = Rounder.keepTrailingZeros(teamLuck, 2)
-            allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId)
+            allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, years, teamId)
             smartCalculator = SmartCalculator(leagueModel)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
             smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
