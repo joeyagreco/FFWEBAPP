@@ -84,6 +84,7 @@ class StatCalculatorService:
                 strengthOfScheduleStr = Rounder.keepTrailingZeros(strengthOfSchedule, 3)
 
                 teamModel = TeamStatsModel(teamId=teamId,
+                                           year=year,
                                            teamName=teamName,
                                            wins=wins,
                                            losses=losses,

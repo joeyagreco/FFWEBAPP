@@ -52,6 +52,9 @@
             <thead>
                 <tr>
                     <th>Team Name</th>
+                    {% if selected_year == 0 %}
+                        <th>Year</th>
+                    {% endif %}
                     <th>{{constants.WINS_STAT_TITLE}}</th>
                     <th>{{constants.LOSSES_STAT_TITLE}}</th>
                     <th>{{constants.TIES_STAT_TITLE}}</th>
@@ -76,6 +79,9 @@
                 {% for teamStats in stats_models %}
                     <tr class="backgroundTeamId{{teamStats.getTeamId()}}">
                         <td>{{teamStats.getTeamName()}}</td>
+                        {% if selected_year == 0 %}
+                            <td>{{teamStats.getYear()}}</td>
+                        {% endif %}
                         <td>{{teamStats.getWins()}}</td>
                         <td>{{teamStats.getLosses()}}</td>
                         <td>{{teamStats.getTies()}}</td>
