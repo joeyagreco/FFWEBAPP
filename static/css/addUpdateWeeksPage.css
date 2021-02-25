@@ -93,7 +93,7 @@
     margin: auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-end;
 }
 
 .teamFormsEven {
@@ -102,7 +102,7 @@
     margin: auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 .teamName {
