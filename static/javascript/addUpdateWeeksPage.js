@@ -123,7 +123,7 @@ function postWeek() {
     // validate data here
     var error = getErrorInData(data);
     if (error) {
-        window.location = "/add-update-weeks?league_id="+leagueId+"&year="+yearNumber+"&week="+weekNumber+"&error_message="+error;
+        window.location = "/add-update-weeks?league_id="+leagueId+"&year="+yearNumber+"&error_message="+error;
         return;
     }
     // send POST request
@@ -149,7 +149,7 @@ function getErrorInData(data) {
     }
     var allTeamIdsSet = [...new Set(allTeamIds)]
     if(allTeamIds.length != allTeamIdsSet.length) {
-        return "A team can only play once per week.";
+        return "A teams must play once per week.";
     }
     for(i=0; i<allTeamScores.length; i++) {
         if(allTeamScores[i] == "") {

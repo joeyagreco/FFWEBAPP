@@ -178,11 +178,13 @@ def addUpdateWeeks():
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
         # could not load league
+        print(4)
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     else:
         if week:
             # if we got a week passed in, render the page with that week displayed
             week = int(week)
+            print(3)
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=week, error_message=errorMessage)
         else:
             yearDict = leagueOrError["years"][str(year)]
@@ -200,13 +202,13 @@ def addUpdateWeeks():
                     weekDict["matchups"].append(matchup)
                 yearDict["weeks"].append(weekDict)
                 leagueOrError["years"][str(year)] = yearDict
-                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year,
-                                       week_number=1)
+                print(2)
+                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=1, error_message=errorMessage)
             else:
                 # default to last (most recent) week in this league
                 week = len(yearDict["weeks"])
-                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year,
-                                       week_number=week)
+                print(1)
+                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=week, error_message=errorMessage)
 
 
 @app.route("/add-year", methods=["GET"])
