@@ -52,7 +52,7 @@ class StatCalculatorService:
             plusMinusStr = Rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
             stddev = scoresCalculator.getStandardDeviation()
             stddevStr = Rounder.keepTrailingZeros(stddev, 2)
-            recordCalculator = RecordCalculator(teamId, leagueModel)
+            recordCalculator = RecordCalculator(teamId, leagueModel, years)
             wins = recordCalculator.getWins()
             losses = recordCalculator.getLosses()
             ties = recordCalculator.getTies()

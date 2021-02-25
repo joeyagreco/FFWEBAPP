@@ -6,9 +6,10 @@ from models.league_models.WeekModel import WeekModel
 
 class AwalCalculator:
 
-    def __init__(self, teamId: int, leagueModel: LeagueModel, wins: int, ties: int):
+    def __init__(self, teamId: int, leagueModel: LeagueModel, years: list, wins: int, ties: int):
         self.__teamId = teamId
         self.__leagueModel = leagueModel
+        self.__years = years
         self.__wins = wins
         self.__ties = ties
 
@@ -25,10 +26,13 @@ class AwalCalculator:
         ONLYWEEKS: [list] Gives AWAL for the given week numbers.
         VSTEAMIDS: [list] Gives AWAL vs teams with the given IDs.
         """
-        throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
-        onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
-        return Rounder.normalRound(self.getAdjustment(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds) + self.getWal(), 2)
+        totalAdjustment = 0
+        for year in self.__years:
+            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            onlyWeeks = params.pop("onlyWeeks", None)
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            totalAdjustment += self.getAdjustment(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
+        return Rounder.normalRound(totalAdjustment + self.getWal(), 2)
 
     def getAdjustment(self, **params) -> float:
         """
@@ -44,22 +48,23 @@ class AwalCalculator:
         ONLYWEEKS: [list] Gives Adjustment for the given week numbers.
         VSTEAMIDS: [list] Gives Adjustment vs teams with the given IDs.
         """
-        throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
-        onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         totalAdjustment = 0
-        L = self.__leagueModel.getNumberOfTeams() - 1
-        for week in self.__leagueModel.getWeeks():
-            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
-                continue
-            elif week.getWeekNumber() > throughWeek:
-                break
-            if LeagueModelNavigator.teamsPlayInWeek(week, self.__teamId, vsTeamIds):
-                WAL = self.__getTeamOutcomeOfWeek(week)
-                W = self.__getTeamsOutscoredOfWeek(week)
-                T = self.__getTeamsTiedOfWeek(week)
-                A = W * (1 / L) + T * (0.5 / L) - WAL
-                totalAdjustment += A
+        for year in self.__years:
+            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            onlyWeeks = params.pop("onlyWeeks", None)
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            L = self.__leagueModel.getNumberOfTeams() - 1
+            for week in self.__leagueModel.getYears()[year].getWeeks():
+                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                    continue
+                elif week.getWeekNumber() > throughWeek:
+                    break
+                if LeagueModelNavigator.teamsPlayInWeek(week, self.__teamId, vsTeamIds):
+                    WAL = self.__getTeamOutcomeOfWeek(week)
+                    W = self.__getTeamsOutscoredOfWeek(week)
+                    T = self.__getTeamsTiedOfWeek(week)
+                    A = W * (1 / L) + T * (0.5 / L) - WAL
+                    totalAdjustment += A
         return Rounder.normalRound(totalAdjustment, 2)
 
     def getWal(self) -> float:
