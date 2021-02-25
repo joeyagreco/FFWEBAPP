@@ -30,7 +30,12 @@ class StatCalculatorService:
         Returns a list of TeamStatsModels, one for each team in the given league in the given year.
         """
         # TODO add logic to determine if we keep the team for a year or the year0 owner team
-        teamYear = "0"
+        # if only 1 year is given, then use that year's team names
+        # if multiple are given, use the owner team names
+        if(len(years) > 1):
+            teamYear = "0"
+        else:
+            teamYear = years[0]
         teamStatsModels = []
         for team in leagueModel.getYears()[teamYear].getTeams():
             decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
