@@ -40,6 +40,14 @@ function clearChanges() {
     sessionStorage["changeCount"] = "0";
 }
 
+function disableDeleteWeek() {
+    // this disables the delete week button if the week is 0
+    if(document.getElementById("week_number").value == 1) {
+        document.getElementById("deleteWeekButton").disabled = true;
+        document.getElementById("deleteWeekButton").classList.add("disabled");
+    }
+}
+
 function changeMade() {
     // when this method is called, it increments the changeCount by 1
     // it also enables the save button
