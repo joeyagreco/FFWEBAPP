@@ -75,7 +75,6 @@ class LeagueModelNavigator:
         THROUGHWEEK: [int] Gives total league points scored through that week.
         ONLYWEEKS: [list] Gives total league points for the given week numbers.
         """
-        print(f"total league points type of years: {type(years)}")
         totalPoints = 0
         for year in years:
             throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))

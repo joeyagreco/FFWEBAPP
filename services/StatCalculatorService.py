@@ -29,7 +29,6 @@ class StatCalculatorService:
         """
         Returns a list of TeamStatsModels, one for each team in the given league in the given year.
         """
-        print(f"stat calculator typeof years: {type(years[0])}")
         # TODO add logic to determine if we keep the team for a year or the year0 owner team
         teamYear = "0"
         teamStatsModels = []
