@@ -27,11 +27,13 @@ class StatCalculatorService:
     @staticmethod
     def getTeamStats(leagueModel: LeagueModel):
         """
-        Returns a list of TeamStatsModels, one for each team in the given league.
+        Returns a list of TeamStatsModels, one for each team in the given league in the given year.
         """
+        # TODO remove this hard coded year
+        year = 2020
         teamStatsModels = []
-        for team in leagueModel.getTeams():
-            decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
+        for team in leagueModel.getYears()[year].getTeams():
+            decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel, year)
             scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel)
             teamId = team.getTeamId()
             teamName = team.getTeamName()
