@@ -375,12 +375,14 @@ class TestLeagueModelNavigator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        team1_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 1)
-        team2_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2)
-        team1_through1 = LeagueModelNavigator.getListOfTeamScores(leagueModel, 1, throughWeek=1)
-        team2_through1 = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2, throughWeek=1)
-        team1_andOpponent = LeagueModelNavigator.getListOfTeamScores(leagueModel, 1, andOpponentScore=True)
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        team1_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2020, 1)
+        team2_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2020, 2)
+        team1_through1 = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2020, 1, throughWeek=1)
+        team2_through1 = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2020, 2, throughWeek=1)
+        team1_andOpponent = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2020, 1, andOpponentScore=True)
         self.assertIsInstance(team1_all, list)
         self.assertEqual(2, len(team1_all))
         self.assertEqual(100, team1_all[0])
