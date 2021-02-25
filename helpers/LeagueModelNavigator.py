@@ -35,7 +35,7 @@ class LeagueModelNavigator:
         return False
 
     @classmethod
-    def teamsPlayEachOther(cls, leagueModel: LeagueModel, team1Id: int, team2Id: int, years: list) -> bool:
+    def teamsPlayEachOther(cls, leagueModel: LeagueModel, years: list, team1Id: int, team2Id: int) -> bool:
         """
         Returns a boolean on whether the teams with the given IDs play at all in the given league in any of the years given.
         """
@@ -46,18 +46,18 @@ class LeagueModelNavigator:
         return False
 
     @classmethod
-    def gamesPlayedByTeam(cls, leagueModel: LeagueModel, teamId: int, **params) -> int:
+    def gamesPlayedByTeam(cls, leagueModel: LeagueModel, year: int, teamId: int, **params) -> int:
         """
         Returns as an int the number of games played in the given league by the team with the given ID.
         THROUGHWEEK: [int] Gives games played through that week.
         ONLYWEEKS: [list] Gives games played for the given week numbers.
         VSTEAMIDS: [list] Gives games played vs teams with the given IDs.
         """
-        throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel))
+        throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, excludeId=[teamId]))
+        vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
         gamesPlayed = 0
-        for week in leagueModel.getWeeks():
+        for week in leagueModel.getYears()[year].getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                 continue
             elif week.getWeekNumber() > throughWeek:
@@ -198,26 +198,26 @@ class LeagueModelNavigator:
         return allScores
 
     @staticmethod
-    def getNumberOfWeeksInLeague(leagueModel: LeagueModel, **params):
+    def getNumberOfWeeksInLeague(leagueModel: LeagueModel, year: int, **params):
         """
         Returns as an int the number of weeks that are in the given leagueModel.
         ASLIST: [boolean] Gives all week numbers as an ordered list.
         """
         asList = params.pop("asList", False)
-        numberOfWeeks = len(leagueModel.getWeeks())
+        numberOfWeeks = len(leagueModel.getYears()[year].getWeeks())
         if asList:
             return [x+1 for x in range(numberOfWeeks)]
         return numberOfWeeks
 
     @staticmethod
-    def getAllTeamIdsInLeague(leagueModel: LeagueModel, **params) -> List[int]:
+    def getAllTeamIdsInLeague(leagueModel: LeagueModel, year:int, **params) -> List[int]:
         """
         Returns as a list of ints all of the team IDs in the given leagueModel.
         EXCLUDEIDS: [list] List of team IDs that will be excluded from the return list.
         """
         excludeIds = params.pop("excludeIds", [])
         teamIds = []
-        for team in leagueModel.getTeams():
+        for team in leagueModel.getYears()[year].getTeams():
             if team.getTeamId() not in excludeIds:
                 teamIds.append(team.getTeamId())
         return teamIds
