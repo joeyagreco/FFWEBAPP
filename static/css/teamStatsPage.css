@@ -19,6 +19,10 @@
     text-align: center;
 }
 
+table, th, td {
+  border: 1px solid black !important;
+}
+
 .statsTable th {
     background-color: #a3a3a3;
     cursor: pointer;
@@ -41,8 +45,4 @@
 
 .statsTable tr:nth-child(even) {
     background-color: #d4d4d4;
-}
-
-.statsTable, th, td {
-    border: 2px solid black;
 }
