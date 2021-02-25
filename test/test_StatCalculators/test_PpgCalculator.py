@@ -4,6 +4,7 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
+from models.league_models.YearModel import YearModel
 from packages.StatCalculators.PpgCalculator import PpgCalculator
 
 
@@ -33,16 +34,18 @@ class TestPpgCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        ppgTeam1_1 = PpgCalculator(1, leagueModel).getPpg(throughWeek=1)
-        ppgTeam1_2 = PpgCalculator(1, leagueModel).getPpg(throughWeek=2)
-        ppgTeam1_3 = PpgCalculator(1, leagueModel).getPpg(throughWeek=3)
-        ppgTeam1_vs2 = PpgCalculator(1, leagueModel).getPpg(vsTeamIds=[2])
-        ppgTeam1_vs3 = PpgCalculator(1, leagueModel).getPpg(vsTeamIds=[3])
-        ppgTeam1_only1 = PpgCalculator(1, leagueModel).getPpg(onlyWeeks=[1])
-        ppgTeam1_only1and3 = PpgCalculator(1, leagueModel).getPpg(onlyWeeks=[1, 3])
-        ppgTeam1_allParams = PpgCalculator(1, leagueModel).getPpg(vsTeamIds=[2], throughWeek=1)
-        ppgTeam1_default = PpgCalculator(1, leagueModel).getPpg()
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        ppgTeam1_1 = PpgCalculator(1, leagueModel, [2020]).getPpg(throughWeek=1)
+        ppgTeam1_2 = PpgCalculator(1, leagueModel, [2020]).getPpg(throughWeek=2)
+        ppgTeam1_3 = PpgCalculator(1, leagueModel, [2020]).getPpg(throughWeek=3)
+        ppgTeam1_vs2 = PpgCalculator(1, leagueModel, [2020]).getPpg(vsTeamIds=[2])
+        ppgTeam1_vs3 = PpgCalculator(1, leagueModel, [2020]).getPpg(vsTeamIds=[3])
+        ppgTeam1_only1 = PpgCalculator(1, leagueModel, [2020]).getPpg(onlyWeeks=[1])
+        ppgTeam1_only1and3 = PpgCalculator(1, leagueModel, [2020]).getPpg(onlyWeeks=[1, 3])
+        ppgTeam1_allParams = PpgCalculator(1, leagueModel, [2020]).getPpg(vsTeamIds=[2], throughWeek=1)
+        ppgTeam1_default = PpgCalculator(1, leagueModel, [2020]).getPpg()
         self.assertIsInstance(ppgTeam1_1, float)
         self.assertEqual(100, ppgTeam1_1)
         self.assertEqual(99.5, ppgTeam1_2)
