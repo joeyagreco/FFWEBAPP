@@ -5,6 +5,7 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
+from models.league_models.YearModel import YearModel
 
 
 class TestLeagueModelNavigator(unittest.TestCase):
@@ -23,10 +24,12 @@ class TestLeagueModelNavigator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        team1 = LeagueModelNavigator.getTeamById(leagueModel, 1)
-        self.assertEqual("team1", team1.getTeamName())
-        self.assertEqual(1, team1.getTeamId())
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        team1_2020 = LeagueModelNavigator.getTeamById(leagueModel, 2020, 1)
+        self.assertEqual("team1", team1_2020.getTeamName())
+        self.assertEqual(1, team1_2020.getTeamId())
         self.assertRaises(Exception, LeagueModelNavigator.getTeamById, leagueModel, 7)
 
     def test_teamsPlayInWeek(self):

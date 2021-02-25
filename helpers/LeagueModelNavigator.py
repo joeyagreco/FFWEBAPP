@@ -14,15 +14,15 @@ class LeagueModelNavigator:
     """
 
     @staticmethod
-    def getTeamById(leagueModel: LeagueModel, teamId: int) -> TeamModel:
+    def getTeamById(leagueModel: LeagueModel, year: int, teamId: int) -> TeamModel:
         """
-        Returns a Team object for the team with the given ID in the given league.
+        Returns a Team object for the team with the given ID in the given league in the given year.
         Throws Exception if a team with the given ID is not in the given league.
         """
-        for team in leagueModel.getTeams():
+        for team in leagueModel.getYears()[year].getTeams():
             if team.getTeamId() == teamId:
                 return team
-        raise Exception("Given TeamID is not in the given LeagueModel")
+        raise Exception("Given TeamID is not in the given LeagueModel at the given year.")
 
     @staticmethod
     def teamsPlayInWeek(week: WeekModel, team1Id: int, opponentIds: list) -> bool:
