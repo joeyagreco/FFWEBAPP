@@ -348,7 +348,7 @@ def deleteWeek():
         # check if week 1 already existed
         if len(leagueOrError["years"][year]["weeks"]) == 0:
             # week 1 didn't exist
-            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"], selected_year=year))
+            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"], year=year))
         else:
             # week 1 exists
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week, selected_year=year, error_message=error.errorMessage())
