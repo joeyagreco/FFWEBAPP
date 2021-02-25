@@ -6,28 +6,38 @@ class TestDatabaseVerifier(unittest.TestCase):
 
     def test_duplicateTeamNamesLowerCaseDuplicate(self):
         dummyTeams = [{"teamId": 1, "teamName": "a"}, {"teamId": 2, "teamName": "a"}]
-        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyTeams))
+        dummyYears = {"1234": {"year": 1234, "teams": dummyTeams, "weeks": []}}
+        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyYears))
         dummyTeams = [{"teamId": 1, "teamName": "a"}, {"teamId": 2, "teamName": "b"}]
-        self.assertEqual(False, DatabaseVerifier.duplicateTeamNames(dummyTeams))
+        dummyYears = {"1234": {"year": 1234, "teams": dummyTeams, "weeks": []}}
+        self.assertEqual(False, DatabaseVerifier.duplicateTeamNames(dummyYears))
 
     def test_duplicateTeamNamesUpperCaseDuplicate(self):
         dummyTeams = [{"teamId": 1, "teamName": "A"}, {"teamId": 2, "teamName": "A"}]
-        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyTeams))
+        dummyYears = {"1234": {"year": 1234, "teams": dummyTeams, "weeks": []}}
+        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyYears))
         dummyTeams = [{"teamId": 1, "teamName": "A"}, {"teamId": 2, "teamName": "B"}]
-        self.assertEqual(False, DatabaseVerifier.duplicateTeamNames(dummyTeams))
+        dummyYears = {"1234": {"year": 1234, "teams": dummyTeams, "weeks": []}}
+        self.assertEqual(False, DatabaseVerifier.duplicateTeamNames(dummyYears))
 
     def test_duplicateTeamNamesMixedCaseDuplicate(self):
         dummyTeams = [{"teamId": 1, "teamName": "Ab"}, {"teamId": 2, "teamName": "aB"}]
-        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyTeams))
+        dummyYears = {"1234": {"year": 1234, "teams": dummyTeams, "weeks": []}}
+        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyYears))
         dummyTeams = [{"teamId": 1, "teamName": "Ab"}, {"teamId": 2, "teamName": "bC"}]
-        self.assertEqual(False, DatabaseVerifier.duplicateTeamNames(dummyTeams))
+        dummyYears = {"1234": {"year": 1234, "teams": dummyTeams, "weeks": []}}
+        self.assertEqual(False, DatabaseVerifier.duplicateTeamNames(dummyYears))
 
     def test_duplicateTeamNamesWhiteSpace(self):
         dummyTeams1 = [{"teamId": 1, "teamName": "a "}, {"teamId": 2, "teamName": "a"}]
+        dummyYears1 = {"1234": {"year": 1234, "teams": dummyTeams1, "weeks": []}}
         dummyTeams2 = [{"teamId": 1, "teamName": " a"}, {"teamId": 2, "teamName": "a"}]
+        dummyYears2 = {"1234": {"year": 1234, "teams": dummyTeams2, "weeks": []}}
         dummyTeams3 = [{"teamId": 1, "teamName": " a "}, {"teamId": 2, "teamName": "a"}]
-        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyTeams1))
-        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyTeams2))
-        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyTeams3))
-        dummyTeams1 = [{"teamId": 1, "teamName": " a "}, {"teamId": 2, "teamName": "b"}]
-        self.assertEqual(False, DatabaseVerifier.duplicateTeamNames(dummyTeams1))
+        dummyYears3 = {"1234": {"year": 1234, "teams": dummyTeams3, "weeks": []}}
+        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyYears1))
+        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyYears2))
+        self.assertEqual(True, DatabaseVerifier.duplicateTeamNames(dummyYears3))
+        dummyTeams = [{"teamId": 1, "teamName": " a "}, {"teamId": 2, "teamName": "b"}]
+        dummyYears = {"1234": {"year": 1234, "teams": dummyTeams, "weeks": []}}
+        self.assertEqual(False, DatabaseVerifier.duplicateTeamNames(dummyYears))

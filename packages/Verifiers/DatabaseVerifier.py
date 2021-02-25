@@ -8,7 +8,7 @@ class DatabaseVerifier:
         """
         Returns a boolean of whether the given years dict has any years duplicate team names.
         """
-        for year in years.keys():
+        for year in years:
             teamNames = []
             for team in years[year]["teams"]:
                 teamNames.append(team["teamName"].lower().strip())
