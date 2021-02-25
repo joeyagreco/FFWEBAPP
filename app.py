@@ -174,7 +174,6 @@ def addUpdateWeeks():
     year = request.args.get("year")
     week = request.args.get("week")
     errorMessage = request.args.get("error_message")
-    print(errorMessage)
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
@@ -268,7 +267,6 @@ def updateWeek():
     # convert dict
     newDataStr = request.data.decode("UTF-8")
     newDataDict = ast.literal_eval(newDataStr)
-    print(newDataDict)
     leagueId = int(newDataDict["league_id"])
     weekNumber = int(newDataDict["week_number"])
     yearNumber = newDataDict["year_number"]
