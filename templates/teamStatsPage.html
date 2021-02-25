@@ -42,7 +42,7 @@
                         {% endif %}
                     {% elif year == '0' %}
                         <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">All Time</a>
-                    {% else %}
+                    {% elif league.years[year].weeks|length > 0 %}
                         <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
                     {% endif %}
                 {% endfor %}

@@ -384,9 +384,11 @@ def teamStats():
     if isinstance(leagueModelOrError, Error):
         return render_template("teamStatsPage.html", league=leagueOrError,
                                error_message=leagueModelOrError.errorMessage())
-    if not year:
+    if year is None:
         # give most recent year if none is given
-        years = sorted(LeagueModelNavigator.getListOfYearsInLeague(leagueModelOrError, asInts=True))
+        print("not year")
+        print(year)
+        years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
         year = years[-1]
     statsModels = mainController.getTeamStatsModel(leagueModelOrError, [year])
     # grab Constants class to use for titles of table

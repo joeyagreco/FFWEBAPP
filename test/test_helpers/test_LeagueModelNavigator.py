@@ -451,4 +451,34 @@ class TestLeagueModelNavigator(unittest.TestCase):
         self.assertEqual(1, len(yearsWithoutZero))
         self.assertIsInstance(yearsWithoutZero[2020], YearModel)
 
+    def test_getAllYearsWithWeeks(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 100, 95.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 102, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year = YearModel(2020, teamList, weekList)
+        year0 = YearModel(0, [], None)
+        yearDict = {0: year0, 2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        yearsWithWeeks = LeagueModelNavigator.getAllYearsWithWeeks(leagueModel)
+        yearsWithWeeksInt = LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True)
+        self.assertEqual(1, len(yearsWithWeeks))
+        self.assertEqual(2020, yearsWithWeeks[0].getYear())
+        self.assertEqual(1, len(yearsWithWeeksInt))
+        self.assertEqual(2020, yearsWithWeeksInt[0])
+
 

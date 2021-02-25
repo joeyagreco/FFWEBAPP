@@ -291,3 +291,21 @@ class LeagueModelNavigator:
         years = leagueModel.getYears()
         del years[0]
         return leagueModel.getYears()
+
+    @staticmethod
+    def getAllYearsWithWeeks(leagueModel: LeagueModel,  **params):
+        """
+        This returns as a dict of TeamModels of all the years in the given league that have at least 1 week.
+        ASINTS: (boolean) If True, returns as a list of ints representing the years
+        """
+        asInts = params.pop("asInts", False)
+        allYears = leagueModel.getYears()
+        years = []
+        for year in allYears:
+            weeks = allYears[year].getWeeks()
+            if weeks and len(weeks) > 0:
+                if asInts:
+                    years.append(year)
+                else:
+                    years.append(allYears[year])
+        return years
