@@ -302,7 +302,7 @@ def updateWeek():
                                                leagueOrError["years"])
         if isinstance(response, Error):
             # could not update week
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber, selected_year=yearNumber, error_message=response.errorMessage())
+            return redirect(url_for("addUpdateWeeks", league=leagueOrError, week_number=weekNumber, selected_year=yearNumber, error_message=response.errorMessage()))
         newLeagueOrError = mainController.getLeague(leagueId)
 
         if isinstance(newLeagueOrError, Error):
