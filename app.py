@@ -395,7 +395,6 @@ def teamStats():
         year = 0
     else:
         yearList = [year]
-    print(yearList)
     statsModels = mainController.getTeamStatsModel(leagueModelOrError, yearList)
     # grab Constants class to use for titles of table
     constants = Constants
