@@ -91,7 +91,7 @@ class LeagueModelNavigator:
     @classmethod
     def totalPointsScoredByTeam(cls, leagueModel: LeagueModel, year: int, teamId: int, **params) -> float:
         """
-        Returns a float that is the total amount of points scored by the team with the given ID in the given league.
+        Returns a float that is the total amount of points scored by the team with the given ID in the given league in the given year.
         THROUGHWEEK: [int] Gives total points scored through that week.
         ONLYWEEKS: [list] Gives total points for the given week numbers.
         VSTEAMIDS: [list] Gives total points vs teams with the given IDs.
@@ -140,19 +140,19 @@ class LeagueModelNavigator:
             return Constants.TIE
 
     @classmethod
-    def getAllScoresInLeague(cls, leagueModel: LeagueModel, **params) -> List[float]:
+    def getAllScoresInLeague(cls, leagueModel: LeagueModel, year: int, **params) -> List[float]:
         """
-        Returns as a list of floats all of the scores in the given leagueModel.
+        Returns as a list of floats all of the scores in the given leagueModel in the given year.
         Note: These scores will be properly rounded.
         THROUGHWEEK: [int] Gives all league scores through that week.
         ONLYWEEKS: [list] Gives all league scores for the given week numbers.
         """
-        throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel))
+        throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))
         onlyWeeks = params.pop("onlyWeeks", None)
         rounder = Rounder()
-        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
+        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel, year)
         allScores = []
-        for week in leagueModel.getWeeks():
+        for week in leagueModel.getYears()[year].getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                 continue
             elif week.getWeekNumber() > throughWeek:
