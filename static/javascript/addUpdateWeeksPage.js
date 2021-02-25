@@ -139,13 +139,22 @@ function getErrorInData(data) {
     // this validates the dict about to be posted
     var numberOfTeams = document.getElementById("number_of_teams").value;
     // check teams first
-    var allTeamIds = []
+    var allTeamIds = [];
+    var allTeamScores = [];
     for(i=1; i<=numberOfTeams/2; i++) {
         allTeamIds.push(data["teamAId_matchup_"+i]);
+        allTeamIds.push(data["teamBId_matchup_"+i]);
+        allTeamScores.push(data["teamAScore_matchup_"+i]);
+        allTeamScores.push(data["teamBScore_matchup_"+i]);
     }
     var allTeamIdsSet = [...new Set(allTeamIds)]
     if(allTeamIds.length != allTeamIdsSet.length) {
-        return "A team can only play once per week."
+        return "A team can only play once per week.";
+    }
+    for(i=0; i<allTeamScores.length; i++) {
+        if(allTeamScores[i] == "") {
+            return "All teams need a score.";
+        }
     }
     return "";
 }
