@@ -86,7 +86,7 @@ class LeagueModelNavigator:
             for matchup in week.getMatchups():
                 totalPoints += matchup.getTeamAScore()
                 totalPoints += matchup.getTeamBScore()
-        return rounder.normalRound(totalPoints, rounder.getDecimalPlacesRoundedToInScores(leagueModel, year))
+        return rounder.normalRound(totalPoints, rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
     @classmethod
     def totalPointsScoredByTeam(cls, leagueModel: LeagueModel, year: int, teamId: int, **params) -> float:
@@ -111,7 +111,7 @@ class LeagueModelNavigator:
                     totalPoints += matchup.getTeamAScore()
                 elif matchup.getTeamB().getTeamId() == teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                     totalPoints += matchup.getTeamBScore()
-        return rounder.normalRound(totalPoints, rounder.getDecimalPlacesRoundedToInScores(leagueModel, year))
+        return rounder.normalRound(totalPoints, rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
     @staticmethod
     def getGameOutcomeAsString(matchup: MatchupModel, teamId: int):
@@ -150,7 +150,7 @@ class LeagueModelNavigator:
         throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))
         onlyWeeks = params.pop("onlyWeeks", None)
         rounder = Rounder()
-        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel, year)
+        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         allScores = []
         for week in leagueModel.getYears()[year].getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
@@ -179,7 +179,7 @@ class LeagueModelNavigator:
         onlyWeeks = params.pop("onlyWeeks", None)
         vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
         rounder = Rounder()
-        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel, year)
+        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         allScores = []
         for week in leagueModel.getYears()[year].getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:

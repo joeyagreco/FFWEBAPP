@@ -4,6 +4,7 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
+from models.league_models.YearModel import YearModel
 from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 
 
@@ -33,16 +34,18 @@ class TestScoresCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        maxScoreTeam1_1 = ScoresCalculator(1, leagueModel).getMaxScore(throughWeek=1)
-        maxScoreTeam1_2 = ScoresCalculator(1, leagueModel).getMaxScore(throughWeek=2)
-        maxScoreTeam1_3 = ScoresCalculator(1, leagueModel).getMaxScore(throughWeek=3)
-        maxScoreTeam1_vs2 = ScoresCalculator(1, leagueModel).getMaxScore(vsTeamIds=[2])
-        maxScoreTeam1_vs3 = ScoresCalculator(1, leagueModel).getMaxScore(vsTeamIds=[3])
-        maxScoreTeam1_only1 = ScoresCalculator(1, leagueModel).getMaxScore(onlyWeeks=[1])
-        maxScoreTeam1_only1and3 = ScoresCalculator(1, leagueModel).getMaxScore(onlyWeeks=[1, 3])
-        maxScoreTeam1_allParams = ScoresCalculator(1, leagueModel).getMaxScore(throughWeek=2, vsTeamIds=[2])
-        maxScoreTeam1_default = ScoresCalculator(1, leagueModel).getMaxScore()
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        maxScoreTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getMaxScore(throughWeek=1)
+        maxScoreTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getMaxScore(throughWeek=2)
+        maxScoreTeam1_3 = ScoresCalculator(1, leagueModel, [2020]).getMaxScore(throughWeek=3)
+        maxScoreTeam1_vs2 = ScoresCalculator(1, leagueModel, [2020]).getMaxScore(vsTeamIds=[2])
+        maxScoreTeam1_vs3 = ScoresCalculator(1, leagueModel, [2020]).getMaxScore(vsTeamIds=[3])
+        maxScoreTeam1_only1 = ScoresCalculator(1, leagueModel, [2020]).getMaxScore(onlyWeeks=[1])
+        maxScoreTeam1_only1and3 = ScoresCalculator(1, leagueModel, [2020]).getMaxScore(onlyWeeks=[1, 3])
+        maxScoreTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getMaxScore(throughWeek=2, vsTeamIds=[2])
+        maxScoreTeam1_default = ScoresCalculator(1, leagueModel, [2020]).getMaxScore()
         self.assertEqual(98, maxScoreTeam1_1)
         self.assertEqual(99, maxScoreTeam1_2)
         self.assertEqual(100, maxScoreTeam1_3)

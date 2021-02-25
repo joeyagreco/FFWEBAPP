@@ -35,7 +35,7 @@ class TestRounder(unittest.TestCase):
         year = YearModel(2020, teamList, weekList)
         yearDict = {2020: year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
-        self.assertEqual(1, Rounder.getDecimalPlacesRoundedToInScores(leagueModel, 2020))
+        self.assertEqual(1, Rounder.getDecimalPlacesRoundedToInScores(leagueModel))
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
         team3 = TeamModel(3, "team3")
@@ -52,7 +52,7 @@ class TestRounder(unittest.TestCase):
         year = YearModel(2020, teamList, weekList)
         yearDict = {2020: year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
-        self.assertEqual(2, Rounder.getDecimalPlacesRoundedToInScores(leagueModel, 2020))
+        self.assertEqual(2, Rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
     def test_keepTrailingZeros(self):
         score1 = 100

@@ -7,35 +7,36 @@ from models.league_models.LeagueModel import LeagueModel
 
 class ScoresCalculator:
 
-    def __init__(self, teamId: int, leagueModel: LeagueModel):
+    def __init__(self, teamId: int, leagueModel: LeagueModel, years: list):
         self.__teamId = teamId
         self.__leagueModel = leagueModel
+        self.__years = years
 
     def getMaxScore(self, **params) -> float:
         """
-        Returns the maximum score the team with the given ID has in the given league.
+        Returns the maximum score the team with the given ID has in the given league in the given years.
         THROUGHWEEK: [int] Gives Max Score through that week.
         ONLYWEEKS: [list] Gives Max Score for the given week numbers.
         VSTEAMIDS: [list] Gives Max Score vs teams with the given IDs.
         """
-        throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
-        onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
         scores = []
-        for week in self.__leagueModel.getWeeks():
-            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
-                continue
-            elif week.getWeekNumber() > throughWeek:
-                break
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                    scores.append(matchup.getTeamAScore())
-                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                    scores.append(matchup.getTeamBScore())
+        for year in self.__years:
+            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            onlyWeeks = params.pop("onlyWeeks", None)
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            for week in self.__leagueModel.getYears()[year].getWeeks():
+                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                    continue
+                elif week.getWeekNumber() > throughWeek:
+                    break
+                for matchup in week.getMatchups():
+                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
+                        scores.append(matchup.getTeamAScore())
+                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
+                        scores.append(matchup.getTeamBScore())
         if not scores:
             return 0.0
-        return Rounder.normalRound(max(scores),
-                                   Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
+        return Rounder.normalRound(max(scores), Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
 
     def getMinScore(self, **params) -> float:
         """
