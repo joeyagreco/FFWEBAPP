@@ -144,11 +144,6 @@ function getErrorInData(data) {
         allTeamIds.push(data["teamAId_matchup_"+i]);
     }
     var allTeamIdsSet = [...new Set(allTeamIds)]
-//    console.log(data);
-//    console.log(data["league_id"]);
-//    console.log(data["teamAId_matchup_1"]);
-//    console.log(allTeamIds);
-//    console.log(allTeamIdsSet);
     if(allTeamIds.length != allTeamIdsSet.length) {
         return "A team can only play once per week."
     }

@@ -184,7 +184,7 @@ def addUpdateWeeks():
         if week:
             # if we got a week passed in, render the page with that week displayed
             week = int(week)
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=week)
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=week, error_message=errorMessage)
         else:
             yearDict = leagueOrError["years"][str(year)]
             if len(yearDict["weeks"]) == 0:
@@ -304,7 +304,7 @@ def updateWeek():
                                                leagueOrError["years"])
         if isinstance(response, Error):
             # could not update week
-            return redirect(url_for("addUpdateWeeks", league_Id=leagueId, week=weekNumber, year=yearNumber, error_message=response.errorMessage()))
+            return redirect(url_for("addUpdateWeeks", league_id=leagueId, week=weekNumber, year=yearNumber, error_message=response.errorMessage()))
         newLeagueOrError = mainController.getLeague(leagueId)
         if isinstance(newLeagueOrError, Error):
             return redirect(url_for('index', error_message=newLeagueOrError.errorMessage()))
