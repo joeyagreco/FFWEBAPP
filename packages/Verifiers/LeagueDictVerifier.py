@@ -8,7 +8,7 @@ class LeagueDictVerifier:
         """
         Returns a boolean of whether any teams play themselves in the given weeks.
         """
-        for year in years.keys():
+        for year in years:
             # check if its year 0
             # TODO add LMN method to check for this
             if year != str(0):
