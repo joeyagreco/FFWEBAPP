@@ -277,7 +277,7 @@ class LeagueModelNavigator:
         asInts = params.pop("asInts", False)
         years = []
         for year in leagueModel.getYears():
-            if year != 0:
+            if year != "0":
                 if asInts:
                     years.append(year)
                 else:

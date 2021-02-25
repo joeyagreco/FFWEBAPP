@@ -21,7 +21,6 @@ class ScoresCalculator:
         """
         scores = []
         for year in self.__years:
-            print(f"maxScore Year: {year}")
             throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
             onlyWeeks = params.pop("onlyWeeks", None)
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
