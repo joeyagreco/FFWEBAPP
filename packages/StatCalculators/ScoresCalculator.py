@@ -128,25 +128,23 @@ class ScoresCalculator:
         ONLYWEEKS: [list] Gives percentage of league scoring for the given week numbers.
         VSTEAMIDS: [list] Gives percentage of league scoring vs teams with the given IDs.
         """
-        weekNumber = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
-        onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds",
-                               LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, excludeIds=[self.__teamId]))
-
-        allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, self.__teamId,
-                                                                               vsTeamIds, onlyWeeks=onlyWeeks)
-        totalLeagueScore = LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, throughWeek=weekNumber,
-                                                                  onlyWeeks=allWeeksTeamsPlay)
         totalTeamScore = 0
-        for week in self.__leagueModel.getWeeks():
-            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
-                continue
-            elif week.getWeekNumber() > weekNumber:
-                break
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                    totalTeamScore += matchup.getTeamAScore()
-                elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                    totalTeamScore += matchup.getTeamBScore()
+        totalLeagueScore = 0
+        for year in self.__years:
+            weekNumber = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            onlyWeeks = params.pop("onlyWeeks", None)
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, year, self.__teamId, vsTeamIds, onlyWeeks=onlyWeeks)
+            totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, year, throughWeek=weekNumber, onlyWeeks=allWeeksTeamsPlay)
+            for week in self.__leagueModel.getYears()[year].getWeeks():
+                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                    continue
+                elif week.getWeekNumber() > weekNumber:
+                    break
+                for matchup in week.getMatchups():
+                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
+                        totalTeamScore += matchup.getTeamAScore()
+                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
+                        totalTeamScore += matchup.getTeamBScore()
         percentageOfScoring = Rounder.normalRound((totalTeamScore / totalLeagueScore) * 100, 2)
         return percentageOfScoring

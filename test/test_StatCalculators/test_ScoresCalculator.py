@@ -215,16 +215,17 @@ class TestScoresCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        percentageTeam1_1 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(throughWeek=1)
-        percentageTeam1_2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(throughWeek=2)
-        percentageTeam1_vs2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(vsTeamIds=[2])
-        percentageTeam1_vs3 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(vsTeamIds=[3])
-        percentageTeam1_only2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(onlyWeeks=[2])
-        percentageTeam1_only1and2 = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(onlyWeeks=[1, 2])
-        percentageTeam1_allParams = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring(throughWeek=1,
-                                                                                                  vsTeamIds=[2])
-        percentageTeam1_default = ScoresCalculator(1, leagueModel).getPercentageOfLeagueScoring()
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        percentageTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(throughWeek=1)
+        percentageTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(throughWeek=2)
+        percentageTeam1_vs2 = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(vsTeamIds=[2])
+        percentageTeam1_vs3 = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(vsTeamIds=[3])
+        percentageTeam1_only2 = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(onlyWeeks=[2])
+        percentageTeam1_only1and2 = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(onlyWeeks=[1, 2])
+        percentageTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(throughWeek=1, vsTeamIds=[2])
+        percentageTeam1_default = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring()
         self.assertIsInstance(percentageTeam1_1, float)
         self.assertEqual(23.87, percentageTeam1_1)
         self.assertEqual(23.96, percentageTeam1_2)
