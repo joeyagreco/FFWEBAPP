@@ -247,7 +247,7 @@ def deleteYear():
     updated = mainController.updateLeague(leagueId, leagueOrError["leagueName"], updatedYears)
     # TODO check for errors
     # find a year to return the user to
-    redirectYear = list(updatedYears)[-1]
+    redirectYear = sorted(list(updatedYears))[-1]
     return redirect(url_for("updateLeague", league_id=leagueId, year=redirectYear))
 
 
