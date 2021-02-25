@@ -375,7 +375,7 @@ def deleteWeek():
 @app.route("/team-stats", methods=["GET"])
 def teamStats():
     leagueId = int(request.args.get("league_id"))
-    year = request.args.get("years")
+    year = request.args.get("year")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
@@ -389,11 +389,13 @@ def teamStats():
         years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
         year = years[-1]
         yearList = [year]
-    elif year == 0:
+    elif year == "0":
         # give them all years (ALL TIME)
         yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        year = 0
     else:
         yearList = [year]
+    print(yearList)
     statsModels = mainController.getTeamStatsModel(leagueModelOrError, yearList)
     # grab Constants class to use for titles of table
     constants = Constants
