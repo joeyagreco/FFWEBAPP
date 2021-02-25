@@ -386,11 +386,14 @@ def teamStats():
                                error_message=leagueModelOrError.errorMessage())
     if not years:
         # give most recent year if none is given
-        years = LeagueModelNavigator.getListOfYearsInLeague(leagueModelOrError, asInts=True)
+        years = sorted(LeagueModelNavigator.getListOfYearsInLeague(leagueModelOrError, asInts=True))
+        year = years[-1]
+    else:
+        years = [years]
     statsModels = mainController.getTeamStatsModel(leagueModelOrError, years)
     # grab Constants class to use for titles of table
     constants = Constants
-    return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels, constants=constants)
+    return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels, constants=constants, selected_year=year)
 
 
 @app.route("/head-to-head-stats", methods=["GET"])
