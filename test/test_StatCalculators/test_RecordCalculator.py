@@ -4,6 +4,7 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
+from models.league_models.YearModel import YearModel
 from packages.StatCalculators.RecordCalculator import RecordCalculator
 
 
@@ -28,15 +29,17 @@ class TestRecordCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        winsTeam1_1 = RecordCalculator(1, leagueModel).getWins(throughWeek=1)
-        winsTeam1_2 = RecordCalculator(1, leagueModel).getWins(throughWeek=2)
-        winsTeam1_vs2 = RecordCalculator(1, leagueModel).getWins(vsTeamIds=[2])
-        winsTeam1_vs3 = RecordCalculator(1, leagueModel).getWins(vsTeamIds=[3])
-        winsTeam1_only2 = RecordCalculator(1, leagueModel).getWins(onlyWeeks=[2])
-        winsTeam1_only1and2 = RecordCalculator(1, leagueModel).getWins(onlyWeeks=[1, 2])
-        winsTeam1_allParams = RecordCalculator(1, leagueModel).getWins(throughWeek=2, vsTeamIds=[2])
-        winsTeam1_default = RecordCalculator(1, leagueModel).getWins()
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        winsTeam1_1 = RecordCalculator(1, leagueModel, [2020]).getWins(throughWeek=1)
+        winsTeam1_2 = RecordCalculator(1, leagueModel, [2020]).getWins(throughWeek=2)
+        winsTeam1_vs2 = RecordCalculator(1, leagueModel, [2020]).getWins(vsTeamIds=[2])
+        winsTeam1_vs3 = RecordCalculator(1, leagueModel, [2020]).getWins(vsTeamIds=[3])
+        winsTeam1_only2 = RecordCalculator(1, leagueModel, [2020]).getWins(onlyWeeks=[2])
+        winsTeam1_only1and2 = RecordCalculator(1, leagueModel, [2020]).getWins(onlyWeeks=[1, 2])
+        winsTeam1_allParams = RecordCalculator(1, leagueModel, [2020]).getWins(throughWeek=2, vsTeamIds=[2])
+        winsTeam1_default = RecordCalculator(1, leagueModel, [2020]).getWins()
         self.assertIsInstance(winsTeam1_1, int)
         self.assertEqual(0, winsTeam1_1)
         self.assertEqual(1, winsTeam1_2)

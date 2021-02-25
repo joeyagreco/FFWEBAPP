@@ -31,8 +31,10 @@ class StatCalculatorService:
         """
         # TODO remove this hard coded year
         years = [2020]
+        # TODO add logic to determine if we keep the team for a year or the year0 owner team
+        teamYear = 0
         teamStatsModels = []
-        for team in leagueModel.getYears()[year].getTeams():
+        for team in leagueModel.getYears()[teamYear].getTeams():
             decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             teamId = team.getTeamId()
             teamName = team.getTeamName()
@@ -41,7 +43,7 @@ class StatCalculatorService:
             maxScoreStr = Rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
             minScore = scoresCalculator.getMinScore()
             minScoreStr = Rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
-            ppgCalculator = PpgCalculator(teamId, leagueModel)
+            ppgCalculator = PpgCalculator(teamId, leagueModel, years)
             ppg = ppgCalculator.getPpg()
             ppgAgainst = ppgCalculator.getPpgAgainst()
             ppgStr = Rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
