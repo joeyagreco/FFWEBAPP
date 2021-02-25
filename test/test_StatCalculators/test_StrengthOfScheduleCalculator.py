@@ -4,6 +4,7 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
+from models.league_models.YearModel import YearModel
 from packages.StatCalculators.StrengthOfScheduleCalculator import StrengthOfScheduleCalculator
 
 
@@ -28,13 +29,15 @@ class TestStrengthOfScheduleCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        sosTeam1 = StrengthOfScheduleCalculator(1, leagueModel).getStrengthOfSchedule()
-        sosTeam2 = StrengthOfScheduleCalculator(2, leagueModel).getStrengthOfSchedule()
-        sosTeam3 = StrengthOfScheduleCalculator(3, leagueModel).getStrengthOfSchedule()
-        sosTeam4 = StrengthOfScheduleCalculator(4, leagueModel).getStrengthOfSchedule()
-        sosTeam5 = StrengthOfScheduleCalculator(5, leagueModel).getStrengthOfSchedule()
-        sosTeam6 = StrengthOfScheduleCalculator(6, leagueModel).getStrengthOfSchedule()
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        sosTeam1 = StrengthOfScheduleCalculator(1, leagueModel, [2020]).getStrengthOfSchedule()
+        sosTeam2 = StrengthOfScheduleCalculator(2, leagueModel, [2020]).getStrengthOfSchedule()
+        sosTeam3 = StrengthOfScheduleCalculator(3, leagueModel, [2020]).getStrengthOfSchedule()
+        sosTeam4 = StrengthOfScheduleCalculator(4, leagueModel, [2020]).getStrengthOfSchedule()
+        sosTeam5 = StrengthOfScheduleCalculator(5, leagueModel, [2020]).getStrengthOfSchedule()
+        sosTeam6 = StrengthOfScheduleCalculator(6, leagueModel, [2020]).getStrengthOfSchedule()
         self.assertIsInstance(sosTeam1, float)
         self.assertEqual(0.5, sosTeam1)
         self.assertEqual(0.45, sosTeam2)
