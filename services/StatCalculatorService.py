@@ -30,13 +30,13 @@ class StatCalculatorService:
         Returns a list of TeamStatsModels, one for each team in the given league in the given year.
         """
         # TODO remove this hard coded year
-        year = 2020
+        years = [2020]
         teamStatsModels = []
         for team in leagueModel.getYears()[year].getTeams():
-            decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel, year)
-            scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel)
+            decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             teamId = team.getTeamId()
             teamName = team.getTeamName()
+            scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, years)
             maxScore = scoresCalculator.getMaxScore()
             maxScoreStr = Rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
             minScore = scoresCalculator.getMinScore()
