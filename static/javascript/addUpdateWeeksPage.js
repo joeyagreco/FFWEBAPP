@@ -63,9 +63,7 @@ function makeActiveTeam(newTeamElement, newTeam, matchupId) {
     // this makes the given team active
     var activeClassName = "activeOdd";
     var teamAorB = "teamA";
-    console.log(newTeamElement.classList);
     if(newTeamElement.classList.contains("evenTeam")) {
-        console.log("even team");
         activeClassName = "activeEven";
         teamAorB = "teamB"
     }
@@ -116,12 +114,17 @@ function postWeek() {
     // add all the teams and scores
     for(i=1; i<=numberOfTeams/2; i++) {
         // add team
-        console.log(document.getElementById("teamAId_matchup_"+i).value);
         data["teamAId_matchup_"+i] = document.getElementById("teamAId_matchup_"+i).value;
         data["teamBId_matchup_"+i] = document.getElementById("teamBId_matchup_"+i).value;
         // add scores
         data["teamAScore_matchup_"+i] = document.getElementById("teamAScore_matchup_"+i).value;
         data["teamBScore_matchup_"+i] = document.getElementById("teamBScore_matchup_"+i).value;
+    }
+    // validate data here
+    var error = getErrorInData(data);
+    if (error) {
+        window.location = "/add-update-weeks?league_id="+leagueId+"&year="+yearNumber+"&week="+weekNumber+"&error_message="+error;
+        return;
     }
     // send POST request
     var fetchPromise = fetch("/update-week", {method: "POST",
@@ -130,4 +133,24 @@ function postWeek() {
     fetchPromise.then(response => {
         window.location.href = response.url;
     });
+}
+
+function getErrorInData(data) {
+    // this validates the dict about to be posted
+    var numberOfTeams = document.getElementById("number_of_teams").value;
+    // check teams first
+    var allTeamIds = []
+    for(i=1; i<=numberOfTeams/2; i++) {
+        allTeamIds.push(data["teamAId_matchup_"+i]);
+    }
+    var allTeamIdsSet = [...new Set(allTeamIds)]
+//    console.log(data);
+//    console.log(data["league_id"]);
+//    console.log(data["teamAId_matchup_1"]);
+//    console.log(allTeamIds);
+//    console.log(allTeamIdsSet);
+    if(allTeamIds.length != allTeamIdsSet.length) {
+        return "A team can only play once per week."
+    }
+    return "";
 }

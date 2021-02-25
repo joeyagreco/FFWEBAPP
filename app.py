@@ -173,6 +173,8 @@ def addUpdateWeeks():
     leagueId = int(request.args.get("league_id"))
     year = request.args.get("year")
     week = request.args.get("week")
+    errorMessage = request.args.get("error_message")
+    print(errorMessage)
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
@@ -302,9 +304,8 @@ def updateWeek():
                                                leagueOrError["years"])
         if isinstance(response, Error):
             # could not update week
-            return redirect(url_for("addUpdateWeeks", league=leagueOrError, week_number=weekNumber, selected_year=yearNumber, error_message=response.errorMessage()))
+            return redirect(url_for("addUpdateWeeks", league_Id=leagueId, week=weekNumber, year=yearNumber, error_message=response.errorMessage()))
         newLeagueOrError = mainController.getLeague(leagueId)
-
         if isinstance(newLeagueOrError, Error):
             return redirect(url_for('index', error_message=newLeagueOrError.errorMessage()))
         else:
