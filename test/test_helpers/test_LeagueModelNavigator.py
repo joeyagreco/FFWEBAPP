@@ -339,13 +339,15 @@ class TestLeagueModelNavigator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        weeks1_vs2 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 1, [2])
-        weeks1_vs3 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 1, [3])
-        weeks1_vs2and3 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 1, [2, 3])
-        weeks1_vsNone = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 1, [])
-        weeks1_vs2_only1 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 1, [2], onlyWeeks=[1])
-        weeks1_vs2_only2 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 1, [2], onlyWeeks=[2])
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        weeks1_vs2 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 2020, 1, [2])
+        weeks1_vs3 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 2020, 1, [3])
+        weeks1_vs2and3 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 2020, 1, [2, 3])
+        weeks1_vsNone = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 2020, 1, [])
+        weeks1_vs2_only1 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 2020, 1, [2], onlyWeeks=[1])
+        weeks1_vs2_only2 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 2020, 1, [2], onlyWeeks=[2])
         self.assertIsInstance(weeks1_vs2, list)
         self.assertEqual(2, len(weeks1_vs2))
         self.assertEqual(0, len(weeks1_vs3))

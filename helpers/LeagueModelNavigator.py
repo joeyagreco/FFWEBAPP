@@ -210,7 +210,7 @@ class LeagueModelNavigator:
         return numberOfWeeks
 
     @staticmethod
-    def getAllTeamIdsInLeague(leagueModel: LeagueModel, year:int, **params) -> List[int]:
+    def getAllTeamIdsInLeague(leagueModel: LeagueModel, year: int, **params) -> List[int]:
         """
         Returns as a list of ints all of the team IDs in the given leagueModel.
         EXCLUDEIDS: [list] List of team IDs that will be excluded from the return list.
@@ -223,14 +223,14 @@ class LeagueModelNavigator:
         return teamIds
 
     @staticmethod
-    def getAllWeeksTeamsPlayEachOther(leagueModel: LeagueModel, team1Id: int, opponentTeamIds: list, **params) -> List[int]:
+    def getAllWeeksTeamsPlayEachOther(leagueModel: LeagueModel, year: int, team1Id: int, opponentTeamIds: list, **params) -> List[int]:
         """
-        Returns as a list of ints all of the weeks that the team with team1Id plays any of the teams with ids in opponentTeamIds.
+        Returns as a list of ints all of the weeks in the given league in the given year that the team with team1Id plays any of the teams with ids in opponentTeamIds.
         ONLYWEEKS: [list] Gives weeks teams play each other for the given week numbers.
         """
         onlyWeeks = params.pop("onlyWeeks", None)
         weeks = []
-        for week in leagueModel.getWeeks():
+        for week in leagueModel.getYears()[year].getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                 continue
             for matchup in week.getMatchups():
