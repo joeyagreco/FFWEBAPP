@@ -46,22 +46,23 @@ class PpgCalculator:
         THROUGHWEEK: [int] Gives PPG Against through that week.
         ONLYWEEKS: [list] Gives PPG Against for the given week numbers.
         """
-        throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel))
-        onlyWeeks = params.pop("onlyWeeks", None)
         points = 0
         gameCount = 0
-        for week in self.__leagueModel.getWeeks():
-            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
-                continue
-            elif week.getWeekNumber() > throughWeek:
-                break
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == self.__teamId:
-                    points += matchup.getTeamBScore()
-                    gameCount += 1
-                elif matchup.getTeamB().getTeamId() == self.__teamId:
-                    points += matchup.getTeamAScore()
-                    gameCount += 1
+        for year in self.__years:
+            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            onlyWeeks = params.pop("onlyWeeks", None)
+            for week in self.__leagueModel.getYears()[year].getWeeks():
+                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                    continue
+                elif week.getWeekNumber() > throughWeek:
+                    break
+                for matchup in week.getMatchups():
+                    if matchup.getTeamA().getTeamId() == self.__teamId:
+                        points += matchup.getTeamBScore()
+                        gameCount += 1
+                    elif matchup.getTeamB().getTeamId() == self.__teamId:
+                        points += matchup.getTeamAScore()
+                        gameCount += 1
         if gameCount == 0:
             return 0.0
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)

@@ -81,13 +81,15 @@ class TestPpgCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        ppgAgainstTeam1_1 = PpgCalculator(1, leagueModel).getPpgAgainst(throughWeek=1)
-        ppgAgainstTeam1_2 = PpgCalculator(1, leagueModel).getPpgAgainst(throughWeek=2)
-        ppgAgainstTeam1_3 = PpgCalculator(1, leagueModel).getPpgAgainst(throughWeek=3)
-        ppgAgainstTeam1_only1 = PpgCalculator(1, leagueModel).getPpgAgainst(onlyWeeks=[1])
-        ppgAgainstTeam1_only1and3 = PpgCalculator(1, leagueModel).getPpgAgainst(onlyWeeks=[1, 3])
-        ppgAgainstTeam1_default = PpgCalculator(1, leagueModel).getPpgAgainst()
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        ppgAgainstTeam1_1 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(throughWeek=1)
+        ppgAgainstTeam1_2 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(throughWeek=2)
+        ppgAgainstTeam1_3 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(throughWeek=3)
+        ppgAgainstTeam1_only1 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(onlyWeeks=[1])
+        ppgAgainstTeam1_only1and3 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(onlyWeeks=[1, 3])
+        ppgAgainstTeam1_default = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst()
         self.assertIsInstance(ppgAgainstTeam1_1, float)
         self.assertEqual(100.5, ppgAgainstTeam1_1)
         self.assertEqual(100.35, ppgAgainstTeam1_2)
