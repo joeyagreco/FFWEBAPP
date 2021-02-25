@@ -68,7 +68,7 @@ def leagueHomepage():
                     leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
                     return render_template("leagueHomepage.html", league=leagueOrError, league_url=leagueUrl)
     # no valid weeks found, send to update league page
-    selectedYear = list(leagueOrError["years"].keys())[0]
+    selectedYear = sorted(list(leagueOrError["years"].keys()))[-1]
     return redirect(url_for("updateLeague", league_id=leagueId, year=selectedYear))
 
 
