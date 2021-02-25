@@ -29,24 +29,19 @@ class StatCalculatorService:
         """
         Returns a list of TeamStatsModels, one for each team in the given league in the given year.
         """
-        # if only 1 year is given, then use that year's team names
-        # if multiple are given, use the owner team names
-        # if len(years) > 1:
-        #     teamYear = "0"
-        # else:
-        #     teamYear = years[0]
         teamStatsModels = []
-        for teamYear in years:
-            for team in leagueModel.getYears()[teamYear].getTeams():
+        for year in years:
+            for team in leagueModel.getYears()[year].getTeams():
+                yearAsList = [year]
                 decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
                 teamId = team.getTeamId()
                 teamName = team.getTeamName()
-                scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, years)
+                scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, yearAsList)
                 maxScore = scoresCalculator.getMaxScore()
                 maxScoreStr = Rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
                 minScore = scoresCalculator.getMinScore()
                 minScoreStr = Rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
-                ppgCalculator = PpgCalculator(teamId, leagueModel, years)
+                ppgCalculator = PpgCalculator(teamId, leagueModel, yearAsList)
                 ppg = ppgCalculator.getPpg()
                 ppgAgainst = ppgCalculator.getPpgAgainst()
                 ppgStr = Rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
@@ -55,22 +50,22 @@ class StatCalculatorService:
                 plusMinusStr = Rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
                 stddev = scoresCalculator.getStandardDeviation()
                 stddevStr = Rounder.keepTrailingZeros(stddev, 2)
-                recordCalculator = RecordCalculator(teamId, leagueModel, years)
+                recordCalculator = RecordCalculator(teamId, leagueModel, yearAsList)
                 wins = recordCalculator.getWins()
                 losses = recordCalculator.getLosses()
                 ties = recordCalculator.getTies()
                 winPercentage = recordCalculator.getWinPercentage()
                 winPercentageStr = Rounder.keepTrailingZeros(winPercentage, 3)
-                awalCalculator = AwalCalculator(teamId, leagueModel, years, wins, ties)
+                awalCalculator = AwalCalculator(teamId, leagueModel, yearAsList, wins, ties)
                 awal = awalCalculator.getAwal()
                 awalStr = Rounder.keepTrailingZeros(awal, 2)
                 wal = awalCalculator.getWal()
                 walStr = Rounder.keepTrailingZeros(wal, 2)
-                gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, years, teamId)
+                gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, yearAsList, teamId)
                 # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
                 # this SHOULD not happen, because currently, a team HAS to play every week
-                totalTeamPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, years, teamId)
-                totalLeaguePoints = LeagueModelNavigator.totalLeaguePoints(leagueModel, years)
+                totalTeamPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, yearAsList, teamId)
+                totalLeaguePoints = LeagueModelNavigator.totalLeaguePoints(leagueModel, yearAsList)
                 sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
                 teamScore = sslCalculator.getTeamScore()
                 teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
@@ -78,13 +73,13 @@ class StatCalculatorService:
                 teamSuccessStr = Rounder.keepTrailingZeros(teamSuccess, 2)
                 teamLuck = sslCalculator.getTeamLuck()
                 teamLuckStr = Rounder.keepTrailingZeros(teamLuck, 2)
-                allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, years, teamId)
-                smartCalculator = SmartCalculator(leagueModel, years)
+                allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, yearAsList, teamId)
+                smartCalculator = SmartCalculator(leagueModel, yearAsList)
                 smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
                 smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
                 percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
                 percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
-                strengthOfScheduleCalculator = StrengthOfScheduleCalculator(teamId, leagueModel, years)
+                strengthOfScheduleCalculator = StrengthOfScheduleCalculator(teamId, leagueModel, yearAsList)
                 strengthOfSchedule = strengthOfScheduleCalculator.getStrengthOfSchedule()
                 strengthOfScheduleStr = Rounder.keepTrailingZeros(strengthOfSchedule, 3)
 
