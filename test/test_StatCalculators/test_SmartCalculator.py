@@ -4,6 +4,7 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
+from models.league_models.YearModel import YearModel
 from packages.StatCalculators.SmartCalculator import SmartCalculator
 
 
@@ -28,8 +29,10 @@ class TestSmartCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        smartCalculator = SmartCalculator(leagueModel)
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        smartCalculator = SmartCalculator(leagueModel, [2020])
         smartWins1 = smartCalculator.getSmartWinsOfScore(100)
         smartWins2 = smartCalculator.getSmartWinsOfScore(100)
         smartWinsDefault = smartCalculator.getSmartWinsOfScore(100)

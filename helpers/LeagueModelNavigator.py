@@ -141,30 +141,30 @@ class LeagueModelNavigator:
             return Constants.TIE
 
     @classmethod
-    def getAllScoresInLeague(cls, leagueModel: LeagueModel, year: int, **params) -> List[float]:
+    def getAllScoresInLeague(cls, leagueModel: LeagueModel, years: list, **params) -> List[float]:
         """
-        Returns as a list of floats all of the scores in the given leagueModel in the given year.
+        Returns as a list of floats all of the scores in the given leagueModel in the given years.
         Note: These scores will be properly rounded.
         THROUGHWEEK: [int] Gives all league scores through that week.
         ONLYWEEKS: [list] Gives all league scores for the given week numbers.
         """
-        throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))
-        onlyWeeks = params.pop("onlyWeeks", None)
-        rounder = Rounder()
-        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
         allScores = []
-        for week in leagueModel.getYears()[year].getWeeks():
-            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
-                continue
-            elif week.getWeekNumber() > throughWeek:
-                break
-            for matchup in week.getMatchups():
-                scoreA = matchup.getTeamAScore()
-                scoreB = matchup.getTeamBScore()
-                scoreA = rounder.normalRound(scoreA, decimalPlacesToRoundTo)
-                scoreB = rounder.normalRound(scoreB, decimalPlacesToRoundTo)
-                allScores.append(scoreA)
-                allScores.append(scoreB)
+        for year in years:
+            throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))
+            onlyWeeks = params.pop("onlyWeeks", None)
+            decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
+            for week in leagueModel.getYears()[year].getWeeks():
+                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                    continue
+                elif week.getWeekNumber() > throughWeek:
+                    break
+                for matchup in week.getMatchups():
+                    scoreA = matchup.getTeamAScore()
+                    scoreB = matchup.getTeamBScore()
+                    scoreA = Rounder.normalRound(scoreA, decimalPlacesToRoundTo)
+                    scoreB = Rounder.normalRound(scoreB, decimalPlacesToRoundTo)
+                    allScores.append(scoreA)
+                    allScores.append(scoreB)
         return allScores
 
     @classmethod
