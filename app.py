@@ -390,7 +390,7 @@ def teamStats():
                                error_message=leagueModelOrError.errorMessage())
     if not years:
         # give most recent year if none is given
-        years = LeagueModelNavigator.getListOfYearsInLeague(leagueModelOrError)[-1]
+        years = LeagueModelNavigator.getListOfYearsInLeague(leagueModelOrError, asInts=True)
     statsModels = mainController.getTeamStatsModel(leagueModelOrError, years)
     # grab Constants class to use for titles of table
     constants = Constants
