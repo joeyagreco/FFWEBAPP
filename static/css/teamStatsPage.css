@@ -1,13 +1,19 @@
-.statsContainer {
+.dropdownAndTable {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.weekSelectDropdown {
+    order: 1;
 }
 
 .statsTable {
     width: 95%;
-    order: 1;
+    order: 2;
     font-size: 120%;
     border-collapse: collapse;
     text-align: center;
