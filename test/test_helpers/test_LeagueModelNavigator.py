@@ -396,3 +396,59 @@ class TestLeagueModelNavigator(unittest.TestCase):
         self.assertEqual(team1_andOpponent[0][0], 100)
         self.assertEqual(team1_andOpponent[0][1], 95.5)
 
+    def test_getListOfYearsInLeague(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 100, 95.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 102, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        listOfYearsAsInts = LeagueModelNavigator.getListOfYearsInLeague(leagueModel, asInts=True)
+        listOfYearsAsObjects = LeagueModelNavigator.getListOfYearsInLeague(leagueModel)
+        self.assertEqual(1, len(listOfYearsAsInts))
+        self.assertEqual(2020, listOfYearsAsInts[0])
+        self.assertEqual(1, len(listOfYearsAsObjects))
+        self.assertEqual(2020, listOfYearsAsObjects[0].getYear())
+
+    def test_getDictOfYearModelsWithoutZero(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 100, 95.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 102, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 101, 101)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {0: None, 2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        yearsWithoutZero = LeagueModelNavigator.getDictOfYearModelsWithoutZero(leagueModel)
+        self.assertEqual(1, len(yearsWithoutZero))
+        self.assertIsInstance(yearsWithoutZero[2020], YearModel)
+
+

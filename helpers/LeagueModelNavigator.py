@@ -265,3 +265,29 @@ class LeagueModelNavigator:
                         continue
                     scores.append(matchup.getTeamBScore())
         return scores
+
+    @staticmethod
+    def getListOfYearsInLeague(leagueModel: LeagueModel, **params):
+        """
+        This returns as a list of TeamModels of all the years in the given league.
+        This does not include year0.
+        ASINTS: (boolean) If True, returns as a list of ints representing the years
+        """
+        asInts = params.pop("asInts", False)
+        years = []
+        for year in leagueModel.getYears():
+            if year != 0:
+                if asInts:
+                    years.append(year)
+                else:
+                    years.append(leagueModel.getYears()[year])
+        return years
+
+    @staticmethod
+    def getDictOfYearModelsWithoutZero(leagueModel: LeagueModel):
+        """
+        This returns as a dict of TeamModels of all the years in the given league without year0.
+        """
+        years = leagueModel.getYears()
+        del years[0]
+        return leagueModel.getYears()

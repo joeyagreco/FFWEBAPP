@@ -29,7 +29,6 @@ class Rounder:
         Ex: score of 132.55 -> 2, score of 130.10 -> 1
         Default return value is 1.
         """
-
         maxDecimalPlaces = 1
         for year in league.getYears():
             for week in league.getYears()[year].getWeeks():

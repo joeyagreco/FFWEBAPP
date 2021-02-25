@@ -30,8 +30,8 @@ class MainController:
         return self.__databaseService.getLeagueModel(leagueId)
 
     @staticmethod
-    def getTeamStatsModel(leagueModel: LeagueModel):
-        return StatCalculatorService.getTeamStats(leagueModel)
+    def getTeamStatsModel(leagueModel: LeagueModel, years: list):
+        return StatCalculatorService.getTeamStats(leagueModel, years)
 
     @staticmethod
     def getHeadToHeadStatsModel(leagueModel: LeagueModel, team1Id: int, team2Id: int):
