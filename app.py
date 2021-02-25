@@ -391,7 +391,6 @@ def teamStats():
     if not years:
         # give most recent year if none is given
         years = LeagueModelNavigator.getListOfYearsInLeague(leagueModelOrError, asInts=True)
-        print(f"app.py years list: {years}")
     statsModels = mainController.getTeamStatsModel(leagueModelOrError, years)
     # grab Constants class to use for titles of table
     constants = Constants

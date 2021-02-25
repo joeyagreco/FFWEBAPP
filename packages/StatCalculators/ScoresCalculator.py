@@ -135,7 +135,7 @@ class ScoresCalculator:
             onlyWeeks = params.pop("onlyWeeks", None)
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
             allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, year, self.__teamId, vsTeamIds, onlyWeeks=onlyWeeks)
-            totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, year, throughWeek=weekNumber, onlyWeeks=allWeeksTeamsPlay)
+            totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, [year], throughWeek=weekNumber, onlyWeeks=allWeeksTeamsPlay)
             for week in self.__leagueModel.getYears()[year].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
