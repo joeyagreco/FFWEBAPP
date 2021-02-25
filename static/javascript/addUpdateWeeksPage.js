@@ -102,3 +102,32 @@ function makeActiveTeam(newTeamElement, newTeam, matchupId) {
     // mark this as a change
     changeMade();
 }
+
+function postWeek() {
+    // this posts all needed info for the week
+    var leagueId = document.getElementById("league_id").value;
+    var weekNumber = document.getElementById("week_number").value;
+    var yearNumber = document.getElementById("year_number").value;
+    var numberOfTeams = document.getElementById("number_of_teams").value;
+
+    data = {"league_id": leagueId,
+            "week_number": weekNumber,
+            "year_number": yearNumber};
+    // add all the teams and scores
+    for(i=1; i<=numberOfTeams/2; i++) {
+        // add team
+        console.log(document.getElementById("teamAId_matchup_"+i).value);
+        data["teamAId_matchup_"+i] = document.getElementById("teamAId_matchup_"+i).value;
+        data["teamBId_matchup_"+i] = document.getElementById("teamBId_matchup_"+i).value;
+        // add scores
+        data["teamAScore_matchup_"+i] = document.getElementById("teamAScore_matchup_"+i).value;
+        data["teamBScore_matchup_"+i] = document.getElementById("teamBScore_matchup_"+i).value;
+    }
+    // send POST request
+    var fetchPromise = fetch("/update-week", {method: "POST",
+                                                headers: {"Content-Type": "application/json"},
+                                                body: JSON.stringify(data)});
+    fetchPromise.then(response => {
+        window.location.href = response.url;
+    });
+}

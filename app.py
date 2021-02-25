@@ -263,10 +263,13 @@ def updateWeek():
                 return True
         return False
 
-    print(request.form)
-    leagueId = int(request.form["league_id"])
-    weekNumber = int(request.form["week_number"])
-    yearNumber = request.form["year_number"]
+    # convert dict
+    newDataStr = request.data.decode("UTF-8")
+    newDataDict = ast.literal_eval(newDataStr)
+    print(newDataDict)
+    leagueId = int(newDataDict["league_id"])
+    weekNumber = int(newDataDict["week_number"])
+    yearNumber = newDataDict["year_number"]
     weekDict = {"weekNumber": weekNumber, "matchups": []}
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
@@ -277,12 +280,12 @@ def updateWeek():
         matchupIdCounter = 1
         for i in range(1, len(leagueOrError["years"][yearNumber]["teams"]), 2):
             matchup = {"matchupId": matchupIdCounter,
-                       "teamA": getTeamById(leagueOrError, int(request.form[f"teamAId_matchup_{matchupIdCounter}"]),
+                       "teamA": getTeamById(leagueOrError, int(newDataDict[f"teamAId_matchup_{matchupIdCounter}"]),
                                             yearNumber),
-                       "teamB": getTeamById(leagueOrError, int(request.form[f"teamBId_matchup_{matchupIdCounter}"]),
+                       "teamB": getTeamById(leagueOrError, int(newDataDict[f"teamBId_matchup_{matchupIdCounter}"]),
                                             yearNumber),
-                       "teamAScore": float(request.form[f"teamAScore_matchup_{matchupIdCounter}"]),
-                       "teamBScore": float(request.form[f"teamBScore_matchup_{matchupIdCounter}"])}
+                       "teamAScore": float(newDataDict[f"teamAScore_matchup_{matchupIdCounter}"]),
+                       "teamBScore": float(newDataDict[f"teamBScore_matchup_{matchupIdCounter}"])}
             weekDict["matchups"].append(matchup)
             matchupIdCounter += 1
         # check if this league has this week already, if so, overwrite it, if not, add it
