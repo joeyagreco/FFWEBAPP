@@ -48,7 +48,7 @@ class LeagueModelNavigator:
     @classmethod
     def gamesPlayedByTeam(cls, leagueModel: LeagueModel, year: int, teamId: int, **params) -> int:
         """
-        Returns as an int the number of games played in the given league by the team with the given ID.
+        Returns as an int the number of games played in the given league in the given year by the team with the given ID.
         THROUGHWEEK: [int] Gives games played through that week.
         ONLYWEEKS: [list] Gives games played for the given week numbers.
         VSTEAMIDS: [list] Gives games played vs teams with the given IDs.
@@ -68,17 +68,17 @@ class LeagueModelNavigator:
         return gamesPlayed
 
     @classmethod
-    def totalLeaguePoints(cls, leagueModel: LeagueModel, **params) -> float:
+    def totalLeaguePoints(cls, leagueModel: LeagueModel, year: int, **params) -> float:
         """
-        Returns a float that is the total amount of points scored in the given league.
+        Returns a float that is the total amount of points scored in the given league in the given year.
         THROUGHWEEK: [int] Gives total league points scored through that week.
         ONLYWEEKS: [list] Gives total league points for the given week numbers.
         """
-        throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel))
+        throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))
         onlyWeeks = params.pop("onlyWeeks", None)
         rounder = Rounder()
         totalPoints = 0
-        for week in leagueModel.getWeeks():
+        for week in leagueModel.getYears()[year].getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                 continue
             elif week.getWeekNumber() > throughWeek:
@@ -86,7 +86,7 @@ class LeagueModelNavigator:
             for matchup in week.getMatchups():
                 totalPoints += matchup.getTeamAScore()
                 totalPoints += matchup.getTeamBScore()
-        return rounder.normalRound(totalPoints, rounder.getDecimalPlacesRoundedToInScores(leagueModel))
+        return rounder.normalRound(totalPoints, rounder.getDecimalPlacesRoundedToInScores(leagueModel, year))
 
     @classmethod
     def totalPointsScoredByTeam(cls, leagueModel: LeagueModel, teamId: int, **params) -> float:

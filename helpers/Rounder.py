@@ -23,15 +23,15 @@ class Rounder:
         return part / (10 ** decimalPlaces)
 
     @staticmethod
-    def getDecimalPlacesRoundedToInScores(league: LeagueModel) -> int:
+    def getDecimalPlacesRoundedToInScores(league: LeagueModel, year: int) -> int:
         """
-        Returns an int that represents how many decimal places the scores in this league are rounded to.
+        Returns an int that represents how many decimal places the scores in this league in the given year are rounded to.
         Ex: score of 132.55 -> 2, score of 130.10 -> 1
         Default return value is 1.
         """
 
         maxDecimalPlaces = 1
-        for week in league.getWeeks():
+        for week in league.getYears()[year].getWeeks():
             for matchup in week.getMatchups():
                 aScore = matchup.getTeamAScore()
                 bScore = matchup.getTeamBScore()

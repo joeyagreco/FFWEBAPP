@@ -131,12 +131,14 @@ class TestLeagueModelNavigator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-        totalLeaguePoints1 = LeagueModelNavigator.totalLeaguePoints(leagueModel, throughWeek=1)
-        totalLeaguePoints2 = LeagueModelNavigator.totalLeaguePoints(leagueModel, throughWeek=2)
-        totalLeaguePoints1_1and2 = LeagueModelNavigator.totalLeaguePoints(leagueModel, onlyWeeks=[1, 2])
-        totalLeaguePoints1_2 = LeagueModelNavigator.totalLeaguePoints(leagueModel, onlyWeeks=[2])
-        totalLeaguePointsDefault = LeagueModelNavigator.totalLeaguePoints(leagueModel)
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        totalLeaguePoints1 = LeagueModelNavigator.totalLeaguePoints(leagueModel, 2020, throughWeek=1)
+        totalLeaguePoints2 = LeagueModelNavigator.totalLeaguePoints(leagueModel, 2020, throughWeek=2)
+        totalLeaguePoints1_1and2 = LeagueModelNavigator.totalLeaguePoints(leagueModel, 2020, onlyWeeks=[1, 2])
+        totalLeaguePoints1_2 = LeagueModelNavigator.totalLeaguePoints(leagueModel, 2020, onlyWeeks=[2])
+        totalLeaguePointsDefault = LeagueModelNavigator.totalLeaguePoints(leagueModel, 2020)
         self.assertEqual(510.5, totalLeaguePoints1)
         self.assertEqual(1021, totalLeaguePoints2)
         self.assertEqual(1021, totalLeaguePoints1_1and2)
