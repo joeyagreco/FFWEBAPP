@@ -167,21 +167,21 @@ class LeagueModelNavigator:
         return allScores
 
     @classmethod
-    def getAllScoresOfTeam(cls, leagueModel: LeagueModel, teamId: int, **params) -> List[float]:
+    def getAllScoresOfTeam(cls, leagueModel: LeagueModel, year: int, teamId: int, **params) -> List[float]:
         """
-        Returns as a list of floats all of the scores in the given leagueModel that the team with the given ID had.
+        Returns as a list of floats all of the scores in the given leagueModel in the given year that the team with the given ID had.
         Note: These scores will be properly rounded.
         THROUGHWEEK: [int] Gives all scores through that week.
         ONLYWEEKS: [list] Gives all scores for the given week numbers.
         VSTEAMIDS: [list] Gives all scores vs teams with the given IDs.
         """
-        throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel))
+        throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))
         onlyWeeks = params.pop("onlyWeeks", None)
-        vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, excludeId=[teamId]))
+        vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
         rounder = Rounder()
-        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel)
+        decimalPlacesToRoundTo = rounder.getDecimalPlacesRoundedToInScores(leagueModel, year)
         allScores = []
-        for week in leagueModel.getWeeks():
+        for week in leagueModel.getYears()[year].getWeeks():
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                 continue
             elif week.getWeekNumber() > throughWeek:
