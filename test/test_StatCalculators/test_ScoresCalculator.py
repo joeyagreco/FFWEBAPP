@@ -96,8 +96,20 @@ class TestScoresCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
-        year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        year2020 = YearModel(2020, teamList, weekList)
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100.6, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 100.1, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year2021 = YearModel(2021, teamList, weekList)
+        yearDict = {2020: year2020, 2021: year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         minScoreTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getMinScore(throughWeek=1)
         minScoreTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getMinScore(throughWeek=2)
@@ -108,6 +120,8 @@ class TestScoresCalculator(unittest.TestCase):
         minScoreTeam1_only1and3 = ScoresCalculator(1, leagueModel, [2020]).getMinScore(onlyWeeks=[1, 3])
         minScoreTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getMinScore(throughWeek=1, vsTeamIds=[2])
         minScoreTeam1_default = ScoresCalculator(1, leagueModel, [2020]).getMinScore()
+        minScoreTeam1_2021 = ScoresCalculator(1, leagueModel, [2021]).getMinScore()
+        minScoreTeam1_bothYears = ScoresCalculator(1, leagueModel, [2020, 2021]).getMinScore()
         self.assertEqual(100, minScoreTeam1_1)
         self.assertEqual(99, minScoreTeam1_2)
         self.assertEqual(98, minScoreTeam1_3)
@@ -117,6 +131,8 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(98, minScoreTeam1_only1and3)
         self.assertEqual(100, minScoreTeam1_allParams)
         self.assertEqual(98, minScoreTeam1_default)
+        self.assertEqual(100, minScoreTeam1_2021)
+        self.assertEqual(98, minScoreTeam1_bothYears)
 
     def test_getPlusMinus(self):
         team1 = TeamModel(1, "team1")
