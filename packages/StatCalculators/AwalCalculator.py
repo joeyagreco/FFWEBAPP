@@ -29,8 +29,11 @@ class AwalCalculator:
         totalAdjustment = 0
         for year in self.__years:
             throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["vsTeamIds"] = vsTeamIds
             totalAdjustment += self.getAdjustment(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
         return Rounder.normalRound(totalAdjustment + self.getWal(), 2)
 
@@ -51,8 +54,11 @@ class AwalCalculator:
         totalAdjustment = 0
         for year in self.__years:
             throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["vsTeamIds"] = vsTeamIds
             L = self.__leagueModel.getNumberOfTeams() - 1
             for week in self.__leagueModel.getYears()[year].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
