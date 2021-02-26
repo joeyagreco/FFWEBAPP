@@ -295,7 +295,7 @@ class ExplanationDivsAsStrings:
         """
 
     TEAM_SUCCESS_FORMULA = f"""
-        {Constants.TEAM_SUCCESS_STAT_TITLE} = ((%0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% / G) * 100) + (%0%{Constants.SCORING_SHARE_STAT_TITLE}%1%{Constants.SCORING_SHARE_STAT_TITLE}%2% * 0.2) + ((%0%{Constants.MAX_SCORE_STAT_TITLE}%1%{Constants.MAX_SCORE_STAT_TITLE}%2% + %0%{Constants.MIN_SCORE_STAT_TITLE}%1%{Constants.MIN_SCORE_STAT_TITLE}%2%) * 0.1)<br>
+        {Constants.TEAM_SUCCESS_STAT_TITLE} = ((%0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% / G) * 100) + (%0%{Constants.SCORING_SHARE_STAT_TITLE}%1%{Constants.SCORING_SHARE_STAT_TITLE}%2% * 2) + ((%0%{Constants.MAX_SCORE_STAT_TITLE}%1%{Constants.MAX_SCORE_STAT_TITLE}%2% + %0%{Constants.MIN_SCORE_STAT_TITLE}%1%{Constants.MIN_SCORE_STAT_TITLE}%2%) * 0.05)<br>
         WHERE:<br>
         G = Total games played by a team
         """
