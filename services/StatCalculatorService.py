@@ -64,9 +64,9 @@ class StatCalculatorService:
                 gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, yearAsList, teamId)
                 # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
                 # this SHOULD not happen, because currently, a team HAS to play every week
-                totalTeamPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, yearAsList, teamId)
-                totalLeaguePoints = LeagueModelNavigator.totalLeaguePoints(leagueModel, yearAsList)
-                sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
+                percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
+                percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
+                sslCalculator = SslCalculator(awal, wal, percentageOfLeagueScoring, maxScore, minScore, gamesPlayed)
                 teamScore = sslCalculator.getTeamScore()
                 teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
                 teamSuccess = sslCalculator.getTeamSuccess()
@@ -77,8 +77,6 @@ class StatCalculatorService:
                 smartCalculator = SmartCalculator(leagueModel, yearAsList)
                 smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
                 smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
-                percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
-                percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
                 strengthOfScheduleCalculator = StrengthOfScheduleCalculator(teamId, leagueModel, yearAsList)
                 strengthOfSchedule = strengthOfScheduleCalculator.getStrengthOfSchedule()
                 strengthOfScheduleStr = Rounder.keepTrailingZeros(strengthOfSchedule, 3)
@@ -150,12 +148,9 @@ class StatCalculatorService:
             gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, years, teamId, vsTeamIds=[opponentTeamId])
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team has to play every week
-            totalTeamPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, years, teamId, vsTeamIds=[opponentTeamId])
-            totalLeaguePoints = 0
-            for y in years:
-                allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, y, team1Id, [team2Id])
-                totalLeaguePoints += LeagueModelNavigator.totalLeaguePoints(leagueModel, [y], onlyIncludeWeeks=allWeeksTeamsPlay)
-            sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
+            percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring(vsTeamIds=[opponentTeamId])
+            percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
+            sslCalculator = SslCalculator(awal, wal, percentageOfLeagueScoring, maxScore, minScore, gamesPlayed)
             teamScore = sslCalculator.getTeamScore()
             teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
             teamSuccess = sslCalculator.getTeamSuccess()
@@ -166,8 +161,6 @@ class StatCalculatorService:
             smartCalculator = SmartCalculator(leagueModel, years)
             smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
             smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
-            percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring(vsTeamIds=[opponentTeamId])
-            percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
             headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
                                                         teamName=teamName,
                                                         wins=wins,
