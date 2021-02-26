@@ -406,6 +406,7 @@ def headToHeadStats():
     leagueId = int(request.args.get("league_id"))
     team1Id = request.args.get("team1")
     team2Id = request.args.get("team2")
+    year = request.args.get("year")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
@@ -422,13 +423,19 @@ def headToHeadStats():
     if isinstance(leagueModelOrError, Error):
         return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=None,
                                given_team_2_id=None, error_message=leagueModelOrError.errorMessage())
+    if year is None:
+        # give most recent year if none is given
+        years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        year = years[-1]
+        yearList = [year]
+    else:
+        yearList = [year]
     # check if these teams play each other ever
-    leagueModelNavigator = LeagueModelNavigator()
-    if not leagueModelNavigator.teamsPlayEachOther(leagueModelOrError, team1Id, team2Id):
+    if not LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, year, team1Id, team2Id):
         return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
                                given_team_2_id=team2Id, teams_dont_play=True)
     # get the stats model
-    statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, team1Id, team2Id)
+    statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, yearList, team1Id, team2Id)
     # grab Constants class to use for dropdown
     constants = Constants
     return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,

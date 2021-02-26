@@ -34,8 +34,8 @@ class MainController:
         return StatCalculatorService.getTeamStats(leagueModel, years)
 
     @staticmethod
-    def getHeadToHeadStatsModel(leagueModel: LeagueModel, team1Id: int, team2Id: int):
-        return StatCalculatorService.getHeadToHeadStats(leagueModel, team1Id, team2Id)
+    def getHeadToHeadStatsModel(leagueModel: LeagueModel, year: list, team1Id: int, team2Id: int):
+        return StatCalculatorService.getHeadToHeadStats(leagueModel, year, team1Id, team2Id)
 
     @staticmethod
     def getLeagueStatsModel(leagueModel: LeagueModel, statSelection: str):

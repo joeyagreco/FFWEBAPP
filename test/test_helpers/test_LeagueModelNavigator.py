@@ -66,8 +66,8 @@ class TestLeagueModelNavigator(unittest.TestCase):
         year = YearModel(2020, teamList, weekList)
         yearDict = {2020: year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
-        self.assertTrue(LeagueModelNavigator.teamsPlayEachOther(leagueModel, [2020], 1, 2))
-        self.assertFalse(LeagueModelNavigator.teamsPlayEachOther(leagueModel, [2020], 1, 3))
+        self.assertTrue(LeagueModelNavigator.teamsPlayEachOther(leagueModel, 2020, 1, 2))
+        self.assertFalse(LeagueModelNavigator.teamsPlayEachOther(leagueModel, 2020, 1, 3))
 
     def test_gamesPlayedByTeam(self):
         team1 = TeamModel(1, "team1")
