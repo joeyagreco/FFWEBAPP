@@ -411,6 +411,7 @@ def headToHeadStats():
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
+    leagueModelOrError = mainController.getLeagueModel(leagueId)
     if team1Id and team2Id:
         # if the user submitted this matchup
         team1Id = int(team1Id)
@@ -419,7 +420,6 @@ def headToHeadStats():
         # no submitted matchup, default to first 2 teams
         team1Id = 1
         team2Id = 2
-    leagueModelOrError = mainController.getLeagueModel(leagueId)
     if isinstance(leagueModelOrError, Error):
         return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=None,
                                given_team_2_id=None, error_message=leagueModelOrError.errorMessage())
@@ -428,12 +428,16 @@ def headToHeadStats():
         years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
         year = years[-1]
         yearList = [year]
+    elif year == "0":
+        # give them all years (ALL TIME)
+        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        year = 0
     else:
         yearList = [year]
     # check if these teams play each other ever
-    if not LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, year, team1Id, team2Id):
-        return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
-                               given_team_2_id=team2Id, teams_dont_play=True)
+    # if not LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, year, team1Id, team2Id):
+    #     return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
+    #                            given_team_2_id=team2Id, teams_dont_play=True)
     # get the stats model
     statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, yearList, team1Id, team2Id)
     # grab Constants class to use for dropdown

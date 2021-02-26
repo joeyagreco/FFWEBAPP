@@ -12,3 +12,9 @@ function updateTeam2(team2) {
     var team1 = document.getElementById("team1button").value;
     getHeadToHeadTable(team1, team2);
 }
+
+function yearRedirect(year) {
+    var leagueId = document.getElementById("league_id").value;
+    // GET request
+     window.location = "/head-to-head-stats?league_id="+leagueId+"&year="+year;
+}
