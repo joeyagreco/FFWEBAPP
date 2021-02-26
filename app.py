@@ -439,7 +439,7 @@ def headToHeadStats():
     # grab Constants class to use for dropdown
     constants = Constants
     return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
-                           given_team_2_id=team2Id, stats_models=statsModelsOrError, constants=constants)
+                           given_team_2_id=team2Id, stats_models=statsModelsOrError, constants=constants, selected_year=year)
 
 
 @app.route("/league-stats", methods=["GET"])
