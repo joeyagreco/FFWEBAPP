@@ -178,8 +178,11 @@ class LeagueModelNavigator:
         allScores = []
         for year in years:
             throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))
+            params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
+            params["vsTeamIds"] = vsTeamIds
             decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             for week in leagueModel.getYears()[year].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
