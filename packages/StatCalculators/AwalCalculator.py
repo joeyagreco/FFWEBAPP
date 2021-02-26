@@ -26,15 +26,7 @@ class AwalCalculator:
         ONLYWEEKS: [list] Gives AWAL for the given week numbers.
         VSTEAMIDS: [list] Gives AWAL vs teams with the given IDs.
         """
-        totalAdjustment = 0
-        for year in self.__years:
-            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
-            params["throughWeek"] = throughWeek
-            onlyWeeks = params.pop("onlyWeeks", None)
-            params["onlyWeeks"] = onlyWeeks
-            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
-            params["vsTeamIds"] = vsTeamIds
-            totalAdjustment += self.getAdjustment(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
+        totalAdjustment = self.getAdjustment(**params)
         return Rounder.normalRound(totalAdjustment + self.getWal(), 2)
 
     def getAdjustment(self, **params) -> float:
