@@ -122,12 +122,10 @@ class StatCalculatorService:
         statsModels = []
         for i, teamId in enumerate(teamIds):
             opponentTeamId = teamIds[i - 1]
-            print(f"stat calculator service: opponent Team ID: {opponentTeamId}")
             decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             teamName = LeagueModelNavigator.getTeamById(leagueModel, year, teamId).getTeamName()
             recordCalculator = RecordCalculator(teamId, leagueModel, years)
             wins = recordCalculator.getWins(vsTeamIds=[opponentTeamId])
-            print("done calculating wins...")
             losses = recordCalculator.getLosses(vsTeamIds=[opponentTeamId])
             ties = recordCalculator.getTies(vsTeamIds=[opponentTeamId])
             winPercentage = recordCalculator.getWinPercentage(vsTeamIds=[opponentTeamId])
@@ -154,9 +152,9 @@ class StatCalculatorService:
             # this SHOULD not happen, because currently, a team has to play every week
             totalTeamPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, years, teamId, vsTeamIds=[opponentTeamId])
             totalLeaguePoints = 0
-            for year in years:
-                allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, year, team1Id, [team2Id])
-                totalLeaguePoints += LeagueModelNavigator.totalLeaguePoints(leagueModel, [year], onlyIncludeWeeks=allWeeksTeamsPlay)
+            for y in years:
+                allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, y, team1Id, [team2Id])
+                totalLeaguePoints += LeagueModelNavigator.totalLeaguePoints(leagueModel, [y], onlyIncludeWeeks=allWeeksTeamsPlay)
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
             teamScore = sslCalculator.getTeamScore()
             teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
