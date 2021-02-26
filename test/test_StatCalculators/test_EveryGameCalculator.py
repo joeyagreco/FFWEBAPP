@@ -4,6 +4,7 @@ from models.league_models.LeagueModel import LeagueModel
 from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
+from models.league_models.YearModel import YearModel
 from models.league_stat_models.MarginOfVictoryModel import MarginOfVictoryModel
 from models.league_stat_models.ScoreModel import ScoreModel
 from packages.StatCalculators.EveryGameCalculator import EveryGameCalculator
@@ -25,8 +26,9 @@ class TestEveryGameCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
         everyGameCalculator = EveryGameCalculator(leagueModel)
         movs = everyGameCalculator.getAllMarginOfVictories()
         self.assertEqual(1, len(movs))
@@ -52,8 +54,9 @@ class TestEveryGameCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
-        leagueModel = LeagueModel(123456, "test", 6, teamList, weekList)
-
+        year = YearModel(2020, teamList, weekList)
+        yearDict = {2020: year}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
         everyGameCalculator = EveryGameCalculator(leagueModel)
         allScores = everyGameCalculator.getAllScores()
         self.assertEqual(6, len(allScores))
