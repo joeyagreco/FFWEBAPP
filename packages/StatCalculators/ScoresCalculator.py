@@ -22,8 +22,11 @@ class ScoresCalculator:
         scores = []
         for year in self.__years:
             throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.getYears()[year].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
@@ -48,8 +51,11 @@ class ScoresCalculator:
         scores = []
         for year in self.__years:
             throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.getYears()[year].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
@@ -77,9 +83,11 @@ class ScoresCalculator:
         totalOpponentScore = 0
         for year in self.__years:
             throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
-            vsTeamIds = params.pop("vsTeamIds",
-                                   LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["onlyWeeks"] = onlyWeeks
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.getYears()[year].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
@@ -104,8 +112,11 @@ class ScoresCalculator:
         scores = []
         for year in self.__years:
             throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.getYears()[year].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
@@ -132,8 +143,11 @@ class ScoresCalculator:
         totalLeagueScore = 0
         for year in self.__years:
             weekNumber = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["weekNumber"] = weekNumber
             onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["vsTeamIds"] = vsTeamIds
             allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, year, self.__teamId, vsTeamIds, onlyWeeks=onlyWeeks)
             totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, [year], throughWeek=weekNumber, onlyWeeks=allWeeksTeamsPlay)
             for week in self.__leagueModel.getYears()[year].getWeeks():
