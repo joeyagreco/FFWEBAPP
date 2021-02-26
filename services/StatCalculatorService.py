@@ -122,10 +122,12 @@ class StatCalculatorService:
         statsModels = []
         for i, teamId in enumerate(teamIds):
             opponentTeamId = teamIds[i - 1]
+            print(f"stat calculator service: opponent Team ID: {opponentTeamId}")
             decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             teamName = LeagueModelNavigator.getTeamById(leagueModel, year, teamId).getTeamName()
             recordCalculator = RecordCalculator(teamId, leagueModel, years)
             wins = recordCalculator.getWins(vsTeamIds=[opponentTeamId])
+            print("done calculating wins...")
             losses = recordCalculator.getLosses(vsTeamIds=[opponentTeamId])
             ties = recordCalculator.getTies(vsTeamIds=[opponentTeamId])
             winPercentage = recordCalculator.getWinPercentage(vsTeamIds=[opponentTeamId])

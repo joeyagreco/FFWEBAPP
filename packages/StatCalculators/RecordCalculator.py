@@ -17,11 +17,17 @@ class RecordCalculator:
         ONLYWEEKS: [list] Gives wins for the given week numbers.
         VSTEAMIDS: [list] Gives wins vs teams with the given IDs.
         """
+        print(f"params {params}")
         wins = 0
         for year in self.__years:
+            print(f"on year: {year}")
             throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["vsTeamIds"] = vsTeamIds
+            print(f"vs team ids: {vsTeamIds}")
             for week in self.__leagueModel.getYears()[year].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
@@ -31,10 +37,12 @@ class RecordCalculator:
                     if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
                         # see if they won as team A
                         if matchup.getTeamAScore() > matchup.getTeamBScore():
+                            # print(f"{matchup.getTeamA().getTeamName()} +1 win vs {matchup.getTeamB().getTeamName()} in year: {year}")
                             wins += 1
                     elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                         # see if they won as team B
                         if matchup.getTeamBScore() > matchup.getTeamAScore():
+                            # print(f"{matchup.getTeamB().getTeamName()} +1 win vs {matchup.getTeamA().getTeamName()} in year: {year}")
                             wins += 1
         return wins
 
