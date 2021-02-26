@@ -12,7 +12,7 @@ class SslCalculator:
         self.__gamesPlayed = gamesPlayed
         self.__awalAndWalMultiplier = 100
         self.__scoringShareMultiplier = 2
-        self.__minMaxMultiplier = 0.1
+        self.__minMaxMultiplier = 0.05
 
     def getTeamScore(self, **params) -> float:
         """
