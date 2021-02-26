@@ -21,8 +21,11 @@ class PpgCalculator:
         gameCount = 0
         for year in self.__years:
             throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.getYears()[year].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
@@ -50,7 +53,9 @@ class PpgCalculator:
         gameCount = 0
         for year in self.__years:
             throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
             for week in self.__leagueModel.getYears()[year].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
