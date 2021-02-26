@@ -279,8 +279,20 @@ class TestScoresCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
-        year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        year2020 = YearModel(2020, teamList, weekList)
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100.6, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 100.1, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year2021 = YearModel(2021, teamList, weekList)
+        yearDict = {2020: year2020, 2021: year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         percentageTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(throughWeek=1)
         percentageTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(throughWeek=2)
@@ -290,6 +302,8 @@ class TestScoresCalculator(unittest.TestCase):
         percentageTeam1_only1and2 = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(onlyWeeks=[1, 2])
         percentageTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring(throughWeek=1, vsTeamIds=[2])
         percentageTeam1_default = ScoresCalculator(1, leagueModel, [2020]).getPercentageOfLeagueScoring()
+        percentageTeam1_2021 = ScoresCalculator(1, leagueModel, [2021]).getPercentageOfLeagueScoring()
+        percentageTeam1_bothYears = ScoresCalculator(1, leagueModel, [2020, 2021]).getPercentageOfLeagueScoring()
         self.assertIsInstance(percentageTeam1_1, float)
         self.assertEqual(23.87, percentageTeam1_1)
         self.assertEqual(23.96, percentageTeam1_2)
@@ -299,3 +313,5 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(23.96, percentageTeam1_only1and2)
         self.assertEqual(23.87, percentageTeam1_allParams)
         self.assertEqual(23.96, percentageTeam1_default)
+        self.assertEqual(17.92, percentageTeam1_2021)
+        self.assertEqual(20.5, percentageTeam1_bothYears)
