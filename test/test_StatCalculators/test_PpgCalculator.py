@@ -34,8 +34,20 @@ class TestPpgCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
-        year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        year2020 = YearModel(2020, teamList, weekList)
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100.6, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 100.1, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year2021 = YearModel(2021, teamList, weekList)
+        yearDict = {2020: year2020, 2021: year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         ppgTeam1_1 = PpgCalculator(1, leagueModel, [2020]).getPpg(throughWeek=1)
         ppgTeam1_2 = PpgCalculator(1, leagueModel, [2020]).getPpg(throughWeek=2)
@@ -46,6 +58,8 @@ class TestPpgCalculator(unittest.TestCase):
         ppgTeam1_only1and3 = PpgCalculator(1, leagueModel, [2020]).getPpg(onlyWeeks=[1, 3])
         ppgTeam1_allParams = PpgCalculator(1, leagueModel, [2020]).getPpg(vsTeamIds=[2], throughWeek=1)
         ppgTeam1_default = PpgCalculator(1, leagueModel, [2020]).getPpg()
+        ppgTeam1_2021 = PpgCalculator(1, leagueModel, [2021]).getPpg()
+        ppgTeam1_bothYears = PpgCalculator(1, leagueModel, [2020, 2021]).getPpg()
         self.assertIsInstance(ppgTeam1_1, float)
         self.assertEqual(100, ppgTeam1_1)
         self.assertEqual(99.5, ppgTeam1_2)
@@ -56,6 +70,8 @@ class TestPpgCalculator(unittest.TestCase):
         self.assertEqual(99.5, ppgTeam1_only1and3)
         self.assertEqual(100, ppgTeam1_allParams)
         self.assertEqual(99.33, ppgTeam1_default)
+        self.assertEqual(100.3, ppgTeam1_2021)
+        self.assertEqual(99.72, ppgTeam1_bothYears)
 
     def test_getPpgAgainst(self):
         team1 = TeamModel(1, "team1")
