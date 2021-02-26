@@ -151,8 +151,10 @@ class StatCalculatorService:
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team has to play every week
             totalTeamPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, years, teamId, vsTeamIds=[opponentTeamId])
-            allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, year, team1Id, [team2Id])
-            totalLeaguePoints = LeagueModelNavigator.totalLeaguePoints(leagueModel, years, onlyIncludeWeeks=allWeeksTeamsPlay)
+            totalLeaguePoints = 0
+            for year in years:
+                allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, year, team1Id, [team2Id])
+                totalLeaguePoints += LeagueModelNavigator.totalLeaguePoints(leagueModel, [year], onlyIncludeWeeks=allWeeksTeamsPlay)
             sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
             teamScore = sslCalculator.getTeamScore()
             teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
