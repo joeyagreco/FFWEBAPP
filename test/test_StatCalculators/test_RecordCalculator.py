@@ -141,8 +141,20 @@ class TestRecordCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
-        year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        year2020 = YearModel(2020, teamList, weekList)
+        matchup1 = MatchupModel(1, team1, team2, 100.5, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100.6, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 100.1, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year2021 = YearModel(2021, teamList, weekList)
+        yearDict = {2020: year2020, 2021: year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         tiesTeam1_1 = RecordCalculator(1, leagueModel, [2020]).getTies(throughWeek=1)
         tiesTeam1_2 = RecordCalculator(1, leagueModel, [2020]).getTies(throughWeek=2)
@@ -152,6 +164,8 @@ class TestRecordCalculator(unittest.TestCase):
         tiesTeam1_only1and2 = RecordCalculator(1, leagueModel, [2020]).getTies(onlyWeeks=[1, 2])
         tiesTeam1_allParams = RecordCalculator(1, leagueModel, [2020]).getTies(throughWeek=1, vsTeamIds=[2])
         tiesTeam1_default = RecordCalculator(1, leagueModel, [2020]).getTies()
+        tiesTeam1_2021 = RecordCalculator(1, leagueModel, [2021]).getTies()
+        tiesTeam1_bothYears = RecordCalculator(1, leagueModel, [2020, 2021]).getTies()
         self.assertIsInstance(tiesTeam1_1, int)
         self.assertEqual(0, tiesTeam1_1)
         self.assertEqual(1, tiesTeam1_2)
@@ -161,6 +175,8 @@ class TestRecordCalculator(unittest.TestCase):
         self.assertEqual(1, tiesTeam1_only1and2)
         self.assertEqual(0, tiesTeam1_allParams)
         self.assertEqual(1, tiesTeam1_default)
+        self.assertEqual(1, tiesTeam1_2021)
+        self.assertEqual(2, tiesTeam1_bothYears)
 
     def test_getWinPercentage(self):
         team1 = TeamModel(1, "team1")
