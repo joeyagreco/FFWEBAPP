@@ -110,77 +110,78 @@ class StatCalculatorService:
         return teamStatsModels
 
     @staticmethod
-    def getHeadToHeadStats(leagueModel: LeagueModel, team1Id: int, team2Id: int):
+    def getHeadToHeadStats(leagueModel: LeagueModel, years: list, team1Id: int, team2Id: int):
         """
-        Returns 2 HeadToHeadStatsModels in a list for the teams with the given IDs.
+        Returns 2 HeadToHeadStatsModels in a list for the teams with the given IDs in the given league in the given year.
         """
         teamIds = (team1Id, team2Id)
         statsModels = []
-        for i, teamId in enumerate(teamIds):
-            opponentTeamId = teamIds[i - 1]
-            decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-            teamName = LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName()
-            recordCalculator = RecordCalculator(teamId, leagueModel)
-            wins = recordCalculator.getWins(vsTeamIds=[opponentTeamId])
-            losses = recordCalculator.getLosses(vsTeamIds=[opponentTeamId])
-            ties = recordCalculator.getTies(vsTeamIds=[opponentTeamId])
-            winPercentage = recordCalculator.getWinPercentage(vsTeamIds=[opponentTeamId])
-            winPercentageStr = Rounder.keepTrailingZeros(winPercentage, 3)
-            ppgCalculator = PpgCalculator(teamId, leagueModel)
-            ppg = ppgCalculator.getPpg(vsTeamIds=[opponentTeamId])
-            ppgStr = Rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
-            scoresCalculator = ScoresCalculator(teamId, leagueModel)
-            plusMinus = scoresCalculator.getPlusMinus(vsTeamIds=[opponentTeamId])
-            plusMinusStr = Rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
-            stddev = scoresCalculator.getStandardDeviation(vsTeamIds=[opponentTeamId])
-            stddevStr = Rounder.keepTrailingZeros(stddev, 2)
-            maxScore = scoresCalculator.getMaxScore(vsTeamIds=[opponentTeamId])
-            maxScoreStr = Rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
-            minScore = scoresCalculator.getMinScore(vsTeamIds=[opponentTeamId])
-            minScoreStr = Rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
-            awalCalculator = AwalCalculator(teamId, leagueModel, wins, ties)
-            awal = awalCalculator.getAwal(vsTeamIds=[opponentTeamId])
-            awalStr = Rounder.keepTrailingZeros(awal, 2)
-            wal = awalCalculator.getWal()
-            walStr = Rounder.keepTrailingZeros(wal, 2)
-            gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
-            # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
-            # this SHOULD not happen, because currently, a team has to play every week
-            totalTeamPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
-            allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, team1Id, [team2Id])
-            totalLeaguePoints = LeagueModelNavigator.totalLeaguePoints(leagueModel, onlyIncludeWeeks=allWeeksTeamsPlay)
-            sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
-            teamScore = sslCalculator.getTeamScore()
-            teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
-            teamSuccess = sslCalculator.getTeamSuccess()
-            teamSuccessStr = Rounder.keepTrailingZeros(teamSuccess, 2)
-            teamLuck = sslCalculator.getTeamLuck()
-            teamLuckStr = Rounder.keepTrailingZeros(teamLuck, 2)
-            allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, teamId, vsTeamIds=[opponentTeamId])
-            smartCalculator = SmartCalculator(leagueModel)
-            smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
-            smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
-            percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring(vsTeamIds=[opponentTeamId])
-            percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
-            headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
-                                                        teamName=teamName,
-                                                        wins=wins,
-                                                        losses=losses,
-                                                        ties=ties,
-                                                        winPercentage=winPercentageStr,
-                                                        ppg=ppgStr,
-                                                        plusMinus=plusMinusStr,
-                                                        stddev=stddevStr,
-                                                        maxScore=maxScoreStr,
-                                                        minScore=minScoreStr,
-                                                        awal=awalStr,
-                                                        teamScore=teamScoreStr,
-                                                        teamSuccess=teamSuccessStr,
-                                                        teamLuck=teamLuckStr,
-                                                        smartWins=smartWinsStr,
-                                                        percentageOfLeagueScoring=percentageOfLeagueScoringStr,
-                                                        wal=walStr)
-            statsModels.append(headToHeadStatsModel)
+        for year in years:
+            for i, teamId in enumerate(teamIds):
+                opponentTeamId = teamIds[i - 1]
+                decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
+                teamName = LeagueModelNavigator.getTeamById(leagueModel, year, teamId).getTeamName()
+                recordCalculator = RecordCalculator(teamId, leagueModel, year)
+                wins = recordCalculator.getWins(vsTeamIds=[opponentTeamId])
+                losses = recordCalculator.getLosses(vsTeamIds=[opponentTeamId])
+                ties = recordCalculator.getTies(vsTeamIds=[opponentTeamId])
+                winPercentage = recordCalculator.getWinPercentage(vsTeamIds=[opponentTeamId])
+                winPercentageStr = Rounder.keepTrailingZeros(winPercentage, 3)
+                ppgCalculator = PpgCalculator(teamId, leagueModel, year)
+                ppg = ppgCalculator.getPpg(vsTeamIds=[opponentTeamId])
+                ppgStr = Rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
+                scoresCalculator = ScoresCalculator(teamId, leagueModel, year)
+                plusMinus = scoresCalculator.getPlusMinus(vsTeamIds=[opponentTeamId])
+                plusMinusStr = Rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
+                stddev = scoresCalculator.getStandardDeviation(vsTeamIds=[opponentTeamId])
+                stddevStr = Rounder.keepTrailingZeros(stddev, 2)
+                maxScore = scoresCalculator.getMaxScore(vsTeamIds=[opponentTeamId])
+                maxScoreStr = Rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
+                minScore = scoresCalculator.getMinScore(vsTeamIds=[opponentTeamId])
+                minScoreStr = Rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
+                awalCalculator = AwalCalculator(teamId, leagueModel, year, wins, ties)
+                awal = awalCalculator.getAwal(vsTeamIds=[opponentTeamId])
+                awalStr = Rounder.keepTrailingZeros(awal, 2)
+                wal = awalCalculator.getWal()
+                walStr = Rounder.keepTrailingZeros(wal, 2)
+                gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, year, teamId, vsTeamIds=[opponentTeamId])
+                # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
+                # this SHOULD not happen, because currently, a team has to play every week
+                totalTeamPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, year, teamId, vsTeamIds=[opponentTeamId])
+                allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, year, team1Id, [team2Id])
+                totalLeaguePoints = LeagueModelNavigator.totalLeaguePoints(leagueModel, year, onlyIncludeWeeks=allWeeksTeamsPlay)
+                sslCalculator = SslCalculator(awal, wal, totalTeamPoints, maxScore, minScore, gamesPlayed, totalLeaguePoints)
+                teamScore = sslCalculator.getTeamScore()
+                teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
+                teamSuccess = sslCalculator.getTeamSuccess()
+                teamSuccessStr = Rounder.keepTrailingZeros(teamSuccess, 2)
+                teamLuck = sslCalculator.getTeamLuck()
+                teamLuckStr = Rounder.keepTrailingZeros(teamLuck, 2)
+                allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, year, teamId, vsTeamIds=[opponentTeamId])
+                smartCalculator = SmartCalculator(leagueModel, year)
+                smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
+                smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
+                percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring(vsTeamIds=[opponentTeamId])
+                percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
+                headToHeadStatsModel = HeadToHeadStatsModel(teamId=teamId,
+                                                            teamName=teamName,
+                                                            wins=wins,
+                                                            losses=losses,
+                                                            ties=ties,
+                                                            winPercentage=winPercentageStr,
+                                                            ppg=ppgStr,
+                                                            plusMinus=plusMinusStr,
+                                                            stddev=stddevStr,
+                                                            maxScore=maxScoreStr,
+                                                            minScore=minScoreStr,
+                                                            awal=awalStr,
+                                                            teamScore=teamScoreStr,
+                                                            teamSuccess=teamSuccessStr,
+                                                            teamLuck=teamLuckStr,
+                                                            smartWins=smartWinsStr,
+                                                            percentageOfLeagueScoring=percentageOfLeagueScoringStr,
+                                                            wal=walStr)
+                statsModels.append(headToHeadStatsModel)
         return statsModels
 
     @staticmethod
