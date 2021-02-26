@@ -18,8 +18,8 @@ class EveryGameCalculator:
         """
         models = []
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
-        for year in self.__leagueModel.getYears():
-            for week in self.__leagueModel.getYears()[year].getWeeks():
+        for year in LeagueModelNavigator.getAllYearsWithWeeks(leagueModel=self.__leagueModel):
+            for week in self.__leagueModel.getYears()[year.getYear()].getWeeks():
                 for matchup in week.getMatchups():
                     if matchup.getTeamAScore() > matchup.getTeamBScore():
                         # team A won
@@ -57,8 +57,8 @@ class EveryGameCalculator:
         """
         models = []
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
-        for year in self.__leagueModel.getYears():
-            for week in self.__leagueModel.getYears()[year].getWeeks():
+        for year in LeagueModelNavigator.getAllYearsWithWeeks(leagueModel=self.__leagueModel):
+            for week in self.__leagueModel.getYears()[year.getYear()].getWeeks():
                 for matchup in week.getMatchups():
                     weekNumber = week.getWeekNumber()
                     # team A score
