@@ -16,5 +16,5 @@ function updateTeam2(team2) {
 function yearRedirect(year) {
     var leagueId = document.getElementById("league_id").value;
     // GET request
-     window.location = "/head-to-head-stats?league_id="+leagueId+"&year="+year;
+     window.location = "/head-to-head-stats?league_id="+leagueId+"&team1="+team1+"&team2="+team2+"&year="+year;
 }

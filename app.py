@@ -431,10 +431,10 @@ def headToHeadStats():
     elif year == "0":
         # give them all years (ALL TIME)
         yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
-        year = 0
     else:
         yearList = [year]
     # check if these teams play each other ever
+    # TODO implement this
     # if not LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, year, team1Id, team2Id):
     #     return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
     #                            given_team_2_id=team2Id, teams_dont_play=True)
