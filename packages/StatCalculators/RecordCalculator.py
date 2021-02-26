@@ -113,16 +113,9 @@ class RecordCalculator:
         wins = 0
         losses = 0
         ties = 0
-        for year in self.__years:
-            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
-            params["throughWeek"] = throughWeek
-            onlyWeeks = params.pop("onlyWeeks", None)
-            params["onlyWeeks"] = onlyWeeks
-            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
-            params["vsTeamIds"] = vsTeamIds
-            wins += self.getWins(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
-            losses += self.getLosses(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
-            ties += self.getTies(throughWeek=throughWeek, onlyWeeks=onlyWeeks, vsTeamIds=vsTeamIds)
+        wins += self.getWins(**params)
+        losses += self.getLosses(**params)
+        ties += self.getTies(**params)
         totalGames = wins + losses + ties
         # if there are no games played, return 0.0 for win percentage
         if totalGames == 0:
