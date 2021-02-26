@@ -97,8 +97,20 @@ class TestPpgCalculator(unittest.TestCase):
         matchupList = [matchup1, matchup2, matchup3]
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
-        year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        year2020 = YearModel(2020, teamList, weekList)
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100.6, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 100.1, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year2021 = YearModel(2021, teamList, weekList)
+        yearDict = {2020: year2020, 2021: year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         ppgAgainstTeam1_1 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(throughWeek=1)
         ppgAgainstTeam1_2 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(throughWeek=2)
@@ -106,6 +118,8 @@ class TestPpgCalculator(unittest.TestCase):
         ppgAgainstTeam1_only1 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(onlyWeeks=[1])
         ppgAgainstTeam1_only1and3 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(onlyWeeks=[1, 3])
         ppgAgainstTeam1_default = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst()
+        ppgAgainstTeam1_2021 = PpgCalculator(1, leagueModel, [2021]).getPpgAgainst()
+        ppgAgainstTeam1_bothYears = PpgCalculator(1, leagueModel, [2020, 2021]).getPpgAgainst()
         self.assertIsInstance(ppgAgainstTeam1_1, float)
         self.assertEqual(100.5, ppgAgainstTeam1_1)
         self.assertEqual(100.35, ppgAgainstTeam1_2)
@@ -113,4 +127,6 @@ class TestPpgCalculator(unittest.TestCase):
         self.assertEqual(100.5, ppgAgainstTeam1_only1)
         self.assertEqual(100.35, ppgAgainstTeam1_only1and3)
         self.assertEqual(100.3, ppgAgainstTeam1_default)
+        self.assertEqual(100.5, ppgAgainstTeam1_2021)
+        self.assertEqual(100.38, ppgAgainstTeam1_bothYears)
 
