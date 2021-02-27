@@ -241,7 +241,7 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
-        graphSelection = Constants.AWAL_BY_WEEK
+        graphSelection = Constants.AWAL_OVER_PPG
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             numOfWeeksList = []
@@ -277,7 +277,7 @@ class StatCalculatorService:
             return GraphBuilder.getHtmlForPieGraph(screenWidth, teamNames, teamPoints, Constants.SCORING_SHARE)
 
         elif graphSelection == Constants.AWAL_OVER_PPG:
-            return GraphBuilder.getHtmlForAwalOverPpg(leagueModel, screenWidth)
+            return GraphBuilder.getHtmlForAwalOverPpg(leagueModel, years, screenWidth)
 
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
             allScores = []
