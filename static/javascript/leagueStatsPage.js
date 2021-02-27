@@ -6,7 +6,6 @@ function submitLeagueStat(year, leagueStat) {
     if(!leagueStat) {
         leagueStat = document.getElementById("stat_selection").value;
     }
-    alert(year);
     window.location = "/league-stats?league_id="+leagueId+"&stat_selection="+leagueStat+"&year="+year;
 }
 
