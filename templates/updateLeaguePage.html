@@ -75,7 +75,11 @@
                 {% if team.teamId is not divisibleby 2 %}
                     {% for owner in league.years['0'].teams %}
                         {% if owner.teamId == team.teamId %}
-                            {% set placeholderNamespace.placeholder = owner.teamName + '\'s Team' %}
+                            {% if selected_year != 0 %}
+                                {% set placeholderNamespace.placeholder = owner.teamName + '\'s Team' %}
+                            {% else %}
+                                {% set placeholderNamespace.placeholder = owner.teamName %}
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                     <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholderNamespace.placeholder}}" required autocomplete="off" onchange="changeMade()">
@@ -88,7 +92,11 @@
                 {% if team.teamId is divisibleby 2 %}
                     {% for owner in league.years['0'].teams %}
                         {% if owner.teamId == team.teamId %}
-                            {% set placeholderNamespace.placeholder = owner.teamName + '\'s Team' %}
+                            {% if selected_year != 0 %}
+                                {% set placeholderNamespace.placeholder = owner.teamName + '\'s Team' %}
+                            {% else %}
+                                {% set placeholderNamespace.placeholder = owner.teamName %}
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                     <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholderNamespace.placeholder}}" required autocomplete="off" onchange="changeMade()">
