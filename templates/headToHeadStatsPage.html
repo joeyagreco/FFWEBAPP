@@ -52,7 +52,7 @@
             <div class="team1Dropdown">
                 {% for team in league.years[selected_year].teams %}
                     {% if team.teamId == given_team_1_id %}
-                        <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}}" type="button" value={{team.teamId}} id="team1button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton" type="button" value={{team.teamId}} id="team1button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{team.teamName}}
                         </button>
                     {% endif %}
@@ -81,7 +81,7 @@
            <div class="team2Dropdown">
                 {% for team in league.years[selected_year].teams %}
                     {% if team.teamId == given_team_2_id %}
-                        <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}}" type="button" value={{team.teamId}} id="team2button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton" type="button" value={{team.teamId}} id="team2button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{team.teamName}}
                         </button>
                     {% endif %}
@@ -158,5 +158,8 @@
         {% if teams_dont_play %}
             <div class="teamsDontPlayDisplay">These Teams Do Not Play Each Other.</div>
         {% endif %}
+        <script>
+            setTeamDropdownWidths({{league.years[selected_year].teams|safe}});
+        </script>
     </div>
 {% endblock %}
