@@ -19,7 +19,8 @@ class EveryGameCalculator:
         models = []
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         for year in LeagueModelNavigator.getAllYearsWithWeeks(leagueModel=self.__leagueModel):
-            for week in self.__leagueModel.getYears()[year.getYear()].getWeeks():
+            yearNum = year.getYear()
+            for week in self.__leagueModel.getYears()[yearNum].getWeeks():
                 for matchup in week.getMatchups():
                     if matchup.getTeamAScore() > matchup.getTeamBScore():
                         # team A won
@@ -42,12 +43,15 @@ class EveryGameCalculator:
                     else:
                         # tie, dont care about this
                         continue
+                    print(yearNum)
+                    print(type(yearNum))
                     model = MarginOfVictoryModel(marginOfVictory=mov,
                                                  winningTeam=teamFor,
                                                  winningTeamPoints=teamForPoints,
                                                  losingTeam=teamAgainst,
                                                  losingTeamPoints=teamAgainstPoints,
-                                                 week=weekNumber)
+                                                 week=weekNumber,
+                                                 year=yearNum)
                     models.append(model)
         return models
 
