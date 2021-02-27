@@ -496,7 +496,7 @@ def graphs():
         yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
     else:
         yearList = [year]
-    divAsString = mainController.getGraphDiv(leagueModelOrError, years, screenWidth, selectedGraph)
+    divAsString = mainController.getGraphDiv(leagueModelOrError, yearList, screenWidth, selectedGraph)
     graphOptions = Constants.GRAPH_OPTIONS
     return render_template("graphsPage.html", league=leagueOrError, graph_options=graphOptions,
                            selected_graph=selectedGraph, graph_div=divAsString)

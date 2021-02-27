@@ -241,7 +241,7 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
-        graphSelection = Constants.PPG_BY_WEEK
+        graphSelection = Constants.AWAL_BY_WEEK
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             numOfWeeksList = []
@@ -254,14 +254,17 @@ class StatCalculatorService:
 
         elif graphSelection == Constants.AWAL_BY_WEEK:
             data = dict()
-            xAxisTicks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
-            for team in leagueModel.getTeams():
-                data[team.getTeamName()] = []
-                for weekNumber in xAxisTicks:
-                    recordCalculator = RecordCalculator(team.getTeamId(), leagueModel)
-                    awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, recordCalculator.getWins(throughWeek=weekNumber), recordCalculator.getTies(throughWeek=weekNumber))
-                    awal = awalCalculator.getAwal(throughWeek=weekNumber)
-                    data[team.getTeamName()].append(awal)
+            numOfWeeksList = []
+            for year in years:
+                for team in leagueModel.getYears()[year].getTeams():
+                    numOfWeeksList.append(LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, year, asList=True))
+                    data[team.getTeamName()] = []
+                    for week in leagueModel.getYears()[year].getWeeks():
+                        recordCalculator = RecordCalculator(team.getTeamId(), leagueModel, [year])
+                        awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year], recordCalculator.getWins(throughWeek=week.getWeekNumber()), recordCalculator.getTies(throughWeek=week.getWeekNumber()))
+                        awal = awalCalculator.getAwal(throughWeek=week.getWeekNumber())
+                        data[team.getTeamName()].append(awal)
+            xAxisTicks = max(numOfWeeksList)
             return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "AWAL", 1, Constants.AWAL_BY_WEEK)
 
         elif graphSelection == Constants.SCORING_SHARE:
