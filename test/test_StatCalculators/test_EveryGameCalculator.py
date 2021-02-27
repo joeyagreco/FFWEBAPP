@@ -29,7 +29,7 @@ class TestEveryGameCalculator(unittest.TestCase):
         year = YearModel(2020, teamList, weekList)
         yearDict = {2020: year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
-        everyGameCalculator = EveryGameCalculator(leagueModel)
+        everyGameCalculator = EveryGameCalculator(leagueModel, [2020])
         movs = everyGameCalculator.getAllMarginOfVictories()
         self.assertEqual(1, len(movs))
         self.assertIsInstance(movs[0], MarginOfVictoryModel)
@@ -57,7 +57,7 @@ class TestEveryGameCalculator(unittest.TestCase):
         year = YearModel(2020, teamList, weekList)
         yearDict = {2020: year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
-        everyGameCalculator = EveryGameCalculator(leagueModel)
+        everyGameCalculator = EveryGameCalculator(leagueModel, [2020])
         allScores = everyGameCalculator.getAllScores()
         self.assertEqual(6, len(allScores))
         self.assertIsInstance(allScores[0], ScoreModel)
