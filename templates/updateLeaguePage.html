@@ -68,16 +68,17 @@
         </div>
     </div>
     {% set yearStr = selected_year|string %}
+    {% set placeholderNamespace = namespace(placeholder='') %}
     <div class="middleForms">
         <div class="oddTeamForms">
             {% for team in league.years[yearStr].teams %}
                 {% if team.teamId is not divisibleby 2 %}
-                    {% if yearStr == "0" %}
-                        {% set placeholder = "Owner" %}
-                    {% else %}
-                        {% set placeholder = "Team" %}
-                    {% endif %}
-                    <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholder}} {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
+                    {% for owner in league.years['0'].teams %}
+                        {% if owner.teamId == team.teamId %}
+                            {% set placeholderNamespace.placeholder = owner.teamName + '\'s Team' %}
+                        {% endif %}
+                    {% endfor %}
+                    <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholderNamespace.placeholder}}" required autocomplete="off" onchange="changeMade()">
                 {% endif %}
             {% endfor %}
         </div>
@@ -85,12 +86,12 @@
         <div class="evenTeamForms">
             {% for team in league.years[yearStr].teams %}
                 {% if team.teamId is divisibleby 2 %}
-                    {% if yearStr == "0" %}
-                        {% set placeholder = "Owner" %}
-                    {% else %}
-                        {% set placeholder = "Team" %}
-                    {% endif %}
-                    <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholder}} {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
+                    {% for owner in league.years['0'].teams %}
+                        {% if owner.teamId == team.teamId %}
+                            {% set placeholderNamespace.placeholder = owner.teamName + '\'s Team' %}
+                        {% endif %}
+                    {% endfor %}
+                    <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholderNamespace.placeholder}}" required autocomplete="off" onchange="changeMade()">
                 {% endif %}
             {% endfor %}
         </div>
