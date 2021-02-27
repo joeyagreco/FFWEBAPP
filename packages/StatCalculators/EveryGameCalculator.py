@@ -43,8 +43,6 @@ class EveryGameCalculator:
                     else:
                         # tie, dont care about this
                         continue
-                    print(yearNum)
-                    print(type(yearNum))
                     model = MarginOfVictoryModel(marginOfVictory=mov,
                                                  winningTeam=teamFor,
                                                  winningTeamPoints=teamForPoints,

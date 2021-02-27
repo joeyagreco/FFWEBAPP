@@ -3,16 +3,14 @@
 class MarginOfVictoryModel:
 
     def __init__(self, **stats):
+        print(stats)
         self.__marginOfVictory = stats["marginOfVictory"]
         self.__winningTeam = stats["winningTeam"]
         self.__winningTeamPoints = stats["winningTeamPoints"]
         self.__losingTeam = stats["losingTeam"]
         self.__losingTeamPoints = stats["losingTeamPoints"]
         self.__week = stats["week"]
-        try:
-            self.__year = stats["year"]
-        except:
-            print(stats)
+        self.__year = stats["year"]
 
     def getMarginOfVictory(self):
         return self.__marginOfVictory

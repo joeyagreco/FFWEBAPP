@@ -226,12 +226,14 @@ class StatCalculatorService:
                 teamAgainstPoints = movModel.getLosingTeamPoints()
                 teamAgainstPoints = Rounder.keepTrailingZeros(teamAgainstPoints, decimalPlacesForScores)
                 weekNumber = movModel.getWeek()
+                year = movModel.getYear()
                 newModel = MarginOfVictoryModel(marginOfVictory=mov,
                                                 winningTeam=teamFor,
                                                 winningTeamPoints=teamForPoints,
                                                 losingTeam=teamAgainst,
                                                 losingTeamPoints=teamAgainstPoints,
-                                                week=weekNumber)
+                                                week=weekNumber,
+                                                year=year)
                 allMovsStr.append(newModel)
             return allMovsStr
 
