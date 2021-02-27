@@ -469,7 +469,7 @@ def leagueStats():
         yearList = [year]
     statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, yearList, statSelection)
     return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
-                           selected_stat=statSelection, stats_models=statsModelOrError)
+                           selected_stat=statSelection, stats_models=statsModelOrError, selected_year=year)
 
 
 @app.route("/graphs", methods=["GET"])
