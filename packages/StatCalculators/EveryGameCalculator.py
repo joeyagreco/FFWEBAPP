@@ -9,8 +9,9 @@ from models.league_stat_models.ScoreModel import ScoreModel
 
 class EveryGameCalculator:
 
-    def __init__(self, leagueModel: LeagueModel):
+    def __init__(self, leagueModel: LeagueModel, years: list):
         self.__leagueModel = leagueModel
+        self.__years = years
 
     def getAllMarginOfVictories(self) -> List[MarginOfVictoryModel]:
         """
@@ -18,9 +19,8 @@ class EveryGameCalculator:
         """
         models = []
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
-        for year in LeagueModelNavigator.getAllYearsWithWeeks(leagueModel=self.__leagueModel):
-            yearNum = year.getYear()
-            for week in self.__leagueModel.getYears()[yearNum].getWeeks():
+        for year in self.__years:
+            for week in self.__leagueModel.getYears()[year].getWeeks():
                 for matchup in week.getMatchups():
                     if matchup.getTeamAScore() > matchup.getTeamBScore():
                         # team A won
@@ -49,7 +49,7 @@ class EveryGameCalculator:
                                                  losingTeam=teamAgainst,
                                                  losingTeamPoints=teamAgainstPoints,
                                                  week=weekNumber,
-                                                 year=yearNum)
+                                                 year=year)
                     models.append(model)
         return models
 
@@ -59,9 +59,8 @@ class EveryGameCalculator:
         """
         models = []
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
-        for year in LeagueModelNavigator.getAllYearsWithWeeks(leagueModel=self.__leagueModel):
-            yearNum = year.getYear()
-            for week in self.__leagueModel.getYears()[year.getYear()].getWeeks():
+        for year in self.__years:
+            for week in self.__leagueModel.getYears()[year].getWeeks():
                 for matchup in week.getMatchups():
                     weekNumber = week.getWeekNumber()
                     # team A score
@@ -82,13 +81,13 @@ class EveryGameCalculator:
                                             teamAgainst=teamAAgainst,
                                             outcome=teamAOutcome,
                                             week=weekNumber,
-                                            year=yearNum)
+                                            year=year)
                     teamBModel = ScoreModel(score=teamBScore,
                                             teamFor=teamBFor,
                                             teamAgainst=teamBAgainst,
                                             outcome=teamBOutcome,
                                             week=weekNumber,
-                                            year=yearNum)
+                                            year=year)
                     models.append(teamAModel)
                     models.append(teamBModel)
         return models

@@ -450,13 +450,24 @@ def headToHeadStats():
 def leagueStats():
     leagueId = int(request.args.get("league_id"))
     statSelection = request.args.get("stat_selection")
+    year = request.args.get("year")
     statOptions = Constants.LEAGUE_STATS_STAT_TITLES
     if not statSelection:
         statSelection = statOptions[0]
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
-    statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, statSelection)
+    if year is None:
+        # give most recent year if none is given
+        years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        year = years[-1]
+        yearList = [year]
+    elif year == "0":
+        # give them all years (ALL TIME)
+        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+    else:
+        yearList = [year]
+    statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, yearList, statSelection)
     return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
                            selected_stat=statSelection, stats_models=statsModelOrError)
 

@@ -38,8 +38,8 @@ class MainController:
         return StatCalculatorService.getHeadToHeadStats(leagueModel, year, team1Id, team2Id)
 
     @staticmethod
-    def getLeagueStatsModel(leagueModel: LeagueModel, statSelection: str):
-        return StatCalculatorService.getLeagueStats(leagueModel, statSelection)
+    def getLeagueStatsModel(leagueModel: LeagueModel, years: list, statSelection: str):
+        return StatCalculatorService.getLeagueStats(leagueModel, years, statSelection)
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, screenWidth: float, graphSelection: str):

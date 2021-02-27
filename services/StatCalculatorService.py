@@ -183,13 +183,13 @@ class StatCalculatorService:
         return statsModels
 
     @staticmethod
-    def getLeagueStats(leagueModel: LeagueModel, statSelection: str):
+    def getLeagueStats(leagueModel: LeagueModel, years: list, statSelection: str):
         """
         Returns a model/models for the given stat for self.__leagueModel.
         """
         statOptions = Constants.LEAGUE_STATS_STAT_TITLES
         decimalPlacesForScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-        everyGameCalculator = EveryGameCalculator(leagueModel)
+        everyGameCalculator = EveryGameCalculator(leagueModel, years)
         if statSelection not in statOptions:
             raise InvalidStatSelectionError(f"Unknown League Stat: {statSelection}.")
         elif statSelection == Constants.ALL_SCORES_STAT_TITLE:
