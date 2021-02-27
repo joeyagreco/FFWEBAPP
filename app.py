@@ -476,6 +476,7 @@ def leagueStats():
 def graphs():
     leagueId = int(request.args.get("league_id"))
     selectedGraph = request.args.get("graph_selection")
+    year = request.args.get("year")
     # default selected graph
     if not selectedGraph:
         selectedGraph = Constants.GRAPH_OPTIONS[0]
@@ -485,7 +486,17 @@ def graphs():
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
-    divAsString = mainController.getGraphDiv(leagueModelOrError, screenWidth, selectedGraph)
+    if year is None:
+        # give most recent year if none is given
+        years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        year = years[-1]
+        yearList = [year]
+    elif year == "0":
+        # give them all years (ALL TIME)
+        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+    else:
+        yearList = [year]
+    divAsString = mainController.getGraphDiv(leagueModelOrError, years, screenWidth, selectedGraph)
     graphOptions = Constants.GRAPH_OPTIONS
     return render_template("graphsPage.html", league=leagueOrError, graph_options=graphOptions,
                            selected_graph=selectedGraph, graph_div=divAsString)

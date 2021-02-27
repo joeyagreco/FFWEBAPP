@@ -240,12 +240,16 @@ class StatCalculatorService:
             return allMovsStr
 
     @staticmethod
-    def getGraphDiv(leagueModel: LeagueModel, screenWidth: float, graphSelection: str):
+    def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
+        graphSelection = Constants.PPG_BY_WEEK
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
-            for team in leagueModel.getTeams():
-                data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
-            xAxisTicks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, asList=True)
+            numOfWeeksList = []
+            for year in years:
+                for team in leagueModel.getYears()[year].getTeams():
+                    data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId())
+                    numOfWeeksList.append(LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, year, asList=True))
+            xAxisTicks = max(numOfWeeksList)
             return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "Points Scored", 10, Constants.PPG_BY_WEEK)
 
         elif graphSelection == Constants.AWAL_BY_WEEK:

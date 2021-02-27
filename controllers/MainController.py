@@ -42,6 +42,6 @@ class MainController:
         return StatCalculatorService.getLeagueStats(leagueModel, years, statSelection)
 
     @staticmethod
-    def getGraphDiv(leagueModel: LeagueModel, screenWidth: float, graphSelection: str):
-        return StatCalculatorService.getGraphDiv(leagueModel, screenWidth, graphSelection)
+    def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
+        return StatCalculatorService.getGraphDiv(leagueModel, years, screenWidth, graphSelection)
 
