@@ -204,11 +204,13 @@ class StatCalculatorService:
                 teamAgainst = scoreModel.getTeamAgainst()
                 outcome = scoreModel.getOutcome()
                 weekNumber = scoreModel.getWeek()
+                year = scoreModel.getYear()
                 newModel = ScoreModel(score=score,
                                       teamFor=teamFor,
                                       teamAgainst=teamAgainst,
                                       outcome=outcome,
-                                      week=weekNumber)
+                                      week=weekNumber,
+                                      year=year)
                 allScoresStr.append(newModel)
             return allScoresStr
         elif statSelection == Constants.MARGINS_OF_VICTORY_STAT_TITLE:

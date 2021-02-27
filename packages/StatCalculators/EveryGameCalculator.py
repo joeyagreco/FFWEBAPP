@@ -60,6 +60,7 @@ class EveryGameCalculator:
         models = []
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         for year in LeagueModelNavigator.getAllYearsWithWeeks(leagueModel=self.__leagueModel):
+            yearNum = year.getYear()
             for week in self.__leagueModel.getYears()[year.getYear()].getWeeks():
                 for matchup in week.getMatchups():
                     weekNumber = week.getWeekNumber()
@@ -80,12 +81,14 @@ class EveryGameCalculator:
                                             teamFor=teamAFor,
                                             teamAgainst=teamAAgainst,
                                             outcome=teamAOutcome,
-                                            week=weekNumber)
+                                            week=weekNumber,
+                                            year=yearNum)
                     teamBModel = ScoreModel(score=teamBScore,
                                             teamFor=teamBFor,
                                             teamAgainst=teamBAgainst,
                                             outcome=teamBOutcome,
-                                            week=weekNumber)
+                                            week=weekNumber,
+                                            year=yearNum)
                     models.append(teamAModel)
                     models.append(teamBModel)
         return models
