@@ -1,6 +1,13 @@
-function submitLeagueStat(leagueStat) {
+function submitLeagueStat(year, leagueStat) {
     var leagueId = document.getElementById("league_id").value;
-    window.location = "/league-stats?league_id="+leagueId+"&stat_selection="+leagueStat;
+    if(!year) {
+        year = document.getElementById("select_year_button").value;
+    }
+    if(!leagueStat) {
+        leagueStat = document.getElementById("stat_selection").value;
+    }
+    alert(year);
+    window.location = "/league-stats?league_id="+leagueId+"&stat_selection="+leagueStat+"&year="+year;
 }
 
 function initializeTables() {

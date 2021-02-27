@@ -32,7 +32,7 @@
     <div class="dropdownSelectionAndTable">
         <div class="dropdowns">
             <div class="yearDropdown">
-                <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="selectYearButton" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="select_year_button" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {% if selected_year == 0 %}
                         All Time
                     {% else %}
@@ -43,14 +43,14 @@
                     {% for year in league.years.keys()|sort %}
                         {% if year == selected_year|string %}
                             {% if selected_year == 0 %}
-                                <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">All Time</a>
+                                <a class="dropdown-item active" href="#" onclick="submitLeagueStat({{selected_year}}, '{{selected_stat}}')">All Time</a>
                             {% else %}
-                                <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
+                                <a class="dropdown-item active" href="#" onclick="submitLeagueStat({{selected_year}}, '{{selected_stat}}')">{{selected_year}}</a>
                             {% endif %}
                         {% elif year == '0' %}
-                            <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">All Time</a>
+                            <a class="dropdown-item" href="#" onclick="submitLeagueStat({{year}}, '{{selected_stat}}')">All Time</a>
                         {% elif league.years[year].weeks|length > 0 %}
-                            <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
+                            <a class="dropdown-item" href="#" onclick="submitLeagueStat({{year}}, '{{selected_stat}}')">{{year}}</a>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -58,7 +58,7 @@
             <div class="statDropdown">
                 {% for stat in stat_options %}
                     {% if stat == selected_stat %}
-                        <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="stat_selection" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{stat}}
                         </button>
                     {% endif %}
@@ -66,9 +66,9 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for stat in stat_options %}
                         {% if stat == selected_stat %}
-                            <a class="dropdown-item active" href="#" onclick="submitLeagueStat('{{stat}}');">{{stat}}</a>
+                            <a class="dropdown-item active" href="#" onclick="submitLeagueStat({{selected_year}}, '{{stat}}')">{{stat}}</a>
                         {% else %}
-                            <a class="dropdown-item" href="#" onclick="submitLeagueStat('{{stat}}');">{{stat}}</a>
+                            <a class="dropdown-item" href="#" onclick="submitLeagueStat({{selected_year}}, '{{stat}}')">{{stat}}</a>
                         {% endif %}
                     {% endfor %}
                 </div>

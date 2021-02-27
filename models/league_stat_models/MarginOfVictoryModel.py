@@ -3,7 +3,6 @@
 class MarginOfVictoryModel:
 
     def __init__(self, **stats):
-        print(stats)
         self.__marginOfVictory = stats["marginOfVictory"]
         self.__winningTeam = stats["winningTeam"]
         self.__winningTeamPoints = stats["winningTeamPoints"]
