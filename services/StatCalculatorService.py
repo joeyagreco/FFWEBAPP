@@ -241,7 +241,7 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
-        graphSelection = Constants.SCORING_SHARE
+        graphSelection = Constants.FREQUENCY_OF_SCORES
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             numOfWeeksList = []
@@ -283,8 +283,9 @@ class StatCalculatorService:
 
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
             allScores = []
-            for team in leagueModel.getTeams():
-                allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId())
+            for year in years:
+                for team in leagueModel.getYears()[year].getTeams():
+                    allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId())
             return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores)/5), "Points Scored", "Occurrences", Constants.FREQUENCY_OF_SCORES)
 
         elif graphSelection == Constants.POINTS_FOR_OVER_POINTS_AGAINST:
