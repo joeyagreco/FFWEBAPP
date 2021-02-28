@@ -143,7 +143,6 @@ class GraphBuilder:
         data = dict()
         for year in years:
             for team in leagueModel.getYears()[year].getTeams():
-                # data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId(), andOpponentScore=True)
                 data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId(), andOpponentScore=True)
         pointsForList = []
         pointsAgainstList = []

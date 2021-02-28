@@ -241,7 +241,6 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
-        graphSelection = Constants.POINTS_FOR_OVER_POINTS_AGAINST
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             numOfWeeksList = []
@@ -270,7 +269,6 @@ class StatCalculatorService:
         elif graphSelection == Constants.SCORING_SHARE:
             teamNames = []
             teamPoints = []
-            print(years)
             for year in years:
                 for team in leagueModel.getYears()[year].getTeams():
                     teamNames.append(team.getTeamName())
