@@ -21,6 +21,7 @@ class TeamStatsModel:
         self.__percentageOfLeagueScoring = stats["percentageOfLeagueScoring"]
         self.__strengthOfSchedule = stats["strengthOfSchedule"]
         self.__wal = stats["wal"]
+        self.__year = stats["year"]
 
     def getTeamId(self):
         return self.__teamId
@@ -81,6 +82,9 @@ class TeamStatsModel:
 
     def getWal(self):
         return self.__wal
+
+    def getYear(self):
+        return self.__year
 
 
 

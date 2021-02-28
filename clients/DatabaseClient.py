@@ -3,6 +3,7 @@ import random
 
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from datetime import datetime
 
 from helpers.Error import Error
 
@@ -47,15 +48,29 @@ class DatabaseClient:
         Returns the new league's ID or an Error object if not inserted
         https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
-        league = {"_id": self.__generateLeagueId(), "leagueName": leagueName,
-                  "numberOfTeams": numberOfTeams, "teams": teams, "weeks": []}
+        # set "year 0", which will be the "all time" year selection
+        owners = []
+        for i in range(1, len(teams)+1):
+            owners.append({"teamId": i, "teamName": f"Owner {i}"})
+        year0 = {"year": 0, "teams": owners, "weeks": None}
+        # get the current year and set it as default
+        currentYear = datetime.now().year
+        # construct default year object
+        year = {"year": currentYear, "teams": teams, "weeks": []}
+        league = {"_id": self.__generateLeagueId(),
+                  "leagueName": leagueName,
+                  "numberOfTeams": numberOfTeams,
+                  "years": {"0": year0,
+                            str(currentYear): year}}
         response = self.__collection.insert_one(league)
         if response.acknowledged:
+            print("no error")
             return response.inserted_id
         else:
+            print("error")
             return Error("Could not insert into database.")
 
-    def updateLeague(self, leagueId: int, leagueName: str, teams: list, weeks: list):
+    def updateLeague(self, leagueId: int, leagueName: str, years):
         """
         Updates a league with given parameters
         Returns a Document object or an Error object if not updated
@@ -67,9 +82,7 @@ class DatabaseClient:
             return league
         else:
             league["leagueName"] = leagueName
-            league["teams"] = teams
-            if weeks:
-                league["weeks"] = weeks
+            league["years"] = years
             response = self.__collection.update({"_id": leagueId}, league)
             if response:
                 return response
@@ -90,9 +103,9 @@ class DatabaseClient:
             # could not delete the league
             return Error("Could not delete league.")
 
-    def deleteWeek(self, leagueId: int):
+    def deleteWeek(self, leagueId: int, year: int):
         """
-        Deletes the most recent week of the league with the given ID
+        Deletes the most recent week of the year in the league with the given ID
         Returns league if successfully deleted or an Error if not.
         https://docs.mongodb.com/manual/reference/method/db.collection.update/
         https://specify.io/how-tos/mongodb-update-documents
@@ -101,7 +114,7 @@ class DatabaseClient:
         if isinstance(league, Error):
             return league
         else:
-            league["weeks"] = league["weeks"][:-1]
+            league["years"][str(year)]["weeks"] = league["years"][str(year)]["weeks"][:-1]
             response = self.__collection.update({"_id": leagueId}, league)
             if response:
                 league = self.getLeague(leagueId)

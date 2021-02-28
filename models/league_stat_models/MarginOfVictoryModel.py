@@ -9,6 +9,7 @@ class MarginOfVictoryModel:
         self.__losingTeam = stats["losingTeam"]
         self.__losingTeamPoints = stats["losingTeamPoints"]
         self.__week = stats["week"]
+        self.__year = stats["year"]
 
     def getMarginOfVictory(self):
         return self.__marginOfVictory
@@ -27,3 +28,9 @@ class MarginOfVictoryModel:
 
     def getWeek(self):
         return self.__week
+
+    def getYear(self):
+        try:
+            return self.__year
+        except:
+            return "no year found"

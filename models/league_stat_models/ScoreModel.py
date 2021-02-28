@@ -8,6 +8,7 @@ class ScoreModel:
         self.__teamAgainst = stats["teamAgainst"]
         self.__outcome = stats["outcome"]
         self.__week = stats["week"]
+        self.__year = stats["year"]
 
     def getScore(self):
         return self.__score
@@ -23,3 +24,6 @@ class ScoreModel:
 
     def getWeek(self):
         return self.__week
+
+    def getYear(self):
+        return self.__year

@@ -16,44 +16,50 @@
 
 {% block pageTitle %}<i class="fas fa-edit"></i> Add/Update Weeks{% endblock %}
 
-{% block pageSubtitle %}{{league.leagueName}}{% endblock %}
+{% block pageSubtitle %}{{selected_year}} Season{% endblock %}
 
 {% block header %}{% endblock %}
 
 {% block content %}
-<form class="weekForm" action="/update-week" method="POST">
+{% set yearStr = selected_year|string %}
+<div class="weekForm" action="/update-week" method="POST">
     <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
     <input class="weekHidden" type="number" name="week_number" id="week_number" value="{{week_number}}">
+    <input class="yearHidden" type="number" name="year_number" id="year_number" value="{{selected_year}}">
+    <input class="numberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
     <div class="selectAndAddWeek">
             <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Week {{week_number}}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for week in league.weeks %}
+                {% for week in league.years[yearStr].weeks %}
                     {% if week.weekNumber == week_number %}
-                        <a class="dropdown-item active" href="#" onclick="updateWeekDropdown({{week.weekNumber}})">Week {{week.weekNumber}}</a>
+                        <a class="dropdown-item active" href="#" onclick="updateWeekDropdown({{week_number}})">Week {{week_number}}</a>
                     {% else %}
                         <a class="dropdown-item" href="#" onclick="updateWeekDropdown({{week.weekNumber}})">Week {{week.weekNumber}}</a>
                     {% endif %}
                 {% endfor %}
             </div>
-        <button class="addWeekButtonPlus primaryColorBackground" type="button" onclick="addWeek()"><i class="fas fa-plus secondaryFontColorLight"></i></button>
+        <button class="addWeekButtonPlus primaryColorBackground" id="addWeekButton" type="button" onclick="addWeek()"><i class="fas fa-plus secondaryFontColorLight"></i></button>
     </div>
     <div class="teams">
         <div class="oddTeamForms">
-            {% for week in league.weeks if week.weekNumber == week_number %}
+            {% for week in league.years[yearStr].weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsOdd">
-                        <select class="teamName btn btn-secondary dropdown-toggle" name="teamAId_matchup_{{loop.index}}" id="teamAId_matchup_{{loop.index}}" onchange="changeMade()">
+                        <button class="btn btn-secondary dropdown-toggle blackText backgroundTeamId{{matchup.teamA.teamId}} teamAMatchupButton{{matchup.matchupId}} teamDropdownButton" type="button" id="teamAId_matchup_{{matchup.matchupId}}" value="{{matchup.teamA.teamId}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{matchup.teamA.teamName}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {% if matchup.matchupId == loop.index %}
-                                <option class="dropdown-item backgroundTeamId{{matchup.teamA.teamId}}" value="{{matchup.teamA.teamId}}" selected>{{matchup.teamA.teamName}}</option>
+                                <a class="dropdown-item blackText backgroundTeamId{{matchup.teamA.teamId}} oddTeam activeOdd active" href="#" onclick="makeActiveTeam(this, {{matchup.teamA}}, {{matchup.matchupId}})">{{matchup.teamA.teamName}}</a>
                             {% endif %}
-                            {% for team in league.teams %}
+                            {% for team in league.years[yearStr].teams %}
                                 {% if team.teamId != matchup.teamA.teamId %}
-                                    <option class="dropdown-item backgroundTeamId{{team.teamId}}" value="{{team.teamId}}">{{team.teamName}}</option>
+                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} oddTeam" href="#" onclick="makeActiveTeam(this, {{team}}, {{matchup.matchupId}})">{{team.teamName}}</a>
                                 {% endif %}
                             {% endfor %}
-                        </select>
+                        </div>
                         {% if matchup.matchupId == loop.index %}
                             <input class="teamScore form-control defaultFormFocus backgroundTeamId{{matchup.teamA.teamId}}" name="teamAScore_matchup_{{loop.index}}" id="teamAScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onchange="changeMade()">
                         {% endif %}
@@ -63,7 +69,7 @@
         </div>
 
         <div class="vs">
-            {% for week in league.weeks if week.weekNumber == week_number %}
+            {% for week in league.years[yearStr].weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="vsText">vs</div>
                 {% endfor %}
@@ -71,19 +77,22 @@
         </div>
 
         <div class="evenTeamForms">
-            {% for week in league.weeks if week.weekNumber == week_number %}
+            {% for week in league.years[yearStr].weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsEven">
-                        <select class="teamName btn btn-secondary dropdown-toggle" name="teamBId_matchup_{{loop.index}}" id="teamBId_matchup_{{loop.index}}" onchange="changeMade()">
+                        <button class="btn btn-secondary dropdown-toggle blackText backgroundTeamId{{matchup.teamB.teamId}} teamBMatchupButton{{matchup.matchupId}} teamDropdownButton" type="button" id="teamBId_matchup_{{matchup.matchupId}}" value="{{matchup.teamB.teamId}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{matchup.teamB.teamName}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {% if matchup.matchupId == loop.index %}
-                                <option class="dropdown-item backgroundTeamId{{matchup.teamB.teamId}}" value="{{matchup.teamB.teamId}}" selected>{{matchup.teamB.teamName}}</option>
+                                <a class="dropdown-item blackText backgroundTeamId{{matchup.teamB.teamId}} evenTeam activeEven active" href="#" onclick="makeActiveTeam(this, {{matchup.teamB}}, {{matchup.matchupId}})">{{matchup.teamB.teamName}}</a>
                             {% endif %}
-                            {% for team in league.teams %}
+                            {% for team in league.years[yearStr].teams %}
                                 {% if team.teamId != matchup.teamB.teamId %}
-                                    <option class="dropdown-item backgroundTeamId{{team.teamId}}" value="{{team.teamId}}">{{team.teamName}}</option>
+                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} evenTeam" href="#" onclick="makeActiveTeam(this, {{team}}, {{matchup.matchupId}})">{{team.teamName}}</a>
                                 {% endif %}
                             {% endfor %}
-                        </select>
+                        </div>
                         {% if matchup.matchupId == loop.index %}
                             <input class="teamScore form-control defaultFormFocus backgroundTeamId{{matchup.teamB.teamId}}" name="teamBScore_matchup_{{loop.index}}" id="teamBScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamBScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onchange="changeMade()">
                         {% endif %}
@@ -93,9 +102,14 @@
         </div>
     </div>
     <div class="actionButtons">
-        <button class="saveChangesButton btn btn-warning disabled" id="saveChangesButton" type="submit"><i class="fas fa-save"></i> Save Changes</button>
-        <button class="deleteWeekButton btn btn-danger" type="button" onclick="deleteWeek()"><i class="fas fa-trash-alt"></i> Delete Week</button>
+        <button class="saveChangesButton btn btn-warning disabled" id="saveChangesButton" type="button" onclick="postWeek()"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="deleteWeekButton btn btn-danger" id="deleteWeekButton" type="button" onclick="deleteWeek()"><i class="fas fa-trash-alt"></i> Delete Week</button>
     </div>
-</form>
-<script>clearChanges()</script>
+</div>
+<!--TODO add this to js file-->
+<script>
+    clearChanges();
+    disableDeleteWeek();
+    setTeamDropdownWidths({{league.years[selected_year].teams|safe}});
+</script>
 {% endblock %}

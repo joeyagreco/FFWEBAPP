@@ -7,13 +7,22 @@
  <!-- bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!-- Add icon library -->
 <script src="https://kit.fontawesome.com/e509e6f024.js" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block pageTitle %}<i class="fas fa-edit"></i> Update Your League{% endblock %}
 
-{% block pageSubtitle %}{{league.leagueName}}{% endblock %}
+{% block pageSubtitle %}
+{% if selected_year == 0 %}
+    All Time
+{% else %}
+    {{selected_year}} Season {{allTime}}
+{% endif %}
+{% endblock %}
 
 {% block header %}{% endblock %}
 
@@ -24,31 +33,90 @@
         <input class="leagueNameForm form-control primaryFormColors" type="text" name="league_name" id="league_name" value="{{league.leagueName}}" placeholder="League Name" required autocomplete="off" onchange="changeMade()">
         <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
         <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
+        <input class="originalYearHidden" type="number" name="original_year_number" id="original_year_number" value="{{selected_year}}">
+        <div class="yearSelect">
+            <button class="editYearButton primaryColorBackground" id="editYearButton" type="button" onclick="toggleYearEdit()"><i class="fas fa-edit secondaryFontColorLight"></i></button>
+            <div class="yearDropdown">
+                <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="selectYearButton" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% if selected_year == 0 %}
+                        All Time
+                    {% else %}
+                        {{selected_year}}
+                    {% endif %}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% for year in league.years.keys()|sort %}
+                        {% if year == selected_year|string %}
+                            {% if selected_year == 0 %}
+                                <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">All Time</a>
+                            {% else %}
+                                <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
+                            {% endif %}
+                        {% elif year == '0' %}
+                            <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">All Time</a>
+                        {% else %}
+                            <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <button class="addYearButtonPlus primaryColorBackground" type="button" onclick="addYear()"><i class="fas fa-plus secondaryFontColorLight"></i></button>
+        </div>
+        <div class="yearEdit" id="yearEdit">
+            <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" autocomplete="off" onchange="changeMade()" step="1" min="1920" max="3000" required>
+            <button class="deleteYearButton primaryColorBackground" id="deleteYearButton" type="button" onclick="deleteYear()" disabled><i class="fas fa-trash-alt secondaryFontColorLight"></i></button>
+        </div>
     </div>
-
+    {% set yearStr = selected_year|string %}
+    {% set placeholderNamespace = namespace(placeholder='') %}
     <div class="middleForms">
         <div class="oddTeamForms">
-        {% for team in league.teams %}
-            {% if team.teamId is not divisibleby 2 %}
-                <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
-            {% endif %}
-        {% endfor %}
+            {% for team in league.years[yearStr].teams %}
+                {% if team.teamId is not divisibleby 2 %}
+                    {% for owner in league.years['0'].teams %}
+                        {% if owner.teamId == team.teamId %}
+                            {% if selected_year != 0 %}
+                                {% set placeholderNamespace.placeholder = owner.teamName + '\'s Team' %}
+                            {% else %}
+                                {% set placeholderNamespace.placeholder = owner.teamName %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholderNamespace.placeholder}}" required autocomplete="off" onchange="changeMade()">
+                {% endif %}
+            {% endfor %}
         </div>
 
         <div class="evenTeamForms">
-        {% for team in league.teams %}
-            {% if team.teamId is divisibleby 2 %}
-                <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="Team {{team.teamId}} Name" required autocomplete="off" onchange="changeMade()">
-            {% endif %}
-        {% endfor %}
+            {% for team in league.years[yearStr].teams %}
+                {% if team.teamId is divisibleby 2 %}
+                    {% for owner in league.years['0'].teams %}
+                        {% if owner.teamId == team.teamId %}
+                            {% if selected_year != 0 %}
+                                {% set placeholderNamespace.placeholder = owner.teamName + '\'s Team' %}
+                            {% else %}
+                                {% set placeholderNamespace.placeholder = owner.teamName %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <input class="teamForm form-control backgroundTeamId{{team.teamId}}" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholderNamespace.placeholder}}" required autocomplete="off" onchange="changeMade()">
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 
     <div class="bottomButtons">
-        <button class="saveChangesButton btn btn-warning secondaryButtonColors disabled" id="saveChangesButton" type="submit"><i class="fas fa-save"></i> Save Changes</button>
-        <button class="addOrUpdateWeekButton btn btn-primary primaryButtonColors" type="button" onclick="addUpdateWeeksRedirect()"><i class="fas fa-edit"></i> Add/Update a Week</button>
+        <button class="saveChangesButton btn btn-warning secondaryButtonColors disabled" id="saveChangesButton" type="button" onclick="postLeagueChanges()"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="addOrUpdateWeekButton btn btn-primary primaryButtonColors" id="addOrUpdateWeekButton" type="button" onclick="addUpdateWeeksRedirect()"><i class="fas fa-edit"></i> Add/Update a Week</button>
         <button class="deleteLeagueButton btn btn-danger" type="button" onclick="deleteLeague()"><i class="fas fa-trash-alt"></i> Delete League</button>
     </div>
 </form>
-<script>clearChanges()</script>
+<!--TODO move this to JS or check on client side-->
+{% if league.years|length > 2 %}
+    <script>enableDeleteYearButton();</script>
+{% endif %}
+{% if league.years[yearStr].weeks is none %}
+    <script>preparePageForYearZero();</script>
+{% endif %}
+<script>clearChanges();</script>
 {% endblock %}

@@ -29,22 +29,23 @@ class Rounder:
         Ex: score of 132.55 -> 2, score of 130.10 -> 1
         Default return value is 1.
         """
-
         maxDecimalPlaces = 1
-        for week in league.getWeeks():
-            for matchup in week.getMatchups():
-                aScore = matchup.getTeamAScore()
-                bScore = matchup.getTeamBScore()
-                if isinstance(aScore, float):
-                    aScoreStr = str(aScore)
-                    aScoreDecimalLength = len(aScoreStr.split(".")[1])
-                    if aScoreDecimalLength > maxDecimalPlaces:
-                        maxDecimalPlaces = aScoreDecimalLength
-                if isinstance(bScore, float):
-                    bScoreStr = str(bScore)
-                    bScoreDecimalLength = len(bScoreStr.split(".")[1])
-                    if bScoreDecimalLength > maxDecimalPlaces:
-                        maxDecimalPlaces = bScoreDecimalLength
+        for year in league.getYears():
+            if year != "0":
+                for week in league.getYears()[year].getWeeks():
+                    for matchup in week.getMatchups():
+                        aScore = matchup.getTeamAScore()
+                        bScore = matchup.getTeamBScore()
+                        if isinstance(aScore, float):
+                            aScoreStr = str(aScore)
+                            aScoreDecimalLength = len(aScoreStr.split(".")[1])
+                            if aScoreDecimalLength > maxDecimalPlaces:
+                                maxDecimalPlaces = aScoreDecimalLength
+                        if isinstance(bScore, float):
+                            bScoreStr = str(bScore)
+                            bScoreDecimalLength = len(bScoreStr.split(".")[1])
+                            if bScoreDecimalLength > maxDecimalPlaces:
+                                maxDecimalPlaces = bScoreDecimalLength
         return maxDecimalPlaces
 
     @staticmethod

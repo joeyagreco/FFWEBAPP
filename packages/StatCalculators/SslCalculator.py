@@ -3,19 +3,16 @@ from helpers.Rounder import Rounder
 
 class SslCalculator:
 
-    def __init__(self, awal: float, wal: float, totalTeamPoints: float, maxScore: float, minScore: float,
-                 gamesPlayed: int, totalLeaguePoints: float):
+    def __init__(self, awal: float, wal: float, scoringShare: float, maxScore: float, minScore: float, gamesPlayed: int):
         self.__awal = awal
         self.__wal = wal
-        self.__totalTeamPoints = totalTeamPoints
+        self.__scoringShare = scoringShare
         self.__maxScore = maxScore
         self.__minScore = minScore
         self.__gamesPlayed = gamesPlayed
-        self.__totalLeaguePoints = totalLeaguePoints
-        self.__awalMultiplier = 100
-        self.__walMultiplier = 100
-        self.__pointsMultiplier = 20
-        self.__minMaxMultiplier = 0.1
+        self.__awalAndWalMultiplier = 100
+        self.__scoringShareMultiplier = 2
+        self.__minMaxMultiplier = 0.05
 
     def getTeamScore(self, **params) -> float:
         """
@@ -25,7 +22,7 @@ class SslCalculator:
         WHERE:
         G = Total games played by a team
         """
-        teamScore = ((self.__awal / self.__gamesPlayed) * self.__awalMultiplier) + ((self.__totalTeamPoints / self.__totalLeaguePoints) * self.__pointsMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
+        teamScore = ((self.__awal / self.__gamesPlayed) * self.__awalAndWalMultiplier) + (self.__scoringShare * self.__scoringShareMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
         rounded = params.pop("rounded", True)
         if rounded:
             return Rounder.normalRound(teamScore, 2)
@@ -39,7 +36,7 @@ class SslCalculator:
         WHERE:
         G = Total games played by a team
         """
-        teamSuccess = ((self.__wal / self.__gamesPlayed) * self.__walMultiplier) + ((self.__totalTeamPoints / self.__totalLeaguePoints) * self.__pointsMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
+        teamSuccess = ((self.__wal / self.__gamesPlayed) * self.__awalAndWalMultiplier) + (self.__scoringShare * self.__scoringShareMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
         rounded = params.pop("rounded", True)
         if rounded:
             return Rounder.normalRound(teamSuccess, 2)

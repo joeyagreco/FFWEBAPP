@@ -89,28 +89,30 @@ class GraphBuilder:
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
-    def getHtmlForAwalOverPpg(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
+    def getHtmlForAwalOverPpg(cls, leagueModel: LeagueModel, years: list, screenWidth: float) -> str:
         """
         This creates a scatter plot for AWAL/PPG for each team in the given leagueModel.
         """
         data = dict()
         ppgList = []
         awalList = []
-        for team in leagueModel.getTeams():
-            recordCalculator = RecordCalculator(team.getTeamId(), leagueModel)
-            ppgCalculator = PpgCalculator(team.getTeamId(), leagueModel)
-            awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, recordCalculator.getWins(),
-                                            recordCalculator.getTies())
-            ppg = ppgCalculator.getPpg()
-            awal = awalCalculator.getAwal()
-            ppgList.append(ppg)
-            awalList.append(awal)
-            data[team.getTeamId()] = ([awal], [ppg])
+        for year in years:
+            for team in leagueModel.getYears()[year].getTeams():
+                recordCalculator = RecordCalculator(team.getTeamId(), leagueModel, [year])
+                ppgCalculator = PpgCalculator(team.getTeamId(), leagueModel, [year])
+                awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year], recordCalculator.getWins(), recordCalculator.getTies())
+                ppg = ppgCalculator.getPpg()
+                awal = awalCalculator.getAwal()
+                ppgList.append(ppg)
+                awalList.append(awal)
+                data[f"{team.getTeamId()}-{year}"] = ([awal], [ppg])
         fig = go.Figure()
-        for teamId in data.keys():
-            fig.add_trace(go.Scatter(x=data[teamId][0],
-                                     y=data[teamId][1],
-                                     name=LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName(),
+        for teamIdAndYear in data:
+            teamId = int(teamIdAndYear[0:-5])
+            year = teamIdAndYear[-4:]
+            fig.add_trace(go.Scatter(x=data[teamIdAndYear][0],
+                                     y=data[teamIdAndYear][1],
+                                     name=LeagueModelNavigator.getTeamById(leagueModel, year, teamId).getTeamName(),
                                      mode="markers",
                                      marker=dict(size=20)
                                      )
@@ -134,25 +136,25 @@ class GraphBuilder:
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
-    def getHtmlForPointsOverPointsAgainst(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
+    def getHtmlForPointsOverPointsAgainst(cls, leagueModel: LeagueModel, years: list, screenWidth: float) -> str:
         """
         This creates a scatter plot for points scored/points against for every team in the given leagueModel.
         """
         data = dict()
-        for team in leagueModel.getTeams():
-            data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(),
-                                                                              andOpponentScore=True)
+        for year in years:
+            for team in leagueModel.getYears()[year].getTeams():
+                data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId(), andOpponentScore=True)
         pointsForList = []
         pointsAgainstList = []
         fig = go.Figure()
-        for teamId in data.keys():
-            teamPointsFor = [matchup[0] for matchup in data[teamId]]
-            teamPointsAgainst = [matchup[1] for matchup in data[teamId]]
+        for teamName in data:
+            teamPointsFor = [matchup[0] for matchup in data[teamName]]
+            teamPointsAgainst = [matchup[1] for matchup in data[teamName]]
             pointsForList += teamPointsFor
             pointsAgainstList += teamPointsAgainst
             fig.add_trace(go.Scatter(x=teamPointsFor,
                                      y=teamPointsAgainst,
-                                     name=LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName(),
+                                     name=teamName,
                                      mode="markers",
                                      marker=dict(size=10)
                                      )

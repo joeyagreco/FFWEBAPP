@@ -4,27 +4,35 @@ class LeagueDictVerifier:
     """
 
     @staticmethod
-    def teamPlaysItself(weeks: list) -> bool:
+    def teamPlaysItself(years: dict) -> bool:
         """
         Returns a boolean of whether any teams play themselves in the given weeks.
         """
-        for week in weeks:
-            for matchup in week["matchups"]:
-                if matchup["teamA"]["teamId"] == matchup["teamB"]["teamId"]:
-                    return True
+        for year in years:
+            # check if its year 0
+            # TODO add LMN method to check for this
+            if year != str(0):
+                for week in years[year]["weeks"]:
+                    for matchup in week["matchups"]:
+                        if matchup["teamA"]["teamId"] == matchup["teamB"]["teamId"]:
+                            return True
         return False
 
     @staticmethod
-    def teamPlaysTwice(weeks: list) -> bool:
+    def teamPlaysTwice(years: dict) -> bool:
         """
         Returns a boolean of whether a team plays twice in any week in the given weeks.
         """
-        for week in weeks:
-            teamIdsThatHavePlayed = []
-            for matchup in week["matchups"]:
-                teamIdsThatHavePlayed.append(matchup["teamA"]["teamId"])
-                teamIdsThatHavePlayed.append(matchup["teamB"]["teamId"])
-            teamIdsSet = set(teamIdsThatHavePlayed)
-            if len(teamIdsThatHavePlayed) != len(teamIdsSet):
-                return True
+        for year in years.keys():
+            # check if its year 0
+            # TODO add LMN method to check for this
+            if year != str(0):
+                for week in years[year]["weeks"]:
+                    teamIdsThatHavePlayed = []
+                    for matchup in week["matchups"]:
+                        teamIdsThatHavePlayed.append(matchup["teamA"]["teamId"])
+                        teamIdsThatHavePlayed.append(matchup["teamB"]["teamId"])
+                    teamIdsSet = set(teamIdsThatHavePlayed)
+                    if len(teamIdsThatHavePlayed) != len(teamIdsSet):
+                        return True
         return False

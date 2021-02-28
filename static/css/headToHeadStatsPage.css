@@ -4,6 +4,12 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
+}
+
+.yearDropdown {
+    order: 1;
+    padding-bottom: 1rem;
 }
 
 .teamsAndVs {
@@ -11,7 +17,7 @@
     height: 10%;
     margin-left: auto;
     margin-right: auto;
-    order: 1;
+    order: 2;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -42,7 +48,7 @@
 
 .statsTable {
     width: 95%;
-    order: 2;
+    order: 3;
     font-size: 120%;
     border-collapse: collapse;
     text-align: center;

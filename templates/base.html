@@ -28,15 +28,18 @@
       <a class="navbar-brand" href="#" onclick="homeRedirect()">
         <img src="static/icons/football_icon.ico" width="30" height="30" class="d-inline-block align-top" alt="">
       </a>
-      <a class="nav-item nav-link primaryFontColor primaryFontColorWithHover" href="#" onclick="leagueHomepageRedirect()"><i class="fas fa-home"></i> League<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link primaryFontColor primaryFontColorWithHover" href="#" onclick="leagueHomepageRedirect()"><i class="fas fa-home"></i> League</a>
       <a class="nav-item nav-link primaryFontColor primaryFontColorWithHover" href="#" onclick="statExplanationRedirect()"><i class="fas fa-book"></i> Stats Explained</a>
+      <a class="nav-item nav-link primaryFontColor primaryFontColorWithHover" href="#" onclick="#"><i class="fas fa-info-circle"></i> About</a>
     </nav>
 
     <div class="topSection">
       <div class="pageTitle">{% block pageTitle %}{% endblock %}</div>
       <div class="pageSubtitle">{% block pageSubtitle %}{% endblock %}</div>
       <div class="errorSection">
+          {% if error_message %}
             <div class="errorMessage">{{error_message}}</div>
+          {% endif %}
         </div>
     </div>
 

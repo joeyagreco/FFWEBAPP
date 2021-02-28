@@ -1,16 +1,26 @@
-.statsContainer {
+.dropdownAndTable {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.weekSelectDropdown {
+    order: 1;
 }
 
 .statsTable {
     width: 95%;
-    order: 1;
+    order: 2;
     font-size: 120%;
     border-collapse: collapse;
     text-align: center;
+}
+
+table, th, td {
+  border: 1px solid black !important;
 }
 
 .statsTable th {
@@ -35,8 +45,4 @@
 
 .statsTable tr:nth-child(even) {
     background-color: #d4d4d4;
-}
-
-.statsTable, th, td {
-    border: 2px solid black;
 }

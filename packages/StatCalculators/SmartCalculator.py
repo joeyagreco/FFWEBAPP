@@ -5,8 +5,9 @@ from models.league_models.LeagueModel import LeagueModel
 
 class SmartCalculator:
 
-    def __init__(self, leagueModel: LeagueModel):
+    def __init__(self, leagueModel: LeagueModel, years: list):
         self.__leagueModel = leagueModel
+        self.__years = years
 
     def getSmartWinsOfScore(self, score: float) -> float:
         """
@@ -14,19 +15,20 @@ class SmartCalculator:
         This is the percentage of games this score would win if it played against every other score.
         Note: This assumes that the given score already exists in self.__leagueModel.
         """
-        # round the given score properly
-        decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
-        score = Rounder.normalRound(score, decimalPlacesToRoundTo)
         scoresBeat = 0
         scoresTied = 0
         totalScores = 0
-        allScores = LeagueModelNavigator.getAllScoresInLeague(self.__leagueModel)
-        for s in allScores:
-            totalScores += 1
-            if score > s:
-                scoresBeat += 1
-            elif score == s:
-                scoresTied += 1
+        for year in self.__years:
+            # round the given score properly
+            decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
+            score = Rounder.normalRound(score, decimalPlacesToRoundTo)
+            allScores = LeagueModelNavigator.getAllScoresInLeague(self.__leagueModel, [year])
+            for s in allScores:
+                totalScores += 1
+                if score > s:
+                    scoresBeat += 1
+                elif score == s:
+                    scoresTied += 1
         # don't include *this* score in with the other scores tied
         # or total scores(the score will always find and tie itself)
         scoresTied -= 1
