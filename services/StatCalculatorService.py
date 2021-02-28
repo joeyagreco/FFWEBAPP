@@ -241,7 +241,7 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
-        graphSelection = Constants.AWAL_OVER_PPG
+        graphSelection = Constants.SCORING_SHARE
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             numOfWeeksList = []
@@ -268,12 +268,14 @@ class StatCalculatorService:
             return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "AWAL", 1, Constants.AWAL_BY_WEEK)
 
         elif graphSelection == Constants.SCORING_SHARE:
-            teamNames = [team.getTeamName() for team in leagueModel.getTeams()]
-            teamPoints = [team.getTeamName() for team in leagueModel.getTeams()]
-            for team in leagueModel.getTeams():
-                teamNames.append(team.getTeamName())
-                totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, team.getTeamId())
-                teamPoints.append(totalPoints)
+            teamNames = []
+            teamPoints = []
+            print(years)
+            for year in years:
+                for team in leagueModel.getYears()[year].getTeams():
+                    teamNames.append(team.getTeamName())
+                    totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [year], team.getTeamId())
+                    teamPoints.append(totalPoints)
             return GraphBuilder.getHtmlForPieGraph(screenWidth, teamNames, teamPoints, Constants.SCORING_SHARE)
 
         elif graphSelection == Constants.AWAL_OVER_PPG:
