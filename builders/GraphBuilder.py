@@ -136,25 +136,26 @@ class GraphBuilder:
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
-    def getHtmlForPointsOverPointsAgainst(cls, leagueModel: LeagueModel, screenWidth: float) -> str:
+    def getHtmlForPointsOverPointsAgainst(cls, leagueModel: LeagueModel, years: list, screenWidth: float) -> str:
         """
         This creates a scatter plot for points scored/points against for every team in the given leagueModel.
         """
         data = dict()
-        for team in leagueModel.getTeams():
-            data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, team.getTeamId(),
-                                                                              andOpponentScore=True)
+        for year in years:
+            for team in leagueModel.getYears()[year].getTeams():
+                # data[team.getTeamId()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId(), andOpponentScore=True)
+                data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId(), andOpponentScore=True)
         pointsForList = []
         pointsAgainstList = []
         fig = go.Figure()
-        for teamId in data.keys():
-            teamPointsFor = [matchup[0] for matchup in data[teamId]]
-            teamPointsAgainst = [matchup[1] for matchup in data[teamId]]
+        for teamName in data:
+            teamPointsFor = [matchup[0] for matchup in data[teamName]]
+            teamPointsAgainst = [matchup[1] for matchup in data[teamName]]
             pointsForList += teamPointsFor
             pointsAgainstList += teamPointsAgainst
             fig.add_trace(go.Scatter(x=teamPointsFor,
                                      y=teamPointsAgainst,
-                                     name=LeagueModelNavigator.getTeamById(leagueModel, teamId).getTeamName(),
+                                     name=teamName,
                                      mode="markers",
                                      marker=dict(size=10)
                                      )

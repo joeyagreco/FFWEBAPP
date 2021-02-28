@@ -241,7 +241,7 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
-        graphSelection = Constants.FREQUENCY_OF_SCORES
+        graphSelection = Constants.POINTS_FOR_OVER_POINTS_AGAINST
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             numOfWeeksList = []
@@ -289,7 +289,7 @@ class StatCalculatorService:
             return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores)/5), "Points Scored", "Occurrences", Constants.FREQUENCY_OF_SCORES)
 
         elif graphSelection == Constants.POINTS_FOR_OVER_POINTS_AGAINST:
-            return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, screenWidth)
+            return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, years, screenWidth)
 
         else:
             raise InvalidStatSelectionError("No Valid Graph Given to Generate.")
