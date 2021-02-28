@@ -45,6 +45,7 @@ function updateLeagueRedirect() {
 
 function graphsRedirect() {
     var leagueId = document.getElementById("league_id").value;
-    window.location = "/graphs?league_id="+leagueId;
+    var screenWidth = window.innerWidth;
+    window.location = "/graphs?league_id="+leagueId+"&screen_width="+screenWidth;
 }
 
