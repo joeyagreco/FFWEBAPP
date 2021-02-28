@@ -1,3 +1,17 @@
+function submitYearAndGraph(year, graphName) {
+    var leagueId = document.getElementById("league_id").value;
+    var screenWidth = window.innerWidth;
+    if(!graphName) {
+        // default to whatever the selected graph is
+        graphName = document.getElementById("selected_graph_button").value;
+    }
+    if(year == null) {
+        // default to whatever the selected year is
+        year = document.getElementById("selectYearButton").value;
+    }
+    window.location = "/graphs?league_id="+leagueId+"&graph_selection="+graphName+"&screen_width="+screenWidth+"&year="+year;
+}
+
 function submitGraph(graphName) {
     var leagueId = document.getElementById("league_id").value;
     if(!graphName) {

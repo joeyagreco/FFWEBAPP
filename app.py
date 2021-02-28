@@ -496,11 +496,10 @@ def graphs():
         yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
     else:
         yearList = [year]
-    yearList = ["2019", "2020"]
     divAsString = mainController.getGraphDiv(leagueModelOrError, yearList, screenWidth, selectedGraph)
     graphOptions = Constants.GRAPH_OPTIONS
     return render_template("graphsPage.html", league=leagueOrError, graph_options=graphOptions,
-                           selected_graph=selectedGraph, graph_div=divAsString)
+                           selected_graph=selectedGraph, graph_div=divAsString, selected_year=year)
 
 
 @app.route("/stats-explained", methods=["GET"])
