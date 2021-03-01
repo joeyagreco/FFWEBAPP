@@ -130,6 +130,15 @@ class GraphBuilder:
                                  marker=dict(color="rgba(0,0,0,0.25)")
                                  )
                       )
+        # add text to explain graph
+        fig.add_annotation(x=max(awalList),
+                           y=m * np.array(max(awalList)) + b,
+                           showarrow=False,
+                           text="Better Team")
+        fig.add_annotation(x=min(awalList),
+                           y=m * np.array(min(awalList)) + b,
+                           showarrow=False,
+                           text="Worse Team")
         fig.update_layout(
             xaxis=dict(title="AWAL", dtick=0.5),
             yaxis=dict(title="PPG"),
