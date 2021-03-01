@@ -178,10 +178,18 @@ function getMaxTeamNameLength(teams) {
 
 function setTeamNameInputWidths(teams) {
     // get all team dropdown button elements
-    width = getMaxTeamNameLength(teams);
+    var width = getMaxTeamNameLength(teams);
     // add room for dropdown arrow
-    teamInputForms = document.getElementsByClassName("teamForm");
+    var teamInputForms = document.getElementsByClassName("teamForm");
     for(i=0; i<teamInputForms.length; i++) {
         teamInputForms[i].setAttribute('style', 'width:'+width+'ch');
     }
+}
+
+function setLeagueNameInputWidth() {
+    // get league name input element
+    var leagueNameInputElement = document.getElementById("league_name");
+    var leagueNameLength = leagueNameInputElement.value.length;
+    var width = leagueNameLength;
+    leagueNameInputElement.setAttribute('style', 'width:'+width+'ch')
 }

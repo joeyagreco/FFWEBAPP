@@ -180,7 +180,7 @@ function getMaxTeamNameLength(teams) {
 
 function setTeamDropdownWidths(teams) {
     // get all team dropdown button elements
-    width = getMaxTeamNameLength(teams);
+    var width = getMaxTeamNameLength(teams);
     // add room for dropdown arrow
     width += 5;
     teamDropdownButtons = document.getElementsByClassName("teamDropdownButton");
