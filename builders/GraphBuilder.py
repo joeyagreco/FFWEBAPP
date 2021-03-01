@@ -216,7 +216,15 @@ class GraphBuilder:
                                  marker=dict(color="rgba(0,0,0,0.25)")
                                  )
                       )
-
+        # add text to explain graph
+        fig.add_annotation(x=max(sosList),
+                           y=m * np.array(max(sosList)) + b,
+                           showarrow=False,
+                           text="Harder Schedule")
+        fig.add_annotation(x=min(sosList),
+                           y=m * np.array(min(sosList)) + b,
+                           showarrow=False,
+                           text="Easier Schedule")
         fig.update_layout(
             xaxis=dict(title="Strength of Schedule", dtick=0.1),
             yaxis=dict(title="PPG Against"),
