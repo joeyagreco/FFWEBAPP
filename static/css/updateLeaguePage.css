@@ -19,6 +19,7 @@
 
 .leagueNameForm {
     width: 15%;
+    min-width: 15%;
     height: 3rem;
     font-size: 2rem !important;
     text-align: center;
@@ -114,7 +115,7 @@
 
 .teamForm {
     width: 20rem;
-    height: auto;
+    min-width: 20rem;
     font-size: 1.5rem !important;
     text-align: center;
 }
