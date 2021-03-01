@@ -16,7 +16,13 @@ class Constants:
     FREQUENCY_OF_SCORES = "Frequency of Scores"
     POINTS_FOR_OVER_POINTS_AGAINST = "Points For/Points Against"
     AWAL_BY_WEEK = "AWAL by Week"
-    GRAPH_OPTIONS = [SCORING_SHARE, FREQUENCY_OF_SCORES, AWAL_OVER_PPG, POINTS_FOR_OVER_POINTS_AGAINST, PPG_BY_WEEK,
+    STRENGTH_OF_SCHEDULE_OVER_PPG_AGAINST = "Strength of Schedule/PPG Against"
+    GRAPH_OPTIONS = [SCORING_SHARE,
+                     FREQUENCY_OF_SCORES,
+                     AWAL_OVER_PPG,
+                     POINTS_FOR_OVER_POINTS_AGAINST,
+                     STRENGTH_OF_SCHEDULE_OVER_PPG_AGAINST,
+                     PPG_BY_WEEK,
                      AWAL_BY_WEEK]
 
     # used for Stats Explained
