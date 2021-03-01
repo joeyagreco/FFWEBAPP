@@ -28,6 +28,11 @@ DROPDOWN ACTIVE BACKGROUND COLOR:
 
 */
 
+button {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .darkestColor {
     background-color: #081c15 !important;
 }
@@ -81,6 +86,12 @@ DROPDOWN ACTIVE BACKGROUND COLOR:
 
 .secondaryButtonColors:focus {
     box-shadow: 0px 0px 0px white, 0px 0px 4px #40916C inset !important;
+}
+
+.secondaryButtonColors:disabled {
+    background-color: grey !important;
+    border-color: grey !important;
+    cursor: default !important;
 }
 
 .primaryFormColors {
