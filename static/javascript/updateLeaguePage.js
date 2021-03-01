@@ -180,10 +180,8 @@ function setTeamNameInputWidths(teams) {
     // get all team dropdown button elements
     width = getMaxTeamNameLength(teams);
     // add room for dropdown arrow
-    width += 5;
     teamInputForms = document.getElementsByClassName("teamForm");
-    console.logg
     for(i=0; i<teamInputForms.length; i++) {
-        teamInputForms[i].setAttribute('style', 'width:'+width/2+'ch');
+        teamInputForms[i].setAttribute('style', 'width:'+width+'ch');
     }
 }

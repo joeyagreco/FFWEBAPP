@@ -113,7 +113,7 @@
 }
 
 .teamForm {
-    width: 20rem !important;
+    width: 20rem;
     height: auto;
     font-size: 1.5rem !important;
     text-align: center;
