@@ -157,7 +157,7 @@ function getErrorInData(data) {
     }
     var allTeamIdsSet = [...new Set(allTeamIds)]
     if(allTeamIds.length != allTeamIdsSet.length) {
-        return "A teams must play once per week.";
+        return "All teams must play once per week.";
     }
     for(i=0; i<allTeamScores.length; i++) {
         if(allTeamScores[i] == "") {
