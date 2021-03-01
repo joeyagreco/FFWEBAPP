@@ -118,5 +118,8 @@
 {% if league.years[yearStr].weeks is none %}
     <script>preparePageForYearZero();</script>
 {% endif %}
-<script>clearChanges();</script>
+<script>
+clearChanges();
+setTeamNameInputWidths({{league.years[selected_year|string].teams|safe}});
+</script>
 {% endblock %}

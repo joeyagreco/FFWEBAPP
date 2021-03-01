@@ -164,3 +164,26 @@ function getErrorInData(data) {
     }
     return "";
 }
+
+function getMaxTeamNameLength(teams) {
+    var maxLength = 0;
+    for(i=0; i<teams.length; i++) {
+        var newLength = teams[i]["teamName"].length;
+        if(newLength > maxLength) {
+            maxLength = newLength;
+        }
+    }
+    return maxLength;
+}
+
+function setTeamNameInputWidths(teams) {
+    // get all team dropdown button elements
+    width = getMaxTeamNameLength(teams);
+    // add room for dropdown arrow
+    width += 5;
+    teamInputForms = document.getElementsByClassName("teamForm");
+    console.logg
+    for(i=0; i<teamInputForms.length; i++) {
+        teamInputForms[i].setAttribute('style', 'width:'+width/2+'ch');
+    }
+}
