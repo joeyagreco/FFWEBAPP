@@ -213,7 +213,7 @@ class ExplanationDivsAsStrings:
     SCORING_SHARE_STATS_EXPLAINED = (SCORING_SHARE_PURPOSE, SCORING_SHARE_FORMULA, SCORING_SHARE_FORMULA_EXPLAINED)
 
     SMART_WINS_PURPOSE = f"""
-        {Constants.SMART_WINS_STAT_TITLE} shows how many wins a team would have if it played against every score in the league this season.
+        {Constants.SMART_WINS_STAT_TITLE} show how many wins a team would have if it played against every score in the league this season.
         """
 
     SMART_WINS_FORMULA = f"""
