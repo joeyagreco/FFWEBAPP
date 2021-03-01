@@ -218,7 +218,7 @@ class GraphBuilder:
                       )
 
         fig.update_layout(
-            xaxis=dict(title="Strength of Schedule", dtick=0.5),
+            xaxis=dict(title="Strength of Schedule", dtick=0.1),
             yaxis=dict(title="PPG Against"),
             title=Constants.STRENGTH_OF_SCHEDULE_OVER_PPG_AGAINST
         )
