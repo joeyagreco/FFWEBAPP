@@ -47,7 +47,7 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <input class="leagueNameInputForm form-control primaryFormColors" type="text" name="league_name" id="league_name" onchange="activateSubmitButton()" placeholder="League Name" maxlength="30" required>
+                <input class="leagueNameInputForm form-control primaryFormColors" type="text" name="league_name" id="league_name" onkeyup="activateSubmitButton()" placeholder="League Name" maxlength="30" autocomplete="off" required>
                 <button class="createLeagueButton btn btn-primary primaryButtonColors disabled" id="createLeagueButton" type="button" onclick="postNewLeague()">Create League</button>
             </div>
         </div>

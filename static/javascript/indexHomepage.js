@@ -11,12 +11,11 @@ function activateSubmitButton() {
     var leagueIdInputElement = document.getElementById("league_id");
     var loadLeagueButtonElement = document.getElementById("load_league_button");
     console.log(leagueIdInputElement.value.replaceAll(/\s/g,'').length);
-    if(leagueIdInputElement.value.replaceAll(/\s/g,'').length == 5) {
+    if(leagueIdInputElement.value.replaceAll(/\s/g,'').length == 6) {
         // valid league name given, enable submit button
         loadLeagueButtonElement.classList.remove("disabled");
     }
     else {
-        console.log("disabled");
         // check if submit button is disabled, if not, disable it again
         if(!loadLeagueButtonElement.classList.contains("disabled")) {
             loadLeagueButtonElement.classList.add("disabled");
