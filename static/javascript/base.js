@@ -3,9 +3,10 @@ function homeRedirect() {
       title: 'Leave your league?',
       html: "You should <a onclick='leagueHomepageRedirect()' href='#'> save your league URL</a> first.",
       icon: 'warning',
+      iconColor: '#bf1d43',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#40916C',
+      cancelButtonColor: '#bf1d43',
       confirmButtonText: 'Yes, leave!',
       heightAuto: false
     }).then((result) => {

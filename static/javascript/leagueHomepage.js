@@ -15,7 +15,7 @@ function copyUrl() {
       iconColor: '#40916C',
       title: 'League URL Copied',
       text: 'Use it to get back here anytime!',
-      confirmButtonColor: '#914440',
+      confirmButtonColor: '#40916C',
       heightAuto: false
     })
 }
