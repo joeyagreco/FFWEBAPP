@@ -92,13 +92,13 @@ button {
 }
 
 .secondaryButtonColors {
-    color: #95d5b2 !important;
-    background-color: #914440 !important;
-    border-color: #914440 !important;
+    color: #081c15 !important;
+    background-color: #95D5B2 !important;
+    border-color: #95D5B2 !important;
 }
 
 .secondaryButtonColors:hover {
-    background-color: #753733 !important
+    background-color: #52B788 !important
 }
 
 .secondaryButtonColors:focus {
@@ -116,6 +116,11 @@ button {
     color: white !important;
     background-color: #914053 !important;
     border-color: #914053 !important;
+}
+
+.dangerButtonColors:hover {
+    background-color: #612a37 !important;
+    border-color: #612a37 !important;
 }
 
 .primaryFormColors {
