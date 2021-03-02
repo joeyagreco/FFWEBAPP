@@ -35,11 +35,27 @@ function clearChanges() {
 function changeMade() {
     // when this method is called, it increments the changeCount by 1
     // it also enables the save button
+    // it also disables the edit year button
+    // it also disables the year select dropdown button
+    // it also disables the add year button
+    // it also disables the add/update week button
     var saveButton = document.getElementById("saveChangesButton");
     saveButton.classList.remove("disabled");
     var changeCount = getChangeCount();
     changeCount++;
     sessionStorage["changeCount"] = changeCount.toString();
+    var editYearButtonElement = document.getElementById("editYearButton");
+    editYearButtonElement.classList.add("disabled");
+    editYearButtonElement.disabled = true;
+    var yearDropdownButtonElement = document.getElementById("selectYearButton");
+    yearDropdownButtonElement.classList.add("disabled");
+    yearDropdownButtonElement.disabled = true;
+    var yearAddButtonElement = document.getElementById("addYearButton");
+    yearAddButtonElement.classList.add("disabled");
+    yearAddButtonElement.disabled = true;
+    var addUpdateWeekButtonElement = document.getElementById("addOrUpdateWeekButton");
+    addUpdateWeekButtonElement.classList.add("disabled");
+    addUpdateWeekButtonElement.disabled = true;
 }
 
 function addYear() {
