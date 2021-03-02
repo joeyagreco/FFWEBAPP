@@ -28,6 +28,16 @@ DROPDOWN ACTIVE BACKGROUND COLOR:
 
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+.errorMessage {
+    font-size: 1.3rem;
+    text-align: center;
+    color: red;
+    background-color: #081c15;
+    font-family: 'Noto Sans', sans-serif;
+}
+
 button {
     overflow: hidden;
     text-overflow: ellipsis;

@@ -7,4 +7,4 @@ class Error:
         self.__errorMessage = errorMessage
 
     def errorMessage(self) -> str:
-        return f"ERROR: {self.__errorMessage}"
+        return self.__errorMessage

@@ -22,11 +22,11 @@
         </header>
 
         <div class="errorSection">
-                <div class="errorMessage">
-                    {% if error_message %}
-                        {{error_message}}
-                    {% endif %}
-                </div>
+            <div class="errorMessage">
+                {% if error_message %}
+                    <span class="errorMessage">- {{error_message}} -</span>
+                {% endif %}
+            </div>
         </div>
 
         <div class="inputSection">
