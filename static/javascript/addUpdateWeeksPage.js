@@ -25,9 +25,10 @@ function deleteWeek() {
     title: 'Are you sure you want to delete week ' + weekNumber + '?',
     text: "This cannot be undone.",
     icon: 'warning',
+    iconColor: '#914053',
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
+    confirmButtonColor: '#914053',
+    cancelButtonColor: '#40916C',
     confirmButtonText: 'Yes, delete week ' + weekNumber + '.',
     heightAuto: false
     }).then((result) => {

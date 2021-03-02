@@ -3,10 +3,10 @@ function deleteLeague() {
     title: 'Are you sure you want to delete your league?',
     text: "This cannot be undone.",
     icon: 'warning',
-    iconColor: 'red',
+    iconColor: '#914053',
     showCancelButton: true,
-    confirmButtonColor: 'red',
-    cancelButtonColor: '#914440',
+    confirmButtonColor: '#914053',
+    cancelButtonColor: '#40916C',
     confirmButtonText: 'Yes, delete my league forever.',
     heightAuto: false
     }).then((result) => {
@@ -73,9 +73,10 @@ function deleteYear() {
     title: 'Are you sure you want to delete the ' + currentYear + ' year?',
     text: "This cannot be undone.",
     icon: 'warning',
+    iconColor: '#914053',
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
+    confirmButtonColor: '#914053',
+    cancelButtonColor: '#40916C',
     confirmButtonText: 'Yes, delete the ' + currentYear + ' year.',
     heightAuto: false
     }).then((result) => {

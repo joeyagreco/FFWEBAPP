@@ -64,7 +64,7 @@
             </div>
             <div class="yearEdit" id="yearEdit">
                 <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" autocomplete="off" onchange="changeMade()" step="1" min="1920" max="3000" required>
-                <button class="deleteYearButton secondaryButtonColors" id="deleteYearButton" type="button" onclick="deleteYear()" disabled><i class="fas fa-trash-alt secondaryFontColorLight"></i></button>
+                <button class="deleteYearButton dangerButtonColors" id="deleteYearButton" type="button" onclick="deleteYear()" disabled><i class="fas fa-trash-alt secondaryFontColorLight"></i></button>
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@
     <div class="bottomButtons">
         <button class="saveChangesButton btn btn-warning secondaryButtonColors disabled" id="saveChangesButton" type="button" onclick="postLeagueChanges()"><i class="fas fa-save"></i> Save Changes</button>
         <button class="addOrUpdateWeekButton btn btn-primary primaryButtonColors" id="addOrUpdateWeekButton" type="button" onclick="addUpdateWeeksRedirect()"><i class="fas fa-edit"></i> Add/Update a Week</button>
-        <button class="deleteLeagueButton btn btn-danger" type="button" onclick="deleteLeague()"><i class="fas fa-trash-alt"></i> Delete League</button>
+        <button class="deleteLeagueButton btn btn-danger dangerButtonColors" type="button" onclick="deleteLeague()"><i class="fas fa-trash-alt"></i> Delete League</button>
     </div>
 </form>
 <!--TODO move this to JS or check on client side-->
