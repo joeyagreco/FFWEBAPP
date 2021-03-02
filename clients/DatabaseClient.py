@@ -64,10 +64,8 @@ class DatabaseClient:
                             str(currentYear): year}}
         response = self.__collection.insert_one(league)
         if response.acknowledged:
-            print("no error")
             return response.inserted_id
         else:
-            print("error")
             return Error("Could not insert into database.")
 
     def updateLeague(self, leagueId: int, leagueName: str, years):
