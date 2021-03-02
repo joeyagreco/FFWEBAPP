@@ -27,7 +27,6 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-
 <form class="inputsAndButtons" action="/update-league" method="POST">
     <div class="topForm">
         <input class="leagueNameForm form-control primaryFormColors" type="text" name="league_name" id="league_name" value="{{league.leagueName}}" placeholder="League Name" required autocomplete="off" onchange="changeMade()">

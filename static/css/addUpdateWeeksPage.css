@@ -19,7 +19,7 @@
     height: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 .selectAndAddWeek {
@@ -47,7 +47,6 @@
 
 .teams {
     width: 60%;
-    height: 60%;
     order: 2;
     margin-left: auto;
     margin-right: auto;
@@ -55,6 +54,7 @@
     flex-direction: row;
     justify-content: space-around;
     text-align: center;
+    margin-top: 3rem;
 }
 
 .oddTeamForms {
@@ -64,6 +64,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin-bottom: 5rem !important;
 }
 
 .vs {
@@ -73,6 +74,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin-bottom: 5rem !important;
 }
 
 .vsText {
@@ -89,6 +91,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin-bottom: 5rem !important;
 }
 
 .teamFormsOdd {

@@ -8,7 +8,7 @@
 
 .topForm {
     width: 100%;
-    height: 15%;
+    height: 17%;
     order: 1;
     display: flex;
     flex-direction: column;
@@ -82,7 +82,6 @@
 
 .middleForms {
     width: 40%;
-    height: 50%;
     order: 2;
     margin-left: auto;
     margin-right: auto;
@@ -116,8 +115,9 @@
 .teamForm {
     width: 20rem;
     min-width: 20rem;
-    font-size: 1.5rem !important;
+    font-size: 1.2rem !important;
     text-align: center;
+    margin-bottom: 1rem !important;
 }
 
 .bottomButtons {
@@ -127,6 +127,8 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: flex-start;
+    padding-top: 1%;
 }
 
 .disabled {
@@ -139,7 +141,8 @@
     height: 20%;
     font-size: 1.5rem !important;
     order: 1;
-    margin: 2% !important;
+    margin-left: 2% !important;
+    margin-right: 2% !important;
 }
 
 .addOrUpdateWeekButton {
@@ -147,7 +150,8 @@
     height: 20%;
     font-size: 1.5rem !important;
     order: 2;
-    margin: 2% !important;
+    margin-left: 2% !important;
+    margin-right: 2% !important;
 }
 
 .deleteLeagueButton {
@@ -155,7 +159,8 @@
     height: 20%;
     font-size: 1.5rem !important;
     order: 3;
-    margin: 2% !important;
+    margin-left: 2% !important;
+    margin-right: 2% !important;
 }
 
 /* Chrome, Safari, Edge, Opera */
