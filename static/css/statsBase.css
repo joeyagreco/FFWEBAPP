@@ -50,9 +50,8 @@
 }
 
 .chunkBody {
-    margin-top: 1%;
     line-height: 150%;
-    order: 2;
+    order: 3;
     font-family: 'Merriweather', serif;
     font-size: 110%;
 }
@@ -71,4 +70,11 @@
 
 #formulaBody {
     font-family: 'Nanum Myeongjo', serif;
+}
+
+.statTitleLine {
+    order: 2;
+    width: 40%;
+    background-color: #081c15 !important;
+    height: 0.1rem !important;
 }
