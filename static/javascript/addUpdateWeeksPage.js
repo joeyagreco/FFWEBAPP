@@ -10,6 +10,12 @@ function updateWeekDropdown(weekNumber) {
     window.location = "/add-update-weeks?league_id="+leagueId+"&week="+weekNumber+"&year="+year;
 }
 
+function updateLeagueRedirect() {
+    var leagueId = document.getElementById("league_id").value;
+    var year = document.getElementById("year_number").value;
+    window.location = "/update-league?league_id="+leagueId+"&year="+year;
+}
+
 function deleteWeek() {
     var weekNumber = document.getElementById("week_number").value;
     var leagueId = document.getElementById("league_id").value;
