@@ -58,7 +58,8 @@ function changeMade() {
     // when this method is called, it increments the changeCount by 1
     // it also enables the save button
     // it also disables the add week button
-    // it also disabled the week select dropdown
+    // it also disables the week select dropdown
+    // it also disables the back to league button
     var saveButton = document.getElementById("saveChangesButton");
     saveButton.classList.remove("disabled");
     saveButton.disabled = false;
@@ -68,6 +69,9 @@ function changeMade() {
     var weekSelectButton = document.getElementById("dropdownMenuButton");
     weekSelectButton.classList.add("disabled");
     weekSelectButton.disabled = true;
+    var backToLeagueButtonElement = document.getElementById("updateLeagueButton");
+    backToLeagueButtonElement.classList.add("disabled");
+    backToLeagueButtonElement.disabled=true;
     var changeCount = getChangeCount();
     changeCount++;
     sessionStorage["changeCount"] = changeCount.toString();
