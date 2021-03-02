@@ -193,7 +193,7 @@ function setTeamDropdownWidths(teams) {
     // get all team dropdown button elements
     var width = getMaxTeamNameLength(teams);
     // add room for dropdown arrow
-    width += 5;
+    width *= 1.1;
     teamDropdownButtons = document.getElementsByClassName("teamDropdownButton");
     for(i=0; i<teamDropdownButtons.length; i++) {
         teamDropdownButtons[i].setAttribute('style', 'width:'+width+'ch');
