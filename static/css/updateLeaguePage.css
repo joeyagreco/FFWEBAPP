@@ -139,7 +139,7 @@
     height: 20%;
     font-size: 1.5rem !important;
     order: 1;
-
+    margin: 2% !important;
 }
 
 .addOrUpdateWeekButton {
@@ -147,6 +147,7 @@
     height: 20%;
     font-size: 1.5rem !important;
     order: 2;
+    margin: 2% !important;
 }
 
 .deleteLeagueButton {
@@ -154,6 +155,7 @@
     height: 20%;
     font-size: 1.5rem !important;
     order: 3;
+    margin: 2% !important;
 }
 
 /* Chrome, Safari, Edge, Opera */
