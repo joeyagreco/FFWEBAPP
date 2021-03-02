@@ -10,7 +10,6 @@ function activateSubmitButton() {
     // this activates the submit button if the league name field isn't empty
     var leagueIdInputElement = document.getElementById("league_id");
     var loadLeagueButtonElement = document.getElementById("load_league_button");
-    console.log(leagueIdInputElement.value.replaceAll(/\s/g,'').length);
     if(leagueIdInputElement.value.replaceAll(/\s/g,'').length == 6) {
         // valid league name given, enable submit button
         loadLeagueButtonElement.classList.remove("disabled");
