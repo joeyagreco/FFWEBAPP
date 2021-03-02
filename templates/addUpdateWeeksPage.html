@@ -22,13 +22,13 @@
 
 {% block content %}
 {% set yearStr = selected_year|string %}
-<div class="weekForm" action="/update-week" method="POST">
+<div class="weekForm">
     <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
     <input class="weekHidden" type="number" name="week_number" id="week_number" value="{{week_number}}">
     <input class="yearHidden" type="number" name="year_number" id="year_number" value="{{selected_year}}">
     <input class="numberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
     <div class="selectAndAddWeek">
-            <button class="btn btn-secondary dropdown-toggle primaryButtonColors" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn dropdown-toggle primaryButtonColors" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Week {{week_number}}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -47,7 +47,7 @@
             {% for week in league.years[yearStr].weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsOdd">
-                        <button class="btn btn-secondary dropdown-toggle blackText backgroundTeamId{{matchup.teamA.teamId}} teamAMatchupButton{{matchup.matchupId}} teamDropdownButton" type="button" id="teamAId_matchup_{{matchup.matchupId}}" value="{{matchup.teamA.teamId}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn dropdown-toggle blackText backgroundTeamId{{matchup.teamA.teamId}} teamAMatchupButton{{matchup.matchupId}} teamDropdownButton" type="button" id="teamAId_matchup_{{matchup.matchupId}}" value="{{matchup.teamA.teamId}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{matchup.teamA.teamName}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -80,7 +80,7 @@
             {% for week in league.years[yearStr].weeks if week.weekNumber == week_number %}
                 {% for matchup in week.matchups %}
                     <div class="teamFormsEven">
-                        <button class="btn btn-secondary dropdown-toggle blackText backgroundTeamId{{matchup.teamB.teamId}} teamBMatchupButton{{matchup.matchupId}} teamDropdownButton" type="button" id="teamBId_matchup_{{matchup.matchupId}}" value="{{matchup.teamB.teamId}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn dropdown-toggle blackText backgroundTeamId{{matchup.teamB.teamId}} teamBMatchupButton{{matchup.matchupId}} teamDropdownButton" type="button" id="teamBId_matchup_{{matchup.matchupId}}" value="{{matchup.teamB.teamId}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{matchup.teamB.teamName}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -102,9 +102,9 @@
         </div>
     </div>
     <div class="actionButtons">
-        <button class="saveChangesButton btn btn-warning warningButtonColors disabled" id="saveChangesButton" type="button" onclick="postWeek()"><i class="fas fa-save"></i> Save Changes</button>
-        <button class="updateLeagueButton btn btn-primary primaryButtonColors" id="updateLeagueButton" type="button" onclick="updateLeagueRedirect()"><i class="fas fa-caret-square-left"></i> Back to League</button>
-        <button class="deleteWeekButton btn btn-danger dangerButtonColors" id="deleteWeekButton" type="button" onclick="deleteWeek()"><i class="fas fa-trash-alt"></i> Delete Week</button>
+        <button class="saveChangesButton btn warningButtonColors disabled" id="saveChangesButton" type="button" onclick="postWeek()"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="updateLeagueButton btn primaryButtonColors" id="updateLeagueButton" type="button" onclick="updateLeagueRedirect()"><i class="fas fa-caret-square-left"></i> Back to League</button>
+        <button class="deleteWeekButton btn dangerButtonColors" id="deleteWeekButton" type="button" onclick="deleteWeek()"><i class="fas fa-trash-alt"></i> Delete Week</button>
     </div>
 </div>
 <!--TODO add this to js file-->
