@@ -50,16 +50,15 @@ window.post = function(url, data) {
 function activateSubmitButton() {
     // this activates the submit button if the league name field isn't empty
     var leagueNameInputElement = document.getElementById("league_name");
-    var submitLeagueButton = document.getElementById("createLeagueButton");
+    var submitLeagueButtonElement = document.getElementById("createLeagueButton");
     if(leagueNameInputElement.value.replaceAll(/\s/g,'').length != 0) {
         // valid league name given, enable submit button
-        submitLeagueButton.classList.remove("disabled");
+        submitLeagueButtonElement.classList.remove("disabled");
     }
     else {
         // check if submit button is disabled, if not, disable it again
-        if(!submitLeagueButton.classList.contains("disabled")) {
-            submitLeagueButton.classList.add("disabled");
+        if(!submitLeagueButtonElement.classList.contains("disabled")) {
+            submitLeagueButtonElement.classList.add("disabled");
         }
     }
-
 }
