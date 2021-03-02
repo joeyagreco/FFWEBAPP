@@ -114,13 +114,13 @@ button {
 
 .dangerButtonColors {
     color: white !important;
-    background-color: #914053 !important;
-    border-color: #914053 !important;
+    background-color: #bf1d43 !important;
+    border-color: #bf1d43 !important;
 }
 
 .dangerButtonColors:hover {
-    background-color: #612a37 !important;
-    border-color: #612a37 !important;
+    background-color: #ff2457!important;
+    border-color: #ff2457 !important;
 }
 
 .primaryFormColors {
