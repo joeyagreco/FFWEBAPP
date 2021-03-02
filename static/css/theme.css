@@ -90,6 +90,7 @@ button {
 }
 
 .secondaryButtonColors {
+    color: #95d5b2 !important;
     background-color: #914440 !important;
     border-color: #914440 !important;
 }
@@ -100,6 +101,7 @@ button {
 
 .secondaryButtonColors:focus {
     box-shadow: 0px 0px 0px white, 0px 0px 4px #40916C inset !important;
+    outline: none !important;
 }
 
 .secondaryButtonColors:disabled {
