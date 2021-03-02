@@ -49,6 +49,10 @@ button {
     border-radius: 0px;
 }
 
+.hoverFade:hover {
+    opacity: 0.8 !important;
+}
+
 .darkestColor {
     background-color: #081c15 !important;
 }
