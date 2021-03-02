@@ -1,3 +1,4 @@
+import copy
 import os
 import ast
 
@@ -217,11 +218,12 @@ def addYear():
     # TODO LMN method to get the highest number year in the league
     latestYear = int(max(list(leagueOrError["years"].keys())))
     newYear = latestYear + 1
-    # carry over teams from current year
-    # TODO maybe make a LMN method that will give default team names like "team1", "team2" for each team so every new year has default team names
-    currentTeams = leagueOrError["years"][str(latestYear)]["teams"]
+    # create new teams with names based on the owner name
+    newTeams = copy.deepcopy(leagueOrError["years"]["0"]["teams"])
+    for team in newTeams:
+        team["teamName"] += "'s Team"
     # create a new year
-    yearDict = {"year": newYear, "teams": currentTeams, "weeks": []}
+    yearDict = {"year": newYear, "teams": newTeams, "weeks": []}
     leagueOrError["years"][str(newYear)] = yearDict
     updatedYears = leagueOrError["years"]
     leagueName = leagueOrError["leagueName"]
