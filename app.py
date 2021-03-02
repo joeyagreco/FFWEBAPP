@@ -434,10 +434,9 @@ def headToHeadStats():
     else:
         yearList = [year]
     # check if these teams play each other ever
-    # TODO implement this
-    # if not LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, year, team1Id, team2Id):
-    #     return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
-    #                            given_team_2_id=team2Id, teams_dont_play=True)
+    for y in yearList:
+        if not LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, y, team1Id, team2Id):
+            return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id, given_team_2_id=team2Id, teams_dont_play=True, selected_year=year)
     # get the stats model
     statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, yearList, team1Id, team2Id)
     # grab Constants class to use for dropdown

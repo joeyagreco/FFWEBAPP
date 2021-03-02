@@ -22,11 +22,14 @@ class SslCalculator:
         WHERE:
         G = Total games played by a team
         """
-        teamScore = ((self.__awal / self.__gamesPlayed) * self.__awalAndWalMultiplier) + (self.__scoringShare * self.__scoringShareMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
-        rounded = params.pop("rounded", True)
-        if rounded:
-            return Rounder.normalRound(teamScore, 2)
-        return teamScore
+        try:
+            teamScore = ((self.__awal / self.__gamesPlayed) * self.__awalAndWalMultiplier) + (self.__scoringShare * self.__scoringShareMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
+            rounded = params.pop("rounded", True)
+            if rounded:
+                return Rounder.normalRound(teamScore, 2)
+            return teamScore
+        except ZeroDivisionError:
+            return 0
 
     def getTeamSuccess(self, **params) -> float:
         """
@@ -36,11 +39,14 @@ class SslCalculator:
         WHERE:
         G = Total games played by a team
         """
-        teamSuccess = ((self.__wal / self.__gamesPlayed) * self.__awalAndWalMultiplier) + (self.__scoringShare * self.__scoringShareMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
-        rounded = params.pop("rounded", True)
-        if rounded:
-            return Rounder.normalRound(teamSuccess, 2)
-        return teamSuccess
+        try:
+            teamSuccess = ((self.__wal / self.__gamesPlayed) * self.__awalAndWalMultiplier) + (self.__scoringShare * self.__scoringShareMultiplier) + ((self.__maxScore + self.__minScore) * self.__minMaxMultiplier)
+            rounded = params.pop("rounded", True)
+            if rounded:
+                return Rounder.normalRound(teamSuccess, 2)
+            return teamSuccess
+        except ZeroDivisionError:
+            return 0
 
     def getTeamLuck(self) -> float:
         """
