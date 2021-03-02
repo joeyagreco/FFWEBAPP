@@ -3,9 +3,10 @@ function deleteLeague() {
     title: 'Are you sure you want to delete your league?',
     text: "This cannot be undone.",
     icon: 'warning',
+    iconColor: 'red',
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
+    confirmButtonColor: 'red',
+    cancelButtonColor: '#914440',
     confirmButtonText: 'Yes, delete my league forever.',
     heightAuto: false
     }).then((result) => {

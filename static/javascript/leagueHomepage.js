@@ -12,8 +12,10 @@ function copyUrl() {
   /* Alert success */
     Swal.fire({
       icon: 'success',
+      iconColor: '#40916C',
       title: 'League URL Copied',
       text: 'Use it to get back here anytime!',
+      confirmButtonColor: '#914440',
       heightAuto: false
     })
 }
