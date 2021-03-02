@@ -119,8 +119,19 @@ button {
 }
 
 .dangerButtonColors:hover {
-    background-color: #ff2457!important;
+    background-color: #ff2457 !important;
     border-color: #ff2457 !important;
+}
+
+.warningButtonColors {
+    color: black !important;
+    background-color: #ccaf1f !important;
+    border-color: #ccaf1f !important;
+}
+
+.warningButtonColors:hover {
+    background-color: #f5db5b !important;
+    border-color: #f5db5b !important;
 }
 
 .primaryFormColors {
