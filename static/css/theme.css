@@ -41,6 +41,10 @@ DROPDOWN ACTIVE BACKGROUND COLOR:
 button {
     overflow: hidden;
     text-overflow: ellipsis;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
 }
 
 .darkestColor {

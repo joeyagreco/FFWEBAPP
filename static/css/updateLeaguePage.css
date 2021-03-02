@@ -42,6 +42,14 @@
     display: none;
 }
 
+.yearSelectAndEdit {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
 .yearSelect {
     order: 1;
     display: flex;
@@ -51,7 +59,7 @@
 
 .editYearButton {
     order: 1;
-    width: 2rem;
+    width: 2.2rem;
 }
 
 .yearDropdown {
@@ -60,13 +68,13 @@
 
 .addYearButtonPlus {
     order: 3;
+    width: 2.2rem;
 }
 
 .yearEdit {
     order: 2;
     display: flex;
     flex-direction: row;
-    margin-left: 2rem;
     display: none;
 }
 
@@ -78,6 +86,7 @@
 
 .deleteYearButton {
     order: 2;
+    width: 2.2rem;
 }
 
 .middleForms {

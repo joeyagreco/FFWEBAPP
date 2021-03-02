@@ -33,37 +33,39 @@
         <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
         <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
         <input class="originalYearHidden" type="number" name="original_year_number" id="original_year_number" value="{{selected_year}}">
-        <div class="yearSelect">
-            <button class="editYearButton secondaryButtonColors" id="editYearButton" type="button" onclick="toggleYearEdit()"><i class="fas fa-edit secondaryFontColorLight"></i></button>
-            <div class="yearDropdown">
-                <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="selectYearButton" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {% if selected_year == 0 %}
-                        All Time
-                    {% else %}
-                        {{selected_year}}
-                    {% endif %}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {% for year in league.years.keys()|sort %}
-                        {% if year == selected_year|string %}
-                            {% if selected_year == 0 %}
-                                <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">All Time</a>
-                            {% else %}
-                                <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
-                            {% endif %}
-                        {% elif year == '0' %}
-                            <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">All Time</a>
+        <div class="yearSelectAndEdit">
+            <div class="yearSelect">
+                <button class="editYearButton secondaryButtonColors" id="editYearButton" type="button" onclick="toggleYearEdit()"><i class="fas fa-edit secondaryFontColorLight"></i></button>
+                <div class="yearDropdown">
+                    <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="selectYearButton" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if selected_year == 0 %}
+                            All Time
                         {% else %}
-                            <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
+                            {{selected_year}}
                         {% endif %}
-                    {% endfor %}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {% for year in league.years.keys()|sort %}
+                            {% if year == selected_year|string %}
+                                {% if selected_year == 0 %}
+                                    <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">All Time</a>
+                                {% else %}
+                                    <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}})">{{selected_year}}</a>
+                                {% endif %}
+                            {% elif year == '0' %}
+                                <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">All Time</a>
+                            {% else %}
+                                <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
+                <button class="addYearButtonPlus secondaryButtonColors" id="addYearButton" type="button" onclick="addYear()"><i class="fas fa-plus secondaryFontColorLight"></i></button>
             </div>
-            <button class="addYearButtonPlus secondaryButtonColors" id="addYearButton" type="button" onclick="addYear()"><i class="fas fa-plus secondaryFontColorLight"></i></button>
-        </div>
-        <div class="yearEdit" id="yearEdit">
-            <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" autocomplete="off" onchange="changeMade()" step="1" min="1920" max="3000" required>
-            <button class="deleteYearButton secondaryButtonColors" id="deleteYearButton" type="button" onclick="deleteYear()" disabled><i class="fas fa-trash-alt secondaryFontColorLight"></i></button>
+            <div class="yearEdit" id="yearEdit">
+                <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" autocomplete="off" onchange="changeMade()" step="1" min="1920" max="3000" required>
+                <button class="deleteYearButton secondaryButtonColors" id="deleteYearButton" type="button" onclick="deleteYear()" disabled><i class="fas fa-trash-alt secondaryFontColorLight"></i></button>
+            </div>
         </div>
     </div>
     {% set yearStr = selected_year|string %}
