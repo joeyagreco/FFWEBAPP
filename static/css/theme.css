@@ -92,13 +92,13 @@ button {
 }
 
 .secondaryButtonColors {
-    color: #081c15 !important;
-    background-color: #95D5B2 !important;
-    border-color: #95D5B2 !important;
+    color: #95D5B2 !important;
+    background-color: #081c15 !important;
+    border-color: #081c15 !important;
 }
 
 .secondaryButtonColors:hover {
-    background-color: #52B788 !important
+    background-color: #134533 !important
 }
 
 .secondaryButtonColors:focus {
