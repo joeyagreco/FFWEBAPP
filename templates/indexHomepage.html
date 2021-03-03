@@ -29,7 +29,9 @@
                 <button class="newLeagueButton btn btn-primary primaryButtonColors" type="submit">New League</button>
             </form>
 
-            <div class="or secondaryFontColorDark">OR</div>
+            <div class="or">
+                <div class="verticalLine"></div>
+            </div>
 
             <form class="leagueIdFormStack" action="/league-homepage" method="GET">
                 <input class="leagueIdInputForm form-control primaryFormColors" type="number" name="league_id" id="league_id" onkeyup="activateSubmitButton()" placeholder="League ID" required min="100000" max="999999" step="1" autocomplete="off" oninput="checkCharacterLimit()">

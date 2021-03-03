@@ -40,7 +40,7 @@ header {
 
 .errorSection {
     width: 100%;
-    height: 15%;
+    height: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,10 +48,10 @@ header {
 
 .buttonSelection {
     width: 100%;
-    height: 30%;
+    height: 20%;
     display: flex;
-    align-items: flex-start;
     justify-content: center;
+    align-items: center;
 }
 
 .newLeagueFormStack {
@@ -60,11 +60,12 @@ header {
     order: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .newLeagueButton {
     width: 100%;
-    height: 40%;
+    height: 30%;
     margin-top: 2rem;
     font-size: 1.5rem !important;
     cursor: pointer;
@@ -73,11 +74,15 @@ header {
 .or {
     width: 10%;
     height: 100%;
-    padding-top: 2rem;
     order: 2;
-    font-size: 300%;
-    text-align: center;
-    color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.verticalLine {
+    height: 100%;
+    border-left: thick solid #081c15;
+    border-width: 0.2rem;
 }
 
 .leagueIdFormStack {
@@ -86,6 +91,7 @@ header {
     order: 3;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .leagueIdInputForm {
@@ -104,7 +110,7 @@ input::-webkit-inner-spin-button {
 
 .loadLeagueButton {
     width: 100%;
-    height: 40%;
+    height: 30%;
     font-size: 1.5rem !important;
     cursor: pointer;
 }
