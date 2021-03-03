@@ -155,9 +155,6 @@
                 </tbody>
             </table>
         {% endif %}
-        {% if teams_dont_play %}
-            <div class="teamsDontPlayDisplay">These Teams Do Not Play Each Other.</div>
-        {% endif %}
         <script>
             setTeamDropdownWidths({{league.years[selected_year].teams|safe}});
         </script>

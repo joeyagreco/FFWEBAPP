@@ -87,10 +87,3 @@
 table, th, td {
   border: 1px solid black !important;
 }
-
-.teamsDontPlayDisplay {
-    width: 100%;
-    height: auto;
-    order: 4;
-    text-align: center;
-}
