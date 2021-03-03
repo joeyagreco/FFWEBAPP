@@ -52,6 +52,7 @@ class TestStreakCalculator(unittest.TestCase):
         yearDict = {2020: year2020, 2021: year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         winStreaks_2020 = StreakCalculator(leagueModel, [2020]).getAllWinStreaks()
+        winStreaks_2021 = StreakCalculator(leagueModel, [2021]).getAllWinStreaks()
         winStreaks_bothYears = StreakCalculator(leagueModel, [2020, 2021]).getAllWinStreaks()
         self.assertIsInstance(winStreaks_2020, list)
         self.assertEqual(3, len(winStreaks_2020))
@@ -61,6 +62,8 @@ class TestStreakCalculator(unittest.TestCase):
         self.assertEqual("team1", winStreaks_2020[0].getStartTeam().getTeamName())
         self.assertEqual("Week 3 2020", winStreaks_2020[0].getEndDate())
         self.assertEqual("team1", winStreaks_2020[0].getEndTeam().getTeamName())
+        self.assertIsInstance(winStreaks_2021, list)
+        self.assertEqual(2, len(winStreaks_2021))
         self.assertIsInstance(winStreaks_bothYears, list)
         self.assertEqual(4, len(winStreaks_bothYears))
         self.assertEqual(1, winStreaks_bothYears[0].getOwnerId())

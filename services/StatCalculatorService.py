@@ -241,7 +241,8 @@ class StatCalculatorService:
             return allMovsStr
         elif statSelection == Constants.WIN_STREAKS:
             streakCalculator = StreakCalculator(leagueModel, years)
-            allWinStreaks = None
+            allWinStreaks = streakCalculator.getAllWinStreaks()
+            return allWinStreaks
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
