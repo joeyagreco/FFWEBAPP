@@ -239,6 +239,10 @@ class StatCalculatorService:
             streakCalculator = StreakCalculator(leagueModel, years)
             allWinStreaks = streakCalculator.getAllWinStreaks()
             return allWinStreaks
+        elif statSelection == Constants.LOSING_STREAKS:
+            streakCalculator = StreakCalculator(leagueModel, years)
+            allLossStreaks = streakCalculator.getAllLossStreaks()
+            return allLossStreaks
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
