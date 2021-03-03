@@ -7,4 +7,4 @@ class TestError(unittest.TestCase):
 
     def test_errorMessage(self):
         error = Error("test")
-        self.assertEqual("ERROR: test", error.errorMessage())
+        self.assertEqual("test", error.errorMessage())
