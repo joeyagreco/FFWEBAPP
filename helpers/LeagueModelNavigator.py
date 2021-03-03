@@ -14,7 +14,7 @@ class LeagueModelNavigator:
     """
 
     @staticmethod
-    def getTeamById(leagueModel: LeagueModel, year: int, teamId: int) -> TeamModel:
+    def getTeamById(leagueModel: LeagueModel, year: str, teamId: int) -> TeamModel:
         """
         Returns a Team object for the team with the given ID in the given league in the given year.
         Throws Exception if a team with the given ID is not in the given league.

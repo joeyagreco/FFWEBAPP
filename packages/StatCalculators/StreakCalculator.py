@@ -60,7 +60,7 @@ class StreakCalculator:
         """
         This returns a default streak dict.
         """
-        return {"ownerId": teamId,
+        return {"owner": LeagueModelNavigator.getTeamById(self.__leagueModel, "0", teamId),
                 "streakNumber": None,
                 "startDate": None,
                 "startTeam": None,
@@ -71,7 +71,7 @@ class StreakCalculator:
         """
         This takes in a dictionary and returns it as a valid StreakModel
         """
-        return StreakModel(ownerId=streakDict["ownerId"],
+        return StreakModel(owner=streakDict["owner"],
                            streakNumber=streakDict["streakNumber"],
                            startDate=streakDict["startDate"],
                            startTeam=streakDict["startTeam"],

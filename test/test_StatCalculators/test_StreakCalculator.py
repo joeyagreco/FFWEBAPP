@@ -36,7 +36,6 @@ class TestStreakCalculator(unittest.TestCase):
         week3 = WeekModel(3, matchupList)
         weekList = [week1, week2, week3]
         year2020 = YearModel(2020, teamList, weekList)
-
         matchup1 = MatchupModel(1, team1, team2, 102, 100.5)
         matchup2 = MatchupModel(2, team3, team4, 110.5, 100)
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
@@ -49,14 +48,15 @@ class TestStreakCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        year0 = YearModel(0, teamList, None)
+        yearDict = {"0": year0, 2020: year2020, 2021: year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         winStreaks_2020 = StreakCalculator(leagueModel, [2020]).getAllWinStreaks()
         winStreaks_2021 = StreakCalculator(leagueModel, [2021]).getAllWinStreaks()
         winStreaks_bothYears = StreakCalculator(leagueModel, [2020, 2021]).getAllWinStreaks()
         self.assertIsInstance(winStreaks_2020, list)
         self.assertEqual(3, len(winStreaks_2020))
-        self.assertEqual(1, winStreaks_2020[0].getOwnerId())
+        self.assertEqual(1, winStreaks_2020[0].getOwner().getTeamId())
         self.assertEqual(2, winStreaks_2020[0].getStreakNumber())
         self.assertEqual("Week 2 2020", winStreaks_2020[0].getStartDate())
         self.assertEqual("team1", winStreaks_2020[0].getStartTeam().getTeamName())
@@ -66,7 +66,7 @@ class TestStreakCalculator(unittest.TestCase):
         self.assertEqual(2, len(winStreaks_2021))
         self.assertIsInstance(winStreaks_bothYears, list)
         self.assertEqual(4, len(winStreaks_bothYears))
-        self.assertEqual(1, winStreaks_bothYears[0].getOwnerId())
+        self.assertEqual(1, winStreaks_bothYears[0].getOwner().getTeamId())
         self.assertEqual(3, winStreaks_bothYears[0].getStreakNumber())
         self.assertEqual("Week 2 2020", winStreaks_bothYears[0].getStartDate())
         self.assertEqual("team1", winStreaks_bothYears[0].getStartTeam().getTeamName())

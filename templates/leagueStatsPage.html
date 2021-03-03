@@ -141,9 +141,9 @@
                     </thead>
                     <tbody>
                         {% for leagueStat in stats_models %}
-                            <tr class="backgroundTeamId{{leagueStat.getOwnerId()}}">
+                            <tr class="backgroundTeamId{{leagueStat.getOwner().getTeamId()}}">
                                 <td>{{leagueStat.getStreakNumber()}}</td>
-                                <td>{{leagueStat.getOwnerId()}}</td>
+                                <td>{{leagueStat.getOwner().getTeamName()}}</td>
                                 <td>{{leagueStat.getStartDate()}}</td>
                                 <td>{{leagueStat.getStartTeam().getTeamName()}}</td>
                                 <td>{{leagueStat.getEndDate()}}</td>
