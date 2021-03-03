@@ -20,12 +20,12 @@ class TestStreakCalculator(unittest.TestCase):
         team6 = TeamModel(6, "team6")
         teamList = [team1, team2, team3, team4, team5, team6]
         matchup1 = MatchupModel(1, team1, team2, 90.5, 100)
-        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup2 = MatchupModel(2, team3, team4, 120.1, 100)
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
         matchup1 = MatchupModel(1, team1, team2, 99, 92)
-        matchup2 = MatchupModel(2, team3, team4, 0, 50.01)
+        matchup2 = MatchupModel(2, team3, team4, 60, 50.01)
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week2 = WeekModel(2, matchupList)
@@ -38,7 +38,7 @@ class TestStreakCalculator(unittest.TestCase):
         year2020 = YearModel(2020, teamList, weekList)
 
         matchup1 = MatchupModel(1, team1, team2, 102, 100.5)
-        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup2 = MatchupModel(2, team3, team4, 110.5, 100)
         matchup3 = MatchupModel(3, team5, team6, 104, 105)
         matchupList = [matchup1, matchup2, matchup3]
         week1 = WeekModel(1, matchupList)
@@ -54,6 +54,7 @@ class TestStreakCalculator(unittest.TestCase):
         winStreaks_team1_2020 = StreakCalculator(leagueModel, 1, [2020]).getWinStreaks()
         winStreaks_team2_2020 = StreakCalculator(leagueModel, 2, [2020]).getWinStreaks()
         winStreaks_team1_bothYears = StreakCalculator(leagueModel, 1, [2020, 2021]).getWinStreaks()
+        winStreaks_team3_bothYears = StreakCalculator(leagueModel, 3, [2020, 2021]).getWinStreaks()
         self.assertIsInstance(winStreaks_team1_2020, list)
         self.assertEqual(1, len(winStreaks_team1_2020))
         self.assertEqual(1, winStreaks_team1_2020[0].getOwnerId())
@@ -72,3 +73,5 @@ class TestStreakCalculator(unittest.TestCase):
         self.assertEqual("team1", winStreaks_team1_bothYears[0].getStartTeam().getTeamName())
         self.assertEqual("Week 1 2021", winStreaks_team1_bothYears[0].getEndDate())
         self.assertEqual("team1", winStreaks_team1_bothYears[0].getEndTeam().getTeamName())
+        self.assertIsInstance(winStreaks_team3_bothYears, list)
+        self.assertEqual(2, len(winStreaks_team3_bothYears))
