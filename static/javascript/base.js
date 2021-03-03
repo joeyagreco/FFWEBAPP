@@ -1,7 +1,7 @@
 function homeRedirect() {
     Swal.fire({
       title: 'Leave your league?',
-      html: "You should <a onclick='leagueHomepageRedirect()' href='#'> save your league URL</a> first.",
+      html: "You should <a onclick='leagueHomepageRedirect()' href='#' style='color: black;'> save your league URL</a> first.",
       icon: 'warning',
       iconColor: '#bf1d43',
       showCancelButton: true,
