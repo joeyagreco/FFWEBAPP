@@ -46,13 +46,15 @@ header {
     width: 100%;
     height: 25%;
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
 .createLeagueFormStack {
     width: 20%;
     height: 100%;
+    order: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,6 +86,14 @@ input::-webkit-inner-spin-button {
     height: 25%;
     font-size: 1.5rem !important;
     order: 3;
+}
+
+.separationLine {
+    order: 1;
+    width: 40%;
+    background-color: #081c15 !important;
+    height: 0.1rem !important;
+    margin-top: 0;
 }
 
 
