@@ -414,14 +414,6 @@ def headToHeadStats():
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     leagueModelOrError = mainController.getLeagueModel(leagueId)
-    if team1Id and team2Id:
-        # if the user submitted this matchup
-        team1Id = int(team1Id)
-        team2Id = int(team2Id)
-    else:
-        # no submitted matchup, default to first 2 teams
-        team1Id = 1
-        team2Id = 2
     if isinstance(leagueModelOrError, Error):
         return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=None,
                                given_team_2_id=None, error_message=leagueModelOrError.errorMessage())
@@ -435,6 +427,18 @@ def headToHeadStats():
         yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
     else:
         yearList = [year]
+    if team1Id and team2Id:
+        # if the user submitted this matchup
+        team1Id = int(team1Id)
+        team2Id = int(team2Id)
+    else:
+        # no submitted matchup, default to first 2 teams
+        team1Id = 1
+        team2Id = 2
+        for i in range(2, leagueModelOrError.getNumberOfTeams()):
+            if LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, year, team1Id, i):
+                team2Id = i
+                break
     # check if these teams play each other ever
     for y in yearList:
         if not LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, y, team1Id, team2Id):
