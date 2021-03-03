@@ -53,3 +53,8 @@ class TestStreakCalculator(unittest.TestCase):
         winStreaks_team1_2020 = StreakCalculator(leagueModel, 1, [2020]).getWinStreaks()
         self.assertIsInstance(winStreaks_team1_2020, list)
         self.assertEqual(winStreaks_team1_2020[0].getOwnerId(), 1)
+        self.assertEqual(winStreaks_team1_2020[0].getStreakNumber(), 2)
+        self.assertEqual(winStreaks_team1_2020[0].getStartDate(), "Week 1 2020")
+        self.assertEqual(winStreaks_team1_2020[0].getStartTeam().getTeamName(), "team1")
+        self.assertEqual(winStreaks_team1_2020[0].getEndDate(), "Week 2 2020")
+        self.assertEqual(winStreaks_team1_2020[0].getEndTeam().getTeamName(), "team1")
