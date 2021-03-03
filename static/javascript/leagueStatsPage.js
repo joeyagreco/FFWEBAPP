@@ -11,12 +11,24 @@ function submitLeagueStat(year, leagueStat) {
 
 function initializeTables() {
     $(document).ready( function () {
-        $('#all_scores_table').DataTable();
+        $('#all_scores_table').DataTable(
+            {
+                "order": [[ 0, "desc" ]]
+            }
+        );
     } );
     $(document).ready( function () {
-        $('#margins_of_victory_table').DataTable();
+        $('#margins_of_victory_table').DataTable(
+            {
+                "order": [[ 0, "desc" ]]
+            }
+        );
     } );
     $(document).ready( function () {
-        $('#win_streaks_table').DataTable();
+        $('#win_streaks_table').DataTable(
+            {
+                "order": [[ 0, "desc" ]]
+            }
+        );
     } );
 }

@@ -242,6 +242,8 @@ class StatCalculatorService:
         elif statSelection == Constants.WIN_STREAKS:
             streakCalculator = StreakCalculator(leagueModel, years)
             allWinStreaks = streakCalculator.getAllWinStreaks()
+            # sort from streak high -> low
+            allWinStreaks.sort(key=lambda x: x.getStreakNumber(), reverse=True)
             return allWinStreaks
 
     @staticmethod
