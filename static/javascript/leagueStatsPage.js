@@ -16,4 +16,7 @@ function initializeTables() {
     $(document).ready( function () {
         $('#margins_of_victory_table').DataTable();
     } );
+    $(document).ready( function () {
+        $('#win_streaks_table').DataTable();
+    } );
 }
