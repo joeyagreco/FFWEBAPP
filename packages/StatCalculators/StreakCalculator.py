@@ -48,8 +48,8 @@ class StreakCalculator:
                                 if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
                                     # valid streak, get StreakModel and add to return list
                                     streakModelList.append(self.__getStreakModelFromDict(currentStreakModelDict))
-                                    # reset tmp streak dict
-                                    currentStreakModelDict = self.__getDefaultStreakDict(teamId)
+                                # reset streak dict
+                                currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             # check if we are currently on a streak and if so, add to streak return list
             if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
                 # valid streak, get StreakModel and add to return list
