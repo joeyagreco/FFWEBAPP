@@ -15,6 +15,7 @@ from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
 from packages.StatCalculators.SmartCalculator import SmartCalculator
 from packages.StatCalculators.SslCalculator import SslCalculator
+from packages.StatCalculators.StreakCalculator import StreakCalculator
 from packages.StatCalculators.StrengthOfScheduleCalculator import StrengthOfScheduleCalculator
 
 
@@ -238,6 +239,9 @@ class StatCalculatorService:
                                                 year=year)
                 allMovsStr.append(newModel)
             return allMovsStr
+        elif statSelection == Constants.WIN_STREAKS:
+            streakCalculator = StreakCalculator(leagueModel, years)
+            allWinStreaks = None
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):

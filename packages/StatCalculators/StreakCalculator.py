@@ -8,58 +8,59 @@ from models.league_stat_models.StreakModel import StreakModel
 
 class StreakCalculator:
 
-    def __init__(self, leagueModel: LeagueModel, teamId: int, years: list):
-        self.__teamId = teamId
+    def __init__(self, leagueModel: LeagueModel, years: list):
         self.__leagueModel = leagueModel
         self.__years = years
 
-    def getWinStreaks(self) -> List[StreakModel]:
+    def getAllWinStreaks(self) -> List[StreakModel]:
         """
-        This returns a list of StreakModels that contain all the win streaks for the team with self.__teamId in self.__leagueModel within self.__years.
+        This returns a list of StreakModels that contain all the win streaks for all teams in self.__leagueModel within self.__years.
         """
         streakModelList = []
-        currentStreakModelDict = self.__getDefaultStreakDict()
-        for year in self.__years:
-            for week in self.__leagueModel.getYears()[year].getWeeks():
-                weekNumber = week.getWeekNumber()
-                for matchup in week.getMatchups():
-                    # check if our target team plays in this matchup
-                    if matchup.getTeamA().getTeamId() == self.__teamId or matchup.getTeamB().getTeamId() == self.__teamId:
-                        # check if our target team won
-                        if LeagueModelNavigator.getGameOutcomeAsString(matchup, self.__teamId) == Constants.WIN:
-                            tmpTeam = LeagueModelNavigator.getTeamById(self.__leagueModel, year, self.__teamId)
-                            # check if we are currently on a streak
-                            if currentStreakModelDict["streakNumber"] is not None:
-                                # currently on a streak, update streak number and "end" streak data
-                                currentStreakModelDict["streakNumber"] += 1
-                                currentStreakModelDict["endDate"] = f"Week {weekNumber} {year}"
-                                currentStreakModelDict["endTeam"] = tmpTeam
+        allTeamIds = LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, self.__years[0])
+        for teamId in allTeamIds:
+            currentStreakModelDict = self.__getDefaultStreakDict(teamId)
+            for year in self.__years:
+                for week in self.__leagueModel.getYears()[year].getWeeks():
+                    weekNumber = week.getWeekNumber()
+                    for matchup in week.getMatchups():
+                        # check if our target team plays in this matchup
+                        if matchup.getTeamA().getTeamId() == teamId or matchup.getTeamB().getTeamId() == teamId:
+                            # check if our target team won
+                            if LeagueModelNavigator.getGameOutcomeAsString(matchup, teamId) == Constants.WIN:
+                                tmpTeam = LeagueModelNavigator.getTeamById(self.__leagueModel, year, teamId)
+                                # check if we are currently on a streak
+                                if currentStreakModelDict["streakNumber"] is not None:
+                                    # currently on a streak, update streak number and "end" streak data
+                                    currentStreakModelDict["streakNumber"] += 1
+                                    currentStreakModelDict["endDate"] = f"Week {weekNumber} {year}"
+                                    currentStreakModelDict["endTeam"] = tmpTeam
+                                else:
+                                    # no current streak, start one
+                                    # initialize tmp streak dict
+                                    currentStreakModelDict["streakNumber"] = 1
+                                    currentStreakModelDict["startDate"] = f"Week {weekNumber} {year}"
+                                    currentStreakModelDict["startTeam"] = tmpTeam
+                                    currentStreakModelDict["endDate"] = f"Week {weekNumber} {year}"
+                                    currentStreakModelDict["endTeam"] = tmpTeam
                             else:
-                                # no current streak, start one
-                                # initialize tmp streak dict
-                                currentStreakModelDict["streakNumber"] = 1
-                                currentStreakModelDict["startDate"] = f"Week {weekNumber} {year}"
-                                currentStreakModelDict["startTeam"] = tmpTeam
-                                currentStreakModelDict["endDate"] = f"Week {weekNumber} {year}"
-                                currentStreakModelDict["endTeam"] = tmpTeam
-                        else:
-                            # if there was a streak of 2+, it is now over
-                            if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
-                                # valid streak, get StreakModel and add to return list
-                                streakModelList.append(self.__getStreakModelFromDict(currentStreakModelDict))
-                                # reset tmp streak dict
-                                currentStreakModelDict = self.__getDefaultStreakDict()
-        # check if we are currently on a streak and if so, add to streak return list
-        if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
-            # valid streak, get StreakModel and add to return list
-            streakModelList.append(self.__getStreakModelFromDict(currentStreakModelDict))
+                                # if there was a streak of 2+, it is now over
+                                if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
+                                    # valid streak, get StreakModel and add to return list
+                                    streakModelList.append(self.__getStreakModelFromDict(currentStreakModelDict))
+                                    # reset tmp streak dict
+                                    currentStreakModelDict = self.__getDefaultStreakDict(teamId)
+            # check if we are currently on a streak and if so, add to streak return list
+            if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
+                # valid streak, get StreakModel and add to return list
+                streakModelList.append(self.__getStreakModelFromDict(currentStreakModelDict))
         return streakModelList
 
-    def __getDefaultStreakDict(self):
+    def __getDefaultStreakDict(self, teamId):
         """
         This returns a default streak dict.
         """
-        return {"ownerId": self.__teamId,
+        return {"ownerId": teamId,
                 "streakNumber": None,
                 "startDate": None,
                 "startTeam": None,
