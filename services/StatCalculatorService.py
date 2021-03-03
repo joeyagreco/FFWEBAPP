@@ -235,7 +235,7 @@ class StatCalculatorService:
                                                 year=year)
                 allMovsStr.append(newModel)
             return allMovsStr
-        elif statSelection == Constants.WIN_STREAKS:
+        elif statSelection == Constants.WINNING_STREAKS:
             streakCalculator = StreakCalculator(leagueModel, years)
             allWinStreaks = streakCalculator.getAllWinStreaks()
             return allWinStreaks
