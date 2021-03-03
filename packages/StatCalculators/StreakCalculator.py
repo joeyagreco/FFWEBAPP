@@ -42,7 +42,7 @@ class StreakCalculator:
                             currentStreakModelDict["endTeam"] = tmpTeam
                     else:
                         # if there was a streak of 2+, it is now over
-                        if currentStreakModelDict["streakNumber"] > 1:
+                        if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
                             # valid streak, get StreakModel and add to return list
                             streakModelList.append(self.__getStreakModelFromDict(currentStreakModelDict))
                             # reset tmp streak dict
