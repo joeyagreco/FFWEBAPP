@@ -195,8 +195,6 @@ class StatCalculatorService:
             raise InvalidStatSelectionError(f"Unknown League Stat: {statSelection}.")
         elif statSelection == Constants.ALL_SCORES_STAT_TITLE:
             allScores = everyGameCalculator.getAllScores()
-            # sort from score high -> low
-            allScores.sort(key=lambda x: x.getScore(), reverse=True)
             allScoresStr = []
             for scoreModel in allScores:
                 score = scoreModel.getScore()
@@ -216,8 +214,6 @@ class StatCalculatorService:
             return allScoresStr
         elif statSelection == Constants.MARGINS_OF_VICTORY_STAT_TITLE:
             allMovs = everyGameCalculator.getAllMarginOfVictories()
-            # sort from MOV high -> low
-            allMovs.sort(key=lambda x: x.getMarginOfVictory(), reverse=True)
             allMovsStr = []
             for movModel in allMovs:
                 mov = movModel.getMarginOfVictory()
@@ -242,8 +238,6 @@ class StatCalculatorService:
         elif statSelection == Constants.WIN_STREAKS:
             streakCalculator = StreakCalculator(leagueModel, years)
             allWinStreaks = streakCalculator.getAllWinStreaks()
-            # sort from streak high -> low
-            allWinStreaks.sort(key=lambda x: x.getStreakNumber(), reverse=True)
             return allWinStreaks
 
     @staticmethod
