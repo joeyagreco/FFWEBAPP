@@ -123,14 +123,16 @@ class GraphBuilder:
                           )
         # draw average line [linear regression]
         m, b = np.polyfit(np.array(awalList), np.array(ssList), 1)
-        fig.add_trace(go.Scatter(x=awalList,
-                                 y=m * np.array(awalList) + b,
-                                 showlegend=False,
-                                 name="Linear Regression",
-                                 mode="lines",
-                                 marker=dict(color="rgba(0,0,0,0.25)")
-                                 )
-                      )
+        # fig.add_trace(go.Scatter(x=awalList,
+        #                          y=m * np.array(awalList) + b,
+        #                          showlegend=False,
+        #                          name="Linear Regression",
+        #                          mode="lines",
+        #                          marker=dict(color="rgba(0,0,0,0.25)")
+        #                          )
+        #               )
+        fig.add_vline(x=sum(awalList)/len(awalList))
+        fig.add_hline(y=sum(ssList)/len(ssList))
         # add text to explain graph
         fig.add_annotation(x=max(awalList),
                            y=m * np.array(max(awalList)) + b,
@@ -173,15 +175,17 @@ class GraphBuilder:
                                      )
                           )
         # draw average line [linear regression]
-        m, b = np.polyfit(np.array(pointsForList), np.array(pointsAgainstList), 1)
-        fig.add_trace(go.Scatter(x=pointsForList,
-                                 y=m * np.array(pointsForList) + b,
-                                 showlegend=False,
-                                 name="Linear Regression",
-                                 mode="lines",
-                                 marker=dict(color="rgba(0,0,0,0.25)")
-                                 )
-                      )
+        # m, b = np.polyfit(np.array(pointsForList), np.array(pointsAgainstList), 1)
+        # fig.add_trace(go.Scatter(x=pointsForList,
+        #                          y=m * np.array(pointsForList) + b,
+        #                          showlegend=False,
+        #                          name="Linear Regression",
+        #                          mode="lines",
+        #                          marker=dict(color="rgba(0,0,0,0.25)")
+        #                          )
+        #               )
+        fig.add_vline(x=sum(pointsForList)/len(pointsForList))
+        fig.add_hline(y=sum(pointsAgainstList)/len(pointsAgainstList))
         fig.update_layout(
             xaxis=dict(title="Points For"),
             yaxis=dict(title="Points Against"),
@@ -218,14 +222,16 @@ class GraphBuilder:
                           )
         # draw average line [linear regression]
         m, b = np.polyfit(np.array(sosList), np.array(ppgAgainstList), 1)
-        fig.add_trace(go.Scatter(x=sosList,
-                                 y=m * np.array(sosList) + b,
-                                 showlegend=False,
-                                 name="Linear Regression",
-                                 mode="lines",
-                                 marker=dict(color="rgba(0,0,0,0.25)")
-                                 )
-                      )
+        # fig.add_trace(go.Scatter(x=sosList,
+        #                          y=m * np.array(sosList) + b,
+        #                          showlegend=False,
+        #                          name="Linear Regression",
+        #                          mode="lines",
+        #                          marker=dict(color="rgba(0,0,0,0.25)")
+        #                          )
+        #               )
+        fig.add_vline(x=sum(sosList)/len(sosList))
+        fig.add_hline(y=sum(ppgAgainstList)/len(ppgAgainstList))
         # add text to explain graph
         fig.add_annotation(x=max(sosList),
                            y=m * np.array(max(sosList)) + b,
