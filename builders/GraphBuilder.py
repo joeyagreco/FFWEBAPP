@@ -10,6 +10,7 @@ from models.league_models.LeagueModel import LeagueModel
 from packages.StatCalculators.AwalCalculator import AwalCalculator
 from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
+from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 from packages.StatCalculators.StrengthOfScheduleCalculator import StrengthOfScheduleCalculator
 
 
@@ -92,23 +93,23 @@ class GraphBuilder:
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
-    def getHtmlForAwalOverPpg(cls, leagueModel: LeagueModel, years: list, screenWidth: float) -> str:
+    def getHtmlForAwalOverScoringShare(cls, leagueModel: LeagueModel, years: list, screenWidth: float) -> str:
         """
-        This creates a scatter plot for AWAL/PPG for each team in the given leagueModel.
+        This creates a scatter plot for AWAL/Scoring Share for each team in the given leagueModel.
         """
         data = dict()
-        ppgList = []
+        ssList = []
         awalList = []
         for year in years:
             for team in leagueModel.getYears()[year].getTeams():
                 recordCalculator = RecordCalculator(team.getTeamId(), leagueModel, [year])
-                ppgCalculator = PpgCalculator(team.getTeamId(), leagueModel, [year])
+                scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, [year])
                 awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year], recordCalculator.getWins(), recordCalculator.getTies())
-                ppg = ppgCalculator.getPpg()
+                ss = scoresCalculator.getPercentageOfLeagueScoring()
                 awal = awalCalculator.getAwal()
-                ppgList.append(ppg)
+                ssList.append(ss)
                 awalList.append(awal)
-                data[f"{team.getTeamId()}-{year}"] = ([awal], [ppg])
+                data[f"{team.getTeamId()}-{year}"] = ([awal], [ss])
         fig = go.Figure()
         for teamIdAndYear in data:
             teamId = int(teamIdAndYear[0:-5])
@@ -121,7 +122,7 @@ class GraphBuilder:
                                      )
                           )
         # draw average line [linear regression]
-        m, b = np.polyfit(np.array(awalList), np.array(ppgList), 1)
+        m, b = np.polyfit(np.array(awalList), np.array(ssList), 1)
         fig.add_trace(go.Scatter(x=awalList,
                                  y=m * np.array(awalList) + b,
                                  showlegend=False,
@@ -141,8 +142,8 @@ class GraphBuilder:
                            text="Worse Team")
         fig.update_layout(
             xaxis=dict(title="AWAL", dtick=0.5),
-            yaxis=dict(title="PPG"),
-            title=Constants.AWAL_OVER_PPG
+            yaxis=dict(title="ScoringShare"),
+            title=Constants.AWAL_OVER_SCORING_SHARE
         )
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)

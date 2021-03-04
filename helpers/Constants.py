@@ -12,14 +12,14 @@ class Constants:
     # used for Graphs
     PPG_BY_WEEK = "PPG by Week"
     SCORING_SHARE = "Scoring Share"
-    AWAL_OVER_PPG = "AWAL/PPG"
+    AWAL_OVER_SCORING_SHARE = "AWAL/Scoring Share"
     FREQUENCY_OF_SCORES = "Frequency of Scores"
     POINTS_FOR_OVER_POINTS_AGAINST = "Points For/Points Against"
     AWAL_BY_WEEK = "AWAL by Week"
     STRENGTH_OF_SCHEDULE_OVER_PPG_AGAINST = "Strength of Schedule/PPG Against"
     GRAPH_OPTIONS = [SCORING_SHARE,
                      FREQUENCY_OF_SCORES,
-                     AWAL_OVER_PPG,
+                     AWAL_OVER_SCORING_SHARE,
                      POINTS_FOR_OVER_POINTS_AGAINST,
                      STRENGTH_OF_SCHEDULE_OVER_PPG_AGAINST,
                      PPG_BY_WEEK,

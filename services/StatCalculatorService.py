@@ -281,8 +281,8 @@ class StatCalculatorService:
                     teamPoints.append(totalPoints)
             return GraphBuilder.getHtmlForPieGraph(screenWidth, teamNames, teamPoints, Constants.SCORING_SHARE)
 
-        elif graphSelection == Constants.AWAL_OVER_PPG:
-            return GraphBuilder.getHtmlForAwalOverPpg(leagueModel, years, screenWidth)
+        elif graphSelection == Constants.AWAL_OVER_SCORING_SHARE:
+            return GraphBuilder.getHtmlForAwalOverScoringShare(leagueModel, years, screenWidth)
 
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
             allScores = []
