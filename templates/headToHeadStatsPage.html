@@ -52,7 +52,7 @@
             <div class="team1Dropdown">
                 {% for team in league.years[selected_year].teams %}
                     {% if team.teamId == given_team_1_id %}
-                        <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton" type="button" value={{team.teamId}} id="team1button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton hoverFade" type="button" value={{team.teamId}} id="team1button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{team.teamName}}
                         </button>
                     {% endif %}
@@ -60,17 +60,17 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for team in league.years[selected_year].teams %}
                         {% if team.teamId == given_team_1_id %}
-                            <a class="dropdown-item active blackText backgroundTeamId{{team.teamId}}" href="#" onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
+                            <a class="dropdown-item active blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
                         {% else %}
                             {% if not given_team_1_id %}
                                 <!--no ids given, exclude ID # 2 from this dropdown by default-->
                                 {% if team.teamId != 2 %}
-                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}}" href="#" onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
+                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
                                 {% endif %}
                             {% else %}
                                 <!--ids given, exclude givenTeam2Id from this dropdown-->
                                 {% if team.teamId != given_team_2_id %}
-                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}}" href="#" onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
+                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
                                 {% endif %}
                             {% endif %}
                         {% endif %}
@@ -81,7 +81,7 @@
            <div class="team2Dropdown">
                 {% for team in league.years[selected_year].teams %}
                     {% if team.teamId == given_team_2_id %}
-                        <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton" type="button" value={{team.teamId}} id="team2button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton hoverFade" type="button" value={{team.teamId}} id="team2button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{team.teamName}}
                         </button>
                     {% endif %}
@@ -89,17 +89,17 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% for team in league.years[selected_year].teams %}
                         {% if team.teamId == given_team_2_id %}
-                            <a class="dropdown-item active blackText backgroundTeamId{{team.teamId}}" href="#" onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
+                            <a class="dropdown-item active blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
                         {% else %}
                             {% if not given_team_2_id %}
                                 <!--no ids given, exclude ID # 2 from this dropdown by default-->
                                 {% if team.teamId != 2 %}
-                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}}" href="#" onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
+                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
                                 {% endif %}
                             {% else %}
                                 <!--ids given, exclude givenTeam1Id from this dropdown-->
                                 {% if team.teamId != given_team_1_id %}
-                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}}" href="#" onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
+                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
                                 {% endif %}
                             {% endif %}
                         {% endif %}
