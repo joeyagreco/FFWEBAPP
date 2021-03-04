@@ -77,7 +77,7 @@
         </div>
         <div class="tableContainer">
             {% if selected_stat == "All Scores" %}
-                <table class="table table-fluid statsTable" id="all_scores_table">
+                <table class="table table-fluid compact statsTable" id="all_scores_table">
                     <thead>
                         <tr>
                             <th>Score</th>
@@ -102,7 +102,7 @@
                     </tbody>
                 </table>
             {% elif selected_stat == "Margins of Victory" %}
-                 <table class="table table-fluid statsTable" id="margins_of_victory_table">
+                 <table class="table table-fluid statsTable compact" id="margins_of_victory_table">
                     <thead>
                         <tr>
                             <th>Margin of Victory</th>
@@ -129,7 +129,7 @@
                     </tbody>
                 </table>
             {% elif selected_stat == "Winning Streaks" or selected_stat == "Losing Streaks" %}
-                 <table class="table table-fluid statsTable" id="win_streaks_table">
+                 <table class="table table-fluid statsTable compact" id="win_streaks_table">
                     <thead>
                         <tr>
                             <th>Streak</th>
