@@ -33,15 +33,15 @@ class StreakCalculator:
                                 if currentStreakModelDict["streakNumber"] is not None:
                                     # currently on a streak, update streak number and "end" streak data
                                     currentStreakModelDict["streakNumber"] += 1
-                                    currentStreakModelDict["endDate"] = f"Week {weekNumber} {year}"
+                                    currentStreakModelDict["endDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["endTeam"] = tmpTeam
                                 else:
                                     # no current streak, start one
                                     # initialize tmp streak dict
                                     currentStreakModelDict["streakNumber"] = 1
-                                    currentStreakModelDict["startDate"] = f"Week {weekNumber} {year}"
+                                    currentStreakModelDict["startDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["startTeam"] = tmpTeam
-                                    currentStreakModelDict["endDate"] = f"Week {weekNumber} {year}"
+                                    currentStreakModelDict["endDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["endTeam"] = tmpTeam
                             else:
                                 # if there was a streak of 2+, it is now over
@@ -77,15 +77,15 @@ class StreakCalculator:
                                 if currentStreakModelDict["streakNumber"] is not None:
                                     # currently on a streak, update streak number and "end" streak data
                                     currentStreakModelDict["streakNumber"] += 1
-                                    currentStreakModelDict["endDate"] = f"Week {weekNumber} {year}"
+                                    currentStreakModelDict["endDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["endTeam"] = tmpTeam
                                 else:
                                     # no current streak, start one
                                     # initialize tmp streak dict
                                     currentStreakModelDict["streakNumber"] = 1
-                                    currentStreakModelDict["startDate"] = f"Week {weekNumber} {year}"
+                                    currentStreakModelDict["startDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["startTeam"] = tmpTeam
-                                    currentStreakModelDict["endDate"] = f"Week {weekNumber} {year}"
+                                    currentStreakModelDict["endDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["endTeam"] = tmpTeam
                             else:
                                 # if there was a streak of 2+, it is now over
