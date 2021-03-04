@@ -25,7 +25,7 @@ function initializeTables() {
         );
     } );
     $(document).ready( function () {
-        $('#win_streaks_table').DataTable(
+        $('#streaks_table').DataTable(
             {
                 "order": [[ 0, "desc" ]]
             }
