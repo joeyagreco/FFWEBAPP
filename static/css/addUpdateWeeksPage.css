@@ -94,21 +94,19 @@
     margin-bottom: 5rem !important;
 }
 
-.teamFormsOdd {
+.teamForms {
     width: 80%;
     height: auto;
     margin: auto;
     display: flex;
     flex-direction: row;
+}
+
+.teamFormsOdd {
     justify-content: flex-end;
 }
 
 .teamFormsEven {
-    width: 80%;
-    height: auto;
-    margin: auto;
-    display: flex;
-    flex-direction: row;
     justify-content: flex-start;
 }
 
