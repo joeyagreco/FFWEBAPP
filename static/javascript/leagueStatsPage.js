@@ -18,8 +18,6 @@ function lockYearDropdownToAllTime() {
     var yearDropdownElement = document.getElementById("select_year_button");
     yearDropdownElement.disabled = true;
     yearDropdownElement.classList.add("disabled");
-    yearDropdownElement.innerHTML = "All Time";
-    yearDropdownElement.value = 0;
 }
 
 function initializeTables() {
