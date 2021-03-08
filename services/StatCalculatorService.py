@@ -5,6 +5,7 @@ from helpers.Rounder import Rounder
 from models.headToHead_stat_models.HeadToHeadStatsModel import HeadToHeadStatsModel
 from models.league_models.LeagueModel import LeagueModel
 from models.league_stat_models.MarginOfVictoryModel import MarginOfVictoryModel
+from models.league_stat_models.OwnerComparisonModel import OwnerComparisonModel
 from models.league_stat_models.ScoreModel import ScoreModel
 from models.team_stat_models.TeamStatsModel import TeamStatsModel
 from packages.Exceptions.InvalidStatSelectionError import InvalidStatSelectionError
@@ -251,10 +252,12 @@ class StatCalculatorService:
             numOfWeeksList = []
             for year in years:
                 for team in leagueModel.getYears()[year].getTeams():
-                    data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId())
+                    data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year,
+                                                                                        team.getTeamId())
                     numOfWeeksList.append(LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, year, asList=True))
             xAxisTicks = max(numOfWeeksList)
-            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "Points Scored", 10, Constants.PPG_BY_WEEK)
+            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "Points Scored", 10,
+                                                          Constants.PPG_BY_WEEK)
 
         elif graphSelection == Constants.AWAL_BY_WEEK:
             data = dict()
@@ -265,11 +268,14 @@ class StatCalculatorService:
                     data[team.getTeamName()] = []
                     for week in leagueModel.getYears()[year].getWeeks():
                         recordCalculator = RecordCalculator(team.getTeamId(), leagueModel, [year])
-                        awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year], recordCalculator.getWins(throughWeek=week.getWeekNumber()), recordCalculator.getTies(throughWeek=week.getWeekNumber()))
+                        awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year],
+                                                        recordCalculator.getWins(throughWeek=week.getWeekNumber()),
+                                                        recordCalculator.getTies(throughWeek=week.getWeekNumber()))
                         awal = awalCalculator.getAwal(throughWeek=week.getWeekNumber())
                         data[team.getTeamName()].append(awal)
             xAxisTicks = max(numOfWeeksList)
-            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "AWAL", 1, Constants.AWAL_BY_WEEK)
+            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "AWAL", 1,
+                                                          Constants.AWAL_BY_WEEK)
 
         elif graphSelection == Constants.SCORING_SHARE:
             teamNames = []
@@ -289,7 +295,8 @@ class StatCalculatorService:
             for year in years:
                 for team in leagueModel.getYears()[year].getTeams():
                     allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId())
-            return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores)/5), "Points Scored", "Occurrences", Constants.FREQUENCY_OF_SCORES)
+            return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores) / 5), "Points Scored",
+                                                    "Occurrences", Constants.FREQUENCY_OF_SCORES)
 
         elif graphSelection == Constants.POINTS_FOR_OVER_POINTS_AGAINST:
             return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, years, screenWidth)
@@ -300,4 +307,81 @@ class StatCalculatorService:
         else:
             raise InvalidStatSelectionError("No Valid Graph Given to Generate.")
 
+    @staticmethod
+    def getOwnerComparisons(leagueModel: LeagueModel):
+        allYears = LeagueModelNavigator.getAllYearsWithWeeks(leagueModel)
+        allOwnerIds = LeagueModelNavigator.getAllTeamIdsInLeague(leagueModel, allYears[0])
 
+        ownerComparisonModels = []
+        for ownerId in allOwnerIds:
+            decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
+            ownerName = LeagueModelNavigator.getTeamById(leagueModel, "0", ownerId).getTeamName()
+            scoresCalculator = ScoresCalculator(ownerId, leagueModel, allYears)
+            maxScore = scoresCalculator.getMaxScore()
+            maxScoreStr = Rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
+            minScore = scoresCalculator.getMinScore()
+            minScoreStr = Rounder.keepTrailingZeros(minScore, decimalPlacesRoundedToScores)
+            ppgCalculator = PpgCalculator(ownerId, leagueModel, allYears)
+            ppg = ppgCalculator.getPpg()
+            ppgAgainst = ppgCalculator.getPpgAgainst()
+            ppgStr = Rounder.keepTrailingZeros(ppg, decimalPlacesRoundedToScores)
+            ppgAgainstStr = Rounder.keepTrailingZeros(ppgAgainst, decimalPlacesRoundedToScores)
+            plusMinus = scoresCalculator.getPlusMinus()
+            plusMinusStr = Rounder.keepTrailingZeros(plusMinus, decimalPlacesRoundedToScores)
+            stddev = scoresCalculator.getStandardDeviation()
+            stddevStr = Rounder.keepTrailingZeros(stddev, 2)
+            recordCalculator = RecordCalculator(ownerId, leagueModel, allYears)
+            wins = recordCalculator.getWins()
+            losses = recordCalculator.getLosses()
+            ties = recordCalculator.getTies()
+            winPercentage = recordCalculator.getWinPercentage()
+            winPercentageStr = Rounder.keepTrailingZeros(winPercentage, 3)
+            awalCalculator = AwalCalculator(ownerId, leagueModel, allYears, wins, ties)
+            awal = awalCalculator.getAwal()
+            awalStr = Rounder.keepTrailingZeros(awal, 2)
+            wal = awalCalculator.getWal()
+            walStr = Rounder.keepTrailingZeros(wal, 2)
+            gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, allYears, ownerId)
+            # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
+            # this SHOULD not happen, because currently, a team HAS to play every week
+            percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
+            percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
+            sslCalculator = SslCalculator(awal, wal, percentageOfLeagueScoring, maxScore, minScore, gamesPlayed)
+            teamScore = sslCalculator.getTeamScore()
+            teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
+            teamSuccess = sslCalculator.getTeamSuccess()
+            teamSuccessStr = Rounder.keepTrailingZeros(teamSuccess, 2)
+            teamLuck = sslCalculator.getTeamLuck()
+            teamLuckStr = Rounder.keepTrailingZeros(teamLuck, 2)
+            allScores = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, allYears, ownerId)
+            smartCalculator = SmartCalculator(leagueModel, allYears)
+            smartWins = smartCalculator.getSmartWinsOfScoresList(allScores)
+            smartWinsStr = Rounder.keepTrailingZeros(smartWins, 2)
+            strengthOfScheduleCalculator = StrengthOfScheduleCalculator(ownerId, leagueModel, allYears)
+            strengthOfSchedule = strengthOfScheduleCalculator.getStrengthOfSchedule()
+            strengthOfScheduleStr = Rounder.keepTrailingZeros(strengthOfSchedule, 3)
+
+            ownerComparisonModel = OwnerComparisonModel(ownerId=ownerId,
+                                                        ownerName=ownerName,
+                                                        wins=wins,
+                                                        losses=losses,
+                                                        ties=ties,
+                                                        winPercentage=winPercentageStr,
+                                                        ppg=ppgStr,
+                                                        ppgAgainst=ppgAgainstStr,
+                                                        plusMinus=plusMinusStr,
+                                                        stddev=stddevStr,
+                                                        maxScore=maxScoreStr,
+                                                        minScore=minScoreStr,
+                                                        awal=awalStr,
+                                                        teamScore=teamScoreStr,
+                                                        teamSuccess=teamSuccessStr,
+                                                        teamLuck=teamLuckStr,
+                                                        smartWins=smartWinsStr,
+                                                        percentageOfLeagueScoring=percentageOfLeagueScoringStr,
+                                                        strengthOfSchedule=strengthOfScheduleStr,
+                                                        wal=walStr)
+            ownerComparisonModels.append(ownerComparisonModel)
+        # sort from win percentage high -> low
+        ownerComparisonModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
+        return ownerComparisonModels
