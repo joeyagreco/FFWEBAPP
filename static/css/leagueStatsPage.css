@@ -139,3 +139,19 @@ table, th, td {
 #streaks_table_paginate.dataTables_paginate.paging_simple_numbers {
     background-color: transparent !important;
 }
+
+#owner_comparison_table_length.dataTables_length {
+    background-color: transparent !important;
+}
+
+#owner_comparison_table_filter.dataTables_filter {
+    background-color: transparent !important;
+}
+
+#owner_comparison_table_info.dataTables_info {
+    background-color: transparent !important;
+}
+
+#owner_comparison_table_paginate.dataTables_paginate.paging_simple_numbers {
+    background-color: transparent !important;
+}
