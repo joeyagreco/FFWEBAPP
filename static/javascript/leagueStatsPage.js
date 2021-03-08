@@ -9,6 +9,14 @@ function submitLeagueStat(year, leagueStat) {
     window.location = "/league-stats?league_id="+leagueId+"&stat_selection="+leagueStat+"&year="+year;
 }
 
+function prepYearDropdownForAllTime() {
+    var yearDropdownElement = document.getElementById("select_year_button");
+    yearDropdownElement.disabled = true;
+    yearDropdownElement.classList.add("disabled");
+    yearDropdownElement.innerHTML = "All Time";
+    yearDropdownElement.value = 0;
+}
+
 function initializeTables() {
     $(document).ready( function () {
         $('#all_scores_table').DataTable(

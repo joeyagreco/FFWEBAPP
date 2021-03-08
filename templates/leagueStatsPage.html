@@ -154,6 +154,8 @@
                     </tbody>
                 </table>
             {% elif selected_stat == "Owner Comparison" %}
+                <!-- TODO move this to js init method-->
+                <script>prepYearDropdownForAllTime()</script>
                  <table class="table table-fluid statsTable compact" id="owner_comparison_table">
                     <thead>
                         <tr>
