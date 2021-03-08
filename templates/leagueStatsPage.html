@@ -153,6 +153,57 @@
                         {% endfor %}
                     </tbody>
                 </table>
+            {% elif selected_stat == "Owner Comparison" %}
+                 <table class="table table-fluid statsTable compact" id="owner_comparison_table">
+                    <thead>
+                        <tr>
+                            <th>Owner</th>
+                            <th>{{constants.WINS_STAT_TITLE}}</th>
+                            <th>{{constants.LOSSES_STAT_TITLE}}</th>
+                            <th>{{constants.TIES_STAT_TITLE}}</th>
+                            <th>{{constants.WIN_PERCENTAGE_STAT_TITLE}}</th>
+                            <th>{{constants.WAL_STAT_TITLE}}</th>
+                            <th>{{constants.AWAL_STAT_TITLE}}</th>
+                            <th>{{constants.SMART_WINS_STAT_TITLE}}</th>
+                            <th>{{constants.PPG_STAT_TITLE}}</th>
+                            <th>{{constants.SCORING_SHARE_STAT_TITLE}}</th>
+                            <th>{{constants.PPG_AGAINST_STAT_TITLE}}</th>
+                            <th>{{constants.PLUS_MINUS_STAT_TITLE}}</th>
+                            <th>{{constants.STRENGTH_OF_SCHEDULE_STAT_TITLE}}</th>
+                            <th>{{constants.MAX_SCORE_STAT_TITLE}}</th>
+                            <th>{{constants.MIN_SCORE_STAT_TITLE}}</th>
+                            <th>{{constants.STDEV_STAT_TITLE}}</th>
+                            <th>{{constants.TEAM_SCORE_STAT_TITLE}}</th>
+                            <th>{{constants.TEAM_SUCCESS_STAT_TITLE}}</th>
+                            <th>{{constants.TEAM_LUCK_STAT_TITLE}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for leagueStat in stats_models %}
+                            <tr class="backgroundTeamId{{leagueStat.getOwnerId()}}">
+                                <td>{{leagueStat.getOwnerName()}}</td>
+                                <td>{{leagueStat.getWins()}}</td>
+                                <td>{{leagueStat.getLosses()}}</td>
+                                <td>{{leagueStat.getTies()}}</td>
+                                <td>{{leagueStat.getWinPercentage()}}</td>
+                                <td>{{leagueStat.getWal()}}</td>
+                                <td>{{leagueStat.getAwal()}}</td>
+                                <td>{{leagueStat.getSmartWins()}}</td>
+                                <td>{{leagueStat.getPpg()}}</td>
+                                <td>{{leagueStat.getPercentageOfLeagueScoring()}}</td>
+                                <td>{{leagueStat.getPpgAgainst()}}</td>
+                                <td>{{leagueStat.getPlusMinus()}}</td>
+                                <td>{{leagueStat.getStrengthOfSchedule()}}</td>
+                                <td>{{leagueStat.getMaxScore()}}</td>
+                                <td>{{leagueStat.getMinScore()}}</td>
+                                <td>{{leagueStat.getStddev()}}</td>
+                                <td>{{leagueStat.getTeamScore()}}</td>
+                                <td>{{leagueStat.getTeamSuccess()}}</td>
+                                <td>{{leagueStat.getTeamLuck()}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             {% endif %}
         </div>
     </div>

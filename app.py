@@ -477,8 +477,10 @@ def leagueStats():
     else:
         yearList = [year]
     statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, yearList, statSelection)
+    # grab Constants class to use for titles of table
+    constants = Constants
     return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
-                           selected_stat=statSelection, stats_models=statsModelOrError, selected_year=year)
+                           selected_stat=statSelection, stats_models=statsModelOrError, selected_year=year, constants=constants)
 
 
 @app.route("/graphs", methods=["GET"])

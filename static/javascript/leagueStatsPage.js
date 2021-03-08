@@ -31,4 +31,11 @@ function initializeTables() {
             }
         );
     } );
+        $(document).ready( function () {
+        $('#owner_comparison_table').DataTable(
+            {
+                "order": [[ 1, "desc" ]]
+            }
+        );
+    } );
 }
