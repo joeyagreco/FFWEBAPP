@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
 html {
   width: 100%;
@@ -74,5 +75,15 @@ body {
 
 button {
     cursor: pointer;
+}
+
+.logoButton {
+    font-size: 150%;
+    font-family: 'Russo One', sans-serif;
+    color: #95D5B2;
+}
+
+.logoButton:hover {
+    color: white;
 }
 
