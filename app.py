@@ -532,6 +532,13 @@ def statsExplained():
                            formula_div=statInfo[1],
                            formula_explained_div=statInfo[2])
 
+@app.route("/about", methods=["GET"])
+def about():
+    leagueId = int(request.args.get("league_id"))
+    mainController = MainController()
+    leagueOrError = mainController.getLeague(leagueId)
+    return render_template("aboutPage.html", league=leagueOrError)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -25,3 +25,8 @@ function statExplanationRedirect() {
     var leagueId = document.getElementById("league_id").value;
     window.location = "/stats-explained?league_id=" + leagueId;
 }
+
+function aboutRedirect() {
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/about?league_id=" + leagueId;
+}
