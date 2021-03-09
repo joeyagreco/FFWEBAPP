@@ -36,3 +36,7 @@
 .profilePic {
     width: 50%;
 }
+
+.supportIcon {
+    height: 3rem !important;
+}
