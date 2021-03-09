@@ -236,15 +236,15 @@ class StatCalculatorService:
                                                 year=year)
                 allMovsStr.append(newModel)
             return allMovsStr
-        elif statSelection == Constants.WINNING_STREAKS:
+        elif statSelection == Constants.WINNING_STREAKS_STAT_TITLE:
             streakCalculator = StreakCalculator(leagueModel, years)
             allWinStreaks = streakCalculator.getAllWinStreaks()
             return allWinStreaks
-        elif statSelection == Constants.LOSING_STREAKS:
+        elif statSelection == Constants.LOSING_STREAKS_STAT_TITLE:
             streakCalculator = StreakCalculator(leagueModel, years)
             allLossStreaks = streakCalculator.getAllLossStreaks()
             return allLossStreaks
-        elif statSelection == Constants.OWNER_COMPARISON:
+        elif statSelection == Constants.OWNER_COMPARISON_STAT_TITLE:
             allYears = LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True)
             allOwnerIds = LeagueModelNavigator.getAllTeamIdsInLeague(leagueModel, allYears[0])
 
