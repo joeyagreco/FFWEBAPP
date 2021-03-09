@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 
 .aboutFull {
     width: 100%;
@@ -9,7 +10,7 @@
 
 .leftSide {
     width: 50%;
-    padding-right: 3rem;
+    padding-right: 2rem;
     order: 1;
     display: flex;
     align-items: flex-start;
@@ -18,16 +19,32 @@
 
 .rightSide {
     width: 50%;
-    padding-left: 3rem;
+    padding-left: 2rem;
     order: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.infoBlocksStack {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 0;
+}
+
+.infoBlock {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 
 .smallTitle {
-    font-family: 'Roboto Slab', serif !important;
     font-size: 2.5rem;
+    font-family: 'Roboto Slab', serif !important;
 }
 
 .titleLine {
@@ -37,8 +54,9 @@
 }
 
 .smallParagraph {
-    width: 70%;
     font-size: 1rem;
+    font-family: 'Merriweather', serif;
+    text-align: center;
 }
 
 .profilePic {

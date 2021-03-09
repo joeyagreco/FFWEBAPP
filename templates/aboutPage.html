@@ -25,25 +25,37 @@
 {% block content %}
 
 <div class="aboutFull">
+
  <div class="leftSide">
   <img class="profilePic" src="{{ url_for('static', filename='img/profilePic.jpg') }}" alt="Profile picture of site creator.">
  </div>
+
   <div class="rightSide">
-   <div class="smallTitle">About Me</div>
-   <hr class="titleLine">
-   <div class="smallParagraph">
-     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-   </div>
-   <div class="smallTitle">Other Projects</div>
-   <hr class="titleLine">
-   <div class="smallParagraph">
-    <button class="hoverFade noOutline" type="button" onclick="githubRedirect()"><img class="supportIcon" src="https://img.icons8.com/ios-filled/500/000000/github.png"/></button>
-   </div>
-   <div class="smallTitle">Support</div>
-   <hr class="titleLine">
-   <div class="smallParagraph">
-    <button class="hoverFade noOutline" type="button" onclick="paypalRedirect()"><img class="supportIcon" src="https://img.icons8.com/ios-filled/48/000000/paypal.png"/></button>
-    <button class="hoverFade noOutline" type="button" onclick="venmoRedirect()"><img class="supportIcon" src="https://img.icons8.com/ios-filled/500/000000/venmo.png"></button>
+   <div class="infoBlocksStack">
+    <div class="infoBlock">
+      <div class="smallTitle">About Me</div>
+      <hr class="titleLine">
+      <div class="smallParagraph">
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+     </div>
+    </div>
+
+    <div class="infoBlock">
+     <div class="smallTitle">Other Projects</div>
+     <hr class="titleLine">
+     <div class="smallParagraph">
+      <button class="hoverFade noOutline" type="button" onclick="githubRedirect()"><img class="supportIcon" src="https://img.icons8.com/ios-filled/500/000000/github.png"/></button>
+     </div>
+    </div>
+
+    <div class="infoBlock">
+     <div class="smallTitle">Support</div>
+     <hr class="titleLine">
+     <div class="smallParagraph">
+      <button class="hoverFade noOutline" type="button" onclick="paypalRedirect()"><img class="supportIcon" src="https://img.icons8.com/ios-filled/48/000000/paypal.png"/></button>
+      <button class="hoverFade noOutline" type="button" onclick="venmoRedirect()"><img class="supportIcon" src="https://img.icons8.com/ios-filled/500/000000/venmo.png"></button>
+     </div>
+    </div>
    </div>
 
  </div>
