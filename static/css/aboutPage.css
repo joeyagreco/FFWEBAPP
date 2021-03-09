@@ -40,3 +40,7 @@
 .supportIcon {
     height: 3rem !important;
 }
+
+.noOutline:focus {
+    outline: none !important;
+}
