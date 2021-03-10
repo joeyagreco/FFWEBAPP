@@ -341,7 +341,7 @@ class LeagueModelNavigator:
         if len(allYears) > 0:
             mostRecentYear = allYears[max(allYears.keys())]
             if asInt:
-                return mostRecentYear.getYear()
+                return int(mostRecentYear.getYear())
             else:
                 return mostRecentYear
         else:

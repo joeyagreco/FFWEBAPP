@@ -132,7 +132,6 @@ def updateLeague():
         currentYear["year"] = int(yearNumber)
         currentYear["teams"] = teams
         # check it its year 0
-        # TODO LMN method for this
         if currentYear["year"] != 0:
             for week in currentYear["weeks"]:
                 for matchup in week["matchups"]:
@@ -217,10 +216,10 @@ def addYear():
     leagueId = int(request.args.get("league_id"))
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
+    leagueModelOrError = mainController.getLeagueModel(leagueId)
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-    # TODO LMN method to get the highest number year in the league
-    latestYear = int(max(list(leagueOrError["years"].keys())))
+    latestYear = LeagueModelNavigator.getMostRecentYear(leagueModelOrError, asInt=True)
     newYear = latestYear + 1
     # create new teams with names based on the owner name
     newTeams = copy.deepcopy(leagueOrError["years"]["0"]["teams"])
