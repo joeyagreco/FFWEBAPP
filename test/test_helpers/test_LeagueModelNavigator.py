@@ -528,5 +528,19 @@ class TestLeagueModelNavigator(unittest.TestCase):
         self.assertIsInstance(mostRecent_asInt_withWeeks, int)
         self.assertEqual(2021, mostRecent_asInt_withWeeks)
 
+        year2022 = YearModel(2022, teamList, [])
+        yearDict = {2020: year2020, 2021: year2021, 2022: year2022}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        mostRecent_withEmptyYear = LeagueModelNavigator.getMostRecentYear(leagueModel)
+        mostRecent_withEmptyYear_withWeeks = LeagueModelNavigator.getMostRecentYear(leagueModel, withWeeks=True)
+        mostRecent_withEmptyYear_withWeeks_asInt = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True, withWeeks=True)
+        self.assertIsInstance(mostRecent_withEmptyYear, YearModel)
+        self.assertEqual(2022, mostRecent_withEmptyYear.getYear())
+        self.assertIsInstance(mostRecent_withEmptyYear_withWeeks, YearModel)
+        self.assertEqual(2021, mostRecent_withEmptyYear_withWeeks.getYear())
+        self.assertIsInstance(mostRecent_withEmptyYear_withWeeks_asInt, int)
+        self.assertEqual(2021, mostRecent_withEmptyYear_withWeeks_asInt)
+
+
 
 
