@@ -94,7 +94,8 @@ def updateLeague():
         if isinstance(leagueOrError, Error):
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         if errorMessage:
-            return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear, error_message=errorMessage)
+            return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear,
+                                   error_message=errorMessage)
         return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
     else:
         # we got a POST
@@ -119,7 +120,8 @@ def updateLeague():
             for year in leagueOrError["years"].keys():
                 if year == yearNumber:
                     # user chose a year that is already in league
-                    return redirect(url_for("updateLeague", league_id=leagueId, year=originalYear, error_message="Year already exists."))
+                    return redirect(url_for("updateLeague", league_id=leagueId, year=originalYear,
+                                            error_message="Year already exists."))
         # update team names
         teams = []
         for teamId in range(1, numberOfTeams + 1):
@@ -151,7 +153,8 @@ def updateLeague():
             return redirect(url_for("index", error_message=leagueOrError.errorMessage()))
         elif isinstance(updated, Error):
             # could not update league
-            return redirect(url_for("updateLeague", league_id=leagueId, year=originalYear, error_message=updated.errorMessage()))
+            return redirect(
+                url_for("updateLeague", league_id=leagueId, year=originalYear, error_message=updated.errorMessage()))
         else:
             # successfully updated league
             return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber))
@@ -184,7 +187,8 @@ def addUpdateWeeks():
         if week:
             # if we got a week passed in, render the page with that week displayed
             week = int(week)
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=week, error_message=errorMessage)
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year,
+                                   week_number=week, error_message=errorMessage)
         else:
             yearDict = leagueOrError["years"][str(year)]
             if len(yearDict["weeks"]) == 0:
@@ -201,11 +205,13 @@ def addUpdateWeeks():
                     weekDict["matchups"].append(matchup)
                 yearDict["weeks"].append(weekDict)
                 leagueOrError["years"][str(year)] = yearDict
-                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=1, error_message=errorMessage)
+                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year,
+                                       week_number=1, error_message=errorMessage)
             else:
                 # default to last (most recent) week in this league
                 week = len(yearDict["weeks"])
-                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year, week_number=week, error_message=errorMessage)
+                return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year,
+                                       week_number=week, error_message=errorMessage)
 
 
 @app.route("/add-year", methods=["GET"])
@@ -302,7 +308,8 @@ def updateWeek():
                                                leagueOrError["years"])
         if isinstance(response, Error):
             # could not update week
-            return redirect(url_for("addUpdateWeeks", league_id=leagueId, week=weekNumber, year=yearNumber, error_message=response.errorMessage()))
+            return redirect(url_for("addUpdateWeeks", league_id=leagueId, week=weekNumber, year=yearNumber,
+                                    error_message=response.errorMessage()))
         newLeagueOrError = mainController.getLeague(leagueId)
         if isinstance(newLeagueOrError, Error):
             return redirect(url_for('index', error_message=newLeagueOrError.errorMessage()))
@@ -331,7 +338,8 @@ def addWeek():
         matchupIdCounter += 1
         weekDict["matchups"].append(matchup)
     leagueOrError["years"][yearNumber]["weeks"].append(weekDict)
-    return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber, selected_year=yearNumber)
+    return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber,
+                           selected_year=yearNumber)
 
 
 @app.route("/delete-week", methods=["GET"])
@@ -353,7 +361,8 @@ def deleteWeek():
             return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"], year=year))
         else:
             # week 1 exists
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week, selected_year=year, error_message=error.errorMessage())
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week,
+                                   selected_year=year, error_message=error.errorMessage())
     # returnWeek is where the user is returned if the week is ineligible for deletion
     returnWeek = len(leagueOrError["years"][year]["weeks"])
     if week == len(leagueOrError["years"][year]["weeks"]):
@@ -368,10 +377,12 @@ def deleteWeek():
     else:
         # determine if this is an unsaved, added week that is being deleted OR a non-last week
         if week > returnWeek:
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek, selected_year=year)
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek,
+                                   selected_year=year)
         else:
             error = Error("Only the most recent week can be deleted.")
-            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek, selected_year=year, error_message=error.errorMessage())
+            return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=returnWeek,
+                                   selected_year=year, error_message=error.errorMessage())
 
 
 @app.route("/team-stats", methods=["GET"])
@@ -400,7 +411,8 @@ def teamStats():
     statsModels = mainController.getTeamStatsModel(leagueModelOrError, yearList)
     # grab Constants class to use for titles of table
     constants = Constants
-    return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels, constants=constants, selected_year=year)
+    return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels, constants=constants,
+                           selected_year=year)
 
 
 @app.route("/head-to-head-stats", methods=["GET"])
@@ -446,13 +458,15 @@ def headToHeadStats():
             message = f"These teams did not face each other in {year}."
             if year == '0':
                 message = "These owners have not faced each other ever."
-            return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id, given_team_2_id=team2Id, selected_year=year, error_message=message)
+            return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
+                                   given_team_2_id=team2Id, selected_year=year, error_message=message)
     # get the stats model
     statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, yearList, team1Id, team2Id)
     # grab Constants class to use for dropdown
     constants = Constants
     return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
-                           given_team_2_id=team2Id, stats_models=statsModelsOrError, constants=constants, selected_year=year)
+                           given_team_2_id=team2Id, stats_models=statsModelsOrError, constants=constants,
+                           selected_year=year)
 
 
 @app.route("/league-stats", methods=["GET"])
@@ -480,7 +494,8 @@ def leagueStats():
     # grab Constants class to use for titles of table
     constants = Constants
     return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
-                           selected_stat=statSelection, stats_models=statsModelOrError, selected_year=year, constants=constants)
+                           selected_stat=statSelection, stats_models=statsModelOrError, selected_year=year,
+                           constants=constants)
 
 
 @app.route("/graphs", methods=["GET"])
@@ -531,6 +546,7 @@ def statsExplained():
                            purpose_div=statInfo[0],
                            formula_div=statInfo[1],
                            formula_explained_div=statInfo[2])
+
 
 @app.route("/about", methods=["GET"])
 def about():

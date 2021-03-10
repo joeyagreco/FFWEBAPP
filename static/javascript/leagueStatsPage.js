@@ -7,7 +7,6 @@ function submitLeagueStat(year, leagueStat) {
         leagueStat = document.getElementById("stat_selection").value;
     }
     // check if the selected stat is an "ALWAYS ALL TIME" stat
-    // TODO find a better way to do this
     if(leagueStat == "Owner Comparison") {
         year = 0;
     }

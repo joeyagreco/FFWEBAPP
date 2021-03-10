@@ -10,7 +10,6 @@ class LeagueDictVerifier:
         """
         for year in years:
             # check if its year 0
-            # TODO add LMN method to check for this
             if year != str(0):
                 for week in years[year]["weeks"]:
                     for matchup in week["matchups"]:
@@ -25,7 +24,6 @@ class LeagueDictVerifier:
         """
         for year in years.keys():
             # check if its year 0
-            # TODO add LMN method to check for this
             if year != str(0):
                 for week in years[year]["weeks"]:
                     teamIdsThatHavePlayed = []
