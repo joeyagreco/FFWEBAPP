@@ -217,7 +217,7 @@ class LeagueModelNavigator:
         asList = params.pop("asList", False)
         numberOfWeeks = len(leagueModel.getYears()[year].getWeeks())
         if asList:
-            return [x+1 for x in range(numberOfWeeks)]
+            return [x + 1 for x in range(numberOfWeeks)]
         return numberOfWeeks
 
     @staticmethod
@@ -234,7 +234,8 @@ class LeagueModelNavigator:
         return teamIds
 
     @staticmethod
-    def getAllWeeksTeamsPlayEachOther(leagueModel: LeagueModel, year: int, team1Id: int, opponentTeamIds: list, **params) -> List[int]:
+    def getAllWeeksTeamsPlayEachOther(leagueModel: LeagueModel, year: int, team1Id: int, opponentTeamIds: list,
+                                      **params) -> List[int]:
         """
         Returns as a list of ints all of the weeks in the given league in the given year that the team with team1Id plays any of the teams with ids in opponentTeamIds.
         ONLYWEEKS: [list] Gives weeks teams play each other for the given week numbers.
@@ -302,10 +303,10 @@ class LeagueModelNavigator:
         del years[0]
         return leagueModel.getYears()
 
-    @staticmethod
-    def getAllYearsWithWeeks(leagueModel: LeagueModel,  **params):
+    @classmethod
+    def getAllYearsWithWeeks(cls, leagueModel: LeagueModel, **params):
         """
-        This returns as a dict of TeamModels of all the years in the given league that have at least 1 week.
+        This returns as a list of TeamModels of all the years in the given league that have at least 1 week.
         ASINTS: (boolean) If True, returns as a list of ints representing the years
         """
         asInts = params.pop("asInts", False)
@@ -319,3 +320,29 @@ class LeagueModelNavigator:
                 else:
                     years.append(allYears[year])
         return years
+
+    @classmethod
+    def getMostRecentYear(cls, leagueModel: LeagueModel, **params):
+        """
+        This returns the most recent (highest-numbered) year in this league.
+        ASINT: (boolean) If True, returns as a list of ints representing the years
+        WITHWEEKS: (boolean) If True, returns the most recent year that has AT LEAST 1 week in it
+        """
+        asInt = params.pop("asInt", False)
+        withWeeks = params.pop("withWeeks", False)
+
+        if withWeeks:
+            allYearsList = cls.getAllYearsWithWeeks(leagueModel)
+            allYears = dict()
+            for year in allYearsList:
+                allYears[year.getYear()] = year
+        else:
+            allYears = leagueModel.getYears()
+        if len(allYears) > 0:
+            mostRecentYear = allYears[max(allYears.keys())]
+            if asInt:
+                return mostRecentYear.getYear()
+            else:
+                return mostRecentYear
+        else:
+            return None

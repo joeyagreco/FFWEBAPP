@@ -60,10 +60,8 @@ def leagueHomepage():
     # check if this league has at least 1 week in any of its years. if not, redirect to update league page.
     for year in leagueOrError["years"]:
         # check if this is year 0
-        # TODO make a LMN method to check for year 0
         if year != str(0):
             for week in leagueOrError["years"][year]["weeks"]:
-                # TODO make LMN method maybe
                 # check if this is year 0
                 if len(week) > 1:
                     leagueUrl = f"{os.getenv('SERVER_BASE_URL')}league-homepage?league_id={leagueId}"
