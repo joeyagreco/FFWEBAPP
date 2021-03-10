@@ -1,9 +1,11 @@
 function submitStat(stat) {
+    startLoading();
     var leagueId = document.getElementById("league_id").value;
     window.location = "/stats-explained?league_id="+leagueId+"&selected_stat="+stat;
 }
 
 function reroute(statName) {
+    startLoading();
     var leagueId = document.getElementById("league_id").value;
     var selectedStat = statName;
     window.location = "/stats-explained?league_id="+leagueId+"&selected_stat="+selectedStat;

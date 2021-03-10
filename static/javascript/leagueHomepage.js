@@ -20,34 +20,34 @@ function copyUrl() {
     })
 }
 
-function testStats() {
-    var leagueId = document.getElementById("league_id").value;
-    window.location = "/test-stats?league_id="+leagueId;
-}
-
 function teamStatsRedirect() {
     var leagueId = document.getElementById("league_id").value;
+    startLoading();
     window.location = "/team-stats?league_id="+leagueId;
 }
 
 function headToHeadStatsRedirect() {
     var leagueId = document.getElementById("league_id").value;
+    startLoading();
     window.location = "/head-to-head-stats?league_id="+leagueId;
 }
 
 function leagueStatsRedirect() {
     var leagueId = document.getElementById("league_id").value;
+    startLoading();
     window.location = "/league-stats?league_id="+leagueId;
 }
 
 function updateLeagueRedirect() {
     var leagueId = document.getElementById("league_id").value;
+    startLoading();
     window.location = "/update-league?league_id="+leagueId;
 }
 
 function graphsRedirect() {
     var leagueId = document.getElementById("league_id").value;
     var screenWidth = window.innerWidth;
+    startLoading();
     window.location = "/graphs?league_id="+leagueId+"&screen_width="+screenWidth;
 }
 

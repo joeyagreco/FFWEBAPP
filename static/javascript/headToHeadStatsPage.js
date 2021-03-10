@@ -6,6 +6,7 @@ function yearRedirect(year, team1, team2) {
     if(!team2) {
         var team2 = document.getElementById("team2button").value;
     }
+    startLoading();
     // GET request
      window.location = "/head-to-head-stats?league_id="+leagueId+"&team1="+team1+"&team2="+team2+"&year="+year;
 }

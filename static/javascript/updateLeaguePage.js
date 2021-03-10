@@ -20,6 +20,7 @@ function deleteLeague() {
 function addUpdateWeeksRedirect() {
     var leagueId = document.getElementById("league_id").value;
     var year = document.getElementById("original_year_number").value;
+    startLoading();
     // GET request
      window.location = "/add-update-weeks?league_id="+leagueId+"&year="+year;
 }
@@ -62,6 +63,7 @@ function changeMade() {
 function addYear() {
     var leagueId = document.getElementById("league_id").value;
     var currentYear = document.getElementById("original_year_number").value;
+    startLoading();
     window.location = "/add-year?league_id="+leagueId+"&selected_year="+currentYear;
 }
 
@@ -81,13 +83,15 @@ function deleteYear() {
     heightAuto: false
     }).then((result) => {
         if (result.isConfirmed) {
-             window.location = "/delete-year?league_id="+leagueId+"&selected_year="+currentYear;
+            startLoading();
+            window.location = "/delete-year?league_id="+leagueId+"&selected_year="+currentYear;
          }
     })
 }
 
 function yearRedirect(year) {
     var leagueId = document.getElementById("league_id").value;
+    startLoading();
     // GET request
      window.location = "/update-league?league_id="+leagueId+"&year="+year;
 }
@@ -128,6 +132,7 @@ function preparePageForYearZero() {
 }
 
 function postLeagueChanges() {
+    startLoading();
     // get all the values we need and put them in a dictionary
     var leagueId = document.getElementById("league_id").value;
     var leagueName = document.getElementById("league_name").value;

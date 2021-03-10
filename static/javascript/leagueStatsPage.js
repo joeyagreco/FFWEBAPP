@@ -10,6 +10,7 @@ function submitLeagueStat(year, leagueStat) {
     if(leagueStat == "Owner Comparison") {
         year = 0;
     }
+    startLoading();
     window.location = "/league-stats?league_id="+leagueId+"&stat_selection="+leagueStat+"&year="+year;
 }
 

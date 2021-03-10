@@ -9,6 +9,7 @@ function submitYearAndGraph(year, graphName) {
         // default to whatever the selected year is
         year = document.getElementById("selectYearButton").value;
     }
+    startLoading();
     window.location = "/graphs?league_id="+leagueId+"&graph_selection="+graphName+"&screen_width="+screenWidth+"&year="+year;
 }
 

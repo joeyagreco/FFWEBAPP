@@ -1,16 +1,19 @@
 function addWeek() {
+    startLoading();
     var leagueId = document.getElementById("league_id").value;
     var year = document.getElementById("year_number").value;
     window.location = "/add-week?league_id="+leagueId+"&year_number="+year;
 }
 
 function updateWeekDropdown(weekNumber) {
+    startLoading();
     var leagueId = document.getElementById("league_id").value;
     var year = document.getElementById("year_number").value;
     window.location = "/add-update-weeks?league_id="+leagueId+"&week="+weekNumber+"&year="+year;
 }
 
 function updateLeagueRedirect() {
+    startLoading();
     var leagueId = document.getElementById("league_id").value;
     var year = document.getElementById("year_number").value;
     window.location = "/update-league?league_id="+leagueId+"&year="+year;
@@ -33,7 +36,8 @@ function deleteWeek() {
     heightAuto: false
     }).then((result) => {
         if (result.isConfirmed) {
-             window.location = "/delete-week?league_id="+leagueId+"&week="+weekNumber+"&year="+yearNumber;
+            startLoading();
+            window.location = "/delete-week?league_id="+leagueId+"&week="+weekNumber+"&year="+yearNumber;
          }
     })
 }
@@ -121,6 +125,7 @@ function makeActiveTeam(newTeamElement, newTeam, matchupId) {
 }
 
 function postWeek() {
+    startLoading();
     // this posts all needed info for the week
     var leagueId = document.getElementById("league_id").value;
     var weekNumber = document.getElementById("week_number").value;
