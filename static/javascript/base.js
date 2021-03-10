@@ -31,12 +31,20 @@ function aboutRedirect() {
     window.location = "/about?league_id=" + leagueId;
 }
 
+function startLoading() {
+    document.querySelector("#loader-wrapper").style.visibility = "visible";
+    document.querySelector("#loader-wrapper").style.display = "flex";
+}
+
+function stopLoading() {
+    document.querySelector("#loader-wrapper").style.display = "none";
+    document.querySelector("body").style.visibility = "visible";
+}
+
 document.onreadystatechange = function() {
     if (document.readyState !== "complete") {
-        document.querySelector("body").style.visibility = "hidden";
-        document.querySelector("#loader-wrapper").style.visibility = "visible";
+        startLoading();
     } else {
-        document.querySelector("#loader-wrapper").style.display = "none";
-        document.querySelector("body").style.visibility = "visible";
+        stopLoading();
     }
 }
