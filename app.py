@@ -85,9 +85,9 @@ def updateLeague():
         errorMessage = request.args.get("error_message")
         mainController = MainController()
         leagueOrError = mainController.getLeague(leagueId)
-        # TODO LMN method to get "default" (probably highest) year from league
+        leagueModelOrError = mainController.getLeagueModel(leagueId)
         if not selectedYear:
-            selectedYear = list(sorted(leagueOrError["years"].keys()))[-1]
+            selectedYear = LeagueModelNavigator.getMostRecentYear(leagueModelOrError, asInt=True)
         selectedYear = int(selectedYear)
         if isinstance(leagueOrError, Error):
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
