@@ -118,7 +118,7 @@ class ExplanationDivsAsStrings:
     MIN_SCORE_STATS_EXPLAINED = (MIN_SCORE_PURPOSE, MIN_SCORE_FORMULA, MIN_SCORE_FORMULA_EXPLAINED)
 
     PPG_PURPOSE = f"""
-        {Constants.PPG_STAT_TITLE} (Points Per Game) is the average amount of points a team scores per week.
+        {Constants.PPG_STAT_TITLE} (Points Per Game) is the average amount of points a team scored per week.
         """
 
     PPG_FORMULA = f"""
@@ -135,7 +135,7 @@ class ExplanationDivsAsStrings:
     PPG_STATS_EXPLAINED = (PPG_PURPOSE, PPG_FORMULA, PPG_FORMULA_EXPLAINED)
 
     PPG_AGAINST_PURPOSE = f"""
-        {Constants.PPG_AGAINST_STAT_TITLE} (Points Per Game Against) is the average amount of points a team has scored against them per week.
+        {Constants.PPG_AGAINST_STAT_TITLE} (Points Per Game Against) is the average amount of points a team had scored against them per week.
         """
 
     PPG_AGAINST_FORMULA = f"""
