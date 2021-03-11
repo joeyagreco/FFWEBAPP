@@ -283,9 +283,9 @@ class StatCalculatorService:
                 gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, allYears, ownerId)
                 # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
                 # this SHOULD not happen, because currently, a team HAS to play every week
-                percentageOfLeagueScoring = scoresCalculator.getScoringShare()
-                percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
-                sslCalculator = SslCalculator(awal, wal, percentageOfLeagueScoring, maxScore, minScore, gamesPlayed)
+                scoringShare = scoresCalculator.getScoringShare()
+                scoringShareStr = Rounder.keepTrailingZeros(scoringShare, 2)
+                sslCalculator = SslCalculator(awal, wal, scoringShare, maxScore, minScore, gamesPlayed)
                 teamScore = sslCalculator.getTeamScore()
                 teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
                 teamSuccess = sslCalculator.getTeamSuccess()
@@ -317,7 +317,7 @@ class StatCalculatorService:
                                                             teamSuccess=teamSuccessStr,
                                                             teamLuck=teamLuckStr,
                                                             smartWins=smartWinsStr,
-                                                            percentageOfLeagueScoring=percentageOfLeagueScoringStr,
+                                                            scoringShare=scoringShareStr,
                                                             strengthOfSchedule=strengthOfScheduleStr,
                                                             wal=walStr)
                 ownerComparisonModels.append(ownerComparisonModel)
