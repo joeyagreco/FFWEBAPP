@@ -105,7 +105,7 @@ class GraphBuilder:
                 recordCalculator = RecordCalculator(team.getTeamId(), leagueModel, [year])
                 scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, [year])
                 awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year], recordCalculator.getWins(), recordCalculator.getTies())
-                ss = scoresCalculator.getPercentageOfLeagueScoring()
+                ss = scoresCalculator.getScoringShare()
                 awal = awalCalculator.getAwal()
                 ssList.append(ss)
                 awalList.append(awal)

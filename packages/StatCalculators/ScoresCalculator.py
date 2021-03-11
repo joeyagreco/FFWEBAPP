@@ -132,7 +132,7 @@ class ScoresCalculator:
         standardDeviation = statistics.pstdev(scores)
         return float(Rounder.normalRound(standardDeviation, 2))
 
-    def getPercentageOfLeagueScoring(self, **params) -> float:
+    def getScoringShare(self, **params) -> float:
         """
         Returns as a percentage the amount of total league scoring the team with self.__teamID was responsible for.
         THROUGHWEEK: [int] Gives percentage of league scoring through that week.

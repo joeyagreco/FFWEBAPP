@@ -66,7 +66,7 @@ class StatCalculatorService:
                 gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, yearAsList, teamId)
                 # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
                 # this SHOULD not happen, because currently, a team HAS to play every week
-                percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
+                percentageOfLeagueScoring = scoresCalculator.getScoringShare()
                 percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
                 sslCalculator = SslCalculator(awal, wal, percentageOfLeagueScoring, maxScore, minScore, gamesPlayed)
                 teamScore = sslCalculator.getTeamScore()
@@ -150,7 +150,7 @@ class StatCalculatorService:
             gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, years, teamId, vsTeamIds=[opponentTeamId])
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team has to play every week
-            percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring(vsTeamIds=[opponentTeamId])
+            percentageOfLeagueScoring = scoresCalculator.getScoringShare(vsTeamIds=[opponentTeamId])
             percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
             sslCalculator = SslCalculator(awal, wal, percentageOfLeagueScoring, maxScore, minScore, gamesPlayed)
             teamScore = sslCalculator.getTeamScore()
@@ -280,7 +280,7 @@ class StatCalculatorService:
                 gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, allYears, ownerId)
                 # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
                 # this SHOULD not happen, because currently, a team HAS to play every week
-                percentageOfLeagueScoring = scoresCalculator.getPercentageOfLeagueScoring()
+                percentageOfLeagueScoring = scoresCalculator.getScoringShare()
                 percentageOfLeagueScoringStr = Rounder.keepTrailingZeros(percentageOfLeagueScoring, 2)
                 sslCalculator = SslCalculator(awal, wal, percentageOfLeagueScoring, maxScore, minScore, gamesPlayed)
                 teamScore = sslCalculator.getTeamScore()
