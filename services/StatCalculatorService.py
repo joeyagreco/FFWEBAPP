@@ -378,8 +378,8 @@ class StatCalculatorService:
         elif graphSelection == Constants.POINTS_FOR_OVER_POINTS_AGAINST:
             return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, years, screenWidth)
 
-        elif graphSelection == Constants.STRENGTH_OF_SCHEDULE_OVER_PPG_AGAINST:
-            return GraphBuilder.getHtmlForStrengthOfScheduleOverPPGAgainst(leagueModel, years, screenWidth)
+        elif graphSelection == Constants.STRENGTH_OF_SCHEDULE_OVER_SCORING_SHARE_AGAINST:
+            return GraphBuilder.getHtmlForStrengthOfScheduleOverScoringShareAgainst(leagueModel, years, screenWidth)
 
         else:
             raise InvalidStatSelectionError("No Valid Graph Given to Generate.")

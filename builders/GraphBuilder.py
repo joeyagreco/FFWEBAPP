@@ -195,22 +195,22 @@ class GraphBuilder:
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
-    def getHtmlForStrengthOfScheduleOverPPGAgainst(cls, leagueModel: LeagueModel, years: list, screenWidth: float) -> str:
+    def getHtmlForStrengthOfScheduleOverScoringShareAgainst(cls, leagueModel: LeagueModel, years: list, screenWidth: float) -> str:
         """
         This creates a scatter plot for points scored/points against for every team in the given leagueModel.
         """
         data = dict()
         sosList = []
-        ppgAgainstList = []
+        ssAgainstList = []
         for year in years:
             for team in leagueModel.getYears()[year].getTeams():
                 sosCalculator = StrengthOfScheduleCalculator(team.getTeamId(), leagueModel, [year])
-                ppgCalculator = PpgCalculator(team.getTeamId(), leagueModel, [year])
+                scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, [year])
                 sos = sosCalculator.getStrengthOfSchedule()
-                ppgAgainst = ppgCalculator.getPpgAgainst()
+                ssAgainst = scoresCalculator.getScoringShareAgainst()
                 sosList.append(sos)
-                ppgAgainstList.append(ppgAgainst)
-                data[team.getTeamName()] = ([sos], [ppgAgainst])
+                ssAgainstList.append(ssAgainst)
+                data[team.getTeamName()] = ([sos], [ssAgainst])
         fig = go.Figure()
         for teamName in data:
             fig.add_trace(go.Scatter(x=data[teamName][0],
@@ -221,7 +221,7 @@ class GraphBuilder:
                                      )
                           )
         # draw average line [linear regression]
-        m, b = np.polyfit(np.array(sosList), np.array(ppgAgainstList), 1)
+        m, b = np.polyfit(np.array(sosList), np.array(ssAgainstList), 1)
         # fig.add_trace(go.Scatter(x=sosList,
         #                          y=m * np.array(sosList) + b,
         #                          showlegend=False,
@@ -231,7 +231,7 @@ class GraphBuilder:
         #                          )
         #               )
         fig.add_vline(x=sum(sosList)/len(sosList))
-        fig.add_hline(y=sum(ppgAgainstList)/len(ppgAgainstList))
+        fig.add_hline(y=sum(ssAgainstList)/len(ssAgainstList))
         # add text to explain graph
         fig.add_annotation(x=max(sosList),
                            y=m * np.array(max(sosList)) + b,
@@ -243,8 +243,8 @@ class GraphBuilder:
                            text="Easier Schedule")
         fig.update_layout(
             xaxis=dict(title="Strength of Schedule", dtick=0.1),
-            yaxis=dict(title="PPG Against"),
-            title=Constants.STRENGTH_OF_SCHEDULE_OVER_PPG_AGAINST
+            yaxis=dict(title="Scoring Share Against"),
+            title=Constants.STRENGTH_OF_SCHEDULE_OVER_SCORING_SHARE_AGAINST
         )
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
