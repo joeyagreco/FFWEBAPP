@@ -285,6 +285,8 @@ class StatCalculatorService:
                 # this SHOULD not happen, because currently, a team HAS to play every week
                 scoringShare = scoresCalculator.getScoringShare()
                 scoringShareStr = Rounder.keepTrailingZeros(scoringShare, 2)
+                scoringShareAgainst = scoresCalculator.getScoringShareAgainst()
+                scoringShareAgainstStr = Rounder.keepTrailingZeros(scoringShareAgainst, 2)
                 sslCalculator = SslCalculator(awal, wal, scoringShare, maxScore, minScore, gamesPlayed)
                 teamScore = sslCalculator.getTeamScore()
                 teamScoreStr = Rounder.keepTrailingZeros(teamScore, 2)
@@ -319,7 +321,8 @@ class StatCalculatorService:
                                                             smartWins=smartWinsStr,
                                                             scoringShare=scoringShareStr,
                                                             strengthOfSchedule=strengthOfScheduleStr,
-                                                            wal=walStr)
+                                                            wal=walStr,
+                                                            scoringShareAgainst=scoringShareAgainstStr)
                 ownerComparisonModels.append(ownerComparisonModel)
             # sort from win percentage high -> low
             ownerComparisonModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
