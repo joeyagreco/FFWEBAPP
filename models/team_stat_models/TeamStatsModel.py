@@ -22,6 +22,7 @@ class TeamStatsModel:
         self.__strengthOfSchedule = stats["strengthOfSchedule"]
         self.__wal = stats["wal"]
         self.__year = stats["year"]
+        self.__scoringShareAgainst = stats["scoringShareAgainst"]
 
     def getTeamId(self):
         return self.__teamId
@@ -85,6 +86,9 @@ class TeamStatsModel:
 
     def getYear(self):
         return self.__year
+
+    def getScoringShareAgainst(self):
+        return self.__scoringShareAgainst
 
 
 
