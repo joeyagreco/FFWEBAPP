@@ -88,7 +88,7 @@ button {
 }
 
 .loader-wrapper {
-    opacity: 0.4;
+    opacity: 0.2;
     background-color: #ccc;
     position: fixed;
     width: 100%;
