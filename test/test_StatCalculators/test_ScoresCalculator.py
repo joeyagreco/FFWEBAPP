@@ -260,7 +260,7 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(0.3, standardDeviationTeam1_2021)
         self.assertEqual(0.63, standardDeviationTeam1_bothYears)
 
-    def test_getPercentageOfLeagueScoring(self):
+    def test_getScoringShare(self):
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
         team3 = TeamModel(3, "team3")
@@ -315,3 +315,59 @@ class TestScoresCalculator(unittest.TestCase):
         self.assertEqual(23.96, percentageTeam1_default)
         self.assertEqual(17.92, percentageTeam1_2021)
         self.assertEqual(20.5, percentageTeam1_bothYears)
+
+    def test_getScoringShareAgainst(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 100, 100)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 10.01)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 101, 100)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 10.01)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year2020 = YearModel(2020, teamList, weekList)
+        matchup1 = MatchupModel(1, team1, team2, 100, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 0.0, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100.6, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 100.1, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year2021 = YearModel(2021, teamList, weekList)
+        yearDict = {2020: year2020, 2021: year2021}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        percentageTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(throughWeek=1)
+        percentageTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(throughWeek=2)
+        percentageTeam1_vs2 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(vsTeamIds=[2])
+        percentageTeam1_vs3 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(vsTeamIds=[3])
+        percentageTeam1_only2 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(onlyWeeks=[2])
+        percentageTeam1_only1and2 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(onlyWeeks=[1, 2])
+        percentageTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(throughWeek=1, vsTeamIds=[2])
+        percentageTeam1_default = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst()
+        percentageTeam1_2021 = ScoresCalculator(1, leagueModel, [2021]).getScoringShareAgainst()
+        percentageTeam1_bothYears = ScoresCalculator(1, leagueModel, [2020, 2021]).getScoringShareAgainst()
+        self.assertIsInstance(percentageTeam1_1, float)
+        self.assertEqual(23.87, percentageTeam1_1)
+        self.assertEqual(23.84, percentageTeam1_2)
+        self.assertEqual(23.84, percentageTeam1_vs2)
+        self.assertEqual(0, percentageTeam1_vs3)
+        self.assertEqual(23.81, percentageTeam1_only2)
+        self.assertEqual(23.84, percentageTeam1_only1and2)
+        self.assertEqual(23.87, percentageTeam1_allParams)
+        self.assertEqual(23.84, percentageTeam1_default)
+        self.assertEqual(17.95, percentageTeam1_2021)
+        self.assertEqual(20.47, percentageTeam1_bothYears)

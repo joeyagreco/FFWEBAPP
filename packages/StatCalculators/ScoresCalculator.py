@@ -162,3 +162,34 @@ class ScoresCalculator:
                         totalTeamScore += matchup.getTeamBScore()
         percentageOfScoring = Rounder.normalRound((totalTeamScore / totalLeagueScore) * 100, 2)
         return percentageOfScoring
+
+    def getScoringShareAgainst(self, **params) -> float:
+        """
+        Returns as a percentage the amount of total league scoring the team with self.__teamID had scored against them.
+        THROUGHWEEK: [int] Gives percentage of league scoring through that week.
+        ONLYWEEKS: [list] Gives percentage of league scoring for the given week numbers.
+        VSTEAMIDS: [list] Gives percentage of league scoring vs teams with the given IDs.
+        """
+        totalTeamScore = 0
+        totalLeagueScore = 0
+        for year in self.__years:
+            weekNumber = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            params["weekNumber"] = weekNumber
+            onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            params["vsTeamIds"] = vsTeamIds
+            allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, year, self.__teamId, vsTeamIds, onlyWeeks=onlyWeeks)
+            totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, [year], throughWeek=weekNumber, onlyWeeks=allWeeksTeamsPlay)
+            for week in self.__leagueModel.getYears()[year].getWeeks():
+                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                    continue
+                elif week.getWeekNumber() > weekNumber:
+                    break
+                for matchup in week.getMatchups():
+                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
+                        totalTeamScore += matchup.getTeamBScore()
+                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
+                        totalTeamScore += matchup.getTeamAScore()
+        percentageOfScoring = Rounder.normalRound((totalTeamScore / totalLeagueScore) * 100, 2)
+        return percentageOfScoring
