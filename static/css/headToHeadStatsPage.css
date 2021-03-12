@@ -27,20 +27,21 @@
     color: black !important;
 }
 
-.team1Dropdown {
+#team1Dropdown {
     width: auto;
     height: auto;
     order: 1;
 }
 
-.vs {
+#vs {
     width: auto;
     height: auto;
     order: 2;
     font-size: 150%;
+    text-align: center;
 }
 
-.team2Dropdown {
+#team2Dropdown {
     width: auto;
     height: auto;
     order: 3;
@@ -86,4 +87,27 @@
 
 table, th, td {
   border: 1px solid black !important;
+}
+
+@media screen and (max-width:414px) {
+    /* CSS for screens that are 414 pixels or less will be put in this section */
+    .teamsAndVs {
+        width: 100%;
+    }
+
+    #team1Dropdown {
+        width: 25%;
+    }
+
+    #vs {
+        width: 10%;
+    }
+
+    #team2Dropdown {
+        width: 25%;
+    }
+
+    .teamSelectButton {
+        width: 100% !important;
+    }
 }

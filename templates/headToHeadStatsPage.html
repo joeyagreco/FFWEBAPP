@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="teamsAndVs">
-            <div class="team1Dropdown">
+            <div class="team1Dropdown" id="team1Dropdown">
                 {% for team in league.years[selected_year].teams %}
                     {% if team.teamId == given_team_1_id %}
                         <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton hoverFade" type="button" value={{team.teamId}} id="team1button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,8 +77,8 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="vs">VS</div>
-           <div class="team2Dropdown">
+            <div id="vs">VS</div>
+           <div class="team2Dropdown" id="team2Dropdown">
                 {% for team in league.years[selected_year].teams %}
                     {% if team.teamId == given_team_2_id %}
                         <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton hoverFade" type="button" value={{team.teamId}} id="team2button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
