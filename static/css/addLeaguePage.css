@@ -52,7 +52,7 @@ header {
 }
 
 .createLeagueFormStack {
-    width: 20%;
+    width: 100%;
     height: 100%;
     order: 2;
     display: flex;
@@ -61,10 +61,10 @@ header {
     justify-content: space-around;
 }
 
-.leagueNameInputForm {
-    width: 50% !important;
+#league_name {
+    width: 10%;
     height: 2rem;
-    font-size: 1.2rem !important;
+    font-size: 1.2rem;
     order: 1;
     text-align: center;
 }
@@ -81,10 +81,10 @@ input::-webkit-inner-spin-button {
     order: 2;
 }
 
-.createLeagueButton {
-    width: 50%;
+#createLeagueButton {
+    width: 10%;
     height: 25%;
-    font-size: 1.5rem !important;
+    font-size: 1.5rem;
     order: 3;
 }
 
@@ -94,6 +94,21 @@ input::-webkit-inner-spin-button {
     background-color: #081c15 !important;
     height: 0.1rem !important;
     margin-top: 0;
+}
+
+@media screen and (max-width:414px) {
+    /* CSS for screens that are 414 pixels or less will be put in this section */
+    .pageTitle {
+        font-size: 325%;
+    }
+
+    #league_name {
+        width: 50%;
+    }
+
+    #createLeagueButton {
+        width: 50%;
+    }
 }
 
 
