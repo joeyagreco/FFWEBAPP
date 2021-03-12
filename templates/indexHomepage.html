@@ -30,15 +30,15 @@
         </div>
 
         <div class="buttonSelection">
-            <form class="newLeagueFormStack" action="/new-league">
-                <button class="newLeagueButton btn btn-primary primaryButtonColors" type="submit">New League</button>
+            <form class="newLeagueFormStack" id="new_league_form_stack" action="/new-league">
+                <button class="newLeagueButton btn btn-primary primaryButtonColors" id="new_league_button" type="submit">New League</button>
             </form>
 
             <div class="or">
                 <div class="verticalLine"></div>
             </div>
 
-            <form class="leagueIdFormStack" action="/league-homepage" method="GET">
+            <form class="leagueIdFormStack" id="league_id_form_stack" action="/league-homepage" method="GET">
                 <input class="leagueIdInputForm form-control primaryFormColors" type="number" name="league_id" id="league_id" onkeyup="activateSubmitButton()" placeholder="League ID" required min="100000" max="999999" step="1" autocomplete="off" oninput="checkCharacterLimit()">
                 <button class="loadLeagueButton btn btn-primary primaryButtonColors disabled" id="load_league_button" type="submit">Load League</button>
             </form>
