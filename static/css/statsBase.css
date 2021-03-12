@@ -78,3 +78,23 @@
     background-color: #081c15 !important;
     height: 0.1rem !important;
 }
+
+@media screen and (max-width:414px) {
+    /* CSS for screens that are 414 pixels or less will be put in this section */
+    .chunkMaster {
+        width: 80%;
+        margin-top: 8%;
+    }
+
+    .chunkHeader {
+        font-size: 200%;
+    }
+
+    .statTitleLine {
+        width: 80%;
+    }
+
+    .chunkBody {
+        font-size: 80%;
+    }
+}
