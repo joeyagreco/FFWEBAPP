@@ -144,6 +144,10 @@ input::-webkit-inner-spin-button {
     .pageSubtitle {
         font-size: 110%;
     }
+
+    .errorSection {
+        width: 70%;
+    }
 }
 
 
