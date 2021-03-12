@@ -112,7 +112,10 @@ button {
     }
 
     .pageTitle {
-        font-size: 300%;
+        font-size: 260%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .pageSubtitle {
