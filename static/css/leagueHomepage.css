@@ -27,7 +27,7 @@
     display: none;
 }
 
-.urlExplanation {
+#urlExplanation {
     width: 100%;
     height: auto%;
     font-size: 120%;
@@ -43,8 +43,8 @@
     padding-top: 1rem;
 }
 
-.urlForm {
-    width: 25% !important;
+#copyLeagueUrlForm {
+    width: 25%;
     height: 18%;
     text-align: center;
 }
@@ -61,4 +61,23 @@ input::-webkit-inner-spin-button {
 
 #leagueId {
     font-weight: bold;
+}
+
+@media screen and (max-width:414px) {
+    /* CSS for screens that are 414 pixels or less will be put in this section */
+    .stackButton {
+        width: 50%;
+    }
+
+    #urlExplanation {
+        font-size: 85%;
+    }
+
+    .copyUrlForm {
+        padding-top: 2%;;
+    }
+
+    #copyLeagueUrlForm {
+        width: 70%;
+    }
 }
