@@ -100,3 +100,18 @@ button {
     align-items: center;
     justify-content: center;
 }
+
+@media screen and (max-width:414px) {
+    /* CSS for screens that are 414 pixels or less will be put in this section */
+    .navBarText {
+        display: none;
+    }
+
+    .pageTitle {
+        font-size: 300%;
+    }
+
+    .pageSubtitle {
+        font-size: 150%;
+    }
+}
