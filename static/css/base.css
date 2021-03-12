@@ -107,6 +107,10 @@ button {
         display: none;
     }
 
+    .topSection {
+       padding-top: 5%;
+    }
+
     .pageTitle {
         font-size: 300%;
     }
