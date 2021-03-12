@@ -70,3 +70,38 @@
 .noOutline:focus {
     outline: none !important;
 }
+
+@media screen and (max-width:414px) {
+    /* CSS for screens that are 414 pixels or less will be put in this section */
+    .aboutFull {
+        flex-direction: column;
+    }
+
+    .infoBlocksStack {
+        align-items: center;
+    }
+
+    .rightSide {
+        width: 100%;
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .leftSide {
+        width: 100%;
+        padding-right: 0;
+        justify-content: center;
+    }
+
+    .infoBlock {
+        margin-top: 8%;
+    }
+
+    .smallTitle {
+        font-size: 200%;
+    }
+
+    .titleLine {
+        width: 80%;
+    }
+}
