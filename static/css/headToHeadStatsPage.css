@@ -89,15 +89,12 @@ table, th, td {
   border: 1px solid black !important;
 }
 
-#headToHeadTable {
-    display: none;
-}
-
 .mobileTableSection {
     width: 100%;
     height: 100%;
     order: 3;
     display: flex;
+    display: none;
     flex-direction: column;
     margin-top: 5%;
 }
@@ -154,5 +151,13 @@ table, th, td {
 
     .teamSelectButton {
         width: 100% !important;
+    }
+
+    #headToHeadTable {
+        display: none;
+    }
+
+    .mobileTableSection {
+        display: flex;
     }
 }
