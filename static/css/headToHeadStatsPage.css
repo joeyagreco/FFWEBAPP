@@ -98,32 +98,41 @@ table, th, td {
     height: 100%;
     order: 3;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 5%;
 }
 
-.team1SectionMobile {
+.mobileRow {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    background-color; red;
+}
+
+.team1ValueMobile {
     width: 33.3%;
-    height: 100%;
     order: 1;
     text-align: right;
 }
 
-.headersSectionMobile {
+.headerValueMobile {
     width: 33.3%;
     height: 100%;
     order: 2;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: bold;
     background-color: #ddd;
 }
 
-.team2SectionMobile {
+.team2ValueMobile {
     width: 33.3%;
-    height: 100%;
     order: 3;
     text-align: left;
 }
+
 
 @media screen and (max-width:414px) {
     /* CSS for screens that are 414 pixels or less will be put in this section */
