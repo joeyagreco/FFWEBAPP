@@ -202,6 +202,46 @@
                     <div class="headerValueMobile">{{constants.PPG_STAT_TITLE}}</div>
                     <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getPpg()}}</div>
                 </div>
+                <div class="mobileRow">
+                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getScoringShare()}}</div>
+                    <div class="headerValueMobile">{{constants.SCORING_SHARE_STAT_TITLE}}</div>
+                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getScoringShare()}}</div>
+                </div>
+                <div class="mobileRow">
+                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getPlusMinus()}}</div>
+                    <div class="headerValueMobile">{{constants.PLUS_MINUS_STAT_TITLE}}</div>
+                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getPlusMinus()}}</div>
+                </div>
+                <div class="mobileRow">
+                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getMaxScore()}}</div>
+                    <div class="headerValueMobile">{{constants.MAX_SCORE_STAT_TITLE}}</div>
+                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getMaxScore()}}</div>
+                </div>
+                <div class="mobileRow">
+                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getMinScore()}}</div>
+                    <div class="headerValueMobile">{{constants.MIN_SCORE_STAT_TITLE}}</div>
+                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getMinScore()}}</div>
+                </div>
+                <div class="mobileRow">
+                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getStddev()}}</div>
+                    <div class="headerValueMobile">{{constants.STDEV_STAT_TITLE}}</div>
+                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getStddev()}}</div>
+                </div>
+                <div class="mobileRow">
+                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getTeamScore()}}</div>
+                    <div class="headerValueMobile">{{constants.TEAM_SCORE_STAT_TITLE}}</div>
+                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getTeamScore()}}</div>
+                </div>
+                <div class="mobileRow">
+                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getTeamSuccess()}}</div>
+                    <div class="headerValueMobile">{{constants.TEAM_SUCCESS_STAT_TITLE}}</div>
+                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getTeamSuccess()}}</div>
+                </div>
+                <div class="mobileRow">
+                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getTeamLuck()}}</div>
+                    <div class="headerValueMobile">{{constants.TEAM_LUCK_STAT_TITLE}}</div>
+                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getTeamLuck()}}</div>
+                </div>
             </div>
         {% endif %}
         <script>
