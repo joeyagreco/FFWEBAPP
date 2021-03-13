@@ -183,3 +183,15 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+@media screen and (max-width:414px) {
+    /* CSS for screens that are 414 pixels or less will be put in this section */
+
+    .middleForms {
+        flex-direction: column;
+    }
+
+    .bottomButtonText {
+        display: none;
+    }
+}
