@@ -38,7 +38,7 @@
     color: black !important;
 }
 
-.addWeekButtonPlus {
+#addWeekButton {
     width: 2%;
     height: auto;
     order: 2;
@@ -167,4 +167,33 @@ input::-webkit-inner-spin-button {
     font-size: 1.5rem !important;
     order: 2;
     margin: 2%;
+}
+
+@media screen and (max-width:414px) {
+    /* CSS for screens that are 414 pixels or less will be put in this section */
+    #addWeekButton {
+        width: 8%;
+    }
+
+    .oddTeamForms {
+        margin-right: 5%;
+    }
+
+    .evenTeamForms {
+        margin-left: 5%;
+    }
+
+    .teamForms {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .teamDropdownButton {
+        width: 100% !important;
+    }
+
+    .bottomButtonText {
+        display: none;
+    }
 }
