@@ -79,6 +79,7 @@
 }
 
 .mobilePadding {
+    min-height: 20%;
     display: none;
 }
 
@@ -102,8 +103,6 @@
     }
 
     .mobilePadding {
-        display: block;
-        width: 100%;
-        height: 20%;
+        display: flex;
     }
 }
