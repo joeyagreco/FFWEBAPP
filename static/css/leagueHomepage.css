@@ -68,6 +68,7 @@ input::-webkit-inner-spin-button {
     /* CSS for screens that are 414 pixels or less will be put in this section */
     .stackButton {
         width: 50%;
+        font-size: 100% !important;
     }
 
     #urlExplanation {
