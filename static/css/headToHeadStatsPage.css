@@ -111,6 +111,7 @@ table, th, td {
     width: 33.3%;
     order: 1;
     text-align: right;
+    padding-right: 2%;
 }
 
 .headerValueMobile {
@@ -128,6 +129,7 @@ table, th, td {
     width: 33.3%;
     order: 3;
     text-align: left;
+    padding-left: 2%;
 }
 
 
