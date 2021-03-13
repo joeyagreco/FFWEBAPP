@@ -154,6 +154,70 @@
                 {% endfor %}
                 </tbody>
             </table>
+
+            <!-- below is the structure the data will go in on mobile -->
+            <div class="mobileTableSection">
+                <div class="team1SectionMobile">
+                    <div class="backgroundTeamId{{stats_models[0].getTeamId()}}">
+                        <div>{{stats_models[0].getTeamName()}}</div>
+                        <div>{{stats_models[0].getWins()}}</div>
+                        <div>{{stats_models[0].getLosses()}}</div>
+                        <div>{{stats_models[0].getTies()}}</div>
+                        <div>{{stats_models[0].getWinPercentage()}}</div>
+                        <div>{{stats_models[0].getWal()}}</div>
+                        <div>{{stats_models[0].getAwal()}}</div>
+                        <div>{{stats_models[0].getSmartWins()}}</div>
+                        <div>{{stats_models[0].getPpg()}}</div>
+                        <div>{{stats_models[0].getScoringShare()}}</div>
+                        <div>{{stats_models[0].getMaxScore()}}</td>
+                        <div>{{stats_models[0].getMinScore()}}</div>
+                        <div>{{stats_models[0].getStddev()}}</div>
+                        <div>{{stats_models[0].getTeamScore()}}</div>
+                        <div>{{stats_models[0].getTeamSuccess()}}</div>
+                        <div>{{stats_models[0].getTeamLuck()}}</div>
+                    </div>
+                </div>
+                </div>
+                <div class="headersSectionMobile">
+                    <div>Team Name</div>
+                    <div>{{constants.WINS_STAT_TITLE}}</div>
+                    <div>{{constants.LOSSES_STAT_TITLE}}</div>
+                    <div>{{constants.TIES_STAT_TITLE}}</div>
+                    <div>{{constants.WIN_PERCENTAGE_STAT_TITLE}}</div>
+                    <div>{{constants.WAL_STAT_TITLE}}</div>
+                    <div>{{constants.AWAL_STAT_TITLE}}</div>
+                    <div>{{constants.SMART_WINS_STAT_TITLE}}</div>
+                    <div>{{constants.PPG_STAT_TITLE}}</div>
+                    <div>{{constants.SCORING_SHARE_STAT_TITLE}}</div>
+                    <div>{{constants.PLUS_MINUS_STAT_TITLE}}</div>
+                    <div>{{constants.MAX_SCORE_STAT_TITLE}}</div>
+                    <div>{{constants.MIN_SCORE_STAT_TITLE}}</div>
+                    <div>{{constants.STDEV_STAT_TITLE}}</div>
+                    <div>{{constants.TEAM_SCORE_STAT_TITLE}}</div>
+                    <div>{{constants.TEAM_SUCCESS_STAT_TITLE}}</div>
+                    <div>{{constants.TEAM_LUCK_STAT_TITLE}}</div>
+                </div>
+                <div class="team2SectionMobile">
+                    <div class="backgroundTeamId{{stats_models[1].getTeamId()}}">
+                        <div>{{stats_models[1].getTeamName()}}</div>
+                        <div>{{stats_models[1].getWins()}}</div>
+                        <div>{{stats_models[1].getLosses()}}</div>
+                        <div>{{stats_models[1].getTies()}}</div>
+                        <div>{{stats_models[1].getWinPercentage()}}</div>
+                        <div>{{stats_models[1].getWal()}}</div>
+                        <div>{{stats_models[1].getAwal()}}</div>
+                        <div>{{stats_models[1].getSmartWins()}}</div>
+                        <div>{{stats_models[1].getPpg()}}</div>
+                        <div>{{stats_models[1].getScoringShare()}}</div>
+                        <div>{{stats_models[1].getMaxScore()}}</td>
+                        <div>{{stats_models[1].getMinScore()}}</div>
+                        <div>{{stats_models[1].getStddev()}}</div>
+                        <div>{{stats_models[1].getTeamScore()}}</div>
+                        <div>{{stats_models[1].getTeamSuccess()}}</div>
+                        <div>{{stats_models[1].getTeamLuck()}}</div>
+                    </div>
+                </div>
+            </div>
         {% endif %}
         <script>
             setTeamDropdownWidths({{league.years[selected_year].teams|safe}});

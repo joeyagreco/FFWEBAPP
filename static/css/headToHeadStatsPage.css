@@ -89,6 +89,42 @@ table, th, td {
   border: 1px solid black !important;
 }
 
+#headToHeadTable {
+    display: none;
+}
+
+.mobileTableSection {
+    width: 100%;
+    height: 100%;
+    order: 3;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+}
+
+.team1SectionMobile {
+    width: 33.3%;
+    height: 100%;
+    order: 1;
+    text-align: right;
+}
+
+.headersSectionMobile {
+    width: 33.3%;
+    height: 100%;
+    order: 2;
+    text-align: center;
+    font-weight: bold;
+    background-color: #ddd;
+}
+
+.team2SectionMobile {
+    width: 33.3%;
+    height: 100%;
+    order: 3;
+    text-align: left;
+}
+
 @media screen and (max-width:414px) {
     /* CSS for screens that are 414 pixels or less will be put in this section */
     .teamsAndVs {
