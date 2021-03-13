@@ -107,7 +107,6 @@ table, th, td {
     height: auto;
     display: flex;
     flex-direction: row;
-    background-color; red;
     border: 1px solid;
 }
 
