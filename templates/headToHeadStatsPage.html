@@ -108,7 +108,7 @@
             </div>
         </div>
         {% if stats_models %}
-            <table class="sortable statsTable">
+            <table class="sortable statsTable" id="headToHeadTable">
                 <thead>
                 <tr>
                     <th>Team Name</th>
@@ -133,23 +133,23 @@
                 <tbody>
                 {% for teamStats in stats_models %}
                 <tr class="backgroundTeamId{{teamStats.getTeamId()}}">
-                    <td>{{teamStats.getTeamName()}}</td>
-                    <td>{{teamStats.getWins()}}</td>
-                    <td>{{teamStats.getLosses()}}</td>
-                    <td>{{teamStats.getTies()}}</td>
-                    <td>{{teamStats.getWinPercentage()}}</td>
-                    <td>{{teamStats.getWal()}}</td>
-                    <td>{{teamStats.getAwal()}}</td>
-                    <td>{{teamStats.getSmartWins()}}</td>
-                    <td>{{teamStats.getPpg()}}</td>
-                    <td>{{teamStats.getScoringShare()}}</td>
-                    <td>{{teamStats.getPlusMinus()}}</td>
-                    <td>{{teamStats.getMaxScore()}}</td>
-                    <td>{{teamStats.getMinScore()}}</td>
-                    <td>{{teamStats.getStddev()}}</td>
-                    <td>{{teamStats.getTeamScore()}}</td>
-                    <td>{{teamStats.getTeamSuccess()}}</td>
-                    <td>{{teamStats.getTeamLuck()}}</td>
+                    <td data-label="Team Name">{{teamStats.getTeamName()}}</td>
+                    <td data-label="{{constants.WINS_STAT_TITLE}}">{{teamStats.getWins()}}</td>
+                    <td data-label="{{constants.LOSSES_STAT_TITLE}}">{{teamStats.getLosses()}}</td>
+                    <td data-label="{{constants.TIES_STAT_TITLE}}">{{teamStats.getTies()}}</td>
+                    <td data-label="{{constants.WIN_PERCENTAGE_STAT_TITLE}}">{{teamStats.getWinPercentage()}}</td>
+                    <td data-label="{{constants.WAL_STAT_TITLE}}">{{teamStats.getWal()}}</td>
+                    <td data-label="{{constants.AWAL_STAT_TITLE}}">{{teamStats.getAwal()}}</td>
+                    <td data-label="{{constants.SMART_WINS_STAT_TITLE}}">{{teamStats.getSmartWins()}}</td>
+                    <td data-label="{{constants.PPG_STAT_TITLE}}">{{teamStats.getPpg()}}</td>
+                    <td data-label="{{constants.SCORING_SHARE_STAT_TITLE}}">{{teamStats.getScoringShare()}}</td>
+                    <td data-label="{{constants.PLUS_MINUS_STAT_TITLE}}">{{teamStats.getPlusMinus()}}</td>
+                    <td data-label="{{constants.MAX_SCORE_STAT_TITLE}}">{{teamStats.getMaxScore()}}</td>
+                    <td data-label="{{constants.MIN_SCORE_STAT_TITLE}}">{{teamStats.getMinScore()}}</td>
+                    <td data-label="{{constants.STDEV_STAT_TITLE}}">{{teamStats.getStddev()}}</td>
+                    <td data-label="{{constants.TEAM_SCORE_STAT_TITLE}}">{{teamStats.getTeamScore()}}</td>
+                    <td data-label="{{constants.TEAM_SUCCESS_STAT_TITLE}}">{{teamStats.getTeamSuccess()}}</td>
+                    <td data-label="{{constants.TEAM_LUCK_STAT_TITLE}}">{{teamStats.getTeamLuck()}}</td>
                 </tr>
                 {% endfor %}
                 </tbody>
