@@ -108,6 +108,7 @@ table, th, td {
     display: flex;
     flex-direction: row;
     background-color; red;
+    border: 1px solid;
 }
 
 .team1ValueMobile {
