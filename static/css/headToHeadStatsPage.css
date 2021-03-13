@@ -122,6 +122,7 @@ table, th, td {
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    overflow-wrap: anywhere;
     background-color: #ddd;
 }
 
