@@ -44,7 +44,7 @@ function injectGraphAsDiv() {
     var injectDiv = document.getElementById("graphDiv").innerHTML;
     injectDiv = htmlDecode(injectDiv);
     // TODO update calculation to not be hardcoded
-    if(getWidthFromDivString(injectDiv) !=  parseInt(window.innerWidth/2, 10) && isDiv(injectDiv)) {
+    if(getWidthFromDivString(injectDiv) !=  parseInt(window.innerWidth/2, 10) && isDiv(injectDiv) && window.innerWidth > 414) {
         // width of given div does not match the screen size
         year = document.getElementById("selectYearButton").value;
         submitYearAndGraph(year, 0);

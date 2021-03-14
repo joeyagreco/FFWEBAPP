@@ -34,8 +34,19 @@ class GraphBuilder:
         height = cls.HEIGHT_MULTIPLIER * width
         fig.update_layout(
             width=width,
-            height=height
+            height=height,
+            legend=dict(
+                bordercolor="Black",
+                borderwidth=2)
         )
+        # check if on mobile
+        if screenWidth <= 414:
+            fig.update_layout(
+                width=width*2,
+                height=height*2,
+                showlegend=False
+
+            )
 
     @classmethod
     def getHtmlForByWeekLineGraph(cls, screenWidth: float, data: dict, xAxisTicks: list, yAxisName: str,

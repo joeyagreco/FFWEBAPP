@@ -12,6 +12,7 @@
     height: auto;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 1%;
     order: 1;
     display: flex;
     flex-direction: row;
@@ -31,11 +32,18 @@
 }
 
 .generatedGraph {
-    width: 80%;
+    width: 100%;
     order: 2;
     text-align: center;
 }
 
 .plotly-graph-div {
     display: inline-block;
+}
+
+@media screen and (max-width:414px) {
+    /* CSS for screens that are 414 pixels or less will be put in this section */
+    .dropdowns {
+        flex-direction: column;
+    }
 }
