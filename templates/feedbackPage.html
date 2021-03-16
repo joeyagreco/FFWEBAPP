@@ -26,18 +26,18 @@
     <div class="allLabelsAndFormsAndButtons">
         <div class="labelAndForm">
             <div class="formLabel">Name</div>
-            <input class="defaultFormFocus form-control hoverFade inputForm" type="text" id="nameForm" placeholder="Name" required autocomplete="off" onchange="#">
+            <input class="defaultFormFocus form-control hoverFade inputForm" type="text" id="name_form" placeholder="Name" required autocomplete="off" onchange="">
         </div>
         <div class="labelAndForm">
             <div class="formLabel">Email</div>
-            <input class="defaultFormFocus form-control hoverFade inputForm" type="email" id="emailForm" placeholder="Email" autocomplete="off" onchange="#">
+            <input class="defaultFormFocus form-control hoverFade inputForm" type="email" id="email_form" placeholder="Email" autocomplete="off" onchange="">
         </div>
         <div class="labelAndForm">
             <div class="formLabel">Feedback</div>
-            <textarea class="defaultFormFocus form-control hoverFade inputForm" id="feedbackForm" placeholder="Tell us what you think..." required autocomplete="off" onchange="#"></textarea>
+            <textarea class="defaultFormFocus form-control hoverFade inputForm" id="feedback_form" placeholder="Tell us what you think..." required autocomplete="off" onchange=""></textarea>
         </div>
         <div class="buttonContainer">
-            <button class="btn secondaryButtonColors" id="sendFeedbackButton" type="submit" onclick="#"><i class="fas fa-paper-plane"></i>  Submit</button>
+            <button class="btn secondaryButtonColors" id="send_feedback_button" type="button" onclick="postForm()"><i class="fas fa-paper-plane"></i>  Submit</button>
         </div>
     </div>
 {% endblock %}

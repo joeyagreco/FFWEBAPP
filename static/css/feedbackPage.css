@@ -26,15 +26,15 @@
     margin-bottom: 5%;
 }
 
-#nameForm {
+#name_form {
     width: 50%;
 }
 
-#emailForm {
+#email_form {
     width: 50%;
 }
 
-#feedbackForm {
+#feedback_form {
     height: 200px;
     resize: none;
 }
@@ -47,6 +47,6 @@
     justify-content: center;
 }
 
-#sendFeedbackButton {
+#send_feedback_button {
     width: 25%;
 }
