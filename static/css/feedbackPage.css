@@ -33,3 +33,8 @@
 #emailForm {
     width: 50%;
 }
+
+#feedbackForm {
+    height: 200px;
+    resize: none;
+}

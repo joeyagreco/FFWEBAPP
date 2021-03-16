@@ -26,11 +26,15 @@
     <div class="allLabelsAndForms">
         <div class="labelAndForm">
             <div class="formLabel">Name</div>
-            <input class="form-control hoverFade inputForm" type="text" id="nameForm" placeholder="Name" required autocomplete="off" onchange="#">
+            <input class="defaultFormFocus form-control hoverFade inputForm" type="text" id="nameForm" placeholder="Name" required autocomplete="off" onchange="#">
         </div>
         <div class="labelAndForm">
             <div class="formLabel">Email</div>
-            <input class="form-control hoverFade inputForm" type="text" id="emailForm" placeholder="Email" required autocomplete="off" onchange="#">
+            <input class="defaultFormFocus form-control hoverFade inputForm" type="email" id="emailForm" placeholder="Email" autocomplete="off" onchange="#">
+        </div>
+        <div class="labelAndForm">
+            <div class="formLabel">Feedback</div>
+            <textarea class="defaultFormFocus form-control hoverFade inputForm" id="feedbackForm" placeholder="Tell us what you think..." required autocomplete="off" onchange="#"></textarea>
         </div>
     </div>
 {% endblock %}
