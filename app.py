@@ -553,6 +553,14 @@ def about():
     return render_template("aboutPage.html", league=leagueOrError)
 
 
+@app.route("/feedback", methods=["GET"])
+def feedback():
+    leagueId = int(request.args.get("league_id"))
+    mainController = MainController()
+    leagueOrError = mainController.getLeague(leagueId)
+    return render_template("feedbackPage.html", league=leagueOrError)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
     # app.run(host="0.0.0.0", port=80)

@@ -34,6 +34,12 @@ function aboutRedirect() {
     window.location = "/about?league_id=" + leagueId;
 }
 
+function feedbackRedirect() {
+    var leagueId = document.getElementById("league_id").value;
+    startLoading();
+    window.location = "/feedback?league_id=" + leagueId;
+}
+
 function startLoading() {
     document.querySelector("#loader-wrapper").style.display = "flex";
     document.querySelector("#loader-wrapper").style.visibility = "visible";
