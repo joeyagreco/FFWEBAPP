@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
-.allLabelsAndForms {
+.allLabelsAndFormsAndButtons {
     width: 100%;
     margin: auto;
     margin-top: 3%;
@@ -37,4 +37,16 @@
 #feedbackForm {
     height: 200px;
     resize: none;
+}
+
+.buttonContainer {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#sendFeedbackButton {
+    width: 25%;
 }

@@ -23,7 +23,7 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-    <div class="allLabelsAndForms">
+    <div class="allLabelsAndFormsAndButtons">
         <div class="labelAndForm">
             <div class="formLabel">Name</div>
             <input class="defaultFormFocus form-control hoverFade inputForm" type="text" id="nameForm" placeholder="Name" required autocomplete="off" onchange="#">
@@ -35,6 +35,9 @@
         <div class="labelAndForm">
             <div class="formLabel">Feedback</div>
             <textarea class="defaultFormFocus form-control hoverFade inputForm" id="feedbackForm" placeholder="Tell us what you think..." required autocomplete="off" onchange="#"></textarea>
+        </div>
+        <div class="buttonContainer">
+            <button class="btn secondaryButtonColors" id="sendFeedbackButton" type="submit" onclick="#"><i class="fas fa-paper-plane"></i>  Submit</button>
         </div>
     </div>
 {% endblock %}
