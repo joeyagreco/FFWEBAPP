@@ -4,12 +4,17 @@ function postForm() {
     var name = document.getElementById("name_form").value;
     var email = document.getElementById("email_form").value;
     var feedback = document.getElementById("feedback_form").value;
-    console.log(`League ID: ${leagueId}\nName: ${name.length}\nEmail: ${email}\nFeedback: ${feedback}`);
+    console.log(`League ID: ${leagueId}\nName: ${name}\nEmail: ${email}\nFeedback: ${feedback}`);
     // validate data
     var error = validateForms(name, email, feedback);
+    var errorMessageElement = document.getElementById("errorMessageFill");
     if(error) {
-        // load page with error
-        window.location = "/feedback?league_id="+leagueId+"&error_message="+error;
+        // set error in page
+//        window.location = "/feedback?league_id="+leagueId+"&error_message="+error;
+        errorMessageElement.innerHTML = "- "+error+" -";
+    }
+    else {
+        errorMessageElement.innerHTML = "";
     }
     stopLoading();
 }
