@@ -556,9 +556,10 @@ def about():
 @app.route("/feedback", methods=["GET"])
 def feedback():
     leagueId = int(request.args.get("league_id"))
+    errorMessage = request.args.get("error_message")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    return render_template("feedbackPage.html", league=leagueOrError)
+    return render_template("feedbackPage.html", league=leagueOrError, error_message=errorMessage)
 
 
 if __name__ == "__main__":
