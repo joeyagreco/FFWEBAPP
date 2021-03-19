@@ -60,3 +60,19 @@
     content: " *";
     color: #ff2457;
 }
+
+@media screen and (max-width:414px) {
+    /* CSS for screens that are 414 pixels or less will be put in this section */
+    .labelAndForm {
+        width: 90%;
+    }
+
+    .formLabel {
+        font-size: 120%;
+    }
+
+    #send_feedback_button {
+        width: auto;
+    }
+
+}
