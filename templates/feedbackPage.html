@@ -25,15 +25,15 @@
 {% block content %}
     <div class="allLabelsAndFormsAndButtons">
         <div class="labelAndForm">
-            <div class="formLabel">Name</div>
+            <div class="formLabel" id="name_label">Name</div>
             <input class="defaultFormFocus form-control hoverFade inputForm" type="text" id="name_form" placeholder="Name" onkeyup="activateSubmitButton()" required autocomplete="off" onchange="">
         </div>
         <div class="labelAndForm">
-            <div class="formLabel">Email</div>
+            <div class="formLabel" id="email_label">Email</div>
             <input class="defaultFormFocus form-control hoverFade inputForm" type="email" id="email_form" placeholder="Email" onkeyup="activateSubmitButton()" autocomplete="off" onchange="">
         </div>
         <div class="labelAndForm">
-            <div class="formLabel">Feedback</div>
+            <div class="formLabel" id="feedback_label">Feedback</div>
             <textarea class="defaultFormFocus form-control hoverFade inputForm" id="feedback_form" placeholder="Tell us what you think..." onkeyup="activateSubmitButton()" required autocomplete="off" onchange=""></textarea>
         </div>
         <div class="buttonContainer">

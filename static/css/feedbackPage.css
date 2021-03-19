@@ -50,3 +50,13 @@
 #send_feedback_button {
     width: 25%;
 }
+
+#name_label::after {
+    content: " *";
+    color: red;
+}
+
+#feedback_label::after {
+    content: " *";
+    color: red;
+}
