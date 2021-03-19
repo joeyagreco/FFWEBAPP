@@ -53,10 +53,10 @@
 
 #name_label::after {
     content: " *";
-    color: red;
+    color: #ff2457;
 }
 
 #feedback_label::after {
     content: " *";
-    color: red;
+    color: #ff2457;
 }
