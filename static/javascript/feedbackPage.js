@@ -13,6 +13,11 @@ function postForm() {
     var feedbackApiUrl = "http://feedback-service.live:3000/v1/feedback";
     postData(feedbackApiUrl, postObject)
       .then(response => {
+        // see if we got a timeout
+        if(typeof response == "string") {
+            window.location = "/feedback?league_id="+leagueId+"&error_message="+response;
+            return;
+        }
         // see if we got a 200 status or not
         if(response.status != 200) {
             // unsuccessful POST, load feedback page with error message
@@ -39,7 +44,7 @@ function postForm() {
 // POST method
 async function postData(url = '', data = {}) {
   // Default options are marked with *
-  const response = await fetch(url, {
+  const response = await fetchOrTimeout(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -51,8 +56,21 @@ async function postData(url = '', data = {}) {
     redirect: 'follow', // manual, *follow, error
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data) // body data type must match "Content-Type" header
+  })
+  .catch((e) => {
+    // timeout error
+    return "Feedback service not available. Please try again later";
   });
-  return response; // parses JSON response into native JavaScript objects
+  return response;
+}
+
+function fetchOrTimeout(url, options, timeout = 5000) {
+    return Promise.race([
+        fetch(url, options),
+        new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('timeout')), timeout)
+        )
+    ]);
 }
 
 function activateSubmitButton() {
