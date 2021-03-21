@@ -5,7 +5,37 @@ function postForm() {
     var email = document.getElementById("email_form").value || null;
     var feedback = document.getElementById("feedback_form").value;
     console.log(`League ID: ${leagueId}\nName: ${name}\nEmail: ${email}\nFeedback: ${feedback}`);
+    var postObject = {
+    "appId": 1,
+    "requestorName": name,
+    "requestorEmail": email,
+    "requestBody": feedback
+    };
+    var feedbackApiUrl = "http://feedback-service.live:3000/v1/feedback";
+    postData(feedbackApiUrl, postObject)
+      .then(data => {
+        console.log(data);
+      });
     stopLoading();
+}
+
+// POST method
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return response; // parses JSON response into native JavaScript objects
 }
 
 function activateSubmitButton() {
