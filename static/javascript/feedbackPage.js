@@ -4,7 +4,6 @@ function postForm() {
     var name = document.getElementById("name_form").value;
     var email = document.getElementById("email_form").value || null;
     var feedback = document.getElementById("feedback_form").value;
-    console.log(`League ID: ${leagueId}\nName: ${name}\nEmail: ${email}\nFeedback: ${feedback}`);
     var postObject = {
     "appId": 1,
     "requestorName": name,
@@ -13,10 +12,28 @@ function postForm() {
     };
     var feedbackApiUrl = "http://feedback-service.live:3000/v1/feedback";
     postData(feedbackApiUrl, postObject)
-      .then(data => {
-        console.log(data);
+      .then(response => {
+        // see if we got a 200 status or not
+        if(response.status != 200) {
+            // unsuccessful POST, load feedback page with error message
+            window.location = "/feedback?league_id="+leagueId+"&error_message="+"Can not submit feedback at this time.";
+            return;
+        }
+        else {
+            // successful post
+              /* Alert success */
+                Swal.fire({
+                  icon: 'success',
+                  iconColor: '#40916C',
+                  title: 'Feedback Received',
+                  text: 'Thank you!',
+                  confirmButtonColor: '#40916C',
+                  heightAuto: false
+                }).then(function() {
+                    window.location = "/feedback?league_id="+leagueId;
+                });
+        }
       });
-    stopLoading();
 }
 
 // POST method
