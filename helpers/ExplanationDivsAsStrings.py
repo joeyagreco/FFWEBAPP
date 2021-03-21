@@ -49,9 +49,9 @@ class ExplanationDivsAsStrings:
     AWAL_FORMULA = f"""
         {Constants.AWAL_STAT_TITLE} = W * (1/L) + T * (0.5/L)<br>
         Where:<br>
-        W = Teams outscored that week<br>
-        T = Teams tied that week<br>
-        L = Opponents that week (usually league size - 1)<br>
+        W = Teams outscored in a week<br>
+        T = Teams tied in a week<br>
+        L = Opponents in a week (usually league size - 1)<br>
         """
     AWAL_FORMULA_EXPLAINED = f"""
         To properly calculate {Constants.AWAL_STAT_TITLE}, the {Constants.AWAL_STAT_TITLE} must be calculated once for each team every week.<br>
@@ -65,6 +65,7 @@ class ExplanationDivsAsStrings:
         """
 
     MARGINS_OF_VICTORY_FORMULA = f"""
+        <i>(In any given matchup)</i><br>
         MOV = |Team A Score - Team B Score|<br>
         OR<br>
         MOV = Winning Team Score - Losing Team Score
@@ -85,7 +86,7 @@ class ExplanationDivsAsStrings:
     MAX_SCORE_FORMULA = f"""
         {Constants.MAX_SCORE_STAT_TITLE} = max(A)<br>
         WHERE:<br>
-        A = List of every score by a single team
+        A = List of every score by a single team in a season
         """
 
     MAX_SCORE_FORMULA_EXPLAINED = f"""
@@ -105,7 +106,7 @@ class ExplanationDivsAsStrings:
     MIN_SCORE_FORMULA = f"""
         {Constants.MIN_SCORE_STAT_TITLE} = min(A)<br>
         WHERE:<br>
-        A = List of every score by a single team
+        A = List of every score by a single team in a season
         """
 
     MIN_SCORE_FORMULA_EXPLAINED = f"""
@@ -238,9 +239,9 @@ class ExplanationDivsAsStrings:
     SMART_WINS_FORMULA = f"""
         {Constants.SMART_WINS_STAT_TITLE} = Σ((W + (T/2)) / S)<br>
         WHERE:<br>
-        W = Total scores in league beat<br>
-        T = Total scores in league tied<br>
-        S = Number of scores in league - 1
+        W = Total scores in the league beat all time<br>
+        T = Total scores in the league tied all time<br>
+        S = Number of scores in the league all time - 1
         """
 
     SMART_WINS_FORMULA_EXPLAINED = f"""
@@ -258,7 +259,7 @@ class ExplanationDivsAsStrings:
         {Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE} = (Σ A) / T<br>
         WHERE:<br>
         A = Opponent's %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% in the week you played against them<br>
-        T = Total number of games played
+        T = Total number of games played in a season
         """
 
     STRENGTH_OF_SCHEDULE_FORMULA_EXPLAINED = f"""
@@ -297,7 +298,7 @@ class ExplanationDivsAsStrings:
     TEAM_SCORE_FORMULA = f"""
         {Constants.TEAM_SCORE_STAT_TITLE} = ((%0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% / G) * 100) + (%0%{Constants.SCORING_SHARE_STAT_TITLE}%1%{Constants.SCORING_SHARE_STAT_TITLE}%2% * 2) + ((%0%{Constants.MAX_SCORE_STAT_TITLE}%1%{Constants.MAX_SCORE_STAT_TITLE}%2% + %0%{Constants.MIN_SCORE_STAT_TITLE}%1%{Constants.MIN_SCORE_STAT_TITLE}%2%) * 0.05)<br>
         WHERE:<br>
-        G = Total games played by a team
+        G = Total games played by a team in a season
         """
 
     TEAM_SCORE_FORMULA_EXPLAINED = f"""
@@ -316,7 +317,7 @@ class ExplanationDivsAsStrings:
     TEAM_SUCCESS_FORMULA = f"""
         {Constants.TEAM_SUCCESS_STAT_TITLE} = ((%0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% / G) * 100) + (%0%{Constants.SCORING_SHARE_STAT_TITLE}%1%{Constants.SCORING_SHARE_STAT_TITLE}%2% * 2) + ((%0%{Constants.MAX_SCORE_STAT_TITLE}%1%{Constants.MAX_SCORE_STAT_TITLE}%2% + %0%{Constants.MIN_SCORE_STAT_TITLE}%1%{Constants.MIN_SCORE_STAT_TITLE}%2%) * 0.05)<br>
         WHERE:<br>
-        G = Total games played by a team
+        G = Total games played by a team in a season
         """
 
     TEAM_SUCCESS_FORMULA_EXPLAINED = f"""
@@ -334,8 +335,8 @@ class ExplanationDivsAsStrings:
     WAL_FORMULA = f"""
             {Constants.WAL_STAT_TITLE} = W + (T * 0.5)<br>
             WHERE:<br>
-            W = Total number of wins a team has<br>
-            T = Total number of ties a team has
+            W = Total number of wins a team has in a season<br>
+            T = Total number of ties a team has in a season
            """
     WAL_FORMULA_EXPLAINED = f"""
             {Constants.WAL_STAT_TITLE} is a quick and useful stat that is used typically to see how successful a team has been.
@@ -348,7 +349,7 @@ class ExplanationDivsAsStrings:
     WIN_PERCENTAGE_FORMULA = f"""
             {Constants.WIN_PERCENTAGE_STAT_TITLE} = %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% / G<br>
             WHERE:<br>
-            G = Total number of games played by a team
+            G = Total number of games played by a team in a season
            """
     WIN_PERCENTAGE_FORMULA_EXPLAINED = f"""
             {Constants.WIN_PERCENTAGE_STAT_TITLE} is simply another way of representing how successful a team has been throughout a season.
