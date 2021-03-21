@@ -49,8 +49,8 @@ class ExplanationDivsAsStrings:
     AWAL_FORMULA = f"""
         {Constants.AWAL_STAT_TITLE} = W * (1/L) + T * (0.5/L)<br>
         Where:<br>
-        W = Teams outscored<br>
-        T = Teams tied<br>
+        W = Teams outscored that week<br>
+        T = Teams tied that week<br>
         L = Opponents that week (usually league size - 1)<br>
         """
     AWAL_FORMULA_EXPLAINED = f"""
@@ -124,12 +124,12 @@ class ExplanationDivsAsStrings:
     PPG_FORMULA = f"""
         {Constants.PPG_STAT_TITLE} = (ΣA) / B<br>
         WHERE:<br>
-        A = All scores by a team<br>
-        B = Number of games played by a team
+        A = All scores by a team in a season<br>
+        B = Number of games played by a team in a season
         """
 
     PPG_FORMULA_EXPLAINED = f"""
-        NA
+        {Constants.PPG_STAT_TITLE} is simply the average score of a team.
         """
 
     PPG_STATS_EXPLAINED = (PPG_PURPOSE, PPG_FORMULA, PPG_FORMULA_EXPLAINED)
@@ -141,12 +141,12 @@ class ExplanationDivsAsStrings:
     PPG_AGAINST_FORMULA = f"""
         {Constants.PPG_AGAINST_STAT_TITLE} = (ΣA) / B<br>
         WHERE:<br>
-        A = All scores against a team<br>
-        B = Number of games played by a team
+        A = All scores against a team in a season<br>
+        B = Number of games played by a team in a season
         """
 
     PPG_AGAINST_FORMULA_EXPLAINED = f"""
-        NA
+        {Constants.PPG_AGAINST_STAT_TITLE} is simply the average score against a team.
         """
 
     PPG_AGAINST_STATS_EXPLAINED = (PPG_AGAINST_PURPOSE, PPG_AGAINST_FORMULA, PPG_AGAINST_FORMULA_EXPLAINED)
@@ -158,8 +158,8 @@ class ExplanationDivsAsStrings:
     PLUS_MINUS_FORMULA = f"""
         {Constants.PLUS_MINUS_STAT_TITLE} = ΣA - ΣB<br>
         WHERE:<br>
-        A = All scores by a team<br>
-        B = All scores against a team
+        A = All scores by a team in a season<br>
+        B = All scores against a team in a season
         """
 
     PLUS_MINUS_FORMULA_EXPLAINED = f"""
@@ -200,17 +200,36 @@ class ExplanationDivsAsStrings:
     SCORING_SHARE_FORMULA = f"""
         {Constants.SCORING_SHARE_STAT_TITLE} = ((ΣA) / (ΣB)) * 100<br>
         WHERE:<br>
-        A = All scores by a team<br>
-        B = All scores by all teams
+        A = All scores by a team in a season<br>
+        B = All scores by all teams in a season
         """
 
     SCORING_SHARE_FORMULA_EXPLAINED = f"""
         {Constants.SCORING_SHARE_STAT_TITLE} is a good way to compare how a team performed in a league one year vs another year.<br>
-        While scoring 100  %0%{Constants.PPG_STAT_TITLE}%1%{Constants.PPG_STAT_TITLE}%2% one year may not be equivalent to scoring 100  %0%{Constants.PPG_STAT_TITLE}%1%{Constants.PPG_STAT_TITLE}%2% another year,<br>
+        While scoring 100  %0%{Constants.PPG_STAT_TITLE}%1%{Constants.PPG_STAT_TITLE}%2% one year may not be equivalent to scoring 100 %0%{Constants.PPG_STAT_TITLE}%1%{Constants.PPG_STAT_TITLE}%2% another year,<br>
         scoring 10% of the league's points <i>will</i> be equivalent to scoring 10% of the league's points another year.
         """
 
     SCORING_SHARE_STATS_EXPLAINED = (SCORING_SHARE_PURPOSE, SCORING_SHARE_FORMULA, SCORING_SHARE_FORMULA_EXPLAINED)
+
+    SCORING_SHARE_AGAINST_PURPOSE = f"""
+        {Constants.SCORING_SHARE_AGAINST_STAT_TITLE} is used to show what percentage of league scoring a team had scored against them.
+        """
+
+    SCORING_SHARE_AGAINST_FORMULA = f"""
+        {Constants.SCORING_SHARE_AGAINST_STAT_TITLE} = ((ΣA) / (ΣB)) * 100<br>
+        WHERE:<br>
+        A = All scores against a team in a season<br>
+        B = All scores by all teams in a season
+        """
+
+    SCORING_SHARE_AGAINST_FORMULA_EXPLAINED = f"""
+        {Constants.SCORING_SHARE_AGAINST_STAT_TITLE} is a good way to compare how a team was performed against in a league one year vs another year.<br>
+        While having 100 %0%{Constants.PPG_STAT_TITLE}%1%{Constants.PPG_STAT_TITLE}%2% scored against a team one year may not be equivalent to having 100 %0%{Constants.PPG_STAT_TITLE}%1%{Constants.PPG_STAT_TITLE}%2% scored against a team another year,<br>
+        having 10% of the league's points scored against a team <i>will</i> be equivalent to having 10% of the league's points scored against a team another year.
+        """
+
+    SCORING_SHARE_AGAINST_STATS_EXPLAINED = (SCORING_SHARE_AGAINST_PURPOSE, SCORING_SHARE_AGAINST_FORMULA, SCORING_SHARE_AGAINST_FORMULA_EXPLAINED)
 
     SMART_WINS_PURPOSE = f"""
         {Constants.SMART_WINS_STAT_TITLE} show how many wins a team would have if it played against every score in the league this season.
@@ -345,6 +364,7 @@ class ExplanationDivsAsStrings:
                                   Constants.PLUS_MINUS_STAT_TITLE: PLUS_MINUS_STATS_EXPLAINED,
                                   Constants.STDEV_STAT_TITLE: STDEV_STATS_EXPLAINED,
                                   Constants.SCORING_SHARE: SCORING_SHARE_STATS_EXPLAINED,
+                                  Constants.SCORING_SHARE_AGAINST_STAT_TITLE: SCORING_SHARE_AGAINST_STATS_EXPLAINED,
                                   Constants.SMART_WINS_STAT_TITLE: SMART_WINS_STATS_EXPLAINED,
                                   Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE: STRENGTH_OF_SCHEDULE_STATS_EXPLAINED,
                                   Constants.TEAM_LUCK_STAT_TITLE: TEAM_LUCK_STATS_EXPLAINED,
