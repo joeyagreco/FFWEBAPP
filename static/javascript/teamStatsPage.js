@@ -4,3 +4,13 @@ function yearRedirect(year) {
     // GET request
      window.location = "/team-stats?league_id="+leagueId+"&year="+year;
 }
+
+function initializeTable() {
+    $(document).ready( function () {
+        $('#statsTable').DataTable(
+            {
+                "order": [[ 4, "desc" ]]
+            }
+        );
+    } );
+}
