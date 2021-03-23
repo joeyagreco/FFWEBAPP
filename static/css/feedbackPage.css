@@ -27,7 +27,7 @@
 }
 
 #name_form {
-    width: 50%;
+    width: 40%;
 }
 
 #email_form {
@@ -61,7 +61,7 @@
     color: #ff2457;
 }
 
-@media screen and (max-width:414px) {
+@media screen and (max-width:750px) {
     /* CSS for screens that are 414 pixels or less will be put in this section */
     .labelAndForm {
         width: 90%;
@@ -75,4 +75,15 @@
         width: auto;
     }
 
+    #name_form {
+        max-width: 10rem;
+    }
+
+    #email_form {
+        max-width: 12rem;
+    }
+
+    #feedback_form {
+        max-width: 25rem;
+    }
 }

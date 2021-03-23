@@ -64,10 +64,11 @@ input::-webkit-inner-spin-button {
     font-weight: bold;
 }
 
-@media screen and (max-width:414px) {
+@media screen and (max-width:750px) {
     /* CSS for screens that are 414 pixels or less will be put in this section */
     .stackButton {
         width: 50%;
+        max-width: 12rem;
         font-size: 100% !important;
     }
 

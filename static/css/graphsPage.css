@@ -41,7 +41,7 @@
     display: inline-block;
 }
 
-@media screen and (max-width:414px) {
+@media screen and (max-width:750px) {
     /* CSS for screens that are 414 pixels or less will be put in this section */
     .dropdowns {
         flex-direction: column;

@@ -118,21 +118,24 @@ input::-webkit-inner-spin-button {
     font-size: 130%;
 }
 
-@media screen and (max-width:414px) {
+@media screen and (max-width:750px) {
     /* CSS for screens that are 414 pixels or less will be put in this section */
 
     #new_league_button {
         width: 100%;
+        max-width: 10rem;
         font-size: 100%;
     }
 
     #league_id {
         width: 100%;
+        max-width: 10rem;
         font-size: 100%;
     }
 
     #load_league_button {
         width: 100%;
+        max-width: 10rem;
         font-size: 100%;
     }
 

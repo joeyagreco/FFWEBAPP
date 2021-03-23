@@ -96,7 +96,7 @@ input::-webkit-inner-spin-button {
     margin-top: 0;
 }
 
-@media screen and (max-width:414px) {
+@media screen and (max-width:750px) {
     /* CSS for screens that are 414 pixels or less will be put in this section */
     .pageTitle {
         font-size: 325%;
@@ -104,10 +104,12 @@ input::-webkit-inner-spin-button {
 
     #league_name {
         width: 50%;
+        max-width: 12rem;
     }
 
     #createLeagueButton {
         width: 50%;
+        max-width: 12rem;
     }
 }
 

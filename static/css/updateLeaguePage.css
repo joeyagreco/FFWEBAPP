@@ -184,7 +184,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-@media screen and (max-width:414px) {
+@media screen and (max-width:750px) {
     /* CSS for screens that are 414 pixels or less will be put in this section */
 
     .middleForms {
@@ -193,5 +193,13 @@ input[type=number] {
 
     .bottomButtonText {
         display: none;
+    }
+
+    .bottomButton {
+        width: auto;
+    }
+
+    .middleForms {
+        margin-top: 4%;
     }
 }
