@@ -563,7 +563,7 @@ def feedback():
 
 
 if __name__ == "__main__":
-    if os.getenv("TEST_ENVIRONMENT"):
+    if os.getenv("TEST_ENVIRONMENT") == "True":
         app.run(debug=True)
     else:
         app.run(host="0.0.0.0", port=80)
