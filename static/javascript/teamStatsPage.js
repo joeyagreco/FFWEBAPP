@@ -9,7 +9,8 @@ function initializeTable() {
     $(document).ready( function () {
         $('#statsTable').DataTable(
             {
-                "order": [[ 4, "desc" ]]
+                "order": [[ 4, "desc" ]],
+                "searching": false
             }
         );
     } );

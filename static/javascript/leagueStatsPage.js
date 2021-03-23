@@ -24,28 +24,32 @@ function initializeTables() {
     $(document).ready( function () {
         $('#all_scores_table').DataTable(
             {
-                "order": [[ 0, "desc" ]]
+                "order": [[ 0, "desc" ]],
+                "searching": false
             }
         );
     } );
     $(document).ready( function () {
         $('#margins_of_victory_table').DataTable(
             {
-                "order": [[ 0, "desc" ]]
+                "order": [[ 0, "desc" ]],
+                "searching": false
             }
         );
     } );
     $(document).ready( function () {
         $('#streaks_table').DataTable(
             {
-                "order": [[ 0, "desc" ]]
+                "order": [[ 0, "desc" ]],
+                "searching": false
             }
         );
     } );
         $(document).ready( function () {
         $('#owner_comparison_table').DataTable(
             {
-                "order": [[ 4, "desc" ]]
+                "order": [[ 4, "desc" ]],
+                "searching": false
             }
         );
     } );
