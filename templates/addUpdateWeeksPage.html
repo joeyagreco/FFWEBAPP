@@ -61,7 +61,7 @@
                             {% endfor %}
                         </div>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="teamScore form-control defaultFormFocus backgroundTeamId{{matchup.teamA.teamId}} hoverFade" name="teamAScore_matchup_{{loop.index}}" id="teamAScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onchange="changeMade()">
+                            <input class="teamScore form-control defaultFormFocus backgroundTeamId{{matchup.teamA.teamId}} hoverFade" name="teamAScore_matchup_{{loop.index}}" id="teamAScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamAScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onkeyup="changeMade()">
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -94,7 +94,7 @@
                             {% endfor %}
                         </div>
                         {% if matchup.matchupId == loop.index %}
-                            <input class="teamScore form-control defaultFormFocus backgroundTeamId{{matchup.teamB.teamId}} hoverFade" name="teamBScore_matchup_{{loop.index}}" id="teamBScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamBScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onchange="changeMade()">
+                            <input class="teamScore form-control defaultFormFocus backgroundTeamId{{matchup.teamB.teamId}} hoverFade" name="teamBScore_matchup_{{loop.index}}" id="teamBScore_matchup_{{loop.index}}" type="number" value="{{matchup.teamBScore}}" placeholder="Score" min="0" step=".01" required autocomplete="off" onkeyup="changeMade()">
                         {% endif %}
                     </div>
                 {% endfor %}
