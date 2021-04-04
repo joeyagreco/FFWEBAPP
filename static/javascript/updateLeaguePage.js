@@ -25,6 +25,30 @@ function addUpdateWeeksRedirect() {
      window.location = "/add-update-weeks?league_id="+leagueId+"&year="+year;
 }
 
+function setOriginalValues() {
+    // this saves the original values of everything on the page to sessionStorage
+    sessionStorage["originalLeagueName"] = document.getElementById("league_name").value;
+    sessionStorage["numberOfTeams"] = document.getElementById("number_of_teams").value;
+    for(i=1; i<=sessionStorage["numberOfTeams"]; i++) {
+        sessionStorage["originalTeamName"+i] = document.getElementById("team_"+i).value;
+    }
+}
+
+function checkAndHandleIfChangeMade() {
+    // this checks if a change was made and handles it accordingly
+    if(sessionStorage["originalLeagueName"] != document.getElementById("league_name").value) {
+        handleChangeMade();
+        return;
+    }
+    for(i=1; i<=sessionStorage["numberOfTeams"]; i++) {
+        if(sessionStorage["originalTeamName"+i] != document.getElementById("team_"+i).value) {
+            handleChangeMade();
+            return;
+        }
+    }
+    undoChangeMade();
+}
+
 function getChangeCount() {
     return parseInt(sessionStorage["changeCount"]);
 }
@@ -34,7 +58,7 @@ function clearChanges() {
     sessionStorage["changeCount"] = "0";
 }
 
-function changeMade() {
+function handleChangeMade() {
     // when this method is called, it increments the changeCount by 1
     // it also enables the save button
     // it also disables the edit year button
@@ -43,6 +67,7 @@ function changeMade() {
     // it also disables the add/update week button
     var saveButton = document.getElementById("saveChangesButton");
     saveButton.classList.remove("disabled");
+    saveButton.disabled = false;
     var changeCount = getChangeCount();
     changeCount++;
     sessionStorage["changeCount"] = changeCount.toString();
@@ -58,6 +83,31 @@ function changeMade() {
     var addUpdateWeekButtonElement = document.getElementById("addOrUpdateWeekButton");
     addUpdateWeekButtonElement.classList.add("disabled");
     addUpdateWeekButtonElement.disabled = true;
+}
+
+function undoChangeMade() {
+    // when this method is called, it sets the changeCount to 0
+    // it also disables the save button
+    // it also enables the edit year button
+    // it also enables the year select dropdown button
+    // it also enables the add year button
+    // it also enables the add/update week button
+    var saveButton = document.getElementById("saveChangesButton");
+    saveButton.classList.add("disabled");
+    saveButton.disabled = true;
+    clearChanges();
+    var editYearButtonElement = document.getElementById("editYearButton");
+    editYearButtonElement.classList.remove("disabled");
+    editYearButtonElement.disabled = false;
+    var yearDropdownButtonElement = document.getElementById("selectYearButton");
+    yearDropdownButtonElement.classList.remove("disabled");
+    yearDropdownButtonElement.disabled = false;
+    var yearAddButtonElement = document.getElementById("addYearButton");
+    yearAddButtonElement.classList.remove("disabled");
+    yearAddButtonElement.disabled = false;
+    var addUpdateWeekButtonElement = document.getElementById("addOrUpdateWeekButton");
+    addUpdateWeekButtonElement.classList.remove("disabled");
+    addUpdateWeekButtonElement.disabled = false;
 }
 
 function addYear() {

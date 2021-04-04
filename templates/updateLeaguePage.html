@@ -29,7 +29,7 @@
 {% block content %}
 <div class="inputsAndButtons">
     <div class="topForm">
-        <input class="leagueNameForm form-control primaryFormColors" type="text" name="league_name" id="league_name" value="{{league.leagueName}}" placeholder="League Name" required autocomplete="off" onkeyup="changeMade()">
+        <input class="leagueNameForm form-control primaryFormColors" type="text" name="league_name" id="league_name" value="{{league.leagueName}}" placeholder="League Name" required autocomplete="off" onkeyup="checkAndHandleIfChangeMade()">
         <input class="leagueIdHidden" type="number" name="league_id" id="league_id" value="{{league._id}}">
         <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
         <input class="originalYearHidden" type="number" name="original_year_number" id="original_year_number" value="{{selected_year}}">
@@ -63,7 +63,7 @@
                 <button class="addYearButtonPlus secondaryButtonColors" id="addYearButton" type="button" onclick="addYear()"><i class="fas fa-plus"></i></button>
             </div>
             <div class="yearEdit" id="yearEdit">
-                <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" autocomplete="off" onkeyup="changeMade()" step="1" min="1920" max="3000" required>
+                <input class="yearForm form-control primaryFormColors" type="number" name="year_number" id="year_form" value="{{selected_year}}" placeholder="Year" autocomplete="off" onkeyup="checkAndHandleIfChangeMade()" step="1" min="1920" max="3000" required>
                 <button class="deleteYearButton dangerButtonColors disabled" id="deleteYearButton" type="button" onclick="deleteYear()" disabled><i class="fas fa-trash-alt"></i></button>
             </div>
         </div>
@@ -83,7 +83,7 @@
                             {% endif %}
                         {% endif %}
                     {% endfor %}
-                    <input class="teamForm defaultFormFocus form-control backgroundTeamId{{team.teamId}} hoverFade" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholderNamespace.placeholder}}" required autocomplete="off" onkeyup="changeMade()">
+                    <input class="teamForm defaultFormFocus form-control backgroundTeamId{{team.teamId}} hoverFade" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholderNamespace.placeholder}}" required autocomplete="off" onkeyup="checkAndHandleIfChangeMade()">
                 {% endif %}
             {% endfor %}
         </div>
@@ -100,7 +100,7 @@
                             {% endif %}
                         {% endif %}
                     {% endfor %}
-                    <input class="teamForm defaultFormFocus form-control backgroundTeamId{{team.teamId}} hoverFade" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholderNamespace.placeholder}}" required autocomplete="off" onkeyup="changeMade()">
+                    <input class="teamForm defaultFormFocus form-control backgroundTeamId{{team.teamId}} hoverFade" type="text" name="team_{{team.teamId}}" id="team_{{team.teamId}}" value="{{team.teamName}}" placeholder="{{placeholderNamespace.placeholder}}" required autocomplete="off" onkeyup="checkAndHandleIfChangeMade()">
                 {% endif %}
             {% endfor %}
         </div>
@@ -123,5 +123,6 @@
 clearChanges();
 setTeamNameInputWidths({{league.years[selected_year|string].teams|safe}});
 setLeagueNameInputWidth();
+setOriginalValues();
 </script>
 {% endblock %}
