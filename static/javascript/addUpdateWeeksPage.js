@@ -42,6 +42,40 @@ function deleteWeek() {
     })
 }
 
+function setOriginalValues() {
+    // this saves the original values of everything on the page to sessionStorage
+    sessionStorage["numberOfTeams"] = document.getElementById("number_of_teams").value;
+    for(i=1; i<=sessionStorage["numberOfTeams"]/2; i++) {
+        sessionStorage["originalTeamAId_matchup_"+i] = document.getElementById("teamAId_matchup_"+i).value;
+        sessionStorage["originalTeamAScore_matchup_"+i] = document.getElementById("teamAScore_matchup_"+i).value;
+        sessionStorage["originalTeamBId_matchup_"+i] = document.getElementById("teamBId_matchup_"+i).value;
+        sessionStorage["originalTeamBScore_matchup_"+i] = document.getElementById("teamBScore_matchup_"+i).value;
+    }
+}
+
+function checkAndHandleIfChangeMade() {
+    // this checks if a change was made and handles it accordingly
+    for(i=1; i<=sessionStorage["numberOfTeams"]/2; i++) {
+        if(sessionStorage["originalTeamAId_matchup_"+i] != document.getElementById("teamAId_matchup_"+i).value) {
+            handleChangeMade();
+            return;
+        }
+        if(sessionStorage["originalTeamAScore_matchup_"+i] != document.getElementById("teamAScore_matchup_"+i).value) {
+            handleChangeMade();
+            return;
+        }
+        if(sessionStorage["originalTeamBId_matchup_"+i] != document.getElementById("teamBId_matchup_"+i).value) {
+            handleChangeMade();
+            return;
+        }
+        if(sessionStorage["originalTeamBScore_matchup_"+i] != document.getElementById("teamBScore_matchup_"+i).value) {
+            handleChangeMade();
+            return;
+        }
+    }
+    undoChangeMade();
+}
+
 function getChangeCount() {
     return parseInt(sessionStorage["changeCount"]);
 }
@@ -59,7 +93,7 @@ function disableDeleteWeek() {
     }
 }
 
-function changeMade() {
+function handleChangeMade() {
     // when this method is called, it increments the changeCount by 1
     // it also enables the save button
     // it also disables the add week button
@@ -80,6 +114,27 @@ function changeMade() {
     var changeCount = getChangeCount();
     changeCount++;
     sessionStorage["changeCount"] = changeCount.toString();
+}
+
+function undoChangeMade() {
+    // when this method is called, it sets the changeCount to 0
+    // it also disables the save button
+    // it also enables the add week button
+    // it also enables the week select dropdown
+    // it also enables the back to league button
+    var saveButton = document.getElementById("saveChangesButton");
+    saveButton.classList.add("disabled");
+    saveButton.disabled = true;
+    var addWeekButton = document.getElementById("addWeekButton");
+    addWeekButton.classList.remove("disabled");
+    addWeekButton.disabled = false;
+    var weekSelectButton = document.getElementById("dropdownMenuButton");
+    weekSelectButton.classList.remove("disabled");
+    weekSelectButton.disabled = false;
+    var backToLeagueButtonElement = document.getElementById("updateLeagueButton");
+    backToLeagueButtonElement.classList.remove("disabled");
+    backToLeagueButtonElement.disabled = false;
+    clearChanges()
 }
 
 function makeActiveTeam(newTeamElement, newTeam, matchupId) {
@@ -120,8 +175,8 @@ function makeActiveTeam(newTeamElement, newTeam, matchupId) {
     scoreElement.classList.add("backgroundTeamId"+newTeam["teamId"]);
     // change id of score element
     scoreElement.id = teamAorB+"Score_matchup_"+matchupId;
-    // mark this as a change
-    changeMade();
+    // handle change
+    checkAndHandleIfChangeMade();
 }
 
 function postWeek() {
