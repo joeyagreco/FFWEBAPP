@@ -28,6 +28,7 @@ function addUpdateWeeksRedirect() {
 function setOriginalValues() {
     // this saves the original values of everything on the page to sessionStorage
     sessionStorage["originalLeagueName"] = document.getElementById("league_name").value;
+    sessionStorage["originalYearNumber"] = document.getElementById("year_form").value;
     sessionStorage["numberOfTeams"] = document.getElementById("number_of_teams").value;
     for(i=1; i<=sessionStorage["numberOfTeams"]; i++) {
         sessionStorage["originalTeamName"+i] = document.getElementById("team_"+i).value;
@@ -37,6 +38,10 @@ function setOriginalValues() {
 function checkAndHandleIfChangeMade() {
     // this checks if a change was made and handles it accordingly
     if(sessionStorage["originalLeagueName"] != document.getElementById("league_name").value) {
+        handleChangeMade();
+        return;
+    }
+    if(sessionStorage["originalYearNumber"] != document.getElementById("year_form").value) {
         handleChangeMade();
         return;
     }
