@@ -108,6 +108,7 @@ table, th, td {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 25px;
     background-color: white;
 }
 
