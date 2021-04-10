@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
 .numberOfPagesHidden {
     display: none;
 }
@@ -109,7 +112,12 @@ table, th, td {
 }
 
 .averageBlockTitle {
+    width: 85%;
+    text-align: center;
     order: 1;
+    font-family: 'Roboto Slab', serif;
+    font-size: 120%;
+    font-weight: bold;
 }
 
 .statTitleLine {
@@ -121,6 +129,8 @@ table, th, td {
 
 .averageBlockContent {
     order: 3;
+    font-family: 'Merriweather', serif;
+    font-size: 200%;
 }
 
 
