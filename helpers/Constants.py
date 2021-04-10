@@ -55,6 +55,11 @@ class Constants:
                               MIN_SCORE_STAT_TITLE, STDEV_STAT_TITLE, TEAM_SCORE_STAT_TITLE, TEAM_SUCCESS_STAT_TITLE,
                               TEAM_LUCK_STAT_TITLE]
 
+    # league averages titles
+    AVERAGE_SCORE_STAT_TITLE = "Average Score"
+    AVERAGE_SCORE_IN_WINS_STAT_TITLE = "Average Score in Wins"
+    AVERAGE_SCORE_IN_LOSSES_STAT_TITLE = "Average Score in Losses"
+
     # league stats
     OWNER_COMPARISON_STAT_TITLE = "Owner Comparison"
     ALL_SCORES_STAT_TITLE = "All Scores"

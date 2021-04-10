@@ -9,6 +9,7 @@ from models.league_stat_models.OwnerComparisonModel import OwnerComparisonModel
 from models.league_stat_models.ScoreModel import ScoreModel
 from models.team_stat_models.TeamStatsModel import TeamStatsModel
 from packages.Exceptions.InvalidStatSelectionError import InvalidStatSelectionError
+from packages.StatCalculators.AverageCalculator import AverageCalculator
 from packages.StatCalculators.AwalCalculator import AwalCalculator
 from packages.StatCalculators.EveryGameCalculator import EveryGameCalculator
 from packages.StatCalculators.ScoresCalculator import ScoresCalculator
@@ -327,6 +328,14 @@ class StatCalculatorService:
             # sort from win percentage high -> low
             ownerComparisonModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
             return ownerComparisonModels
+        elif statSelection == Constants.LEAGUE_AVERAGES_STAT_TITLE:
+            # return a dictionary with each average
+            leagueAveragesDict = dict()
+            averageCalculator = AverageCalculator(leagueModel, years)
+            leagueAveragesDict[Constants.AVERAGE_SCORE_STAT_TITLE] = averageCalculator.getAverageScore()
+            leagueAveragesDict[Constants.AVERAGE_SCORE_IN_WINS_STAT_TITLE] = averageCalculator.getAverageScoreInWins()
+            leagueAveragesDict[Constants.AVERAGE_SCORE_IN_LOSSES_STAT_TITLE] = averageCalculator.getAverageScoreInLosses()
+            return leagueAveragesDict
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
