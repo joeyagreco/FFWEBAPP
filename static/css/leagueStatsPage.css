@@ -112,17 +112,17 @@ table, th, td {
 }
 
 .averageBlockTitle {
-    width: 85%;
+    width: 95%;
     text-align: center;
     order: 1;
     font-family: 'Roboto Slab', serif;
-    font-size: 120%;
+    font-size: 100%;
     font-weight: bold;
 }
 
 .statTitleLine {
     order: 2;
-    width: 40%;
+    width: 75%;
     background-color: #081c15 !important;
     height: 0.1rem !important;
 }
@@ -130,9 +130,8 @@ table, th, td {
 .averageBlockContent {
     order: 3;
     font-family: 'Merriweather', serif;
-    font-size: 200%;
+    font-size: 180%;
 }
-
 
 
 /* hard-coding styles for all league stat tables */
