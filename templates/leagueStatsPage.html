@@ -210,18 +210,13 @@
                 </table>
             {% elif selected_stat == "League Averages" %}
                 <div class="averageBlocksContainer">
-                    <div class="averageBlock">
-                        <div class="averageBlockTitle">{{constants.AVERAGE_SCORE_STAT_TITLE}}</div>
-                        <div class="averageBlockContent">{{stats_models[constants.AVERAGE_SCORE_STAT_TITLE]}}</div>
-                    </div>
-                    <div class="averageBlock">
-                        <div class="averageBlockTitle">{{constants.AVERAGE_SCORE_IN_WINS_STAT_TITLE}}</div>
-                        <div class="averageBlockContent">{{stats_models[constants.AVERAGE_SCORE_IN_WINS_STAT_TITLE]}}</div>
-                    </div>
-                    <div class="averageBlock">
-                        <div class="averageBlockTitle">{{constants.AVERAGE_SCORE_IN_LOSSES_STAT_TITLE}}</div>
-                        <div class="averageBlockContent">{{stats_models[constants.AVERAGE_SCORE_IN_LOSSES_STAT_TITLE]}}</div>
-                    </div>
+                    {% for leagueStat in stats_models.keys() %}
+                        <div class="averageBlock">
+                            <div class="averageBlockTitle">{{leagueStat}}</div>
+                            <hr class="statTitleLine">
+                            <div class="averageBlockContent">{{stats_models[leagueStat]}}</div>
+                        </div>
+                    {% endfor %}
                 </div>
             {% endif %}
         </div>
