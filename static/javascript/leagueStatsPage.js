@@ -35,7 +35,8 @@ function initializeTables() {
         $('#all_scores_table').DataTable(
             {
                 "order": [[ 0, "desc" ]],
-                "searching": false
+                "searching": false,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
             }
         );
     } );
@@ -43,7 +44,8 @@ function initializeTables() {
         $('#margins_of_victory_table').DataTable(
             {
                 "order": [[ 0, "desc" ]],
-                "searching": false
+                "searching": false,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
             }
         );
     } );
@@ -51,7 +53,8 @@ function initializeTables() {
         $('#streaks_table').DataTable(
             {
                 "order": [[ 0, "desc" ]],
-                "searching": false
+                "searching": false,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
             }
         );
     } );
@@ -59,7 +62,8 @@ function initializeTables() {
         $('#owner_comparison_table').DataTable(
             {
                 "order": [[ 4, "desc" ]],
-                "searching": false
+                "searching": false,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
             }
         );
     } );

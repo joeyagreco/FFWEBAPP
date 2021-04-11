@@ -16,12 +16,24 @@ function getIndexOfColumnToSort() {
     return index;
 }
 
+function getNumberOfRowsToShow() {
+    // this returns the number of teams in the league OR 10 (default), whichever is more.
+    var numberOfRows = 10;
+    var numberOfTeamsInLeague = document.getElementById("number_of_teams").value;
+    if(numberOfTeamsInLeague > numberOfRows) {
+        numberOfRows = numberOfTeamsInLeague;
+    }
+    return numberOfRows;
+}
+
 function initializeTable() {
     $(document).ready( function () {
         $('#statsTable').DataTable(
             {
                 "order": [[ getIndexOfColumnToSort(), "desc" ]],
-                "searching": false
+                "searching": false,
+                "iDisplayLength": getNumberOfRowsToShow(),
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
             }
         );
     } );

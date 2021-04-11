@@ -31,6 +31,7 @@
 {% block header %}{% endblock %}
 
 {% block content %}
+    <input class="leagueNumberOfTeamsHidden" type="number" name="number_of_teams" id="number_of_teams" value="{{league.numberOfTeams}}">
     <div class="dropdownAndTable">
         <div class="yearDropdown">
             <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="selectYearButton" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
