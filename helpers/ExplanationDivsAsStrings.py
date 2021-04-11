@@ -86,7 +86,7 @@ class ExplanationDivsAsStrings:
     MAX_SCORE_FORMULA = f"""
         {Constants.MAX_SCORE_STAT_TITLE} = max(A)<br>
         WHERE:<br>
-        A = List of every score by a single team in a season
+        A = List of every score by a single team in a sample size
         """
 
     MAX_SCORE_FORMULA_EXPLAINED = f"""
@@ -106,7 +106,7 @@ class ExplanationDivsAsStrings:
     MIN_SCORE_FORMULA = f"""
         {Constants.MIN_SCORE_STAT_TITLE} = min(A)<br>
         WHERE:<br>
-        A = List of every score by a single team in a season
+        A = List of every score by a single team in a sample size
         """
 
     MIN_SCORE_FORMULA_EXPLAINED = f"""
@@ -125,8 +125,8 @@ class ExplanationDivsAsStrings:
     PPG_FORMULA = f"""
         {Constants.PPG_STAT_TITLE} = (ΣA) / B<br>
         WHERE:<br>
-        A = All scores by a team in a season<br>
-        B = Number of games played by a team in a season
+        A = All scores by a team in a sample size<br>
+        B = Number of games played by a team in a sample size
         """
 
     PPG_FORMULA_EXPLAINED = f"""
@@ -142,8 +142,8 @@ class ExplanationDivsAsStrings:
     PPG_AGAINST_FORMULA = f"""
         {Constants.PPG_AGAINST_STAT_TITLE} = (ΣA) / B<br>
         WHERE:<br>
-        A = All scores against a team in a season<br>
-        B = Number of games played by a team in a season
+        A = All scores against a team in a sample size<br>
+        B = Number of games played by a team in a sample size
         """
 
     PPG_AGAINST_FORMULA_EXPLAINED = f"""
@@ -153,14 +153,14 @@ class ExplanationDivsAsStrings:
     PPG_AGAINST_STATS_EXPLAINED = (PPG_AGAINST_PURPOSE, PPG_AGAINST_FORMULA, PPG_AGAINST_FORMULA_EXPLAINED)
 
     PLUS_MINUS_PURPOSE = f"""
-        {Constants.PLUS_MINUS_STAT_TITLE} (+/-) is used to show the net score differential for a team in a season.
+        {Constants.PLUS_MINUS_STAT_TITLE} (+/-) is used to show the net score differential for a team in a sample size
         """
 
     PLUS_MINUS_FORMULA = f"""
         {Constants.PLUS_MINUS_STAT_TITLE} = ΣA - ΣB<br>
         WHERE:<br>
-        A = All scores by a team in a season<br>
-        B = All scores against a team in a season
+        A = All scores by a team in a sample size<br>
+        B = All scores against a team in a sample size
         """
 
     PLUS_MINUS_FORMULA_EXPLAINED = f"""
@@ -201,8 +201,8 @@ class ExplanationDivsAsStrings:
     SCORING_SHARE_FORMULA = f"""
         {Constants.SCORING_SHARE_STAT_TITLE} = ((ΣA) / (ΣB)) * 100<br>
         WHERE:<br>
-        A = All scores by a team in a season<br>
-        B = All scores by all teams in a season
+        A = All scores by a team in a sample size<br>
+        B = All scores by all teams in a sample size
         """
 
     SCORING_SHARE_FORMULA_EXPLAINED = f"""
@@ -220,8 +220,8 @@ class ExplanationDivsAsStrings:
     SCORING_SHARE_AGAINST_FORMULA = f"""
         {Constants.SCORING_SHARE_AGAINST_STAT_TITLE} = ((ΣA) / (ΣB)) * 100<br>
         WHERE:<br>
-        A = All scores against a team in a season<br>
-        B = All scores by all teams in a season
+        A = All scores against a team in a sample size<br>
+        B = All scores by all teams in a sample size
         """
 
     SCORING_SHARE_AGAINST_FORMULA_EXPLAINED = f"""
@@ -252,14 +252,14 @@ class ExplanationDivsAsStrings:
     SMART_WINS_STATS_EXPLAINED = (SMART_WINS_PURPOSE, SMART_WINS_FORMULA, SMART_WINS_FORMULA_EXPLAINED)
 
     STRENGTH_OF_SCHEDULE_PURPOSE = f"""
-        {Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE} is a metric that is used to show how difficult a given team's schedule was over the course of a season.
+        {Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE} is a metric that is used to show how difficult a given team's schedule was over the course of any given sample size (typically a season).
         """
 
     STRENGTH_OF_SCHEDULE_FORMULA = f"""
         {Constants.STRENGTH_OF_SCHEDULE_STAT_TITLE} = (Σ A) / T<br>
         WHERE:<br>
         A = Opponent's %0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% in the week you played against them<br>
-        T = Total number of games played in a season
+        T = Total number of games played in a sample size
         """
 
     STRENGTH_OF_SCHEDULE_FORMULA_EXPLAINED = f"""
@@ -298,7 +298,7 @@ class ExplanationDivsAsStrings:
     TEAM_SCORE_FORMULA = f"""
         {Constants.TEAM_SCORE_STAT_TITLE} = ((%0%{Constants.AWAL_STAT_TITLE}%1%{Constants.AWAL_STAT_TITLE}%2% / G) * 100) + (%0%{Constants.SCORING_SHARE_STAT_TITLE}%1%{Constants.SCORING_SHARE_STAT_TITLE}%2% * 2) + ((%0%{Constants.MAX_SCORE_STAT_TITLE}%1%{Constants.MAX_SCORE_STAT_TITLE}%2% + %0%{Constants.MIN_SCORE_STAT_TITLE}%1%{Constants.MIN_SCORE_STAT_TITLE}%2%) * 0.05)<br>
         WHERE:<br>
-        G = Total games played by a team in a season
+        G = Total games played by a team in a sample size
         """
 
     TEAM_SCORE_FORMULA_EXPLAINED = f"""
@@ -317,7 +317,7 @@ class ExplanationDivsAsStrings:
     TEAM_SUCCESS_FORMULA = f"""
         {Constants.TEAM_SUCCESS_STAT_TITLE} = ((%0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% / G) * 100) + (%0%{Constants.SCORING_SHARE_STAT_TITLE}%1%{Constants.SCORING_SHARE_STAT_TITLE}%2% * 2) + ((%0%{Constants.MAX_SCORE_STAT_TITLE}%1%{Constants.MAX_SCORE_STAT_TITLE}%2% + %0%{Constants.MIN_SCORE_STAT_TITLE}%1%{Constants.MIN_SCORE_STAT_TITLE}%2%) * 0.05)<br>
         WHERE:<br>
-        G = Total games played by a team in a season
+        G = Total games played by a team in a sample size
         """
 
     TEAM_SUCCESS_FORMULA_EXPLAINED = f"""
@@ -335,8 +335,8 @@ class ExplanationDivsAsStrings:
     WAL_FORMULA = f"""
             {Constants.WAL_STAT_TITLE} = W + (T * 0.5)<br>
             WHERE:<br>
-            W = Total number of wins a team has in a season<br>
-            T = Total number of ties a team has in a season
+            W = Total number of wins a team has in a sample size<br>
+            T = Total number of ties a team has in a sample size
            """
     WAL_FORMULA_EXPLAINED = f"""
             {Constants.WAL_STAT_TITLE} is a quick and useful stat that is used typically to see how successful a team has been.
@@ -349,10 +349,10 @@ class ExplanationDivsAsStrings:
     WIN_PERCENTAGE_FORMULA = f"""
             {Constants.WIN_PERCENTAGE_STAT_TITLE} = %0%{Constants.WAL_STAT_TITLE}%1%{Constants.WAL_STAT_TITLE}%2% / G<br>
             WHERE:<br>
-            G = Total number of games played by a team in a season
+            G = Total number of games played by a team in a sample size
            """
     WIN_PERCENTAGE_FORMULA_EXPLAINED = f"""
-            {Constants.WIN_PERCENTAGE_STAT_TITLE} is simply another way of representing how successful a team has been throughout a season.
+            {Constants.WIN_PERCENTAGE_STAT_TITLE} is simply another way of representing how successful a team has been throughout a sample size.
            """
     WIN_PERCENTAGE_STATS_EXPLAINED = (WIN_PERCENTAGE_PURPOSE, WIN_PERCENTAGE_FORMULA, WIN_PERCENTAGE_FORMULA_EXPLAINED)
 

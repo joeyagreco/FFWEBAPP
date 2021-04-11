@@ -72,7 +72,8 @@ class Constants:
 
     # excluded stats (stats that don't need explanation)
     EXCLUDED_STAT_TITLES = [ALL_SCORES_STAT_TITLE, LOSSES_STAT_TITLE, TIES_STAT_TITLE, WINS_STAT_TITLE,
-                            OWNER_COMPARISON_STAT_TITLE, WINNING_STREAKS_STAT_TITLE, LOSING_STREAKS_STAT_TITLE]
+                            OWNER_COMPARISON_STAT_TITLE, WINNING_STREAKS_STAT_TITLE, LOSING_STREAKS_STAT_TITLE,
+                            LEAGUE_AVERAGES_STAT_TITLE]
 
     # all stat titles without the excluded stats list
     ALL_STAT_TITLES = list(set(TEAM_STATS_STAT_TITLES + LEAGUE_STATS_STAT_TITLES) - set(EXCLUDED_STAT_TITLES))
