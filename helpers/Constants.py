@@ -56,9 +56,9 @@ class Constants:
                               TEAM_LUCK_STAT_TITLE]
 
     # league averages titles
-    AVERAGE_SCORE_STAT_TITLE = "Average Score"
-    AVERAGE_SCORE_IN_WINS_STAT_TITLE = "Average Score in Wins"
-    AVERAGE_SCORE_IN_LOSSES_STAT_TITLE = "Average Score in Losses"
+    AVERAGE_SCORE_STAT_TITLE = "Average Team Score"
+    AVERAGE_SCORE_IN_WINS_STAT_TITLE = "Average Team Score in Wins"
+    AVERAGE_SCORE_IN_LOSSES_STAT_TITLE = "Average Team Score in Losses"
 
     # league stats
     OWNER_COMPARISON_STAT_TITLE = "Owner Comparison"
