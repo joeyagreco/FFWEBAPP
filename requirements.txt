@@ -6,3 +6,4 @@ numpy~=1.19.5
 plotly~=4.14.3
 gunicorn
 pymongo[srv]
+dnspython==2.0.0
