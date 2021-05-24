@@ -51,3 +51,8 @@ function graphsRedirect() {
     window.location = "/graphs?league_id="+leagueId+"&screen_width="+screenWidth;
 }
 
+function insertUrl() {
+    var urlForm = document.getElementById("copyLeagueUrlForm");
+    urlForm.value = window.location.href;
+}
+
