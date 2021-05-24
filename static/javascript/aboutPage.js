@@ -4,7 +4,7 @@ function paypalRedirect() {
 }
 
 function venmoRedirect() {
-    var redirectLink = "https://www.venmo.com/joey-a-greco";
+    var redirectLink = "https://www.venmo.com/joeyagreco";
     window.open(redirectLink, '_blank');
 }
 
