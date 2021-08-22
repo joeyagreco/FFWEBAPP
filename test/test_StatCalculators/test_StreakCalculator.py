@@ -5,7 +5,6 @@ from models.league_models.MatchupModel import MatchupModel
 from models.league_models.TeamModel import TeamModel
 from models.league_models.WeekModel import WeekModel
 from models.league_models.YearModel import YearModel
-from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.StreakCalculator import StreakCalculator
 
 
@@ -72,6 +71,8 @@ class TestStreakCalculator(unittest.TestCase):
         self.assertEqual("team1", winStreaks_bothYears[0].getStartTeam().getTeamName())
         self.assertEqual("Week 1, 2021", winStreaks_bothYears[0].getEndDate())
         self.assertEqual("team1", winStreaks_bothYears[0].getEndTeam().getTeamName())
+        self.assertTrue(winStreaks_2021[-1].getOngoing())
+        self.assertFalse(winStreaks_bothYears[0].getOngoing())
 
     def test_getLossStreaks(self):
         team1 = TeamModel(1, "team1")
@@ -134,3 +135,5 @@ class TestStreakCalculator(unittest.TestCase):
         self.assertEqual("team2", lossStreaks_bothYears[0].getStartTeam().getTeamName())
         self.assertEqual("Week 1, 2021", lossStreaks_bothYears[0].getEndDate())
         self.assertEqual("team2", lossStreaks_bothYears[0].getEndTeam().getTeamName())
+        self.assertTrue(lossStreaks_2021[-1].getOngoing())
+        self.assertFalse(lossStreaks_2020[1].getOngoing())
