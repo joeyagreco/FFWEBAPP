@@ -138,6 +138,7 @@
                             <th>Start Team</th>
                             <th>End Date</th>
                             <th>End Team</th>
+                            <th>Ongoing</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,6 +150,11 @@
                                 <td>{{leagueStat.getStartTeam().getTeamName()}}</td>
                                 <td>{{leagueStat.getEndDate()}}</td>
                                 <td>{{leagueStat.getEndTeam().getTeamName()}}</td>
+                                {% if leagueStat.getOngoing() %}
+                                    <td>*</td>
+                                {% else %}
+                                    <td></td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                     </tbody>

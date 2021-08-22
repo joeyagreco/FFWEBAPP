@@ -7,6 +7,7 @@ class StreakModel:
         self.__startTeam = stats["startTeam"]
         self.__endDate = stats["endDate"]
         self.__endTeam = stats["endTeam"]
+        self.__ongoing = stats["ongoing"]
 
     def getOwner(self):
         return self.__owner
@@ -25,3 +26,6 @@ class StreakModel:
 
     def getEndTeam(self):
         return self.__endTeam
+
+    def getOngoing(self):
+        return self.__ongoing

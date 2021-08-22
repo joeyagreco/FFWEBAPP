@@ -35,6 +35,7 @@ class StreakCalculator:
                                     currentStreakModelDict["streakNumber"] += 1
                                     currentStreakModelDict["endDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["endTeam"] = tmpTeam
+                                    currentStreakModelDict["ongoing"] = True
                                 else:
                                     # no current streak, start one
                                     # initialize tmp streak dict
@@ -43,10 +44,14 @@ class StreakCalculator:
                                     currentStreakModelDict["startTeam"] = tmpTeam
                                     currentStreakModelDict["endDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["endTeam"] = tmpTeam
+                                    currentStreakModelDict["ongoing"] = True
                             else:
                                 # if there was a streak of 2+, it is now over
                                 if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
-                                    # valid streak, get StreakModel and add to return list
+                                    # valid streak
+                                    # mark as not ongoing streak
+                                    currentStreakModelDict["ongoing"] = False
+                                    # get StreakModel and add to return list
                                     streakModelList.append(self.__getStreakModelFromDict(currentStreakModelDict))
                                 # reset streak dict
                                 currentStreakModelDict = self.__getDefaultStreakDict(teamId)
@@ -79,6 +84,7 @@ class StreakCalculator:
                                     currentStreakModelDict["streakNumber"] += 1
                                     currentStreakModelDict["endDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["endTeam"] = tmpTeam
+                                    currentStreakModelDict["ongoing"] = True
                                 else:
                                     # no current streak, start one
                                     # initialize tmp streak dict
@@ -87,10 +93,14 @@ class StreakCalculator:
                                     currentStreakModelDict["startTeam"] = tmpTeam
                                     currentStreakModelDict["endDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["endTeam"] = tmpTeam
+                                    currentStreakModelDict["ongoing"] = True
                             else:
                                 # if there was a streak of 2+, it is now over
                                 if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
-                                    # valid streak, get StreakModel and add to return list
+                                    # valid streak
+                                    # mark as not ongoing streak
+                                    currentStreakModelDict["ongoing"] = False
+                                    # get StreakModel and add to return list
                                     streakModelList.append(self.__getStreakModelFromDict(currentStreakModelDict))
                                 # reset streak dict
                                 currentStreakModelDict = self.__getDefaultStreakDict(teamId)
@@ -109,7 +119,8 @@ class StreakCalculator:
                 "startDate": None,
                 "startTeam": None,
                 "endDate": None,
-                "endTeam": None}
+                "endTeam": None,
+                "ongoing": None}
 
     def __getStreakModelFromDict(self, streakDict: dict) -> StreakModel:
         """
@@ -120,4 +131,5 @@ class StreakCalculator:
                            startDate=streakDict["startDate"],
                            startTeam=streakDict["startTeam"],
                            endDate=streakDict["endDate"],
-                           endTeam=streakDict["endTeam"])
+                           endTeam=streakDict["endTeam"],
+                           ongoing=streakDict["ongoing"])
