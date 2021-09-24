@@ -8,9 +8,8 @@ from helpers.Error import Error
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 
 
-@app.route("/league-homepage", methods=["GET"])
-def leagueHomepage():
-    leagueId = int(request.args.get("league_id"))
+@app.route("/league-homepage/<int:leagueId>", methods=["GET"])
+def leagueHomepage(leagueId):
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):

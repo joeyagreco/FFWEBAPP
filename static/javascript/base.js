@@ -19,7 +19,7 @@ function homeRedirect() {
 function leagueHomepageRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/league-homepage?league_id=" + leagueId;
+    window.location = "/league-homepage/" + leagueId;
 }
 
 function statExplanationRedirect() {
