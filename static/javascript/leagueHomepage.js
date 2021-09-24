@@ -23,13 +23,13 @@ function copyUrl() {
 function teamStatsRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/team-stats?league_id="+leagueId;
+    window.location = "/team-stats/" + leagueId + "/0";
 }
 
 function headToHeadStatsRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/head-to-head-stats?league_id="+leagueId;
+    window.location = "/head-to-head-stats/" + leagueId + "/0";
 }
 
 function leagueStatsRedirect() {
@@ -48,7 +48,7 @@ function graphsRedirect() {
     var leagueId = document.getElementById("league_id").value;
     var screenWidth = window.innerWidth;
     startLoading();
-    window.location = "/graphs?league_id="+leagueId+"&screen_width="+screenWidth;
+    window.location = "/graphs/" + leagueId + "/0?screen_width="+screenWidth;
 }
 
 function insertUrl() {

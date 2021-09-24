@@ -35,13 +35,14 @@ class LeagueModelNavigator:
         return False
 
     @classmethod
-    def teamsPlayEachOther(cls, leagueModel: LeagueModel, year: int, team1Id: int, team2Id: int) -> bool:
+    def teamsPlayEachOther(cls, leagueModel: LeagueModel, years: list, team1Id: int, team2Id: int) -> bool:
         """
         Returns a boolean on whether the teams with the given IDs play at all in the given league in the given year.
         """
-        for week in leagueModel.getYears()[year].getWeeks():
-            if cls.teamsPlayInWeek(week, team1Id, [team2Id]):
-                return True
+        for year in years:
+            for week in leagueModel.getYears()[year].getWeeks():
+                if cls.teamsPlayInWeek(week, team1Id, [team2Id]):
+                    return True
         return False
 
     @classmethod

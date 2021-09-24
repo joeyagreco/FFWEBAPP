@@ -8,7 +8,7 @@ function yearRedirect(year, team1, team2) {
     }
     startLoading();
     // GET request
-     window.location = "/head-to-head-stats?league_id="+leagueId+"&team1="+team1+"&team2="+team2+"&year="+year;
+     window.location = "/head-to-head-stats/" + leagueId + "/" + year + "?team1="+team1+"&team2="+team2;
 }
 
 function getMaxTeamNameLength(teams) {
