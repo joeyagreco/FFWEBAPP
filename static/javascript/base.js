@@ -25,19 +25,19 @@ function leagueHomepageRedirect() {
 function statExplanationRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/stats-explained?league_id=" + leagueId;
+    window.location = "/stats-explained/" + leagueId;
 }
 
 function aboutRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/about?league_id=" + leagueId;
+    window.location = "/about/" + leagueId;
 }
 
 function feedbackRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/feedback?league_id=" + leagueId;
+    window.location = "/feedback/" + leagueId;
 }
 
 function startLoading() {

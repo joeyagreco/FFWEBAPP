@@ -18,17 +18,15 @@ def index():
     return render_template("indexHomepage.html", error_message=errorMessage)
 
 
-@app.route("/about", methods=["GET"])
-def about():
-    leagueId = int(request.args.get("league_id"))
+@app.route("/about/<int:leagueId>", methods=["GET"])
+def about(leagueId):
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     return render_template("aboutPage.html", league=leagueOrError)
 
 
-@app.route("/feedback", methods=["GET"])
-def feedback():
-    leagueId = int(request.args.get("league_id"))
+@app.route("/feedback/<int:leagueId>", methods=["GET"])
+def feedback(leagueId):
     errorMessage = request.args.get("error_message")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)

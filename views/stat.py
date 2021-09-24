@@ -136,9 +136,8 @@ def graphs(leagueId, year):
                            selected_graph=selectedGraph, graph_div=divAsString, selected_year=year)
 
 
-@app.route("/stats-explained", methods=["GET"])
-def statsExplained():
-    leagueId = int(request.args.get("league_id"))
+@app.route("/stats-explained/<int:leagueId>", methods=["GET"])
+def statsExplained(leagueId):
     selectedStat = request.args.get("selected_stat")
     statList = sorted(Constants.ALL_STAT_TITLES)
     # set default stat selection if none given
