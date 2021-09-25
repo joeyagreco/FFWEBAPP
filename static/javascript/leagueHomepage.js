@@ -23,7 +23,7 @@ function copyUrl() {
 function teamStatsRedirect() {
     startLoading();
     var leagueId = document.getElementById("league_id").value;
-    window.location = "/team-stats/" + leagueId + "/0";
+    window.location = "/team-stats/" + leagueId;
 }
 
 function headToHeadStatsRedirect() {

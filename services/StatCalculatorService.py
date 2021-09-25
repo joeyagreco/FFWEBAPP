@@ -12,9 +12,9 @@ from packages.Exceptions.InvalidStatSelectionError import InvalidStatSelectionEr
 from packages.StatCalculators.AverageCalculator import AverageCalculator
 from packages.StatCalculators.AwalCalculator import AwalCalculator
 from packages.StatCalculators.EveryGameCalculator import EveryGameCalculator
-from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
+from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 from packages.StatCalculators.SmartCalculator import SmartCalculator
 from packages.StatCalculators.SslCalculator import SslCalculator
 from packages.StatCalculators.StreakCalculator import StreakCalculator
@@ -34,7 +34,7 @@ class StatCalculatorService:
         """
         teamStatsModels = []
         for year in years:
-            for team in leagueModel.getYears()[year].getTeams():
+            for team in leagueModel.getYears()[str(year)].getTeams():
                 yearAsList = [year]
                 decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
                 teamId = team.getTeamId()
@@ -334,7 +334,8 @@ class StatCalculatorService:
             averageCalculator = AverageCalculator(leagueModel, years)
             leagueAveragesDict[Constants.AVERAGE_SCORE_STAT_TITLE] = averageCalculator.getAverageScore()
             leagueAveragesDict[Constants.AVERAGE_SCORE_IN_WINS_STAT_TITLE] = averageCalculator.getAverageScoreInWins()
-            leagueAveragesDict[Constants.AVERAGE_SCORE_IN_LOSSES_STAT_TITLE] = averageCalculator.getAverageScoreInLosses()
+            leagueAveragesDict[
+                Constants.AVERAGE_SCORE_IN_LOSSES_STAT_TITLE] = averageCalculator.getAverageScoreInLosses()
             return leagueAveragesDict
 
     @staticmethod

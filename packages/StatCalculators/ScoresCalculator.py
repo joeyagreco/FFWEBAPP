@@ -21,13 +21,15 @@ class ScoresCalculator:
         """
         scores = []
         for year in self.__years:
-            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            throughWeek = params.pop("throughWeek",
+                                     LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
             params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
+                                                                                           excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.getYears()[year].getWeeks():
+            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
                 elif week.getWeekNumber() > throughWeek:
@@ -50,13 +52,15 @@ class ScoresCalculator:
         """
         scores = []
         for year in self.__years:
-            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            throughWeek = params.pop("throughWeek",
+                                     LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
             params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
+                                                                                           excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.getYears()[year].getWeeks():
+            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
                 elif week.getWeekNumber() > throughWeek:
@@ -82,13 +86,15 @@ class ScoresCalculator:
         totalTeamScore = 0
         totalOpponentScore = 0
         for year in self.__years:
-            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            throughWeek = params.pop("throughWeek",
+                                     LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
             params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
+                                                                                           excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.getYears()[year].getWeeks():
+            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
                 elif week.getWeekNumber() > throughWeek:
@@ -100,7 +106,8 @@ class ScoresCalculator:
                     elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
                         totalTeamScore += matchup.getTeamBScore()
                         totalOpponentScore += matchup.getTeamAScore()
-        return float(Rounder.normalRound(totalTeamScore - totalOpponentScore, Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)))
+        return float(Rounder.normalRound(totalTeamScore - totalOpponentScore,
+                                         Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)))
 
     def getStandardDeviation(self, **params) -> float:
         """
@@ -111,13 +118,15 @@ class ScoresCalculator:
         """
         scores = []
         for year in self.__years:
-            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            throughWeek = params.pop("throughWeek",
+                                     LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
             params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
+                                                                                           excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.getYears()[year].getWeeks():
+            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
                 elif week.getWeekNumber() > throughWeek:
@@ -142,15 +151,21 @@ class ScoresCalculator:
         totalTeamScore = 0
         totalLeagueScore = 0
         for year in self.__years:
-            weekNumber = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            weekNumber = params.pop("throughWeek",
+                                    LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
             params["weekNumber"] = weekNumber
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
+                                                                                           excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, year, self.__teamId, vsTeamIds, onlyWeeks=onlyWeeks)
-            totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, [year], throughWeek=weekNumber, onlyWeeks=allWeeksTeamsPlay)
-            for week in self.__leagueModel.getYears()[year].getWeeks():
+            allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, year,
+                                                                                   self.__teamId, vsTeamIds,
+                                                                                   onlyWeeks=onlyWeeks)
+            totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, [year],
+                                                                       throughWeek=weekNumber,
+                                                                       onlyWeeks=allWeeksTeamsPlay)
+            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
                 elif week.getWeekNumber() > weekNumber:
@@ -173,15 +188,21 @@ class ScoresCalculator:
         totalTeamScore = 0
         totalLeagueScore = 0
         for year in self.__years:
-            weekNumber = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            weekNumber = params.pop("throughWeek",
+                                    LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
             params["weekNumber"] = weekNumber
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
+                                                                                           excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, year, self.__teamId, vsTeamIds, onlyWeeks=onlyWeeks)
-            totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, [year], throughWeek=weekNumber, onlyWeeks=allWeeksTeamsPlay)
-            for week in self.__leagueModel.getYears()[year].getWeeks():
+            allWeeksTeamsPlay = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(self.__leagueModel, year,
+                                                                                   self.__teamId, vsTeamIds,
+                                                                                   onlyWeeks=onlyWeeks)
+            totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, [year],
+                                                                       throughWeek=weekNumber,
+                                                                       onlyWeeks=allWeeksTeamsPlay)
+            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
                 elif week.getWeekNumber() > weekNumber:

@@ -9,6 +9,7 @@ from helpers.LeagueModelNavigator import LeagueModelNavigator
 
 
 @app.route("/team-stats/<int:leagueId>/<year>", methods=["GET"])
+@app.route("/team-stats/<int:leagueId>", defaults={"year": None}, methods=["GET"])
 def teamStats(leagueId, year):
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
@@ -18,7 +19,10 @@ def teamStats(leagueId, year):
     if isinstance(leagueModelOrError, Error):
         return render_template("teamStatsPage.html", league=leagueOrError,
                                error_message=leagueModelOrError.errorMessage())
-    if year == "0":
+    if year is None:
+        year = LeagueModelNavigator.getMostRecentYear(leagueModelOrError, asInt=True)
+        yearList = [year]
+    elif year == "0":
         # give them all years (ALL TIME)
         yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
     else:
