@@ -33,6 +33,7 @@ def teamStats(leagueId, year):
 
 
 @app.route("/head-to-head-stats/<int:leagueId>/<year>", methods=["GET"])
+@app.route("/head-to-head-stats/<int:leagueId>", defaults={"year": None}, methods=["GET"])
 def headToHeadStats(leagueId, year):
     team1Id = request.args.get("team1")
     team2Id = request.args.get("team2")
@@ -44,7 +45,10 @@ def headToHeadStats(leagueId, year):
     if isinstance(leagueModelOrError, Error):
         return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=None,
                                given_team_2_id=None, error_message=leagueModelOrError.errorMessage())
-    if year == "0":
+    if year is None:
+        year = LeagueModelNavigator.getMostRecentYear(leagueModelOrError, asInt=True)
+        yearList = [year]
+    elif year == "0":
         # give them all years (ALL TIME)
         yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
     else:

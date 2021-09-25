@@ -19,7 +19,7 @@ class LeagueModelNavigator:
         Returns a Team object for the team with the given ID in the given league in the given year.
         Throws Exception if a team with the given ID is not in the given league.
         """
-        for team in leagueModel.getYears()[year].getTeams():
+        for team in leagueModel.getYears()[str(year)].getTeams():
             if team.getTeamId() == teamId:
                 return team
         raise Exception("Given TeamID is not in the given LeagueModel at the given year.")
@@ -40,7 +40,7 @@ class LeagueModelNavigator:
         Returns a boolean on whether the teams with the given IDs play at all in the given league in the given year.
         """
         for year in years:
-            for week in leagueModel.getYears()[year].getWeeks():
+            for week in leagueModel.getYears()[str(year)].getWeeks():
                 if cls.teamsPlayInWeek(week, team1Id, [team2Id]):
                     return True
         return False

@@ -29,7 +29,7 @@ function teamStatsRedirect() {
 function headToHeadStatsRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/head-to-head-stats/" + leagueId + "/0";
+    window.location = "/head-to-head-stats/" + leagueId;
 }
 
 function leagueStatsRedirect() {
