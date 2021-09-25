@@ -148,7 +148,7 @@ function yearRedirect(year) {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
     // GET request
-     window.location = "/update-league?league_id="+leagueId+"&year="+year;
+     window.location = "/update-league/"+leagueId+"/"+year;
 }
 
 function htmlDecode(input) {

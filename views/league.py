@@ -24,23 +24,24 @@ def leagueHomepage(leagueId):
                     return render_template("leagueHomepage.html", league=leagueOrError)
     # no valid weeks found, send to update league page
     selectedYear = sorted(list(leagueOrError["years"].keys()))[-1]
-    return redirect(url_for("updateLeague", league_id=leagueId, year=selectedYear))
+    return redirect(url_for("updateLeague", leagueId=leagueId, year=selectedYear))
 
 
 @app.route("/add-league", methods=["POST"])
 def addLeague():
-    # convert the POST request headers into a python dictionary
-    newDataStr = request.data.decode("UTF-8")
-    newDataDict = ast.literal_eval(newDataStr)
-    # retrieve the values from our dictionary
-    leagueName = newDataDict["league_name"]
-    numberOfTeams = int(newDataDict["number_of_teams"])
-    mainController = MainController()
-    newLeagueIdOrError = mainController.addLeague(leagueName, numberOfTeams)
-    if isinstance(newLeagueIdOrError, Error):
-        return render_template("addLeaguePage.html", error_message=newLeagueIdOrError.errorMessage())
-    else:
-        return redirect(url_for("updateLeague", league_id=newLeagueIdOrError))
+    def addLeague():
+        # convert the POST request headers into a python dictionary
+        newDataStr = request.data.decode("UTF-8")
+        newDataDict = ast.literal_eval(newDataStr)
+        # retrieve the values from our dictionary
+        leagueName = newDataDict["league_name"]
+        numberOfTeams = int(newDataDict["number_of_teams"])
+        mainController = MainController()
+        newLeagueIdOrError = mainController.addLeague(leagueName, numberOfTeams)
+        if isinstance(newLeagueIdOrError, Error):
+            return render_template("addLeaguePage.html", error_message=newLeagueIdOrError.errorMessage())
+        else:
+            return redirect(url_for("updateLeague", leagueId=newLeagueIdOrError))
 
 
 @app.route("/new-league", methods=["GET"])
@@ -49,8 +50,9 @@ def newLeague():
     return render_template("addLeaguePage.html", error_message=errorMessage)
 
 
-@app.route("/update-league", methods=["GET", "POST"])
-def updateLeague():
+@app.route("/update-league/<int:leagueId>/<year>", methods=["GET", "POST"])
+@app.route("/update-league/<int:leagueId>", defaults={"year": None})
+def updateLeague(leagueId, year):
     # helper function to get team by id
     def getTeamNameById(teams: list, teamId: int):
         for team in teams:
@@ -58,21 +60,21 @@ def updateLeague():
                 return team["teamName"]
 
     if request.method == "GET":
-        leagueId = int(request.args.get("league_id"))
-        selectedYear = request.args.get("year")
+        # leagueId = int(request.args.get("league_id"))
+        # year = request.args.get("year")
         errorMessage = request.args.get("error_message")
         mainController = MainController()
         leagueOrError = mainController.getLeague(leagueId)
         leagueModelOrError = mainController.getLeagueModel(leagueId)
-        if not selectedYear:
-            selectedYear = LeagueModelNavigator.getMostRecentYear(leagueModelOrError, asInt=True)
-        selectedYear = int(selectedYear)
+        if year is None:
+            year = LeagueModelNavigator.getMostRecentYear(leagueModelOrError, asInt=True)
+        year = int(year)
         if isinstance(leagueOrError, Error):
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         if errorMessage:
-            return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear,
+            return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=year,
                                    error_message=errorMessage)
-        return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=selectedYear)
+        return render_template("updateLeaguePage.html", league=leagueOrError, selected_year=year)
     else:
         # we got a POST
         # convert headers
@@ -96,7 +98,7 @@ def updateLeague():
             for year in leagueOrError["years"].keys():
                 if year == yearNumber:
                     # user chose a year that is already in league
-                    return redirect(url_for("updateLeague", league_id=leagueId, year=originalYear,
+                    return redirect(url_for("updateLeague", leagueId=leagueId, year=originalYear,
                                             error_message="Year already exists."))
         # update team names
         teams = []
@@ -132,7 +134,7 @@ def updateLeague():
                 url_for("updateLeague", league_id=leagueId, year=originalYear, error_message=updated.errorMessage()))
         else:
             # successfully updated league
-            return redirect(url_for("updateLeague", league_id=leagueId, year=yearNumber))
+            return redirect(url_for("updateLeague", leagueId=leagueId, year=yearNumber))
 
 
 @app.route("/delete-league", methods=["GET"])
