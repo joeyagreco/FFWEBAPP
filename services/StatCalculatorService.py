@@ -374,7 +374,7 @@ class StatCalculatorService:
             teamNames = []
             teamPoints = []
             for year in years:
-                for team in leagueModel.getYears()[year].getTeams():
+                for team in leagueModel.getYears()[str(year)].getTeams():
                     teamNames.append(team.getTeamName())
                     totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [year], team.getTeamId())
                     teamPoints.append(totalPoints)

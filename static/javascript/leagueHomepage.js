@@ -48,7 +48,7 @@ function graphsRedirect() {
     startLoading();
     var leagueId = document.getElementById("league_id").value;
     var screenWidth = window.innerWidth;
-    window.location = "/graphs/" + leagueId + "/0?screen_width="+screenWidth;
+    window.location = "/graphs/" + leagueId + "?screen_width="+screenWidth;
 }
 
 function insertUrl() {

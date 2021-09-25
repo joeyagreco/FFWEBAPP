@@ -110,6 +110,7 @@ def leagueStats(leagueId, year):
 
 
 @app.route("/graphs/<int:leagueId>/<year>", methods=["GET"])
+@app.route("/graphs/<int:leagueId>", defaults={"year": None}, methods=["GET"])
 def graphs(leagueId, year):
     selectedGraph = request.args.get("graph_selection")
     # default selected graph
