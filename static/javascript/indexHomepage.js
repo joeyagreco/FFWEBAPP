@@ -1,3 +1,9 @@
+function redirectToLeagueHomepage() {
+    startLoading();
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/league-homepage/"+leagueId;
+}
+
 function checkCharacterLimit() {
     // this function simply prevents the user from entering a league id that has more than 6 digits
     var leagueIdForm = document.getElementById("league_id");

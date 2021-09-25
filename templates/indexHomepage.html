@@ -1,48 +1,65 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Free Fantasy Football Stats">
-        <meta name="keywords" content="HTML, CSS, JavaScript">
-        <meta name="author" content="Joey Greco">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Leeger.io</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/indexHomepage.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
-        <script src="{{ url_for('static', filename='javascript/indexHomepage.js') }}"></script>
-        <!-- bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Fantasy Football Stats">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Joey Greco">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leeger.io</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/indexHomepage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+    <script src="{{ url_for('static', filename='javascript/base.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/indexHomepage.js') }}"></script>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+    <!-- Add icon library -->
+    <script src="https://kit.fontawesome.com/e509e6f024.js" crossorigin="anonymous"></script>
+</head>
 
-    <body class="primaryColorBackground">
-        <header>
-            <div class="headerTitles primaryColorBackground">
-                <div class="pageTitle primaryFontColor">Leeger.io</div>
-                <div class="pageSubtitle secondaryFontColorLight">Free, In-Depth Stats for YOUR Fantasy Football League!</div>
-            </div>
-        </header>
+<!-- this is the loading icon that shows when a page is loading -->
+<div class="loader-wrapper" id="loader-wrapper">
+    <i class="fa fa-spinner fa-spin fa-5x"></i>
+</div>
 
-        <div class="errorSection">
-            {% if error_message %}
-                <span class="errorMessage">- {{error_message}} -</span>
-            {% endif %}
-        </div>
+<body class="primaryColorBackground">
+<header>
+    <div class="headerTitles primaryColorBackground">
+        <div class="pageTitle primaryFontColor">Leeger.io</div>
+        <div class="pageSubtitle secondaryFontColorLight">Free, In-Depth Stats for YOUR Fantasy Football League!</div>
+    </div>
+</header>
 
-        <div class="buttonSelection">
-            <form class="newLeagueFormStack" id="new_league_form_stack" action="/new-league">
-                <button class="newLeagueButton btn btn-primary primaryButtonColors" id="new_league_button" type="submit">New League</button>
-            </form>
+<div class="errorSection">
+    {% if error_message %}
+    <span class="errorMessage">- {{error_message}} -</span>
+    {% endif %}
+</div>
 
-            <div class="or">
-                <div class="verticalLine"></div>
-            </div>
+<div class="buttonSelection">
+    <form class="newLeagueFormStack" id="new_league_form_stack" action="/new-league">
+        <button class="newLeagueButton btn btn-primary primaryButtonColors" id="new_league_button" type="submit">New
+            League
+        </button>
+    </form>
 
-            <form class="leagueIdFormStack" id="league_id_form_stack" action="/league-homepage" method="GET">
-                <input class="leagueIdInputForm form-control primaryFormColors hoverFade" type="number" name="league_id" id="league_id" onkeyup="activateSubmitButton()" placeholder="League ID" required min="100000" max="999999" step="1" autocomplete="off" oninput="checkCharacterLimit()">
-                <button class="loadLeagueButton btn btn-primary primaryButtonColors disabled" id="load_league_button" type="submit">Load League</button>
-            </form>
-        </div>
-    </body>
+    <div class="or">
+        <div class="verticalLine"></div>
+    </div>
+
+    <form class="leagueIdFormStack" id="league_id_form_stack">
+        <input class="leagueIdInputForm form-control primaryFormColors hoverFade" type="number" name="league_id"
+               id="league_id" onkeyup="activateSubmitButton()" placeholder="League ID" required min="100000"
+               max="999999" step="1" autocomplete="off" oninput="checkCharacterLimit()">
+        <button class="loadLeagueButton btn btn-primary primaryButtonColors disabled" id="load_league_button"
+                type="button" onclick="redirectToLeagueHomepage()">Load League
+        </button>
+    </form>
+</div>
+</body>
 
 </html>
