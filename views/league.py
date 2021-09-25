@@ -50,7 +50,7 @@ def newLeague():
 
 
 @app.route("/update-league/<int:leagueId>/<year>", methods=["GET", "POST"])
-@app.route("/update-league/<int:leagueId>", defaults={"year": None})
+@app.route("/update-league/<int:leagueId>", defaults={"year": None}, methods=["GET", "POST"])
 def updateLeague(leagueId, year):
     # helper function to get team by id
     def getTeamNameById(teams: list, teamId: int):

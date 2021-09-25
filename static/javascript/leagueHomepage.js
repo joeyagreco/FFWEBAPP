@@ -41,7 +41,7 @@ function leagueStatsRedirect() {
 function updateLeagueRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/update-league?league_id="+leagueId;
+    window.location = "/update-league/"+leagueId;
 }
 
 function graphsRedirect() {
