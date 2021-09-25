@@ -326,7 +326,7 @@ class LeagueModelNavigator:
     def getMostRecentYear(cls, leagueModel: LeagueModel, **params):
         """
         This returns the most recent (highest-numbered) year in this league.
-        ASINT: (boolean) If True, returns as a list of ints representing the years
+        ASINT: (boolean) If True, returns the most recent year as an int
         WITHWEEKS: (boolean) If True, returns the most recent year that has AT LEAST 1 week in it
         """
         asInt = params.pop("asInt", False)

@@ -67,7 +67,6 @@ def updateLeague(leagueId, year):
         leagueModelOrError = mainController.getLeagueModel(leagueId)
         if year is None:
             year = LeagueModelNavigator.getMostRecentYear(leagueModelOrError, asInt=True)
-        year = int(year)
         if isinstance(leagueOrError, Error):
             return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
         if errorMessage:
@@ -130,7 +129,7 @@ def updateLeague(leagueId, year):
         elif isinstance(updated, Error):
             # could not update league
             return redirect(
-                url_for("updateLeague", league_id=leagueId, year=originalYear, error_message=updated.errorMessage()))
+                url_for("updateLeague", leagueId=leagueId, year=originalYear, error_message=updated.errorMessage()))
         else:
             # successfully updated league
             return redirect(url_for("updateLeague", leagueId=leagueId, year=yearNumber))
