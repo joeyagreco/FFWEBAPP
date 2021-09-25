@@ -24,9 +24,7 @@ def teamStats(leagueId, year):
     else:
         yearList = [year]
     statsModels = mainController.getTeamStatsModel(leagueModelOrError, yearList)
-    # grab Constants class to use for titles of table
-    constants = Constants
-    return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels, constants=constants,
+    return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels, constants=Constants,
                            selected_year=year)
 
 
@@ -65,10 +63,8 @@ def headToHeadStats(leagueId, year):
         if LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, [y], team1Id, team2Id):
             # get the stats model
             statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, yearList, team1Id, team2Id)
-            # grab Constants class to use for dropdown
-            constants = Constants
             return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
-                                   given_team_2_id=team2Id, stats_models=statsModelsOrError, constants=constants,
+                                   given_team_2_id=team2Id, stats_models=statsModelsOrError, constants=Constants,
                                    selected_year=year)
         # these teams/owners have never faced each other
         # create an error message
@@ -101,11 +97,9 @@ def leagueStats():
     else:
         yearList = [year]
     statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, yearList, statSelection)
-    # grab Constants class to use for titles of table
-    constants = Constants
     return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
                            selected_stat=statSelection, stats_models=statsModelOrError, selected_year=year,
-                           constants=constants)
+                           constants=Constants)
 
 
 @app.route("/graphs/<int:leagueId>/<year>", methods=["GET"])
