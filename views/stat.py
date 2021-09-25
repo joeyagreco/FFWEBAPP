@@ -75,13 +75,12 @@ def headToHeadStats(leagueId, year):
                                given_team_2_id=team2Id, selected_year=year, error_message=message)
 
 
-@app.route("/league-stats", methods=["GET"])
-def leagueStats():
-    leagueId = int(request.args.get("league_id"))
+@app.route("/league-stats/<int:leagueId>/<year>", methods=["GET"])
+@app.route("/league-stats/<int:leagueId>", defaults={"year": None}, methods=["GET"])
+def leagueStats(leagueId, year):
     statSelection = request.args.get("stat_selection")
-    year = request.args.get("year")
     statOptions = Constants.LEAGUE_STATS_STAT_TITLES
-    if not statSelection:
+    if statSelection is None:
         statSelection = statOptions[0]
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)

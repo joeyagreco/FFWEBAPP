@@ -1,4 +1,5 @@
 function submitLeagueStat(year, leagueStat) {
+    startLoading();
     var leagueId = document.getElementById("league_id").value;
     if(!year) {
         year = document.getElementById("select_year_button").value;
@@ -10,8 +11,7 @@ function submitLeagueStat(year, leagueStat) {
     if(leagueStat == "Owner Comparison") {
         year = 0;
     }
-    startLoading();
-    window.location = "/league-stats?league_id="+leagueId+"&stat_selection="+leagueStat+"&year="+year;
+    window.location = "/league-stats/"+leagueId+"/"+year+"?stat_selection="+leagueStat;
 }
 
 function lockYearDropdownToAllTime() {
