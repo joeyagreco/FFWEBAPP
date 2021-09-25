@@ -29,19 +29,18 @@ def leagueHomepage(leagueId):
 
 @app.route("/add-league", methods=["POST"])
 def addLeague():
-    def addLeague():
-        # convert the POST request headers into a python dictionary
-        newDataStr = request.data.decode("UTF-8")
-        newDataDict = ast.literal_eval(newDataStr)
-        # retrieve the values from our dictionary
-        leagueName = newDataDict["league_name"]
-        numberOfTeams = int(newDataDict["number_of_teams"])
-        mainController = MainController()
-        newLeagueIdOrError = mainController.addLeague(leagueName, numberOfTeams)
-        if isinstance(newLeagueIdOrError, Error):
-            return render_template("addLeaguePage.html", error_message=newLeagueIdOrError.errorMessage())
-        else:
-            return redirect(url_for("updateLeague", leagueId=newLeagueIdOrError))
+    # convert the POST request headers into a python dictionary
+    newDataStr = request.data.decode("UTF-8")
+    newDataDict = ast.literal_eval(newDataStr)
+    # retrieve the values from our dictionary
+    leagueName = newDataDict["league_name"]
+    numberOfTeams = int(newDataDict["number_of_teams"])
+    mainController = MainController()
+    newLeagueIdOrError = mainController.addLeague(leagueName, numberOfTeams)
+    if isinstance(newLeagueIdOrError, Error):
+        return render_template("addLeaguePage.html", error_message=newLeagueIdOrError.errorMessage())
+    else:
+        return redirect(url_for("updateLeague", leagueId=newLeagueIdOrError))
 
 
 @app.route("/new-league", methods=["GET"])
@@ -137,9 +136,9 @@ def updateLeague(leagueId, year):
             return redirect(url_for("updateLeague", leagueId=leagueId, year=yearNumber))
 
 
-@app.route("/delete-league", methods=["GET"])
-def deleteLeague():
-    leagueId = int(request.args.get("league_id"))
+# TODO: use DELETE instead of GET
+@app.route("/delete-league/<int:leagueId>", methods=["GET"])
+def deleteLeague(leagueId):
     mainController = MainController()
     response = mainController.deleteLeague(leagueId)
     if isinstance(response, Error):

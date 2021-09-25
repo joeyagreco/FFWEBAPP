@@ -12,7 +12,7 @@ function deleteLeague() {
     }).then((result) => {
         if (result.isConfirmed) {
             var leagueId = document.getElementById("league_id").value;
-             window.location = "/delete-league?league_id="+leagueId;
+             window.location = "/delete-league/"+leagueId;
          }
     })
 }
