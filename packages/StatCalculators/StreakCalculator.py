@@ -21,7 +21,7 @@ class StreakCalculator:
         for teamId in allTeamIds:
             currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             for year in self.__years:
-                for week in self.__leagueModel.getYears()[year].getWeeks():
+                for week in self.__leagueModel.getYears()[str(year)].getWeeks():
                     weekNumber = week.getWeekNumber()
                     for matchup in week.getMatchups():
                         # check if our target team plays in this matchup
@@ -47,7 +47,8 @@ class StreakCalculator:
                                     currentStreakModelDict["ongoing"] = True
                             else:
                                 # if there was a streak of 2+, it is now over
-                                if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
+                                if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict[
+                                    "streakNumber"] > 1:
                                     # valid streak
                                     # mark as not ongoing streak
                                     currentStreakModelDict["ongoing"] = False
@@ -70,7 +71,7 @@ class StreakCalculator:
         for teamId in allTeamIds:
             currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             for year in self.__years:
-                for week in self.__leagueModel.getYears()[year].getWeeks():
+                for week in self.__leagueModel.getYears()[str(year)].getWeeks():
                     weekNumber = week.getWeekNumber()
                     for matchup in week.getMatchups():
                         # check if our target team plays in this matchup
@@ -96,7 +97,8 @@ class StreakCalculator:
                                     currentStreakModelDict["ongoing"] = True
                             else:
                                 # if there was a streak of 2+, it is now over
-                                if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
+                                if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict[
+                                    "streakNumber"] > 1:
                                     # valid streak
                                     # mark as not ongoing streak
                                     currentStreakModelDict["ongoing"] = False
