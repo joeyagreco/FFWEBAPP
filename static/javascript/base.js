@@ -11,7 +11,8 @@ function homeRedirect() {
       heightAuto: false
     }).then((result) => {
         if (result.isConfirmed) {
-         window.location = "/";
+            startLoading();
+            window.location = "/";
          }
     })
 }
