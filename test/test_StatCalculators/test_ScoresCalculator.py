@@ -47,7 +47,7 @@ class TestScoresCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         maxScoreTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getMaxScore(throughWeek=1)
         maxScoreTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getMaxScore(throughWeek=2)
@@ -109,7 +109,7 @@ class TestScoresCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         minScoreTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getMinScore(throughWeek=1)
         minScoreTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getMinScore(throughWeek=2)
@@ -171,7 +171,7 @@ class TestScoresCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         plusMinusTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getPlusMinus(throughWeek=1)
         plusMinusTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getPlusMinus(throughWeek=2)
@@ -234,7 +234,7 @@ class TestScoresCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         standardDeviationTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getStandardDeviation(throughWeek=1)
         standardDeviationTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getStandardDeviation(throughWeek=2)
@@ -242,8 +242,10 @@ class TestScoresCalculator(unittest.TestCase):
         standardDeviationTeam1_vs2 = ScoresCalculator(1, leagueModel, [2020]).getStandardDeviation(vsTeamIds=[2])
         standardDeviationTeam1_vs3 = ScoresCalculator(1, leagueModel, [2020]).getStandardDeviation(vsTeamIds=[3])
         standardDeviationTeam1_only1 = ScoresCalculator(1, leagueModel, [2020]).getStandardDeviation(onlyWeeks=[1])
-        standardDeviationTeam1_only1and3 = ScoresCalculator(1, leagueModel, [2020]).getStandardDeviation(onlyWeeks=[1, 3])
-        standardDeviationTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getStandardDeviation(throughWeek=1, vsTeamIds=[2])
+        standardDeviationTeam1_only1and3 = ScoresCalculator(1, leagueModel, [2020]).getStandardDeviation(
+            onlyWeeks=[1, 3])
+        standardDeviationTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getStandardDeviation(throughWeek=1,
+                                                                                                         vsTeamIds=[2])
         standardDeviationTeam1_default = ScoresCalculator(1, leagueModel, [2020]).getStandardDeviation()
         standardDeviationTeam1_2021 = ScoresCalculator(1, leagueModel, [2021]).getStandardDeviation()
         standardDeviationTeam1_bothYears = ScoresCalculator(1, leagueModel, [2020, 2021]).getStandardDeviation()
@@ -292,7 +294,7 @@ class TestScoresCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         percentageTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getScoringShare(throughWeek=1)
         percentageTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getScoringShare(throughWeek=2)
@@ -300,7 +302,8 @@ class TestScoresCalculator(unittest.TestCase):
         percentageTeam1_vs3 = ScoresCalculator(1, leagueModel, [2020]).getScoringShare(vsTeamIds=[3])
         percentageTeam1_only2 = ScoresCalculator(1, leagueModel, [2020]).getScoringShare(onlyWeeks=[2])
         percentageTeam1_only1and2 = ScoresCalculator(1, leagueModel, [2020]).getScoringShare(onlyWeeks=[1, 2])
-        percentageTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getScoringShare(throughWeek=1, vsTeamIds=[2])
+        percentageTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getScoringShare(throughWeek=1,
+                                                                                             vsTeamIds=[2])
         percentageTeam1_default = ScoresCalculator(1, leagueModel, [2020]).getScoringShare()
         percentageTeam1_2021 = ScoresCalculator(1, leagueModel, [2021]).getScoringShare()
         percentageTeam1_bothYears = ScoresCalculator(1, leagueModel, [2020, 2021]).getScoringShare()
@@ -348,7 +351,7 @@ class TestScoresCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         percentageTeam1_1 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(throughWeek=1)
         percentageTeam1_2 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(throughWeek=2)
@@ -356,7 +359,8 @@ class TestScoresCalculator(unittest.TestCase):
         percentageTeam1_vs3 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(vsTeamIds=[3])
         percentageTeam1_only2 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(onlyWeeks=[2])
         percentageTeam1_only1and2 = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(onlyWeeks=[1, 2])
-        percentageTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(throughWeek=1, vsTeamIds=[2])
+        percentageTeam1_allParams = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst(throughWeek=1,
+                                                                                                    vsTeamIds=[2])
         percentageTeam1_default = ScoresCalculator(1, leagueModel, [2020]).getScoringShareAgainst()
         percentageTeam1_2021 = ScoresCalculator(1, leagueModel, [2021]).getScoringShareAgainst()
         percentageTeam1_bothYears = ScoresCalculator(1, leagueModel, [2020, 2021]).getScoringShareAgainst()

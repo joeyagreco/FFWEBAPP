@@ -262,7 +262,7 @@ class LeagueModelNavigator:
         andOpponentScore = params.pop("andOpponentScore", False)
 
         scores = []
-        for week in leagueModel.getYears()[year].getWeeks():
+        for week in leagueModel.getYears()[str(year)].getWeeks():
             if week.getWeekNumber() > throughWeek:
                 break
             for matchup in week.getMatchups():

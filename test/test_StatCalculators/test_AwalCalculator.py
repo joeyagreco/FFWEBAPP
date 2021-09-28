@@ -42,7 +42,7 @@ class TestAwalCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         awalTeam1_1 = AwalCalculator(1, leagueModel, [2020], 0, 0).getAwal(throughWeek=1)
         awalTeam1_2 = AwalCalculator(1, leagueModel, [2020], 0, 0).getAwal(throughWeek=2)
@@ -81,7 +81,7 @@ class TestAwalCalculator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         awalTeam1 = AwalCalculator(1, leagueModel, [2020], 0, 1).getAwal()
         awalTeam2 = AwalCalculator(2, leagueModel, [2020], 0, 1).getAwal()
@@ -112,7 +112,7 @@ class TestAwalCalculator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         awalTeam1 = AwalCalculator(1, leagueModel, [2020], 0, 0).getAwal()
         awalTeam2 = AwalCalculator(2, leagueModel, [2020], 1, 0).getAwal()
@@ -143,7 +143,7 @@ class TestAwalCalculator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         awalTeam1 = AwalCalculator(1, leagueModel, [2020], 0, 1).getAwal()
         awalTeam2 = AwalCalculator(2, leagueModel, [2020], 0, 1).getAwal()
@@ -174,7 +174,7 @@ class TestAwalCalculator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         awalTeam1 = AwalCalculator(1, leagueModel, [2020], 0, 1).getAwal()
         awalTeam2 = AwalCalculator(2, leagueModel, [2020], 0, 1).getAwal()
@@ -210,7 +210,7 @@ class TestAwalCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         awalTeam1 = AwalCalculator(1, leagueModel, [2020], 0, 0).getAwal()
         awalTeam2 = AwalCalculator(2, leagueModel, [2020], 2, 0).getAwal()
@@ -257,7 +257,7 @@ class TestAwalCalculator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 16, yearDict)
         awalTeam1 = AwalCalculator(1, leagueModel, [2020], 0, 0).getAwal()
         awalTeam2 = AwalCalculator(2, leagueModel, [2020], 1, 0).getAwal()
@@ -339,7 +339,7 @@ class TestAwalCalculator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         adjustmentTeam1 = AwalCalculator(1, leagueModel, [2020], 0, 0).getAdjustment()
         adjustmentTeam2 = AwalCalculator(2, leagueModel, [2020], 1, 0).getAdjustment()

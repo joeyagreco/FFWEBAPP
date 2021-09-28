@@ -83,32 +83,6 @@ def headToHeadStats(leagueId, year):
                                given_team_2_id=team2Id, selected_year=year, error_message=message)
 
 
-@app.route("/league-stats/<int:leagueId>/<year>", methods=["GET"])
-@app.route("/league-stats/<int:leagueId>", defaults={"year": None}, methods=["GET"])
-def leagueStats(leagueId, year):
-    statSelection = request.args.get("stat_selection")
-    statOptions = Constants.LEAGUE_STATS_STAT_TITLES
-    if statSelection is None:
-        statSelection = statOptions[0]
-    mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    leagueModelOrError = mainController.getLeagueModel(leagueId)
-    if year is None:
-        # give most recent year if none is given
-        years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
-        year = years[-1]
-        yearList = [year]
-    elif year == "0":
-        # give them all years (ALL TIME)
-        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
-    else:
-        yearList = [year]
-    statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, yearList, statSelection)
-    return render_template("leagueStatsPage.html", league=leagueOrError, stat_options=statOptions,
-                           selected_stat=statSelection, stats_models=statsModelOrError, selected_year=year,
-                           constants=Constants)
-
-
 @app.route("/graphs/<int:leagueId>/<year>", methods=["GET"])
 @app.route("/graphs/<int:leagueId>", defaults={"year": None}, methods=["GET"])
 def graphs(leagueId, year):
@@ -155,21 +129,3 @@ def statsExplained(leagueId):
                            purpose_div=statInfo[0],
                            formula_div=statInfo[1],
                            formula_explained_div=statInfo[2])
-
-
-@app.route("/test", methods=["GET"])
-def test():
-    leagueId = 746608
-    statOptions = Constants.LEAGUE_STATS_STAT_TITLES
-    statSelection = statOptions[0]
-    mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    leagueModelOrError = mainController.getLeagueModel(leagueId)
-    # give most recent year if none is given
-    years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
-    year = years[-1]
-    yearList = [year]
-    statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, yearList, statSelection)
-    return render_template("league_stats/leagueStatsBase.html", league=leagueOrError, stat_options=statOptions,
-                           selected_stat=statSelection, stats_models=statsModelOrError, selected_year=year,
-                           constants=Constants)

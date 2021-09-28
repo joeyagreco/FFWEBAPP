@@ -42,7 +42,7 @@ class TestSmartCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         smartCalculator2020 = SmartCalculator(leagueModel, [2020])
         smartCalculator2021 = SmartCalculator(leagueModel, [2021])
@@ -79,7 +79,7 @@ class TestSmartCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         smartCalculator = SmartCalculator(leagueModel, [2020])
         smartWins2 = smartCalculator.getSmartWinsOfScoresList([100, 100])
@@ -108,7 +108,7 @@ class TestSmartCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         smartCalculator = SmartCalculator(leagueModel, [2020])
         swa2 = smartCalculator.getSmartWinsAdjustmentOfScores([100, 100], 1)
@@ -116,4 +116,3 @@ class TestSmartCalculator(unittest.TestCase):
         self.assertIsInstance(swa2, float)
         self.assertEqual(-0.18, swa2)
         self.assertEqual(-0.18, swaDefault)
-

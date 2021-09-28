@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="statDropdown">
-            {% for stat in stat_options %}
+            {% for stat in constants.LEAGUE_STATS_STAT_TITLES %}
             {% if stat == selected_stat %}
             <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="stat_selection" type="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,7 +81,7 @@
             {% endif %}
             {% endfor %}
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for stat in stat_options %}
+                {% for stat in constants.LEAGUE_STATS_STAT_TITLES %}
                 {% if stat == selected_stat %}
                 <a class="dropdown-item active" href="#" onclick="submitLeagueStat({{selected_year}}, '{{stat}}')">{{stat}}</a>
                 {% else %}
@@ -246,6 +246,10 @@
 <script>
     initializeTables();
     makeLeagueAveragesSquareCss();
+
+
+
+
 
 
 

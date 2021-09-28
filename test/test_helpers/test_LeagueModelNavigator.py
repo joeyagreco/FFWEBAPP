@@ -25,7 +25,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         team1_2020 = LeagueModelNavigator.getTeamById(leagueModel, 2020, 1)
         self.assertEqual("team1", team1_2020.getTeamName())
@@ -64,7 +64,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         self.assertTrue(LeagueModelNavigator.teamsPlayEachOther(leagueModel, [2020], 1, 2))
         self.assertFalse(LeagueModelNavigator.teamsPlayEachOther(leagueModel, [2020], 1, 3))
@@ -89,7 +89,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         team1GamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, [2020], 1)
         team2GamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, [2020], 2)
@@ -133,7 +133,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         totalLeaguePoints1 = LeagueModelNavigator.totalLeaguePoints(leagueModel, [2020], throughWeek=1)
         totalLeaguePoints2 = LeagueModelNavigator.totalLeaguePoints(leagueModel, [2020], throughWeek=2)
@@ -166,7 +166,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         totalTeamPoints1_1 = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1, throughWeek=1)
         totalTeamPoints1_2 = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1, throughWeek=2)
@@ -222,7 +222,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         allScores1 = LeagueModelNavigator.getAllScoresInLeague(leagueModel, [2020], throughWeek=1)
         allScores2 = LeagueModelNavigator.getAllScoresInLeague(leagueModel, [2020], throughWeek=2)
@@ -252,7 +252,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         allScores1_1 = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, [2020], 1, throughWeek=1)
         allScores1_2 = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, [2020], 1, throughWeek=2)
@@ -291,7 +291,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         numberOfWeeks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, 2020)
         numberOfWeeksAsList = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, 2020, asList=True)
@@ -315,7 +315,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         allTeamIds = LeagueModelNavigator.getAllTeamIdsInLeague(leagueModel, 2020)
         allTeamIds_exclude1 = LeagueModelNavigator.getAllTeamIdsInLeague(leagueModel, 2020, excludeIds=[1])
@@ -344,7 +344,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         weeks1_vs2 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 2020, 1, [2])
         weeks1_vs3 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 2020, 1, [3])
@@ -380,7 +380,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         team1_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2020, 1)
         team2_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2020, 2)

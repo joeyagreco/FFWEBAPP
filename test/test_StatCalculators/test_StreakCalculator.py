@@ -48,7 +48,7 @@ class TestStreakCalculator(unittest.TestCase):
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
         year0 = YearModel(0, teamList, None)
-        yearDict = {"0": year0, 2020: year2020, 2021: year2021}
+        yearDict = {"0": year0, "2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         winStreaks_2020 = StreakCalculator(leagueModel, [2020]).getAllWinStreaks()
         winStreaks_2021 = StreakCalculator(leagueModel, [2021]).getAllWinStreaks()
@@ -112,7 +112,7 @@ class TestStreakCalculator(unittest.TestCase):
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
         year0 = YearModel(0, teamList, None)
-        yearDict = {"0": year0, 2020: year2020, 2021: year2021}
+        yearDict = {"0": year0, "2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         lossStreaks_2020 = StreakCalculator(leagueModel, [2020]).getAllLossStreaks()
         lossStreaks_2021 = StreakCalculator(leagueModel, [2021]).getAllLossStreaks()

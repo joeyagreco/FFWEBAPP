@@ -11,7 +11,14 @@ function submitLeagueStat(year, leagueStat) {
     if(leagueStat == "Owner Comparison") {
         year = 0;
     }
-    window.location = "/league-stats/"+leagueId+"/"+year+"?stat_selection="+leagueStat;
+    leagueStat = formatStatSelection(leagueStat);
+    window.location = "/league-stats/"+leagueId+"/"+year+"/"+leagueStat;
+}
+
+function formatStatSelection(statSelection) {
+    // Removes spaces from the given string and replaces them with hyphens
+    // Example: "this is my string" -> "this-is-my-string"
+    return statSelection.replaceAll(" ", "-").toLowerCase();
 }
 
 function lockYearDropdownToAllTime() {
