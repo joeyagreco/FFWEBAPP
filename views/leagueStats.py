@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import redirect, url_for, render_template
 
 from app import app
 from controllers.MainController import MainController
@@ -38,9 +38,10 @@ def marginsOfVictory(leagueId, year):
                            constants=Constants)
 
 
-@app.route("/league-stats/<int:leagueId>/0/owner-comparison", methods=["GET"])
-def ownerComparison(leagueId):
-    year = "0"
+@app.route("/league-stats/<int:leagueId>/<year>/owner-comparison", methods=["GET"])
+def ownerComparison(leagueId, year):
+    if year != "0":
+        return redirect(url_for("ownerComparison", leagueId=leagueId, year="0"))
     league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.OWNER_COMPARISON_STAT_TITLE)
     return render_template("leagueStatsPage.html", league=league, selected_stat=Constants.OWNER_COMPARISON_STAT_TITLE,
                            stats_models=statsModel, selected_year=year,

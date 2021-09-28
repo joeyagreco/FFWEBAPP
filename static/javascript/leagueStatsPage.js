@@ -7,10 +7,6 @@ function submitLeagueStat(year, leagueStat) {
     if(!leagueStat) {
         leagueStat = document.getElementById("stat_selection").value;
     }
-    // check if the selected stat is an "ALWAYS ALL TIME" stat
-    if(leagueStat == "Owner Comparison") {
-        year = 0;
-    }
     leagueStat = formatStatSelection(leagueStat);
     window.location = "/league-stats/"+leagueId+"/"+year+"/"+leagueStat;
 }
