@@ -77,24 +77,6 @@ def leagueStats(leagueId):
                            constants=Constants)
 
 
-@app.route("/test", methods=["GET"])
-def test():
-    leagueId = 152168
-    statOptions = Constants.LEAGUE_STATS_STAT_TITLES
-    statSelection = statOptions[0]
-    mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    leagueModelOrError = mainController.getLeagueModel(leagueId)
-    # give most recent year
-    years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
-    year = years[-1]
-    yearList = [year]
-    statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, yearList, statSelection)
-    return render_template("league_stats/leagueStatsBase.html", league=leagueOrError, selected_stat=statSelection,
-                           stats_models=statsModelOrError, selected_year=year,
-                           constants=Constants)
-
-
 def __getLeagueAndStatsModel(leagueId, year, statSelection):
     statOptions = Constants.LEAGUE_STATS_STAT_TITLES
     if statSelection is None:
