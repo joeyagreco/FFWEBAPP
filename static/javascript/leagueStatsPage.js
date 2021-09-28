@@ -21,12 +21,6 @@ function formatStatSelection(statSelection) {
     return statSelection.replaceAll(" ", "-").toLowerCase();
 }
 
-function lockYearDropdownToAllTime() {
-    var yearDropdownElement = document.getElementById("select_year_button");
-    yearDropdownElement.disabled = true;
-    yearDropdownElement.classList.add("disabled");
-}
-
 function makeLeagueAveragesSquareCss() {
     // makes the height = width on all .averageBlock divs
     var allAverageBlocks = document.getElementsByClassName("averageBlock");

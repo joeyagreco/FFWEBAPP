@@ -38,12 +38,13 @@ def marginsOfVictory(leagueId, year):
                            constants=Constants)
 
 
-@app.route("/league-stats/<int:leagueId>/<year>/owner-comparison", methods=["GET"])
-def ownerComparison(leagueId, year):
+@app.route("/league-stats/<int:leagueId>/0/owner-comparison", methods=["GET"])
+def ownerComparison(leagueId):
+    year = "0"
     league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.OWNER_COMPARISON_STAT_TITLE)
     return render_template("leagueStatsPage.html", league=league, selected_stat=Constants.OWNER_COMPARISON_STAT_TITLE,
                            stats_models=statsModel, selected_year=year,
-                           constants=Constants)
+                           constants=Constants, disable_year_dropdown=True)
 
 
 @app.route("/league-stats/<int:leagueId>/<year>/winning-streaks", methods=["GET"])

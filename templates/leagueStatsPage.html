@@ -44,7 +44,10 @@
 <div class="dropdownSelectionAndTable">
     <div class="dropdowns">
         <div class="yearDropdown">
-            <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="select_year_button" type="button"
+            {% if disable_year_dropdown %}
+            <!-- disable year dropdown-->
+            <button class="btn btn-secondary dropdown-toggle primaryButtonColors disabled" id="select_year_button"
+                    type="button"
                     value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {% if selected_year == '0' %}
                 All Time
@@ -52,6 +55,17 @@
                 {{selected_year}}
                 {% endif %}
             </button>
+            {% else %}
+            <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="select_year_button"
+                    type="button"
+                    value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% if selected_year == '0' %}
+                All Time
+                {% else %}
+                {{selected_year}}
+                {% endif %}
+            </button>
+            {% endif %}
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {% for year in league.years.keys()|sort %}
                 {% if year == selected_year|string %}
@@ -246,6 +260,9 @@
 <script>
     initializeTables();
     makeLeagueAveragesSquareCss();
+
+
+
 
 
 
