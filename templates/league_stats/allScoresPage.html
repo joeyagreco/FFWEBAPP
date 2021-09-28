@@ -1,0 +1,40 @@
+{% extends "league_stats/leagueStatsBase.html" %}
+
+{% block leagueStatsHead %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/league_stats/allScoresPage.css') }}">
+<script src="{{ url_for('static', filename='javascript/league_stats/allScoresPage.js') }}"></script>
+{% endblock %}
+
+
+{% block leagueStatContent %}
+<div class="tableContainer">
+    <table class="table table-fluid compact statsTable" id="all_scores_table">
+        <thead>
+        <tr>
+            <th>Score</th>
+            <th>Outcome</th>
+            <th>Team For</th>
+            <th>Team Against</th>
+            <th>Week</th>
+            <th>Year</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for leagueStat in stats_models %}
+        <tr class="backgroundTeamId{{leagueStat.getTeamFor().getTeamId()}}">
+            <td>{{leagueStat.getScore()}}</td>
+            <td>{{leagueStat.getOutcome()}}</td>
+            <td>{{leagueStat.getTeamFor().getTeamName()}}</td>
+            <td>{{leagueStat.getTeamAgainst().getTeamName()}}</td>
+            <td>{{leagueStat.getWeek()}}</td>
+            <td>{{leagueStat.getYear()}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    initializeTable();
+
+</script>
+{% endblock %}
