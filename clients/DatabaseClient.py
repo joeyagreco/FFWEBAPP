@@ -1,9 +1,10 @@
 import os
 import random
+import ssl
+from datetime import datetime
 
 from dotenv import load_dotenv
 from pymongo import MongoClient
-from datetime import datetime
 
 from helpers.Error import Error
 
@@ -16,7 +17,7 @@ class DatabaseClient:
     """
 
     def __init__(self):
-        self.__cluster = MongoClient(os.getenv("DATABASE_CLUSTER"))
+        self.__cluster = MongoClient(os.getenv("DATABASE_CLUSTER"), ssl=True, ssl_cert_reqs=ssl.CERT_NONE)
         self.__database = self.__cluster[os.getenv("DATABASE_DATABASE")]
         self.__collection = self.__database[os.getenv("DATABASE_COLLECTION")]
 
@@ -50,7 +51,7 @@ class DatabaseClient:
         """
         # set "year 0", which will be the "all time" year selection
         owners = []
-        for i in range(1, len(teams)+1):
+        for i in range(1, len(teams) + 1):
             owners.append({"teamId": i, "teamName": f"Owner {i}"})
         year0 = {"year": 0, "teams": owners, "weeks": None}
         # get the current year and set it as default
