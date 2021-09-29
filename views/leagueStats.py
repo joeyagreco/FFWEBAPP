@@ -27,7 +27,8 @@ def leagueAverages(leagueId, year):
 @app.route("/league-stats/<int:leagueId>/<year>/losing-streaks", methods=["GET"])
 def losingStreaks(leagueId, year):
     league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.LOSING_STREAKS_STAT_TITLE)
-    return render_template("leagueStatsPage.html", league=league, selected_stat=Constants.LOSING_STREAKS_STAT_TITLE,
+    return render_template("league_stats/losingStreaksPage.html", league=league,
+                           selected_stat=Constants.LOSING_STREAKS_STAT_TITLE,
                            stats_models=statsModel, selected_year=year,
                            constants=Constants)
 
