@@ -18,6 +18,7 @@ class StreakCalculator:
         """
         streakModelList = []
         allTeamIds = LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, self.__years[0])
+        mostRecentYear = LeagueModelNavigator.getMostRecentYear(self.__leagueModel, asInt=True)
         for teamId in allTeamIds:
             currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             for year in self.__years:
@@ -35,7 +36,6 @@ class StreakCalculator:
                                     currentStreakModelDict["streakNumber"] += 1
                                     currentStreakModelDict["endDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["endTeam"] = tmpTeam
-                                    currentStreakModelDict["ongoing"] = True
                                 else:
                                     # no current streak, start one
                                     # initialize tmp streak dict
@@ -58,7 +58,14 @@ class StreakCalculator:
                                 currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             # check if we are currently on a streak and if so, add to streak return list
             if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
-                # valid streak, get StreakModel and add to return list
+                # valid streak, check if this streak is ongoing
+                # remove end date if ongoing
+                if currentStreakModelDict["ongoing"] and int(year) == mostRecentYear:
+                    currentStreakModelDict["ongoing"] = True
+                    currentStreakModelDict["endDate"] = ""
+                else:
+                    currentStreakModelDict["ongoing"] = False
+                # get StreakModel and add to return list
                 streakModelList.append(self.__getStreakModelFromDict(currentStreakModelDict))
         return streakModelList
 
@@ -68,6 +75,7 @@ class StreakCalculator:
         """
         streakModelList = []
         allTeamIds = LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, self.__years[0])
+        mostRecentYear = LeagueModelNavigator.getMostRecentYear(self.__leagueModel, asInt=True)
         for teamId in allTeamIds:
             currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             for year in self.__years:
@@ -85,7 +93,6 @@ class StreakCalculator:
                                     currentStreakModelDict["streakNumber"] += 1
                                     currentStreakModelDict["endDate"] = f"Week {weekNumber}, {year}"
                                     currentStreakModelDict["endTeam"] = tmpTeam
-                                    currentStreakModelDict["ongoing"] = True
                                 else:
                                     # no current streak, start one
                                     # initialize tmp streak dict
@@ -108,7 +115,14 @@ class StreakCalculator:
                                 currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             # check if we are currently on a streak and if so, add to streak return list
             if currentStreakModelDict["streakNumber"] is not None and currentStreakModelDict["streakNumber"] > 1:
-                # valid streak, get StreakModel and add to return list
+                # valid streak, check if this streak is ongoing
+                # remove end date if ongoing
+                if currentStreakModelDict["ongoing"] and int(year) == mostRecentYear:
+                    currentStreakModelDict["ongoing"] = True
+                    currentStreakModelDict["endDate"] = ""
+                else:
+                    currentStreakModelDict["ongoing"] = False
+                # get StreakModel and add to return list
                 streakModelList.append(self.__getStreakModelFromDict(currentStreakModelDict))
         return streakModelList
 

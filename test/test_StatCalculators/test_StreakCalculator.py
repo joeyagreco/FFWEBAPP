@@ -74,6 +74,49 @@ class TestStreakCalculator(unittest.TestCase):
         self.assertTrue(winStreaks_2021[-1].getOngoing())
         self.assertFalse(winStreaks_bothYears[0].getOngoing())
 
+    def test_getWinStreaks_nonCurrentYearCantBeOngoing(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 90.5, 200)
+        matchup2 = MatchupModel(2, team3, team4, 120.1, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 99, 200)
+        matchup2 = MatchupModel(2, team3, team4, 60, 50.01)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 110.2, 200)
+        matchup2 = MatchupModel(2, team3, team4, 0, 50.01)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week3 = WeekModel(3, matchupList)
+        weekList = [week1, week2, week3]
+        year2020 = YearModel(2020, teamList, weekList)
+        matchup1 = MatchupModel(1, team1, team2, 102, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 110.5, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100.5, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 100.1, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year2021 = YearModel(2021, teamList, weekList)
+        year0 = YearModel(0, teamList, None)
+        yearDict = {"0": year0, "2020": year2020, "2021": year2021}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        winStreaks_bothYears = StreakCalculator(leagueModel, [2020, 2021]).getAllWinStreaks()
+        self.assertFalse(winStreaks_bothYears[0].getOngoing())
+
     def test_getLossStreaks(self):
         team1 = TeamModel(1, "team1")
         team2 = TeamModel(2, "team2")
@@ -137,3 +180,46 @@ class TestStreakCalculator(unittest.TestCase):
         self.assertEqual("team2", lossStreaks_bothYears[0].getEndTeam().getTeamName())
         self.assertTrue(lossStreaks_2021[-1].getOngoing())
         self.assertFalse(lossStreaks_2020[1].getOngoing())
+
+    def test_getLossStreaks_nonCurrentYearCantBeOngoing(self):
+        team1 = TeamModel(1, "team1")
+        team2 = TeamModel(2, "team2")
+        team3 = TeamModel(3, "team3")
+        team4 = TeamModel(4, "team4")
+        team5 = TeamModel(5, "team5")
+        team6 = TeamModel(6, "team6")
+        teamList = [team1, team2, team3, team4, team5, team6]
+        matchup1 = MatchupModel(1, team1, team2, 90.5, 0)
+        matchup2 = MatchupModel(2, team3, team4, 120.1, 0)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 99, 0)
+        matchup2 = MatchupModel(2, team3, team4, 60, 50.01)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 110.2, 0)
+        matchup2 = MatchupModel(2, team3, team4, 0, 50.01)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week3 = WeekModel(3, matchupList)
+        weekList = [week1, week2, week3]
+        year2020 = YearModel(2020, teamList, weekList)
+        matchup1 = MatchupModel(1, team1, team2, 102, 200)
+        matchup2 = MatchupModel(2, team3, team4, 110.5, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week1 = WeekModel(1, matchupList)
+        matchup1 = MatchupModel(1, team1, team2, 100.5, 100.5)
+        matchup2 = MatchupModel(2, team3, team4, 100.1, 100)
+        matchup3 = MatchupModel(3, team5, team6, 104, 105)
+        matchupList = [matchup1, matchup2, matchup3]
+        week2 = WeekModel(2, matchupList)
+        weekList = [week1, week2]
+        year2021 = YearModel(2021, teamList, weekList)
+        year0 = YearModel(0, teamList, None)
+        yearDict = {"0": year0, "2020": year2020, "2021": year2021}
+        leagueModel = LeagueModel(123456, "test", 6, yearDict)
+        winStreaks_bothYears = StreakCalculator(leagueModel, [2020, 2021]).getAllLossStreaks()
+        self.assertFalse(winStreaks_bothYears[0].getOngoing())
