@@ -56,7 +56,8 @@ def ownerComparison(leagueId, year):
 @app.route("/league-stats/<int:leagueId>/<year>/winning-streaks", methods=["GET"])
 def winningStreaks(leagueId, year):
     league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.WINNING_STREAKS_STAT_TITLE)
-    return render_template("leagueStatsPage.html", league=league, selected_stat=Constants.WINNING_STREAKS_STAT_TITLE,
+    return render_template("league_stats/winningStreaksPage.html", league=league,
+                           selected_stat=Constants.WINNING_STREAKS_STAT_TITLE,
                            stats_models=statsModel, selected_year=year,
                            constants=Constants)
 
