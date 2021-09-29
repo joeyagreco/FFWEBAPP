@@ -64,19 +64,13 @@ def winningStreaks(leagueId, year):
 
 @app.route("/league-stats/<int:leagueId>", methods=["GET"])
 def leagueStats(leagueId):
-    statOptions = Constants.LEAGUE_STATS_STAT_TITLES
-    statSelection = statOptions[0]
+    # default league stats route
     mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
     # give most recent year
     years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
     year = years[-1]
-    yearList = [year]
-    statsModelOrError = mainController.getLeagueStatsModel(leagueModelOrError, yearList, statSelection)
-    return render_template("leagueStatsPage.html", league=leagueOrError, selected_stat=statSelection,
-                           stats_models=statsModelOrError, selected_year=year,
-                           constants=Constants)
+    return redirect(url_for("allScores", leagueId=leagueId, year=year))
 
 
 def __getLeagueAndStatsModel(leagueId, year, statSelection):
