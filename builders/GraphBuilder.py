@@ -1,6 +1,4 @@
-import pandas as pd
 import numpy as np
-
 import plotly.graph_objects as go
 from plotly.graph_objs import Figure
 
@@ -8,7 +6,6 @@ from helpers.Constants import Constants
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from models.league_models.LeagueModel import LeagueModel
 from packages.StatCalculators.AwalCalculator import AwalCalculator
-from packages.StatCalculators.PpgCalculator import PpgCalculator
 from packages.StatCalculators.RecordCalculator import RecordCalculator
 from packages.StatCalculators.ScoresCalculator import ScoresCalculator
 from packages.StatCalculators.StrengthOfScheduleCalculator import StrengthOfScheduleCalculator
@@ -42,8 +39,8 @@ class GraphBuilder:
         # check if on mobile
         if screenWidth <= 414:
             fig.update_layout(
-                width=width*2,
-                height=height*2,
+                width=width * 2,
+                height=height * 2,
                 showlegend=False
 
             )
@@ -112,10 +109,11 @@ class GraphBuilder:
         ssList = []
         awalList = []
         for year in years:
-            for team in leagueModel.getYears()[year].getTeams():
+            for team in leagueModel.getYears()[str(year)].getTeams():
                 recordCalculator = RecordCalculator(team.getTeamId(), leagueModel, [year])
                 scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, [year])
-                awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year], recordCalculator.getWins(), recordCalculator.getTies())
+                awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year], recordCalculator.getWins(),
+                                                recordCalculator.getTies())
                 ss = scoresCalculator.getScoringShare()
                 awal = awalCalculator.getAwal()
                 ssList.append(ss)
@@ -142,8 +140,8 @@ class GraphBuilder:
         #                          marker=dict(color="rgba(0,0,0,0.25)")
         #                          )
         #               )
-        fig.add_vline(x=sum(awalList)/len(awalList))
-        fig.add_hline(y=sum(ssList)/len(ssList))
+        fig.add_vline(x=sum(awalList) / len(awalList))
+        fig.add_hline(y=sum(ssList) / len(ssList))
         # add text to explain graph
         fig.add_annotation(x=max(awalList),
                            y=m * np.array(max(awalList)) + b,
@@ -168,8 +166,9 @@ class GraphBuilder:
         """
         data = dict()
         for year in years:
-            for team in leagueModel.getYears()[year].getTeams():
-                data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId(), andOpponentScore=True)
+            for team in leagueModel.getYears()[str(year)].getTeams():
+                data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId(),
+                                                                                    andOpponentScore=True)
         pointsForList = []
         pointsAgainstList = []
         fig = go.Figure()
@@ -195,8 +194,8 @@ class GraphBuilder:
         #                          marker=dict(color="rgba(0,0,0,0.25)")
         #                          )
         #               )
-        fig.add_vline(x=sum(pointsForList)/len(pointsForList))
-        fig.add_hline(y=sum(pointsAgainstList)/len(pointsAgainstList))
+        fig.add_vline(x=sum(pointsForList) / len(pointsForList))
+        fig.add_hline(y=sum(pointsAgainstList) / len(pointsAgainstList))
         fig.update_layout(
             xaxis=dict(title="Points For"),
             yaxis=dict(title="Points Against"),
@@ -206,7 +205,8 @@ class GraphBuilder:
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
 
     @classmethod
-    def getHtmlForStrengthOfScheduleOverScoringShareAgainst(cls, leagueModel: LeagueModel, years: list, screenWidth: float) -> str:
+    def getHtmlForStrengthOfScheduleOverScoringShareAgainst(cls, leagueModel: LeagueModel, years: list,
+                                                            screenWidth: float) -> str:
         """
         This creates a scatter plot for points scored/points against for every team in the given leagueModel.
         """
@@ -214,7 +214,7 @@ class GraphBuilder:
         sosList = []
         ssAgainstList = []
         for year in years:
-            for team in leagueModel.getYears()[year].getTeams():
+            for team in leagueModel.getYears()[str(year)].getTeams():
                 sosCalculator = StrengthOfScheduleCalculator(team.getTeamId(), leagueModel, [year])
                 scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, [year])
                 sos = sosCalculator.getStrengthOfSchedule()
@@ -241,8 +241,8 @@ class GraphBuilder:
         #                          marker=dict(color="rgba(0,0,0,0.25)")
         #                          )
         #               )
-        fig.add_vline(x=sum(sosList)/len(sosList))
-        fig.add_hline(y=sum(ssAgainstList)/len(ssAgainstList))
+        fig.add_vline(x=sum(sosList) / len(sosList))
+        fig.add_hline(y=sum(ssAgainstList) / len(ssAgainstList))
         # add text to explain graph
         fig.add_annotation(x=max(sosList),
                            y=m * np.array(max(sosList)) + b,

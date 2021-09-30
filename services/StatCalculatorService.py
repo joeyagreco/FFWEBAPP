@@ -344,7 +344,7 @@ class StatCalculatorService:
             data = dict()
             numOfWeeksList = []
             for year in years:
-                for team in leagueModel.getYears()[year].getTeams():
+                for team in leagueModel.getYears()[str(year)].getTeams():
                     data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year,
                                                                                         team.getTeamId())
                     numOfWeeksList.append(LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, year, asList=True))
@@ -356,10 +356,10 @@ class StatCalculatorService:
             data = dict()
             numOfWeeksList = []
             for year in years:
-                for team in leagueModel.getYears()[year].getTeams():
+                for team in leagueModel.getYears()[str(year)].getTeams():
                     numOfWeeksList.append(LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, year, asList=True))
                     data[team.getTeamName()] = []
-                    for week in leagueModel.getYears()[year].getWeeks():
+                    for week in leagueModel.getYears()[str(year)].getWeeks():
                         recordCalculator = RecordCalculator(team.getTeamId(), leagueModel, [year])
                         awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year],
                                                         recordCalculator.getWins(throughWeek=week.getWeekNumber()),
@@ -386,7 +386,7 @@ class StatCalculatorService:
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
             allScores = []
             for year in years:
-                for team in leagueModel.getYears()[year].getTeams():
+                for team in leagueModel.getYears()[str(year)].getTeams():
                     allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId())
             return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores) / 5), "Points Scored",
                                                     "Occurrences", Constants.FREQUENCY_OF_SCORES)
