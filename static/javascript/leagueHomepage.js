@@ -21,34 +21,34 @@ function copyUrl() {
 }
 
 function teamStatsRedirect() {
-    var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/team-stats?league_id="+leagueId;
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/team-stats/" + leagueId;
 }
 
 function headToHeadStatsRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/head-to-head-stats?league_id="+leagueId;
+    window.location = "/head-to-head-stats/" + leagueId;
 }
 
 function leagueStatsRedirect() {
-    var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/league-stats?league_id="+leagueId;
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/league-stats/"+leagueId;
 }
 
 function updateLeagueRedirect() {
-    var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/update-league?league_id="+leagueId;
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/update-league/"+leagueId;
 }
 
 function graphsRedirect() {
+    startLoading();
     var leagueId = document.getElementById("league_id").value;
     var screenWidth = window.innerWidth;
-    startLoading();
-    window.location = "/graphs?league_id="+leagueId+"&screen_width="+screenWidth;
+    window.location = "/graphs/" + leagueId + "?screen_width="+screenWidth;
 }
 
 function insertUrl() {

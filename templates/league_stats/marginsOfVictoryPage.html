@@ -1,0 +1,44 @@
+{% extends "league_stats/leagueStatsBase.html" %}
+
+{% block leagueStatsHead %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/league_stats/marginsOfVictoryPage.css') }}">
+<script src="{{ url_for('static', filename='javascript/league_stats/marginsOfVictoryPage.js') }}"></script>
+{% endblock %}
+
+
+{% block leagueStatContent %}
+<div class="tableContainer">
+    <table class="table table-fluid statsTable compact" id="margins_of_victory_table">
+        <thead>
+        <tr>
+            <th>Margin of Victory</th>
+            <th>Team For</th>
+            <th>Team For Points</th>
+            <th>Team Against</th>
+            <th>Team Against Points</th>
+            <th>Week</th>
+            <th>Year</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for leagueStat in stats_models %}
+        <tr class="backgroundTeamId{{leagueStat.getWinningTeam().getTeamId()}}">
+            <td>{{leagueStat.getMarginOfVictory()}}</td>
+            <td>{{leagueStat.getWinningTeam().getTeamName()}}</td>
+            <td>{{leagueStat.getWinningTeamPoints()}}</td>
+            <td>{{leagueStat.getLosingTeam().getTeamName()}}</td>
+            <td>{{leagueStat.getLosingTeamPoints()}}</td>
+            <td>{{leagueStat.getWeek()}}</td>
+            <td>{{leagueStat.getYear()}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    initializeTable();
+
+
+
+</script>
+{% endblock %}

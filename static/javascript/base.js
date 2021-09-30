@@ -11,7 +11,8 @@ function homeRedirect() {
       heightAuto: false
     }).then((result) => {
         if (result.isConfirmed) {
-         window.location = "/";
+            startLoading();
+            window.location = "/";
          }
     })
 }
@@ -19,25 +20,25 @@ function homeRedirect() {
 function leagueHomepageRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/league-homepage?league_id=" + leagueId;
+    window.location = "/league-homepage/" + leagueId;
 }
 
 function statExplanationRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/stats-explained?league_id=" + leagueId;
+    window.location = "/stats-explained/" + leagueId;
 }
 
 function aboutRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/about?league_id=" + leagueId;
+    window.location = "/about/" + leagueId;
 }
 
 function feedbackRedirect() {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
-    window.location = "/feedback?league_id=" + leagueId;
+    window.location = "/feedback/" + leagueId;
 }
 
 function startLoading() {

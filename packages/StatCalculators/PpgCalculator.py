@@ -20,13 +20,15 @@ class PpgCalculator:
         points = 0
         gameCount = 0
         for year in self.__years:
-            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            throughWeek = params.pop("throughWeek",
+                                     LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
             params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year, excludeIds=[self.__teamId]))
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
+                                                                                           excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.getYears()[year].getWeeks():
+            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
                 elif week.getWeekNumber() > throughWeek:
@@ -52,11 +54,12 @@ class PpgCalculator:
         points = 0
         gameCount = 0
         for year in self.__years:
-            throughWeek = params.pop("throughWeek", LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
+            throughWeek = params.pop("throughWeek",
+                                     LeagueModelNavigator.getNumberOfWeeksInLeague(self.__leagueModel, year))
             params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            for week in self.__leagueModel.getYears()[year].getWeeks():
+            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
                 elif week.getWeekNumber() > throughWeek:
@@ -72,4 +75,3 @@ class PpgCalculator:
             return 0.0
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         return Rounder.normalRound(points / gameCount, decimalPlacesRoundedTo)
-

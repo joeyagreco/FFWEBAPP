@@ -1,6 +1,6 @@
 import copy
 
-from flask import redirect, url_for, request, render_template
+from flask import redirect, url_for, render_template
 
 from app import app
 from controllers.MainController import MainController
@@ -8,9 +8,8 @@ from helpers.Error import Error
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 
 
-@app.route("/add-year", methods=["GET"])
-def addYear():
-    leagueId = int(request.args.get("league_id"))
+@app.route("/add-year/<int:leagueId>", methods=["GET"])
+def addYear(leagueId):
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     leagueModelOrError = mainController.getLeagueModel(leagueId)
@@ -30,20 +29,19 @@ def addYear():
     # now update league in database
     mainController.updateLeague(leagueId, leagueName, updatedYears)
     # TODO check for errors
-    return redirect(url_for("updateLeague", league_id=leagueId, year=newYear))
+    return redirect(url_for("updateLeague", leagueId=leagueId, year=newYear))
 
 
-@app.route("/delete-year", methods=["GET"])
-def deleteYear():
-    leagueId = int(request.args.get("league_id"))
-    selectedYear = request.args.get("selected_year")
+# TODO: use DELETE instead of GET
+@app.route("/delete-year/<int:leagueId>/<year>", methods=["GET"])
+def deleteYear(leagueId, year):
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
-    del leagueOrError["years"][selectedYear]
+    del leagueOrError["years"][year]
     updatedYears = leagueOrError["years"]
     leagueOrError = mainController.getLeague(leagueId)
     mainController.updateLeague(leagueId, leagueOrError["leagueName"], updatedYears)
     # TODO check for errors
     # find a year to return the user to
     redirectYear = sorted(list(updatedYears))[-1]
-    return redirect(url_for("updateLeague", league_id=leagueId, year=redirectYear))
+    return redirect(url_for("updateLeague", leagueId=leagueId, year=redirectYear))

@@ -1,0 +1,7 @@
+{% macro averageBlock(leagueStat, statsModels) %}
+<div class="averageBlock">
+    <div class="averageBlockTitle">{{leagueStat}}</div>
+    <hr class="statTitleLine">
+    <div class="averageBlockContent">{{statsModels[leagueStat]}}</div>
+</div>
+{% endmacro %}

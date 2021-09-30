@@ -27,7 +27,7 @@ class TestEveryGameCalculator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         everyGameCalculator = EveryGameCalculator(leagueModel, [2020])
         movs = everyGameCalculator.getAllMarginOfVictories()
@@ -55,12 +55,9 @@ class TestEveryGameCalculator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         everyGameCalculator = EveryGameCalculator(leagueModel, [2020])
         allScores = everyGameCalculator.getAllScores()
         self.assertEqual(6, len(allScores))
         self.assertIsInstance(allScores[0], ScoreModel)
-
-
-

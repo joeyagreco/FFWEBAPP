@@ -12,7 +12,7 @@ function deleteLeague() {
     }).then((result) => {
         if (result.isConfirmed) {
             var leagueId = document.getElementById("league_id").value;
-             window.location = "/delete-league?league_id="+leagueId;
+             window.location = "/delete-league/"+leagueId;
          }
     })
 }
@@ -22,7 +22,7 @@ function addUpdateWeeksRedirect() {
     var year = document.getElementById("original_year_number").value;
     startLoading();
     // GET request
-     window.location = "/add-update-weeks?league_id="+leagueId+"&year="+year;
+     window.location = "/add-update-weeks/"+leagueId+"/"+year;
 }
 
 function setOriginalValues() {
@@ -112,14 +112,14 @@ function undoChangeMade() {
     yearAddButtonElement.disabled = false;
     var addUpdateWeekButtonElement = document.getElementById("addOrUpdateWeekButton");
     addUpdateWeekButtonElement.classList.remove("disabled");
+    addUpdateWeekButtonElement.classList.remove("disabled");
     addUpdateWeekButtonElement.disabled = false;
 }
 
 function addYear() {
     var leagueId = document.getElementById("league_id").value;
-    var currentYear = document.getElementById("original_year_number").value;
     startLoading();
-    window.location = "/add-year?league_id="+leagueId+"&selected_year="+currentYear;
+    window.location = "/add-year/"+leagueId;
 }
 
 function deleteYear() {
@@ -139,7 +139,7 @@ function deleteYear() {
     }).then((result) => {
         if (result.isConfirmed) {
             startLoading();
-            window.location = "/delete-year?league_id="+leagueId+"&selected_year="+currentYear;
+            window.location = "/delete-year/"+leagueId+"/"+currentYear;
          }
     })
 }
@@ -148,7 +148,7 @@ function yearRedirect(year) {
     var leagueId = document.getElementById("league_id").value;
     startLoading();
     // GET request
-     window.location = "/update-league?league_id="+leagueId+"&year="+year;
+     window.location = "/update-league/"+leagueId+"/"+year;
 }
 
 function htmlDecode(input) {
@@ -208,11 +208,11 @@ function postLeagueChanges() {
     // validate data here
     var error = getErrorInData(data);
     if (error) {
-        window.location = "/update-league?league_id="+leagueId+"&error_message="+error;
+        window.location = "/update-league/"+leagueId+"&error_message="+error;
         return;
     }
     // send POST request
-    var fetchPromise = fetch("/update-league", {method: "POST",
+    var fetchPromise = fetch("/update-league/"+leagueId, {method: "POST",
                                                 headers: {"Content-Type": "application/json"},
                                                 body: JSON.stringify(data)});
     // redirect

@@ -1,4 +1,5 @@
 function submitLeagueStat(year, leagueStat) {
+    startLoading();
     var leagueId = document.getElementById("league_id").value;
     if(!year) {
         year = document.getElementById("select_year_button").value;
@@ -6,28 +7,14 @@ function submitLeagueStat(year, leagueStat) {
     if(!leagueStat) {
         leagueStat = document.getElementById("stat_selection").value;
     }
-    // check if the selected stat is an "ALWAYS ALL TIME" stat
-    if(leagueStat == "Owner Comparison") {
-        year = 0;
-    }
-    startLoading();
-    window.location = "/league-stats?league_id="+leagueId+"&stat_selection="+leagueStat+"&year="+year;
+    leagueStat = formatStatSelection(leagueStat);
+    window.location = "/league-stats/"+leagueId+"/"+year+"/"+leagueStat;
 }
 
-function lockYearDropdownToAllTime() {
-    var yearDropdownElement = document.getElementById("select_year_button");
-    yearDropdownElement.disabled = true;
-    yearDropdownElement.classList.add("disabled");
-}
-
-function makeLeagueAveragesSquareCss() {
-    // makes the height = width on all .averageBlock divs
-    var allAverageBlocks = document.getElementsByClassName("averageBlock");
-    var stylingInfo = allAverageBlocks[0].getBoundingClientRect();
-    for(i=0; i<allAverageBlocks.length; i++) {
-        allAverageBlocks[i].style.height = stylingInfo.width + "px";
-        console.log(allAverageBlocks[i].style.height);
-    }
+function formatStatSelection(statSelection) {
+    // Removes spaces from the given string and replaces them with hyphens
+    // Example: "this is my string" -> "this-is-my-string"
+    return statSelection.replaceAll(" ", "-").toLowerCase();
 }
 
 function initializeTables() {

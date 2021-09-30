@@ -42,7 +42,7 @@ class TestRecordCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         winsTeam1_1 = RecordCalculator(1, leagueModel, [2020]).getWins(throughWeek=1)
         winsTeam1_2 = RecordCalculator(1, leagueModel, [2020]).getWins(throughWeek=2)
@@ -98,7 +98,7 @@ class TestRecordCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         lossesTeam1_1 = RecordCalculator(1, leagueModel, [2020]).getLosses(throughWeek=1)
         lossesTeam1_2 = RecordCalculator(1, leagueModel, [2020]).getLosses(throughWeek=2)
@@ -109,7 +109,7 @@ class TestRecordCalculator(unittest.TestCase):
         lossesTeam1_allParams = RecordCalculator(1, leagueModel, [2020]).getLosses(throughWeek=1, vsTeamIds=[2])
         lossesTeam1_default = RecordCalculator(1, leagueModel, [2020]).getLosses()
         lossesTeam1_2021 = RecordCalculator(1, leagueModel, [2021]).getLosses()
-        lossesTeam1_bothYears = RecordCalculator(1, leagueModel, [2020,2021]).getLosses()
+        lossesTeam1_bothYears = RecordCalculator(1, leagueModel, [2020, 2021]).getLosses()
         self.assertIsInstance(lossesTeam1_1, int)
         self.assertEqual(1, lossesTeam1_1)
         self.assertEqual(1, lossesTeam1_2)
@@ -154,7 +154,7 @@ class TestRecordCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         tiesTeam1_1 = RecordCalculator(1, leagueModel, [2020]).getTies(throughWeek=1)
         tiesTeam1_2 = RecordCalculator(1, leagueModel, [2020]).getTies(throughWeek=2)
@@ -215,7 +215,7 @@ class TestRecordCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         winPercentageTeam1_1 = RecordCalculator(1, leagueModel, [2020]).getWinPercentage(throughWeek=1)
         winPercentageTeam1_2 = RecordCalculator(1, leagueModel, [2020]).getWinPercentage(throughWeek=2)
@@ -224,7 +224,8 @@ class TestRecordCalculator(unittest.TestCase):
         winPercentageTeam1_vs3 = RecordCalculator(1, leagueModel, [2020]).getWinPercentage(vsTeamIds=[3])
         winPercentageTeam1_only2 = RecordCalculator(1, leagueModel, [2020]).getWinPercentage(onlyWeeks=[2])
         winPercentageTeam1_only1and3 = RecordCalculator(1, leagueModel, [2020]).getWinPercentage(onlyWeeks=[1, 3])
-        winPercentageTeam1_allParams = RecordCalculator(1, leagueModel, [2020]).getWinPercentage(throughWeek=1, vsTeamIds=[2])
+        winPercentageTeam1_allParams = RecordCalculator(1, leagueModel, [2020]).getWinPercentage(throughWeek=1,
+                                                                                                 vsTeamIds=[2])
         winPercentageTeam1_default = RecordCalculator(1, leagueModel, [2020]).getWinPercentage()
         winPercentageTeam1_2021 = RecordCalculator(1, leagueModel, [2021]).getWinPercentage()
         winPercentageTeam1_bothYears = RecordCalculator(1, leagueModel, [2020, 2021]).getWinPercentage()

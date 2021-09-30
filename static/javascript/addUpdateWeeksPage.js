@@ -2,21 +2,21 @@ function addWeek() {
     startLoading();
     var leagueId = document.getElementById("league_id").value;
     var year = document.getElementById("year_number").value;
-    window.location = "/add-week?league_id="+leagueId+"&year_number="+year;
+    window.location = "/add-week/"+leagueId+"/"+year;
 }
 
 function updateWeekDropdown(weekNumber) {
     startLoading();
     var leagueId = document.getElementById("league_id").value;
     var year = document.getElementById("year_number").value;
-    window.location = "/add-update-weeks?league_id="+leagueId+"&week="+weekNumber+"&year="+year;
+    window.location = "/add-update-weeks/"+leagueId+"/"+year+"/"+weekNumber;
 }
 
 function updateLeagueRedirect() {
     startLoading();
     var leagueId = document.getElementById("league_id").value;
     var year = document.getElementById("year_number").value;
-    window.location = "/update-league?league_id="+leagueId+"&year="+year;
+    window.location = "/update-league/"+leagueId+"/"+year;
 }
 
 function deleteWeek() {
@@ -37,7 +37,7 @@ function deleteWeek() {
     }).then((result) => {
         if (result.isConfirmed) {
             startLoading();
-            window.location = "/delete-week?league_id="+leagueId+"&week="+weekNumber+"&year="+yearNumber;
+            window.location = "/delete-week/"+leagueId+"/"+yearNumber+"/"+weekNumber;
          }
     })
 }
@@ -202,7 +202,7 @@ function postWeek() {
     // validate data here
     var error = getErrorInData(data);
     if (error) {
-        window.location = "/add-update-weeks?league_id="+leagueId+"&year="+yearNumber+"&error_message="+error;
+        window.location = "/add-update-weeks/"+leagueId+"/"+yearNumber+"?error_message="+error;
         return;
     }
     // send POST request

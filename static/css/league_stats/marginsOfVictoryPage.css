@@ -1,0 +1,17 @@
+/* hard-coding styles for all league stat table */
+
+#margins_of_victory_table_length.dataTables_length {
+    background-color: transparent !important;
+}
+
+#margins_of_victory_table_filter.dataTables_filter {
+    background-color: transparent !important;
+}
+
+#margins_of_victory_table_info.dataTables_info {
+    background-color: transparent !important;
+}
+
+#margins_of_victory_table_paginate.dataTables_paginate.paging_simple_numbers {
+    background-color: transparent !important;
+}

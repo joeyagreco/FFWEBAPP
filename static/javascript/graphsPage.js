@@ -10,7 +10,7 @@ function submitYearAndGraph(year, graphName) {
         year = document.getElementById("selectYearButton").value;
     }
     startLoading();
-    window.location = "/graphs?league_id="+leagueId+"&graph_selection="+graphName+"&screen_width="+screenWidth+"&year="+year;
+    window.location = "/graphs/" + leagueId + "/" + year + "?graph_selection="+graphName+"&screen_width="+screenWidth;
 }
 
 function htmlDecode(input) {

@@ -30,7 +30,7 @@ class TestStrengthOfScheduleCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         sosTeam1 = StrengthOfScheduleCalculator(1, leagueModel, [2020]).getStrengthOfSchedule()
         sosTeam2 = StrengthOfScheduleCalculator(2, leagueModel, [2020]).getStrengthOfSchedule()
@@ -45,4 +45,3 @@ class TestStrengthOfScheduleCalculator(unittest.TestCase):
         self.assertEqual(0.1, sosTeam4)
         self.assertEqual(1.0, sosTeam5)
         self.assertEqual(0.8, sosTeam6)
-

@@ -7,11 +7,9 @@ from controllers.MainController import MainController
 from helpers.Error import Error
 
 
-@app.route("/add-update-weeks", methods=["GET"])
-def addUpdateWeeks():
-    leagueId = int(request.args.get("league_id"))
-    year = request.args.get("year")
-    week = request.args.get("week")
+@app.route("/add-update-weeks/<int:leagueId>/<year>/<week>", methods=["GET"])
+@app.route("/add-update-weeks/<int:leagueId>/<year>", defaults={"week": None}, methods=["GET"])
+def addUpdateWeeks(leagueId, year, week):
     errorMessage = request.args.get("error_message")
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
@@ -19,7 +17,7 @@ def addUpdateWeeks():
         # could not load league
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
     else:
-        if week:
+        if week is not None:
             # if we got a week passed in, render the page with that week displayed
             week = int(week)
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, selected_year=year,
@@ -108,39 +106,35 @@ def updateWeek():
         if isinstance(newLeagueOrError, Error):
             return redirect(url_for('index', error_message=newLeagueOrError.errorMessage()))
         else:
-            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"], week=weekNumber, year=yearNumber))
+            return redirect(url_for('addUpdateWeeks', leagueId=leagueOrError["_id"], year=yearNumber, week=weekNumber))
 
 
-@app.route("/add-week", methods=["GET"])
-def addWeek():
-    leagueId = int(request.args.get("league_id"))
-    yearNumber = request.args.get("year_number")
+@app.route("/add-week/<int:leagueId>/<year>", methods=["GET"])
+def addWeek(leagueId, year):
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
         return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-    weekNumber = len(leagueOrError["years"][yearNumber]["weeks"]) + 1
+    weekNumber = len(leagueOrError["years"][year]["weeks"]) + 1
     # add an empty week
     weekDict = {"weekNumber": weekNumber, "matchups": []}
     matchupIdCounter = 1
-    for i in range(1, len(leagueOrError["years"][yearNumber]["teams"]), 2):
+    for i in range(1, len(leagueOrError["years"][year]["teams"]), 2):
         matchup = {"matchupId": matchupIdCounter,
-                   "teamA": leagueOrError["years"][yearNumber]["teams"][i - 1],
-                   "teamB": leagueOrError["years"][yearNumber]["teams"][i],
+                   "teamA": leagueOrError["years"][year]["teams"][i - 1],
+                   "teamB": leagueOrError["years"][year]["teams"][i],
                    "teamAScore": None,
                    "teamBScore": None}
         matchupIdCounter += 1
         weekDict["matchups"].append(matchup)
-    leagueOrError["years"][yearNumber]["weeks"].append(weekDict)
+    leagueOrError["years"][year]["weeks"].append(weekDict)
     return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=weekNumber,
-                           selected_year=yearNumber)
+                           selected_year=year)
 
 
-@app.route("/delete-week", methods=["GET"])
-def deleteWeek():
-    leagueId = int(request.args.get("league_id"))
-    week = int(request.args.get("week"))
-    year = request.args.get("year")
+# TODO: use DELETE instead of GET
+@app.route("/delete-week/<int:leagueId>/<year>/<int:week>", methods=["GET"])
+def deleteWeek(leagueId, year, week):
     mainController = MainController()
     leagueOrError = mainController.getLeague(leagueId)
     if isinstance(leagueOrError, Error):
@@ -152,7 +146,7 @@ def deleteWeek():
         # check if week 1 already existed
         if len(leagueOrError["years"][year]["weeks"]) == 0:
             # week 1 didn't exist
-            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"], year=year))
+            return redirect(url_for('addUpdateWeeks', leagueId=leagueOrError["_id"], year=year))
         else:
             # week 1 exists
             return render_template("addUpdateWeeksPage.html", league=leagueOrError, week_number=week,
@@ -167,7 +161,7 @@ def deleteWeek():
             return redirect(url_for('index'))
         else:
             # successfully deleted week
-            return redirect(url_for('addUpdateWeeks', league_id=leagueOrError["_id"], year=year))
+            return redirect(url_for('addUpdateWeeks', leagueId=leagueOrError["_id"], year=year))
     else:
         # determine if this is an unsaved, added week that is being deleted OR a non-last week
         if week > returnWeek:

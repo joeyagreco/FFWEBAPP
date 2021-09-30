@@ -25,7 +25,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         team1_2020 = LeagueModelNavigator.getTeamById(leagueModel, 2020, 1)
         self.assertEqual("team1", team1_2020.getTeamName())
@@ -64,10 +64,10 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
-        self.assertTrue(LeagueModelNavigator.teamsPlayEachOther(leagueModel, 2020, 1, 2))
-        self.assertFalse(LeagueModelNavigator.teamsPlayEachOther(leagueModel, 2020, 1, 3))
+        self.assertTrue(LeagueModelNavigator.teamsPlayEachOther(leagueModel, [2020], 1, 2))
+        self.assertFalse(LeagueModelNavigator.teamsPlayEachOther(leagueModel, [2020], 1, 3))
 
     def test_gamesPlayedByTeam(self):
         team1 = TeamModel(1, "team1")
@@ -89,7 +89,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         team1GamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, [2020], 1)
         team2GamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, [2020], 2)
@@ -99,7 +99,8 @@ class TestLeagueModelNavigator(unittest.TestCase):
         team1GamesPlayed_vs3 = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, [2020], 1, vsTeamIds=[3])
         team1GamesPlayed_only2 = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, [2020], 1, onlyWeeks=[2])
         team1GamesPlayed_only1and2 = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, [2020], 1, onlyWeeks=[1, 2])
-        team1GamesPlayed_allParams = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, [2020], 1, throughWeek=1, vsTeamIds=[2])
+        team1GamesPlayed_allParams = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, [2020], 1, throughWeek=1,
+                                                                            vsTeamIds=[2])
         nonTeamGamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, [2020], 7)
         self.assertEqual(2, team1GamesPlayed)
         self.assertEqual(2, team2GamesPlayed)
@@ -132,7 +133,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         totalLeaguePoints1 = LeagueModelNavigator.totalLeaguePoints(leagueModel, [2020], throughWeek=1)
         totalLeaguePoints2 = LeagueModelNavigator.totalLeaguePoints(leagueModel, [2020], throughWeek=2)
@@ -165,15 +166,17 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         totalTeamPoints1_1 = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1, throughWeek=1)
         totalTeamPoints1_2 = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1, throughWeek=2)
         totalTeamPoints1_vs2 = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1, vsTeamIds=[2])
         totalTeamPoints1_vs3 = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1, vsTeamIds=[3])
         totalTeamPoints1_only2 = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1, onlyWeeks=[2])
-        totalTeamPoints1_only1and2 = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1, onlyWeeks=[1, 2])
-        totalTeamPoints1_allParams = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1, throughWeek=1, vsTeamIds=[2])
+        totalTeamPoints1_only1and2 = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1,
+                                                                                  onlyWeeks=[1, 2])
+        totalTeamPoints1_allParams = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1, throughWeek=1,
+                                                                                  vsTeamIds=[2])
         totalTeamPoints1_default = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [2020], 1)
         self.assertEqual(100, totalTeamPoints1_1)
         self.assertEqual(200, totalTeamPoints1_2)
@@ -219,7 +222,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         allScores1 = LeagueModelNavigator.getAllScoresInLeague(leagueModel, [2020], throughWeek=1)
         allScores2 = LeagueModelNavigator.getAllScoresInLeague(leagueModel, [2020], throughWeek=2)
@@ -249,7 +252,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         allScores1_1 = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, [2020], 1, throughWeek=1)
         allScores1_2 = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, [2020], 1, throughWeek=2)
@@ -257,7 +260,8 @@ class TestLeagueModelNavigator(unittest.TestCase):
         allScores1_vs3 = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, [2020], 1, vsTeamIds=[3])
         allScores1_only2 = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, [2020], 1, onlyWeeks=[2])
         allScores1_only1and2 = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, [2020], 1, onlyWeeks=[1, 2])
-        allScores1_allParams = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, [2020], 1, throughWeek=1, vsTeamIds=[2])
+        allScores1_allParams = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, [2020], 1, throughWeek=1,
+                                                                       vsTeamIds=[2])
         allScores1_default = LeagueModelNavigator.getAllScoresOfTeam(leagueModel, [2020], 1)
         self.assertIsInstance(allScores1_1, list)
         self.assertEqual(1, len(allScores1_1))
@@ -287,7 +291,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         numberOfWeeks = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, 2020)
         numberOfWeeksAsList = LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, 2020, asList=True)
@@ -311,7 +315,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week1 = WeekModel(1, matchupList)
         weekList = [week1]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         allTeamIds = LeagueModelNavigator.getAllTeamIdsInLeague(leagueModel, 2020)
         allTeamIds_exclude1 = LeagueModelNavigator.getAllTeamIdsInLeague(leagueModel, 2020, excludeIds=[1])
@@ -340,7 +344,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         weeks1_vs2 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 2020, 1, [2])
         weeks1_vs3 = LeagueModelNavigator.getAllWeeksTeamsPlayEachOther(leagueModel, 2020, 1, [3])
@@ -376,7 +380,7 @@ class TestLeagueModelNavigator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year = YearModel(2020, teamList, weekList)
-        yearDict = {2020: year}
+        yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         team1_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2020, 1)
         team2_all = LeagueModelNavigator.getListOfTeamScores(leagueModel, 2020, 2)
@@ -533,14 +537,11 @@ class TestLeagueModelNavigator(unittest.TestCase):
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         mostRecent_withEmptyYear = LeagueModelNavigator.getMostRecentYear(leagueModel)
         mostRecent_withEmptyYear_withWeeks = LeagueModelNavigator.getMostRecentYear(leagueModel, withWeeks=True)
-        mostRecent_withEmptyYear_withWeeks_asInt = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True, withWeeks=True)
+        mostRecent_withEmptyYear_withWeeks_asInt = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True,
+                                                                                          withWeeks=True)
         self.assertIsInstance(mostRecent_withEmptyYear, YearModel)
         self.assertEqual(2022, mostRecent_withEmptyYear.getYear())
         self.assertIsInstance(mostRecent_withEmptyYear_withWeeks, YearModel)
         self.assertEqual(2021, mostRecent_withEmptyYear_withWeeks.getYear())
         self.assertIsInstance(mostRecent_withEmptyYear_withWeeks_asInt, int)
         self.assertEqual(2021, mostRecent_withEmptyYear_withWeeks_asInt)
-
-
-
-

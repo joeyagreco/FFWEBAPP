@@ -9,11 +9,20 @@
 <!-- Add icon library -->
 <script src="https://kit.fontawesome.com/e509e6f024.js" crossorigin="anonymous"></script>
 <!-- bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block pageTitle %}<i class="fas fa-user-friends"></i> Head to Head Stats{% endblock %}
@@ -23,229 +32,305 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-    <div class="selectionsAndTable">
-        <div class="yearDropdown">
-            <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="selectYearButton" type="button" value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {% if selected_year == '0' %}
-                    All Time
-                {% else %}
-                    {{selected_year}}
-                {% endif %}
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for year in league.years.keys()|sort %}
-                    {% if year == selected_year|string %}
-                        {% if selected_year == '0' %}
-                            <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}}, null, null)">All Time</a>
-                        {% else %}
-                            <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}}, null, null)">{{selected_year}}</a>
-                        {% endif %}
-                    {% elif year == '0' %}
-                        <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">All Time</a>
-                    {% elif league.years[year].weeks|length > 0 %}
-                        <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
-                    {% endif %}
-                {% endfor %}
-            </div>
+<div class="selectionsAndTable">
+    <div class="yearDropdown">
+        <button class="btn btn-secondary dropdown-toggle primaryButtonColors" id="selectYearButton" type="button"
+                value="{{selected_year}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% if selected_year == '0' %}
+            All Time
+            {% else %}
+            {{selected_year}}
+            {% endif %}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% for year in league.years.keys()|sort %}
+            {% if year == selected_year|string %}
+            {% if selected_year == '0' %}
+            <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}}, null, null)">All Time</a>
+            {% else %}
+            <a class="dropdown-item active" href="#" onclick="yearRedirect({{selected_year}}, null, null)">{{selected_year}}</a>
+            {% endif %}
+            {% elif year == '0' %}
+            <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">All Time</a>
+            {% elif league.years[year].weeks|length > 0 %}
+            <a class="dropdown-item" href="#" onclick="yearRedirect({{year}})">{{year}}</a>
+            {% endif %}
+            {% endfor %}
         </div>
-        <div class="teamsAndVs">
-            <div class="team1Dropdown" id="team1Dropdown">
-                {% for team in league.years[selected_year].teams %}
-                    {% if team.teamId == given_team_1_id %}
-                        <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton hoverFade" type="button" value={{team.teamId}} id="team1button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{team.teamName}}
-                        </button>
-                    {% endif %}
-                {% endfor %}
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {% for team in league.years[selected_year].teams %}
-                        {% if team.teamId == given_team_1_id %}
-                            <a class="dropdown-item active blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
-                        {% else %}
-                            {% if not given_team_1_id %}
-                                <!--no ids given, exclude ID # 2 from this dropdown by default-->
-                                {% if team.teamId != 2 %}
-                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
-                                {% endif %}
-                            {% else %}
-                                <!--ids given, exclude givenTeam2Id from this dropdown-->
-                                {% if team.teamId != given_team_2_id %}
-                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
-                                {% endif %}
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-            <div id="vs">VS</div>
-           <div class="team2Dropdown" id="team2Dropdown">
-                {% for team in league.years[selected_year].teams %}
-                    {% if team.teamId == given_team_2_id %}
-                        <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton hoverFade" type="button" value={{team.teamId}} id="team2button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{team.teamName}}
-                        </button>
-                    {% endif %}
-                {% endfor %}
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {% for team in league.years[selected_year].teams %}
-                        {% if team.teamId == given_team_2_id %}
-                            <a class="dropdown-item active blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
-                        {% else %}
-                            {% if not given_team_2_id %}
-                                <!--no ids given, exclude ID # 2 from this dropdown by default-->
-                                {% if team.teamId != 2 %}
-                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
-                                {% endif %}
-                            {% else %}
-                                <!--ids given, exclude givenTeam1Id from this dropdown-->
-                                {% if team.teamId != given_team_1_id %}
-                                    <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#" onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
-                                {% endif %}
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        {% if stats_models %}
-            <table class="sortable statsTable" id="headToHeadTable">
-                <thead>
-                <tr>
-                    <th>Team Name</th>
-                    <th>{{constants.WINS_STAT_TITLE}}</th>
-                    <th>{{constants.LOSSES_STAT_TITLE}}</th>
-                    <th>{{constants.TIES_STAT_TITLE}}</th>
-                    <th>{{constants.WIN_PERCENTAGE_STAT_TITLE}}</th>
-                    <th>{{constants.WAL_STAT_TITLE}}</th>
-                    <th>{{constants.AWAL_STAT_TITLE}}</th>
-                    <th>{{constants.SMART_WINS_STAT_TITLE}}</th>
-                    <th>{{constants.PPG_STAT_TITLE}}</th>
-                    <th>{{constants.SCORING_SHARE_STAT_TITLE}}</th>
-                    <th>{{constants.PLUS_MINUS_STAT_TITLE}}</th>
-                    <th>{{constants.MAX_SCORE_STAT_TITLE}}</th>
-                    <th>{{constants.MIN_SCORE_STAT_TITLE}}</th>
-                    <th>{{constants.STDEV_STAT_TITLE}}</th>
-                    <th>{{constants.TEAM_SCORE_STAT_TITLE}}</th>
-                    <th>{{constants.TEAM_SUCCESS_STAT_TITLE}}</th>
-                    <th>{{constants.TEAM_LUCK_STAT_TITLE}}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for teamStats in stats_models %}
-                <tr class="backgroundTeamId{{teamStats.getTeamId()}}">
-                    <td data-label="Team Name">{{teamStats.getTeamName()}}</td>
-                    <td data-label="{{constants.WINS_STAT_TITLE}}">{{teamStats.getWins()}}</td>
-                    <td data-label="{{constants.LOSSES_STAT_TITLE}}">{{teamStats.getLosses()}}</td>
-                    <td data-label="{{constants.TIES_STAT_TITLE}}">{{teamStats.getTies()}}</td>
-                    <td data-label="{{constants.WIN_PERCENTAGE_STAT_TITLE}}">{{teamStats.getWinPercentage()}}</td>
-                    <td data-label="{{constants.WAL_STAT_TITLE}}">{{teamStats.getWal()}}</td>
-                    <td data-label="{{constants.AWAL_STAT_TITLE}}">{{teamStats.getAwal()}}</td>
-                    <td data-label="{{constants.SMART_WINS_STAT_TITLE}}">{{teamStats.getSmartWins()}}</td>
-                    <td data-label="{{constants.PPG_STAT_TITLE}}">{{teamStats.getPpg()}}</td>
-                    <td data-label="{{constants.SCORING_SHARE_STAT_TITLE}}">{{teamStats.getScoringShare()}}</td>
-                    <td data-label="{{constants.PLUS_MINUS_STAT_TITLE}}">{{teamStats.getPlusMinus()}}</td>
-                    <td data-label="{{constants.MAX_SCORE_STAT_TITLE}}">{{teamStats.getMaxScore()}}</td>
-                    <td data-label="{{constants.MIN_SCORE_STAT_TITLE}}">{{teamStats.getMinScore()}}</td>
-                    <td data-label="{{constants.STDEV_STAT_TITLE}}">{{teamStats.getStddev()}}</td>
-                    <td data-label="{{constants.TEAM_SCORE_STAT_TITLE}}">{{teamStats.getTeamScore()}}</td>
-                    <td data-label="{{constants.TEAM_SUCCESS_STAT_TITLE}}">{{teamStats.getTeamSuccess()}}</td>
-                    <td data-label="{{constants.TEAM_LUCK_STAT_TITLE}}">{{teamStats.getTeamLuck()}}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-
-            <!-- below is the structure the data will go in on mobile -->
-            <div class="mobileTableSection">
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getTeamName()}}</div>
-                    <div class="headerValueMobile">Team Name</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getTeamName()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getWins()}}</div>
-                    <div class="headerValueMobile">{{constants.WINS_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getWins()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getLosses()}}</div>
-                    <div class="headerValueMobile">{{constants.LOSSES_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getLosses()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getTies()}}</div>
-                    <div class="headerValueMobile">{{constants.TIES_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getTies()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getWinPercentage()}}</div>
-                    <div class="headerValueMobile">{{constants.WIN_PERCENTAGE_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getWinPercentage()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getWal()}}</div>
-                    <div class="headerValueMobile">{{constants.WAL_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getWal()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getAwal()}}</div>
-                    <div class="headerValueMobile">{{constants.AWAL_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getAwal()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getSmartWins()}}</div>
-                    <div class="headerValueMobile">{{constants.SMART_WINS_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getSmartWins()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getPpg()}}</div>
-                    <div class="headerValueMobile">{{constants.PPG_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getPpg()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getScoringShare()}}</div>
-                    <div class="headerValueMobile">{{constants.SCORING_SHARE_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getScoringShare()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getPlusMinus()}}</div>
-                    <div class="headerValueMobile">{{constants.PLUS_MINUS_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getPlusMinus()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getMaxScore()}}</div>
-                    <div class="headerValueMobile">{{constants.MAX_SCORE_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getMaxScore()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getMinScore()}}</div>
-                    <div class="headerValueMobile">{{constants.MIN_SCORE_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getMinScore()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getStddev()}}</div>
-                    <div class="headerValueMobile">{{constants.STDEV_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getStddev()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getTeamScore()}}</div>
-                    <div class="headerValueMobile">{{constants.TEAM_SCORE_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getTeamScore()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getTeamSuccess()}}</div>
-                    <div class="headerValueMobile">{{constants.TEAM_SUCCESS_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getTeamSuccess()}}</div>
-                </div>
-                <div class="mobileRow">
-                    <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getTeamLuck()}}</div>
-                    <div class="headerValueMobile">{{constants.TEAM_LUCK_STAT_TITLE}}</div>
-                    <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getTeamLuck()}}</div>
-                </div>
-            </div>
-        {% endif %}
-        <script>
-            setTeamDropdownWidths({{league.years[selected_year].teams|safe}});
-        </script>
     </div>
+    <div class="teamsAndVs">
+        <div class="team1Dropdown" id="team1Dropdown">
+            {% for team in league.years[selected_year|string].teams %}
+            {% if team.teamId == given_team_1_id %}
+            <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton hoverFade"
+                    type="button" value={{team.teamId}} id="team1button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                {{team.teamName}}
+            </button>
+            {% endif %}
+            {% endfor %}
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for team in league.years[selected_year|string].teams %}
+                {% if team.teamId == given_team_1_id %}
+                <a class="dropdown-item active blackText backgroundTeamId{{team.teamId}} hoverFade" href="#"
+                   onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
+                {% else %}
+                {% if not given_team_1_id %}
+                <!--no ids given, exclude ID # 2 from this dropdown by default-->
+                {% if team.teamId != 2 %}
+                <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#"
+                   onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
+                {% endif %}
+                {% else %}
+                <!--ids given, exclude givenTeam2Id from this dropdown-->
+                {% if team.teamId != given_team_2_id %}
+                <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#"
+                   onclick="yearRedirect({{selected_year}}, {{team.teamId}}, null)">{{team.teamName}}</a>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div id="vs">VS</div>
+        <div class="team2Dropdown" id="team2Dropdown">
+            {% for team in league.years[selected_year|string].teams %}
+            {% if team.teamId == given_team_2_id %}
+            <button class="btn btn-secondary dropdown-toggle teamSelectButton blackText backgroundTeamId{{team.teamId}} teamDropdownButton hoverFade"
+                    type="button" value={{team.teamId}} id="team2button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                {{team.teamName}}
+            </button>
+            {% endif %}
+            {% endfor %}
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for team in league.years[selected_year|string].teams %}
+                {% if team.teamId == given_team_2_id %}
+                <a class="dropdown-item active blackText backgroundTeamId{{team.teamId}} hoverFade" href="#"
+                   onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
+                {% else %}
+                {% if not given_team_2_id %}
+                <!--no ids given, exclude ID # 2 from this dropdown by default-->
+                {% if team.teamId != 2 %}
+                <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#"
+                   onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
+                {% endif %}
+                {% else %}
+                <!--ids given, exclude givenTeam1Id from this dropdown-->
+                {% if team.teamId != given_team_1_id %}
+                <a class="dropdown-item blackText backgroundTeamId{{team.teamId}} hoverFade" href="#"
+                   onclick="yearRedirect({{selected_year}}, null, {{team.teamId}})">{{team.teamName}}</a>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% if stats_models %}
+    <table class="sortable statsTable" id="headToHeadTable">
+        <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>{{constants.WINS_STAT_TITLE}}</th>
+            <th>{{constants.LOSSES_STAT_TITLE}}</th>
+            <th>{{constants.TIES_STAT_TITLE}}</th>
+            <th>{{constants.WIN_PERCENTAGE_STAT_TITLE}}</th>
+            <th>{{constants.WAL_STAT_TITLE}}</th>
+            <th>{{constants.AWAL_STAT_TITLE}}</th>
+            <th>{{constants.SMART_WINS_STAT_TITLE}}</th>
+            <th>{{constants.PPG_STAT_TITLE}}</th>
+            <th>{{constants.SCORING_SHARE_STAT_TITLE}}</th>
+            <th>{{constants.PLUS_MINUS_STAT_TITLE}}</th>
+            <th>{{constants.MAX_SCORE_STAT_TITLE}}</th>
+            <th>{{constants.MIN_SCORE_STAT_TITLE}}</th>
+            <th>{{constants.STDEV_STAT_TITLE}}</th>
+            <th>{{constants.TEAM_SCORE_STAT_TITLE}}</th>
+            <th>{{constants.TEAM_SUCCESS_STAT_TITLE}}</th>
+            <th>{{constants.TEAM_LUCK_STAT_TITLE}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for teamStats in stats_models %}
+        <tr class="backgroundTeamId{{teamStats.getTeamId()}}">
+            <td data-label="Team Name">{{teamStats.getTeamName()}}</td>
+            <td data-label="{{constants.WINS_STAT_TITLE}}">{{teamStats.getWins()}}</td>
+            <td data-label="{{constants.LOSSES_STAT_TITLE}}">{{teamStats.getLosses()}}</td>
+            <td data-label="{{constants.TIES_STAT_TITLE}}">{{teamStats.getTies()}}</td>
+            <td data-label="{{constants.WIN_PERCENTAGE_STAT_TITLE}}">{{teamStats.getWinPercentage()}}</td>
+            <td data-label="{{constants.WAL_STAT_TITLE}}">{{teamStats.getWal()}}</td>
+            <td data-label="{{constants.AWAL_STAT_TITLE}}">{{teamStats.getAwal()}}</td>
+            <td data-label="{{constants.SMART_WINS_STAT_TITLE}}">{{teamStats.getSmartWins()}}</td>
+            <td data-label="{{constants.PPG_STAT_TITLE}}">{{teamStats.getPpg()}}</td>
+            <td data-label="{{constants.SCORING_SHARE_STAT_TITLE}}">{{teamStats.getScoringShare()}}</td>
+            <td data-label="{{constants.PLUS_MINUS_STAT_TITLE}}">{{teamStats.getPlusMinus()}}</td>
+            <td data-label="{{constants.MAX_SCORE_STAT_TITLE}}">{{teamStats.getMaxScore()}}</td>
+            <td data-label="{{constants.MIN_SCORE_STAT_TITLE}}">{{teamStats.getMinScore()}}</td>
+            <td data-label="{{constants.STDEV_STAT_TITLE}}">{{teamStats.getStddev()}}</td>
+            <td data-label="{{constants.TEAM_SCORE_STAT_TITLE}}">{{teamStats.getTeamScore()}}</td>
+            <td data-label="{{constants.TEAM_SUCCESS_STAT_TITLE}}">{{teamStats.getTeamSuccess()}}</td>
+            <td data-label="{{constants.TEAM_LUCK_STAT_TITLE}}">{{teamStats.getTeamLuck()}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- below is the structure the data will go in on mobile -->
+    <div class="mobileTableSection">
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getTeamName()}}
+            </div>
+            <div class="headerValueMobile">Team Name</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getTeamName()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getWins()}}
+            </div>
+            <div class="headerValueMobile">{{constants.WINS_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getWins()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getLosses()}}
+            </div>
+            <div class="headerValueMobile">{{constants.LOSSES_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getLosses()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getTies()}}
+            </div>
+            <div class="headerValueMobile">{{constants.TIES_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getTies()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getWinPercentage()}}
+            </div>
+            <div class="headerValueMobile">{{constants.WIN_PERCENTAGE_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getWinPercentage()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getWal()}}
+            </div>
+            <div class="headerValueMobile">{{constants.WAL_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getWal()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getAwal()}}
+            </div>
+            <div class="headerValueMobile">{{constants.AWAL_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getAwal()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getSmartWins()}}
+            </div>
+            <div class="headerValueMobile">{{constants.SMART_WINS_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getSmartWins()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getPpg()}}
+            </div>
+            <div class="headerValueMobile">{{constants.PPG_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getPpg()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getScoringShare()}}
+            </div>
+            <div class="headerValueMobile">{{constants.SCORING_SHARE_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getScoringShare()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getPlusMinus()}}
+            </div>
+            <div class="headerValueMobile">{{constants.PLUS_MINUS_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getPlusMinus()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getMaxScore()}}
+            </div>
+            <div class="headerValueMobile">{{constants.MAX_SCORE_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getMaxScore()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getMinScore()}}
+            </div>
+            <div class="headerValueMobile">{{constants.MIN_SCORE_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getMinScore()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getStddev()}}
+            </div>
+            <div class="headerValueMobile">{{constants.STDEV_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getStddev()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getTeamScore()}}
+            </div>
+            <div class="headerValueMobile">{{constants.TEAM_SCORE_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getTeamScore()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getTeamSuccess()}}
+            </div>
+            <div class="headerValueMobile">{{constants.TEAM_SUCCESS_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getTeamSuccess()}}
+            </div>
+        </div>
+        <div class="mobileRow">
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
+                {{stats_models[0].getTeamLuck()}}
+            </div>
+            <div class="headerValueMobile">{{constants.TEAM_LUCK_STAT_TITLE}}</div>
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
+                {{stats_models[1].getTeamLuck()}}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <script>
+        setTeamDropdownWidths({{league.years[selected_year|string].teams|safe}});
+
+    </script>
+</div>
 {% endblock %}

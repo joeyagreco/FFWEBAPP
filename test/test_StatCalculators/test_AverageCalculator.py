@@ -42,7 +42,7 @@ class TestAverageCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         averageScore_allYears = AverageCalculator(leagueModel, [2020, 2021]).getAverageScore()
         averageScore_2020 = AverageCalculator(leagueModel, [2020]).getAverageScore()
@@ -86,7 +86,7 @@ class TestAverageCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         averageScore_allYears = AverageCalculator(leagueModel, [2020, 2021]).getAverageScoreInWins()
         averageScore_2020 = AverageCalculator(leagueModel, [2020]).getAverageScoreInWins()
@@ -130,7 +130,7 @@ class TestAverageCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         averageScore_allYears = AverageCalculator(leagueModel, [2020, 2021]).getAverageScoreInLosses()
         averageScore_2020 = AverageCalculator(leagueModel, [2020]).getAverageScoreInLosses()

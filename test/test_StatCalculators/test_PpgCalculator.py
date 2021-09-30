@@ -47,7 +47,7 @@ class TestPpgCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         ppgTeam1_1 = PpgCalculator(1, leagueModel, [2020]).getPpg(throughWeek=1)
         ppgTeam1_2 = PpgCalculator(1, leagueModel, [2020]).getPpg(throughWeek=2)
@@ -110,7 +110,7 @@ class TestPpgCalculator(unittest.TestCase):
         week2 = WeekModel(2, matchupList)
         weekList = [week1, week2]
         year2021 = YearModel(2021, teamList, weekList)
-        yearDict = {2020: year2020, 2021: year2021}
+        yearDict = {"2020": year2020, "2021": year2021}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         ppgAgainstTeam1_1 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(throughWeek=1)
         ppgAgainstTeam1_2 = PpgCalculator(1, leagueModel, [2020]).getPpgAgainst(throughWeek=2)
@@ -129,4 +129,3 @@ class TestPpgCalculator(unittest.TestCase):
         self.assertEqual(100.3, ppgAgainstTeam1_default)
         self.assertEqual(100.5, ppgAgainstTeam1_2021)
         self.assertEqual(100.38, ppgAgainstTeam1_bothYears)
-

@@ -7,6 +7,7 @@ app = Flask(__name__)
 if __name__ == "__main__":
     from views.admin import *
     from views.league import *
+    from views.leagueStats import *
     from views.stat import *
     from views.week import *
     from views.year import *
