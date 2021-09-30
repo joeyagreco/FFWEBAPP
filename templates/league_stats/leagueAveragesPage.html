@@ -1,4 +1,5 @@
 {% extends "league_stats/leagueStatsBase.html" %}
+{% from "league_stats/macros/leagueAverages.html" import averageBlock %}
 
 {% block leagueStatsHead %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/league_stats/leagueAveragesPage.css') }}">
@@ -9,11 +10,7 @@
 {% block leagueStatContent %}
 <div class="averageBlocksContainer">
     {% for leagueStat in stats_models.keys() %}
-    <div class="averageBlock">
-        <div class="averageBlockTitle">{{leagueStat}}</div>
-        <hr class="statTitleLine">
-        <div class="averageBlockContent">{{stats_models[leagueStat]}}</div>
-    </div>
+    {{averageBlock(leagueStat, stats_models)}}
     {% endfor %}
 </div>
 <script>
