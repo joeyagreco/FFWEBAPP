@@ -4,8 +4,8 @@ from flask import redirect, url_for, request, render_template
 
 from app import app
 from controllers.MainController import MainController
-from helpers.Error import Error
 from packages.Exceptions.DatabaseError import DatabaseError
+from packages.Exceptions.LeagueNotWellFormedError import LeagueNotWellFormedError
 
 
 @app.route("/add-update-weeks/<int:leagueId>/<year>/<week>", methods=["GET"])
@@ -99,7 +99,7 @@ def updateWeek():
             mainController.updateLeague(league["_id"],
                                         league["leagueName"],
                                         league["years"])
-        except DatabaseError as e:
+        except (DatabaseError, LeagueNotWellFormedError) as e:
             return redirect(url_for("addUpdateWeeks", league_id=leagueId, week=weekNumber, year=yearNumber,
                                     error_message=str(e)))
         return redirect(url_for('addUpdateWeeks', leagueId=league["_id"], year=yearNumber, week=weekNumber))
@@ -139,7 +139,6 @@ def deleteWeek(leagueId, year, week):
         return render_template("indexHomepage.html", error_message=str(e))
     # don't allow user to delete week 1
     if week == 1:
-        error = Error("Week 1 cannot be deleted.")
         # check if week 1 already existed
         if len(league["years"][year]["weeks"]) == 0:
             # week 1 didn't exist
@@ -147,7 +146,7 @@ def deleteWeek(leagueId, year, week):
         else:
             # week 1 exists
             return render_template("addUpdateWeeksPage.html", league=league, week_number=week,
-                                   selected_year=year, error_message=error.errorMessage())
+                                   selected_year=year, error_message="Week 1 cannot be deleted.")
     # returnWeek is where the user is returned if the week is ineligible for deletion
     returnWeek = len(league["years"][year]["weeks"])
     if week == len(league["years"][year]["weeks"]):
@@ -164,6 +163,5 @@ def deleteWeek(leagueId, year, week):
             return render_template("addUpdateWeeksPage.html", league=league, week_number=returnWeek,
                                    selected_year=year)
         else:
-            error = Error("Only the most recent week can be deleted.")
             return render_template("addUpdateWeeksPage.html", league=league, week_number=returnWeek,
-                                   selected_year=year, error_message=error.errorMessage())
+                                   selected_year=year, error_message="Only the most recent week can be deleted.")

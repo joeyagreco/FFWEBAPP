@@ -6,6 +6,7 @@ from app import app
 from controllers.MainController import MainController
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from packages.Exceptions.DatabaseError import DatabaseError
+from packages.Exceptions.LeagueNotWellFormedError import LeagueNotWellFormedError
 
 
 @app.route("/add-year/<int:leagueId>", methods=["GET"])
@@ -30,7 +31,7 @@ def addYear(leagueId):
     # now update league in database
     try:
         mainController.updateLeague(leagueId, leagueName, updatedYears)
-    except DatabaseError as e:
+    except (DatabaseError, LeagueNotWellFormedError) as e:
         return render_template("indexHomepage.html", error_message=str(e))
     return redirect(url_for("updateLeague", leagueId=leagueId, year=newYear))
 
@@ -48,7 +49,7 @@ def deleteYear(leagueId, year):
     try:
         league = mainController.getLeague(leagueId)
         mainController.updateLeague(leagueId, league["leagueName"], updatedYears)
-    except DatabaseError as e:
+    except (DatabaseError, LeagueNotWellFormedError) as e:
         return render_template("indexHomepage.html", error_message=str(e))
     # find a year to return the user to
     redirectYear = sorted(list(updatedYears))[-1]

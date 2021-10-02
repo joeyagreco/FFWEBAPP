@@ -4,9 +4,9 @@ from flask import redirect, url_for, request, render_template
 
 from app import app
 from controllers.MainController import MainController
-from helpers.Error import Error
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from packages.Exceptions.DatabaseError import DatabaseError
+from packages.Exceptions.LeagueNotWellFormedError import LeagueNotWellFormedError
 
 
 @app.route("/league-homepage/<int:leagueId>", methods=["GET"])
@@ -106,9 +106,6 @@ def updateLeague(leagueId, year):
         teams = []
         for teamId in range(1, numberOfTeams + 1):
             teams.append({"teamId": int(teamId), "teamName": newDataDict[f"team_{teamId}"]})
-        if isinstance(league, Error):
-            # could not find league
-            return redirect(url_for("index", error_message=league.errorMessage()))
         years = league["years"]
         currentYear = years[originalYear]
         currentYear["year"] = int(yearNumber)
@@ -127,7 +124,7 @@ def updateLeague(leagueId, year):
         # now update league in database
         try:
             mainController.updateLeague(leagueId, leagueName, years)
-        except DatabaseError as e:
+        except (DatabaseError, LeagueNotWellFormedError) as e:
             return redirect(
                 url_for("updateLeague", leagueId=leagueId, year=originalYear, error_message=str(e)))
         # successfully updated league

@@ -1,8 +1,6 @@
 from builders.LeagueBuilder import LeagueBuilder
 from clients.DatabaseClient import DatabaseClient
-from helpers.Error import Error
 from models.league_models.LeagueModel import LeagueModel
-from packages.Verifiers.DatabaseVerifier import DatabaseVerifier
 from packages.Verifiers.LeagueDictVerifier import LeagueDictVerifier
 
 
@@ -35,14 +33,15 @@ class DatabaseService:
         """
         Returns a Document object
         Raises a DatabaseError if the league could not be updated
+        Raises a LeagueNotWellFormedError if there is an issue with league formatting
         Does checks on the updated league data
         """
-        if DatabaseVerifier.duplicateTeamNames(years):
-            return Error("Duplicate team names.")
+        if LeagueDictVerifier.duplicateTeamNames(years):
+            raise LeagueNotWellFormedError("Duplicate team names.")
         if LeagueDictVerifier.teamPlaysItself(years):
-            return Error("A team cannot play itself.")
+            raise LeagueNotWellFormedError("A team cannot play itself.")
         if LeagueDictVerifier.teamPlaysTwice(years):
-            return Error("A team can not play twice in the same week.")
+            raise LeagueNotWellFormedError("A team can not play twice in the same week.")
         return self.__databaseClient.updateLeague(leagueId, leagueName, years)
 
     def deleteLeague(self, leagueId: int) -> None:

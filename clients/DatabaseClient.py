@@ -6,7 +6,6 @@ from datetime import datetime
 from dotenv import load_dotenv
 from pymongo import MongoClient
 
-from helpers.Error import Error
 from packages.Exceptions.DatabaseError import DatabaseError
 
 load_dotenv()
@@ -81,16 +80,13 @@ class DatabaseClient:
         https://specify.io/how-tos/mongodb-update-documents
         """
         league = self.getLeague(leagueId)
-        if isinstance(league, Error):
-            return league
+        league["leagueName"] = leagueName
+        league["years"] = years
+        response = self.__collection.replace_one({"_id": leagueId}, league)
+        if response:
+            return response
         else:
-            league["leagueName"] = leagueName
-            league["years"] = years
-            response = self.__collection.replace_one({"_id": leagueId}, league)
-            if response:
-                return response
-            else:
-                raise DatabaseError(f"Could not update league with ID: {leagueId}")
+            raise DatabaseError(f"Could not update league with ID: {leagueId}")
 
     def deleteLeague(self, leagueId: int) -> None:
         """
@@ -112,13 +108,10 @@ class DatabaseClient:
         https://specify.io/how-tos/mongodb-update-documents
         """
         league = self.getLeague(leagueId)
-        if isinstance(league, Error):
+        league["years"][str(year)]["weeks"] = league["years"][str(year)]["weeks"][:-1]
+        response = self.__collection.replace_one({"_id": leagueId}, league)
+        if response:
+            league = self.getLeague(leagueId)
             return league
         else:
-            league["years"][str(year)]["weeks"] = league["years"][str(year)]["weeks"][:-1]
-            response = self.__collection.replace_one({"_id": leagueId}, league)
-            if response:
-                league = self.getLeague(leagueId)
-                return league
-            else:
-                raise DatabaseError(f"Could not delete week for league with ID: {leagueId}")
+            raise DatabaseError(f"Could not delete week for league with ID: {leagueId}")
