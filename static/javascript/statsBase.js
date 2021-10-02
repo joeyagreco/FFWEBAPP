@@ -4,6 +4,11 @@ function submitStat(stat) {
     window.location = "/stats-explained/"+leagueId+"?selected_stat="+stat;
 }
 
+function reroute(statName) {
+    var leagueId = document.getElementById("league_id").value;
+    window.location = "/stats-explained/"+leagueId+"?selected_stat="+statName;
+}
+
 function htmlDecode(input) {
     // used to get rid of escape characters that have replaced needed HTML valid characters
     var e = document.createElement('div');
