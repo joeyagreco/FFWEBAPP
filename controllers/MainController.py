@@ -11,10 +11,10 @@ class MainController:
     def __init__(self):
         self.__databaseService = DatabaseService()
 
-    def getLeague(self, leagueId: int):
+    def getLeague(self, leagueId: int) -> dict:
         return self.__databaseService.getLeague(leagueId)
 
-    def addLeague(self, leagueName: str, numberOfTeams: int):
+    def addLeague(self, leagueName: str, numberOfTeams: int) -> int:
         return self.__databaseService.addLeague(leagueName, numberOfTeams)
 
     def updateLeague(self, leagueId: int, leagueName: str, years):
@@ -23,10 +23,10 @@ class MainController:
     def deleteLeague(self, leagueId: int):
         return self.__databaseService.deleteLeague(leagueId)
 
-    def deleteWeek(self, leagueId: int, year: int):
+    def deleteWeek(self, leagueId: int, year: int) -> dict:
         return self.__databaseService.deleteWeek(leagueId, year)
 
-    def getLeagueModel(self, leagueId: int):
+    def getLeagueModel(self, leagueId: int) -> LeagueModel:
         return self.__databaseService.getLeagueModel(leagueId)
 
     @staticmethod
@@ -44,4 +44,3 @@ class MainController:
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
         return StatCalculatorService.getGraphDiv(leagueModel, years, screenWidth, graphSelection)
-

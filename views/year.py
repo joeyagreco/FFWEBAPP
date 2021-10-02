@@ -4,31 +4,34 @@ from flask import redirect, url_for, render_template
 
 from app import app
 from controllers.MainController import MainController
-from helpers.Error import Error
 from helpers.LeagueModelNavigator import LeagueModelNavigator
+from packages.Exceptions.DatabaseError import DatabaseError
 
 
 @app.route("/add-year/<int:leagueId>", methods=["GET"])
 def addYear(leagueId):
     mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    leagueModelOrError = mainController.getLeagueModel(leagueId)
-    if isinstance(leagueOrError, Error):
-        return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-    latestYear = LeagueModelNavigator.getMostRecentYear(leagueModelOrError, asInt=True)
+    try:
+        league = mainController.getLeague(leagueId)
+        leagueModel = mainController.getLeagueModel(leagueId)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
+    latestYear = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True)
     newYear = latestYear + 1
     # create new teams with names based on the owner name
-    newTeams = copy.deepcopy(leagueOrError["years"]["0"]["teams"])
+    newTeams = copy.deepcopy(league["years"]["0"]["teams"])
     for team in newTeams:
         team["teamName"] += "'s Team"
     # create a new year
     yearDict = {"year": newYear, "teams": newTeams, "weeks": []}
-    leagueOrError["years"][str(newYear)] = yearDict
-    updatedYears = leagueOrError["years"]
-    leagueName = leagueOrError["leagueName"]
+    league["years"][str(newYear)] = yearDict
+    updatedYears = league["years"]
+    leagueName = league["leagueName"]
     # now update league in database
-    mainController.updateLeague(leagueId, leagueName, updatedYears)
-    # TODO check for errors
+    try:
+        mainController.updateLeague(leagueId, leagueName, updatedYears)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     return redirect(url_for("updateLeague", leagueId=leagueId, year=newYear))
 
 
@@ -36,12 +39,17 @@ def addYear(leagueId):
 @app.route("/delete-year/<int:leagueId>/<year>", methods=["GET"])
 def deleteYear(leagueId, year):
     mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    del leagueOrError["years"][year]
-    updatedYears = leagueOrError["years"]
-    leagueOrError = mainController.getLeague(leagueId)
-    mainController.updateLeague(leagueId, leagueOrError["leagueName"], updatedYears)
-    # TODO check for errors
+    try:
+        league = mainController.getLeague(leagueId)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
+    del league["years"][year]
+    updatedYears = league["years"]
+    try:
+        league = mainController.getLeague(leagueId)
+        mainController.updateLeague(leagueId, league["leagueName"], updatedYears)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     # find a year to return the user to
     redirectYear = sorted(list(updatedYears))[-1]
     return redirect(url_for("updateLeague", leagueId=leagueId, year=redirectYear))

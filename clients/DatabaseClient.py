@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 
 from helpers.Error import Error
+from packages.Exceptions.DatabaseError import DatabaseError
 
 load_dotenv()
 
@@ -31,9 +32,10 @@ class DatabaseClient:
             newLeagueId = random.randint(100000, 999999)
         return newLeagueId
 
-    def getLeague(self, leagueId: int):
+    def getLeague(self, leagueId: int) -> dict:
         """
-        Returns a dictionary object of the league or an Error object if not inserted
+        Returns the league with the given ID
+        Raises a DatabaseError if the league cannot be found
         https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
         """
         response = self.__collection.find_one({"_id": leagueId})
@@ -41,12 +43,13 @@ class DatabaseClient:
         if response:
             return response
         else:
-            return Error(f"Could not find a league with ID: {leagueId}")
+            raise DatabaseError(f"Could not find a league with ID: {leagueId}")
 
-    def addLeague(self, leagueName: str, numberOfTeams: int, teams: list):
+    def addLeague(self, leagueName: str, numberOfTeams: int, teams: list) -> int:
         """
         Adds a league with a new generated ID to the database
-        Returns the new league's ID or an Error object if not inserted
+        Returns the new league's ID
+        Raises a DatabaseError if the league could not be added
         https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/
         """
         # set "year 0", which will be the "all time" year selection
@@ -67,12 +70,13 @@ class DatabaseClient:
         if response.acknowledged:
             return response.inserted_id
         else:
-            return Error("Could not insert into database.")
+            raise DatabaseError(f"Could not insert new league into database.")
 
     def updateLeague(self, leagueId: int, leagueName: str, years):
         """
         Updates a league with given parameters
-        Returns a Document object or an Error object if not updated
+        Returns a Document object
+        Raises a DatabaseError if the league could not be updated
         https://docs.mongodb.com/manual/reference/method/db.collection.update/
         https://specify.io/how-tos/mongodb-update-documents
         """
@@ -82,30 +86,28 @@ class DatabaseClient:
         else:
             league["leagueName"] = leagueName
             league["years"] = years
-            response = self.__collection.update({"_id": leagueId}, league)
+            response = self.__collection.replace_one({"_id": leagueId}, league)
             if response:
                 return response
             else:
-                return Error("Could not update league.")
+                raise DatabaseError(f"Could not update league with ID: {leagueId}")
 
-    def deleteLeague(self, leagueId: int):
+    def deleteLeague(self, leagueId: int) -> None:
         """
         Deletes the league with the given ID
-        Returns None if successfully deleted or an Error if not.
+        Raises a DatabaseError if the league could not be deleted
         https://docs.mongodb.com/manual/reference/method/db.collection.remove/
         """
-        response = self.__collection.remove({"_id": leagueId})
-        if response["n"] == 1:
-            # successfully deleted 1 league
-            return None
-        else:
+        response = self.__collection.delete_one({"_id": leagueId})
+        if response.deleted_count != 1:
             # could not delete the league
-            return Error("Could not delete league.")
+            raise DatabaseError(f"Could not delete league with ID: {leagueId}")
 
-    def deleteWeek(self, leagueId: int, year: int):
+    def deleteWeek(self, leagueId: int, year: int) -> dict:
         """
         Deletes the most recent week of the year in the league with the given ID
-        Returns league if successfully deleted or an Error if not.
+        Returns the league as a dictionary if successfully deleted
+        Raises a DatabaseError if the week could not be deleted
         https://docs.mongodb.com/manual/reference/method/db.collection.update/
         https://specify.io/how-tos/mongodb-update-documents
         """
@@ -114,9 +116,9 @@ class DatabaseClient:
             return league
         else:
             league["years"][str(year)]["weeks"] = league["years"][str(year)]["weeks"][:-1]
-            response = self.__collection.update({"_id": leagueId}, league)
+            response = self.__collection.replace_one({"_id": leagueId}, league)
             if response:
                 league = self.getLeague(leagueId)
                 return league
             else:
-                return Error("Could not delete week.")
+                raise DatabaseError(f"Could not delete week for league with ID: {leagueId}")

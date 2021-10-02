@@ -4,6 +4,7 @@ from app import app
 from controllers.MainController import MainController
 from helpers.Constants import Constants
 from helpers.LeagueModelNavigator import LeagueModelNavigator
+from packages.Exceptions.DatabaseError import DatabaseError
 
 
 @app.route("/league-stats/<int:leagueId>/<year>/all-scores", methods=["GET"])
@@ -66,10 +67,14 @@ def winningStreaks(leagueId, year):
 def leagueStats(leagueId):
     # default league stats route
     mainController = MainController()
-    leagueModelOrError = mainController.getLeagueModel(leagueId)
+    try:
+        leagueModel = mainController.getLeagueModel(leagueId)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     # give most recent year
-    years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+    years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
     year = years[-1]
+    # TODO: make this choose the first league stats page automatically
     return redirect(url_for("allScores", leagueId=leagueId, year=year))
 
 
@@ -78,16 +83,19 @@ def __getLeagueAndStatsModel(leagueId, year, statSelection):
     if statSelection is None:
         statSelection = statOptions[0]
     mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    leagueModelOrError = mainController.getLeagueModel(leagueId)
+    try:
+        league = mainController.getLeague(leagueId)
+        leagueModel = mainController.getLeagueModel(leagueId)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     if year is None:
         # give most recent year if none is given
-        years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
         year = years[-1]
         yearList = [year]
     elif year == "0":
         # give them all years (ALL TIME)
-        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
     else:
         yearList = [year]
-    return leagueOrError, mainController.getLeagueStatsModel(leagueModelOrError, yearList, statSelection)
+    return league, mainController.getLeagueStatsModel(leagueModel, yearList, statSelection)

@@ -2,6 +2,7 @@ from flask import redirect, url_for, request, render_template
 
 from app import app
 from controllers.MainController import MainController
+from packages.Exceptions.DatabaseError import DatabaseError
 
 
 @app.route('/favicon.ico')
@@ -21,13 +22,19 @@ def index():
 @app.route("/about/<int:leagueId>", methods=["GET"])
 def about(leagueId):
     mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    return render_template("aboutPage.html", league=leagueOrError)
+    try:
+        league = mainController.getLeague(leagueId)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
+    return render_template("aboutPage.html", league=league)
 
 
 @app.route("/feedback/<int:leagueId>", methods=["GET"])
 def feedback(leagueId):
     errorMessage = request.args.get("error_message")
     mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    return render_template("feedbackPage.html", league=leagueOrError, error_message=errorMessage)
+    try:
+        league = mainController.getLeague(leagueId)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
+    return render_template("feedbackPage.html", league=league, error_message=errorMessage)

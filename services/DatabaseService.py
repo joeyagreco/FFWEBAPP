@@ -1,6 +1,7 @@
 from builders.LeagueBuilder import LeagueBuilder
 from clients.DatabaseClient import DatabaseClient
 from helpers.Error import Error
+from models.league_models.LeagueModel import LeagueModel
 from packages.Verifiers.DatabaseVerifier import DatabaseVerifier
 from packages.Verifiers.LeagueDictVerifier import LeagueDictVerifier
 
@@ -14,10 +15,16 @@ class DatabaseService:
     def __init__(self):
         self.__databaseClient = DatabaseClient()
 
-    def getLeague(self, leagueId):
+    def getLeague(self, leagueId) -> dict:
+        # Returns the league with the given ID
+        # Raises a DatabaseError if the league cannot be found
         return self.__databaseClient.getLeague(leagueId)
 
-    def addLeague(self, leagueName: str, numberOfTeams: int):
+    def addLeague(self, leagueName: str, numberOfTeams: int) -> int:
+        """
+        Returns the added league's ID
+        Raises a DatabaseError if the league cannot be found
+        """
         # build out the teams list with default team names
         teams = []
         for x in range(1, numberOfTeams + 1):
@@ -26,8 +33,9 @@ class DatabaseService:
 
     def updateLeague(self, leagueId: int, leagueName: str, years):
         """
+        Returns a Document object
+        Raises a DatabaseError if the league could not be updated
         Does checks on the updated league data
-        Either passes the request to the client or returns an Error
         """
         if DatabaseVerifier.duplicateTeamNames(years):
             return Error("Duplicate team names.")
@@ -37,16 +45,20 @@ class DatabaseService:
             return Error("A team can not play twice in the same week.")
         return self.__databaseClient.updateLeague(leagueId, leagueName, years)
 
-    def deleteLeague(self, leagueId: int):
+    def deleteLeague(self, leagueId: int) -> None:
+        # Raises a DatabaseError if the league could not be deleted
         return self.__databaseClient.deleteLeague(leagueId)
 
-    def deleteWeek(self, leagueId: int, year: int):
+    def deleteWeek(self, leagueId: int, year: int) -> dict:
+        # Returns the league as a dictionary if successfully deleted
+        # Raises a DatabaseError if the week could not be deleted
         return self.__databaseClient.deleteWeek(leagueId, year)
 
-    def getLeagueModel(self, leagueId: int):
+    def getLeagueModel(self, leagueId: int) -> LeagueModel:
         """
         This takes in a league ID
-        It returns a Python object version of the given league or an Error
+        It returns the league model of the league with the given ID
+        Raises a DatabaseError if the league cannot be found
         """
         leagueDict = self.__databaseClient.getLeague(leagueId)
         leagueBuilder = LeagueBuilder(leagueDict)

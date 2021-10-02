@@ -3,32 +3,34 @@ from flask import request, render_template
 from app import app
 from controllers.MainController import MainController
 from helpers.Constants import Constants
-from helpers.Error import Error
 from helpers.ExplanationDivsAsStrings import ExplanationDivsAsStrings
 from helpers.LeagueModelNavigator import LeagueModelNavigator
+from packages.Exceptions.DatabaseError import DatabaseError
 
 
 @app.route("/team-stats/<int:leagueId>/<year>", methods=["GET"])
 @app.route("/team-stats/<int:leagueId>", defaults={"year": None}, methods=["GET"])
 def teamStats(leagueId, year):
     mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    if isinstance(leagueOrError, Error):
-        return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-    leagueModelOrError = mainController.getLeagueModel(leagueId)
-    if isinstance(leagueModelOrError, Error):
-        return render_template("teamStatsPage.html", league=leagueOrError,
-                               error_message=leagueModelOrError.errorMessage())
+    try:
+        league = mainController.getLeague(leagueId)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
+    try:
+        leagueModel = mainController.getLeagueModel(leagueId)
+    except DatabaseError as e:
+        return render_template("teamStatsPage.html", league=league,
+                               error_message=str(e))
     if year is None:
-        year = LeagueModelNavigator.getMostRecentYear(leagueModelOrError, asInt=True)
+        year = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True)
         yearList = [year]
     elif year == "0":
         # give them all years (ALL TIME)
-        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
     else:
         yearList = [year]
-    statsModels = mainController.getTeamStatsModel(leagueModelOrError, yearList)
-    return render_template("teamStatsPage.html", league=leagueOrError, stats_models=statsModels, constants=Constants,
+    statsModels = mainController.getTeamStatsModel(leagueModel, yearList)
+    return render_template("teamStatsPage.html", league=league, stats_models=statsModels, constants=Constants,
                            selected_year=year)
 
 
@@ -38,19 +40,21 @@ def headToHeadStats(leagueId, year):
     team1Id = request.args.get("team1")
     team2Id = request.args.get("team2")
     mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    if isinstance(leagueOrError, Error):
-        return render_template("indexHomepage.html", error_message=leagueOrError.errorMessage())
-    leagueModelOrError = mainController.getLeagueModel(leagueId)
-    if isinstance(leagueModelOrError, Error):
-        return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=None,
-                               given_team_2_id=None, error_message=leagueModelOrError.errorMessage())
+    try:
+        league = mainController.getLeague(leagueId)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
+    try:
+        leagueModel = mainController.getLeagueModel(leagueId)
+    except DatabaseError as e:
+        return render_template("headToHeadStatsPage.html", league=league, given_team_1_id=None,
+                               given_team_2_id=None, error_message=str(e))
     if year is None:
-        year = LeagueModelNavigator.getMostRecentYear(leagueModelOrError, asInt=True)
+        year = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True)
         yearList = [year]
     elif year == "0":
         # give them all years (ALL TIME)
-        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
     else:
         yearList = [year]
     if team1Id and team2Id:
@@ -61,17 +65,17 @@ def headToHeadStats(leagueId, year):
         # no submitted matchup, default to first 2 teams
         team1Id = 1
         team2Id = 2
-        for i in range(2, leagueModelOrError.getNumberOfTeams()):
-            if LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, yearList, team1Id, i):
+        for i in range(2, leagueModel.getNumberOfTeams()):
+            if LeagueModelNavigator.teamsPlayEachOther(leagueModel, yearList, team1Id, i):
                 team2Id = i
                 break
     # check if these teams/owners have played each other ever
     for y in yearList:
         # these teams/owners have played each other
-        if LeagueModelNavigator.teamsPlayEachOther(leagueModelOrError, [y], team1Id, team2Id):
+        if LeagueModelNavigator.teamsPlayEachOther(leagueModel, [y], team1Id, team2Id):
             # get the stats model
-            statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModelOrError, yearList, team1Id, team2Id)
-            return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
+            statsModelsOrError = mainController.getHeadToHeadStatsModel(leagueModel, yearList, team1Id, team2Id)
+            return render_template("headToHeadStatsPage.html", league=league, given_team_1_id=team1Id,
                                    given_team_2_id=team2Id, stats_models=statsModelsOrError, constants=Constants,
                                    selected_year=year)
         # these teams/owners have never faced each other
@@ -79,7 +83,7 @@ def headToHeadStats(leagueId, year):
         message = f"These teams did not face each other in {year}."
         if year == '0':
             message = "These owners have not faced each other ever."
-        return render_template("headToHeadStatsPage.html", league=leagueOrError, given_team_1_id=team1Id,
+        return render_template("headToHeadStatsPage.html", league=league, given_team_1_id=team1Id,
                                given_team_2_id=team2Id, selected_year=year, error_message=message)
 
 
@@ -94,21 +98,24 @@ def graphs(leagueId, year):
     if screenWidth:
         screenWidth = float(screenWidth)
     mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
-    leagueModelOrError = mainController.getLeagueModel(leagueId)
+    try:
+        league = mainController.getLeague(leagueId)
+        leagueModel = mainController.getLeagueModel(leagueId)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     if year is None:
         # give most recent year if none is given
-        years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
         year = years[-1]
         yearList = [year]
     elif year == "0":
         # give them all years (ALL TIME)
-        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModelOrError, asInts=True))
+        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
     else:
         yearList = [year]
-    divAsString = mainController.getGraphDiv(leagueModelOrError, yearList, screenWidth, selectedGraph)
+    divAsString = mainController.getGraphDiv(leagueModel, yearList, screenWidth, selectedGraph)
     graphOptions = Constants.GRAPH_OPTIONS
-    return render_template("graphsPage.html", league=leagueOrError, graph_options=graphOptions,
+    return render_template("graphsPage.html", league=league, graph_options=graphOptions,
                            selected_graph=selectedGraph, graph_div=divAsString, selected_year=year)
 
 
@@ -120,10 +127,13 @@ def statsExplained(leagueId):
     if not selectedStat:
         selectedStat = statList[0]
     mainController = MainController()
-    leagueOrError = mainController.getLeague(leagueId)
+    try:
+        league = mainController.getLeague(leagueId)
+    except DatabaseError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     statInfo = ExplanationDivsAsStrings.retrieveStatList(selectedStat)
     return render_template("statsBase.html",
-                           league=leagueOrError,
+                           league=league,
                            stat_list=statList,
                            selected_stat=selectedStat,
                            purpose_div=statInfo[0],
