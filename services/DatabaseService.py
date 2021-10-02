@@ -1,6 +1,7 @@
 from builders.LeagueBuilder import LeagueBuilder
 from clients.DatabaseClient import DatabaseClient
 from models.league_models.LeagueModel import LeagueModel
+from packages.Exceptions.LeagueNotWellFormedError import LeagueNotWellFormedError
 from packages.Verifiers.LeagueDictVerifier import LeagueDictVerifier
 
 
