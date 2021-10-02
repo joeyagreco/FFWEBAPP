@@ -42,7 +42,7 @@ class DatabaseService:
         if LeagueDictVerifier.teamPlaysItself(years):
             raise LeagueNotWellFormedError("A team cannot play itself.")
         if LeagueDictVerifier.teamPlaysTwice(years):
-            raise LeagueNotWellFormedError("A team can not play twice in the same week.")
+            raise LeagueNotWellFormedError("A team cannot play twice in the same week.")
         return self.__databaseClient.updateLeague(leagueId, leagueName, years)
 
     def deleteLeague(self, leagueId: int) -> None:
