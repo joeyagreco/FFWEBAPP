@@ -1,4 +1,8 @@
+from typing import List
+
+from models.headToHead_stat_models.HeadToHeadStatsModel import HeadToHeadStatsModel
 from models.league_models.LeagueModel import LeagueModel
+from models.team_stat_models.TeamStatsModel import TeamStatsModel
 from services.DatabaseService import DatabaseService
 from services.StatCalculatorService import StatCalculatorService
 
@@ -20,7 +24,7 @@ class MainController:
     def updateLeague(self, leagueId: int, leagueName: str, years):
         return self.__databaseService.updateLeague(leagueId, leagueName, years)
 
-    def deleteLeague(self, leagueId: int):
+    def deleteLeague(self, leagueId: int) -> None:
         return self.__databaseService.deleteLeague(leagueId)
 
     def deleteWeek(self, leagueId: int, year: int) -> dict:
@@ -30,11 +34,12 @@ class MainController:
         return self.__databaseService.getLeagueModel(leagueId)
 
     @staticmethod
-    def getTeamStatsModel(leagueModel: LeagueModel, years: list):
+    def getTeamStatsModel(leagueModel: LeagueModel, years: list) -> List[TeamStatsModel]:
         return StatCalculatorService.getTeamStats(leagueModel, years)
 
     @staticmethod
-    def getHeadToHeadStatsModel(leagueModel: LeagueModel, year: list, team1Id: int, team2Id: int):
+    def getHeadToHeadStatsModel(leagueModel: LeagueModel, year: list, team1Id: int, team2Id: int) -> List[
+        HeadToHeadStatsModel]:
         return StatCalculatorService.getHeadToHeadStats(leagueModel, year, team1Id, team2Id)
 
     @staticmethod
