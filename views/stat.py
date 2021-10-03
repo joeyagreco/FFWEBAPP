@@ -6,6 +6,7 @@ from helpers.Constants import Constants
 from helpers.ExplanationDivsAsStrings import ExplanationDivsAsStrings
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from packages.Exceptions.DatabaseError import DatabaseError
+from packages.Exceptions.InvalidStatSelectionError import InvalidStatSelectionError
 
 
 @app.route("/team-stats/<int:leagueId>/<year>", methods=["GET"])
@@ -113,7 +114,10 @@ def graphs(leagueId, year):
         yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
     else:
         yearList = [year]
-    divAsString = mainController.getGraphDiv(leagueModel, yearList, screenWidth, selectedGraph)
+    try:
+        divAsString = mainController.getGraphDiv(leagueModel, yearList, screenWidth, selectedGraph)
+    except InvalidStatSelectionError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     graphOptions = Constants.GRAPH_OPTIONS
     return render_template("graphsPage.html", league=league, graph_options=graphOptions,
                            selected_graph=selectedGraph, graph_div=divAsString, selected_year=year)

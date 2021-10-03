@@ -194,7 +194,8 @@ class StatCalculatorService:
     @staticmethod
     def getLeagueStats(leagueModel: LeagueModel, years: list, statSelection: str):
         """
-        Returns a model/models for the given stat for self.__leagueModel.
+        Returns a model/models for the given stat for self.__leagueModel
+        Raises InvalidStatSelectionError if stat is not known
         """
         statOptions = Constants.LEAGUE_STATS_STAT_TITLES
         decimalPlacesForScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
@@ -343,6 +344,9 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
+        """
+        Raises InvalidStatSelectionError if graph is not known
+        """
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             numOfWeeksList = []
@@ -382,10 +386,8 @@ class StatCalculatorService:
                     totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [year], team.getTeamId())
                     teamPoints.append(totalPoints)
             return GraphBuilder.getHtmlForPieGraph(screenWidth, teamNames, teamPoints, Constants.SCORING_SHARE)
-
         elif graphSelection == Constants.AWAL_OVER_SCORING_SHARE:
             return GraphBuilder.getHtmlForAwalOverScoringShare(leagueModel, years, screenWidth)
-
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
             allScores = []
             for year in years:
@@ -393,12 +395,10 @@ class StatCalculatorService:
                     allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId())
             return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores) / 5), "Points Scored",
                                                     "Occurrences", Constants.FREQUENCY_OF_SCORES)
-
         elif graphSelection == Constants.POINTS_FOR_OVER_POINTS_AGAINST:
             return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, years, screenWidth)
 
         elif graphSelection == Constants.STRENGTH_OF_SCHEDULE_OVER_SCORING_SHARE_AGAINST:
             return GraphBuilder.getHtmlForStrengthOfScheduleOverScoringShareAgainst(leagueModel, years, screenWidth)
-
         else:
             raise InvalidStatSelectionError("No Valid Graph Given to Generate.")

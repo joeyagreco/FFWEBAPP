@@ -5,11 +5,15 @@ from controllers.MainController import MainController
 from helpers.Constants import Constants
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from packages.Exceptions.DatabaseError import DatabaseError
+from packages.Exceptions.InvalidStatSelectionError import InvalidStatSelectionError
 
 
 @app.route("/league-stats/<int:leagueId>/<year>/all-scores", methods=["GET"])
 def allScores(leagueId, year):
-    league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.ALL_SCORES_STAT_TITLE)
+    try:
+        league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.ALL_SCORES_STAT_TITLE)
+    except (DatabaseError, InvalidStatSelectionError) as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     return render_template("league_stats/allScoresPage.html", league=league,
                            selected_stat=Constants.ALL_SCORES_STAT_TITLE,
                            stats_models=statsModel, selected_year=year,
@@ -18,7 +22,10 @@ def allScores(leagueId, year):
 
 @app.route("/league-stats/<int:leagueId>/<year>/league-averages", methods=["GET"])
 def leagueAverages(leagueId, year):
-    league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.LEAGUE_AVERAGES_STAT_TITLE)
+    try:
+        league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.LEAGUE_AVERAGES_STAT_TITLE)
+    except (DatabaseError, InvalidStatSelectionError) as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     return render_template("league_stats/leagueAveragesPage.html", league=league,
                            selected_stat=Constants.LEAGUE_AVERAGES_STAT_TITLE,
                            stats_models=statsModel, selected_year=year,
@@ -27,7 +34,10 @@ def leagueAverages(leagueId, year):
 
 @app.route("/league-stats/<int:leagueId>/<year>/losing-streaks", methods=["GET"])
 def losingStreaks(leagueId, year):
-    league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.LOSING_STREAKS_STAT_TITLE)
+    try:
+        league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.LOSING_STREAKS_STAT_TITLE)
+    except (DatabaseError, InvalidStatSelectionError) as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     return render_template("league_stats/losingStreaksPage.html", league=league,
                            selected_stat=Constants.LOSING_STREAKS_STAT_TITLE,
                            stats_models=statsModel, selected_year=year,
@@ -36,7 +46,10 @@ def losingStreaks(leagueId, year):
 
 @app.route("/league-stats/<int:leagueId>/<year>/margins-of-victory", methods=["GET"])
 def marginsOfVictory(leagueId, year):
-    league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.MARGINS_OF_VICTORY_STAT_TITLE)
+    try:
+        league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.MARGINS_OF_VICTORY_STAT_TITLE)
+    except (DatabaseError, InvalidStatSelectionError) as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     return render_template("league_stats/marginsOfVictoryPage.html", league=league,
                            selected_stat=Constants.MARGINS_OF_VICTORY_STAT_TITLE,
                            stats_models=statsModel, selected_year=year,
@@ -47,7 +60,10 @@ def marginsOfVictory(leagueId, year):
 def ownerComparison(leagueId, year):
     if year != "0":
         return redirect(url_for("ownerComparison", leagueId=leagueId, year="0"))
-    league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.OWNER_COMPARISON_STAT_TITLE)
+    try:
+        league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.OWNER_COMPARISON_STAT_TITLE)
+    except (DatabaseError, InvalidStatSelectionError) as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     return render_template("league_stats/ownerComparisonPage.html", league=league,
                            selected_stat=Constants.OWNER_COMPARISON_STAT_TITLE,
                            stats_models=statsModel, selected_year=year,
@@ -56,7 +72,10 @@ def ownerComparison(leagueId, year):
 
 @app.route("/league-stats/<int:leagueId>/<year>/winning-streaks", methods=["GET"])
 def winningStreaks(leagueId, year):
-    league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.WINNING_STREAKS_STAT_TITLE)
+    try:
+        league, statsModel = __getLeagueAndStatsModel(leagueId, year, Constants.WINNING_STREAKS_STAT_TITLE)
+    except (DatabaseError, InvalidStatSelectionError) as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     return render_template("league_stats/winningStreaksPage.html", league=league,
                            selected_stat=Constants.WINNING_STREAKS_STAT_TITLE,
                            stats_models=statsModel, selected_year=year,
@@ -69,7 +88,7 @@ def leagueStats(leagueId):
     mainController = MainController()
     try:
         leagueModel = mainController.getLeagueModel(leagueId)
-    except DatabaseError as e:
+    except (DatabaseError, InvalidStatSelectionError) as e:
         return render_template("indexHomepage.html", error_message=str(e))
     # give most recent year
     years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
@@ -83,11 +102,8 @@ def __getLeagueAndStatsModel(leagueId, year, statSelection):
     if statSelection is None:
         statSelection = statOptions[0]
     mainController = MainController()
-    try:
-        league = mainController.getLeague(leagueId)
-        leagueModel = mainController.getLeagueModel(leagueId)
-    except DatabaseError as e:
-        return render_template("indexHomepage.html", error_message=str(e))
+    league = mainController.getLeague(leagueId)
+    leagueModel = mainController.getLeagueModel(leagueId)
     if year is None:
         # give most recent year if none is given
         years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
