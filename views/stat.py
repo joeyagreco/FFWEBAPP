@@ -7,6 +7,7 @@ from helpers.ExplanationDivsAsStrings import ExplanationDivsAsStrings
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from packages.Exceptions.DatabaseError import DatabaseError
 from packages.Exceptions.InvalidStatSelectionError import InvalidStatSelectionError
+from packages.Exceptions.LeagueNotFoundError import LeagueNotFoundError
 
 
 @app.route("/team-stats/<int:leagueId>/<year>", methods=["GET"])
@@ -15,7 +16,7 @@ def teamStats(leagueId, year):
     mainController = MainController()
     try:
         league = mainController.getLeague(leagueId)
-    except DatabaseError as e:
+    except LeagueNotFoundError as e:
         return render_template("indexHomepage.html", error_message=str(e))
     try:
         leagueModel = mainController.getLeagueModel(leagueId)
@@ -43,7 +44,7 @@ def headToHeadStats(leagueId, year):
     mainController = MainController()
     try:
         league = mainController.getLeague(leagueId)
-    except DatabaseError as e:
+    except LeagueNotFoundError as e:
         return render_template("indexHomepage.html", error_message=str(e))
     try:
         leagueModel = mainController.getLeagueModel(leagueId)
@@ -102,7 +103,7 @@ def graphs(leagueId, year):
     try:
         league = mainController.getLeague(leagueId)
         leagueModel = mainController.getLeagueModel(leagueId)
-    except DatabaseError as e:
+    except (DatabaseError, LeagueNotFoundError) as e:
         return render_template("indexHomepage.html", error_message=str(e))
     if year is None:
         # give most recent year if none is given
@@ -133,7 +134,7 @@ def statsExplained(leagueId):
     mainController = MainController()
     try:
         league = mainController.getLeague(leagueId)
-    except DatabaseError as e:
+    except LeagueNotFoundError as e:
         return render_template("indexHomepage.html", error_message=str(e))
     statInfo = ExplanationDivsAsStrings.retrieveStatList(selectedStat)
     return render_template("statsBase.html",

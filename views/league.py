@@ -6,6 +6,7 @@ from app import app
 from controllers.MainController import MainController
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from packages.Exceptions.DatabaseError import DatabaseError
+from packages.Exceptions.LeagueNotFoundError import LeagueNotFoundError
 from packages.Exceptions.LeagueNotWellFormedError import LeagueNotWellFormedError
 
 
@@ -14,8 +15,8 @@ def leagueHomepage(leagueId):
     mainController = MainController()
     try:
         league = mainController.getLeague(leagueId)
-    except DatabaseError as e:
-        return redirect(url_for("index", error_message=str(e)))
+    except LeagueNotFoundError as e:
+        return render_template("indexHomepage.html", error_message=str(e))
     # check if this league has at least 1 week in any of its years. if not, redirect to update league page.
     for year in league["years"]:
         # check if this is year 0
@@ -66,7 +67,7 @@ def updateLeague(leagueId, year):
         try:
             league = mainController.getLeague(leagueId)
             leagueModel = mainController.getLeagueModel(leagueId)
-        except DatabaseError as e:
+        except (DatabaseError, LeagueNotFoundError) as e:
             return render_template("indexHomepage.html", error_message=str(e))
         if year is None:
             year = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True)
@@ -91,7 +92,7 @@ def updateLeague(leagueId, year):
         mainController = MainController()
         try:
             league = mainController.getLeague(leagueId)
-        except DatabaseError as e:
+        except LeagueNotFoundError as e:
             return render_template("indexHomepage.html", error_message=str(e))
         # check if user updated the year and if they updated the year to be one that already exists
         # if so, return an error message

@@ -5,6 +5,7 @@ from flask import redirect, url_for, request, render_template
 from app import app
 from controllers.MainController import MainController
 from packages.Exceptions.DatabaseError import DatabaseError
+from packages.Exceptions.LeagueNotFoundError import LeagueNotFoundError
 from packages.Exceptions.LeagueNotWellFormedError import LeagueNotWellFormedError
 
 
@@ -15,7 +16,7 @@ def addUpdateWeeks(leagueId, year, week):
     mainController = MainController()
     try:
         league = mainController.getLeague(leagueId)
-    except DatabaseError as e:
+    except LeagueNotFoundError as e:
         return render_template("indexHomepage.html", error_message=str(e))
     else:
         if week is not None:
@@ -73,7 +74,7 @@ def updateWeek():
     mainController = MainController()
     try:
         league = mainController.getLeague(leagueId)
-    except DatabaseError as e:
+    except LeagueNotFoundError as e:
         return redirect(url_for('index', error_message=str(e)))
     else:
         matchupIdCounter = 1
@@ -110,7 +111,7 @@ def addWeek(leagueId, year):
     mainController = MainController()
     try:
         league = mainController.getLeague(leagueId)
-    except DatabaseError as e:
+    except LeagueNotFoundError as e:
         return render_template("indexHomepage.html", error_message=str(e))
     weekNumber = len(league["years"][year]["weeks"]) + 1
     # add an empty week
@@ -135,7 +136,7 @@ def deleteWeek(leagueId, year, week):
     mainController = MainController()
     try:
         league = mainController.getLeague(leagueId)
-    except DatabaseError as e:
+    except LeagueNotFoundError as e:
         return render_template("indexHomepage.html", error_message=str(e))
     # don't allow user to delete week 1
     if week == 1:
@@ -153,8 +154,8 @@ def deleteWeek(leagueId, year, week):
         # if this is the last week added [most recent week]
         try:
             league = mainController.deleteWeek(leagueId, int(year))
-        except DatabaseError as e:
-            return redirect(url_for('index', error_message=str(e)))
+        except (DatabaseError, LeagueNotFoundError) as e:
+            return render_template("indexHomepage.html", error_message=str(e))
         # successfully deleted week
         return redirect(url_for('addUpdateWeeks', leagueId=league["_id"], year=year))
     else:

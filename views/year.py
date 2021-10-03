@@ -6,6 +6,7 @@ from app import app
 from controllers.MainController import MainController
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from packages.Exceptions.DatabaseError import DatabaseError
+from packages.Exceptions.LeagueNotFoundError import LeagueNotFoundError
 from packages.Exceptions.LeagueNotWellFormedError import LeagueNotWellFormedError
 
 
@@ -15,7 +16,7 @@ def addYear(leagueId):
     try:
         league = mainController.getLeague(leagueId)
         leagueModel = mainController.getLeagueModel(leagueId)
-    except DatabaseError as e:
+    except (DatabaseError, LeagueNotFoundError) as e:
         return render_template("indexHomepage.html", error_message=str(e))
     latestYear = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True)
     newYear = latestYear + 1
@@ -42,14 +43,14 @@ def deleteYear(leagueId, year):
     mainController = MainController()
     try:
         league = mainController.getLeague(leagueId)
-    except DatabaseError as e:
+    except LeagueNotFoundError as e:
         return render_template("indexHomepage.html", error_message=str(e))
     del league["years"][year]
     updatedYears = league["years"]
     try:
         league = mainController.getLeague(leagueId)
         mainController.updateLeague(leagueId, league["leagueName"], updatedYears)
-    except (DatabaseError, LeagueNotWellFormedError) as e:
+    except (DatabaseError, LeagueNotFoundError, LeagueNotWellFormedError) as e:
         return render_template("indexHomepage.html", error_message=str(e))
     # find a year to return the user to
     redirectYear = sorted(list(updatedYears))[-1]

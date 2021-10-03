@@ -16,7 +16,7 @@ class DatabaseService:
 
     def getLeague(self, leagueId) -> dict:
         # Returns the league with the given ID
-        # Raises a DatabaseError if the league cannot be found
+        # Raises a LeagueNotFoundError if the league cannot be found
         return self.__databaseClient.getLeague(leagueId)
 
     def addLeague(self, leagueName: str, numberOfTeams: int) -> int:
@@ -50,8 +50,11 @@ class DatabaseService:
         return self.__databaseClient.deleteLeague(leagueId)
 
     def deleteWeek(self, leagueId: int, year: int) -> dict:
-        # Returns the league as a dictionary if successfully deleted
-        # Raises a DatabaseError if the week could not be deleted
+        """
+        Returns the league as a dictionary if successfully deleted
+        Raises a DatabaseError if the week could not be deleted
+        Raises a LeagueNotFoundError if the league could not be found
+        """
         return self.__databaseClient.deleteWeek(leagueId, year)
 
     def getLeagueModel(self, leagueId: int) -> LeagueModel:

@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 
 from packages.Exceptions.DatabaseError import DatabaseError
+from packages.Exceptions.LeagueNotFoundError import LeagueNotFoundError
 
 load_dotenv()
 
@@ -34,7 +35,7 @@ class DatabaseClient:
     def getLeague(self, leagueId: int) -> dict:
         """
         Returns the league with the given ID
-        Raises a DatabaseError if the league cannot be found
+        Raises a LeagueNotFoundError if the league cannot be found
         https://docs.mongodb.com/manual/reference/method/db.collection.findOne/
         """
         response = self.__collection.find_one({"_id": leagueId})
@@ -42,7 +43,7 @@ class DatabaseClient:
         if response:
             return response
         else:
-            raise DatabaseError(f"Could not find a league with ID: {leagueId}")
+            raise LeagueNotFoundError(f"Could not find a league with ID: {leagueId}")
 
     def addLeague(self, leagueName: str, numberOfTeams: int, teams: list) -> int:
         """
@@ -104,6 +105,7 @@ class DatabaseClient:
         Deletes the most recent week of the year in the league with the given ID
         Returns the league as a dictionary if successfully deleted
         Raises a DatabaseError if the week could not be deleted
+        Raises a LeagueNotFoundError if the league could not be found
         https://docs.mongodb.com/manual/reference/method/db.collection.update/
         https://specify.io/how-tos/mongodb-update-documents
         """
