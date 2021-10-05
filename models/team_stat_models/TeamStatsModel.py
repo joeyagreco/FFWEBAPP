@@ -23,6 +23,7 @@ class TeamStatsModel:
         self.__wal = stats["wal"]
         self.__year = stats["year"]
         self.__scoringShareAgainst = stats["scoringShareAgainst"]
+        self.__awalPerGame = stats["awalPerGame"]
 
     def getTeamId(self):
         return self.__teamId
@@ -90,5 +91,5 @@ class TeamStatsModel:
     def getScoringShareAgainst(self):
         return self.__scoringShareAgainst
 
-
-
+    def getAwalPerGame(self):
+        return self.__awalPerGame

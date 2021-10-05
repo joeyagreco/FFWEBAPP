@@ -64,6 +64,8 @@ class StatCalculatorService:
                 awalStr = Rounder.keepTrailingZeros(awal, 2)
                 wal = awalCalculator.getWal()
                 walStr = Rounder.keepTrailingZeros(wal, 2)
+                awalPerGame = awalCalculator.getAwalPerGame()
+                awalPerGameStr = Rounder.keepTrailingZeros(awalPerGame, 2)
                 gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, yearAsList, teamId)
                 # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
                 # this SHOULD not happen, because currently, a team HAS to play every week
@@ -107,7 +109,8 @@ class StatCalculatorService:
                                            scoringShare=scoringShareStr,
                                            strengthOfSchedule=strengthOfScheduleStr,
                                            wal=walStr,
-                                           scoringShareAgainst=scoringShareAgainstStr)
+                                           scoringShareAgainst=scoringShareAgainstStr,
+                                           awalPerGame=awalPerGameStr)
                 teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
         teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)

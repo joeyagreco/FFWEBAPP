@@ -84,8 +84,8 @@ class AwalCalculator:
         ONLYWEEKS: [list] Gives AWAL Per Game for the given week numbers.
         VSTEAMIDS: [list] Gives AWAL Per Game vs teams with the given IDs.
         """
-        numberOfGames = LeagueModelNavigator.getNumberOfGamesPlayedByTeam(self.__leagueModel, self.__years,
-                                                                          self.__teamId, **params)
+        numberOfGames = LeagueModelNavigator.gamesPlayedByTeam(self.__leagueModel, self.__years,
+                                                               self.__teamId, **params)
         return Rounder.normalRound(self.getAwal(**params) / numberOfGames, 2) if numberOfGames != 0 else 0
 
     def __getTeamOutcomeOfWeek(self, week: WeekModel) -> float:

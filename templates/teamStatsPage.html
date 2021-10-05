@@ -87,6 +87,7 @@
             <th>{{constants.WIN_PERCENTAGE_STAT_TITLE}}</th>
             <th>{{constants.WAL_STAT_TITLE}}</th>
             <th>{{constants.AWAL_STAT_TITLE}}</th>
+            <th>{{constants.AWAL_PER_GAME_STAT_TITLE}}</th>
             <th>{{constants.SMART_WINS_STAT_TITLE}}</th>
             <th>{{constants.PPG_STAT_TITLE}}</th>
             <th>{{constants.PPG_AGAINST_STAT_TITLE}}</th>
@@ -115,6 +116,7 @@
             <td>{{teamStats.getWinPercentage()}}</td>
             <td>{{teamStats.getWal()}}</td>
             <td>{{teamStats.getAwal()}}</td>
+            <td>{{teamStats.getAwalPerGame()}}</td>
             <td>{{teamStats.getSmartWins()}}</td>
             <td>{{teamStats.getPpg()}}</td>
             <td>{{teamStats.getPpgAgainst()}}</td>
@@ -135,6 +137,8 @@
 </div>
 <script>
     initializeTable();
+
+
 
 
 
