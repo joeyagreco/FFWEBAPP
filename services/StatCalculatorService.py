@@ -373,7 +373,7 @@ class StatCalculatorService:
                         awal = awalCalculator.getAwal(throughWeek=week.getWeekNumber())
                         data[team.getTeamName()].append(awal)
             xAxisTicks = max(numOfWeeksList)
-            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "AWAL", 1,
+            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, Constants.AWAL_STAT_TITLE, 1,
                                                           Constants.AWAL_BY_WEEK)
 
         elif graphSelection == Constants.SCORING_SHARE:
@@ -386,7 +386,7 @@ class StatCalculatorService:
                     teamPoints.append(totalPoints)
             return GraphBuilder.getHtmlForPieGraph(screenWidth, teamNames, teamPoints, Constants.SCORING_SHARE)
 
-        elif graphSelection == Constants.AWAL_OVER_SCORING_SHARE:
+        elif graphSelection == Constants.AWAL_PER_GAME_OVER_SCORING_SHARE:
             return GraphBuilder.getHtmlForAwalOverScoringShare(leagueModel, years, screenWidth)
 
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
