@@ -19,6 +19,7 @@ class HeadToHeadStatsModel:
         self.__smartWins = stats["smartWins"]
         self.__scoringShare = stats["scoringShare"]
         self.__wal = stats["wal"]
+        self.__awalPerGame = stats["awalPerGame"]
 
     def getTeamId(self):
         return self.__teamId
@@ -74,5 +75,5 @@ class HeadToHeadStatsModel:
     def getWal(self):
         return self.__wal
 
-
-
+    def getAwalPerGame(self):
+        return self.__awalPerGame
