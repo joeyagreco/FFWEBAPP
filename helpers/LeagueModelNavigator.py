@@ -347,3 +347,28 @@ class LeagueModelNavigator:
                 return mostRecentYear
         else:
             return None
+
+    @staticmethod
+    def getNumberOfGamesPlayedByTeam(leagueModel: LeagueModel, years: List[int], teamId: int, **params) -> int:
+        """
+        Returns the number of games the team with the given ID played in the given years.
+        """
+        numberOfGames = 0
+        for year in years:
+            throughWeek = params.pop("throughWeek",
+                                     LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, year))
+            params["throughWeek"] = throughWeek
+            onlyWeeks = params.pop("onlyWeeks", None)
+            params["onlyWeeks"] = onlyWeeks
+            vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(leagueModel, year,
+                                                                                           excludeIds=[teamId]))
+            for week in leagueModel.getYears()[str(year)].getWeeks():
+                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                    continue
+                elif week.getWeekNumber() > throughWeek:
+                    break
+                if LeagueModelNavigator.teamsPlayInWeek(week, teamId, vsTeamIds):
+                    for matchup in week.getMatchups():
+                        if matchup.getTeamA().getTeamId() == teamId or matchup.getTeamB().getTeamId() == teamId:
+                            numberOfGames += 1
+        return numberOfGames
