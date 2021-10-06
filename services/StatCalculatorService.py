@@ -66,6 +66,8 @@ class StatCalculatorService:
                 awalStr = Rounder.keepTrailingZeros(awal, 2)
                 wal = awalCalculator.getWal()
                 walStr = Rounder.keepTrailingZeros(wal, 2)
+                awalPerGame = awalCalculator.getAwalPerGame()
+                awalPerGameStr = Rounder.keepTrailingZeros(awalPerGame, 2)
                 gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, yearAsList, teamId)
                 # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
                 # this SHOULD not happen, because currently, a team HAS to play every week
@@ -109,7 +111,8 @@ class StatCalculatorService:
                                            scoringShare=scoringShareStr,
                                            strengthOfSchedule=strengthOfScheduleStr,
                                            wal=walStr,
-                                           scoringShareAgainst=scoringShareAgainstStr)
+                                           scoringShareAgainst=scoringShareAgainstStr,
+                                           awalPerGame=awalPerGameStr)
                 teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
         teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
@@ -154,6 +157,8 @@ class StatCalculatorService:
             awalStr = Rounder.keepTrailingZeros(awal, 2)
             wal = awalCalculator.getWal()
             walStr = Rounder.keepTrailingZeros(wal, 2)
+            awalPerGame = awalCalculator.getAwalPerGame(vsTeamIds=[opponentTeamId])
+            awalPerGameStr = Rounder.keepTrailingZeros(awalPerGame, 2)
             gamesPlayed = LeagueModelNavigator.gamesPlayedByTeam(leagueModel, years, teamId, vsTeamIds=[opponentTeamId])
             # NOTE: if a team has played 0 games, the SSL calculations will have a DivisionByZero Error
             # this SHOULD not happen, because currently, a team has to play every week
@@ -187,7 +192,8 @@ class StatCalculatorService:
                                                         teamLuck=teamLuckStr,
                                                         smartWins=smartWinsStr,
                                                         scoringShare=scoringShareStr,
-                                                        wal=walStr)
+                                                        wal=walStr,
+                                                        awalPerGame=awalPerGameStr)
             statsModels.append(headToHeadStatsModel)
         return statsModels
 
@@ -374,7 +380,7 @@ class StatCalculatorService:
                         awal = awalCalculator.getAwal(throughWeek=week.getWeekNumber())
                         data[team.getTeamName()].append(awal)
             xAxisTicks = max(numOfWeeksList)
-            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "AWAL", 1,
+            return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, Constants.AWAL_STAT_TITLE, 1,
                                                           Constants.AWAL_BY_WEEK)
 
         elif graphSelection == Constants.SCORING_SHARE:
@@ -386,8 +392,10 @@ class StatCalculatorService:
                     totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [year], team.getTeamId())
                     teamPoints.append(totalPoints)
             return GraphBuilder.getHtmlForPieGraph(screenWidth, teamNames, teamPoints, Constants.SCORING_SHARE)
-        elif graphSelection == Constants.AWAL_OVER_SCORING_SHARE:
+
+        elif graphSelection == Constants.AWAL_PER_GAME_OVER_SCORING_SHARE:
             return GraphBuilder.getHtmlForAwalOverScoringShare(leagueModel, years, screenWidth)
+
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
             allScores = []
             for year in years:
@@ -395,10 +403,12 @@ class StatCalculatorService:
                     allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId())
             return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores) / 5), "Points Scored",
                                                     "Occurrences", Constants.FREQUENCY_OF_SCORES)
+
         elif graphSelection == Constants.POINTS_FOR_OVER_POINTS_AGAINST:
             return GraphBuilder.getHtmlForPointsOverPointsAgainst(leagueModel, years, screenWidth)
 
         elif graphSelection == Constants.STRENGTH_OF_SCHEDULE_OVER_SCORING_SHARE_AGAINST:
             return GraphBuilder.getHtmlForStrengthOfScheduleOverScoringShareAgainst(leagueModel, years, screenWidth)
+
         else:
             raise InvalidStatSelectionError("No Valid Graph Given to Generate.")

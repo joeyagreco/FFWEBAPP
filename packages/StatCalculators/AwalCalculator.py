@@ -1,3 +1,5 @@
+from typing import List
+
 from helpers.LeagueModelNavigator import LeagueModelNavigator
 from helpers.Rounder import Rounder
 from models.league_models.LeagueModel import LeagueModel
@@ -6,7 +8,7 @@ from models.league_models.WeekModel import WeekModel
 
 class AwalCalculator:
 
-    def __init__(self, teamId: int, leagueModel: LeagueModel, years: list, wins: int, ties: int):
+    def __init__(self, teamId: int, leagueModel: LeagueModel, years: List[int], wins: int, ties: int):
         self.__teamId = teamId
         self.__leagueModel = leagueModel
         self.__years = years
@@ -15,7 +17,7 @@ class AwalCalculator:
 
     def getAwal(self, **params) -> float:
         """
-        Returns a float that is the AWAL for the team with self.__teamId.
+        Returns the AWAL for the team with self.__teamId.
         AWAL = W * (1/L) + T * (0.5/L)
         Where:
         W = Teams outscored
@@ -31,7 +33,7 @@ class AwalCalculator:
 
     def getAdjustment(self, **params) -> float:
         """
-        Returns a float that is the adjustment [A] for the team with self.__teamId.
+        Returns the adjustment [A] for the team with self.__teamId.
         A = W * (1/L) + T * (0.5/L) - WAL
         Where:
         WAL = Game outcome (1=win, 0=loss, 0.5=tie)
@@ -73,6 +75,18 @@ class AwalCalculator:
         """
         wal = self.__wins + (0.5 * self.__ties)
         return Rounder.normalRound(wal, 2)
+
+    def getAwalPerGame(self, **params) -> float:
+        """
+        Returns the AWAL per game
+
+        THROUGHWEEK: [int] Gives AWAL Per Game through that week.
+        ONLYWEEKS: [list] Gives AWAL Per Game for the given week numbers.
+        VSTEAMIDS: [list] Gives AWAL Per Game vs teams with the given IDs.
+        """
+        numberOfGames = LeagueModelNavigator.gamesPlayedByTeam(self.__leagueModel, self.__years,
+                                                               self.__teamId, **params)
+        return Rounder.normalRound(self.getAwal(**params) / numberOfGames, 2) if numberOfGames != 0 else 0
 
     def __getTeamOutcomeOfWeek(self, week: WeekModel) -> float:
         """

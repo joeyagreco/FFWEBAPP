@@ -115,10 +115,10 @@ class GraphBuilder:
                 awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year], recordCalculator.getWins(),
                                                 recordCalculator.getTies())
                 ss = scoresCalculator.getScoringShare()
-                awal = awalCalculator.getAwal()
+                awalPerGame = awalCalculator.getAwalPerGame()
                 ssList.append(ss)
-                awalList.append(awal)
-                data[f"{team.getTeamId()}-{year}"] = ([awal], [ss])
+                awalList.append(awalPerGame)
+                data[f"{team.getTeamId()}-{year}"] = ([awalPerGame], [ss])
         fig = go.Figure()
         for teamIdAndYear in data:
             teamId = int(teamIdAndYear[0:-5])
@@ -152,9 +152,9 @@ class GraphBuilder:
                            showarrow=False,
                            text="Worse Team")
         fig.update_layout(
-            xaxis=dict(title="AWAL", dtick=0.5),
-            yaxis=dict(title="ScoringShare"),
-            title=Constants.AWAL_OVER_SCORING_SHARE
+            xaxis=dict(title=Constants.AWAL_PER_GAME_STAT_TITLE, dtick=0.5),
+            yaxis=dict(title=Constants.SCORING_SHARE),
+            title=Constants.AWAL_PER_GAME_OVER_SCORING_SHARE
         )
         cls.__setWidthAndHeightOfFig(fig, screenWidth)
         return fig.to_html(full_html=False, auto_play=False, include_plotlyjs=False)
