@@ -1,3 +1,5 @@
+from typing import List
+
 from builders.GraphBuilder import GraphBuilder
 from helpers.Constants import Constants
 from helpers.LeagueModelNavigator import LeagueModelNavigator
@@ -28,7 +30,7 @@ class StatCalculatorService:
     """
 
     @staticmethod
-    def getTeamStats(leagueModel: LeagueModel, years: list):
+    def getTeamStats(leagueModel: LeagueModel, years: list) -> List[TeamStatsModel]:
         """
         Returns a list of TeamStatsModels, one for each team in the given league in the given year.
         """
@@ -117,7 +119,8 @@ class StatCalculatorService:
         return teamStatsModels
 
     @staticmethod
-    def getHeadToHeadStats(leagueModel: LeagueModel, years: list, team1Id: int, team2Id: int):
+    def getHeadToHeadStats(leagueModel: LeagueModel, years: list, team1Id: int, team2Id: int) -> List[
+        HeadToHeadStatsModel]:
         """
         Returns 2 HeadToHeadStatsModels in a list for the teams with the given IDs in the given league in the given year.
         """
@@ -197,7 +200,8 @@ class StatCalculatorService:
     @staticmethod
     def getLeagueStats(leagueModel: LeagueModel, years: list, statSelection: str):
         """
-        Returns a model/models for the given stat for self.__leagueModel.
+        Returns a model/models for the given stat for self.__leagueModel
+        Raises InvalidStatSelectionError if stat is not known
         """
         statOptions = Constants.LEAGUE_STATS_STAT_TITLES
         decimalPlacesForScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
@@ -346,6 +350,9 @@ class StatCalculatorService:
 
     @staticmethod
     def getGraphDiv(leagueModel: LeagueModel, years: list, screenWidth: float, graphSelection: str):
+        """
+        Raises InvalidStatSelectionError if graph is not known
+        """
         if graphSelection == Constants.PPG_BY_WEEK:
             data = dict()
             numOfWeeksList = []
