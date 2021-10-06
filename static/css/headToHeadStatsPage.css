@@ -60,6 +60,7 @@
 .statsTable th {
     background-color: #a3a3a3;
     cursor: pointer;
+    padding: 0.5rem;
 }
 
 .statsTable td {
