@@ -22,6 +22,7 @@ class OwnerComparisonModel:
         self.__strengthOfSchedule = stats["strengthOfSchedule"]
         self.__wal = stats["wal"]
         self.__scoringShareAgainst = stats["scoringShareAgainst"]
+        self.__awalPerGame = stats["awalPerGame"]
 
     def getOwnerId(self):
         return self.__ownerId
@@ -86,4 +87,5 @@ class OwnerComparisonModel:
     def getScoringShareAgainst(self):
         return self.__scoringShareAgainst
 
-
+    def getAwalPerGame(self):
+        return self.__awalPerGame
