@@ -3,10 +3,10 @@ class StreakModel:
     def __init__(self, **stats):
         self.__owner = stats["owner"]
         self.__streakNumber = stats["streakNumber"]
-        self.__startDate = stats["startDate"]
-        self.__startTeam = stats["startTeam"]
-        self.__endDate = stats["endDate"]
-        self.__endTeam = stats["endTeam"]
+        self.__firstDate = stats["firstDate"]
+        self.__firstTeam = stats["firstTeam"]
+        self.__lastDate = stats["lastDate"]
+        self.__lastTeam = stats["lastTeam"]
         self.__ongoing = stats["ongoing"]
 
     def getOwner(self):
@@ -15,17 +15,17 @@ class StreakModel:
     def getStreakNumber(self):
         return self.__streakNumber
 
-    def getStartDate(self):
-        return self.__startDate
+    def getFirstDate(self):
+        return self.__firstDate
 
-    def getStartTeam(self):
-        return self.__startTeam
+    def getFirstTeam(self):
+        return self.__firstTeam
 
-    def getEndDate(self):
-        return self.__endDate
+    def getLastDate(self):
+        return self.__lastDate
 
-    def getEndTeam(self):
-        return self.__endTeam
+    def getLastTeam(self):
+        return self.__lastTeam
 
     def getOngoing(self):
         return self.__ongoing

@@ -13,10 +13,10 @@
         <tr>
             <th>Streak</th>
             <th>Owner</th>
-            <th>Start Date</th>
-            <th>Start Team</th>
-            <th>End Date</th>
-            <th>End Team</th>
+            <th>First Date</th>
+            <th>First Team</th>
+            <th>Last Date</th>
+            <th>Last Team</th>
             <th>Ongoing</th>
         </tr>
         </thead>
@@ -25,10 +25,10 @@
         <tr class="backgroundTeamId{{leagueStat.getOwner().getTeamId()}}">
             <td>{{leagueStat.getStreakNumber()}}</td>
             <td>{{leagueStat.getOwner().getTeamName()}}</td>
-            <td>{{leagueStat.getStartDate()}}</td>
-            <td>{{leagueStat.getStartTeam().getTeamName()}}</td>
-            <td>{{leagueStat.getEndDate()}}</td>
-            <td>{{leagueStat.getEndTeam().getTeamName()}}</td>
+            <td>{{leagueStat.getFirstDate()}}</td>
+            <td>{{leagueStat.getFirstTeam().getTeamName()}}</td>
+            <td>{{leagueStat.getLastDate()}}</td>
+            <td>{{leagueStat.getLastTeam().getTeamName()}}</td>
             {% if leagueStat.getOngoing() %}
             <td><i class="fas fa-check"></i></td>
             {% else %}
@@ -41,6 +41,8 @@
 </div>
 <script>
     initializeTable();
+
+
 
 
 </script>
