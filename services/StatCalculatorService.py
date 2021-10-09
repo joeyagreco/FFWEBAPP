@@ -115,7 +115,7 @@ class StatCalculatorService:
                                            awalPerGame=awalPerGameStr)
                 teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
-        teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
+        teamStatsModels.sort(key=lambda x: x.winPercentage, reverse=True)
         return teamStatsModels
 
     @staticmethod
