@@ -153,25 +153,25 @@
         </thead>
         <tbody>
         {% for teamStats in stats_models %}
-        <tr class="backgroundTeamId{{teamStats.getTeamId()}}">
-            <td data-label="Team Name">{{teamStats.getTeamName()}}</td>
-            <td data-label="{{constants.WINS_STAT_TITLE}}">{{teamStats.getWins()}}</td>
-            <td data-label="{{constants.LOSSES_STAT_TITLE}}">{{teamStats.getLosses()}}</td>
-            <td data-label="{{constants.TIES_STAT_TITLE}}">{{teamStats.getTies()}}</td>
-            <td data-label="{{constants.WIN_PERCENTAGE_STAT_TITLE}}">{{teamStats.getWinPercentage()}}</td>
-            <td data-label="{{constants.WAL_STAT_TITLE}}">{{teamStats.getWal()}}</td>
-            <td data-label="{{constants.AWAL_STAT_TITLE}}">{{teamStats.getAwal()}}</td>
-            <td data-label="{{constants.AWAL_PER_GAME_STAT_TITLE}}">{{teamStats.getAwalPerGame()}}</td>
-            <td data-label="{{constants.SMART_WINS_STAT_TITLE}}">{{teamStats.getSmartWins()}}</td>
-            <td data-label="{{constants.PPG_STAT_TITLE}}">{{teamStats.getPpg()}}</td>
-            <td data-label="{{constants.SCORING_SHARE_STAT_TITLE}}">{{teamStats.getScoringShare()}}</td>
-            <td data-label="{{constants.PLUS_MINUS_STAT_TITLE}}">{{teamStats.getPlusMinus()}}</td>
-            <td data-label="{{constants.MAX_SCORE_STAT_TITLE}}">{{teamStats.getMaxScore()}}</td>
-            <td data-label="{{constants.MIN_SCORE_STAT_TITLE}}">{{teamStats.getMinScore()}}</td>
-            <td data-label="{{constants.STDEV_STAT_TITLE}}">{{teamStats.getStddev()}}</td>
-            <td data-label="{{constants.TEAM_SCORE_STAT_TITLE}}">{{teamStats.getTeamScore()}}</td>
-            <td data-label="{{constants.TEAM_SUCCESS_STAT_TITLE}}">{{teamStats.getTeamSuccess()}}</td>
-            <td data-label="{{constants.TEAM_LUCK_STAT_TITLE}}">{{teamStats.getTeamLuck()}}</td>
+        <tr class="backgroundTeamId{{teamStats.teamId}}">
+            <td data-label="Team Name">{{teamStats.teamName}}</td>
+            <td data-label="{{constants.WINS_STAT_TITLE}}">{{teamStats.wins}}</td>
+            <td data-label="{{constants.LOSSES_STAT_TITLE}}">{{teamStats.losses}}</td>
+            <td data-label="{{constants.TIES_STAT_TITLE}}">{{teamStats.ties}}</td>
+            <td data-label="{{constants.WIN_PERCENTAGE_STAT_TITLE}}">{{teamStats.winPercentage}}</td>
+            <td data-label="{{constants.WAL_STAT_TITLE}}">{{teamStats.wal}}</td>
+            <td data-label="{{constants.AWAL_STAT_TITLE}}">{{teamStats.awal}}</td>
+            <td data-label="{{constants.AWAL_PER_GAME_STAT_TITLE}}">{{teamStats.awalPerGame}}</td>
+            <td data-label="{{constants.SMART_WINS_STAT_TITLE}}">{{teamStats.smartWins}}</td>
+            <td data-label="{{constants.PPG_STAT_TITLE}}">{{teamStats.ppg}}</td>
+            <td data-label="{{constants.SCORING_SHARE_STAT_TITLE}}">{{teamStats.scoringShare}}</td>
+            <td data-label="{{constants.PLUS_MINUS_STAT_TITLE}}">{{teamStats.plusMinus}}</td>
+            <td data-label="{{constants.MAX_SCORE_STAT_TITLE}}">{{teamStats.maxScore}}</td>
+            <td data-label="{{constants.MIN_SCORE_STAT_TITLE}}">{{teamStats.minScore}}</td>
+            <td data-label="{{constants.STDEV_STAT_TITLE}}">{{teamStats.stddev}}</td>
+            <td data-label="{{constants.TEAM_SCORE_STAT_TITLE}}">{{teamStats.teamScore}}</td>
+            <td data-label="{{constants.TEAM_SUCCESS_STAT_TITLE}}">{{teamStats.teamSuccess}}</td>
+            <td data-label="{{constants.TEAM_LUCK_STAT_TITLE}}">{{teamStats.teamLuck}}</td>
         </tr>
         {% endfor %}
         </tbody>
@@ -180,169 +180,167 @@
     <!-- below is the structure the data will go in on mobile -->
     <div class="mobileTableSection">
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getTeamName()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].teamName}}
             </div>
             <div class="headerValueMobile">Team Name</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getTeamName()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].teamName}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getWins()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].wins}}
             </div>
             <div class="headerValueMobile">{{constants.WINS_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getWins()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].wins}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getLosses()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].losses}}
             </div>
             <div class="headerValueMobile">{{constants.LOSSES_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getLosses()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].losses}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getTies()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].ties}}
             </div>
             <div class="headerValueMobile">{{constants.TIES_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getTies()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].ties}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getWinPercentage()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].winPercentage}}
             </div>
             <div class="headerValueMobile">{{constants.WIN_PERCENTAGE_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getWinPercentage()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].winPercentage}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getWal()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">{{stats_models[0].wal}}
             </div>
             <div class="headerValueMobile">{{constants.WAL_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getWal()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">{{stats_models[1].wal}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getAwal()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].awal}}
             </div>
             <div class="headerValueMobile">{{constants.AWAL_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getAwal()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].awal}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getAwalPerGame()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].awalPerGame}}
             </div>
             <div class="headerValueMobile">{{constants.AWAL_PER_GAME_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getAwalPerGame()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].awalPerGame}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getSmartWins()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].smartWins}}
             </div>
             <div class="headerValueMobile">{{constants.SMART_WINS_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getSmartWins()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].smartWins}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">{{stats_models[0].getPpg()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">{{stats_models[0].ppg}}
             </div>
             <div class="headerValueMobile">{{constants.PPG_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">{{stats_models[1].getPpg()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">{{stats_models[1].ppg}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getScoringShare()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].scoringShare}}
             </div>
             <div class="headerValueMobile">{{constants.SCORING_SHARE_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getScoringShare()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].scoringShare}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getPlusMinus()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].plusMinus}}
             </div>
             <div class="headerValueMobile">{{constants.PLUS_MINUS_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getPlusMinus()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].plusMinus}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getMaxScore()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].maxScore}}
             </div>
             <div class="headerValueMobile">{{constants.MAX_SCORE_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getMaxScore()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].maxScore}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getMinScore()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].minScore}}
             </div>
             <div class="headerValueMobile">{{constants.MIN_SCORE_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getMinScore()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].minScore}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getStddev()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].stddev}}
             </div>
             <div class="headerValueMobile">{{constants.STDEV_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getStddev()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].stddev}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getTeamScore()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].teamScore}}
             </div>
             <div class="headerValueMobile">{{constants.TEAM_SCORE_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getTeamScore()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].teamScore}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getTeamSuccess()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].teamSuccess}}
             </div>
             <div class="headerValueMobile">{{constants.TEAM_SUCCESS_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getTeamSuccess()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].teamSuccess}}
             </div>
         </div>
         <div class="mobileRow">
-            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].getTeamId()}}">
-                {{stats_models[0].getTeamLuck()}}
+            <div class="team1ValueMobile backgroundTeamId{{stats_models[0].teamId}}">
+                {{stats_models[0].teamLuck}}
             </div>
             <div class="headerValueMobile">{{constants.TEAM_LUCK_STAT_TITLE}}</div>
-            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].getTeamId()}}">
-                {{stats_models[1].getTeamLuck()}}
+            <div class="team2ValueMobile backgroundTeamId{{stats_models[1].teamId}}">
+                {{stats_models[1].teamLuck}}
             </div>
         </div>
     </div>
     {% endif %}
     <script>
         setTeamDropdownWidths({{league.years[selected_year|string].teams|safe}});
-
-
 
     </script>
 </div>
