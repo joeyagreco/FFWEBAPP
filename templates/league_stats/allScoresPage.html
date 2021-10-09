@@ -21,13 +21,13 @@
         </thead>
         <tbody>
         {% for leagueStat in stats_models %}
-        <tr class="backgroundTeamId{{leagueStat.getTeamFor().getTeamId()}}">
-            <td>{{leagueStat.getScore()}}</td>
-            <td>{{leagueStat.getOutcome()}}</td>
-            <td>{{leagueStat.getTeamFor().getTeamName()}}</td>
-            <td>{{leagueStat.getTeamAgainst().getTeamName()}}</td>
-            <td>{{leagueStat.getWeek()}}</td>
-            <td>{{leagueStat.getYear()}}</td>
+        <tr class="backgroundTeamId{{leagueStat.teamFor.getTeamId()}}">
+            <td>{{leagueStat.score}}</td>
+            <td>{{leagueStat.outcome}}</td>
+            <td>{{leagueStat.teamFor.getTeamName()}}</td>
+            <td>{{leagueStat.teamAgainst.getTeamName()}}</td>
+            <td>{{leagueStat.week}}</td>
+            <td>{{leagueStat.year}}</td>
         </tr>
         {% endfor %}
         </tbody>
@@ -35,6 +35,7 @@
 </div>
 <script>
     initializeTable();
+
 
 </script>
 {% endblock %}

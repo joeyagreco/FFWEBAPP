@@ -212,13 +212,13 @@ class StatCalculatorService:
             allScores = everyGameCalculator.getAllScores()
             allScoresStr = []
             for scoreModel in allScores:
-                score = scoreModel.getScore()
+                score = scoreModel.score
                 score = Rounder.keepTrailingZeros(score, decimalPlacesForScores)
-                teamFor = scoreModel.getTeamFor()
-                teamAgainst = scoreModel.getTeamAgainst()
-                outcome = scoreModel.getOutcome()
-                weekNumber = scoreModel.getWeek()
-                year = scoreModel.getYear()
+                teamFor = scoreModel.teamFor
+                teamAgainst = scoreModel.teamAgainst
+                outcome = scoreModel.outcome
+                weekNumber = scoreModel.week
+                year = scoreModel.year
                 newModel = ScoreModel(score=score,
                                       teamFor=teamFor,
                                       teamAgainst=teamAgainst,
