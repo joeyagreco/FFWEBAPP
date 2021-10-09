@@ -339,7 +339,7 @@ class StatCalculatorService:
                                                             awalPerGame=awalPerGameStr)
                 ownerComparisonModels.append(ownerComparisonModel)
             # sort from win percentage high -> low
-            ownerComparisonModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
+            ownerComparisonModels.sort(key=lambda x: x.winPercentage, reverse=True)
             return ownerComparisonModels
         elif statSelection == Constants.LEAGUE_AVERAGES_STAT_TITLE:
             # return a dictionary with each average
