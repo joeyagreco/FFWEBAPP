@@ -231,16 +231,16 @@ class StatCalculatorService:
             allMovs = everyGameCalculator.getAllMarginOfVictories()
             allMovsStr = []
             for movModel in allMovs:
-                mov = movModel.getMarginOfVictory()
+                mov = movModel.marginOfVictory
                 mov = Rounder.keepTrailingZeros(mov, decimalPlacesForScores)
-                teamFor = movModel.getWinningTeam()
-                teamForPoints = movModel.getWinningTeamPoints()
+                teamFor = movModel.winningTeam
+                teamForPoints = movModel.winningTeamPoints
                 teamForPoints = Rounder.keepTrailingZeros(teamForPoints, decimalPlacesForScores)
-                teamAgainst = movModel.getLosingTeam()
-                teamAgainstPoints = movModel.getLosingTeamPoints()
+                teamAgainst = movModel.losingTeam
+                teamAgainstPoints = movModel.losingTeamPoints
                 teamAgainstPoints = Rounder.keepTrailingZeros(teamAgainstPoints, decimalPlacesForScores)
-                weekNumber = movModel.getWeek()
-                year = movModel.getYear()
+                weekNumber = movModel.week
+                year = movModel.year
                 newModel = MarginOfVictoryModel(marginOfVictory=mov,
                                                 winningTeam=teamFor,
                                                 winningTeamPoints=teamForPoints,

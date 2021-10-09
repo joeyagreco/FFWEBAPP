@@ -3,22 +3,22 @@ from dataclasses import dataclass
 
 @dataclass
 class HeadToHeadStatsModel:
-    teamId: int
-    teamName: str
-    wins: int
+    awal: float
+    awalPerGame: float
     losses: int
-    ties: int
-    winPercentage: float
-    ppg: float
-    plusMinus: float
-    stddev: float
     maxScore: float
     minScore: float
-    awal: float
+    plusMinus: float
+    ppg: float
+    scoringShare: float
+    smartWins: float
+    stddev: float
+    teamId: int
+    teamLuck: float
+    teamName: str
     teamScore: float
     teamSuccess: float
-    teamLuck: float
-    smartWins: float
-    scoringShare: float
+    ties: int
     wal: float
-    awalPerGame: float
+    winPercentage: float
+    wins: int
