@@ -3,25 +3,25 @@ from dataclasses import dataclass
 
 @dataclass
 class OwnerComparisonModel:
-    ownerId: int
-    ownerName: str
-    wins: int
+    awal: float
+    awalPerGame: float
     losses: int
-    ties: int
-    winPercentage: float
-    ppg: float
-    ppgAgainst: float
-    plusMinus: float
-    stddev: float
     maxScore: float
     minScore: float
-    awal: float
+    ownerId: int
+    ownerName: str
+    plusMinus: float
+    ppg: float
+    ppgAgainst: float
+    scoringShare: float
+    scoringShareAgainst: float
+    smartWins: float
+    stddev: float
+    strengthOfSchedule: float
+    teamLuck: float
     teamScore: float
     teamSuccess: float
-    teamLuck: float
-    smartWins: float
-    scoringShare: float
-    strengthOfSchedule: float
+    ties: int
     wal: float
-    scoringShareAgainst: float
-    awalPerGame: float
+    winPercentage: float
+    wins: int
