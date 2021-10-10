@@ -19,7 +19,7 @@ class StrengthOfScheduleCalculator:
         totalOpponentAwal = 0
         gameCount = 0
         for year in self.__years:
-            for week in self.__leagueModel.years[str(year)].getWeeks():
+            for week in self.__leagueModel.years[str(year)].weeks:
                 for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId:
                         recordCalculator = RecordCalculator(matchup.teamB.teamId, self.__leagueModel, [year])

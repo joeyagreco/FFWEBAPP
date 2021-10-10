@@ -32,7 +32,7 @@ class Rounder:
         maxDecimalPlaces = 1
         for year in league.years:
             if year != "0":
-                for week in league.years[year].getWeeks():
+                for week in league.years[year].weeks:
                     for matchup in week.matchups:
                         aScore = matchup.teamAScore
                         bScore = matchup.teamBScore

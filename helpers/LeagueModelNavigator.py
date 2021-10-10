@@ -19,7 +19,7 @@ class LeagueModelNavigator:
         Returns a Team object for the team with the given ID in the given league in the given year.
         Throws Exception if a team with the given ID is not in the given league.
         """
-        for team in leagueModel.years[str(year)].getTeams():
+        for team in leagueModel.years[str(year)].teams:
             if team.teamId == teamId:
                 return team
         raise Exception("Given TeamID is not in the given LeagueModel at the given year.")
@@ -40,7 +40,7 @@ class LeagueModelNavigator:
         Returns a boolean on whether the teams with the given IDs play at all in the given league in the given year.
         """
         for year in years:
-            for week in leagueModel.years[str(year)].getWeeks():
+            for week in leagueModel.years[str(year)].weeks:
                 if cls.teamsPlayInWeek(week, team1Id, [team2Id]):
                     return True
         return False
@@ -61,7 +61,7 @@ class LeagueModelNavigator:
             params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in leagueModel.years[str(year)].getWeeks():
+            for week in leagueModel.years[str(year)].weeks:
                 if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
                 elif week.weekNumber > throughWeek:
@@ -84,7 +84,7 @@ class LeagueModelNavigator:
             params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            for week in leagueModel.years[str(year)].getWeeks():
+            for week in leagueModel.years[str(year)].weeks:
                 if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
                 elif week.weekNumber > throughWeek:
@@ -110,7 +110,7 @@ class LeagueModelNavigator:
             params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in leagueModel.years[str(year)].getWeeks():
+            for week in leagueModel.years[str(year)].weeks:
                 if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
                 elif week.weekNumber > throughWeek:
@@ -161,7 +161,7 @@ class LeagueModelNavigator:
             throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))
             onlyWeeks = params.pop("onlyWeeks", None)
             decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-            for week in leagueModel.years[str(year)].getWeeks():
+            for week in leagueModel.years[str(year)].weeks:
                 if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
                 elif week.weekNumber > throughWeek:
@@ -193,7 +193,7 @@ class LeagueModelNavigator:
             vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
             params["vsTeamIds"] = vsTeamIds
             decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-            for week in leagueModel.years[str(year)].getWeeks():
+            for week in leagueModel.years[str(year)].weeks:
                 if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
                 elif week.weekNumber > throughWeek:
@@ -216,7 +216,7 @@ class LeagueModelNavigator:
         ASLIST: [boolean] Gives all week numbers as an ordered list.
         """
         asList = params.pop("asList", False)
-        numberOfWeeks = len(leagueModel.years[str(year)].getWeeks())
+        numberOfWeeks = len(leagueModel.years[str(year)].weeks)
         if asList:
             return [x + 1 for x in range(numberOfWeeks)]
         return numberOfWeeks
@@ -229,7 +229,7 @@ class LeagueModelNavigator:
         """
         excludeIds = params.pop("excludeIds", [])
         teamIds = []
-        for team in leagueModel.years[str(year)].getTeams():
+        for team in leagueModel.years[str(year)].teams:
             if team.teamId not in excludeIds:
                 teamIds.append(team.teamId)
         return teamIds
@@ -243,7 +243,7 @@ class LeagueModelNavigator:
         """
         onlyWeeks = params.pop("onlyWeeks", None)
         weeks = []
-        for week in leagueModel.years[str(year)].getWeeks():
+        for week in leagueModel.years[str(year)].weeks:
             if onlyWeeks and week.weekNumber not in onlyWeeks:
                 continue
             for matchup in week.matchups:
@@ -262,7 +262,7 @@ class LeagueModelNavigator:
         andOpponentScore = params.pop("andOpponentScore", False)
 
         scores = []
-        for week in leagueModel.years[str(year)].getWeeks():
+        for week in leagueModel.years[str(year)].weeks:
             if week.weekNumber > throughWeek:
                 break
             for matchup in week.matchups:
@@ -314,7 +314,7 @@ class LeagueModelNavigator:
         allYears = leagueModel.years
         years = []
         for year in allYears:
-            weeks = allYears[year].getWeeks()
+            weeks = allYears[year].weeks
             if weeks and len(weeks) > 0:
                 if asInts:
                     years.append(int(year))
@@ -336,13 +336,13 @@ class LeagueModelNavigator:
             allYearsList = cls.getAllYearsWithWeeks(leagueModel)
             allYears = dict()
             for year in allYearsList:
-                allYears[year.getYear()] = year
+                allYears[year.year] = year
         else:
             allYears = leagueModel.years
         if len(allYears) > 0:
             mostRecentYear = allYears[max(allYears.keys())]
             if asInt:
-                return int(mostRecentYear.getYear())
+                return int(mostRecentYear.year)
             else:
                 return mostRecentYear
         else:

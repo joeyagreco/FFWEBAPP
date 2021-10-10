@@ -27,7 +27,7 @@ class RecordCalculator:
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.years[str(year)].getWeeks():
+            for week in self.__leagueModel.years[str(year)].weeks:
                 if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
                 elif week.weekNumber > throughWeek:
@@ -60,7 +60,7 @@ class RecordCalculator:
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.years[str(year)].getWeeks():
+            for week in self.__leagueModel.years[str(year)].weeks:
                 if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
                 elif week.weekNumber > throughWeek:
@@ -93,7 +93,7 @@ class RecordCalculator:
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.years[str(year)].getWeeks():
+            for week in self.__leagueModel.years[str(year)].weeks:
                 if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
                 elif week.weekNumber > throughWeek:

@@ -37,7 +37,7 @@ class TestLeagueBuilder(unittest.TestCase):
         leagueDict = {"_id": 123456, "leagueName": "test", "numberOfTeams": 6,
                       "years": {"1234": {"year": 1234, "teams": teamList, "weeks": []}}}
         leagueObject = LeagueBuilder(leagueDict).getLeagueObject()
-        leagueTeams = leagueObject.years["1234"].getTeams()
+        leagueTeams = leagueObject.years["1234"].teams
         self.assertEqual(1, leagueTeams[0].teamId)
         self.assertEqual("team1", leagueTeams[0].teamName)
         self.assertEqual(6, len(leagueTeams))
@@ -58,7 +58,7 @@ class TestLeagueBuilder(unittest.TestCase):
         leagueDict = {"_id": 123456, "leagueName": "test", "numberOfTeams": 6,
                       "years": {"1234": {"year": 1234, "teams": teamList, "weeks": [week1]}}}
         leagueObject = LeagueBuilder(leagueDict).getLeagueObject()
-        leagueWeeks = leagueObject.years["1234"].getWeeks()
+        leagueWeeks = leagueObject.years["1234"].weeks
         self.assertEqual(1, leagueWeeks[0].weekNumber)
         self.assertEqual(1, len(leagueWeeks))
         self.assertEqual(3, len(leagueWeeks[0].matchups))

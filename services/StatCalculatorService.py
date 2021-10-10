@@ -36,7 +36,7 @@ class StatCalculatorService:
         """
         teamStatsModels = []
         for year in years:
-            for team in leagueModel.years[str(year)].getTeams():
+            for team in leagueModel.years[str(year)].teams:
                 yearAsList = [year]
                 decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
                 teamId = team.teamId
@@ -360,7 +360,7 @@ class StatCalculatorService:
             data = dict()
             numOfWeeksList = []
             for year in years:
-                for team in leagueModel.years[str(year)].getTeams():
+                for team in leagueModel.years[str(year)].teams:
                     data[team.teamName] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year,
                                                                                    team.teamId)
                     numOfWeeksList.append(LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, year, asList=True))
@@ -372,10 +372,10 @@ class StatCalculatorService:
             data = dict()
             numOfWeeksList = []
             for year in years:
-                for team in leagueModel.years[str(year)].getTeams():
+                for team in leagueModel.years[str(year)].teams:
                     numOfWeeksList.append(LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, year, asList=True))
                     data[team.teamName] = []
-                    for week in leagueModel.years[str(year)].getWeeks():
+                    for week in leagueModel.years[str(year)].weeks:
                         recordCalculator = RecordCalculator(team.teamId, leagueModel, [year])
                         awalCalculator = AwalCalculator(team.teamId, leagueModel, [year],
                                                         recordCalculator.getWins(throughWeek=week.weekNumber),
@@ -390,7 +390,7 @@ class StatCalculatorService:
             teamNames = []
             teamPoints = []
             for year in years:
-                for team in leagueModel.years[str(year)].getTeams():
+                for team in leagueModel.years[str(year)].teams:
                     teamNames.append(team.teamName)
                     totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [year], team.teamId)
                     teamPoints.append(totalPoints)
@@ -402,7 +402,7 @@ class StatCalculatorService:
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
             allScores = []
             for year in years:
-                for team in leagueModel.years[str(year)].getTeams():
+                for team in leagueModel.years[str(year)].teams:
                     allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.teamId)
             return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores) / 5), "Points Scored",
                                                     "Occurrences", Constants.FREQUENCY_OF_SCORES)

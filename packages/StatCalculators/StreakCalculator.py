@@ -22,7 +22,7 @@ class StreakCalculator:
         for teamId in allTeamIds:
             currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             for year in self.__years:
-                for week in self.__leagueModel.years[str(year)].getWeeks():
+                for week in self.__leagueModel.years[str(year)].weeks:
                     weekNumber = week.weekNumber
                     for matchup in week.matchups:
                         # check if our target team plays in this matchup
@@ -79,7 +79,7 @@ class StreakCalculator:
         for teamId in allTeamIds:
             currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             for year in self.__years:
-                for week in self.__leagueModel.years[str(year)].getWeeks():
+                for week in self.__leagueModel.years[str(year)].weeks:
                     weekNumber = week.weekNumber
                     for matchup in week.matchups:
                         # check if our target team plays in this matchup

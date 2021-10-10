@@ -109,7 +109,7 @@ class GraphBuilder:
         ssList = []
         awalList = []
         for year in years:
-            for team in leagueModel.years[str(year)].getTeams():
+            for team in leagueModel.years[str(year)].teams:
                 recordCalculator = RecordCalculator(team.teamId, leagueModel, [year])
                 scoresCalculator = ScoresCalculator(team.teamId, leagueModel, [year])
                 awalCalculator = AwalCalculator(team.teamId, leagueModel, [year], recordCalculator.getWins(),
@@ -166,7 +166,7 @@ class GraphBuilder:
         """
         data = dict()
         for year in years:
-            for team in leagueModel.years[str(year)].getTeams():
+            for team in leagueModel.years[str(year)].teams:
                 data[team.teamName] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.teamId,
                                                                                andOpponentScore=True)
         pointsForList = []
@@ -214,7 +214,7 @@ class GraphBuilder:
         sosList = []
         ssAgainstList = []
         for year in years:
-            for team in leagueModel.years[str(year)].getTeams():
+            for team in leagueModel.years[str(year)].teams:
                 sosCalculator = StrengthOfScheduleCalculator(team.teamId, leagueModel, [year])
                 scoresCalculator = ScoresCalculator(team.teamId, leagueModel, [year])
                 sos = sosCalculator.getStrengthOfSchedule()
