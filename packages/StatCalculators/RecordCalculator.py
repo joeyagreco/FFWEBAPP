@@ -33,13 +33,13 @@ class RecordCalculator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
+                    if matchup.teamA.getTeamId() == self.__teamId and matchup.teamB.getTeamId() in vsTeamIds:
                         # see if they won as team A
-                        if matchup.getTeamAScore() > matchup.getTeamBScore():
+                        if matchup.teamAScore > matchup.teamBScore:
                             wins += 1
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
+                    elif matchup.teamB.getTeamId() == self.__teamId and matchup.teamA.getTeamId() in vsTeamIds:
                         # see if they won as team B
-                        if matchup.getTeamBScore() > matchup.getTeamAScore():
+                        if matchup.teamBScore > matchup.teamAScore:
                             wins += 1
         return wins
 
@@ -66,13 +66,13 @@ class RecordCalculator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
+                    if matchup.teamA.getTeamId() == self.__teamId and matchup.teamB.getTeamId() in vsTeamIds:
                         # see if they lost as team A
-                        if matchup.getTeamAScore() < matchup.getTeamBScore():
+                        if matchup.teamAScore < matchup.teamBScore:
                             losses += 1
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
+                    elif matchup.teamB.getTeamId() == self.__teamId and matchup.teamA.getTeamId() in vsTeamIds:
                         # see if they lost as team B
-                        if matchup.getTeamBScore() < matchup.getTeamAScore():
+                        if matchup.teamBScore < matchup.teamAScore:
                             losses += 1
         return losses
 
@@ -99,13 +99,13 @@ class RecordCalculator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
+                    if matchup.teamA.getTeamId() == self.__teamId and matchup.teamB.getTeamId() in vsTeamIds:
                         # see if they tied as team A
-                        if matchup.getTeamAScore() == matchup.getTeamBScore():
+                        if matchup.teamAScore == matchup.teamBScore:
                             ties += 1
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
+                    elif matchup.teamB.getTeamId() == self.__teamId and matchup.teamA.getTeamId() in vsTeamIds:
                         # see if they tied as team B
-                        if matchup.getTeamBScore() == matchup.getTeamAScore():
+                        if matchup.teamBScore == matchup.teamAScore:
                             ties += 1
         return ties
 

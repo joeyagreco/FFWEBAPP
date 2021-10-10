@@ -35,10 +35,10 @@ class ScoresCalculator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamAScore())
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamBScore())
+                    if matchup.teamA.getTeamId() == self.__teamId and matchup.teamB.getTeamId() in vsTeamIds:
+                        scores.append(matchup.teamAScore)
+                    elif matchup.teamB.getTeamId() == self.__teamId and matchup.teamA.getTeamId() in vsTeamIds:
+                        scores.append(matchup.teamBScore)
         if not scores:
             return 0.0
         return Rounder.normalRound(max(scores), Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
@@ -66,10 +66,10 @@ class ScoresCalculator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamAScore())
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamBScore())
+                    if matchup.teamA.getTeamId() == self.__teamId and matchup.teamB.getTeamId() in vsTeamIds:
+                        scores.append(matchup.teamAScore)
+                    elif matchup.teamB.getTeamId() == self.__teamId and matchup.teamA.getTeamId() in vsTeamIds:
+                        scores.append(matchup.teamBScore)
         if not scores:
             return 0.0
         return Rounder.normalRound(min(scores), Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
@@ -100,12 +100,12 @@ class ScoresCalculator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamAScore()
-                        totalOpponentScore += matchup.getTeamBScore()
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamBScore()
-                        totalOpponentScore += matchup.getTeamAScore()
+                    if matchup.teamA.getTeamId() == self.__teamId and matchup.teamB.getTeamId() in vsTeamIds:
+                        totalTeamScore += matchup.teamAScore
+                        totalOpponentScore += matchup.teamBScore
+                    elif matchup.teamB.getTeamId() == self.__teamId and matchup.teamA.getTeamId() in vsTeamIds:
+                        totalTeamScore += matchup.teamBScore
+                        totalOpponentScore += matchup.teamAScore
         return float(Rounder.normalRound(totalTeamScore - totalOpponentScore,
                                          Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)))
 
@@ -132,10 +132,10 @@ class ScoresCalculator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamAScore())
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamBScore())
+                    if matchup.teamA.getTeamId() == self.__teamId and matchup.teamB.getTeamId() in vsTeamIds:
+                        scores.append(matchup.teamAScore)
+                    elif matchup.teamB.getTeamId() == self.__teamId and matchup.teamA.getTeamId() in vsTeamIds:
+                        scores.append(matchup.teamBScore)
         if not scores:
             return 0.0
         standardDeviation = statistics.pstdev(scores)
@@ -171,10 +171,10 @@ class ScoresCalculator:
                 elif week.getWeekNumber() > weekNumber:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamAScore()
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamBScore()
+                    if matchup.teamA.getTeamId() == self.__teamId and matchup.teamB.getTeamId() in vsTeamIds:
+                        totalTeamScore += matchup.teamAScore
+                    elif matchup.teamB.getTeamId() == self.__teamId and matchup.teamA.getTeamId() in vsTeamIds:
+                        totalTeamScore += matchup.teamBScore
         percentageOfScoring = Rounder.normalRound((totalTeamScore / totalLeagueScore) * 100, 2)
         return percentageOfScoring
 
@@ -208,9 +208,9 @@ class ScoresCalculator:
                 elif week.getWeekNumber() > weekNumber:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamBScore()
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamAScore()
+                    if matchup.teamA.getTeamId() == self.__teamId and matchup.teamB.getTeamId() in vsTeamIds:
+                        totalTeamScore += matchup.teamBScore
+                    elif matchup.teamB.getTeamId() == self.__teamId and matchup.teamA.getTeamId() in vsTeamIds:
+                        totalTeamScore += matchup.teamAScore
         percentageOfScoring = Rounder.normalRound((totalTeamScore / totalLeagueScore) * 100, 2)
         return percentageOfScoring

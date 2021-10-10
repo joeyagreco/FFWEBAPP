@@ -22,23 +22,23 @@ class EveryGameCalculator:
         for year in self.__years:
             for week in self.__leagueModel.years[str(year)].getWeeks():
                 for matchup in week.getMatchups():
-                    if matchup.getTeamAScore() > matchup.getTeamBScore():
+                    if matchup.teamAScore > matchup.teamBScore:
                         # team A won
-                        mov = matchup.getTeamAScore() - matchup.getTeamBScore()
+                        mov = matchup.teamAScore - matchup.teamBScore
                         mov = Rounder.normalRound(mov, decimalPlacesRoundedTo)
-                        teamFor = matchup.getTeamA()
-                        teamForPoints = matchup.getTeamAScore()
-                        teamAgainst = matchup.getTeamB()
-                        teamAgainstPoints = matchup.getTeamBScore()
+                        teamFor = matchup.teamA
+                        teamForPoints = matchup.teamAScore
+                        teamAgainst = matchup.teamB
+                        teamAgainstPoints = matchup.teamBScore
                         weekNumber = week.getWeekNumber()
-                    elif matchup.getTeamBScore() > matchup.getTeamAScore():
+                    elif matchup.teamBScore > matchup.teamAScore:
                         # team B won
-                        mov = matchup.getTeamBScore() - matchup.getTeamAScore()
+                        mov = matchup.teamBScore - matchup.teamAScore
                         mov = Rounder.normalRound(mov, decimalPlacesRoundedTo)
-                        teamFor = matchup.getTeamB()
-                        teamForPoints = matchup.getTeamBScore()
-                        teamAgainst = matchup.getTeamA()
-                        teamAgainstPoints = matchup.getTeamAScore()
+                        teamFor = matchup.teamB
+                        teamForPoints = matchup.teamBScore
+                        teamAgainst = matchup.teamA
+                        teamAgainstPoints = matchup.teamAScore
                         weekNumber = week.getWeekNumber()
                     else:
                         # tie, dont care about this
@@ -64,17 +64,17 @@ class EveryGameCalculator:
                 for matchup in week.getMatchups():
                     weekNumber = week.getWeekNumber()
                     # team A score
-                    teamAScore = matchup.getTeamAScore()
+                    teamAScore = matchup.teamAScore
                     teamAScore = Rounder.normalRound(teamAScore, decimalPlacesRoundedTo)
-                    teamAFor = matchup.getTeamA()
-                    teamAAgainst = matchup.getTeamB()
-                    teamAOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.getTeamA().getTeamId())
+                    teamAFor = matchup.teamA
+                    teamAAgainst = matchup.teamB
+                    teamAOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.teamA.getTeamId())
                     # team B score
-                    teamBScore = matchup.getTeamBScore()
+                    teamBScore = matchup.teamBScore
                     teamBScore = Rounder.normalRound(teamBScore, decimalPlacesRoundedTo)
-                    teamBFor = matchup.getTeamB()
-                    teamBAgainst = matchup.getTeamA()
-                    teamBOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.getTeamB().getTeamId())
+                    teamBFor = matchup.teamB
+                    teamBAgainst = matchup.teamA
+                    teamBOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.teamB.getTeamId())
                     # create both team models and add to list
                     teamAModel = ScoreModel(score=teamAScore,
                                             teamFor=teamAFor,

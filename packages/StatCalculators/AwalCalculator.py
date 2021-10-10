@@ -94,23 +94,23 @@ class AwalCalculator:
         (1=win, 0=loss, 0.5=tie)
         """
         for matchup in week.getMatchups():
-            if matchup.getTeamA().getTeamId() == self.__teamId:
+            if matchup.teamA.getTeamId() == self.__teamId:
                 # our target team is TeamA
-                if matchup.getTeamAScore() > matchup.getTeamBScore():
+                if matchup.teamAScore > matchup.teamBScore:
                     # our target team won
                     return 1
-                elif matchup.getTeamAScore() < matchup.getTeamBScore():
+                elif matchup.teamAScore < matchup.teamBScore:
                     # our target team lost
                     return 0
                 else:
                     # our target team tied
                     return 0.5
-            elif matchup.getTeamB().getTeamId() == self.__teamId:
+            elif matchup.teamB.getTeamId() == self.__teamId:
                 # our target team is TeamB
-                if matchup.getTeamBScore() > matchup.getTeamAScore():
+                if matchup.teamBScore > matchup.teamAScore:
                     # our target team won
                     return 1
-                elif matchup.getTeamBScore() < matchup.getTeamAScore():
+                elif matchup.teamBScore < matchup.teamAScore:
                     # our target team lost
                     return 0
                 else:
@@ -123,8 +123,8 @@ class AwalCalculator:
         """
         allScores = {}
         for matchup in week.getMatchups():
-            allScores[matchup.getTeamA().getTeamId()] = matchup.getTeamAScore()
-            allScores[matchup.getTeamB().getTeamId()] = matchup.getTeamBScore()
+            allScores[matchup.teamA.getTeamId()] = matchup.teamAScore
+            allScores[matchup.teamB.getTeamId()] = matchup.teamBScore
         allScoresList = []
         for teamId in allScores:
             allScoresList.append(allScores[teamId])
@@ -141,8 +141,8 @@ class AwalCalculator:
         """
         allScores = {}
         for matchup in week.getMatchups():
-            allScores[matchup.getTeamA().getTeamId()] = matchup.getTeamAScore()
-            allScores[matchup.getTeamB().getTeamId()] = matchup.getTeamBScore()
+            allScores[matchup.teamA.getTeamId()] = matchup.teamAScore
+            allScores[matchup.teamB.getTeamId()] = matchup.teamBScore
         allScoresList = []
         for teamId in allScores:
             if teamId != self.__teamId:
