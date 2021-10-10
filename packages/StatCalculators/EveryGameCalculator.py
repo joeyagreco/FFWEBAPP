@@ -68,13 +68,13 @@ class EveryGameCalculator:
                     teamAScore = Rounder.normalRound(teamAScore, decimalPlacesRoundedTo)
                     teamAFor = matchup.teamA
                     teamAAgainst = matchup.teamB
-                    teamAOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.teamA.getTeamId())
+                    teamAOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.teamA.teamId)
                     # team B score
                     teamBScore = matchup.teamBScore
                     teamBScore = Rounder.normalRound(teamBScore, decimalPlacesRoundedTo)
                     teamBFor = matchup.teamB
                     teamBAgainst = matchup.teamA
-                    teamBOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.teamB.getTeamId())
+                    teamBOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.teamB.teamId)
                     # create both team models and add to list
                     teamAModel = ScoreModel(score=teamAScore,
                                             teamFor=teamAFor,

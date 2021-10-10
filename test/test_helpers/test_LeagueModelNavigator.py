@@ -28,8 +28,8 @@ class TestLeagueModelNavigator(unittest.TestCase):
         yearDict = {"2020": year}
         leagueModel = LeagueModel(123456, "test", 6, yearDict)
         team1_2020 = LeagueModelNavigator.getTeamById(leagueModel, 2020, 1)
-        self.assertEqual("team1", team1_2020.getTeamName())
-        self.assertEqual(1, team1_2020.getTeamId())
+        self.assertEqual("team1", team1_2020.teamName)
+        self.assertEqual(1, team1_2020.teamId)
         self.assertRaises(Exception, LeagueModelNavigator.getTeamById, leagueModel, 7)
 
     def test_teamsPlayInWeek(self):

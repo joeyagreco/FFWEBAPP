@@ -38,8 +38,8 @@ class TestLeagueBuilder(unittest.TestCase):
                       "years": {"1234": {"year": 1234, "teams": teamList, "weeks": []}}}
         leagueObject = LeagueBuilder(leagueDict).getLeagueObject()
         leagueTeams = leagueObject.years["1234"].getTeams()
-        self.assertEqual(1, leagueTeams[0].getTeamId())
-        self.assertEqual("team1", leagueTeams[0].getTeamName())
+        self.assertEqual(1, leagueTeams[0].teamId)
+        self.assertEqual("team1", leagueTeams[0].teamName)
         self.assertEqual(6, len(leagueTeams))
 
     def test_getLeagueObjectWeeks(self):
@@ -63,9 +63,9 @@ class TestLeagueBuilder(unittest.TestCase):
         self.assertEqual(1, len(leagueWeeks))
         self.assertEqual(3, len(leagueWeeks[0].getMatchups()))
         self.assertEqual(1, leagueWeeks[0].getMatchups()[0].matchupId)
-        self.assertEqual(1, leagueWeeks[0].getMatchups()[0].teamA.getTeamId())
-        self.assertEqual("team1", leagueWeeks[0].getMatchups()[0].teamA.getTeamName())
-        self.assertEqual(2, leagueWeeks[0].getMatchups()[0].teamB.getTeamId())
-        self.assertEqual("team2", leagueWeeks[0].getMatchups()[0].teamB.getTeamName())
+        self.assertEqual(1, leagueWeeks[0].getMatchups()[0].teamA.teamId)
+        self.assertEqual("team1", leagueWeeks[0].getMatchups()[0].teamA.teamName)
+        self.assertEqual(2, leagueWeeks[0].getMatchups()[0].teamB.teamId)
+        self.assertEqual("team2", leagueWeeks[0].getMatchups()[0].teamB.teamName)
         self.assertEqual(100, leagueWeeks[0].getMatchups()[0].teamAScore)
         self.assertEqual(101, leagueWeeks[0].getMatchups()[0].teamBScore)

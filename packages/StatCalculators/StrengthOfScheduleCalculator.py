@@ -21,16 +21,16 @@ class StrengthOfScheduleCalculator:
         for year in self.__years:
             for week in self.__leagueModel.years[str(year)].getWeeks():
                 for matchup in week.getMatchups():
-                    if matchup.teamA.getTeamId() == self.__teamId:
-                        recordCalculator = RecordCalculator(matchup.teamB.getTeamId(), self.__leagueModel, [year])
-                        awalCalculator = AwalCalculator(matchup.teamB.getTeamId(), self.__leagueModel, [year],
+                    if matchup.teamA.teamId == self.__teamId:
+                        recordCalculator = RecordCalculator(matchup.teamB.teamId, self.__leagueModel, [year])
+                        awalCalculator = AwalCalculator(matchup.teamB.teamId, self.__leagueModel, [year],
                                                         recordCalculator.getWins(onlyWeeks=[week.getWeekNumber()]),
                                                         recordCalculator.getTies(onlyWeeks=[week.getWeekNumber()]))
                         totalOpponentAwal += awalCalculator.getAwal(onlyWeeks=[week.getWeekNumber()])
                         gameCount += 1
-                    elif matchup.teamB.getTeamId() == self.__teamId:
-                        recordCalculator = RecordCalculator(matchup.teamA.getTeamId(), self.__leagueModel, [year])
-                        awalCalculator = AwalCalculator(matchup.teamA.getTeamId(), self.__leagueModel, [year],
+                    elif matchup.teamB.teamId == self.__teamId:
+                        recordCalculator = RecordCalculator(matchup.teamA.teamId, self.__leagueModel, [year])
+                        awalCalculator = AwalCalculator(matchup.teamA.teamId, self.__leagueModel, [year],
                                                         recordCalculator.getWins(onlyWeeks=[week.getWeekNumber()]),
                                                         recordCalculator.getTies(onlyWeeks=[week.getWeekNumber()]))
                         totalOpponentAwal += awalCalculator.getAwal(onlyWeeks=[week.getWeekNumber()])

@@ -94,7 +94,7 @@ class AwalCalculator:
         (1=win, 0=loss, 0.5=tie)
         """
         for matchup in week.getMatchups():
-            if matchup.teamA.getTeamId() == self.__teamId:
+            if matchup.teamA.teamId == self.__teamId:
                 # our target team is TeamA
                 if matchup.teamAScore > matchup.teamBScore:
                     # our target team won
@@ -105,7 +105,7 @@ class AwalCalculator:
                 else:
                     # our target team tied
                     return 0.5
-            elif matchup.teamB.getTeamId() == self.__teamId:
+            elif matchup.teamB.teamId == self.__teamId:
                 # our target team is TeamB
                 if matchup.teamBScore > matchup.teamAScore:
                     # our target team won
@@ -123,8 +123,8 @@ class AwalCalculator:
         """
         allScores = {}
         for matchup in week.getMatchups():
-            allScores[matchup.teamA.getTeamId()] = matchup.teamAScore
-            allScores[matchup.teamB.getTeamId()] = matchup.teamBScore
+            allScores[matchup.teamA.teamId] = matchup.teamAScore
+            allScores[matchup.teamB.teamId] = matchup.teamBScore
         allScoresList = []
         for teamId in allScores:
             allScoresList.append(allScores[teamId])
@@ -141,8 +141,8 @@ class AwalCalculator:
         """
         allScores = {}
         for matchup in week.getMatchups():
-            allScores[matchup.teamA.getTeamId()] = matchup.teamAScore
-            allScores[matchup.teamB.getTeamId()] = matchup.teamBScore
+            allScores[matchup.teamA.teamId] = matchup.teamAScore
+            allScores[matchup.teamB.teamId] = matchup.teamBScore
         allScoresList = []
         for teamId in allScores:
             if teamId != self.__teamId:

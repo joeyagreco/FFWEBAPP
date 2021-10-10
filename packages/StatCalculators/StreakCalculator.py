@@ -26,7 +26,7 @@ class StreakCalculator:
                     weekNumber = week.getWeekNumber()
                     for matchup in week.getMatchups():
                         # check if our target team plays in this matchup
-                        if matchup.teamA.getTeamId() == teamId or matchup.teamB.getTeamId() == teamId:
+                        if matchup.teamA.teamId == teamId or matchup.teamB.teamId == teamId:
                             # check if our target team won
                             if LeagueModelNavigator.getGameOutcomeAsString(matchup, teamId) == Constants.WIN:
                                 tmpTeam = LeagueModelNavigator.getTeamById(self.__leagueModel, year, teamId)
@@ -83,7 +83,7 @@ class StreakCalculator:
                     weekNumber = week.getWeekNumber()
                     for matchup in week.getMatchups():
                         # check if our target team plays in this matchup
-                        if matchup.teamA.getTeamId() == teamId or matchup.teamB.getTeamId() == teamId:
+                        if matchup.teamA.teamId == teamId or matchup.teamB.teamId == teamId:
                             # check if our target team won
                             if LeagueModelNavigator.getGameOutcomeAsString(matchup, teamId) == Constants.LOSS:
                                 tmpTeam = LeagueModelNavigator.getTeamById(self.__leagueModel, year, teamId)

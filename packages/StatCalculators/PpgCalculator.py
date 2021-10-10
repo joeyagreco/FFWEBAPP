@@ -34,10 +34,10 @@ class PpgCalculator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.teamA.getTeamId() == self.__teamId and matchup.teamB.getTeamId() in vsTeamIds:
+                    if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         points += matchup.teamAScore
                         gameCount += 1
-                    elif matchup.teamB.getTeamId() == self.__teamId and matchup.teamA.getTeamId() in vsTeamIds:
+                    elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
                         points += matchup.teamBScore
                         gameCount += 1
         if gameCount == 0:
@@ -65,10 +65,10 @@ class PpgCalculator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.teamA.getTeamId() == self.__teamId:
+                    if matchup.teamA.teamId == self.__teamId:
                         points += matchup.teamBScore
                         gameCount += 1
-                    elif matchup.teamB.getTeamId() == self.__teamId:
+                    elif matchup.teamB.teamId == self.__teamId:
                         points += matchup.teamAScore
                         gameCount += 1
         if gameCount == 0:

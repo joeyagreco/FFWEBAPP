@@ -20,7 +20,7 @@ class LeagueModelNavigator:
         Throws Exception if a team with the given ID is not in the given league.
         """
         for team in leagueModel.years[str(year)].getTeams():
-            if team.getTeamId() == teamId:
+            if team.teamId == teamId:
                 return team
         raise Exception("Given TeamID is not in the given LeagueModel at the given year.")
 
@@ -30,7 +30,7 @@ class LeagueModelNavigator:
         Returns a boolean on whether teams with the given IDs play in the given week.
         """
         for matchup in week.getMatchups():
-            if matchup.teamA.getTeamId() == team1Id and matchup.teamB.getTeamId() in opponentIds or matchup.teamB.getTeamId() == team1Id and matchup.teamA.getTeamId() in opponentIds:
+            if matchup.teamA.teamId == team1Id and matchup.teamB.teamId in opponentIds or matchup.teamB.teamId == team1Id and matchup.teamA.teamId in opponentIds:
                 return True
         return False
 
@@ -67,7 +67,7 @@ class LeagueModelNavigator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.teamA.getTeamId() == teamId and matchup.teamB.getTeamId() in vsTeamIds or matchup.teamB.getTeamId() == teamId and matchup.teamA.getTeamId() in vsTeamIds:
+                    if matchup.teamA.teamId == teamId and matchup.teamB.teamId in vsTeamIds or matchup.teamB.teamId == teamId and matchup.teamA.teamId in vsTeamIds:
                         gamesPlayed += 1
         return gamesPlayed
 
@@ -116,9 +116,9 @@ class LeagueModelNavigator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.teamA.getTeamId() == teamId and matchup.teamB.getTeamId() in vsTeamIds:
+                    if matchup.teamA.teamId == teamId and matchup.teamB.teamId in vsTeamIds:
                         totalPoints += matchup.teamAScore
-                    elif matchup.teamB.getTeamId() == teamId and matchup.teamA.getTeamId() in vsTeamIds:
+                    elif matchup.teamB.teamId == teamId and matchup.teamA.teamId in vsTeamIds:
                         totalPoints += matchup.teamBScore
         return Rounder.normalRound(totalPoints, Rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
@@ -128,10 +128,10 @@ class LeagueModelNavigator:
         Returns a string representation [win/loss/tie] of the outcome of the given game for the team with the given ID.
         Returns None if a team with the given ID does not play in this matchup.
         """
-        if teamId != matchup.teamA.getTeamId() and teamId != matchup.teamB.getTeamId():
+        if teamId != matchup.teamA.teamId and teamId != matchup.teamB.teamId:
             # the given team doesn't play in the given matchup
             return None
-        if teamId == matchup.teamA.getTeamId():
+        if teamId == matchup.teamA.teamId:
             # given team is team A
             isTeamA = True
         else:
@@ -199,11 +199,11 @@ class LeagueModelNavigator:
                 elif week.getWeekNumber() > throughWeek:
                     break
                 for matchup in week.getMatchups():
-                    if matchup.teamA.getTeamId() == teamId and matchup.teamB.getTeamId() in vsTeamIds:
+                    if matchup.teamA.teamId == teamId and matchup.teamB.teamId in vsTeamIds:
                         score = matchup.teamAScore
                         score = Rounder.normalRound(score, decimalPlacesToRoundTo)
                         allScores.append(score)
-                    elif matchup.teamB.getTeamId() == teamId and matchup.teamA.getTeamId() in vsTeamIds:
+                    elif matchup.teamB.teamId == teamId and matchup.teamA.teamId in vsTeamIds:
                         score = matchup.teamBScore
                         score = Rounder.normalRound(score, decimalPlacesToRoundTo)
                         allScores.append(score)
@@ -230,8 +230,8 @@ class LeagueModelNavigator:
         excludeIds = params.pop("excludeIds", [])
         teamIds = []
         for team in leagueModel.years[str(year)].getTeams():
-            if team.getTeamId() not in excludeIds:
-                teamIds.append(team.getTeamId())
+            if team.teamId not in excludeIds:
+                teamIds.append(team.teamId)
         return teamIds
 
     @staticmethod
@@ -247,7 +247,7 @@ class LeagueModelNavigator:
             if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                 continue
             for matchup in week.getMatchups():
-                if matchup.teamA.getTeamId() == team1Id and matchup.teamB.getTeamId() in opponentTeamIds or matchup.teamB.getTeamId() == team1Id and matchup.teamA.getTeamId() in opponentTeamIds:
+                if matchup.teamA.teamId == team1Id and matchup.teamB.teamId in opponentTeamIds or matchup.teamB.teamId == team1Id and matchup.teamA.teamId in opponentTeamIds:
                     weeks.append(week.getWeekNumber())
         return weeks
 
@@ -266,12 +266,12 @@ class LeagueModelNavigator:
             if week.getWeekNumber() > throughWeek:
                 break
             for matchup in week.getMatchups():
-                if matchup.teamA.getTeamId() == teamId:
+                if matchup.teamA.teamId == teamId:
                     if andOpponentScore:
                         scores.append((matchup.teamAScore, matchup.teamBScore))
                         continue
                     scores.append(matchup.teamAScore)
-                elif matchup.teamB.getTeamId() == teamId:
+                elif matchup.teamB.teamId == teamId:
                     if andOpponentScore:
                         scores.append((matchup.teamBScore, matchup.teamAScore))
                         continue
