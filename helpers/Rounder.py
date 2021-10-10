@@ -30,9 +30,9 @@ class Rounder:
         Default return value is 1.
         """
         maxDecimalPlaces = 1
-        for year in league.getYears():
+        for year in league.years:
             if year != "0":
-                for week in league.getYears()[year].getWeeks():
+                for week in league.years[year].getWeeks():
                     for matchup in week.getMatchups():
                         aScore = matchup.getTeamAScore()
                         bScore = matchup.getTeamBScore()

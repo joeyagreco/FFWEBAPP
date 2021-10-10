@@ -67,7 +67,7 @@ def headToHeadStats(leagueId, year):
         # no submitted matchup, default to first 2 teams
         team1Id = 1
         team2Id = 2
-        for i in range(2, leagueModel.getNumberOfTeams()):
+        for i in range(2, leagueModel.numberOfTeams):
             if LeagueModelNavigator.teamsPlayEachOther(leagueModel, yearList, team1Id, i):
                 team2Id = i
                 break

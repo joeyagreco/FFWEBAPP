@@ -55,8 +55,8 @@ class AwalCalculator:
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            L = self.__leagueModel.getNumberOfTeams() - 1
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
+            L = self.__leagueModel.numberOfTeams - 1
+            for week in self.__leagueModel.years[str(year)].getWeeks():
                 if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
                     continue
                 elif week.getWeekNumber() > throughWeek:
