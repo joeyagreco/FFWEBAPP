@@ -287,12 +287,12 @@ class LeagueModelNavigator:
         """
         asInts = params.pop("asInts", False)
         years = []
-        for year in leagueModel.getYears():
+        for year in leagueModel.years:
             if year != "0":
                 if asInts:
                     years.append(year)
                 else:
-                    years.append(leagueModel.getYears()[year])
+                    years.append(leagueModel.years[year])
         return years
 
     @staticmethod
@@ -300,9 +300,9 @@ class LeagueModelNavigator:
         """
         This returns as a dict of TeamModels of all the years in the given league without year0.
         """
-        years = leagueModel.getYears()
+        years = leagueModel.years
         del years[0]
-        return leagueModel.getYears()
+        return leagueModel.years
 
     @classmethod
     def getAllYearsWithWeeks(cls, leagueModel: LeagueModel, **params):
