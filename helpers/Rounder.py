@@ -33,7 +33,7 @@ class Rounder:
         for year in league.years:
             if year != "0":
                 for week in league.years[year].getWeeks():
-                    for matchup in week.getMatchups():
+                    for matchup in week.matchups:
                         aScore = matchup.teamAScore
                         bScore = matchup.teamBScore
                         if isinstance(aScore, float):

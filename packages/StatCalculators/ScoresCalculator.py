@@ -30,11 +30,11 @@ class ScoresCalculator:
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         scores.append(matchup.teamAScore)
                     elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
@@ -61,11 +61,11 @@ class ScoresCalculator:
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         scores.append(matchup.teamAScore)
                     elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
@@ -95,11 +95,11 @@ class ScoresCalculator:
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         totalTeamScore += matchup.teamAScore
                         totalOpponentScore += matchup.teamBScore
@@ -127,11 +127,11 @@ class ScoresCalculator:
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         scores.append(matchup.teamAScore)
                     elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
@@ -166,11 +166,11 @@ class ScoresCalculator:
                                                                        throughWeek=weekNumber,
                                                                        onlyWeeks=allWeeksTeamsPlay)
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > weekNumber:
+                elif week.weekNumber > weekNumber:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         totalTeamScore += matchup.teamAScore
                     elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
@@ -203,11 +203,11 @@ class ScoresCalculator:
                                                                        throughWeek=weekNumber,
                                                                        onlyWeeks=allWeeksTeamsPlay)
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > weekNumber:
+                elif week.weekNumber > weekNumber:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         totalTeamScore += matchup.teamBScore
                     elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:

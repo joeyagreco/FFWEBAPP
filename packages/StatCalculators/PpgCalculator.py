@@ -29,11 +29,11 @@ class PpgCalculator:
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         points += matchup.teamAScore
                         gameCount += 1
@@ -60,11 +60,11 @@ class PpgCalculator:
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId:
                         points += matchup.teamBScore
                         gameCount += 1

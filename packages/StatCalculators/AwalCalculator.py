@@ -57,9 +57,9 @@ class AwalCalculator:
             params["vsTeamIds"] = vsTeamIds
             L = self.__leagueModel.numberOfTeams - 1
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
                 if LeagueModelNavigator.teamsPlayInWeek(week, self.__teamId, vsTeamIds):
                     WAL = self.__getTeamOutcomeOfWeek(week)
@@ -93,7 +93,7 @@ class AwalCalculator:
         Returns the outcome in the given week for the team with self.__teamId.
         (1=win, 0=loss, 0.5=tie)
         """
-        for matchup in week.getMatchups():
+        for matchup in week.matchups:
             if matchup.teamA.teamId == self.__teamId:
                 # our target team is TeamA
                 if matchup.teamAScore > matchup.teamBScore:
@@ -122,7 +122,7 @@ class AwalCalculator:
         Returns the number of teams outscored in the given week for the team with self.__teamId.
         """
         allScores = {}
-        for matchup in week.getMatchups():
+        for matchup in week.matchups:
             allScores[matchup.teamA.teamId] = matchup.teamAScore
             allScores[matchup.teamB.teamId] = matchup.teamBScore
         allScoresList = []
@@ -140,7 +140,7 @@ class AwalCalculator:
         Returns the number of teams tied in the given week for the team with self.__teamId.
         """
         allScores = {}
-        for matchup in week.getMatchups():
+        for matchup in week.matchups:
             allScores[matchup.teamA.teamId] = matchup.teamAScore
             allScores[matchup.teamB.teamId] = matchup.teamBScore
         allScoresList = []

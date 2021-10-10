@@ -17,7 +17,7 @@ class AverageCalculator:
         allScores = []
         for year in self.__years:
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     allScores.append(matchup.teamAScore)
                     allScores.append(matchup.teamBScore)
         if len(allScores) > 0:
@@ -32,7 +32,7 @@ class AverageCalculator:
         allScores = []
         for year in self.__years:
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamAScore > matchup.teamBScore:
                         allScores.append(matchup.teamAScore)
                     elif matchup.teamBScore > matchup.teamAScore:
@@ -49,7 +49,7 @@ class AverageCalculator:
         allScores = []
         for year in self.__years:
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamAScore < matchup.teamBScore:
                         allScores.append(matchup.teamAScore)
                     elif matchup.teamBScore < matchup.teamAScore:

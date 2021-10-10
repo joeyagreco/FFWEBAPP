@@ -378,9 +378,9 @@ class StatCalculatorService:
                     for week in leagueModel.years[str(year)].getWeeks():
                         recordCalculator = RecordCalculator(team.teamId, leagueModel, [year])
                         awalCalculator = AwalCalculator(team.teamId, leagueModel, [year],
-                                                        recordCalculator.getWins(throughWeek=week.getWeekNumber()),
-                                                        recordCalculator.getTies(throughWeek=week.getWeekNumber()))
-                        awal = awalCalculator.getAwal(throughWeek=week.getWeekNumber())
+                                                        recordCalculator.getWins(throughWeek=week.weekNumber),
+                                                        recordCalculator.getTies(throughWeek=week.weekNumber))
+                        awal = awalCalculator.getAwal(throughWeek=week.weekNumber)
                         data[team.teamName].append(awal)
             xAxisTicks = max(numOfWeeksList)
             return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, Constants.AWAL_STAT_TITLE, 1,

@@ -28,11 +28,11 @@ class RecordCalculator:
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         # see if they won as team A
                         if matchup.teamAScore > matchup.teamBScore:
@@ -61,11 +61,11 @@ class RecordCalculator:
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         # see if they lost as team A
                         if matchup.teamAScore < matchup.teamBScore:
@@ -94,11 +94,11 @@ class RecordCalculator:
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
                         # see if they tied as team A
                         if matchup.teamAScore == matchup.teamBScore:

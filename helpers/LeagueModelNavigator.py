@@ -29,7 +29,7 @@ class LeagueModelNavigator:
         """
         Returns a boolean on whether teams with the given IDs play in the given week.
         """
-        for matchup in week.getMatchups():
+        for matchup in week.matchups:
             if matchup.teamA.teamId == team1Id and matchup.teamB.teamId in opponentIds or matchup.teamB.teamId == team1Id and matchup.teamA.teamId in opponentIds:
                 return True
         return False
@@ -62,11 +62,11 @@ class LeagueModelNavigator:
             vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
             params["vsTeamIds"] = vsTeamIds
             for week in leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == teamId and matchup.teamB.teamId in vsTeamIds or matchup.teamB.teamId == teamId and matchup.teamA.teamId in vsTeamIds:
                         gamesPlayed += 1
         return gamesPlayed
@@ -85,11 +85,11 @@ class LeagueModelNavigator:
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
             for week in leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     totalPoints += matchup.teamAScore
                     totalPoints += matchup.teamBScore
         return Rounder.normalRound(totalPoints, Rounder.getDecimalPlacesRoundedToInScores(leagueModel))
@@ -111,11 +111,11 @@ class LeagueModelNavigator:
             vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
             params["vsTeamIds"] = vsTeamIds
             for week in leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == teamId and matchup.teamB.teamId in vsTeamIds:
                         totalPoints += matchup.teamAScore
                     elif matchup.teamB.teamId == teamId and matchup.teamA.teamId in vsTeamIds:
@@ -162,11 +162,11 @@ class LeagueModelNavigator:
             onlyWeeks = params.pop("onlyWeeks", None)
             decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             for week in leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     scoreA = matchup.teamAScore
                     scoreB = matchup.teamBScore
                     scoreA = Rounder.normalRound(scoreA, decimalPlacesToRoundTo)
@@ -194,11 +194,11 @@ class LeagueModelNavigator:
             params["vsTeamIds"] = vsTeamIds
             decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
             for week in leagueModel.years[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamA.teamId == teamId and matchup.teamB.teamId in vsTeamIds:
                         score = matchup.teamAScore
                         score = Rounder.normalRound(score, decimalPlacesToRoundTo)
@@ -244,11 +244,11 @@ class LeagueModelNavigator:
         onlyWeeks = params.pop("onlyWeeks", None)
         weeks = []
         for week in leagueModel.years[str(year)].getWeeks():
-            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            if onlyWeeks and week.weekNumber not in onlyWeeks:
                 continue
-            for matchup in week.getMatchups():
+            for matchup in week.matchups:
                 if matchup.teamA.teamId == team1Id and matchup.teamB.teamId in opponentTeamIds or matchup.teamB.teamId == team1Id and matchup.teamA.teamId in opponentTeamIds:
-                    weeks.append(week.getWeekNumber())
+                    weeks.append(week.weekNumber)
         return weeks
 
     @classmethod
@@ -263,9 +263,9 @@ class LeagueModelNavigator:
 
         scores = []
         for week in leagueModel.years[str(year)].getWeeks():
-            if week.getWeekNumber() > throughWeek:
+            if week.weekNumber > throughWeek:
                 break
-            for matchup in week.getMatchups():
+            for matchup in week.matchups:
                 if matchup.teamA.teamId == teamId:
                     if andOpponentScore:
                         scores.append((matchup.teamAScore, matchup.teamBScore))

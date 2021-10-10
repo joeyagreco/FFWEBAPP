@@ -21,7 +21,7 @@ class EveryGameCalculator:
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         for year in self.__years:
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                for matchup in week.getMatchups():
+                for matchup in week.matchups:
                     if matchup.teamAScore > matchup.teamBScore:
                         # team A won
                         mov = matchup.teamAScore - matchup.teamBScore
@@ -30,7 +30,7 @@ class EveryGameCalculator:
                         teamForPoints = matchup.teamAScore
                         teamAgainst = matchup.teamB
                         teamAgainstPoints = matchup.teamBScore
-                        weekNumber = week.getWeekNumber()
+                        weekNumber = week.weekNumber
                     elif matchup.teamBScore > matchup.teamAScore:
                         # team B won
                         mov = matchup.teamBScore - matchup.teamAScore
@@ -39,7 +39,7 @@ class EveryGameCalculator:
                         teamForPoints = matchup.teamBScore
                         teamAgainst = matchup.teamA
                         teamAgainstPoints = matchup.teamAScore
-                        weekNumber = week.getWeekNumber()
+                        weekNumber = week.weekNumber
                     else:
                         # tie, dont care about this
                         continue
@@ -61,8 +61,8 @@ class EveryGameCalculator:
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         for year in self.__years:
             for week in self.__leagueModel.years[str(year)].getWeeks():
-                for matchup in week.getMatchups():
-                    weekNumber = week.getWeekNumber()
+                for matchup in week.matchups:
+                    weekNumber = week.weekNumber
                     # team A score
                     teamAScore = matchup.teamAScore
                     teamAScore = Rounder.normalRound(teamAScore, decimalPlacesRoundedTo)
