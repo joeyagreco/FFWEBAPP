@@ -18,7 +18,7 @@ class StreakCalculator:
         """
         streakModelList = []
         allTeamIds = LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, self.__years[0])
-        mostRecentYear = LeagueModelNavigator.getMostRecentYear(self.__leagueModel, asInt=True)
+        mostRecentYear = LeagueModelNavigator.getMostRecentYear(self.__leagueModel, asInt=True, withWeeks=True)
         for teamId in allTeamIds:
             currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             for year in self.__years:
@@ -75,7 +75,7 @@ class StreakCalculator:
         """
         streakModelList = []
         allTeamIds = LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, self.__years[0])
-        mostRecentYear = LeagueModelNavigator.getMostRecentYear(self.__leagueModel, asInt=True)
+        mostRecentYear = LeagueModelNavigator.getMostRecentYear(self.__leagueModel, asInt=True, withWeeks=True)
         for teamId in allTeamIds:
             currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             for year in self.__years:
