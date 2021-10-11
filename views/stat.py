@@ -1,4 +1,4 @@
-from flask import request, render_template
+from flask import request, render_template, redirect, url_for
 
 from app import app
 from controllers.MainController import MainController
@@ -23,14 +23,19 @@ def teamStats(leagueId, year):
     except DatabaseError as e:
         return render_template("teamStatsPage.html", league=league,
                                error_message=str(e))
+    allYearsWithWeeksAsInts = LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True, withWeeks=True)
     if year is None:
-        year = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True)
+        year = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True, withWeeks=True)
         yearList = [year]
     elif year == "0":
         # give them all years (ALL TIME)
-        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
+        yearList = sorted(allYearsWithWeeksAsInts)
     else:
         yearList = [year]
+    if int(year) not in allYearsWithWeeksAsInts and year != "0":
+        # invalid year given, reroute to most recent year
+        return redirect(url_for("teamStats", leagueId=leagueId,
+                                year=LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True, withWeeks=True)))
     statsModels = mainController.getTeamStatsModel(leagueModel, yearList)
     return render_template("teamStatsPage.html", league=league, stats_models=statsModels, constants=Constants,
                            selected_year=year)
@@ -51,14 +56,20 @@ def headToHeadStats(leagueId, year):
     except DatabaseError as e:
         return render_template("headToHeadStatsPage.html", league=league, given_team_1_id=None,
                                given_team_2_id=None, error_message=str(e))
+    allYearsWithWeeksAsInts = LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True, withWeeks=True)
     if year is None:
-        year = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True)
+        year = LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True, withWeeks=True)
         yearList = [year]
     elif year == "0":
         # give them all years (ALL TIME)
-        yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
+        yearList = sorted(allYearsWithWeeksAsInts)
     else:
         yearList = [year]
+    if int(year) not in allYearsWithWeeksAsInts and year != "0":
+        # invalid year given, reroute to most recent year
+        return redirect(url_for("headToHeadStats", leagueId=leagueId,
+                                year=LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True, withWeeks=True),
+                                team1=team1Id, team2=team2Id))
     if team1Id and team2Id:
         # if the user submitted this matchup
         team1Id = int(team1Id)
@@ -105,9 +116,10 @@ def graphs(leagueId, year):
         leagueModel = mainController.getLeagueModel(leagueId)
     except (DatabaseError, LeagueNotFoundError) as e:
         return render_template("indexHomepage.html", error_message=str(e))
+    allYearsWithWeeksAsInts = LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True, withWeeks=True)
     if year is None:
         # give most recent year if none is given
-        years = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
+        years = sorted(allYearsWithWeeksAsInts)
         year = years[-1]
         yearList = [year]
     elif year == "0":
@@ -115,6 +127,11 @@ def graphs(leagueId, year):
         yearList = sorted(LeagueModelNavigator.getAllYearsWithWeeks(leagueModel, asInts=True))
     else:
         yearList = [year]
+    if int(year) not in allYearsWithWeeksAsInts and year != "0":
+        # invalid year given, reroute to most recent year
+        return redirect(url_for("graphs", leagueId=leagueId,
+                                year=LeagueModelNavigator.getMostRecentYear(leagueModel, asInt=True, withWeeks=True),
+                                graph_selection=selectedGraph, screen_width=screenWidth))
     try:
         divAsString = mainController.getGraphDiv(leagueModel, yearList, screenWidth, selectedGraph)
     except InvalidStatSelectionError as e:
