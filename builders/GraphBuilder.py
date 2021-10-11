@@ -109,23 +109,23 @@ class GraphBuilder:
         ssList = []
         awalList = []
         for year in years:
-            for team in leagueModel.getYears()[str(year)].getTeams():
-                recordCalculator = RecordCalculator(team.getTeamId(), leagueModel, [year])
-                scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, [year])
-                awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year], recordCalculator.getWins(),
+            for team in leagueModel.years[str(year)].teams:
+                recordCalculator = RecordCalculator(team.teamId, leagueModel, [year])
+                scoresCalculator = ScoresCalculator(team.teamId, leagueModel, [year])
+                awalCalculator = AwalCalculator(team.teamId, leagueModel, [year], recordCalculator.getWins(),
                                                 recordCalculator.getTies())
                 ss = scoresCalculator.getScoringShare()
                 awalPerGame = awalCalculator.getAwalPerGame()
                 ssList.append(ss)
                 awalList.append(awalPerGame)
-                data[f"{team.getTeamId()}-{year}"] = ([awalPerGame], [ss])
+                data[f"{team.teamId}-{year}"] = ([awalPerGame], [ss])
         fig = go.Figure()
         for teamIdAndYear in data:
             teamId = int(teamIdAndYear[0:-5])
             year = teamIdAndYear[-4:]
             fig.add_trace(go.Scatter(x=data[teamIdAndYear][0],
                                      y=data[teamIdAndYear][1],
-                                     name=LeagueModelNavigator.getTeamById(leagueModel, year, teamId).getTeamName(),
+                                     name=LeagueModelNavigator.getTeamById(leagueModel, year, teamId).teamName,
                                      mode="markers",
                                      marker=dict(size=20)
                                      )
@@ -166,9 +166,9 @@ class GraphBuilder:
         """
         data = dict()
         for year in years:
-            for team in leagueModel.getYears()[str(year)].getTeams():
-                data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId(),
-                                                                                    andOpponentScore=True)
+            for team in leagueModel.years[str(year)].teams:
+                data[team.teamName] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.teamId,
+                                                                               andOpponentScore=True)
         pointsForList = []
         pointsAgainstList = []
         fig = go.Figure()
@@ -214,14 +214,14 @@ class GraphBuilder:
         sosList = []
         ssAgainstList = []
         for year in years:
-            for team in leagueModel.getYears()[str(year)].getTeams():
-                sosCalculator = StrengthOfScheduleCalculator(team.getTeamId(), leagueModel, [year])
-                scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, [year])
+            for team in leagueModel.years[str(year)].teams:
+                sosCalculator = StrengthOfScheduleCalculator(team.teamId, leagueModel, [year])
+                scoresCalculator = ScoresCalculator(team.teamId, leagueModel, [year])
                 sos = sosCalculator.getStrengthOfSchedule()
                 ssAgainst = scoresCalculator.getScoringShareAgainst()
                 sosList.append(sos)
                 ssAgainstList.append(ssAgainst)
-                data[team.getTeamName()] = ([sos], [ssAgainst])
+                data[team.teamName] = ([sos], [ssAgainst])
         fig = go.Figure()
         for teamName in data:
             fig.add_trace(go.Scatter(x=data[teamName][0],

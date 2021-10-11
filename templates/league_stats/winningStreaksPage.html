@@ -22,14 +22,14 @@
         </thead>
         <tbody>
         {% for leagueStat in stats_models %}
-        <tr class="backgroundTeamId{{leagueStat.getOwner().getTeamId()}}">
-            <td>{{leagueStat.getStreakNumber()}}</td>
-            <td>{{leagueStat.getOwner().getTeamName()}}</td>
-            <td>{{leagueStat.getFirstDate()}}</td>
-            <td>{{leagueStat.getFirstTeam().getTeamName()}}</td>
-            <td>{{leagueStat.getLastDate()}}</td>
-            <td>{{leagueStat.getLastTeam().getTeamName()}}</td>
-            {% if leagueStat.getOngoing() %}
+        <tr class="backgroundTeamId{{leagueStat.owner.teamId}}">
+            <td>{{leagueStat.streakNumber}}</td>
+            <td>{{leagueStat.owner.teamName}}</td>
+            <td>{{leagueStat.firstDate}}</td>
+            <td>{{leagueStat.firstTeam.teamName}}</td>
+            <td>{{leagueStat.lastDate}}</td>
+            <td>{{leagueStat.lastTeam.teamName}}</td>
+            {% if leagueStat.ongoing %}
             <td><i class="fas fa-check"></i></td>
             {% else %}
             <td></td>
@@ -41,7 +41,6 @@
 </div>
 <script>
     initializeTable();
-
 
 
 

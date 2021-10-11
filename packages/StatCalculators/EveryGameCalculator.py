@@ -20,26 +20,26 @@ class EveryGameCalculator:
         models = []
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         for year in self.__years:
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                for matchup in week.getMatchups():
-                    if matchup.getTeamAScore() > matchup.getTeamBScore():
+            for week in self.__leagueModel.years[str(year)].weeks:
+                for matchup in week.matchups:
+                    if matchup.teamAScore > matchup.teamBScore:
                         # team A won
-                        mov = matchup.getTeamAScore() - matchup.getTeamBScore()
+                        mov = matchup.teamAScore - matchup.teamBScore
                         mov = Rounder.normalRound(mov, decimalPlacesRoundedTo)
-                        teamFor = matchup.getTeamA()
-                        teamForPoints = matchup.getTeamAScore()
-                        teamAgainst = matchup.getTeamB()
-                        teamAgainstPoints = matchup.getTeamBScore()
-                        weekNumber = week.getWeekNumber()
-                    elif matchup.getTeamBScore() > matchup.getTeamAScore():
+                        teamFor = matchup.teamA
+                        teamForPoints = matchup.teamAScore
+                        teamAgainst = matchup.teamB
+                        teamAgainstPoints = matchup.teamBScore
+                        weekNumber = week.weekNumber
+                    elif matchup.teamBScore > matchup.teamAScore:
                         # team B won
-                        mov = matchup.getTeamBScore() - matchup.getTeamAScore()
+                        mov = matchup.teamBScore - matchup.teamAScore
                         mov = Rounder.normalRound(mov, decimalPlacesRoundedTo)
-                        teamFor = matchup.getTeamB()
-                        teamForPoints = matchup.getTeamBScore()
-                        teamAgainst = matchup.getTeamA()
-                        teamAgainstPoints = matchup.getTeamAScore()
-                        weekNumber = week.getWeekNumber()
+                        teamFor = matchup.teamB
+                        teamForPoints = matchup.teamBScore
+                        teamAgainst = matchup.teamA
+                        teamAgainstPoints = matchup.teamAScore
+                        weekNumber = week.weekNumber
                     else:
                         # tie, dont care about this
                         continue
@@ -60,21 +60,21 @@ class EveryGameCalculator:
         models = []
         decimalPlacesRoundedTo = Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)
         for year in self.__years:
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                for matchup in week.getMatchups():
-                    weekNumber = week.getWeekNumber()
+            for week in self.__leagueModel.years[str(year)].weeks:
+                for matchup in week.matchups:
+                    weekNumber = week.weekNumber
                     # team A score
-                    teamAScore = matchup.getTeamAScore()
+                    teamAScore = matchup.teamAScore
                     teamAScore = Rounder.normalRound(teamAScore, decimalPlacesRoundedTo)
-                    teamAFor = matchup.getTeamA()
-                    teamAAgainst = matchup.getTeamB()
-                    teamAOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.getTeamA().getTeamId())
+                    teamAFor = matchup.teamA
+                    teamAAgainst = matchup.teamB
+                    teamAOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.teamA.teamId)
                     # team B score
-                    teamBScore = matchup.getTeamBScore()
+                    teamBScore = matchup.teamBScore
                     teamBScore = Rounder.normalRound(teamBScore, decimalPlacesRoundedTo)
-                    teamBFor = matchup.getTeamB()
-                    teamBAgainst = matchup.getTeamA()
-                    teamBOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.getTeamB().getTeamId())
+                    teamBFor = matchup.teamB
+                    teamBAgainst = matchup.teamA
+                    teamBOutcome = LeagueModelNavigator.getGameOutcomeAsString(matchup, matchup.teamB.teamId)
                     # create both team models and add to list
                     teamAModel = ScoreModel(score=teamAScore,
                                             teamFor=teamAFor,

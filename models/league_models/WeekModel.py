@@ -1,12 +1,10 @@
+from dataclasses import dataclass
+from typing import List
+
+from models.league_models.MatchupModel import MatchupModel
+
+
+@dataclass
 class WeekModel:
-
-    # def __init__(self, weekNumber: int, matchups: List[MatchupModel]):
-    def __init__(self, weekNumber: int, matchups):
-        self.__weekNumber = weekNumber
-        self.__matchups = matchups
-
-    def getWeekNumber(self):
-        return self.__weekNumber
-
-    def getMatchups(self):
-        return self.__matchups
+    weekNumber: int
+    matchups: List[MatchupModel]

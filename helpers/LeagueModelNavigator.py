@@ -19,8 +19,8 @@ class LeagueModelNavigator:
         Returns a Team object for the team with the given ID in the given league in the given year.
         Throws Exception if a team with the given ID is not in the given league.
         """
-        for team in leagueModel.getYears()[str(year)].getTeams():
-            if team.getTeamId() == teamId:
+        for team in leagueModel.years[str(year)].teams:
+            if team.teamId == teamId:
                 return team
         raise Exception("Given TeamID is not in the given LeagueModel at the given year.")
 
@@ -29,8 +29,8 @@ class LeagueModelNavigator:
         """
         Returns a boolean on whether teams with the given IDs play in the given week.
         """
-        for matchup in week.getMatchups():
-            if matchup.getTeamA().getTeamId() == team1Id and matchup.getTeamB().getTeamId() in opponentIds or matchup.getTeamB().getTeamId() == team1Id and matchup.getTeamA().getTeamId() in opponentIds:
+        for matchup in week.matchups:
+            if matchup.teamA.teamId == team1Id and matchup.teamB.teamId in opponentIds or matchup.teamB.teamId == team1Id and matchup.teamA.teamId in opponentIds:
                 return True
         return False
 
@@ -40,7 +40,7 @@ class LeagueModelNavigator:
         Returns a boolean on whether the teams with the given IDs play at all in the given league in the given year.
         """
         for year in years:
-            for week in leagueModel.getYears()[str(year)].getWeeks():
+            for week in leagueModel.years[str(year)].weeks:
                 if cls.teamsPlayInWeek(week, team1Id, [team2Id]):
                     return True
         return False
@@ -61,13 +61,13 @@ class LeagueModelNavigator:
             params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == teamId and matchup.getTeamB().getTeamId() in vsTeamIds or matchup.getTeamB().getTeamId() == teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == teamId and matchup.teamB.teamId in vsTeamIds or matchup.teamB.teamId == teamId and matchup.teamA.teamId in vsTeamIds:
                         gamesPlayed += 1
         return gamesPlayed
 
@@ -84,14 +84,14 @@ class LeagueModelNavigator:
             params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            for week in leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    totalPoints += matchup.getTeamAScore()
-                    totalPoints += matchup.getTeamBScore()
+                for matchup in week.matchups:
+                    totalPoints += matchup.teamAScore
+                    totalPoints += matchup.teamBScore
         return Rounder.normalRound(totalPoints, Rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
     @classmethod
@@ -110,16 +110,16 @@ class LeagueModelNavigator:
             params["onlyWeeks"] = onlyWeeks
             vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        totalPoints += matchup.getTeamAScore()
-                    elif matchup.getTeamB().getTeamId() == teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        totalPoints += matchup.getTeamBScore()
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == teamId and matchup.teamB.teamId in vsTeamIds:
+                        totalPoints += matchup.teamAScore
+                    elif matchup.teamB.teamId == teamId and matchup.teamA.teamId in vsTeamIds:
+                        totalPoints += matchup.teamBScore
         return Rounder.normalRound(totalPoints, Rounder.getDecimalPlacesRoundedToInScores(leagueModel))
 
     @staticmethod
@@ -128,20 +128,20 @@ class LeagueModelNavigator:
         Returns a string representation [win/loss/tie] of the outcome of the given game for the team with the given ID.
         Returns None if a team with the given ID does not play in this matchup.
         """
-        if teamId != matchup.getTeamA().getTeamId() and teamId != matchup.getTeamB().getTeamId():
+        if teamId != matchup.teamA.teamId and teamId != matchup.teamB.teamId:
             # the given team doesn't play in the given matchup
             return None
-        if teamId == matchup.getTeamA().getTeamId():
+        if teamId == matchup.teamA.teamId:
             # given team is team A
             isTeamA = True
         else:
             # given team is team B
             isTeamA = False
-        if matchup.getTeamAScore() > matchup.getTeamBScore():
+        if matchup.teamAScore > matchup.teamBScore:
             if isTeamA:
                 return Constants.WIN
             return Constants.LOSS
-        elif matchup.getTeamAScore() < matchup.getTeamBScore():
+        elif matchup.teamAScore < matchup.teamBScore:
             if isTeamA:
                 return Constants.LOSS
             return Constants.WIN
@@ -161,14 +161,14 @@ class LeagueModelNavigator:
             throughWeek = params.pop("throughWeek", cls.getNumberOfWeeksInLeague(leagueModel, year))
             onlyWeeks = params.pop("onlyWeeks", None)
             decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-            for week in leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    scoreA = matchup.getTeamAScore()
-                    scoreB = matchup.getTeamBScore()
+                for matchup in week.matchups:
+                    scoreA = matchup.teamAScore
+                    scoreB = matchup.teamBScore
                     scoreA = Rounder.normalRound(scoreA, decimalPlacesToRoundTo)
                     scoreB = Rounder.normalRound(scoreB, decimalPlacesToRoundTo)
                     allScores.append(scoreA)
@@ -193,18 +193,18 @@ class LeagueModelNavigator:
             vsTeamIds = params.pop("vsTeamIds", cls.getAllTeamIdsInLeague(leagueModel, year, excludeId=[teamId]))
             params["vsTeamIds"] = vsTeamIds
             decimalPlacesToRoundTo = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-            for week in leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        score = matchup.getTeamAScore()
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == teamId and matchup.teamB.teamId in vsTeamIds:
+                        score = matchup.teamAScore
                         score = Rounder.normalRound(score, decimalPlacesToRoundTo)
                         allScores.append(score)
-                    elif matchup.getTeamB().getTeamId() == teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        score = matchup.getTeamBScore()
+                    elif matchup.teamB.teamId == teamId and matchup.teamA.teamId in vsTeamIds:
+                        score = matchup.teamBScore
                         score = Rounder.normalRound(score, decimalPlacesToRoundTo)
                         allScores.append(score)
         return allScores
@@ -216,7 +216,7 @@ class LeagueModelNavigator:
         ASLIST: [boolean] Gives all week numbers as an ordered list.
         """
         asList = params.pop("asList", False)
-        numberOfWeeks = len(leagueModel.getYears()[str(year)].getWeeks())
+        numberOfWeeks = len(leagueModel.years[str(year)].weeks)
         if asList:
             return [x + 1 for x in range(numberOfWeeks)]
         return numberOfWeeks
@@ -229,9 +229,9 @@ class LeagueModelNavigator:
         """
         excludeIds = params.pop("excludeIds", [])
         teamIds = []
-        for team in leagueModel.getYears()[str(year)].getTeams():
-            if team.getTeamId() not in excludeIds:
-                teamIds.append(team.getTeamId())
+        for team in leagueModel.years[str(year)].teams:
+            if team.teamId not in excludeIds:
+                teamIds.append(team.teamId)
         return teamIds
 
     @staticmethod
@@ -243,12 +243,12 @@ class LeagueModelNavigator:
         """
         onlyWeeks = params.pop("onlyWeeks", None)
         weeks = []
-        for week in leagueModel.getYears()[str(year)].getWeeks():
-            if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+        for week in leagueModel.years[str(year)].weeks:
+            if onlyWeeks and week.weekNumber not in onlyWeeks:
                 continue
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == team1Id and matchup.getTeamB().getTeamId() in opponentTeamIds or matchup.getTeamB().getTeamId() == team1Id and matchup.getTeamA().getTeamId() in opponentTeamIds:
-                    weeks.append(week.getWeekNumber())
+            for matchup in week.matchups:
+                if matchup.teamA.teamId == team1Id and matchup.teamB.teamId in opponentTeamIds or matchup.teamB.teamId == team1Id and matchup.teamA.teamId in opponentTeamIds:
+                    weeks.append(week.weekNumber)
         return weeks
 
     @classmethod
@@ -262,20 +262,20 @@ class LeagueModelNavigator:
         andOpponentScore = params.pop("andOpponentScore", False)
 
         scores = []
-        for week in leagueModel.getYears()[str(year)].getWeeks():
-            if week.getWeekNumber() > throughWeek:
+        for week in leagueModel.years[str(year)].weeks:
+            if week.weekNumber > throughWeek:
                 break
-            for matchup in week.getMatchups():
-                if matchup.getTeamA().getTeamId() == teamId:
+            for matchup in week.matchups:
+                if matchup.teamA.teamId == teamId:
                     if andOpponentScore:
-                        scores.append((matchup.getTeamAScore(), matchup.getTeamBScore()))
+                        scores.append((matchup.teamAScore, matchup.teamBScore))
                         continue
-                    scores.append(matchup.getTeamAScore())
-                elif matchup.getTeamB().getTeamId() == teamId:
+                    scores.append(matchup.teamAScore)
+                elif matchup.teamB.teamId == teamId:
                     if andOpponentScore:
-                        scores.append((matchup.getTeamBScore(), matchup.getTeamAScore()))
+                        scores.append((matchup.teamBScore, matchup.teamAScore))
                         continue
-                    scores.append(matchup.getTeamBScore())
+                    scores.append(matchup.teamBScore)
         return scores
 
     @staticmethod
@@ -287,12 +287,12 @@ class LeagueModelNavigator:
         """
         asInts = params.pop("asInts", False)
         years = []
-        for year in leagueModel.getYears():
+        for year in leagueModel.years:
             if year != "0":
                 if asInts:
                     years.append(year)
                 else:
-                    years.append(leagueModel.getYears()[year])
+                    years.append(leagueModel.years[year])
         return years
 
     @staticmethod
@@ -300,9 +300,9 @@ class LeagueModelNavigator:
         """
         This returns as a dict of TeamModels of all the years in the given league without year0.
         """
-        years = leagueModel.getYears()
+        years = leagueModel.years
         del years[0]
-        return leagueModel.getYears()
+        return leagueModel.years
 
     @classmethod
     def getAllYearsWithWeeks(cls, leagueModel: LeagueModel, **params):
@@ -311,10 +311,10 @@ class LeagueModelNavigator:
         ASINTS: (boolean) If True, returns as a list of ints representing the years
         """
         asInts = params.pop("asInts", False)
-        allYears = leagueModel.getYears()
+        allYears = leagueModel.years
         years = []
         for year in allYears:
-            weeks = allYears[year].getWeeks()
+            weeks = allYears[year].weeks
             if weeks and len(weeks) > 0:
                 if asInts:
                     years.append(int(year))
@@ -336,13 +336,13 @@ class LeagueModelNavigator:
             allYearsList = cls.getAllYearsWithWeeks(leagueModel)
             allYears = dict()
             for year in allYearsList:
-                allYears[year.getYear()] = year
+                allYears[year.year] = year
         else:
-            allYears = leagueModel.getYears()
+            allYears = leagueModel.years
         if len(allYears) > 0:
             mostRecentYear = allYears[max(allYears.keys())]
             if asInt:
-                return int(mostRecentYear.getYear())
+                return int(mostRecentYear.year)
             else:
                 return mostRecentYear
         else:

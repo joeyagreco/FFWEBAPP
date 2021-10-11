@@ -22,14 +22,14 @@
         </thead>
         <tbody>
         {% for leagueStat in stats_models %}
-        <tr class="backgroundTeamId{{leagueStat.getWinningTeam().getTeamId()}}">
-            <td>{{leagueStat.getMarginOfVictory()}}</td>
-            <td>{{leagueStat.getWinningTeam().getTeamName()}}</td>
-            <td>{{leagueStat.getWinningTeamPoints()}}</td>
-            <td>{{leagueStat.getLosingTeam().getTeamName()}}</td>
-            <td>{{leagueStat.getLosingTeamPoints()}}</td>
-            <td>{{leagueStat.getWeek()}}</td>
-            <td>{{leagueStat.getYear()}}</td>
+        <tr class="backgroundTeamId{{leagueStat.winningTeam.teamId}}">
+            <td>{{leagueStat.marginOfVictory}}</td>
+            <td>{{leagueStat.winningTeam.teamName}}</td>
+            <td>{{leagueStat.winningTeamPoints}}</td>
+            <td>{{leagueStat.losingTeam.teamName}}</td>
+            <td>{{leagueStat.losingTeamPoints}}</td>
+            <td>{{leagueStat.week}}</td>
+            <td>{{leagueStat.year}}</td>
         </tr>
         {% endfor %}
         </tbody>
@@ -37,7 +37,6 @@
 </div>
 <script>
     initializeTable();
-
 
 
 </script>

@@ -22,11 +22,11 @@ class StreakCalculator:
         for teamId in allTeamIds:
             currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             for year in self.__years:
-                for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                    weekNumber = week.getWeekNumber()
-                    for matchup in week.getMatchups():
+                for week in self.__leagueModel.years[str(year)].weeks:
+                    weekNumber = week.weekNumber
+                    for matchup in week.matchups:
                         # check if our target team plays in this matchup
-                        if matchup.getTeamA().getTeamId() == teamId or matchup.getTeamB().getTeamId() == teamId:
+                        if matchup.teamA.teamId == teamId or matchup.teamB.teamId == teamId:
                             # check if our target team won
                             if LeagueModelNavigator.getGameOutcomeAsString(matchup, teamId) == Constants.WIN:
                                 tmpTeam = LeagueModelNavigator.getTeamById(self.__leagueModel, year, teamId)
@@ -79,11 +79,11 @@ class StreakCalculator:
         for teamId in allTeamIds:
             currentStreakModelDict = self.__getDefaultStreakDict(teamId)
             for year in self.__years:
-                for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                    weekNumber = week.getWeekNumber()
-                    for matchup in week.getMatchups():
+                for week in self.__leagueModel.years[str(year)].weeks:
+                    weekNumber = week.weekNumber
+                    for matchup in week.matchups:
                         # check if our target team plays in this matchup
-                        if matchup.getTeamA().getTeamId() == teamId or matchup.getTeamB().getTeamId() == teamId:
+                        if matchup.teamA.teamId == teamId or matchup.teamB.teamId == teamId:
                             # check if our target team won
                             if LeagueModelNavigator.getGameOutcomeAsString(matchup, teamId) == Constants.LOSS:
                                 tmpTeam = LeagueModelNavigator.getTeamById(self.__leagueModel, year, teamId)

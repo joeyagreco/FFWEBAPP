@@ -29,16 +29,16 @@ class ScoresCalculator:
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in self.__leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamAScore())
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamBScore())
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
+                        scores.append(matchup.teamAScore)
+                    elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
+                        scores.append(matchup.teamBScore)
         if not scores:
             return 0.0
         return Rounder.normalRound(max(scores), Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
@@ -60,16 +60,16 @@ class ScoresCalculator:
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in self.__leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamAScore())
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamBScore())
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
+                        scores.append(matchup.teamAScore)
+                    elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
+                        scores.append(matchup.teamBScore)
         if not scores:
             return 0.0
         return Rounder.normalRound(min(scores), Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
@@ -94,18 +94,18 @@ class ScoresCalculator:
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in self.__leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamAScore()
-                        totalOpponentScore += matchup.getTeamBScore()
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamBScore()
-                        totalOpponentScore += matchup.getTeamAScore()
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
+                        totalTeamScore += matchup.teamAScore
+                        totalOpponentScore += matchup.teamBScore
+                    elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
+                        totalTeamScore += matchup.teamBScore
+                        totalOpponentScore += matchup.teamAScore
         return float(Rounder.normalRound(totalTeamScore - totalOpponentScore,
                                          Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel)))
 
@@ -126,16 +126,16 @@ class ScoresCalculator:
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in self.__leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamAScore())
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        scores.append(matchup.getTeamBScore())
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
+                        scores.append(matchup.teamAScore)
+                    elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
+                        scores.append(matchup.teamBScore)
         if not scores:
             return 0.0
         standardDeviation = statistics.pstdev(scores)
@@ -165,16 +165,16 @@ class ScoresCalculator:
             totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, [year],
                                                                        throughWeek=weekNumber,
                                                                        onlyWeeks=allWeeksTeamsPlay)
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in self.__leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > weekNumber:
+                elif week.weekNumber > weekNumber:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamAScore()
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamBScore()
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
+                        totalTeamScore += matchup.teamAScore
+                    elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
+                        totalTeamScore += matchup.teamBScore
         percentageOfScoring = Rounder.normalRound((totalTeamScore / totalLeagueScore) * 100, 2)
         return percentageOfScoring
 
@@ -202,15 +202,15 @@ class ScoresCalculator:
             totalLeagueScore += LeagueModelNavigator.totalLeaguePoints(self.__leagueModel, [year],
                                                                        throughWeek=weekNumber,
                                                                        onlyWeeks=allWeeksTeamsPlay)
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in self.__leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > weekNumber:
+                elif week.weekNumber > weekNumber:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamBScore()
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        totalTeamScore += matchup.getTeamAScore()
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
+                        totalTeamScore += matchup.teamBScore
+                    elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
+                        totalTeamScore += matchup.teamAScore
         percentageOfScoring = Rounder.normalRound((totalTeamScore / totalLeagueScore) * 100, 2)
         return percentageOfScoring

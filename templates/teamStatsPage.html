@@ -105,31 +105,31 @@
         </thead>
         <tbody>
         {% for teamStats in stats_models %}
-        <tr class="backgroundTeamId{{teamStats.getTeamId()}}">
-            <td>{{teamStats.getTeamName()}}</td>
+        <tr class="backgroundTeamId{{teamStats.teamId}}">
+            <td>{{teamStats.teamName}}</td>
             {% if selected_year == '0' %}
-            <td>{{teamStats.getYear()}}</td>
+            <td>{{teamStats.year}}</td>
             {% endif %}
-            <td>{{teamStats.getWins()}}</td>
-            <td>{{teamStats.getLosses()}}</td>
-            <td>{{teamStats.getTies()}}</td>
-            <td>{{teamStats.getWinPercentage()}}</td>
-            <td>{{teamStats.getWal()}}</td>
-            <td>{{teamStats.getAwal()}}</td>
-            <td>{{teamStats.getAwalPerGame()}}</td>
-            <td>{{teamStats.getSmartWins()}}</td>
-            <td>{{teamStats.getPpg()}}</td>
-            <td>{{teamStats.getPpgAgainst()}}</td>
-            <td>{{teamStats.getScoringShare()}}</td>
-            <td>{{teamStats.getScoringShareAgainst()}}</td>
-            <td>{{teamStats.getPlusMinus()}}</td>
-            <td>{{teamStats.getStrengthOfSchedule()}}</td>
-            <td>{{teamStats.getMaxScore()}}</td>
-            <td>{{teamStats.getMinScore()}}</td>
-            <td>{{teamStats.getStddev()}}</td>
-            <td>{{teamStats.getTeamScore()}}</td>
-            <td>{{teamStats.getTeamSuccess()}}</td>
-            <td>{{teamStats.getTeamLuck()}}</td>
+            <td>{{teamStats.wins}}</td>
+            <td>{{teamStats.losses}}</td>
+            <td>{{teamStats.ties}}</td>
+            <td>{{teamStats.winPercentage}}</td>
+            <td>{{teamStats.wal}}</td>
+            <td>{{teamStats.awal}}</td>
+            <td>{{teamStats.awalPerGame}}</td>
+            <td>{{teamStats.smartWins}}</td>
+            <td>{{teamStats.ppg}}</td>
+            <td>{{teamStats.ppgAgainst}}</td>
+            <td>{{teamStats.scoringShare}}</td>
+            <td>{{teamStats.scoringShareAgainst}}</td>
+            <td>{{teamStats.plusMinus}}</td>
+            <td>{{teamStats.strengthOfSchedule}}</td>
+            <td>{{teamStats.maxScore}}</td>
+            <td>{{teamStats.minScore}}</td>
+            <td>{{teamStats.stddev}}</td>
+            <td>{{teamStats.teamScore}}</td>
+            <td>{{teamStats.teamSuccess}}</td>
+            <td>{{teamStats.teamLuck}}</td>
         </tr>
         {% endfor %}
         </tbody>
@@ -137,15 +137,6 @@
 </div>
 <script>
     initializeTable();
-
-
-
-
-
-
-
-
-
 
 </script>
 {% endblock %}

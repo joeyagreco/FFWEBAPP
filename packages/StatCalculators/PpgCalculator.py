@@ -28,17 +28,17 @@ class PpgCalculator:
             vsTeamIds = params.pop("vsTeamIds", LeagueModelNavigator.getAllTeamIdsInLeague(self.__leagueModel, year,
                                                                                            excludeIds=[self.__teamId]))
             params["vsTeamIds"] = vsTeamIds
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in self.__leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId and matchup.getTeamB().getTeamId() in vsTeamIds:
-                        points += matchup.getTeamAScore()
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == self.__teamId and matchup.teamB.teamId in vsTeamIds:
+                        points += matchup.teamAScore
                         gameCount += 1
-                    elif matchup.getTeamB().getTeamId() == self.__teamId and matchup.getTeamA().getTeamId() in vsTeamIds:
-                        points += matchup.getTeamBScore()
+                    elif matchup.teamB.teamId == self.__teamId and matchup.teamA.teamId in vsTeamIds:
+                        points += matchup.teamBScore
                         gameCount += 1
         if gameCount == 0:
             return 0.0
@@ -59,17 +59,17 @@ class PpgCalculator:
             params["throughWeek"] = throughWeek
             onlyWeeks = params.pop("onlyWeeks", None)
             params["onlyWeeks"] = onlyWeeks
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                if onlyWeeks and week.getWeekNumber() not in onlyWeeks:
+            for week in self.__leagueModel.years[str(year)].weeks:
+                if onlyWeeks and week.weekNumber not in onlyWeeks:
                     continue
-                elif week.getWeekNumber() > throughWeek:
+                elif week.weekNumber > throughWeek:
                     break
-                for matchup in week.getMatchups():
-                    if matchup.getTeamA().getTeamId() == self.__teamId:
-                        points += matchup.getTeamBScore()
+                for matchup in week.matchups:
+                    if matchup.teamA.teamId == self.__teamId:
+                        points += matchup.teamBScore
                         gameCount += 1
-                    elif matchup.getTeamB().getTeamId() == self.__teamId:
-                        points += matchup.getTeamAScore()
+                    elif matchup.teamB.teamId == self.__teamId:
+                        points += matchup.teamAScore
                         gameCount += 1
         if gameCount == 0:
             return 0.0

@@ -33,12 +33,12 @@ class TestEveryGameCalculator(unittest.TestCase):
         movs = everyGameCalculator.getAllMarginOfVictories()
         self.assertEqual(1, len(movs))
         self.assertIsInstance(movs[0], MarginOfVictoryModel)
-        self.assertEqual(0.5, movs[0].getMarginOfVictory())
-        self.assertEqual(team2, movs[0].getWinningTeam())
-        self.assertEqual(100.5, movs[0].getWinningTeamPoints())
-        self.assertEqual(team1, movs[0].getLosingTeam())
-        self.assertEqual(100, movs[0].getLosingTeamPoints())
-        self.assertEqual(1, movs[0].getWeek())
+        self.assertEqual(0.5, movs[0].marginOfVictory)
+        self.assertEqual(team2, movs[0].winningTeam)
+        self.assertEqual(100.5, movs[0].winningTeamPoints)
+        self.assertEqual(team1, movs[0].losingTeam)
+        self.assertEqual(100, movs[0].losingTeamPoints)
+        self.assertEqual(1, movs[0].week)
 
     def test_getAllScores(self):
         team1 = TeamModel(1, "team1")

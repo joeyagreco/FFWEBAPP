@@ -36,28 +36,28 @@
         </thead>
         <tbody>
         {% for leagueStat in stats_models %}
-        <tr class="backgroundTeamId{{leagueStat.getOwnerId()}}">
-            <td>{{leagueStat.getOwnerName()}}</td>
-            <td>{{leagueStat.getWins()}}</td>
-            <td>{{leagueStat.getLosses()}}</td>
-            <td>{{leagueStat.getTies()}}</td>
-            <td>{{leagueStat.getWinPercentage()}}</td>
-            <td>{{leagueStat.getWal()}}</td>
-            <td>{{leagueStat.getAwal()}}</td>
-            <td>{{leagueStat.getAwalPerGame()}}</td>
-            <td>{{leagueStat.getSmartWins()}}</td>
-            <td>{{leagueStat.getPpg()}}</td>
-            <td>{{leagueStat.getPpgAgainst()}}</td>
-            <td>{{leagueStat.getScoringShare()}}</td>
-            <td>{{leagueStat.getScoringShareAgainst()}}</td>
-            <td>{{leagueStat.getPlusMinus()}}</td>
-            <td>{{leagueStat.getStrengthOfSchedule()}}</td>
-            <td>{{leagueStat.getMaxScore()}}</td>
-            <td>{{leagueStat.getMinScore()}}</td>
-            <td>{{leagueStat.getStddev()}}</td>
-            <td>{{leagueStat.getTeamScore()}}</td>
-            <td>{{leagueStat.getTeamSuccess()}}</td>
-            <td>{{leagueStat.getTeamLuck()}}</td>
+        <tr class="backgroundTeamId{{leagueStat.ownerId}}">
+            <td>{{leagueStat.ownerName}}</td>
+            <td>{{leagueStat.wins}}</td>
+            <td>{{leagueStat.losses}}</td>
+            <td>{{leagueStat.ties}}</td>
+            <td>{{leagueStat.winPercentage}}</td>
+            <td>{{leagueStat.wal}}</td>
+            <td>{{leagueStat.awal}}</td>
+            <td>{{leagueStat.awalPerGame}}</td>
+            <td>{{leagueStat.smartWins}}</td>
+            <td>{{leagueStat.ppg}}</td>
+            <td>{{leagueStat.ppgAgainst}}</td>
+            <td>{{leagueStat.scoringShare}}</td>
+            <td>{{leagueStat.scoringShareAgainst}}</td>
+            <td>{{leagueStat.plusMinus}}</td>
+            <td>{{leagueStat.strengthOfSchedule}}</td>
+            <td>{{leagueStat.maxScore}}</td>
+            <td>{{leagueStat.minScore}}</td>
+            <td>{{leagueStat.stddev}}</td>
+            <td>{{leagueStat.teamScore}}</td>
+            <td>{{leagueStat.teamSuccess}}</td>
+            <td>{{leagueStat.teamLuck}}</td>
         </tr>
         {% endfor %}
         </tbody>
@@ -65,6 +65,7 @@
 </div>
 <script>
     initializeTable();
+
 
 </script>
 {% endblock %}

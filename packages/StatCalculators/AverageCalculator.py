@@ -16,10 +16,10 @@ class AverageCalculator:
         """
         allScores = []
         for year in self.__years:
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                for matchup in week.getMatchups():
-                    allScores.append(matchup.getTeamAScore())
-                    allScores.append(matchup.getTeamBScore())
+            for week in self.__leagueModel.years[str(year)].weeks:
+                for matchup in week.matchups:
+                    allScores.append(matchup.teamAScore)
+                    allScores.append(matchup.teamBScore)
         if len(allScores) > 0:
             return Rounder.normalRound(statistics.mean(allScores),
                                        Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
@@ -31,12 +31,12 @@ class AverageCalculator:
         """
         allScores = []
         for year in self.__years:
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                for matchup in week.getMatchups():
-                    if matchup.getTeamAScore() > matchup.getTeamBScore():
-                        allScores.append(matchup.getTeamAScore())
-                    elif matchup.getTeamBScore() > matchup.getTeamAScore():
-                        allScores.append(matchup.getTeamBScore())
+            for week in self.__leagueModel.years[str(year)].weeks:
+                for matchup in week.matchups:
+                    if matchup.teamAScore > matchup.teamBScore:
+                        allScores.append(matchup.teamAScore)
+                    elif matchup.teamBScore > matchup.teamAScore:
+                        allScores.append(matchup.teamBScore)
         if len(allScores) > 0:
             return Rounder.normalRound(statistics.mean(allScores),
                                        Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))
@@ -48,12 +48,12 @@ class AverageCalculator:
         """
         allScores = []
         for year in self.__years:
-            for week in self.__leagueModel.getYears()[str(year)].getWeeks():
-                for matchup in week.getMatchups():
-                    if matchup.getTeamAScore() < matchup.getTeamBScore():
-                        allScores.append(matchup.getTeamAScore())
-                    elif matchup.getTeamBScore() < matchup.getTeamAScore():
-                        allScores.append(matchup.getTeamBScore())
+            for week in self.__leagueModel.years[str(year)].weeks:
+                for matchup in week.matchups:
+                    if matchup.teamAScore < matchup.teamBScore:
+                        allScores.append(matchup.teamAScore)
+                    elif matchup.teamBScore < matchup.teamAScore:
+                        allScores.append(matchup.teamBScore)
         if len(allScores) > 0:
             return Rounder.normalRound(statistics.mean(allScores),
                                        Rounder.getDecimalPlacesRoundedToInScores(self.__leagueModel))

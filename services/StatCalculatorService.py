@@ -36,12 +36,12 @@ class StatCalculatorService:
         """
         teamStatsModels = []
         for year in years:
-            for team in leagueModel.getYears()[str(year)].getTeams():
+            for team in leagueModel.years[str(year)].teams:
                 yearAsList = [year]
                 decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-                teamId = team.getTeamId()
-                teamName = team.getTeamName()
-                scoresCalculator = ScoresCalculator(team.getTeamId(), leagueModel, yearAsList)
+                teamId = team.teamId
+                teamName = team.teamName
+                scoresCalculator = ScoresCalculator(team.teamId, leagueModel, yearAsList)
                 maxScore = scoresCalculator.getMaxScore()
                 maxScoreStr = Rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
                 minScore = scoresCalculator.getMinScore()
@@ -115,7 +115,7 @@ class StatCalculatorService:
                                            awalPerGame=awalPerGameStr)
                 teamStatsModels.append(teamModel)
         # sort from win percentage high -> low
-        teamStatsModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
+        teamStatsModels.sort(key=lambda x: x.winPercentage, reverse=True)
         return teamStatsModels
 
     @staticmethod
@@ -133,7 +133,7 @@ class StatCalculatorService:
         for i, teamId in enumerate(teamIds):
             opponentTeamId = teamIds[i - 1]
             decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-            teamName = LeagueModelNavigator.getTeamById(leagueModel, year, teamId).getTeamName()
+            teamName = LeagueModelNavigator.getTeamById(leagueModel, year, teamId).teamName
             recordCalculator = RecordCalculator(teamId, leagueModel, years)
             wins = recordCalculator.getWins(vsTeamIds=[opponentTeamId])
             losses = recordCalculator.getLosses(vsTeamIds=[opponentTeamId])
@@ -212,13 +212,13 @@ class StatCalculatorService:
             allScores = everyGameCalculator.getAllScores()
             allScoresStr = []
             for scoreModel in allScores:
-                score = scoreModel.getScore()
+                score = scoreModel.score
                 score = Rounder.keepTrailingZeros(score, decimalPlacesForScores)
-                teamFor = scoreModel.getTeamFor()
-                teamAgainst = scoreModel.getTeamAgainst()
-                outcome = scoreModel.getOutcome()
-                weekNumber = scoreModel.getWeek()
-                year = scoreModel.getYear()
+                teamFor = scoreModel.teamFor
+                teamAgainst = scoreModel.teamAgainst
+                outcome = scoreModel.outcome
+                weekNumber = scoreModel.week
+                year = scoreModel.year
                 newModel = ScoreModel(score=score,
                                       teamFor=teamFor,
                                       teamAgainst=teamAgainst,
@@ -231,16 +231,16 @@ class StatCalculatorService:
             allMovs = everyGameCalculator.getAllMarginOfVictories()
             allMovsStr = []
             for movModel in allMovs:
-                mov = movModel.getMarginOfVictory()
+                mov = movModel.marginOfVictory
                 mov = Rounder.keepTrailingZeros(mov, decimalPlacesForScores)
-                teamFor = movModel.getWinningTeam()
-                teamForPoints = movModel.getWinningTeamPoints()
+                teamFor = movModel.winningTeam
+                teamForPoints = movModel.winningTeamPoints
                 teamForPoints = Rounder.keepTrailingZeros(teamForPoints, decimalPlacesForScores)
-                teamAgainst = movModel.getLosingTeam()
-                teamAgainstPoints = movModel.getLosingTeamPoints()
+                teamAgainst = movModel.losingTeam
+                teamAgainstPoints = movModel.losingTeamPoints
                 teamAgainstPoints = Rounder.keepTrailingZeros(teamAgainstPoints, decimalPlacesForScores)
-                weekNumber = movModel.getWeek()
-                year = movModel.getYear()
+                weekNumber = movModel.week
+                year = movModel.year
                 newModel = MarginOfVictoryModel(marginOfVictory=mov,
                                                 winningTeam=teamFor,
                                                 winningTeamPoints=teamForPoints,
@@ -265,7 +265,7 @@ class StatCalculatorService:
             ownerComparisonModels = []
             for ownerId in allOwnerIds:
                 decimalPlacesRoundedToScores = Rounder.getDecimalPlacesRoundedToInScores(leagueModel)
-                ownerName = LeagueModelNavigator.getTeamById(leagueModel, "0", ownerId).getTeamName()
+                ownerName = LeagueModelNavigator.getTeamById(leagueModel, "0", ownerId).teamName
                 scoresCalculator = ScoresCalculator(ownerId, leagueModel, allYears)
                 maxScore = scoresCalculator.getMaxScore()
                 maxScoreStr = Rounder.keepTrailingZeros(maxScore, decimalPlacesRoundedToScores)
@@ -339,7 +339,7 @@ class StatCalculatorService:
                                                             awalPerGame=awalPerGameStr)
                 ownerComparisonModels.append(ownerComparisonModel)
             # sort from win percentage high -> low
-            ownerComparisonModels.sort(key=lambda x: x.getWinPercentage(), reverse=True)
+            ownerComparisonModels.sort(key=lambda x: x.winPercentage, reverse=True)
             return ownerComparisonModels
         elif statSelection == Constants.LEAGUE_AVERAGES_STAT_TITLE:
             # return a dictionary with each average
@@ -360,9 +360,9 @@ class StatCalculatorService:
             data = dict()
             numOfWeeksList = []
             for year in years:
-                for team in leagueModel.getYears()[str(year)].getTeams():
-                    data[team.getTeamName()] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year,
-                                                                                        team.getTeamId())
+                for team in leagueModel.years[str(year)].teams:
+                    data[team.teamName] = LeagueModelNavigator.getListOfTeamScores(leagueModel, year,
+                                                                                   team.teamId)
                     numOfWeeksList.append(LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, year, asList=True))
             xAxisTicks = max(numOfWeeksList)
             return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, "Points Scored", 10,
@@ -372,16 +372,16 @@ class StatCalculatorService:
             data = dict()
             numOfWeeksList = []
             for year in years:
-                for team in leagueModel.getYears()[str(year)].getTeams():
+                for team in leagueModel.years[str(year)].teams:
                     numOfWeeksList.append(LeagueModelNavigator.getNumberOfWeeksInLeague(leagueModel, year, asList=True))
-                    data[team.getTeamName()] = []
-                    for week in leagueModel.getYears()[str(year)].getWeeks():
-                        recordCalculator = RecordCalculator(team.getTeamId(), leagueModel, [year])
-                        awalCalculator = AwalCalculator(team.getTeamId(), leagueModel, [year],
-                                                        recordCalculator.getWins(throughWeek=week.getWeekNumber()),
-                                                        recordCalculator.getTies(throughWeek=week.getWeekNumber()))
-                        awal = awalCalculator.getAwal(throughWeek=week.getWeekNumber())
-                        data[team.getTeamName()].append(awal)
+                    data[team.teamName] = []
+                    for week in leagueModel.years[str(year)].weeks:
+                        recordCalculator = RecordCalculator(team.teamId, leagueModel, [year])
+                        awalCalculator = AwalCalculator(team.teamId, leagueModel, [year],
+                                                        recordCalculator.getWins(throughWeek=week.weekNumber),
+                                                        recordCalculator.getTies(throughWeek=week.weekNumber))
+                        awal = awalCalculator.getAwal(throughWeek=week.weekNumber)
+                        data[team.teamName].append(awal)
             xAxisTicks = max(numOfWeeksList)
             return GraphBuilder.getHtmlForByWeekLineGraph(screenWidth, data, xAxisTicks, Constants.AWAL_STAT_TITLE, 1,
                                                           Constants.AWAL_BY_WEEK)
@@ -390,9 +390,9 @@ class StatCalculatorService:
             teamNames = []
             teamPoints = []
             for year in years:
-                for team in leagueModel.getYears()[str(year)].getTeams():
-                    teamNames.append(team.getTeamName())
-                    totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [year], team.getTeamId())
+                for team in leagueModel.years[str(year)].teams:
+                    teamNames.append(team.teamName)
+                    totalPoints = LeagueModelNavigator.totalPointsScoredByTeam(leagueModel, [year], team.teamId)
                     teamPoints.append(totalPoints)
             return GraphBuilder.getHtmlForPieGraph(screenWidth, teamNames, teamPoints, Constants.SCORING_SHARE)
 
@@ -402,8 +402,8 @@ class StatCalculatorService:
         elif graphSelection == Constants.FREQUENCY_OF_SCORES:
             allScores = []
             for year in years:
-                for team in leagueModel.getYears()[str(year)].getTeams():
-                    allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.getTeamId())
+                for team in leagueModel.years[str(year)].teams:
+                    allScores += LeagueModelNavigator.getListOfTeamScores(leagueModel, year, team.teamId)
             return GraphBuilder.getHtmlForHistogram(screenWidth, allScores, int(len(allScores) / 5), "Points Scored",
                                                     "Occurrences", Constants.FREQUENCY_OF_SCORES)
 
