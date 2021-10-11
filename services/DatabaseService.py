@@ -64,5 +64,4 @@ class DatabaseService:
         Raises a DatabaseError if the league cannot be found
         """
         leagueDict = self.__databaseClient.getLeague(leagueId)
-        leagueBuilder = LeagueBuilder(leagueDict)
-        return leagueBuilder.getLeagueObject()
+        return LeagueBuilder.getLeagueObject(leagueDict)
