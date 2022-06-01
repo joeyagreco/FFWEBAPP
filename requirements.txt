@@ -1,10 +1,10 @@
 flask~=1.1.2
 python-dotenv~=0.15.0
-pymongo~=3.11.0
 pandas~=1.2.1
 numpy~=1.19.5
 plotly~=4.14.3
 gunicorn
-pymongo[srv]
 PyMongo>=3.0
+# pymongo[srv]
+pymongo~=3.11.0
 dnspython==2.2.1
